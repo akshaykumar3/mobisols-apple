@@ -50,21 +50,14 @@ public class PaymentDetails {
 	public String postPaymentDetails(@QueryParam("json") String json,@QueryParam("username") String user)
 	{
 		JsonConverter c=new JsonConverter();
-		try {
-			PaymentDetails pd=(PaymentDetails)c.getObject(json, Class.forName("PaymentDetails"));
-			//TODO update data using Hibernate
-			GeneralResponse response =new GeneralResponse();
-			response.setDescription("your account details have been updated successfully");
-			//TODO update general response details
-			String status="";
-			String request="";
-			return c.getJSON(request, status, response);
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		PaymentDetails pd=(PaymentDetails)c.getObject(json, "com.mobisols.tollpayments.mockwebservices.PaymentDetails");
+		//TODO update data using Hibernate
+		GeneralResponse response =new GeneralResponse();
+		response.setDescription("your account details have been updated successfully");
+		//TODO update general response details
+		String status="";
+		String request="";
+		return c.getJSON(request, status, response);
 	}
 	public String getCardNumber() {
 		return cardNumber;

@@ -15,6 +15,7 @@
  */
 package com.mobisols.tollpayments.mockwebservices;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -35,20 +36,22 @@ public class AccountDetails {
 	}
 
 	public AccountDetails(String user) {
-		paymentDetails=new PaymentDetails(user);
-		String vehicle_id = "1234";
-		int no_of_vehicles=1;
-		for(int i=0;i<no_of_vehicles;i++)
+		this.paymentDetails=new PaymentDetails(user);
+		String vehicleId = "1234";
+		int noOfVehicles=1;
+		this.vehicleDetails=new LinkedList<VehicleDetails>();
+		for(int i=0;i<noOfVehicles;i++)
 		{
-			vehicleDetails.add(new VehicleDetails(user,vehicle_id));
+			this.vehicleDetails.add(new VehicleDetails(user,vehicleId));
 		}
 		String tollId="1";
 		int no_of_tollPayments=1;
+		this.tollPayments=new LinkedList<TollPayments>();
 		for(int i=0;i<no_of_tollPayments;i++)
 		{
-			tollPayments.add(new TollPayments(user,vehicle_id,tollId));
+			this.tollPayments.add(new TollPayments(user,vehicleId,tollId));
 		}
-		balanceInfo=new BalanceInfo(user);
+		this.balanceInfo=new BalanceInfo(user);
 	}
 	
 	@GET
@@ -57,7 +60,9 @@ public class AccountDetails {
 	{
 		String request="";
 		String status="";
+		System.out.println("creating account details object");
 		AccountDetails ac=new AccountDetails(user);
+		System.out.println("created account details object");
 		JsonConverter json=new JsonConverter();
 		return json.getJSON(request, status, ac);
 	}

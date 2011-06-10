@@ -14,6 +14,7 @@
 package com.mobisols.tollpayments.mockwebservices;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 public class JsonConverter {
 
@@ -30,10 +31,18 @@ public class JsonConverter {
 		return gson.toJson(this);
 	}
 	
-	public Object getObject(String json,Class c){
+	public Object getObject(String json,String className){
 		Gson gson=new Gson();
 		Object o = null;
-		o=gson.fromJson(json, c);
+		try {
+			o=gson.fromJson(json, Class.forName(className));
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return o;
 		
 	}

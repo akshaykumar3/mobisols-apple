@@ -48,41 +48,27 @@ public class VehicleDetails {
 	@POST
 	public String postVehicleDetails(@QueryParam("json") String json,@QueryParam("username") String user){
 		JsonConverter c=new JsonConverter();
-		try {
-			VehicleDetails vd=(VehicleDetails)c.getObject(json, Class.forName("VehicleDetails"));
-			//TODO update data using Hibernate
-			GeneralResponse response =new GeneralResponse(); 
-			response.setDescription("your vehicles details have been updated successfully");
-			//TODO update general response details
-			String status="";
-			String request="";
-			return c.getJSON(request, status, response);
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
+		//TODO update data using Hibernate
+		GeneralResponse response =new GeneralResponse(); 
+		response.setDescription("your vehicles details have been updated successfully");
+		//TODO update general response details
+		String status="";
+		String request="";
+		return c.getJSON(request, status, response);
 	}
 	
 	@DELETE
 	public String deleteVechileDetails(@QueryParam("json") String json,@QueryParam("username") String user){
 		JsonConverter c=new JsonConverter();
-		try {
-			VehicleDetails vd=(VehicleDetails)c.getObject(json, Class.forName("VehicleDetails"));
-			//TODO delete data using Hibernate
-			GeneralResponse response =new GeneralResponse();
-			response.setDescription("your vechicle details have been successfully updated");
-			//TODO update general response details
-			String status="";
-			String request="";
-			return c.getJSON(request, status, response);
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
+		//TODO delete data using Hibernate
+		GeneralResponse response =new GeneralResponse();
+		response.setDescription("your vechicle details have been successfully updated");
+		//TODO update general response details
+		String status="";
+		String request="";
+		return c.getJSON(request, status, response);
 	}
 	
 	public String getRegistration() {
