@@ -25,6 +25,9 @@ public class ClientConfiguration {
 	private String version;
 	private String userAgent;
 	
+	public ClientConfiguration(){
+		
+	}
 	public ClientConfiguration(String user)	{
 		
 	}
@@ -33,20 +36,13 @@ public class ClientConfiguration {
 	@Produces("text/plain")
 	public String postClientConfiguration(@QueryParam("json") String json,@QueryParam("username") String user){
 		JsonConverter c=new JsonConverter();
-		try {
-			ClientConfiguration cc=(ClientConfiguration)c.getObject(json, Class.forName("PaymentDetails"));
-			//TODO check client configuration
-			GeneralResponse response =new GeneralResponse(); 
-			//TODO update general response details
-			String status="";
-			String request="";
-			return c.getJSON(request, status, response);
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		ClientConfiguration cc=(ClientConfiguration)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.ClientConfiguration");
+		//TODO check client configuration
+		GeneralResponse response =new GeneralResponse(); 
+		//TODO update general response details
+		String status="";
+		String request="";
+		return c.getJSON(request, status, response);
 	}
 	public ClientConfiguration getInstance(String user){
 		return new ClientConfiguration(user);

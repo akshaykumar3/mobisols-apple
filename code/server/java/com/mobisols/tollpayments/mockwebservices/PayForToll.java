@@ -16,20 +16,13 @@ public class PayForToll {
 	@Produces("text/plain")
 	public String postPayForToll(@QueryParam("username") String user,@QueryParam("json") String json){
 		JsonConverter c=new JsonConverter();
-		try {
-			Location loc=(Location)c.getObject(json, Class.forName("Location"));
-			//TODO update data using Hibernate
-			GeneralResponse response =new GeneralResponse(); 
-			response.setDescription("you hvae been charged for $0.10 for passing through this toll");
-			//TODO update general response details
-			String status="";
-			String request="";
-			return c.getJSON(request, status, response);
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		Location loc=(Location)c.getObject(json, "com.mobisols.tollpayments.mockwebservices.Location");
+		//TODO update data using Hibernate
+		GeneralResponse response =new GeneralResponse(); 
+		response.setDescription("you hvae been charged for $0.10 for passing through this toll");
+		//TODO update general response details
+		String status="";
+		String request="";
+		return c.getJSON(request, status, response);
 	}
 }

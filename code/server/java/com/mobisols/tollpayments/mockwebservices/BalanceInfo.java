@@ -15,6 +15,7 @@
  */
 package com.mobisols.tollpayments.mockwebservices;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -39,6 +40,7 @@ public class BalanceInfo {
 		this.setMinBalance((float)0.0000);
 		int balancelogCount=1;
 		int logid=1;
+		this.balancelog=new LinkedList<BalanceLog>();
 		for(int i=0;i<balancelogCount;i++){
 			balancelog.add(new BalanceLog(logid));
 		}

@@ -34,23 +34,15 @@ public class AddBalance {
 	public String addBalance(@QueryParam("username") String user,@QueryParam("json")String json)
 	{
 		JsonConverter c=new JsonConverter();
-		try {
-			AddBalance ad=(AddBalance)c.getObject(json, Class.forName("PaymentDetails"));
-			ad.setAmount((float)20.000);
-			ad.setDescription("added amount from your credit card through ");
-			//TODO update data using Hibernate and add balance to the user's account
-			GeneralResponse response =new GeneralResponse(); 
-			response.setDescription("successfully added $20 to your account");
-			String status="";
-			String request="";
-			return c.getJSON(request, status, response);
-		}
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//TODO write hibernate that adds the amount to the user's account
-		return null;
+		AddBalance ad=(AddBalance)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.AddBalance");
+		ad.setAmount((float)20.000);
+		ad.setDescription("added amount from your credit card through ");
+		//TODO update data using Hibernate and add balance to the user's account
+		GeneralResponse response =new GeneralResponse(); 
+		response.setDescription("successfully added $20 to your account");
+		String status="";
+		String request="";
+		return c.getJSON(request, status, response);
 	}
 	
 	public float getAmount() {
