@@ -1,3 +1,6 @@
+
+Generic triggers for history tables:
+
 create trigger trigger_name before update on table_name
 start transaction;
 insert into table_name_history(column_names)
