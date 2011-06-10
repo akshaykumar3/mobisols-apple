@@ -1,3 +1,13 @@
+create trigger trigger_name before update on table_name
+start transaction;
+insert into table_name_history(column_names)
+values(new.column_name);
+update table_name_history
+set end_date := sysdate,
+where table_nameid=new.table_nameid;
+commit;
+
+
 create trigger trigger_name before insert on table_name
 start transaction;
 insert into table_name_history(column_names) 
@@ -6,6 +16,7 @@ update table_name_history
 set start_date := sysdate,end_date :=’1-1-3000’
 where table_nameid = new.id;
 commit;
+
 
 create trigger trigger_name before update on table_name
 start transaction;
