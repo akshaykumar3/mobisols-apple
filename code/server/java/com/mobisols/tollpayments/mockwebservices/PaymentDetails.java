@@ -34,7 +34,11 @@ public class PaymentDetails {
 	
 	public PaymentDetails(String user) {
 		//TODO code to access database using hibernate
-		
+		this.setCardNumber("xxxxxxxxxxx1234");
+		this.setExpDate(new Date());
+		this.setCardType("mastero");
+		this.setBankRouting("");
+		this.setBankAccount("1234567890");
 	}
 	
 	public PaymentDetails() {
@@ -49,7 +53,8 @@ public class PaymentDetails {
 		try {
 			PaymentDetails pd=(PaymentDetails)c.getObject(json, Class.forName("PaymentDetails"));
 			//TODO update data using Hibernate
-			GeneralResponse response =new GeneralResponse(); 
+			GeneralResponse response =new GeneralResponse();
+			response.setDescription("your account details have been updated successfully");
 			//TODO update general response details
 			String status="";
 			String request="";

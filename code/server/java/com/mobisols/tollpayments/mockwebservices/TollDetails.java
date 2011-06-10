@@ -30,6 +30,12 @@ public class TollDetails {
 	}
 	public TollDetails(String tollid) {
 		// TODO Auto-generated constructor stub
+		this.setTollName("Illinois");
+		this.setTollOperator("illinois");
+		this.setCity("NewYork");
+		this.setState("xyz");
+		this.setLat((float)21.09);
+		this.setLongt((float)21.09);
 	}
 	
 	public String getTollName() {

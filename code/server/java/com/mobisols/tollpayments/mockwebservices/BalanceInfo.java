@@ -35,9 +35,11 @@ public class BalanceInfo {
 	public BalanceInfo(String user)
 	{
 		//TODO retrieve the data using hibernate and populate the object
-		int balancelog_count=0;
-		int logid=0;
-		for(int i=0;i<balancelog_count;i++){
+		this.setCurrentBalance((float)20.0000);
+		this.setMinBalance((float)0.0000);
+		int balancelogCount=1;
+		int logid=1;
+		for(int i=0;i<balancelogCount;i++){
 			balancelog.add(new BalanceLog(logid));
 		}
 	}

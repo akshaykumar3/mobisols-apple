@@ -36,17 +36,17 @@ public class AccountDetails {
 
 	public AccountDetails(String user) {
 		paymentDetails=new PaymentDetails(user);
-		String registration = "";
-		int no_of_vehicles=0;
+		String vehicle_id = "1234";
+		int no_of_vehicles=1;
 		for(int i=0;i<no_of_vehicles;i++)
 		{
-			vehicleDetails.add(new VehicleDetails(user,registration));
+			vehicleDetails.add(new VehicleDetails(user,vehicle_id));
 		}
-		String tollId="";
-		int no_of_tollPayments=0;
+		String tollId="1";
+		int no_of_tollPayments=1;
 		for(int i=0;i<no_of_tollPayments;i++)
 		{
-			tollPayments.add(new TollPayments(user,registration,tollId));
+			tollPayments.add(new TollPayments(user,vehicle_id,tollId));
 		}
 		balanceInfo=new BalanceInfo(user);
 	}

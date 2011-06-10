@@ -23,7 +23,7 @@ import javax.ws.rs.QueryParam;
 @Path("/AddBalance")
 public class AddBalance {
 	
-	int amount;
+	float amount;
 	String description;
 	
 	public AddBalance() {
@@ -36,9 +36,11 @@ public class AddBalance {
 		JsonConverter c=new JsonConverter();
 		try {
 			AddBalance ad=(AddBalance)c.getObject(json, Class.forName("PaymentDetails"));
+			ad.setAmount((float)20.000);
+			ad.setDescription("added amount from your credit card through ");
 			//TODO update data using Hibernate and add balance to the user's account
 			GeneralResponse response =new GeneralResponse(); 
-			response=response.getInstance();
+			response.setDescription("successfully added $20 to your account");
 			String status="";
 			String request="";
 			return c.getJSON(request, status, response);
@@ -51,11 +53,11 @@ public class AddBalance {
 		return null;
 	}
 	
-	public int getAmount() {
+	public float getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(float amount) {
 		this.amount = amount;
 	}
 
