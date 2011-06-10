@@ -20,6 +20,7 @@ public class PayForToll {
 			Location loc=(Location)c.getObject(json, Class.forName("Location"));
 			//TODO update data using Hibernate
 			GeneralResponse response =new GeneralResponse(); 
+			response.setDescription("you hvae been charged for $0.10 for passing through this toll");
 			//TODO update general response details
 			String status="";
 			String request="";

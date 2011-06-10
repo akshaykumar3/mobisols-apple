@@ -35,8 +35,14 @@ public class VehicleDetails {
 		
 	}
 	
-	public VehicleDetails(String user,String registration_no){
+	public VehicleDetails(String user,String vehicle_id){
 		//TODO update details using Hibernate
+		this.setIsActive("true");
+		this.setRegistration("1234");
+		this.setState("California");
+		this.setType("type1");
+		this.setStartDate(new Date());
+		this.setEndDate(new Date());
 	}
 	
 	@POST
@@ -46,6 +52,7 @@ public class VehicleDetails {
 			VehicleDetails vd=(VehicleDetails)c.getObject(json, Class.forName("VehicleDetails"));
 			//TODO update data using Hibernate
 			GeneralResponse response =new GeneralResponse(); 
+			response.setDescription("your vehicles details have been updated successfully");
 			//TODO update general response details
 			String status="";
 			String request="";
@@ -64,7 +71,8 @@ public class VehicleDetails {
 		try {
 			VehicleDetails vd=(VehicleDetails)c.getObject(json, Class.forName("VehicleDetails"));
 			//TODO delete data using Hibernate
-			GeneralResponse response =new GeneralResponse(); 
+			GeneralResponse response =new GeneralResponse();
+			response.setDescription("your vechicle details have been successfully updated");
 			//TODO update general response details
 			String status="";
 			String request="";

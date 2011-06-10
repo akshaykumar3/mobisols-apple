@@ -15,8 +15,4 @@ public class GeneralResponse {
 	public GeneralResponse(){
 		
 	}
-	
-	public GeneralResponse getInstance(){
-		return new GeneralResponse();
-	}
 }
