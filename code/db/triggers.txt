@@ -21,7 +21,7 @@ where table_nameid = new.id;
 commit;
 
 
-create trigger trigger_name before update on table_name
+create trigger trigger_name after update on table_name
 start transaction;
 insert into table_name_history(column_names)
 values(new.column_name);
