@@ -81,7 +81,7 @@ Ext.setup({
 			]
 		});
 
-		var CarList= Ext.extend(Ext.Panel,{
+		/*var CarList= Ext.extend(Ext.Panel,{
 			fullscreen: true,
 			cardSwitchAnimation: 'slide',
 			layout: 'card',
@@ -98,7 +98,7 @@ Ext.setup({
 				iconCls: 'add',
 				itemId: 'addCar',
 				handler: function(){
-					mycar.setActiveItem('entrycar');
+					//mycar.setActiveItem('entrycar');
 				}
 			}]
 		}],
@@ -113,7 +113,7 @@ Ext.setup({
 				mycar.setActiveItem('entrycar');
 			}
         }]
-		});
+		});*/
 
 		var position = new google.maps.LatLng(37.49885,-122.198452);
 		var position1=new google.maps.LatLng(37.42980,-122.210674);
@@ -132,9 +132,12 @@ Ext.setup({
 				content: markerDetails[1].description+'  '+markerDetails[1].url
 			});
 			
-		var imageMarker=new google.maps.MarkerImage({
-		
-		});
+		var imageMarker=new google.maps.MarkerImage(
+			'resources/images/covered.png',
+			new google.maps.Size(20,34),
+			new google.maps.Point(0,0),
+			new google.maps.Point(16,31)
+		);
 
         var tabpanel = new Ext.TabPanel({
             tabBar: {
@@ -155,39 +158,50 @@ Ext.setup({
                 scroll: 'vertical'
             },*/
             items: [{
-        title: 'Home',
-		scroll: 'vertical',
-        xtype: 'form',
-        id: 'home',
-        scroll: 'vertical',
-        iconCls: 'home',
+				title: 'Home',
+				scroll: 'vertical',
+				xtype: 'formpanel',
+				id: 'home',
+				scroll: 'vertical',
+				iconCls: 'home',
         
-        cls: 'card1',
-        items: [
-			{
-                xtype: 'togglefield',
-                name: 'enable',
-                label: 'Global toll pass - enable'
-            },
-        	
-        	{
-            xtype: 'fieldset',
-            title: 'Toll operator',
-            instructions: 'Please enter the information above.',
-            defaults: {
-                // labelAlign: 'right'
-                labelWidth: '35%'
-            },
-            items: [{
-                xtype: 'textfield',
-                name: 'currloc',
-                label: 'Current location',
-                placeHolder: 'San Diego, CA',
-                autoCapitalize : true,
-                required: true,
-                useClearIcon: true
-            },
-            /*{
+				cls: 'card1',
+				dockedItems: [{
+						xtype: 'toolbar',
+						dock: 'top',
+						ui: 'light',
+						title: 'Global Toll Pass',
+						layout: {
+							pack: 'right'
+						},
+						ui: 'light',
+						items: [{
+							text: 'help',
+							ui: 'green'
+						}]
+					}],
+				items: [{
+					    xtype: 'togglefield',
+						name: 'enable',
+						label: 'Global toll pass - enable'
+					},{
+						xtype: 'fieldset',
+						title: 'Car & Service',
+						instructions: 'Please enter the information above.',
+						defaults: {
+							// labelAlign: 'right'
+							labelWidth: '35%'
+						},
+						items: [/*{
+							xtype: 'textfield',
+							name: 'currloc',
+							label: 'Current location',
+							placeHolder: 'San Diego, CA',
+							autoCapitalize : true,
+							required: true,
+							useClearIcon: true
+						},
+            {
                 xtype: 'textfield',
                 name: 'userid',
                 label: 'UserID',
@@ -212,7 +226,21 @@ Ext.setup({
 						text: '4G23VS2',
 						value: 'type2'
 					}]
-				} ]},
+				},
+				{
+					xtype: 'selectfield',
+					name: 'serviceplan',
+					label: 'Service',
+					required: true,
+					options: [{
+						text: 'GT- Pass',
+						value: 'gtpass'
+					},{
+						text: 'L-Pass',
+						value: 'lpass'
+					}]
+					}	
+					]},
             {
             xtype: 'fieldset',
             title: 'Payment info',
@@ -310,11 +338,7 @@ Ext.setup({
             pack: 'center'
         },*/
         cls: 'card2',
-        items: [
-				/*{new CarList({
-					id: 'carlist'
-				})
-				}*/{
+		dockedItems:[{
 			xtype: 'toolbar',
 			dock: 'top',
 			title: 'My Cars',
@@ -329,8 +353,10 @@ Ext.setup({
 				handler: function(){
 					tabpanel.setActiveItem('entrycar');
 				}
-			},EntryCar]
-		},{
+			}]
+		}],
+        items: [
+				{
             //width: Ext.is.Phone ? undefined : 300,
             //height: 500,
             xtype: 'list',
