@@ -5,10 +5,10 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * UserBasicId entity. @author MyEclipse Persistence Tools
+ * UserId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class UserBasicId implements java.io.Serializable {
+public class UserId implements java.io.Serializable {
 
 	// Fields
 
@@ -38,11 +38,11 @@ public class UserBasicId implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public UserBasicId() {
+	public UserId() {
 	}
 
 	/** minimal constructor */
-	public UserBasicId(Integer userId, Integer clientId, Integer utypeId,
+	public UserId(Integer userId, Integer clientId, Integer utypeId,
 			String userName, String password, String isActive,
 			Timestamp createdOn, Timestamp lastModifiedOn,
 			Integer lastModifiedBy) {
@@ -58,7 +58,7 @@ public class UserBasicId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserBasicId(Integer userId, Integer clientId, Integer utypeId,
+	public UserId(Integer userId, Integer clientId, Integer utypeId,
 			String userName, String password, String locale, String isActive,
 			String contactNo, Timestamp lastLoginTime, String udf1,
 			String udf2, String udf3, String udf4, String udf5, String flag1,
@@ -294,9 +294,9 @@ public class UserBasicId implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof UserBasicId))
+		if (!(other instanceof UserId))
 			return false;
-		UserBasicId castOther = (UserBasicId) other;
+		UserId castOther = (UserId) other;
 
 		return ((this.getUserId() == castOther.getUserId()) || (this
 				.getUserId() != null && castOther.getUserId() != null && this

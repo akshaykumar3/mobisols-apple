@@ -18,18 +18,18 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 /**
- * UserBasicAll entity. @author MyEclipse Persistence Tools
+ * UserAll entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "user_basic_all", catalog = "globaltoll", uniqueConstraints = @UniqueConstraint(columnNames = {
+@Table(name = "user_all", catalog = "globaltoll", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"user_name", "client_id" }))
-public class UserBasicAll implements java.io.Serializable {
+public class UserAll implements java.io.Serializable {
 
 	// Fields
 
 	private Integer userId;
 	private ClientAll clientAll;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private UserTypeAll userTypeAll;
 	private String userName;
 	private String password;
@@ -83,7 +83,7 @@ public class UserBasicAll implements java.io.Serializable {
 	private Set<ComponentVersionAll> componentVersionAlls = new HashSet<ComponentVersionAll>(
 			0);
 	private Set<CcTypeAll> ccTypeAlls = new HashSet<CcTypeAll>(0);
-	private Set<UserBasicAll> userBasicAlls = new HashSet<UserBasicAll>(0);
+	private Set<UserAll> userAlls = new HashSet<UserAll>(0);
 	private Set<ComponentAll> componentAlls_1 = new HashSet<ComponentAll>(0);
 	private Set<VehicleTollUsageAll> vehicleTollUsageAlls = new HashSet<VehicleTollUsageAll>(
 			0);
@@ -100,15 +100,15 @@ public class UserBasicAll implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public UserBasicAll() {
+	public UserAll() {
 	}
 
 	/** minimal constructor */
-	public UserBasicAll(ClientAll clientAll, UserBasicAll userBasicAll,
+	public UserAll(ClientAll clientAll, UserAll userAll,
 			UserTypeAll userTypeAll, String userName, String password,
 			String isActive, Timestamp createdOn, Timestamp lastModifiedOn) {
 		this.clientAll = clientAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.userTypeAll = userTypeAll;
 		this.userName = userName;
 		this.password = password;
@@ -118,7 +118,7 @@ public class UserBasicAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserBasicAll(ClientAll clientAll, UserBasicAll userBasicAll,
+	public UserAll(ClientAll clientAll, UserAll userAll,
 			UserTypeAll userTypeAll, String userName, String password,
 			String locale, String isActive, String contactNo,
 			Timestamp lastLoginTime, String udf1, String udf2, String udf3,
@@ -144,7 +144,7 @@ public class UserBasicAll implements java.io.Serializable {
 			UserPaymentDetailAll userPaymentDetailAllByUserId,
 			Set<VehicleTypeAll> vehicleTypeAlls,
 			Set<ComponentVersionAll> componentVersionAlls,
-			Set<CcTypeAll> ccTypeAlls, Set<UserBasicAll> userBasicAlls,
+			Set<CcTypeAll> ccTypeAlls, Set<UserAll> userAlls,
 			Set<ComponentAll> componentAlls_1,
 			Set<VehicleTollUsageAll> vehicleTollUsageAlls,
 			Set<ComponentVersionAll> componentVersionAlls_1,
@@ -153,7 +153,7 @@ public class UserBasicAll implements java.io.Serializable {
 			Set<UserServiceAll> userServiceAllsForLastModifiedBy,
 			Set<ConfigurationAll> configurationAlls_1) {
 		this.clientAll = clientAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.userTypeAll = userTypeAll;
 		this.userName = userName;
 		this.password = password;
@@ -196,7 +196,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.vehicleTypeAlls = vehicleTypeAlls;
 		this.componentVersionAlls = componentVersionAlls;
 		this.ccTypeAlls = ccTypeAlls;
-		this.userBasicAlls = userBasicAlls;
+		this.userAlls = userAlls;
 		this.componentAlls_1 = componentAlls_1;
 		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
 		this.componentVersionAlls_1 = componentVersionAlls_1;
@@ -230,12 +230,12 @@ public class UserBasicAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -410,7 +410,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ComponentAll> getComponentAlls() {
 		return this.componentAlls;
 	}
@@ -419,7 +419,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.componentAlls = componentAlls;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userBasicAllByUserId")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public TollOperatorAll getTollOperatorAllByUserId() {
 		return this.tollOperatorAllByUserId;
 	}
@@ -429,7 +429,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.tollOperatorAllByUserId = tollOperatorAllByUserId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ClientAll> getClientAlls() {
 		return this.clientAlls;
 	}
@@ -438,7 +438,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.clientAlls = clientAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<VmlTypeAll> getVmlTypeAlls() {
 		return this.vmlTypeAlls;
 	}
@@ -447,7 +447,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.vmlTypeAlls = vmlTypeAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ServicePlanAll> getServicePlanAlls() {
 		return this.servicePlanAlls;
 	}
@@ -456,7 +456,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.servicePlanAlls = servicePlanAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<TollLocationAll> getTollLocationAlls() {
 		return this.tollLocationAlls;
 	}
@@ -465,7 +465,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.tollLocationAlls = tollLocationAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<OwnerTypeAll> getOwnerTypeAlls() {
 		return this.ownerTypeAlls;
 	}
@@ -474,7 +474,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.ownerTypeAlls = ownerTypeAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<PaymentTransactionAll> getPaymentTransactionAlls() {
 		return this.paymentTransactionAlls;
 	}
@@ -484,7 +484,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.paymentTransactionAlls = paymentTransactionAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByLastModifiedBy")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByLastModifiedBy")
 	public Set<UserVehicleAll> getUserVehicleAllsForLastModifiedBy() {
 		return this.userVehicleAllsForLastModifiedBy;
 	}
@@ -494,7 +494,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userVehicleAllsForLastModifiedBy = userVehicleAllsForLastModifiedBy;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByUserId")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public Set<UserVehicleAll> getUserVehicleAllsForUserId() {
 		return this.userVehicleAllsForUserId;
 	}
@@ -504,7 +504,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userVehicleAllsForUserId = userVehicleAllsForUserId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<TollPriceAll> getTollPriceAlls() {
 		return this.tollPriceAlls;
 	}
@@ -513,7 +513,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.tollPriceAlls = tollPriceAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByUserId")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public Set<UserServiceAll> getUserServiceAllsForUserId() {
 		return this.userServiceAllsForUserId;
 	}
@@ -523,7 +523,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userServiceAllsForUserId = userServiceAllsForUserId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<UserTypeAll> getUserTypeAlls() {
 		return this.userTypeAlls;
 	}
@@ -532,7 +532,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userTypeAlls = userTypeAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByUserId")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public Set<UserBalanceAll> getUserBalanceAllsForUserId() {
 		return this.userBalanceAllsForUserId;
 	}
@@ -542,7 +542,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userBalanceAllsForUserId = userBalanceAllsForUserId;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userBasicAllByUserId")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public UserPaymentDetailAll getUserPaymentDetailAllByUserId() {
 		return this.userPaymentDetailAllByUserId;
 	}
@@ -552,7 +552,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userPaymentDetailAllByUserId = userPaymentDetailAllByUserId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<UserBalanceLogAll> getUserBalanceLogAlls() {
 		return this.userBalanceLogAlls;
 	}
@@ -561,7 +561,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userBalanceLogAlls = userBalanceLogAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ConfigurationAll> getConfigurationAlls() {
 		return this.configurationAlls;
 	}
@@ -570,7 +570,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.configurationAlls = configurationAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByLastModifiedBy")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByLastModifiedBy")
 	public Set<UserBalanceAll> getUserBalanceAllsForLastModifiedBy() {
 		return this.userBalanceAllsForLastModifiedBy;
 	}
@@ -580,7 +580,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userBalanceAllsForLastModifiedBy = userBalanceAllsForLastModifiedBy;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<VehicleMovementLogAll> getVehicleMovementLogAlls() {
 		return this.vehicleMovementLogAlls;
 	}
@@ -590,7 +590,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userBasicAllByUserId")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public UserPaymentDetailAll getUserPaymentDetailAllByUserId() {
 		return this.userPaymentDetailAllByUserId;
 	}
@@ -600,7 +600,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userPaymentDetailAllByUserId = userPaymentDetailAllByUserId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<VehicleTypeAll> getVehicleTypeAlls() {
 		return this.vehicleTypeAlls;
 	}
@@ -609,7 +609,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.vehicleTypeAlls = vehicleTypeAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ComponentVersionAll> getComponentVersionAlls() {
 		return this.componentVersionAlls;
 	}
@@ -619,7 +619,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.componentVersionAlls = componentVersionAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<CcTypeAll> getCcTypeAlls() {
 		return this.ccTypeAlls;
 	}
@@ -628,16 +628,16 @@ public class UserBasicAll implements java.io.Serializable {
 		this.ccTypeAlls = ccTypeAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
-	public Set<UserBasicAll> getUserBasicAlls() {
-		return this.userBasicAlls;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
+	public Set<UserAll> getUserAlls() {
+		return this.userAlls;
 	}
 
-	public void setUserBasicAlls(Set<UserBasicAll> userBasicAlls) {
-		this.userBasicAlls = userBasicAlls;
+	public void setUserAlls(Set<UserAll> userAlls) {
+		this.userAlls = userAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ComponentAll> getComponentAlls_1() {
 		return this.componentAlls_1;
 	}
@@ -646,7 +646,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.componentAlls_1 = componentAlls_1;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<VehicleTollUsageAll> getVehicleTollUsageAlls() {
 		return this.vehicleTollUsageAlls;
 	}
@@ -656,7 +656,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ComponentVersionAll> getComponentVersionAlls_1() {
 		return this.componentVersionAlls_1;
 	}
@@ -666,7 +666,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.componentVersionAlls_1 = componentVersionAlls_1;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByLastModifiedBy")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByLastModifiedBy")
 	public Set<TollOperatorAll> getTollOperatorAllsForLastModifiedBy() {
 		return this.tollOperatorAllsForLastModifiedBy;
 	}
@@ -676,7 +676,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.tollOperatorAllsForLastModifiedBy = tollOperatorAllsForLastModifiedBy;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ClientAll> getClientAlls_1() {
 		return this.clientAlls_1;
 	}
@@ -685,7 +685,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.clientAlls_1 = clientAlls_1;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAllByLastModifiedBy")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByLastModifiedBy")
 	public Set<UserServiceAll> getUserServiceAllsForLastModifiedBy() {
 		return this.userServiceAllsForLastModifiedBy;
 	}
@@ -695,7 +695,7 @@ public class UserBasicAll implements java.io.Serializable {
 		this.userServiceAllsForLastModifiedBy = userServiceAllsForLastModifiedBy;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userBasicAll")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<ConfigurationAll> getConfigurationAlls_1() {
 		return this.configurationAlls_1;
 	}
