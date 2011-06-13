@@ -5,6 +5,10 @@ Ext.setup({
     glossOnIcon: false,
     onReady: function() {
 		console.log('Page is setup ');
+		console.log(carsList.getAt(0).get('reg'));
+		console.log(TollsData.getAt(0).get('tolloperator'));
+		console.log(TollsData.getAt(0).get('avgtoll'));
+		//carsList.insert(0,[{reg: '12345',state: 'LB',type: 'sedan'}]);
 		var EntryCar=new Ext.Panel({
 			id: 'entrycar',
 			scroll: 'vertical',
@@ -219,9 +223,9 @@ Ext.setup({
 										console.log(cl.getValue());
 										console.log(toggle.value);
 										cl.setValue("San Diego");
-										to.setValue("Fast Pass");
-										at.setValue("2$");
-										pt.setValue("1.5$");
+										to.setValue(TollsData.getAt(0).get('tolloperator'));
+										at.setValue(TollsData.getAt(0).get('avgtoll'));
+										pt.setValue(TollsData.getAt(0).get('tollperday'));
 										toggle.value=1;
 									}else{
 										console.log(toggle.value);
@@ -400,7 +404,67 @@ Ext.setup({
                 name: 'password',
                 label: 'Password',
                 useClearIcon: true
-            } ]}, {
+            } ]},
+            {
+            xtype: 'fieldset',
+            title: 'Payment info',
+            instructions: 'Please enter the information above.',
+            defaults: {
+                // labelAlign: 'right'
+                labelWidth: '35%'
+            },
+            items: [{
+            
+                xtype: 'emailfield',
+                name: 'email',
+                label: 'Email',
+                placeHolder: 'me@sencha.com',
+                useClearIcon: true
+            },  {
+                xtype: 'checkboxfield',
+                name: 'autopay',
+                label: 'Auto-pay'
+            },{
+                xtype: 'textfield',
+                name: 'ccnumber',
+                label: 'Credit card#',
+                placeHolder: 'XXXX-XXXX-XXXX-XXXX',
+                useClearIcon: true
+            }
+            , {
+                xtype: 'datepickerfield',
+                name: 'expirydate',
+                label: 'Expiry date',
+                picker: { yearFrom: 2011 }
+            }, {
+                xtype: 'selectfield',
+                name: 'cardtype',
+                label: 'Credit card type',
+                options: [{
+                    text: 'Visa',
+                    value: 'visa'
+                },
+                {
+                    text: 'Master',
+                    value: 'master'
+                },{
+                    text: 'American Express',
+                    value: 'amex'
+                }, {
+                    text: 'Discover',
+                    value: 'discover'
+                }]
+            }, {
+                xtype: 'hiddenfield',
+                name: 'secret',
+                value: false
+            }, {
+                xtype: 'textareafield',
+                name: 'billingadd',
+                label: 'Billing address'
+            }]
+        },
+            {
             layout: 'vbox',
             defaults: {xtype: 'button', flex: 1, style: 'margin: .5em;'},
             items: [{
