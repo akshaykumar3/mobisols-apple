@@ -13,10 +13,9 @@ Ext.setup({
 				width: '150px',
 				text: 'Click Me',
 				handler: function(btn){
-					console.log('button clicked');
 					var t=Ext.getCmp('name');
-					t.value="hello pradeep";
-					t.update();
+					console.log('button clicked');
+					t.setValue("hello pradeep");
 				}
 			}]
 		});

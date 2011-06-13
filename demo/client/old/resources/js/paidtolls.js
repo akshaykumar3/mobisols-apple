@@ -1,5 +1,5 @@
 Ext.regModel('PaidTolls', {
-    fields: ['date', 'amount','location','reg']
+    fields: [{name:'date'},{name: 'amount'},{name: 'location'},{name: 'reg'}]
 });
 
 var paidTolls = new Ext.data.Store({
