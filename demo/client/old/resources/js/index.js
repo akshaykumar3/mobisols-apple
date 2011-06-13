@@ -6,6 +6,7 @@ Ext.setup({
     onReady: function() {
 		var EntryCar=new Ext.Panel({
 			id: 'entrycar',
+			scroll: 'vertical',
 			dockedItems: [
 				{
 					xtype: 'toolbar',
@@ -351,7 +352,7 @@ Ext.setup({
 				iconCls: 'add',
 				itemId: 'addCar',
 				handler: function(){
-					tabpanel.setActiveItem('entrycar');
+					tabpanel.setActiveItem('addcar');
 				}
 			}]
 		}],
@@ -364,7 +365,7 @@ Ext.setup({
 			scroll: 'vertical',
             itemTpl: '<div class="contact"><strong>{reg}</strong>  - {state} - {type}</div>',
 			onItemDisclosure: function(record, btn, index){
-				tabpanel.setActiveItem('paidtolls');
+				tabpanel.setActiveItem('addcar');
 			}
         }]
     },{
@@ -372,6 +373,7 @@ Ext.setup({
 			id: 'addcar',
 			iconcls: 'add',
 			ui: 'action',
+			hidden: true,
 			cls: 'carcls',
 			items: [
 					EntryCar
