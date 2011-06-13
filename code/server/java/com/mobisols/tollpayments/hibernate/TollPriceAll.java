@@ -24,7 +24,7 @@ public class TollPriceAll implements java.io.Serializable {
 
 	private Integer tollPriceId;
 	private TollLocationAll tollLocationAll;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private VehicleTypeAll vehicleTypeAll;
 	private String direction;
 	private Double costPrice;
@@ -49,12 +49,11 @@ public class TollPriceAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public TollPriceAll(TollLocationAll tollLocationAll,
-			UserBasicAll userBasicAll, VehicleTypeAll vehicleTypeAll,
-			String direction, Double costPrice, Double sellingPrice,
-			Timestamp lastModifiedOn, Timestamp createdOn) {
+	public TollPriceAll(TollLocationAll tollLocationAll, UserAll userAll,
+			VehicleTypeAll vehicleTypeAll, String direction, Double costPrice,
+			Double sellingPrice, Timestamp lastModifiedOn, Timestamp createdOn) {
 		this.tollLocationAll = tollLocationAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.vehicleTypeAll = vehicleTypeAll;
 		this.direction = direction;
 		this.costPrice = costPrice;
@@ -64,14 +63,14 @@ public class TollPriceAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TollPriceAll(TollLocationAll tollLocationAll,
-			UserBasicAll userBasicAll, VehicleTypeAll vehicleTypeAll,
-			String direction, Double costPrice, Double sellingPrice,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp lastModifiedOn, Timestamp createdOn) {
+	public TollPriceAll(TollLocationAll tollLocationAll, UserAll userAll,
+			VehicleTypeAll vehicleTypeAll, String direction, Double costPrice,
+			Double sellingPrice, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp lastModifiedOn,
+			Timestamp createdOn) {
 		this.tollLocationAll = tollLocationAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.vehicleTypeAll = vehicleTypeAll;
 		this.direction = direction;
 		this.costPrice = costPrice;
@@ -114,12 +113,12 @@ public class TollPriceAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

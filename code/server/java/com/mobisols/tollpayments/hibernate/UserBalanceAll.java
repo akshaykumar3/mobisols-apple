@@ -25,8 +25,8 @@ public class UserBalanceAll implements java.io.Serializable {
 	// Fields
 
 	private Integer ubalId;
-	private UserBasicAll userBasicAllByLastModifiedBy;
-	private UserBasicAll userBasicAllByUserId;
+	private UserAll userAllByLastModifiedBy;
+	private UserAll userAllByUserId;
 	private Double balance;
 	private String udf1;
 	private String udf2;
@@ -50,23 +50,22 @@ public class UserBalanceAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserBalanceAll(UserBasicAll userBasicAllByLastModifiedBy,
-			Double balance, Timestamp lastModifiedOn, Timestamp createdOn) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public UserBalanceAll(UserAll userAllByLastModifiedBy, Double balance,
+			Timestamp lastModifiedOn, Timestamp createdOn) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.balance = balance;
 		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
 	}
 
 	/** full constructor */
-	public UserBalanceAll(UserBasicAll userBasicAllByLastModifiedBy,
-			UserBasicAll userBasicAllByUserId, Double balance, String udf1,
-			String udf2, String udf3, String udf4, String udf5, String flag1,
-			String flag2, String flag3, String flag4, String flag5,
-			Timestamp lastModifiedOn, Timestamp createdOn,
-			Set<UserBalanceLogAll> userBalanceLogAlls) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public UserBalanceAll(UserAll userAllByLastModifiedBy,
+			UserAll userAllByUserId, Double balance, String udf1, String udf2,
+			String udf3, String udf4, String udf5, String flag1, String flag2,
+			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
+			Timestamp createdOn, Set<UserBalanceLogAll> userBalanceLogAlls) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
+		this.userAllByUserId = userAllByUserId;
 		this.balance = balance;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
@@ -97,23 +96,22 @@ public class UserBalanceAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAllByLastModifiedBy() {
-		return this.userBasicAllByLastModifiedBy;
+	public UserAll getUserAllByLastModifiedBy() {
+		return this.userAllByLastModifiedBy;
 	}
 
-	public void setUserBasicAllByLastModifiedBy(
-			UserBasicAll userBasicAllByLastModifiedBy) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public void setUserAllByLastModifiedBy(UserAll userAllByLastModifiedBy) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	public UserBasicAll getUserBasicAllByUserId() {
-		return this.userBasicAllByUserId;
+	public UserAll getUserAllByUserId() {
+		return this.userAllByUserId;
 	}
 
-	public void setUserBasicAllByUserId(UserBasicAll userBasicAllByUserId) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public void setUserAllByUserId(UserAll userAllByUserId) {
+		this.userAllByUserId = userAllByUserId;
 	}
 
 	@Column(name = "balance", nullable = false, scale = 4)

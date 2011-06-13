@@ -24,7 +24,7 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 	private Integer vtuId;
 	private Timestamp timestamp;
 	private UserVehicleHistoryAll userVehicleHistoryAll;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private PaymentTransactionAll paymentTransactionAll;
 	private VehicleMovementLogAll vehicleMovementLogAll;
 	private TollLocationAll tollLocationAll;
@@ -50,12 +50,11 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 
 	/** minimal constructor */
 	public VehicleTollUsageAll(UserVehicleHistoryAll userVehicleHistoryAll,
-			UserBasicAll userBasicAll,
-			VehicleMovementLogAll vehicleMovementLogAll,
+			UserAll userAll, VehicleMovementLogAll vehicleMovementLogAll,
 			TollLocationAll tollLocationAll, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
 		this.userVehicleHistoryAll = userVehicleHistoryAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.vehicleMovementLogAll = vehicleMovementLogAll;
 		this.tollLocationAll = tollLocationAll;
 		this.lastModifiedOn = lastModifiedOn;
@@ -64,8 +63,7 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 
 	/** full constructor */
 	public VehicleTollUsageAll(UserVehicleHistoryAll userVehicleHistoryAll,
-			UserBasicAll userBasicAll,
-			PaymentTransactionAll paymentTransactionAll,
+			UserAll userAll, PaymentTransactionAll paymentTransactionAll,
 			VehicleMovementLogAll vehicleMovementLogAll,
 			TollLocationAll tollLocationAll,
 			TollPriceHistoryAll tollPriceHistoryAll, String udf1, String udf2,
@@ -73,7 +71,7 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
 		this.userVehicleHistoryAll = userVehicleHistoryAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.paymentTransactionAll = paymentTransactionAll;
 		this.vehicleMovementLogAll = vehicleMovementLogAll;
 		this.tollLocationAll = tollLocationAll;
@@ -127,12 +125,12 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

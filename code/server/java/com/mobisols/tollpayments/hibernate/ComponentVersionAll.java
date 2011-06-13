@@ -28,7 +28,7 @@ public class ComponentVersionAll implements java.io.Serializable {
 	private Integer compVersionId;
 	private String version;
 	private ComponentAll componentAll;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private String description;
 	private String listOfChanges;
 	private String udf1;
@@ -53,22 +53,21 @@ public class ComponentVersionAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ComponentVersionAll(UserBasicAll userBasicAll, Timestamp createdOn,
+	public ComponentVersionAll(UserAll userAll, Timestamp createdOn,
 			Timestamp lastModifiedOn) {
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
 	/** full constructor */
-	public ComponentVersionAll(ComponentAll componentAll,
-			UserBasicAll userBasicAll, String description,
-			String listOfChanges, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String flag1, String flag2, String flag3,
-			String flag4, String flag5, Timestamp createdOn,
+	public ComponentVersionAll(ComponentAll componentAll, UserAll userAll,
+			String description, String listOfChanges, String udf1, String udf2,
+			String udf3, String udf4, String udf5, String flag1, String flag2,
+			String flag3, String flag4, String flag5, Timestamp createdOn,
 			Timestamp lastModifiedOn, Set<ConfigurationAll> configurationAlls) {
 		this.componentAll = componentAll;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.description = description;
 		this.listOfChanges = listOfChanges;
 		this.udf1 = udf1;
@@ -120,12 +119,12 @@ public class ComponentVersionAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "description", length = 45)

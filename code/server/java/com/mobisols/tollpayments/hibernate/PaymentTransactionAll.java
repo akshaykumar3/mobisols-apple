@@ -27,8 +27,8 @@ public class PaymentTransactionAll implements java.io.Serializable {
 
 	private Integer ptranId;
 	private Timestamp timestamp;
-	private UserBasicAll userBasicAll;
 	private UserBalanceLogAll userBalanceLogAllByToBlId;
+	private UserAll userAll;
 	private UserPaymentDetailHistoryAll userPaymentDetailHistoryAll;
 	private UserBalanceLogAll userBalanceLogAllByUserBlId;
 	private String status;
@@ -55,9 +55,9 @@ public class PaymentTransactionAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public PaymentTransactionAll(UserBasicAll userBasicAll, String status,
-			Double amount, Timestamp lastModifiedOn, Timestamp createdOn) {
-		this.userBasicAll = userBasicAll;
+	public PaymentTransactionAll(UserAll userAll, String status, Double amount,
+			Timestamp lastModifiedOn, Timestamp createdOn) {
+		this.userAll = userAll;
 		this.status = status;
 		this.amount = amount;
 		this.lastModifiedOn = lastModifiedOn;
@@ -65,16 +65,16 @@ public class PaymentTransactionAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public PaymentTransactionAll(UserBasicAll userBasicAll,
-			UserBalanceLogAll userBalanceLogAllByToBlId,
+	public PaymentTransactionAll(UserBalanceLogAll userBalanceLogAllByToBlId,
+			UserAll userAll,
 			UserPaymentDetailHistoryAll userPaymentDetailHistoryAll,
 			UserBalanceLogAll userBalanceLogAllByUserBlId, String status,
 			Double amount, String udf1, String udf2, String udf3, String udf4,
 			String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn, Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
-		this.userBasicAll = userBasicAll;
 		this.userBalanceLogAllByToBlId = userBalanceLogAllByToBlId;
+		this.userAll = userAll;
 		this.userPaymentDetailHistoryAll = userPaymentDetailHistoryAll;
 		this.userBalanceLogAllByUserBlId = userBalanceLogAllByUserBlId;
 		this.status = status;
@@ -117,16 +117,6 @@ public class PaymentTransactionAll implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
-	}
-
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "to_bl_id")
 	public UserBalanceLogAll getUserBalanceLogAllByToBlId() {
 		return this.userBalanceLogAllByToBlId;
@@ -135,6 +125,16 @@ public class PaymentTransactionAll implements java.io.Serializable {
 	public void setUserBalanceLogAllByToBlId(
 			UserBalanceLogAll userBalanceLogAllByToBlId) {
 		this.userBalanceLogAllByToBlId = userBalanceLogAllByToBlId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "last_modified_by", nullable = false)
+	public UserAll getUserAll() {
+		return this.userAll;
+	}
+
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

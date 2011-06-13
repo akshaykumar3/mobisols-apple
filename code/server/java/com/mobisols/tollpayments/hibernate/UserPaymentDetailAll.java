@@ -30,8 +30,8 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 	// Fields
 
 	private Integer updId;
-	private UserBasicAll userBasicAllByUserId;
-	private UserBasicAll userBasicAllByUserId;
+	private UserAll userAllByUserId;
+	private UserAll userAllByUserId;
 	private CcTypeAll ccTypeAll;
 	private String ccAcName;
 	private String ccNumber;
@@ -72,18 +72,17 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserPaymentDetailAll(UserBasicAll userBasicAllByUserId,
-			UserBasicAll userBasicAllByUserId, CcTypeAll ccTypeAll,
-			String ccAcName, String ccNumber, Integer ccExpMonth,
-			Date ccExpYear, Integer ccCvv, Integer bankRouting,
-			Long bankAccount, String payPrefer, String address1,
-			String address2, String city, String state, String country,
-			String zip, String udf1, String udf2, String udf3, String udf4,
-			String udf5, String flag1, String flag2, String flag3,
+	public UserPaymentDetailAll(UserAll userAllByUserId,
+			UserAll userAllByUserId, CcTypeAll ccTypeAll, String ccAcName,
+			String ccNumber, Integer ccExpMonth, Date ccExpYear, Integer ccCvv,
+			Integer bankRouting, Long bankAccount, String payPrefer,
+			String address1, String address2, String city, String state,
+			String country, String zip, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
-		this.userBasicAllByUserId = userBasicAllByUserId;
+		this.userAllByUserId = userAllByUserId;
+		this.userAllByUserId = userAllByUserId;
 		this.ccTypeAll = ccTypeAll;
 		this.ccAcName = ccAcName;
 		this.ccNumber = ccNumber;
@@ -125,22 +124,22 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 		this.updId = updId;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userBasicAll")
-	public UserBasicAll getUserBasicAllByUserId() {
-		return this.userBasicAllByUserId;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAll")
+	public UserAll getUserAllByUserId() {
+		return this.userAllByUserId;
 	}
 
-	public void setUserBasicAllByUserId(UserBasicAll userBasicAllByUserId) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public void setUserAllByUserId(UserAll userAllByUserId) {
+		this.userAllByUserId = userAllByUserId;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tollOperatorAllByUserId")
-	public UserBasicAll getUserBasicAllByUserId() {
-		return this.userBasicAllByUserId;
+	public UserAll getUserAllByUserId() {
+		return this.userAllByUserId;
 	}
 
-	public void setUserBasicAllByUserId(UserBasicAll userBasicAllByUserId) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public void setUserAllByUserId(UserAll userAllByUserId) {
+		this.userAllByUserId = userAllByUserId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -25,7 +25,7 @@ public class ServicePlanAll implements java.io.Serializable {
 	// Fields
 
 	private Integer servicePlanId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private TollOperatorAll tollOperatorAll;
 	private String name;
 	private String description;
@@ -50,22 +50,21 @@ public class ServicePlanAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ServicePlanAll(UserBasicAll userBasicAll, String name,
+	public ServicePlanAll(UserAll userAll, String name,
 			Timestamp lastModifiedOn, Timestamp createdOn) {
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.name = name;
 		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
 	}
 
 	/** full constructor */
-	public ServicePlanAll(UserBasicAll userBasicAll,
-			TollOperatorAll tollOperatorAll, String name, String description,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp lastModifiedOn, Timestamp createdOn,
-			Set<UserServiceAll> userServiceAlls) {
-		this.userBasicAll = userBasicAll;
+	public ServicePlanAll(UserAll userAll, TollOperatorAll tollOperatorAll,
+			String name, String description, String udf1, String udf2,
+			String udf3, String udf4, String udf5, String flag1, String flag2,
+			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
+			Timestamp createdOn, Set<UserServiceAll> userServiceAlls) {
+		this.userAll = userAll;
 		this.tollOperatorAll = tollOperatorAll;
 		this.name = name;
 		this.description = description;
@@ -98,12 +97,12 @@ public class ServicePlanAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -27,8 +27,8 @@ public class UserBalanceLogAll implements java.io.Serializable {
 
 	private Integer ublogId;
 	private Timestamp timestamp;
-	private UserBasicAll userBasicAll;
 	private UserBalanceAll userBalanceAll;
+	private UserAll userAll;
 	private Double delta;
 	private String action;
 	private String udf1;
@@ -65,15 +65,15 @@ public class UserBalanceLogAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserBalanceLogAll(UserBasicAll userBasicAll,
-			UserBalanceAll userBalanceAll, Double delta, String action,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp lastModifiedOn, Timestamp createdOn,
+	public UserBalanceLogAll(UserBalanceAll userBalanceAll, UserAll userAll,
+			Double delta, String action, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp lastModifiedOn,
+			Timestamp createdOn,
 			Set<PaymentTransactionAll> paymentTransactionAllsForToBlId,
 			Set<PaymentTransactionAll> paymentTransactionAllsForUserBlId) {
-		this.userBasicAll = userBasicAll;
 		this.userBalanceAll = userBalanceAll;
+		this.userAll = userAll;
 		this.delta = delta;
 		this.action = action;
 		this.udf1 = udf1;
@@ -115,16 +115,6 @@ public class UserBalanceLogAll implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "last_modified_by")
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
-	}
-
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ubal_id", nullable = false)
 	public UserBalanceAll getUserBalanceAll() {
 		return this.userBalanceAll;
@@ -132,6 +122,16 @@ public class UserBalanceLogAll implements java.io.Serializable {
 
 	public void setUserBalanceAll(UserBalanceAll userBalanceAll) {
 		this.userBalanceAll = userBalanceAll;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "last_modified_by")
+	public UserAll getUserAll() {
+		return this.userAll;
+	}
+
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "delta", nullable = false, scale = 4)

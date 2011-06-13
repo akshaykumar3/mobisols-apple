@@ -23,7 +23,7 @@ public class VmlTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer vmlTypeId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private String name;
 	private String description;
 	private String udf1;
@@ -48,24 +48,24 @@ public class VmlTypeAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public VmlTypeAll(Integer vmlTypeId, UserBasicAll userBasicAll,
-			String name, Timestamp lastModifiedOn, Timestamp createdOn) {
+	public VmlTypeAll(Integer vmlTypeId, UserAll userAll, String name,
+			Timestamp lastModifiedOn, Timestamp createdOn) {
 		this.vmlTypeId = vmlTypeId;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.name = name;
 		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
 	}
 
 	/** full constructor */
-	public VmlTypeAll(Integer vmlTypeId, UserBasicAll userBasicAll,
-			String name, String description, String udf1, String udf2,
-			String udf3, String udf4, String udf5, String flag1, String flag2,
-			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
+	public VmlTypeAll(Integer vmlTypeId, UserAll userAll, String name,
+			String description, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn,
 			Set<VehicleMovementLogAll> vehicleMovementLogAlls) {
 		this.vmlTypeId = vmlTypeId;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
 		this.udf1 = udf1;
@@ -96,12 +96,12 @@ public class VmlTypeAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "name", nullable = false, length = 45)

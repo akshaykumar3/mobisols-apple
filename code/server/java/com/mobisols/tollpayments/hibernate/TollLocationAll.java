@@ -23,7 +23,7 @@ public class TollLocationAll implements java.io.Serializable {
 	// Fields
 
 	private Integer tollLocationId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private TollOperatorAll tollOperatorAll;
 	private String geometry;
 	private String isCovered;
@@ -57,11 +57,11 @@ public class TollLocationAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public TollLocationAll(Integer tollLocationId, UserBasicAll userBasicAll,
+	public TollLocationAll(Integer tollLocationId, UserAll userAll,
 			TollOperatorAll tollOperatorAll, String geometry, String isCovered,
 			String isCashOnly, Timestamp lastModifiedOn, Timestamp createdOn) {
 		this.tollLocationId = tollLocationId;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.tollOperatorAll = tollOperatorAll;
 		this.geometry = geometry;
 		this.isCovered = isCovered;
@@ -71,7 +71,7 @@ public class TollLocationAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TollLocationAll(Integer tollLocationId, UserBasicAll userBasicAll,
+	public TollLocationAll(Integer tollLocationId, UserAll userAll,
 			TollOperatorAll tollOperatorAll, String geometry, String isCovered,
 			String isCashOnly, String address1, String address2, String city,
 			String state, String country, String zip, String udf1, String udf2,
@@ -80,7 +80,7 @@ public class TollLocationAll implements java.io.Serializable {
 			Timestamp createdOn, Set<VehicleTollUsageAll> vehicleTollUsageAlls,
 			Set<TollPriceAll> tollPriceAlls) {
 		this.tollLocationId = tollLocationId;
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.tollOperatorAll = tollOperatorAll;
 		this.geometry = geometry;
 		this.isCovered = isCovered;
@@ -120,12 +120,12 @@ public class TollLocationAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
