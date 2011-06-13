@@ -29,8 +29,8 @@ public class TollOperatorAll implements java.io.Serializable {
 	// Fields
 
 	private Integer tollOperatorId;
-	private UserBasicAll userBasicAllByLastModifiedBy;
-	private UserBasicAll userBasicAllByUserId;
+	private UserAll userAllByLastModifiedBy;
+	private UserAll userAllByUserId;
 	private String name;
 	private String isActive;
 	private String website;
@@ -57,10 +57,9 @@ public class TollOperatorAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public TollOperatorAll(UserBasicAll userBasicAllByLastModifiedBy,
-			String name, String isActive, Timestamp createdOn,
-			Timestamp lastModifiedOn) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public TollOperatorAll(UserAll userAllByLastModifiedBy, String name,
+			String isActive, Timestamp createdOn, Timestamp lastModifiedOn) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.name = name;
 		this.isActive = isActive;
 		this.createdOn = createdOn;
@@ -68,15 +67,15 @@ public class TollOperatorAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TollOperatorAll(UserBasicAll userBasicAllByLastModifiedBy,
-			UserBasicAll userBasicAllByUserId, String name, String isActive,
+	public TollOperatorAll(UserAll userAllByLastModifiedBy,
+			UserAll userAllByUserId, String name, String isActive,
 			String website, String udf1, String udf2, String udf3, String udf4,
 			String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp createdOn,
 			Timestamp lastModifiedOn, Set<ServicePlanAll> servicePlanAlls,
 			Set<TollLocationAll> tollLocationAlls) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
-		this.userBasicAllByUserId = userBasicAllByUserId;
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
+		this.userAllByUserId = userAllByUserId;
 		this.name = name;
 		this.isActive = isActive;
 		this.website = website;
@@ -110,22 +109,21 @@ public class TollOperatorAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAllByLastModifiedBy() {
-		return this.userBasicAllByLastModifiedBy;
+	public UserAll getUserAllByLastModifiedBy() {
+		return this.userAllByLastModifiedBy;
 	}
 
-	public void setUserBasicAllByLastModifiedBy(
-			UserBasicAll userBasicAllByLastModifiedBy) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public void setUserAllByLastModifiedBy(UserAll userAllByLastModifiedBy) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tollOperatorAllByUserId")
-	public UserBasicAll getUserBasicAllByUserId() {
-		return this.userBasicAllByUserId;
+	public UserAll getUserAllByUserId() {
+		return this.userAllByUserId;
 	}
 
-	public void setUserBasicAllByUserId(UserBasicAll userBasicAllByUserId) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public void setUserAllByUserId(UserAll userAllByUserId) {
+		this.userAllByUserId = userAllByUserId;
 	}
 
 	@Column(name = "name", unique = true, nullable = false, length = 100)

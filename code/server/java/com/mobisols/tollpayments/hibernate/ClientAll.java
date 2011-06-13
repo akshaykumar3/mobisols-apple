@@ -25,7 +25,7 @@ public class ClientAll implements java.io.Serializable {
 	// Fields
 
 	private Integer clientId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private String clientName;
 	private String udf1;
 	private String udf2;
@@ -39,7 +39,7 @@ public class ClientAll implements java.io.Serializable {
 	private String flag5;
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
-	private Set<UserBasicAll> userBasicAlls = new HashSet<UserBasicAll>(0);
+	private Set<UserAll> userAlls = new HashSet<UserAll>(0);
 	private Set<ComponentAll> componentAlls = new HashSet<ComponentAll>(0);
 
 	// Constructors
@@ -49,21 +49,21 @@ public class ClientAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public ClientAll(UserBasicAll userBasicAll, String clientName,
-			Timestamp createdOn, Timestamp lastModifiedOn) {
-		this.userBasicAll = userBasicAll;
+	public ClientAll(UserAll userAll, String clientName, Timestamp createdOn,
+			Timestamp lastModifiedOn) {
+		this.userAll = userAll;
 		this.clientName = clientName;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
 	/** full constructor */
-	public ClientAll(UserBasicAll userBasicAll, String clientName, String udf1,
+	public ClientAll(UserAll userAll, String clientName, String udf1,
 			String udf2, String udf3, String udf4, String udf5, String flag1,
 			String flag2, String flag3, String flag4, String flag5,
 			Timestamp createdOn, Timestamp lastModifiedOn,
-			Set<UserBasicAll> userBasicAlls, Set<ComponentAll> componentAlls) {
-		this.userBasicAll = userBasicAll;
+			Set<UserAll> userAlls, Set<ComponentAll> componentAlls) {
+		this.userAll = userAll;
 		this.clientName = clientName;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
@@ -77,7 +77,7 @@ public class ClientAll implements java.io.Serializable {
 		this.flag5 = flag5;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
-		this.userBasicAlls = userBasicAlls;
+		this.userAlls = userAlls;
 		this.componentAlls = componentAlls;
 	}
 
@@ -95,12 +95,12 @@ public class ClientAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "client_name", nullable = false, length = 45)
@@ -221,12 +221,12 @@ public class ClientAll implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
-	public Set<UserBasicAll> getUserBasicAlls() {
-		return this.userBasicAlls;
+	public Set<UserAll> getUserAlls() {
+		return this.userAlls;
 	}
 
-	public void setUserBasicAlls(Set<UserBasicAll> userBasicAlls) {
-		this.userBasicAlls = userBasicAlls;
+	public void setUserAlls(Set<UserAll> userAlls) {
+		this.userAlls = userAlls;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")

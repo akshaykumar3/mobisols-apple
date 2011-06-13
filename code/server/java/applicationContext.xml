@@ -150,12 +150,6 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="UserBasicAllDAO"
-		class="com.mobisols.tollpayments.hibernate.UserBasicAllDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
 	<bean id="VehicleTollUsageAllDAO"
 		class="com.mobisols.tollpayments.hibernate.VehicleTollUsageAllDAO">
 		<property name="sessionFactory">
@@ -264,12 +258,6 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="UserBasicDAO"
-		class="com.mobisols.tollpayments.hibernate.UserBasicDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>
 	<bean id="UserHistoryDAO"
 		class="com.mobisols.tollpayments.hibernate.UserHistoryDAO">
 		<property name="sessionFactory">
@@ -320,6 +308,42 @@
 	</bean>
 	<bean id="PaymentTransactionDAO"
 		class="com.mobisols.tollpayments.hibernate.PaymentTransactionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserAllDAO"
+		class="com.mobisols.tollpayments.hibernate.UserAllDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserHistoryAllDAO"
+		class="com.mobisols.tollpayments.hibernate.UserHistoryAllDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UdfDataAllDAO"
+		class="com.mobisols.tollpayments.hibernate.UdfDataAllDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UdfDefinitionAllDAO"
+		class="com.mobisols.tollpayments.hibernate.UdfDefinitionAllDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TollLocationHistoryAllDAO"
+		class="com.mobisols.tollpayments.hibernate.TollLocationHistoryAllDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserDAO"
+		class="com.mobisols.tollpayments.hibernate.UserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

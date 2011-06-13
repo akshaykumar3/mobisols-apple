@@ -21,8 +21,8 @@ public class UserServiceAll implements java.io.Serializable {
 	// Fields
 
 	private Integer userServiceId;
-	private UserBasicAll userBasicAllByLastModifiedBy;
-	private UserBasicAll userBasicAllByUserId;
+	private UserAll userAllByLastModifiedBy;
+	private UserAll userAllByUserId;
 	private ServicePlanAll servicePlanAll;
 	private Timestamp startDate;
 	private Timestamp endDate;
@@ -47,10 +47,9 @@ public class UserServiceAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserServiceAll(UserBasicAll userBasicAllByLastModifiedBy,
-			Timestamp startDate, Timestamp endDate, Timestamp createdOn,
-			Timestamp lastModifiedOn) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public UserServiceAll(UserAll userAllByLastModifiedBy, Timestamp startDate,
+			Timestamp endDate, Timestamp createdOn, Timestamp lastModifiedOn) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.createdOn = createdOn;
@@ -58,14 +57,14 @@ public class UserServiceAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserServiceAll(UserBasicAll userBasicAllByLastModifiedBy,
-			UserBasicAll userBasicAllByUserId, ServicePlanAll servicePlanAll,
+	public UserServiceAll(UserAll userAllByLastModifiedBy,
+			UserAll userAllByUserId, ServicePlanAll servicePlanAll,
 			Timestamp startDate, Timestamp endDate, Integer priority,
 			String udf1, String udf2, String udf3, String udf4, String udf5,
 			String flag1, String flag2, String flag3, String flag4,
 			String flag5, Timestamp createdOn, Timestamp lastModifiedOn) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
-		this.userBasicAllByUserId = userBasicAllByUserId;
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
+		this.userAllByUserId = userAllByUserId;
 		this.servicePlanAll = servicePlanAll;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -98,23 +97,22 @@ public class UserServiceAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAllByLastModifiedBy() {
-		return this.userBasicAllByLastModifiedBy;
+	public UserAll getUserAllByLastModifiedBy() {
+		return this.userAllByLastModifiedBy;
 	}
 
-	public void setUserBasicAllByLastModifiedBy(
-			UserBasicAll userBasicAllByLastModifiedBy) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public void setUserAllByLastModifiedBy(UserAll userAllByLastModifiedBy) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	public UserBasicAll getUserBasicAllByUserId() {
-		return this.userBasicAllByUserId;
+	public UserAll getUserAllByUserId() {
+		return this.userAllByUserId;
 	}
 
-	public void setUserBasicAllByUserId(UserBasicAll userBasicAllByUserId) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public void setUserAllByUserId(UserAll userAllByUserId) {
+		this.userAllByUserId = userAllByUserId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

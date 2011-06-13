@@ -25,7 +25,7 @@ public class UserTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer userTypeId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private String name;
 	private String description;
 	private Double minBalance;
@@ -42,7 +42,7 @@ public class UserTypeAll implements java.io.Serializable {
 	private String flag5;
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
-	private Set<UserBasicAll> userBasicAlls = new HashSet<UserBasicAll>(0);
+	private Set<UserAll> userAlls = new HashSet<UserAll>(0);
 
 	// Constructors
 
@@ -51,22 +51,21 @@ public class UserTypeAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserTypeAll(UserBasicAll userBasicAll, String name,
-			Timestamp createdOn, Timestamp lastModifiedOn) {
-		this.userBasicAll = userBasicAll;
+	public UserTypeAll(UserAll userAll, String name, Timestamp createdOn,
+			Timestamp lastModifiedOn) {
+		this.userAll = userAll;
 		this.name = name;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
 	/** full constructor */
-	public UserTypeAll(UserBasicAll userBasicAll, String name,
-			String description, Double minBalance, String minBalanceType,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp createdOn, Timestamp lastModifiedOn,
-			Set<UserBasicAll> userBasicAlls) {
-		this.userBasicAll = userBasicAll;
+	public UserTypeAll(UserAll userAll, String name, String description,
+			Double minBalance, String minBalanceType, String udf1, String udf2,
+			String udf3, String udf4, String udf5, String flag1, String flag2,
+			String flag3, String flag4, String flag5, Timestamp createdOn,
+			Timestamp lastModifiedOn, Set<UserAll> userAlls) {
+		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
 		this.minBalance = minBalance;
@@ -83,7 +82,7 @@ public class UserTypeAll implements java.io.Serializable {
 		this.flag5 = flag5;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
-		this.userBasicAlls = userBasicAlls;
+		this.userAlls = userAlls;
 	}
 
 	// Property accessors
@@ -100,12 +99,12 @@ public class UserTypeAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "name", nullable = false, length = 45)
@@ -253,12 +252,12 @@ public class UserTypeAll implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userTypeAll")
-	public Set<UserBasicAll> getUserBasicAlls() {
-		return this.userBasicAlls;
+	public Set<UserAll> getUserAlls() {
+		return this.userAlls;
 	}
 
-	public void setUserBasicAlls(Set<UserBasicAll> userBasicAlls) {
-		this.userBasicAlls = userBasicAlls;
+	public void setUserAlls(Set<UserAll> userAlls) {
+		this.userAlls = userAlls;
 	}
 
 }

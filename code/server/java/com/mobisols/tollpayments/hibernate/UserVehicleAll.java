@@ -23,9 +23,9 @@ public class UserVehicleAll implements java.io.Serializable {
 	// Fields
 
 	private Integer userVehicleId;
-	private UserBasicAll userBasicAllByLastModifiedBy;
+	private UserAll userAllByLastModifiedBy;
 	private OwnerTypeAll ownerTypeAll;
-	private UserBasicAll userBasicAllByUserId;
+	private UserAll userAllByUserId;
 	private VehicleTypeAll vehicleTypeAll;
 	private Timestamp vehicleStartDate;
 	private Timestamp vehicleEndDate;
@@ -52,12 +52,12 @@ public class UserVehicleAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserVehicleAll(UserBasicAll userBasicAllByLastModifiedBy,
-			UserBasicAll userBasicAllByUserId, VehicleTypeAll vehicleTypeAll,
+	public UserVehicleAll(UserAll userAllByLastModifiedBy,
+			UserAll userAllByUserId, VehicleTypeAll vehicleTypeAll,
 			String isActive, String registrationNo, String registeredState,
 			Timestamp lastModifiedOn, Timestamp createdOn) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
-		this.userBasicAllByUserId = userBasicAllByUserId;
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
+		this.userAllByUserId = userAllByUserId;
 		this.vehicleTypeAll = vehicleTypeAll;
 		this.isActive = isActive;
 		this.registrationNo = registrationNo;
@@ -67,17 +67,17 @@ public class UserVehicleAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserVehicleAll(UserBasicAll userBasicAllByLastModifiedBy,
-			OwnerTypeAll ownerTypeAll, UserBasicAll userBasicAllByUserId,
+	public UserVehicleAll(UserAll userAllByLastModifiedBy,
+			OwnerTypeAll ownerTypeAll, UserAll userAllByUserId,
 			VehicleTypeAll vehicleTypeAll, Timestamp vehicleStartDate,
 			Timestamp vehicleEndDate, String isActive, String registrationNo,
 			String registeredState, String udf1, String udf2, String udf3,
 			String udf4, String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.ownerTypeAll = ownerTypeAll;
-		this.userBasicAllByUserId = userBasicAllByUserId;
+		this.userAllByUserId = userAllByUserId;
 		this.vehicleTypeAll = vehicleTypeAll;
 		this.vehicleStartDate = vehicleStartDate;
 		this.vehicleEndDate = vehicleEndDate;
@@ -112,13 +112,12 @@ public class UserVehicleAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAllByLastModifiedBy() {
-		return this.userBasicAllByLastModifiedBy;
+	public UserAll getUserAllByLastModifiedBy() {
+		return this.userAllByLastModifiedBy;
 	}
 
-	public void setUserBasicAllByLastModifiedBy(
-			UserBasicAll userBasicAllByLastModifiedBy) {
-		this.userBasicAllByLastModifiedBy = userBasicAllByLastModifiedBy;
+	public void setUserAllByLastModifiedBy(UserAll userAllByLastModifiedBy) {
+		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -133,12 +132,12 @@ public class UserVehicleAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
-	public UserBasicAll getUserBasicAllByUserId() {
-		return this.userBasicAllByUserId;
+	public UserAll getUserAllByUserId() {
+		return this.userAllByUserId;
 	}
 
-	public void setUserBasicAllByUserId(UserBasicAll userBasicAllByUserId) {
-		this.userBasicAllByUserId = userBasicAllByUserId;
+	public void setUserAllByUserId(UserAll userAllByUserId) {
+		this.userAllByUserId = userAllByUserId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

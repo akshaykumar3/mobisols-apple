@@ -25,7 +25,7 @@ public class CcTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer ccTypeId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private String name;
 	private String description;
 	private String udf1;
@@ -50,21 +50,20 @@ public class CcTypeAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public CcTypeAll(UserBasicAll userBasicAll, Timestamp createdOn,
+	public CcTypeAll(UserAll userAll, Timestamp createdOn,
 			Timestamp lastModifiedOn) {
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
 	/** full constructor */
-	public CcTypeAll(UserBasicAll userBasicAll, String name,
-			String description, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String flag1, String flag2, String flag3,
-			String flag4, String flag5, Timestamp createdOn,
-			Timestamp lastModifiedOn,
+	public CcTypeAll(UserAll userAll, String name, String description,
+			String udf1, String udf2, String udf3, String udf4, String udf5,
+			String flag1, String flag2, String flag3, String flag4,
+			String flag5, Timestamp createdOn, Timestamp lastModifiedOn,
 			Set<UserPaymentDetailAll> userPaymentDetailAlls) {
-		this.userBasicAll = userBasicAll;
+		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
 		this.udf1 = udf1;
@@ -96,12 +95,12 @@ public class CcTypeAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "name", length = 45)

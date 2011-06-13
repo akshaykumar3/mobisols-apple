@@ -25,7 +25,7 @@ public class OwnerTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer ownerTypeId;
-	private UserBasicAll userBasicAll;
+	private UserAll userAll;
 	private String name;
 	private String description;
 	private String udf1;
@@ -49,21 +49,21 @@ public class OwnerTypeAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public OwnerTypeAll(UserBasicAll userBasicAll, String name,
-			Timestamp createdOn, Timestamp lastModifiedeOn) {
-		this.userBasicAll = userBasicAll;
+	public OwnerTypeAll(UserAll userAll, String name, Timestamp createdOn,
+			Timestamp lastModifiedeOn) {
+		this.userAll = userAll;
 		this.name = name;
 		this.createdOn = createdOn;
 		this.lastModifiedeOn = lastModifiedeOn;
 	}
 
 	/** full constructor */
-	public OwnerTypeAll(UserBasicAll userBasicAll, String name,
-			String description, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String falg1, String flag2, String flag3,
-			String flag4, String flag5, Timestamp createdOn,
-			Timestamp lastModifiedeOn, Set<UserVehicleAll> userVehicleAlls) {
-		this.userBasicAll = userBasicAll;
+	public OwnerTypeAll(UserAll userAll, String name, String description,
+			String udf1, String udf2, String udf3, String udf4, String udf5,
+			String falg1, String flag2, String flag3, String flag4,
+			String flag5, Timestamp createdOn, Timestamp lastModifiedeOn,
+			Set<UserVehicleAll> userVehicleAlls) {
+		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
 		this.udf1 = udf1;
@@ -95,12 +95,12 @@ public class OwnerTypeAll implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserBasicAll getUserBasicAll() {
-		return this.userBasicAll;
+	public UserAll getUserAll() {
+		return this.userAll;
 	}
 
-	public void setUserBasicAll(UserBasicAll userBasicAll) {
-		this.userBasicAll = userBasicAll;
+	public void setUserAll(UserAll userAll) {
+		this.userAll = userAll;
 	}
 
 	@Column(name = "name", nullable = false, length = 45)
