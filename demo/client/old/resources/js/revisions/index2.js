@@ -148,6 +148,8 @@ Ext.setup({
 			]
 		});
 
+			var curl,avgt,pt,tollop;
+
         var tabpanel = new Ext.TabPanel({
             tabBar: {
                 dock: 'bottom',
@@ -205,11 +207,29 @@ Ext.setup({
 								//sign=sign * -1;
 								//document.getElementById(curloc).value="Illinois";
 								click: function() { 
-										var hid=Ext.getCmp('curloc');
-										console.log(hid.getValue());
-										console.log(this.value+"");
-										if(this.value==0)
-										hid.setValue("hello");								
+									console.log(Ext.getCmp('tfd').value);
+									var toggle=Ext.getCmp('tfd');
+									var cl=Ext.getCmp('curloc');
+									var to=Ext.getCmp('operator');
+									var at=Ext.getCmp('avgtoll');
+									var pt=Ext.getCmp('pdtoll');
+									//toggle.value=1;
+									if(toggle.value==0){
+										console.log(cl.getValue());
+										console.log(toggle.value);
+										cl.setValue("San Diego");
+										to.setValue("Fast Pass");
+										at.setValue("2$");
+										pt.setValue("1.5$");
+										toggle.value=1;
+									}else{
+										console.log(toggle.value);
+										cl.setValue("");
+										to.setValue("");
+										at.setValue("");
+										pt.setValue("");
+										toggle.value=0;
+									}
 									}	
 							},
 							scope: this
@@ -235,15 +255,18 @@ Ext.setup({
 						},{
 								xtype: 'textfield',
 								name: 'oper',
+								id: 'operator',
 								label: 'Operator'
 							},
 							{
 								xtype: 'textfield',
 								name: 'avgtoll',
+								id: 'avgtoll',
 								label: 'Avg Toll Price'
 							},{
 								xtype: 'textfield',
 								name: 'perdaytoll',
+								id: 'pdtoll',
 								label: 'Per Day'
 							},
 				 {
