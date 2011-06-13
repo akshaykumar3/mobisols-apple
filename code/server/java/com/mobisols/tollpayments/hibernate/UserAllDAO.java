@@ -11,19 +11,18 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
  * A data access object (DAO) providing persistence and search support for
- * UserBasicAll entities. Transaction control of the save(), update() and
- * delete() operations can directly support Spring container-managed
- * transactions or they can be augmented to handle user-managed Spring
- * transactions. Each of these methods provides additional information for how
- * to configure it for the desired type of transaction control.
+ * UserAll entities. Transaction control of the save(), update() and delete()
+ * operations can directly support Spring container-managed transactions or they
+ * can be augmented to handle user-managed Spring transactions. Each of these
+ * methods provides additional information for how to configure it for the
+ * desired type of transaction control.
  * 
- * @see com.mobisols.tollpayments.hibernate.UserBasicAll
+ * @see com.mobisols.tollpayments.hibernate.UserAll
  * @author MyEclipse Persistence Tools
  */
 
-public class UserBasicAllDAO extends HibernateDaoSupport {
-	private static final Logger log = LoggerFactory
-			.getLogger(UserBasicAllDAO.class);
+public class UserAllDAO extends HibernateDaoSupport {
+	private static final Logger log = LoggerFactory.getLogger(UserAllDAO.class);
 	// property constants
 	public static final String USER_NAME = "userName";
 	public static final String PASSWORD = "password";
@@ -45,8 +44,8 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		// do nothing
 	}
 
-	public void save(UserBasicAll transientInstance) {
-		log.debug("saving UserBasicAll instance");
+	public void save(UserAll transientInstance) {
+		log.debug("saving UserAll instance");
 		try {
 			getHibernateTemplate().save(transientInstance);
 			log.debug("save successful");
@@ -56,8 +55,8 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void delete(UserBasicAll persistentInstance) {
-		log.debug("deleting UserBasicAll instance");
+	public void delete(UserAll persistentInstance) {
+		log.debug("deleting UserAll instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
@@ -67,11 +66,11 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public UserBasicAll findById(java.lang.Integer id) {
-		log.debug("getting UserBasicAll instance with id: " + id);
+	public UserAll findById(java.lang.Integer id) {
+		log.debug("getting UserAll instance with id: " + id);
 		try {
-			UserBasicAll instance = (UserBasicAll) getHibernateTemplate().get(
-					"com.mobisols.tollpayments.hibernate.UserBasicAll", id);
+			UserAll instance = (UserAll) getHibernateTemplate().get(
+					"com.mobisols.tollpayments.hibernate.UserAll", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -79,10 +78,10 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List<UserBasicAll> findByExample(UserBasicAll instance) {
-		log.debug("finding UserBasicAll instance by example");
+	public List<UserAll> findByExample(UserAll instance) {
+		log.debug("finding UserAll instance by example");
 		try {
-			List<UserBasicAll> results = (List<UserBasicAll>) getHibernateTemplate()
+			List<UserAll> results = (List<UserAll>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -94,10 +93,10 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding UserBasicAll instance with property: "
-				+ propertyName + ", value: " + value);
+		log.debug("finding UserAll instance with property: " + propertyName
+				+ ", value: " + value);
 		try {
-			String queryString = "from UserBasicAll as model where model."
+			String queryString = "from UserAll as model where model."
 					+ propertyName + "= ?";
 			return getHibernateTemplate().find(queryString, value);
 		} catch (RuntimeException re) {
@@ -106,70 +105,70 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List<UserBasicAll> findByUserName(Object userName) {
+	public List<UserAll> findByUserName(Object userName) {
 		return findByProperty(USER_NAME, userName);
 	}
 
-	public List<UserBasicAll> findByPassword(Object password) {
+	public List<UserAll> findByPassword(Object password) {
 		return findByProperty(PASSWORD, password);
 	}
 
-	public List<UserBasicAll> findByLocale(Object locale) {
+	public List<UserAll> findByLocale(Object locale) {
 		return findByProperty(LOCALE, locale);
 	}
 
-	public List<UserBasicAll> findByIsActive(Object isActive) {
+	public List<UserAll> findByIsActive(Object isActive) {
 		return findByProperty(IS_ACTIVE, isActive);
 	}
 
-	public List<UserBasicAll> findByContactNo(Object contactNo) {
+	public List<UserAll> findByContactNo(Object contactNo) {
 		return findByProperty(CONTACT_NO, contactNo);
 	}
 
-	public List<UserBasicAll> findByUdf1(Object udf1) {
+	public List<UserAll> findByUdf1(Object udf1) {
 		return findByProperty(UDF1, udf1);
 	}
 
-	public List<UserBasicAll> findByUdf2(Object udf2) {
+	public List<UserAll> findByUdf2(Object udf2) {
 		return findByProperty(UDF2, udf2);
 	}
 
-	public List<UserBasicAll> findByUdf3(Object udf3) {
+	public List<UserAll> findByUdf3(Object udf3) {
 		return findByProperty(UDF3, udf3);
 	}
 
-	public List<UserBasicAll> findByUdf4(Object udf4) {
+	public List<UserAll> findByUdf4(Object udf4) {
 		return findByProperty(UDF4, udf4);
 	}
 
-	public List<UserBasicAll> findByUdf5(Object udf5) {
+	public List<UserAll> findByUdf5(Object udf5) {
 		return findByProperty(UDF5, udf5);
 	}
 
-	public List<UserBasicAll> findByFlag1(Object flag1) {
+	public List<UserAll> findByFlag1(Object flag1) {
 		return findByProperty(FLAG1, flag1);
 	}
 
-	public List<UserBasicAll> findByFlag2(Object flag2) {
+	public List<UserAll> findByFlag2(Object flag2) {
 		return findByProperty(FLAG2, flag2);
 	}
 
-	public List<UserBasicAll> findByFlag3(Object flag3) {
+	public List<UserAll> findByFlag3(Object flag3) {
 		return findByProperty(FLAG3, flag3);
 	}
 
-	public List<UserBasicAll> findByFlag4(Object flag4) {
+	public List<UserAll> findByFlag4(Object flag4) {
 		return findByProperty(FLAG4, flag4);
 	}
 
-	public List<UserBasicAll> findByFlag5(Object flag5) {
+	public List<UserAll> findByFlag5(Object flag5) {
 		return findByProperty(FLAG5, flag5);
 	}
 
 	public List findAll() {
-		log.debug("finding all UserBasicAll instances");
+		log.debug("finding all UserAll instances");
 		try {
-			String queryString = "from UserBasicAll";
+			String queryString = "from UserAll";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -177,10 +176,10 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public UserBasicAll merge(UserBasicAll detachedInstance) {
-		log.debug("merging UserBasicAll instance");
+	public UserAll merge(UserAll detachedInstance) {
+		log.debug("merging UserAll instance");
 		try {
-			UserBasicAll result = (UserBasicAll) getHibernateTemplate().merge(
+			UserAll result = (UserAll) getHibernateTemplate().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -190,8 +189,8 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void attachDirty(UserBasicAll instance) {
-		log.debug("attaching dirty UserBasicAll instance");
+	public void attachDirty(UserAll instance) {
+		log.debug("attaching dirty UserAll instance");
 		try {
 			getHibernateTemplate().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -201,8 +200,8 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void attachClean(UserBasicAll instance) {
-		log.debug("attaching clean UserBasicAll instance");
+	public void attachClean(UserAll instance) {
+		log.debug("attaching clean UserAll instance");
 		try {
 			getHibernateTemplate().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -212,8 +211,7 @@ public class UserBasicAllDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public static UserBasicAllDAO getFromApplicationContext(
-			ApplicationContext ctx) {
-		return (UserBasicAllDAO) ctx.getBean("UserBasicAllDAO");
+	public static UserAllDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (UserAllDAO) ctx.getBean("UserAllDAO");
 	}
 }

@@ -8,24 +8,24 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * UserBasic entity. @author MyEclipse Persistence Tools
+ * User entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "user_basic", catalog = "globaltoll")
-public class UserBasic implements java.io.Serializable {
+@Table(name = "user", catalog = "globaltoll")
+public class User implements java.io.Serializable {
 
 	// Fields
 
-	private UserBasicId id;
+	private UserId id;
 
 	// Constructors
 
 	/** default constructor */
-	public UserBasic() {
+	public User() {
 	}
 
 	/** full constructor */
-	public UserBasic(UserBasicId id) {
+	public User(UserId id) {
 		this.id = id;
 	}
 
@@ -54,11 +54,11 @@ public class UserBasic implements java.io.Serializable {
 			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)),
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", nullable = false, length = 19)),
 			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)) })
-	public UserBasicId getId() {
+	public UserId getId() {
 		return this.id;
 	}
 
-	public void setId(UserBasicId id) {
+	public void setId(UserId id) {
 		this.id = id;
 	}
 
