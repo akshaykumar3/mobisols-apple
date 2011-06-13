@@ -1,10 +1,13 @@
 Ext.regModel('TollOperators',{
-	fields: ['tolloperator', 'tollperday', 'avgtoll']	
+	fields: [{name:'tolloperator'},
+			{name: 'tollperday'},
+			{name:'avgtoll'}]	
 });
 
-var TollsData = Ext.data.Store({
+var TollsData = new Ext.data.Store({
 	model: 'TollOperators',
+	storeId: 'tollops',
 	data: [{
-		tolloperator: 'Shama Operator', tollperday: '2$', avgtoll: '1.5$'
+		tolloperator: 'Fast Pass', tollperday: '3$', avgtoll: '4$'
 	}]	
 });
