@@ -8,6 +8,21 @@ Ext.setup({
 		console.log(carsList.getAt(0).get('reg'));
 		console.log(TollsData.getAt(0).get('tolloperator'));
 		console.log(tolldetails.getAt(1).get('latitude'));
+		
+		var car_model_instance= Ext.ModelMgr.create({
+			state: 'RF',
+			reg: 'S23WP',
+			type: 'truck'
+		},'Cars');
+		
+		console.log(carsList.getAt(0).get('reg'));
+		console.log('count is '+carsList.getCount());
+		
+		carsList.insert(0,car_model_instance);
+		
+		console.log('count is now'+carsList.getCount());
+		console.log(carsList.getAt(0).get('reg'));
+		
 		//carsList.insert(0,[{reg: '12345',state: 'LB',type: 'sedan'}]);
 		var EntryCar=new Ext.Panel({
 			id: 'entrycar',
@@ -31,11 +46,21 @@ Ext.setup({
 					ui: 'action',
 					handler: function(){
 						console.log('clicked ok');
-						console.log(Ext.getCmp('st').getValue())
-						if(Ext.getCmp('st').getValue())
-						alert('enter state field');
+						console.log(Ext.getCmp('tp').getValue());
+						console.log(Ext.getCmp('st').getValue());
+						if(Ext.getCmp('st').getValue()=="")
+						Ext.Msg.alert('enter state field');
+						else if(Ext.getCmp('rg').getValue()=="")
+						Ext.Msg.alert("Enter registration number");
 						else
-						tabpanel.setActiveItem('mycars');
+						{
+							carsList.insert(0,Ext.ModelMgr.create({
+								state: Ext.getCmp('st').getValue(),
+								reg: Ext.getCmp('rg').getValue(),
+								type: Ext.getCmp('tp').getValue()},'Cars'));
+							console.log(carsList.getCount());
+							tabpanel.setActiveItem('mycars');
+						}
 					}
 				}]
 			}],
@@ -79,6 +104,7 @@ Ext.setup({
 				items: [{
 					xtype: 'datepickerfield',
 					label: 'Start Date',
+					value: new Date(),
 					name: 'sd'
 				},{
 					xtype: 'datepickerfield',
@@ -90,7 +116,7 @@ Ext.setup({
 
 		var value=1;
 
-		var CarList= Ext.extend(Ext.Panel,{
+		CarList= Ext.extend(Ext.Panel,{
 			fullscreen: true,
 			cardSwitchAnimation: 'slide',
 			layout: 'card',
@@ -117,7 +143,7 @@ Ext.setup({
         	    xtype: 'list',
         	    store: carsList,
 				scroll: 'vertical',
-            	itemTpl: '<div class="contact"><strong>{reg}</strong>  - {state} - {type}</div>',
+            	itemTpl: '<div class="contact"><strong>{reg}</strong> - {state} - {type}</div>',
 				onItemDisclosure: function(record, btn, index){
 					mycar.setActiveItem('entrycar');
 				}
