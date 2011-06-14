@@ -225,6 +225,8 @@ values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end;
 
+//
+
 delimiter ;
 
 
