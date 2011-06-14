@@ -7,40 +7,6 @@ CREATE SCHEMA IF NOT EXISTS `globaltoll` DEFAULT CHARACTER SET latin1 ;
 USE `globaltoll` ;
 
 -- -----------------------------------------------------
--- Table `globaltoll`.`user_type_all`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `globaltoll`.`user_type_all` ;
-
-CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_type_all` (
-  `user_type_id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL COMMENT 'trial/prepaid/premium/postpaid users' ,
-  `description` VARCHAR(200) NULL COMMENT 'Description of the differnent user types like toll operatore,normal users etc' ,
-  `min_balance` DECIMAL(19,4) ZEROFILL NULL COMMENT 'Min balance amount depending on the type of user' ,
-  `min_balance_type` VARCHAR(45) NULL COMMENT 'value, percentage' ,
-  `udf1` VARCHAR(1000) NULL ,
-  `udf2` VARCHAR(1000) NULL ,
-  `udf3` VARCHAR(1000) NULL ,
-  `udf4` VARCHAR(1000) NULL ,
-  `udf5` VARCHAR(1000) NULL ,
-  `flag1` VARCHAR(1) NULL ,
-  `flag2` VARCHAR(1) NULL ,
-  `flag3` VARCHAR(1) NULL ,
-  `flag4` VARCHAR(1) NULL ,
-  `flag5` VARCHAR(1) NULL ,
-  `created_on` DATETIME NOT NULL ,
-  `last_modified_on` DATETIME NOT NULL ,
-  `last_modified_by` INT NOT NULL ,
-  PRIMARY KEY (`user_type_id`) ,
-  INDEX `fk_last_mod_by_uta` (`last_modified_by` ASC) ,
-  CONSTRAINT `fk_last_mod_by_uta`
-    FOREIGN KEY (`last_modified_by` )
-    REFERENCES `globaltoll`.`user_all` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `globaltoll`.`client_all`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `globaltoll`.`client_all` ;
@@ -78,6 +44,47 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `globaltoll`.`user_type_all`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `globaltoll`.`user_type_all` ;
+
+CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_type_all` (
+  `user_type_id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NOT NULL COMMENT 'trial/prepaid/premium/postpaid users' ,
+  `description` VARCHAR(200) NULL COMMENT 'Description of the differnent user types like toll operatore,normal users etc' ,
+  `min_balance` DECIMAL(19,4) ZEROFILL NULL COMMENT 'Min balance amount depending on the type of user' ,
+  `min_balance_type` VARCHAR(45) NULL COMMENT 'value, percentage' ,
+  `udf1` VARCHAR(1000) NULL ,
+  `udf2` VARCHAR(1000) NULL ,
+  `udf3` VARCHAR(1000) NULL ,
+  `udf4` VARCHAR(1000) NULL ,
+  `udf5` VARCHAR(1000) NULL ,
+  `flag1` VARCHAR(1) NULL ,
+  `flag2` VARCHAR(1) NULL ,
+  `flag3` VARCHAR(1) NULL ,
+  `flag4` VARCHAR(1) NULL ,
+  `flag5` VARCHAR(1) NULL ,
+  `created_on` DATETIME NOT NULL ,
+  `last_modified_on` DATETIME NOT NULL ,
+  `last_modified_by` INT NOT NULL ,
+  `client_id` INT NULL ,
+  PRIMARY KEY (`user_type_id`) ,
+  INDEX `fk_last_mod_by_uta` (`last_modified_by` ASC) ,
+  INDEX `fk_client_ut` (`client_id` ASC) ,
+  CONSTRAINT `fk_last_mod_by_uta`
+    FOREIGN KEY (`last_modified_by` )
+    REFERENCES `globaltoll`.`user_all` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_ut`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `globaltoll`.`user_all`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `globaltoll`.`user_all` ;
@@ -108,22 +115,16 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_all` (
   PRIMARY KEY (`user_id`) ,
   UNIQUE INDEX `uk_user_name` (`user_name` ASC, `client_id` ASC) ,
   INDEX `fk_utype_user` (`utype_id` ASC) ,
-  INDEX `fk_client_user` (`client_id` ASC) ,
-  INDEX `fk_user_user` (`last_modified_by` ASC) ,
+  INDEX `fk_client_id_user` (`client_id` ASC) ,
   CONSTRAINT `fk_utype_user`
     FOREIGN KEY (`utype_id` )
     REFERENCES `globaltoll`.`user_type_all` (`user_type_id` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `fk_client_user`
+  CONSTRAINT `fk_client_id_user`
     FOREIGN KEY (`client_id` )
     REFERENCES `globaltoll`.`client_all` (`client_id` )
     ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_user_user`
-    FOREIGN KEY (`last_modified_by` )
-    REFERENCES `globaltoll`.`user_all` (`user_id` )
-    ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 COMMENT = 'This table has all details about the users' ;
@@ -151,12 +152,19 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`cc_type_all` (
   `created_on` DATETIME NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `last_modified_by` INT NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`cc_type_id`) ,
   INDEX `fk_last_mod_by_cta` (`last_modified_by` ASC) ,
+  INDEX `fk_client_cct` (`client_id` ASC) ,
   CONSTRAINT `fk_last_mod_by_cta`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_cct`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -197,6 +205,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_all` (
   `last_modified_by` INT NULL ,
   `last_modified_on` DATETIME NULL ,
   `created_on` DATETIME NULL ,
+  `client_id` INT NULL ,
   INDEX `fk_upd_user` (`user_id` ASC) ,
   PRIMARY KEY (`upd_id`) ,
   INDEX `fk_last_mod_by_upda` (`last_modified_by` ASC) ,
@@ -205,6 +214,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_all` (
   UNIQUE INDEX `last_modified_by_UNIQUE` (`last_modified_by` ASC) ,
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) ,
   INDEX `fk_cctype_upd` (`cc_type_id` ASC) ,
+  INDEX `fk_client_upd` (`client_id` ASC) ,
   CONSTRAINT `fk_upd_user`
     FOREIGN KEY (`user_id` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
@@ -218,6 +228,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_all` (
   CONSTRAINT `fk_cctype_upd`
     FOREIGN KEY (`cc_type_id` )
     REFERENCES `globaltoll`.`cc_type_all` (`cc_type_id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_upd`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
@@ -246,12 +261,19 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vehicle_type_all` (
   `created_on` DATETIME NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `last_modified_by` INT NOT NULL COMMENT 'user id' ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`vehicle_type_id`) ,
   INDEX `fk_last_mod_by_vta` (`last_modified_by` ASC) ,
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) ,
+  INDEX `fk_client_vtp` (`client_id` ASC) ,
   CONSTRAINT `fk_last_mod_by_vta`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_vtp`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
@@ -280,12 +302,19 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`owner_type_all` (
   `created_on` DATETIME NOT NULL ,
   `last_modifiede_on` DATETIME NOT NULL ,
   `last_modified_by` INT NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`owner_type_id`) ,
   INDEX `fk_last_mod_by_ota` (`last_modified_by` ASC) ,
+  INDEX `fk_client_ot` (`client_id` ASC) ,
   CONSTRAINT `fk_last_mod_by_ota`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_ot`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -318,12 +347,14 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`user_vehicle_id`) ,
   INDEX `fk_vt_user_vehicle` (`vehicle_type_id` ASC) ,
   INDEX `fk_user_user_vehicle` (`user_id` ASC) ,
   INDEX `fk_mod_on` (`last_modified_by` ASC) ,
   UNIQUE INDEX `uk_user_reg_vehicle` (`user_id` ASC, `registration_no` ASC) ,
   INDEX `fk_uv_co` (`owner_type_id` ASC) ,
+  INDEX `fk_client_uv` (`client_id` ASC) ,
   CONSTRAINT `fk_vt_user_vehicle`
     FOREIGN KEY (`vehicle_type_id` )
     REFERENCES `globaltoll`.`vehicle_type_all` (`vehicle_type_id` )
@@ -342,6 +373,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_all` (
   CONSTRAINT `fk_uv_co`
     FOREIGN KEY (`owner_type_id` )
     REFERENCES `globaltoll`.`owner_type_all` (`owner_type_id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_uv`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
@@ -372,11 +408,13 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_operator_all` (
   `created_on` DATETIME NOT NULL ,
   `last_modified_on` DATETIME NOT NULL COMMENT 'includes user id of the toll operater and the details that are required other than user details' ,
   `last_modified_by` INT NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`toll_operator_id`) ,
   INDEX `fk_last_mod_by_toa` (`last_modified_by` ASC) ,
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) ,
   INDEX `fk_toll_user` (`user_id` ASC) ,
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) ,
+  INDEX `fk_client_to` (`client_id` ASC) ,
   CONSTRAINT `fk_last_mod_by_toa`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
@@ -386,7 +424,12 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_operator_all` (
     FOREIGN KEY (`user_id` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE RESTRICT
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_to`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB, 
 COMMENT = 'List of all the toll operators , their banking details etc' ;
 
@@ -421,9 +464,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_location_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`toll_location_id`) ,
   INDEX `fk_toll_op_id` (`toll_operator_id` ASC) ,
   INDEX `fk_last_mod_by_tla` (`last_modified_by` ASC) ,
+  INDEX `fk_client_tl` (`client_id` ASC) ,
   CONSTRAINT `fk_toll_op_id`
     FOREIGN KEY (`toll_operator_id` )
     REFERENCES `globaltoll`.`toll_operator_all` (`toll_operator_id` )
@@ -433,6 +478,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_location_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_tl`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'This table maps the location with corresponding toll operato' /* comment truncated */ ;
@@ -470,6 +520,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_history_all` (
   `start_date` DATETIME NOT NULL ,
   `end_date` DATETIME NOT NULL ,
   `action` VARCHAR(20) NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`uvh_id`) )
 ENGINE = InnoDB, 
 COMMENT = 'List of vehicles registered by the user' ;
@@ -497,11 +548,18 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vml_type_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`vml_type_id`) ,
+  INDEX `fk_client_vmlt` (`client_id` ASC) ,
   CONSTRAINT `fk_last_mod_by_all`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_vmlt`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'This table has log type(start, stop, toll usage, heart beat ' /* comment truncated */ ;
@@ -531,10 +589,12 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vehicle_movement_log_all` (
   `last_modified_on` DATETIME NOT NULL ,
   `last_modified_by` INT NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`vml_id`) ,
   INDEX `fk_vml_uvh` (`uvh_id` ASC) ,
   INDEX `fk_vml_vmlt` (`vml_type_id` ASC) ,
   INDEX `fk_last_mod_by_vmla` (`last_modified_by` ASC) ,
+  INDEX `fk_client_vml` (`client_id` ASC) ,
   CONSTRAINT `fk_vml_uvh`
     FOREIGN KEY (`uvh_id` )
     REFERENCES `globaltoll`.`user_vehicle_history_all` (`uvh_id` )
@@ -549,6 +609,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vehicle_movement_log_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_vml`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'Trackiing the vehicle movement ' ;
@@ -583,6 +648,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_price_history_all` (
   `last_modified_by` INT NULL ,
   `start_date` DATETIME NOT NULL ,
   `end_date` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`tph_id`) )
 ENGINE = InnoDB, 
 COMMENT = 'toll price for each transaction' ;
@@ -610,9 +676,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_balance_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   INDEX `fk_ubal_users` (`user_id` ASC) ,
   INDEX `fk_last_mod_by_uba` (`last_modified_by` ASC) ,
   PRIMARY KEY (`ubal_id`) ,
+  INDEX `fk_client_ub` (`client_id` ASC) ,
   CONSTRAINT `fk_ubal_users`
     FOREIGN KEY (`user_id` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
@@ -622,6 +690,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_balance_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_ub`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -650,9 +723,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_balance_log_all` (
   `last_modified_by` INT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`ublog_id`) ,
   INDEX `fk_ublog_ubal` (`ubal_id` ASC) ,
   INDEX `fk_last_mod_by_ubla` (`last_modified_by` ASC) ,
+  INDEX `fk_client_ubl` (`client_id` ASC) ,
   CONSTRAINT `fk_ublog_ubal`
     FOREIGN KEY (`ubal_id` )
     REFERENCES `globaltoll`.`user_balance_all` (`ubal_id` )
@@ -662,6 +737,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_balance_log_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_ubl`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -706,6 +786,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history_all` (
   `last_modified_by` DATETIME NULL ,
   `start_date` DATETIME NOT NULL ,
   `end_date` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`updh_id`) )
 ENGINE = InnoDB;
 
@@ -736,11 +817,13 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`payment_transaction_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`ptran_id`) ,
   INDEX `fk_lat_mod_by_pta` (`last_modified_by` ASC) ,
   INDEX `fk_pt_ublog` (`user_bl_id` ASC) ,
   INDEX `fk_pt_tlog` (`to_bl_id` ASC) ,
   INDEX `fk_pt_updh` (`updh_id` ASC) ,
+  INDEX `fk_client_pt` (`client_id` ASC) ,
   CONSTRAINT `fk_lat_mod_by_pta`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
@@ -760,7 +843,12 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`payment_transaction_all` (
     FOREIGN KEY (`updh_id` )
     REFERENCES `globaltoll`.`user_payment_detail_history_all` (`updh_id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_client_pt`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'All the payment transactions up to the date' ;
 
@@ -791,6 +879,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vehicle_toll_usage_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`vtu_id`) ,
   INDEX `fk_vtu_uv` (`uvh_id` ASC) ,
   INDEX `fk_vtu_tl` (`toll_loc_id` ASC) ,
@@ -798,6 +887,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vehicle_toll_usage_all` (
   INDEX `fk_vtu_tp` (`tph_id` ASC) ,
   INDEX `fk_vtu_pt` (`ptran_id` ASC) ,
   INDEX `fk_last_mod_by` (`last_modified_by` ASC) ,
+  INDEX `fk_client_vtu` (`client_id` ASC) ,
   CONSTRAINT `fk_vtu_uv`
     FOREIGN KEY (`uvh_id` )
     REFERENCES `globaltoll`.`user_vehicle_history_all` (`uvh_id` )
@@ -827,6 +917,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`vehicle_toll_usage_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_vtu`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'Payment to be done by each vehicle and other details' ;
@@ -857,11 +952,13 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_price_all` (
   `last_modified_by` INT NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`toll_price_id`) ,
   INDEX `fk_tp_tl` (`toll_location_id` ASC) ,
   INDEX `fk_tp_vt` (`vehicle_type_id` ASC) ,
   INDEX `fk_last_mod_by_tpa` (`last_modified_by` ASC) ,
   UNIQUE INDEX `uk_tl_vt_dir` (`toll_location_id` ASC, `vehicle_type_id` ASC, `direction` ASC) ,
+  INDEX `fk_client_tp` (`client_id` ASC) ,
   CONSTRAINT `fk_tp_tl`
     FOREIGN KEY (`toll_location_id` )
     REFERENCES `globaltoll`.`toll_location_all` (`toll_location_id` )
@@ -876,6 +973,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_price_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_tp`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'toll price for each transaction' ;
@@ -952,6 +1054,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_location_history_all` (
   `start_date` DATETIME NOT NULL ,
   `end_date` DATETIME NOT NULL ,
   `action` VARCHAR(20) NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`tlh_id`) )
 ENGINE = InnoDB, 
 COMMENT = 'This table maps the location with corresponding toll operato' /* comment truncated */ ;
@@ -980,9 +1083,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`service_plan_all` (
   `last_modified_on` DATETIME NOT NULL ,
   `last_modified_by` INT NOT NULL ,
   `created_on` DATETIME NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`service_plan_id`) ,
   INDEX `fk_last_mod_by_spa` (`last_modified_by` ASC) ,
   INDEX `fk_sp_to` (`toll_operator_id` ASC) ,
+  INDEX `fk_client_sp` (`client_id` ASC) ,
   CONSTRAINT `fk_last_mod_by_spa`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
@@ -991,6 +1096,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`service_plan_all` (
   CONSTRAINT `fk_sp_to`
     FOREIGN KEY (`toll_operator_id` )
     REFERENCES `globaltoll`.`toll_operator_all` (`toll_operator_id` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_sp`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -1052,10 +1162,12 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_service_all` (
   `created_on` DATETIME NOT NULL ,
   `last_modified_on` DATETIME NOT NULL ,
   `last_modified_by` INT NOT NULL ,
+  `client_id` INT NULL ,
   PRIMARY KEY (`user_service_id`) ,
   INDEX `fk_us_user` (`user_id` ASC) ,
   INDEX `fk_us_ser` (`service_id` ASC) ,
   INDEX `fk_las_mod_by` (`last_modified_by` ASC) ,
+  INDEX `fk_client_us` (`client_id` ASC) ,
   CONSTRAINT `fk_us_user`
     FOREIGN KEY (`user_id` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
@@ -1070,6 +1182,11 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_service_all` (
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_client_us`
+    FOREIGN KEY (`client_id` )
+    REFERENCES `globaltoll`.`client_all` (`client_id` )
+    ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -1099,23 +1216,17 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`component_all` (
   `last_modified_by` INT NOT NULL ,
   PRIMARY KEY (`component_id`) ,
   INDEX `fk_comp_client` (`client_id` ASC) ,
-  INDEX `fk_comp_user` (`last_modified_by` ASC) ,
-  INDEX `fk_mod_vy_comp_all` (`last_modified_by` ASC) ,
+  INDEX `fk_last_mod_comp` (`last_modified_by` ASC) ,
   CONSTRAINT `fk_comp_client`
     FOREIGN KEY (`client_id` )
     REFERENCES `globaltoll`.`client_all` (`client_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_comp_user`
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_last_mod_comp`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mod_vy_comp_all`
-    FOREIGN KEY (`last_modified_by` )
-    REFERENCES `globaltoll`.`user_all` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB, 
 COMMENT = 'This table store different components(client, server, portal' /* comment truncated */ ;
 
@@ -1146,23 +1257,17 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`component_version_all` (
   `version` VARCHAR(20) NULL ,
   PRIMARY KEY (`comp_version_id`) ,
   INDEX `fk_cv_c` (`component_id` ASC) ,
-  INDEX `fk_cmpver_user` (`last_modified_by` ASC) ,
-  INDEX `fk_mod_by` (`last_modified_by` ASC) ,
+  INDEX `fk_last_mod_cv` (`last_modified_by` ASC) ,
   CONSTRAINT `fk_cv_c`
     FOREIGN KEY (`component_id` )
     REFERENCES `globaltoll`.`component_all` (`component_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_cmpver_user`
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_last_mod_cv`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mod_by`
-    FOREIGN KEY (`last_modified_by` )
-    REFERENCES `globaltoll`.`user_all` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -1191,23 +1296,17 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`configuration_all` (
   `last_modified_by` INT NOT NULL ,
   PRIMARY KEY (`config_id`) ,
   INDEX `fk_c_cv` (`comp_version_id` ASC) ,
-  INDEX `fk_c_user` (`last_modified_by` ASC) ,
   INDEX `fk_mod_by_config_all` (`last_modified_by` ASC) ,
   CONSTRAINT `fk_c_cv`
     FOREIGN KEY (`comp_version_id` )
     REFERENCES `globaltoll`.`component_version_all` (`comp_version_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_c_user`
-    FOREIGN KEY (`last_modified_by` )
-    REFERENCES `globaltoll`.`user_all` (`user_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_mod_by_config_all`
     FOREIGN KEY (`last_modified_by` )
     REFERENCES `globaltoll`.`user_all` (`user_id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -1219,67 +1318,67 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`user` (`user_id` INT, `client_id` INT, 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`vehicle_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_type` (`vehicle_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_type` (`vehicle_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`toll_operator`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_operator` (`toll_operator_id` INT, `user_id` INT, `name` INT, `is_active` INT, `website` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_operator` (`toll_operator_id` INT, `user_id` INT, `name` INT, `is_active` INT, `website` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_payment_detail`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail` (`upd_id` INT, `user_id` INT, `cc_type_id` INT, `cc_ac_name` INT, `cc_number` INT, `cc_exp_month` INT, `cc_exp_year` INT, `cc_cvv` INT, `bank_routing` INT, `bank_account` INT, `pay_prefer` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail` (`upd_id` INT, `user_id` INT, `cc_type_id` INT, `cc_ac_name` INT, `cc_number` INT, `cc_exp_month` INT, `cc_exp_year` INT, `cc_cvv` INT, `bank_routing` INT, `bank_account` INT, `pay_prefer` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_vehicle`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_vehicle` (`user_vehicle_id` INT, `user_id` INT, `vehicle_type_id` INT, `vehicle_start_date` INT, `vehicle_end_date` INT, `is_active` INT, `registration_no` INT, `registered_state` INT, `owner_type_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_vehicle` (`user_vehicle_id` INT, `user_id` INT, `vehicle_type_id` INT, `vehicle_start_date` INT, `vehicle_end_date` INT, `is_active` INT, `registration_no` INT, `registered_state` INT, `owner_type_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`toll_location`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_location` (`toll_location_id` INT, `toll_operator_id` INT, `geometry` INT, `is_covered` INT, `is_cash_only` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_location` (`toll_location_id` INT, `toll_operator_id` INT, `geometry` INT, `is_covered` INT, `is_cash_only` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`toll_price`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_price` (`toll_price_id` INT, `toll_location_id` INT, `vehicle_type_id` INT, `direction` INT, `cost_price` INT, `selling_price` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_price` (`toll_price_id` INT, `toll_location_id` INT, `vehicle_type_id` INT, `direction` INT, `cost_price` INT, `selling_price` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`vehicle_toll_usage`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_toll_usage` (`vtu_id` INT, `uvh_id` INT, `toll_loc_id` INT, `tph_id` INT, `timestamp` INT, `vml_id` INT, `ptran_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_toll_usage` (`vtu_id` INT, `uvh_id` INT, `toll_loc_id` INT, `tph_id` INT, `timestamp` INT, `vml_id` INT, `ptran_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`vehicle_movement_log`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_movement_log` (`vml_id` INT, `vml_type_id` INT, `uvh_id` INT, `geometry` INT, `timestamp` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_on` INT, `last_modified_by` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_movement_log` (`vml_id` INT, `vml_type_id` INT, `uvh_id` INT, `geometry` INT, `timestamp` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_on` INT, `last_modified_by` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`vml_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`vml_type` (`vml_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`vml_type` (`vml_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`payment_transaction`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`payment_transaction` (`ptran_id` INT, `user_bl_id` INT, `to_bl_id` INT, `updh_id` INT, `timestamp` INT, `status` INT, `amount` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`payment_transaction` (`ptran_id` INT, `user_bl_id` INT, `to_bl_id` INT, `updh_id` INT, `timestamp` INT, `status` INT, `amount` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_type` (`user_type_id` INT, `name` INT, `description` INT, `min_balance` INT, `min_balance_type` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_type` (`user_type_id` INT, `name` INT, `description` INT, `min_balance` INT, `min_balance_type` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_balance`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_balance` (`ubal_id` INT, `user_id` INT, `balance` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_balance` (`ubal_id` INT, `user_id` INT, `balance` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`service_plan`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`service_plan` (`service_plan_id` INT, `toll_operator_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_on` INT, `last_modified_by` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`service_plan` (`service_plan_id` INT, `toll_operator_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_on` INT, `last_modified_by` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`client`
@@ -1289,17 +1388,17 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`client` (`client_id` INT, `client_name`
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`owner_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`owner_type` (`owner_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `falg1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modifiede_on` INT, `last_modified_by` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`owner_type` (`owner_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `falg1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modifiede_on` INT, `last_modified_by` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`cc_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`cc_type` (`cc_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`cc_type` (`cc_type_id` INT, `name` INT, `description` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_service`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_service` (`user_service_id` INT, `user_id` INT, `service_id` INT, `start_date` INT, `end_date` INT, `priority` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_service` (`user_service_id` INT, `user_id` INT, `service_id` INT, `start_date` INT, `end_date` INT, `priority` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`configuration`
@@ -1319,12 +1418,12 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`component` (`component_id` INT, `name` 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_payment_detail_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history` (`updh_id` INT, `upd_id` INT, `user_id` INT, `cc_type_id` INT, `cc_ac_name` INT, `cc_number` INT, `cc_exp_month` INT, `cc_exp_year` INT, `cc_cvv` INT, `bank_routing` INT, `bank_account` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `ziip` INT, `pay_prefer` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history` (`updh_id` INT, `upd_id` INT, `user_id` INT, `cc_type_id` INT, `cc_ac_name` INT, `cc_number` INT, `cc_exp_month` INT, `cc_exp_year` INT, `cc_cvv` INT, `bank_routing` INT, `bank_account` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `ziip` INT, `pay_prefer` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`toll_price_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_price_history` (`tph_id` INT, `toll_price_id` INT, `toll_location_id` INT, `vehicle_type_id` INT, `direction` INT, `cost_price` INT, `selling_price` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_price_history` (`tph_id` INT, `toll_price_id` INT, `toll_location_id` INT, `vehicle_type_id` INT, `direction` INT, `cost_price` INT, `selling_price` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_history`
@@ -1334,17 +1433,17 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`user_history` (`user_his_id` INT, `user
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_balance_log`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_balance_log` (`ublog_id` INT, `ubal_id` INT, `delta` INT, `timestamp` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_balance_log` (`ublog_id` INT, `ubal_id` INT, `delta` INT, `timestamp` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_by` INT, `last_modified_on` INT, `created_on` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`toll_location_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_location_history` (`tlh_id` INT, `toll_location_id` INT, `toll_operator_id` INT, `geometry` INT, `is_covered` INT, `is_cash_only` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `action` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_location_history` (`tlh_id` INT, `toll_location_id` INT, `toll_operator_id` INT, `geometry` INT, `is_covered` INT, `is_cash_only` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `action` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_vehicle_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_history` (`uvh_id` INT, `user_vehicle_id` INT, `user_id` INT, `vehicle_type_id` INT, `is_active` INT, `vehicle_start_date` INT, `vehicle_end_date` INT, `registration_no` INT, `registered_state` INT, `owner_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `action` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_history` (`uvh_id` INT, `user_vehicle_id` INT, `user_id` INT, `vehicle_type_id` INT, `is_active` INT, `vehicle_start_date` INT, `vehicle_end_date` INT, `registration_no` INT, `registered_state` INT, `owner_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `action` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- View `globaltoll`.`user`
