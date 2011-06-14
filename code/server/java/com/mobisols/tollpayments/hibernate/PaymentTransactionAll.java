@@ -27,6 +27,7 @@ public class PaymentTransactionAll implements java.io.Serializable {
 
 	private Integer ptranId;
 	private Timestamp timestamp;
+	private ClientAll clientAll;
 	private UserBalanceLogAll userBalanceLogAllByToBlId;
 	private UserAll userAll;
 	private UserPaymentDetailHistoryAll userPaymentDetailHistoryAll;
@@ -65,14 +66,15 @@ public class PaymentTransactionAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public PaymentTransactionAll(UserBalanceLogAll userBalanceLogAllByToBlId,
-			UserAll userAll,
+	public PaymentTransactionAll(ClientAll clientAll,
+			UserBalanceLogAll userBalanceLogAllByToBlId, UserAll userAll,
 			UserPaymentDetailHistoryAll userPaymentDetailHistoryAll,
 			UserBalanceLogAll userBalanceLogAllByUserBlId, String status,
 			Double amount, String udf1, String udf2, String udf3, String udf4,
 			String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn, Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
+		this.clientAll = clientAll;
 		this.userBalanceLogAllByToBlId = userBalanceLogAllByToBlId;
 		this.userAll = userAll;
 		this.userPaymentDetailHistoryAll = userPaymentDetailHistoryAll;
@@ -114,6 +116,16 @@ public class PaymentTransactionAll implements java.io.Serializable {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

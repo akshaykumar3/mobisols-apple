@@ -38,6 +38,7 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private String action;
+	private Integer clientId;
 
 	// Constructors
 
@@ -70,7 +71,7 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 			String flag1, String flag2, String flag3, String flag4,
 			String flag5, Timestamp createdOn, Timestamp lastModifiedOn,
 			Integer lastModifiedBy, Timestamp startDate, Timestamp endDate,
-			String action) {
+			String action, Integer clientId) {
 		this.uvhId = uvhId;
 		this.userVehicleId = userVehicleId;
 		this.userId = userId;
@@ -97,6 +98,7 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.action = action;
+		this.clientId = clientId;
 	}
 
 	// Property accessors
@@ -335,6 +337,15 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 		this.action = action;
 	}
 
+	@Column(name = "client_id")
+	public Integer getClientId() {
+		return this.clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -440,7 +451,11 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 						.getEndDate().equals(castOther.getEndDate())))
 				&& ((this.getAction() == castOther.getAction()) || (this
 						.getAction() != null && castOther.getAction() != null && this
-						.getAction().equals(castOther.getAction())));
+						.getAction().equals(castOther.getAction())))
+				&& ((this.getClientId() == castOther.getClientId()) || (this
+						.getClientId() != null
+						&& castOther.getClientId() != null && this
+						.getClientId().equals(castOther.getClientId())));
 	}
 
 	public int hashCode() {
@@ -514,6 +529,8 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 				+ (getEndDate() == null ? 0 : this.getEndDate().hashCode());
 		result = 37 * result
 				+ (getAction() == null ? 0 : this.getAction().hashCode());
+		result = 37 * result
+				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
 		return result;
 	}
 

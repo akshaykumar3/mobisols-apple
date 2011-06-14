@@ -28,6 +28,7 @@ public class VehicleMovementLogAll implements java.io.Serializable {
 	private Integer vmlId;
 	private Timestamp timestamp;
 	private UserVehicleHistoryAll userVehicleHistoryAll;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private VmlTypeAll vmlTypeAll;
 	private String geometry;
@@ -66,12 +67,13 @@ public class VehicleMovementLogAll implements java.io.Serializable {
 
 	/** full constructor */
 	public VehicleMovementLogAll(UserVehicleHistoryAll userVehicleHistoryAll,
-			UserAll userAll, VmlTypeAll vmlTypeAll, String geometry,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp lastModifiedOn, Timestamp createdOn,
-			Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
+			ClientAll clientAll, UserAll userAll, VmlTypeAll vmlTypeAll,
+			String geometry, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp lastModifiedOn,
+			Timestamp createdOn, Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
 		this.userVehicleHistoryAll = userVehicleHistoryAll;
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.vmlTypeAll = vmlTypeAll;
 		this.geometry = geometry;
@@ -121,6 +123,16 @@ public class VehicleMovementLogAll implements java.io.Serializable {
 	public void setUserVehicleHistoryAll(
 			UserVehicleHistoryAll userVehicleHistoryAll) {
 		this.userVehicleHistoryAll = userVehicleHistoryAll;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -27,6 +27,7 @@ public class UserBalanceLogAll implements java.io.Serializable {
 
 	private Integer ublogId;
 	private Timestamp timestamp;
+	private ClientAll clientAll;
 	private UserBalanceAll userBalanceAll;
 	private UserAll userAll;
 	private Double delta;
@@ -65,13 +66,15 @@ public class UserBalanceLogAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserBalanceLogAll(UserBalanceAll userBalanceAll, UserAll userAll,
-			Double delta, String action, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String flag1, String flag2, String flag3,
+	public UserBalanceLogAll(ClientAll clientAll,
+			UserBalanceAll userBalanceAll, UserAll userAll, Double delta,
+			String action, String udf1, String udf2, String udf3, String udf4,
+			String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn,
 			Set<PaymentTransactionAll> paymentTransactionAllsForToBlId,
 			Set<PaymentTransactionAll> paymentTransactionAllsForUserBlId) {
+		this.clientAll = clientAll;
 		this.userBalanceAll = userBalanceAll;
 		this.userAll = userAll;
 		this.delta = delta;
@@ -112,6 +115,16 @@ public class UserBalanceLogAll implements java.io.Serializable {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

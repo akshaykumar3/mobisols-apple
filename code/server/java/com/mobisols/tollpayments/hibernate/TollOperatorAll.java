@@ -29,6 +29,7 @@ public class TollOperatorAll implements java.io.Serializable {
 	// Fields
 
 	private Integer tollOperatorId;
+	private ClientAll clientAll;
 	private UserAll userAllByLastModifiedBy;
 	private UserAll userAllByUserId;
 	private String name;
@@ -67,13 +68,15 @@ public class TollOperatorAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TollOperatorAll(UserAll userAllByLastModifiedBy,
-			UserAll userAllByUserId, String name, String isActive,
-			String website, String udf1, String udf2, String udf3, String udf4,
-			String udf5, String flag1, String flag2, String flag3,
-			String flag4, String flag5, Timestamp createdOn,
-			Timestamp lastModifiedOn, Set<ServicePlanAll> servicePlanAlls,
+	public TollOperatorAll(ClientAll clientAll,
+			UserAll userAllByLastModifiedBy, UserAll userAllByUserId,
+			String name, String isActive, String website, String udf1,
+			String udf2, String udf3, String udf4, String udf5, String flag1,
+			String flag2, String flag3, String flag4, String flag5,
+			Timestamp createdOn, Timestamp lastModifiedOn,
+			Set<ServicePlanAll> servicePlanAlls,
 			Set<TollLocationAll> tollLocationAlls) {
+		this.clientAll = clientAll;
 		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.userAllByUserId = userAllByUserId;
 		this.name = name;
@@ -105,6 +108,16 @@ public class TollOperatorAll implements java.io.Serializable {
 
 	public void setTollOperatorId(Integer tollOperatorId) {
 		this.tollOperatorId = tollOperatorId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -24,6 +24,7 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 	private Integer vtuId;
 	private Timestamp timestamp;
 	private UserVehicleHistoryAll userVehicleHistoryAll;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private PaymentTransactionAll paymentTransactionAll;
 	private VehicleMovementLogAll vehicleMovementLogAll;
@@ -63,7 +64,8 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 
 	/** full constructor */
 	public VehicleTollUsageAll(UserVehicleHistoryAll userVehicleHistoryAll,
-			UserAll userAll, PaymentTransactionAll paymentTransactionAll,
+			ClientAll clientAll, UserAll userAll,
+			PaymentTransactionAll paymentTransactionAll,
 			VehicleMovementLogAll vehicleMovementLogAll,
 			TollLocationAll tollLocationAll,
 			TollPriceHistoryAll tollPriceHistoryAll, String udf1, String udf2,
@@ -71,6 +73,7 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
 		this.userVehicleHistoryAll = userVehicleHistoryAll;
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.paymentTransactionAll = paymentTransactionAll;
 		this.vehicleMovementLogAll = vehicleMovementLogAll;
@@ -121,6 +124,16 @@ public class VehicleTollUsageAll implements java.io.Serializable {
 	public void setUserVehicleHistoryAll(
 			UserVehicleHistoryAll userVehicleHistoryAll) {
 		this.userVehicleHistoryAll = userVehicleHistoryAll;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

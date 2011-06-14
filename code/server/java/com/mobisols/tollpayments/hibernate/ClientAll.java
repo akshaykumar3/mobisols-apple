@@ -39,8 +39,32 @@ public class ClientAll implements java.io.Serializable {
 	private String flag5;
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
-	private Set<UserAll> userAlls = new HashSet<UserAll>(0);
+	private Set<VehicleMovementLogAll> vehicleMovementLogAlls = new HashSet<VehicleMovementLogAll>(
+			0);
+	private Set<CcTypeAll> ccTypeAlls = new HashSet<CcTypeAll>(0);
 	private Set<ComponentAll> componentAlls = new HashSet<ComponentAll>(0);
+	private Set<ServicePlanAll> servicePlanAlls = new HashSet<ServicePlanAll>(0);
+	private Set<TollOperatorAll> tollOperatorAlls = new HashSet<TollOperatorAll>(
+			0);
+	private Set<UserVehicleAll> userVehicleAlls = new HashSet<UserVehicleAll>(0);
+	private Set<UserServiceAll> userServiceAlls = new HashSet<UserServiceAll>(0);
+	private Set<UserTypeAll> userTypeAlls = new HashSet<UserTypeAll>(0);
+	private Set<TollPriceAll> tollPriceAlls = new HashSet<TollPriceAll>(0);
+	private Set<TollLocationAll> tollLocationAlls = new HashSet<TollLocationAll>(
+			0);
+	private Set<UserPaymentDetailAll> userPaymentDetailAlls = new HashSet<UserPaymentDetailAll>(
+			0);
+	private Set<VehicleTypeAll> vehicleTypeAlls = new HashSet<VehicleTypeAll>(0);
+	private Set<UserAll> userAlls = new HashSet<UserAll>(0);
+	private Set<PaymentTransactionAll> paymentTransactionAlls = new HashSet<PaymentTransactionAll>(
+			0);
+	private Set<UserBalanceAll> userBalanceAlls = new HashSet<UserBalanceAll>(0);
+	private Set<UserBalanceLogAll> userBalanceLogAlls = new HashSet<UserBalanceLogAll>(
+			0);
+	private Set<VehicleTollUsageAll> vehicleTollUsageAlls = new HashSet<VehicleTollUsageAll>(
+			0);
+	private Set<OwnerTypeAll> ownerTypeAlls = new HashSet<OwnerTypeAll>(0);
+	private Set<VmlTypeAll> vmlTypeAlls = new HashSet<VmlTypeAll>(0);
 
 	// Constructors
 
@@ -62,7 +86,21 @@ public class ClientAll implements java.io.Serializable {
 			String udf2, String udf3, String udf4, String udf5, String flag1,
 			String flag2, String flag3, String flag4, String flag5,
 			Timestamp createdOn, Timestamp lastModifiedOn,
-			Set<UserAll> userAlls, Set<ComponentAll> componentAlls) {
+			Set<VehicleMovementLogAll> vehicleMovementLogAlls,
+			Set<CcTypeAll> ccTypeAlls, Set<ComponentAll> componentAlls,
+			Set<ServicePlanAll> servicePlanAlls,
+			Set<TollOperatorAll> tollOperatorAlls,
+			Set<UserVehicleAll> userVehicleAlls,
+			Set<UserServiceAll> userServiceAlls, Set<UserTypeAll> userTypeAlls,
+			Set<TollPriceAll> tollPriceAlls,
+			Set<TollLocationAll> tollLocationAlls,
+			Set<UserPaymentDetailAll> userPaymentDetailAlls,
+			Set<VehicleTypeAll> vehicleTypeAlls, Set<UserAll> userAlls,
+			Set<PaymentTransactionAll> paymentTransactionAlls,
+			Set<UserBalanceAll> userBalanceAlls,
+			Set<UserBalanceLogAll> userBalanceLogAlls,
+			Set<VehicleTollUsageAll> vehicleTollUsageAlls,
+			Set<OwnerTypeAll> ownerTypeAlls, Set<VmlTypeAll> vmlTypeAlls) {
 		this.userAll = userAll;
 		this.clientName = clientName;
 		this.udf1 = udf1;
@@ -77,8 +115,25 @@ public class ClientAll implements java.io.Serializable {
 		this.flag5 = flag5;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
-		this.userAlls = userAlls;
+		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
+		this.ccTypeAlls = ccTypeAlls;
 		this.componentAlls = componentAlls;
+		this.servicePlanAlls = servicePlanAlls;
+		this.tollOperatorAlls = tollOperatorAlls;
+		this.userVehicleAlls = userVehicleAlls;
+		this.userServiceAlls = userServiceAlls;
+		this.userTypeAlls = userTypeAlls;
+		this.tollPriceAlls = tollPriceAlls;
+		this.tollLocationAlls = tollLocationAlls;
+		this.userPaymentDetailAlls = userPaymentDetailAlls;
+		this.vehicleTypeAlls = vehicleTypeAlls;
+		this.userAlls = userAlls;
+		this.paymentTransactionAlls = paymentTransactionAlls;
+		this.userBalanceAlls = userBalanceAlls;
+		this.userBalanceLogAlls = userBalanceLogAlls;
+		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
+		this.ownerTypeAlls = ownerTypeAlls;
+		this.vmlTypeAlls = vmlTypeAlls;
 	}
 
 	// Property accessors
@@ -221,12 +276,22 @@ public class ClientAll implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
-	public Set<UserAll> getUserAlls() {
-		return this.userAlls;
+	public Set<VehicleMovementLogAll> getVehicleMovementLogAlls() {
+		return this.vehicleMovementLogAlls;
 	}
 
-	public void setUserAlls(Set<UserAll> userAlls) {
-		this.userAlls = userAlls;
+	public void setVehicleMovementLogAlls(
+			Set<VehicleMovementLogAll> vehicleMovementLogAlls) {
+		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<CcTypeAll> getCcTypeAlls() {
+		return this.ccTypeAlls;
+	}
+
+	public void setCcTypeAlls(Set<CcTypeAll> ccTypeAlls) {
+		this.ccTypeAlls = ccTypeAlls;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
@@ -236,6 +301,153 @@ public class ClientAll implements java.io.Serializable {
 
 	public void setComponentAlls(Set<ComponentAll> componentAlls) {
 		this.componentAlls = componentAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<ServicePlanAll> getServicePlanAlls() {
+		return this.servicePlanAlls;
+	}
+
+	public void setServicePlanAlls(Set<ServicePlanAll> servicePlanAlls) {
+		this.servicePlanAlls = servicePlanAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<TollOperatorAll> getTollOperatorAlls() {
+		return this.tollOperatorAlls;
+	}
+
+	public void setTollOperatorAlls(Set<TollOperatorAll> tollOperatorAlls) {
+		this.tollOperatorAlls = tollOperatorAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserVehicleAll> getUserVehicleAlls() {
+		return this.userVehicleAlls;
+	}
+
+	public void setUserVehicleAlls(Set<UserVehicleAll> userVehicleAlls) {
+		this.userVehicleAlls = userVehicleAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserServiceAll> getUserServiceAlls() {
+		return this.userServiceAlls;
+	}
+
+	public void setUserServiceAlls(Set<UserServiceAll> userServiceAlls) {
+		this.userServiceAlls = userServiceAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserTypeAll> getUserTypeAlls() {
+		return this.userTypeAlls;
+	}
+
+	public void setUserTypeAlls(Set<UserTypeAll> userTypeAlls) {
+		this.userTypeAlls = userTypeAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<TollPriceAll> getTollPriceAlls() {
+		return this.tollPriceAlls;
+	}
+
+	public void setTollPriceAlls(Set<TollPriceAll> tollPriceAlls) {
+		this.tollPriceAlls = tollPriceAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<TollLocationAll> getTollLocationAlls() {
+		return this.tollLocationAlls;
+	}
+
+	public void setTollLocationAlls(Set<TollLocationAll> tollLocationAlls) {
+		this.tollLocationAlls = tollLocationAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserPaymentDetailAll> getUserPaymentDetailAlls() {
+		return this.userPaymentDetailAlls;
+	}
+
+	public void setUserPaymentDetailAlls(
+			Set<UserPaymentDetailAll> userPaymentDetailAlls) {
+		this.userPaymentDetailAlls = userPaymentDetailAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<VehicleTypeAll> getVehicleTypeAlls() {
+		return this.vehicleTypeAlls;
+	}
+
+	public void setVehicleTypeAlls(Set<VehicleTypeAll> vehicleTypeAlls) {
+		this.vehicleTypeAlls = vehicleTypeAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserAll> getUserAlls() {
+		return this.userAlls;
+	}
+
+	public void setUserAlls(Set<UserAll> userAlls) {
+		this.userAlls = userAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<PaymentTransactionAll> getPaymentTransactionAlls() {
+		return this.paymentTransactionAlls;
+	}
+
+	public void setPaymentTransactionAlls(
+			Set<PaymentTransactionAll> paymentTransactionAlls) {
+		this.paymentTransactionAlls = paymentTransactionAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserBalanceAll> getUserBalanceAlls() {
+		return this.userBalanceAlls;
+	}
+
+	public void setUserBalanceAlls(Set<UserBalanceAll> userBalanceAlls) {
+		this.userBalanceAlls = userBalanceAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<UserBalanceLogAll> getUserBalanceLogAlls() {
+		return this.userBalanceLogAlls;
+	}
+
+	public void setUserBalanceLogAlls(Set<UserBalanceLogAll> userBalanceLogAlls) {
+		this.userBalanceLogAlls = userBalanceLogAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<VehicleTollUsageAll> getVehicleTollUsageAlls() {
+		return this.vehicleTollUsageAlls;
+	}
+
+	public void setVehicleTollUsageAlls(
+			Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
+		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<OwnerTypeAll> getOwnerTypeAlls() {
+		return this.ownerTypeAlls;
+	}
+
+	public void setOwnerTypeAlls(Set<OwnerTypeAll> ownerTypeAlls) {
+		this.ownerTypeAlls = ownerTypeAlls;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "clientAll")
+	public Set<VmlTypeAll> getVmlTypeAlls() {
+		return this.vmlTypeAlls;
+	}
+
+	public void setVmlTypeAlls(Set<VmlTypeAll> vmlTypeAlls) {
+		this.vmlTypeAlls = vmlTypeAlls;
 	}
 
 }

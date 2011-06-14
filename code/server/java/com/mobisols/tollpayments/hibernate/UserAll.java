@@ -29,7 +29,6 @@ public class UserAll implements java.io.Serializable {
 
 	private Integer userId;
 	private ClientAll clientAll;
-	private UserAll userAll;
 	private UserTypeAll userTypeAll;
 	private String userName;
 	private String password;
@@ -49,7 +48,7 @@ public class UserAll implements java.io.Serializable {
 	private String flag5;
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
-	private Set<ComponentAll> componentAlls = new HashSet<ComponentAll>(0);
+	private Integer lastModifiedBy;
 	private TollOperatorAll tollOperatorAllByUserId;
 	private Set<ClientAll> clientAlls = new HashSet<ClientAll>(0);
 	private Set<VmlTypeAll> vmlTypeAlls = new HashSet<VmlTypeAll>(0);
@@ -74,27 +73,22 @@ public class UserAll implements java.io.Serializable {
 			0);
 	private Set<ConfigurationAll> configurationAlls = new HashSet<ConfigurationAll>(
 			0);
+	private Set<ComponentAll> componentAlls = new HashSet<ComponentAll>(0);
 	private Set<UserBalanceAll> userBalanceAllsForLastModifiedBy = new HashSet<UserBalanceAll>(
 			0);
+	private UserPaymentDetailAll userPaymentDetailAllByUserId;
 	private Set<VehicleMovementLogAll> vehicleMovementLogAlls = new HashSet<VehicleMovementLogAll>(
 			0);
-	private UserPaymentDetailAll userPaymentDetailAllByUserId;
 	private Set<VehicleTypeAll> vehicleTypeAlls = new HashSet<VehicleTypeAll>(0);
 	private Set<ComponentVersionAll> componentVersionAlls = new HashSet<ComponentVersionAll>(
 			0);
 	private Set<CcTypeAll> ccTypeAlls = new HashSet<CcTypeAll>(0);
-	private Set<UserAll> userAlls = new HashSet<UserAll>(0);
-	private Set<ComponentAll> componentAlls_1 = new HashSet<ComponentAll>(0);
 	private Set<VehicleTollUsageAll> vehicleTollUsageAlls = new HashSet<VehicleTollUsageAll>(
-			0);
-	private Set<ComponentVersionAll> componentVersionAlls_1 = new HashSet<ComponentVersionAll>(
 			0);
 	private Set<TollOperatorAll> tollOperatorAllsForLastModifiedBy = new HashSet<TollOperatorAll>(
 			0);
 	private Set<ClientAll> clientAlls_1 = new HashSet<ClientAll>(0);
 	private Set<UserServiceAll> userServiceAllsForLastModifiedBy = new HashSet<UserServiceAll>(
-			0);
-	private Set<ConfigurationAll> configurationAlls_1 = new HashSet<ConfigurationAll>(
 			0);
 
 	// Constructors
@@ -104,29 +98,30 @@ public class UserAll implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserAll(ClientAll clientAll, UserAll userAll,
-			UserTypeAll userTypeAll, String userName, String password,
-			String isActive, Timestamp createdOn, Timestamp lastModifiedOn) {
+	public UserAll(ClientAll clientAll, UserTypeAll userTypeAll,
+			String userName, String password, String isActive,
+			Timestamp createdOn, Timestamp lastModifiedOn,
+			Integer lastModifiedBy) {
 		this.clientAll = clientAll;
-		this.userAll = userAll;
 		this.userTypeAll = userTypeAll;
 		this.userName = userName;
 		this.password = password;
 		this.isActive = isActive;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
+		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	/** full constructor */
-	public UserAll(ClientAll clientAll, UserAll userAll,
-			UserTypeAll userTypeAll, String userName, String password,
-			String locale, String isActive, String contactNo,
-			Timestamp lastLoginTime, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String flag1, String flag2, String flag3,
-			String flag4, String flag5, Timestamp createdOn,
-			Timestamp lastModifiedOn, Set<ComponentAll> componentAlls,
-			TollOperatorAll tollOperatorAllByUserId, Set<ClientAll> clientAlls,
-			Set<VmlTypeAll> vmlTypeAlls, Set<ServicePlanAll> servicePlanAlls,
+	public UserAll(ClientAll clientAll, UserTypeAll userTypeAll,
+			String userName, String password, String locale, String isActive,
+			String contactNo, Timestamp lastLoginTime, String udf1,
+			String udf2, String udf3, String udf4, String udf5, String flag1,
+			String flag2, String flag3, String flag4, String flag5,
+			Timestamp createdOn, Timestamp lastModifiedOn,
+			Integer lastModifiedBy, TollOperatorAll tollOperatorAllByUserId,
+			Set<ClientAll> clientAlls, Set<VmlTypeAll> vmlTypeAlls,
+			Set<ServicePlanAll> servicePlanAlls,
 			Set<TollLocationAll> tollLocationAlls,
 			Set<OwnerTypeAll> ownerTypeAlls,
 			Set<PaymentTransactionAll> paymentTransactionAlls,
@@ -139,21 +134,18 @@ public class UserAll implements java.io.Serializable {
 			UserPaymentDetailAll userPaymentDetailAllByUserId,
 			Set<UserBalanceLogAll> userBalanceLogAlls,
 			Set<ConfigurationAll> configurationAlls,
+			Set<ComponentAll> componentAlls,
 			Set<UserBalanceAll> userBalanceAllsForLastModifiedBy,
-			Set<VehicleMovementLogAll> vehicleMovementLogAlls,
 			UserPaymentDetailAll userPaymentDetailAllByUserId,
+			Set<VehicleMovementLogAll> vehicleMovementLogAlls,
 			Set<VehicleTypeAll> vehicleTypeAlls,
 			Set<ComponentVersionAll> componentVersionAlls,
-			Set<CcTypeAll> ccTypeAlls, Set<UserAll> userAlls,
-			Set<ComponentAll> componentAlls_1,
+			Set<CcTypeAll> ccTypeAlls,
 			Set<VehicleTollUsageAll> vehicleTollUsageAlls,
-			Set<ComponentVersionAll> componentVersionAlls_1,
 			Set<TollOperatorAll> tollOperatorAllsForLastModifiedBy,
 			Set<ClientAll> clientAlls_1,
-			Set<UserServiceAll> userServiceAllsForLastModifiedBy,
-			Set<ConfigurationAll> configurationAlls_1) {
+			Set<UserServiceAll> userServiceAllsForLastModifiedBy) {
 		this.clientAll = clientAll;
-		this.userAll = userAll;
 		this.userTypeAll = userTypeAll;
 		this.userName = userName;
 		this.password = password;
@@ -173,7 +165,7 @@ public class UserAll implements java.io.Serializable {
 		this.flag5 = flag5;
 		this.createdOn = createdOn;
 		this.lastModifiedOn = lastModifiedOn;
-		this.componentAlls = componentAlls;
+		this.lastModifiedBy = lastModifiedBy;
 		this.tollOperatorAllByUserId = tollOperatorAllByUserId;
 		this.clientAlls = clientAlls;
 		this.vmlTypeAlls = vmlTypeAlls;
@@ -190,20 +182,17 @@ public class UserAll implements java.io.Serializable {
 		this.userPaymentDetailAllByUserId = userPaymentDetailAllByUserId;
 		this.userBalanceLogAlls = userBalanceLogAlls;
 		this.configurationAlls = configurationAlls;
+		this.componentAlls = componentAlls;
 		this.userBalanceAllsForLastModifiedBy = userBalanceAllsForLastModifiedBy;
-		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
 		this.userPaymentDetailAllByUserId = userPaymentDetailAllByUserId;
+		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
 		this.vehicleTypeAlls = vehicleTypeAlls;
 		this.componentVersionAlls = componentVersionAlls;
 		this.ccTypeAlls = ccTypeAlls;
-		this.userAlls = userAlls;
-		this.componentAlls_1 = componentAlls_1;
 		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
-		this.componentVersionAlls_1 = componentVersionAlls_1;
 		this.tollOperatorAllsForLastModifiedBy = tollOperatorAllsForLastModifiedBy;
 		this.clientAlls_1 = clientAlls_1;
 		this.userServiceAllsForLastModifiedBy = userServiceAllsForLastModifiedBy;
-		this.configurationAlls_1 = configurationAlls_1;
 	}
 
 	// Property accessors
@@ -226,16 +215,6 @@ public class UserAll implements java.io.Serializable {
 
 	public void setClientAll(ClientAll clientAll) {
 		this.clientAll = clientAll;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "last_modified_by", nullable = false)
-	public UserAll getUserAll() {
-		return this.userAll;
-	}
-
-	public void setUserAll(UserAll userAll) {
-		this.userAll = userAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -410,13 +389,13 @@ public class UserAll implements java.io.Serializable {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
-	public Set<ComponentAll> getComponentAlls() {
-		return this.componentAlls;
+	@Column(name = "last_modified_by", nullable = false)
+	public Integer getLastModifiedBy() {
+		return this.lastModifiedBy;
 	}
 
-	public void setComponentAlls(Set<ComponentAll> componentAlls) {
-		this.componentAlls = componentAlls;
+	public void setLastModifiedBy(Integer lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
@@ -570,6 +549,15 @@ public class UserAll implements java.io.Serializable {
 		this.configurationAlls = configurationAlls;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
+	public Set<ComponentAll> getComponentAlls() {
+		return this.componentAlls;
+	}
+
+	public void setComponentAlls(Set<ComponentAll> componentAlls) {
+		this.componentAlls = componentAlls;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByLastModifiedBy")
 	public Set<UserBalanceAll> getUserBalanceAllsForLastModifiedBy() {
 		return this.userBalanceAllsForLastModifiedBy;
@@ -580,16 +568,6 @@ public class UserAll implements java.io.Serializable {
 		this.userBalanceAllsForLastModifiedBy = userBalanceAllsForLastModifiedBy;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
-	public Set<VehicleMovementLogAll> getVehicleMovementLogAlls() {
-		return this.vehicleMovementLogAlls;
-	}
-
-	public void setVehicleMovementLogAlls(
-			Set<VehicleMovementLogAll> vehicleMovementLogAlls) {
-		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
-	}
-
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAllByUserId")
 	public UserPaymentDetailAll getUserPaymentDetailAllByUserId() {
 		return this.userPaymentDetailAllByUserId;
@@ -598,6 +576,16 @@ public class UserAll implements java.io.Serializable {
 	public void setUserPaymentDetailAllByUserId(
 			UserPaymentDetailAll userPaymentDetailAllByUserId) {
 		this.userPaymentDetailAllByUserId = userPaymentDetailAllByUserId;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
+	public Set<VehicleMovementLogAll> getVehicleMovementLogAlls() {
+		return this.vehicleMovementLogAlls;
+	}
+
+	public void setVehicleMovementLogAlls(
+			Set<VehicleMovementLogAll> vehicleMovementLogAlls) {
+		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
@@ -629,24 +617,6 @@ public class UserAll implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
-	public Set<UserAll> getUserAlls() {
-		return this.userAlls;
-	}
-
-	public void setUserAlls(Set<UserAll> userAlls) {
-		this.userAlls = userAlls;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
-	public Set<ComponentAll> getComponentAlls_1() {
-		return this.componentAlls_1;
-	}
-
-	public void setComponentAlls_1(Set<ComponentAll> componentAlls_1) {
-		this.componentAlls_1 = componentAlls_1;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
 	public Set<VehicleTollUsageAll> getVehicleTollUsageAlls() {
 		return this.vehicleTollUsageAlls;
 	}
@@ -654,16 +624,6 @@ public class UserAll implements java.io.Serializable {
 	public void setVehicleTollUsageAlls(
 			Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
 		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
-	public Set<ComponentVersionAll> getComponentVersionAlls_1() {
-		return this.componentVersionAlls_1;
-	}
-
-	public void setComponentVersionAlls_1(
-			Set<ComponentVersionAll> componentVersionAlls_1) {
-		this.componentVersionAlls_1 = componentVersionAlls_1;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAllByLastModifiedBy")
@@ -693,15 +653,6 @@ public class UserAll implements java.io.Serializable {
 	public void setUserServiceAllsForLastModifiedBy(
 			Set<UserServiceAll> userServiceAllsForLastModifiedBy) {
 		this.userServiceAllsForLastModifiedBy = userServiceAllsForLastModifiedBy;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userAll")
-	public Set<ConfigurationAll> getConfigurationAlls_1() {
-		return this.configurationAlls_1;
-	}
-
-	public void setConfigurationAlls_1(Set<ConfigurationAll> configurationAlls_1) {
-		this.configurationAlls_1 = configurationAlls_1;
 	}
 
 }

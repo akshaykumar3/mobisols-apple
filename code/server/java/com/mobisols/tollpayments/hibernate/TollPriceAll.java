@@ -23,6 +23,7 @@ public class TollPriceAll implements java.io.Serializable {
 	// Fields
 
 	private Integer tollPriceId;
+	private ClientAll clientAll;
 	private TollLocationAll tollLocationAll;
 	private UserAll userAll;
 	private VehicleTypeAll vehicleTypeAll;
@@ -63,12 +64,13 @@ public class TollPriceAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TollPriceAll(TollLocationAll tollLocationAll, UserAll userAll,
-			VehicleTypeAll vehicleTypeAll, String direction, Double costPrice,
-			Double sellingPrice, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String flag1, String flag2, String flag3,
-			String flag4, String flag5, Timestamp lastModifiedOn,
+	public TollPriceAll(ClientAll clientAll, TollLocationAll tollLocationAll,
+			UserAll userAll, VehicleTypeAll vehicleTypeAll, String direction,
+			Double costPrice, Double sellingPrice, String udf1, String udf2,
+			String udf3, String udf4, String udf5, String flag1, String flag2,
+			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
+		this.clientAll = clientAll;
 		this.tollLocationAll = tollLocationAll;
 		this.userAll = userAll;
 		this.vehicleTypeAll = vehicleTypeAll;
@@ -99,6 +101,16 @@ public class TollPriceAll implements java.io.Serializable {
 
 	public void setTollPriceId(Integer tollPriceId) {
 		this.tollPriceId = tollPriceId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

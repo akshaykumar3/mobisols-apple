@@ -45,6 +45,7 @@ public class TollLocationHistoryAll implements java.io.Serializable {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private String action;
+	private Integer clientId;
 
 	// Constructors
 
@@ -70,7 +71,8 @@ public class TollLocationHistoryAll implements java.io.Serializable {
 			String udf3, String udf4, String udf5, String flag1, String flag2,
 			String flag3, String flag4, String flag5, Timestamp createdOn,
 			Timestamp lastModifiedOn, Integer lastModifiedBy,
-			Timestamp startDate, Timestamp endDate, String action) {
+			Timestamp startDate, Timestamp endDate, String action,
+			Integer clientId) {
 		this.tollLocationId = tollLocationId;
 		this.tollOperatorId = tollOperatorId;
 		this.geometry = geometry;
@@ -98,6 +100,7 @@ public class TollLocationHistoryAll implements java.io.Serializable {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.action = action;
+		this.clientId = clientId;
 	}
 
 	// Property accessors
@@ -353,6 +356,15 @@ public class TollLocationHistoryAll implements java.io.Serializable {
 
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	@Column(name = "client_id")
+	public Integer getClientId() {
+		return this.clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
 	}
 
 }

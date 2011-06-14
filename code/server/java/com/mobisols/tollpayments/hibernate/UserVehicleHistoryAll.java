@@ -48,6 +48,7 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private String action;
+	private Integer clientId;
 	private Set<VehicleMovementLogAll> vehicleMovementLogAlls = new HashSet<VehicleMovementLogAll>(
 			0);
 	private Set<VehicleTollUsageAll> vehicleTollUsageAlls = new HashSet<VehicleTollUsageAll>(
@@ -82,6 +83,7 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 			String flag3, String flag4, String flag5, Timestamp createdOn,
 			Timestamp lastModifiedOn, Integer lastModifiedBy,
 			Timestamp startDate, Timestamp endDate, String action,
+			Integer clientId,
 			Set<VehicleMovementLogAll> vehicleMovementLogAlls,
 			Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
 		this.userVehicleId = userVehicleId;
@@ -109,6 +111,7 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.action = action;
+		this.clientId = clientId;
 		this.vehicleMovementLogAlls = vehicleMovementLogAlls;
 		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
 	}
@@ -348,6 +351,15 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	@Column(name = "client_id")
+	public Integer getClientId() {
+		return this.clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userVehicleHistoryAll")

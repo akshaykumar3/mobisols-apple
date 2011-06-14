@@ -25,6 +25,7 @@ public class OwnerTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer ownerTypeId;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private String name;
 	private String description;
@@ -58,11 +59,12 @@ public class OwnerTypeAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public OwnerTypeAll(UserAll userAll, String name, String description,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String falg1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp createdOn, Timestamp lastModifiedeOn,
-			Set<UserVehicleAll> userVehicleAlls) {
+	public OwnerTypeAll(ClientAll clientAll, UserAll userAll, String name,
+			String description, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String falg1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp createdOn,
+			Timestamp lastModifiedeOn, Set<UserVehicleAll> userVehicleAlls) {
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
@@ -91,6 +93,16 @@ public class OwnerTypeAll implements java.io.Serializable {
 
 	public void setOwnerTypeId(Integer ownerTypeId) {
 		this.ownerTypeId = ownerTypeId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

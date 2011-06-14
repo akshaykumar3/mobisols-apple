@@ -59,6 +59,7 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 	private Timestamp lastModifiedBy;
 	private Timestamp startDate;
 	private Timestamp endDate;
+	private Integer clientId;
 	private Set<PaymentTransactionAll> paymentTransactionAlls = new HashSet<PaymentTransactionAll>(
 			0);
 
@@ -87,7 +88,7 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 			String flag2, String flag3, String flag4, String flag5,
 			Timestamp createdOn, Timestamp lastModifiedOn,
 			Timestamp lastModifiedBy, Timestamp startDate, Timestamp endDate,
-			Set<PaymentTransactionAll> paymentTransactionAlls) {
+			Integer clientId, Set<PaymentTransactionAll> paymentTransactionAlls) {
 		this.updId = updId;
 		this.userId = userId;
 		this.ccTypeId = ccTypeId;
@@ -121,6 +122,7 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 		this.lastModifiedBy = lastModifiedBy;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.clientId = clientId;
 		this.paymentTransactionAlls = paymentTransactionAlls;
 	}
 
@@ -432,6 +434,15 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 
 	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
+	}
+
+	@Column(name = "client_id")
+	public Integer getClientId() {
+		return this.clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userPaymentDetailHistoryAll")
