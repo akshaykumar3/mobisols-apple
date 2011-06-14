@@ -65,7 +65,8 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", length = 19)),
 			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", length = 19)),
 			@AttributeOverride(name = "startDate", column = @Column(name = "start_date", nullable = false, length = 19)),
-			@AttributeOverride(name = "endDate", column = @Column(name = "end_date", nullable = false, length = 19)) })
+			@AttributeOverride(name = "endDate", column = @Column(name = "end_date", nullable = false, length = 19)),
+			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })
 	public UserPaymentDetailHistoryId getId() {
 		return this.id;
 	}

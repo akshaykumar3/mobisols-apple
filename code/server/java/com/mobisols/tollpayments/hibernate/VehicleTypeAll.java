@@ -26,6 +26,7 @@ public class VehicleTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer vehicleTypeId;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private String name;
 	private String description;
@@ -60,11 +61,13 @@ public class VehicleTypeAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public VehicleTypeAll(UserAll userAll, String name, String description,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Timestamp createdOn, Timestamp lastModifiedOn,
-			Set<TollPriceAll> tollPriceAlls, Set<UserVehicleAll> userVehicleAlls) {
+	public VehicleTypeAll(ClientAll clientAll, UserAll userAll, String name,
+			String description, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp createdOn,
+			Timestamp lastModifiedOn, Set<TollPriceAll> tollPriceAlls,
+			Set<UserVehicleAll> userVehicleAlls) {
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
@@ -94,6 +97,16 @@ public class VehicleTypeAll implements java.io.Serializable {
 
 	public void setVehicleTypeId(Integer vehicleTypeId) {
 		this.vehicleTypeId = vehicleTypeId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

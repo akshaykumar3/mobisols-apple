@@ -47,7 +47,8 @@ public class OwnerType implements java.io.Serializable {
 			@AttributeOverride(name = "flag5", column = @Column(name = "flag5", length = 1)),
 			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)),
 			@AttributeOverride(name = "lastModifiedeOn", column = @Column(name = "last_modifiede_on", nullable = false, length = 19)),
-			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)) })
+			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)),
+			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })
 	public OwnerTypeId getId() {
 		return this.id;
 	}

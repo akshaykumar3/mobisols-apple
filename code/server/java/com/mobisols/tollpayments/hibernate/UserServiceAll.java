@@ -21,6 +21,7 @@ public class UserServiceAll implements java.io.Serializable {
 	// Fields
 
 	private Integer userServiceId;
+	private ClientAll clientAll;
 	private UserAll userAllByLastModifiedBy;
 	private UserAll userAllByUserId;
 	private ServicePlanAll servicePlanAll;
@@ -57,12 +58,13 @@ public class UserServiceAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserServiceAll(UserAll userAllByLastModifiedBy,
+	public UserServiceAll(ClientAll clientAll, UserAll userAllByLastModifiedBy,
 			UserAll userAllByUserId, ServicePlanAll servicePlanAll,
 			Timestamp startDate, Timestamp endDate, Integer priority,
 			String udf1, String udf2, String udf3, String udf4, String udf5,
 			String flag1, String flag2, String flag3, String flag4,
 			String flag5, Timestamp createdOn, Timestamp lastModifiedOn) {
+		this.clientAll = clientAll;
 		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.userAllByUserId = userAllByUserId;
 		this.servicePlanAll = servicePlanAll;
@@ -93,6 +95,16 @@ public class UserServiceAll implements java.io.Serializable {
 
 	public void setUserServiceId(Integer userServiceId) {
 		this.userServiceId = userServiceId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

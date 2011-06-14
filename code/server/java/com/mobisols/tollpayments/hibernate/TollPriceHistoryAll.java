@@ -45,6 +45,7 @@ public class TollPriceHistoryAll implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private Timestamp startDate;
 	private Timestamp endDate;
+	private Integer clientId;
 	private Set<VehicleTollUsageAll> vehicleTollUsageAlls = new HashSet<VehicleTollUsageAll>(
 			0);
 
@@ -74,7 +75,7 @@ public class TollPriceHistoryAll implements java.io.Serializable {
 			String udf3, String udf4, String udf5, String flag1, String flag2,
 			String flag3, String flag4, String flag5, Timestamp createdOn,
 			Timestamp lastModifiedOn, Integer lastModifiedBy,
-			Timestamp startDate, Timestamp endDate,
+			Timestamp startDate, Timestamp endDate, Integer clientId,
 			Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
 		this.tollPriceId = tollPriceId;
 		this.tollLocationId = tollLocationId;
@@ -98,6 +99,7 @@ public class TollPriceHistoryAll implements java.io.Serializable {
 		this.lastModifiedBy = lastModifiedBy;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.clientId = clientId;
 		this.vehicleTollUsageAlls = vehicleTollUsageAlls;
 	}
 
@@ -309,6 +311,15 @@ public class TollPriceHistoryAll implements java.io.Serializable {
 
 	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
+	}
+
+	@Column(name = "client_id")
+	public Integer getClientId() {
+		return this.clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tollPriceHistoryAll")

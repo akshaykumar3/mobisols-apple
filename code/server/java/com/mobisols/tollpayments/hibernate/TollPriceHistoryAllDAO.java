@@ -43,6 +43,7 @@ public class TollPriceHistoryAllDAO extends HibernateDaoSupport {
 	public static final String FLAG4 = "flag4";
 	public static final String FLAG5 = "flag5";
 	public static final String LAST_MODIFIED_BY = "lastModifiedBy";
+	public static final String CLIENT_ID = "clientId";
 
 	protected void initDao() {
 		// do nothing
@@ -180,6 +181,10 @@ public class TollPriceHistoryAllDAO extends HibernateDaoSupport {
 
 	public List<TollPriceHistoryAll> findByLastModifiedBy(Object lastModifiedBy) {
 		return findByProperty(LAST_MODIFIED_BY, lastModifiedBy);
+	}
+
+	public List<TollPriceHistoryAll> findByClientId(Object clientId) {
+		return findByProperty(CLIENT_ID, clientId);
 	}
 
 	public List findAll() {

@@ -25,6 +25,7 @@ public class UserBalanceAll implements java.io.Serializable {
 	// Fields
 
 	private Integer ubalId;
+	private ClientAll clientAll;
 	private UserAll userAllByLastModifiedBy;
 	private UserAll userAllByUserId;
 	private Double balance;
@@ -59,11 +60,12 @@ public class UserBalanceAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserBalanceAll(UserAll userAllByLastModifiedBy,
+	public UserBalanceAll(ClientAll clientAll, UserAll userAllByLastModifiedBy,
 			UserAll userAllByUserId, Double balance, String udf1, String udf2,
 			String udf3, String udf4, String udf5, String flag1, String flag2,
 			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn, Set<UserBalanceLogAll> userBalanceLogAlls) {
+		this.clientAll = clientAll;
 		this.userAllByLastModifiedBy = userAllByLastModifiedBy;
 		this.userAllByUserId = userAllByUserId;
 		this.balance = balance;
@@ -92,6 +94,16 @@ public class UserBalanceAll implements java.io.Serializable {
 
 	public void setUbalId(Integer ubalId) {
 		this.ubalId = ubalId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

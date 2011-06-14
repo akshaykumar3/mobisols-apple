@@ -25,6 +25,7 @@ public class ServicePlanAll implements java.io.Serializable {
 	// Fields
 
 	private Integer servicePlanId;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private TollOperatorAll tollOperatorAll;
 	private String name;
@@ -59,11 +60,13 @@ public class ServicePlanAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ServicePlanAll(UserAll userAll, TollOperatorAll tollOperatorAll,
-			String name, String description, String udf1, String udf2,
-			String udf3, String udf4, String udf5, String flag1, String flag2,
-			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
-			Timestamp createdOn, Set<UserServiceAll> userServiceAlls) {
+	public ServicePlanAll(ClientAll clientAll, UserAll userAll,
+			TollOperatorAll tollOperatorAll, String name, String description,
+			String udf1, String udf2, String udf3, String udf4, String udf5,
+			String flag1, String flag2, String flag3, String flag4,
+			String flag5, Timestamp lastModifiedOn, Timestamp createdOn,
+			Set<UserServiceAll> userServiceAlls) {
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.tollOperatorAll = tollOperatorAll;
 		this.name = name;
@@ -93,6 +96,16 @@ public class ServicePlanAll implements java.io.Serializable {
 
 	public void setServicePlanId(Integer servicePlanId) {
 		this.servicePlanId = servicePlanId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

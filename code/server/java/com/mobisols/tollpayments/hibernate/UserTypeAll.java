@@ -25,6 +25,7 @@ public class UserTypeAll implements java.io.Serializable {
 	// Fields
 
 	private Integer userTypeId;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private String name;
 	private String description;
@@ -60,11 +61,13 @@ public class UserTypeAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserTypeAll(UserAll userAll, String name, String description,
-			Double minBalance, String minBalanceType, String udf1, String udf2,
-			String udf3, String udf4, String udf5, String flag1, String flag2,
-			String flag3, String flag4, String flag5, Timestamp createdOn,
-			Timestamp lastModifiedOn, Set<UserAll> userAlls) {
+	public UserTypeAll(ClientAll clientAll, UserAll userAll, String name,
+			String description, Double minBalance, String minBalanceType,
+			String udf1, String udf2, String udf3, String udf4, String udf5,
+			String flag1, String flag2, String flag3, String flag4,
+			String flag5, Timestamp createdOn, Timestamp lastModifiedOn,
+			Set<UserAll> userAlls) {
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.name = name;
 		this.description = description;
@@ -95,6 +98,16 @@ public class UserTypeAll implements java.io.Serializable {
 
 	public void setUserTypeId(Integer userTypeId) {
 		this.userTypeId = userTypeId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -23,6 +23,7 @@ public class TollLocationAll implements java.io.Serializable {
 	// Fields
 
 	private Integer tollLocationId;
+	private ClientAll clientAll;
 	private UserAll userAll;
 	private TollOperatorAll tollOperatorAll;
 	private String geometry;
@@ -71,15 +72,17 @@ public class TollLocationAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TollLocationAll(Integer tollLocationId, UserAll userAll,
-			TollOperatorAll tollOperatorAll, String geometry, String isCovered,
-			String isCashOnly, String address1, String address2, String city,
-			String state, String country, String zip, String udf1, String udf2,
-			String udf3, String udf4, String udf5, String flag1, String flag2,
-			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
+	public TollLocationAll(Integer tollLocationId, ClientAll clientAll,
+			UserAll userAll, TollOperatorAll tollOperatorAll, String geometry,
+			String isCovered, String isCashOnly, String address1,
+			String address2, String city, String state, String country,
+			String zip, String udf1, String udf2, String udf3, String udf4,
+			String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn, Set<VehicleTollUsageAll> vehicleTollUsageAlls,
 			Set<TollPriceAll> tollPriceAlls) {
 		this.tollLocationId = tollLocationId;
+		this.clientAll = clientAll;
 		this.userAll = userAll;
 		this.tollOperatorAll = tollOperatorAll;
 		this.geometry = geometry;
@@ -116,6 +119,16 @@ public class TollLocationAll implements java.io.Serializable {
 
 	public void setTollLocationId(Integer tollLocationId) {
 		this.tollLocationId = tollLocationId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

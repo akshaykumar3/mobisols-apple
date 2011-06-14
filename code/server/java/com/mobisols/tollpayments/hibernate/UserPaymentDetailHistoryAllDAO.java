@@ -54,6 +54,7 @@ public class UserPaymentDetailHistoryAllDAO extends HibernateDaoSupport {
 	public static final String FLAG3 = "flag3";
 	public static final String FLAG4 = "flag4";
 	public static final String FLAG5 = "flag5";
+	public static final String CLIENT_ID = "clientId";
 
 	protected void initDao() {
 		// do nothing
@@ -230,6 +231,10 @@ public class UserPaymentDetailHistoryAllDAO extends HibernateDaoSupport {
 
 	public List<UserPaymentDetailHistoryAll> findByFlag5(Object flag5) {
 		return findByProperty(FLAG5, flag5);
+	}
+
+	public List<UserPaymentDetailHistoryAll> findByClientId(Object clientId) {
+		return findByProperty(CLIENT_ID, clientId);
 	}
 
 	public List findAll() {

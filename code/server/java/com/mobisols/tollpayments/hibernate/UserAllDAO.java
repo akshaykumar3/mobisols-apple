@@ -39,6 +39,7 @@ public class UserAllDAO extends HibernateDaoSupport {
 	public static final String FLAG3 = "flag3";
 	public static final String FLAG4 = "flag4";
 	public static final String FLAG5 = "flag5";
+	public static final String LAST_MODIFIED_BY = "lastModifiedBy";
 
 	protected void initDao() {
 		// do nothing
@@ -163,6 +164,10 @@ public class UserAllDAO extends HibernateDaoSupport {
 
 	public List<UserAll> findByFlag5(Object flag5) {
 		return findByProperty(FLAG5, flag5);
+	}
+
+	public List<UserAll> findByLastModifiedBy(Object lastModifiedBy) {
+		return findByProperty(LAST_MODIFIED_BY, lastModifiedBy);
 	}
 
 	public List findAll() {

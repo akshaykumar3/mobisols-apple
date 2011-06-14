@@ -49,7 +49,8 @@ public class VehicleMovementLog implements java.io.Serializable {
 			@AttributeOverride(name = "flag5", column = @Column(name = "flag5", length = 1)),
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", nullable = false, length = 19)),
 			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)),
-			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)) })
+			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)),
+			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })
 	public VehicleMovementLogId getId() {
 		return this.id;
 	}

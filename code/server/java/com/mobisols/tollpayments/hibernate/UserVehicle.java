@@ -53,7 +53,8 @@ public class UserVehicle implements java.io.Serializable {
 			@AttributeOverride(name = "flag5", column = @Column(name = "flag5", length = 1)),
 			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)),
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", nullable = false, length = 19)),
-			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)) })
+			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)),
+			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })
 	public UserVehicleId getId() {
 		return this.id;
 	}

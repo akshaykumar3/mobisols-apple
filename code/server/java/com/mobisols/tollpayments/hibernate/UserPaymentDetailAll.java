@@ -30,6 +30,7 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 	// Fields
 
 	private Integer updId;
+	private ClientAll clientAll;
 	private UserAll userAllByUserId;
 	private UserAll userAllByUserId;
 	private CcTypeAll ccTypeAll;
@@ -72,7 +73,7 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public UserPaymentDetailAll(UserAll userAllByUserId,
+	public UserPaymentDetailAll(ClientAll clientAll, UserAll userAllByUserId,
 			UserAll userAllByUserId, CcTypeAll ccTypeAll, String ccAcName,
 			String ccNumber, Integer ccExpMonth, Date ccExpYear, Integer ccCvv,
 			Integer bankRouting, Long bankAccount, String payPrefer,
@@ -81,6 +82,7 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 			String udf4, String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
 			Timestamp createdOn) {
+		this.clientAll = clientAll;
 		this.userAllByUserId = userAllByUserId;
 		this.userAllByUserId = userAllByUserId;
 		this.ccTypeAll = ccTypeAll;
@@ -124,7 +126,17 @@ public class UserPaymentDetailAll implements java.io.Serializable {
 		this.updId = updId;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userAll")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	public ClientAll getClientAll() {
+		return this.clientAll;
+	}
+
+	public void setClientAll(ClientAll clientAll) {
+		this.clientAll = clientAll;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userPaymentDetailAllByUserId")
 	public UserAll getUserAllByUserId() {
 		return this.userAllByUserId;
 	}

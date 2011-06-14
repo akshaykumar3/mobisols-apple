@@ -28,6 +28,7 @@ public class UserBalanceId implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
+	private Integer clientId;
 
 	// Constructors
 
@@ -51,7 +52,7 @@ public class UserBalanceId implements java.io.Serializable {
 			String udf1, String udf2, String udf3, String udf4, String udf5,
 			String flag1, String flag2, String flag3, String flag4,
 			String flag5, Integer lastModifiedBy, Timestamp lastModifiedOn,
-			Timestamp createdOn) {
+			Timestamp createdOn, Integer clientId) {
 		this.ubalId = ubalId;
 		this.userId = userId;
 		this.balance = balance;
@@ -68,6 +69,7 @@ public class UserBalanceId implements java.io.Serializable {
 		this.lastModifiedBy = lastModifiedBy;
 		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
+		this.clientId = clientId;
 	}
 
 	// Property accessors
@@ -216,6 +218,15 @@ public class UserBalanceId implements java.io.Serializable {
 		this.createdOn = createdOn;
 	}
 
+	@Column(name = "client_id")
+	public Integer getClientId() {
+		return this.clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -277,7 +288,11 @@ public class UserBalanceId implements java.io.Serializable {
 				&& ((this.getCreatedOn() == castOther.getCreatedOn()) || (this
 						.getCreatedOn() != null
 						&& castOther.getCreatedOn() != null && this
-						.getCreatedOn().equals(castOther.getCreatedOn())));
+						.getCreatedOn().equals(castOther.getCreatedOn())))
+				&& ((this.getClientId() == castOther.getClientId()) || (this
+						.getClientId() != null
+						&& castOther.getClientId() != null && this
+						.getClientId().equals(castOther.getClientId())));
 	}
 
 	public int hashCode() {
@@ -319,6 +334,8 @@ public class UserBalanceId implements java.io.Serializable {
 						.hashCode());
 		result = 37 * result
 				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
+		result = 37 * result
+				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
 		return result;
 	}
 

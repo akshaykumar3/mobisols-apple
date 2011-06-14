@@ -44,6 +44,7 @@ public class UserVehicleHistoryAllDAO extends HibernateDaoSupport {
 	public static final String FLAG5 = "flag5";
 	public static final String LAST_MODIFIED_BY = "lastModifiedBy";
 	public static final String ACTION = "action";
+	public static final String CLIENT_ID = "clientId";
 
 	protected void initDao() {
 		// do nothing
@@ -189,6 +190,10 @@ public class UserVehicleHistoryAllDAO extends HibernateDaoSupport {
 
 	public List<UserVehicleHistoryAll> findByAction(Object action) {
 		return findByProperty(ACTION, action);
+	}
+
+	public List<UserVehicleHistoryAll> findByClientId(Object clientId) {
+		return findByProperty(CLIENT_ID, clientId);
 	}
 
 	public List findAll() {
