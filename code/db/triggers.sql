@@ -1,5 +1,6 @@
 delimiter //
 
+drop trigger if exixts trg_user_payment_bfr_del;
 create trigger trg_user_payment_bfr_del 
 before delete on user_payment_detail_all 
 for each row
@@ -16,7 +17,7 @@ old.city,old.state,old.country,old.zip,old.pay_prefer,'delete',old.udf1,old.udf2
 old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate(),old.client_id);
 end;
 
-
+drop trigger if exixts trg_user_payment_aft_ins;
 create trigger trg_user_payment_aft_ins after insert on user_payment_detail_all 
 FOR EACH ROW
 begin
@@ -27,7 +28,7 @@ new.city,new.state,new.country,new.zip,new.pay_prefer,'insert',new.udf1,new.udf2
 new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
 end;
 
-
+drop trigger if exixts trg_user_payment_aft_upd;
 create trigger trg_user_payment_aft_upd 
 after update on user_payment_detail_all
 for each row
@@ -44,7 +45,7 @@ new.city,new.state,new.country,new.zip,new.pay_prefer,'update',new.udf1,new.udf2
 new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
 end;
 
-
+drop trigger if exixts trg_tol_loc_bfr_del;
 create trigger trg_tol_loc_bfr_del 
 before delete on toll_location_all 
 for each row begin
@@ -54,24 +55,24 @@ where
 toll_location_id = old.toll_location_id
 and end_date = GetInfFuture(); 
 insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
-udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flga5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
 values(null,old.toll_location_id,old.toll_operator_id,old.geometry,old.is_covered,old.is_cash_only,old.address1,old.address2,old.city,old.state,old.country,old.zip,
 old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,
 GetStartDate(),GetStartDate(),'delete',old.client_id);
 end;
 
-
+drop trigger if exixts trg_tol_loc_aft_ins;
 create trigger trg_tol_loc_aft_ins 
 after insert on toll_location_all 
 for each row begin
 insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
-udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flga5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
 values(null,new.toll_location_id,new.toll_operator_id,new.geometry,new.is_covered,new.is_cash_only,new.address1,new.address2,new.city,new.state,new.country,zip,
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
 GetStartDate(),GetInfFuture(),'insert',new.client_id);
 end;
 
-
+drop trigger if exixts trg_tol_loc_aft_upd; 
 create trigger trg_tol_loc_aft_upd 
 after update on toll_location_all
 for each row begin
@@ -81,12 +82,13 @@ where
 toll_location_id = new.toll_location_id
 and end_date = GetInfFuture();
 insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
-udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flga5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
 values(null,new.toll_location_id,new.toll_operator_id,new.geometry,new.is_covered,new.is_cash_only,new.address1,new.address2,new.city,new.state,new.country,new.zip,
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
 GetStartDate(),GetInfFuture(),'update',new.client_id);
 end;
 
+drop trigger if exixts trg_tol_price_bfr_del;
 create trigger trg_tol_price_bfr_del 
 before delete on toll_price_all
 for each row begin
@@ -101,6 +103,7 @@ values(null,old.toll_price_id,old.toll_location_id,old.vehicle_type_id,old.direc
 old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate(),old.client_id);
 end;
 
+drop trigger if exixts trg_toll_price_all_aft_ins; 
 create trigger trg_toll_price_all_aft_ins 
 after insert on toll_price_all 
 for each row begin
@@ -110,6 +113,7 @@ values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.direc
 new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
 end;
 
+drop trigger if exixts trg_toll_price_aft_upd;
 create trigger trg_toll_price_aft_upd 
 after update on toll_price_all
 for each row begin
@@ -124,6 +128,7 @@ values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.direc
 new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
 end;
 
+drop trigger if exixts trg_user_all_bfr_del;
 create trigger trg_user_all_bfr_del 
 before delete on user_all
 for each row begin
@@ -138,6 +143,7 @@ values(null,old.user_id,old.user_name,old.password,old.locale,old.utype_id,old.l
 old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate());
 end;
 
+drop trigger if exixts trg_user_all_aft_ins;
 create trigger trg_user_all_aft_ins 
 after insert on user_all 
 for each row begin
@@ -147,6 +153,7 @@ values(null,new.user_id,new.user_name,new.password,new.locale,new.utype_id,new.l
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture());
 end;
 
+drop trigger if exixts trg_user_all_aft_upd;
 create trigger trg_user_all_aft_upd 
 after update on user_all
 for each row begin
@@ -161,6 +168,7 @@ values(null,new.user_id,new.user_name,new.password,new.locale,new.utype_id,new.l
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture());
 end;
 
+drop trigger if exixts trg_user_vehicle_bfr_del ;
 create trigger trg_user_vehicle_bfr_del 
 before delete on user_vehicle_all
 for each row begin
@@ -176,6 +184,7 @@ old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.f
 GetStartDate(),GetStartDate(),'delete',old.client_id);
 end;
 
+drop trigger if exixts trg_user_vehicle_aft_ins;
 create trigger trg_user_vehicle_aft_ins 
 after insert on user_vehicle_all 
 for each row begin
@@ -186,6 +195,7 @@ new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.f
 GetStartDate(),GetInfFuture(),'insert',new.client_id);
 end;
 
+drop trigger if exixts trg_user_vehicle_aft_upd;
 create trigger trg_user_vehicle_aft_upd 
 after update on user_vehicle_all
 for each row begin
@@ -201,6 +211,7 @@ new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.f
 GetStartDate(),GetInfFuture(),'update',new.client_id);
 end;
 
+drop trigger if exixts trg_bal_log_bfr_del; 
 create trigger trg_bal_log_bfr_del 
 before delete on user_balance_all
 for each row begin
@@ -209,6 +220,7 @@ values(null,old.ubal_id,old.balanceold.balance,sysdate(),'delete',old.udf1,old.u
 old.last_modified_by,old.last_modified_on,old.created_on,old.client_id);
 end;
 
+drop trigger if exixts trg_bal_log_aft_ins;
 create trigger trg_bal_log_aft_ins 
 after insert on user_balance_all
 for each row begin
@@ -217,10 +229,11 @@ values(null,new.ubal_id,0,sysdate(),'new account created',new.udf1,new.udf2,new.
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end;
 
+drop trigger if exixts trg_bal_log_aft_upd;
 create trigger trg_bal_log_aft_upd 
 after update on user_balance_all
 for each row begin
-insert into user_balance_log_all (ublog_id,ubal_id,delta,ve_timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
+insert into user_balance_log_all (ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
 values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end;
