@@ -148,7 +148,7 @@ public class TollOperatorAll implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "is_active", nullable = false, length = 45)
+	@Column(name = "is_active", nullable = false, length = 1)
 	public String getIsActive() {
 		return this.isActive;
 	}
