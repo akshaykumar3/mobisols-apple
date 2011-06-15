@@ -393,7 +393,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_operator_all` (
   `toll_operator_id` INT NOT NULL AUTO_INCREMENT ,
   `user_id` INT NULL ,
   `name` VARCHAR(100) NOT NULL COMMENT 'name of the toll agency' ,
-  `is_active` VARCHAR(45) NOT NULL COMMENT 'if the toll agency is still in collabration with us' ,
+  `is_active` VARCHAR(1) NOT NULL COMMENT 'if the toll agency is still in collabration with us' ,
   `website` VARCHAR(2100) NULL COMMENT 'for automated payment purposes, this has the website of the toll agency' ,
   `udf1` VARCHAR(1000) NULL ,
   `udf2` VARCHAR(1000) NULL ,
@@ -503,7 +503,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_history_all` (
   `vehicle_end_date` DATETIME NULL ,
   `registration_no` VARCHAR(45) NOT NULL ,
   `registered_state` VARCHAR(45) NOT NULL ,
-  `owner_id` INT NULL COMMENT 'to show whether the vehicle is still owned by the user' ,
+  `owner_type_id` INT NULL COMMENT 'to show whether the vehicle is still owned by the user' ,
   `udf1` VARCHAR(1000) NULL ,
   `udf2` VARCHAR(1000) NULL ,
   `udf3` VARCHAR(1000) NULL ,
@@ -768,7 +768,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history_all` (
   `city` VARCHAR(100) NULL ,
   `state` VARCHAR(100) NULL ,
   `country` VARCHAR(100) NULL ,
-  `ziip` VARCHAR(10) NULL ,
+  `zip` VARCHAR(10) NULL ,
   `pay_prefer` VARCHAR(1) NULL ,
   `action` VARCHAR(20) NOT NULL COMMENT 'insert/update/delete' ,
   `udf1` VARCHAR(1000) NULL ,
@@ -783,7 +783,7 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history_all` (
   `flag5` VARCHAR(1) NULL ,
   `created_on` DATETIME NULL ,
   `last_modified_on` DATETIME NULL ,
-  `last_modified_by` DATETIME NULL ,
+  `last_modified_by` INT NULL ,
   `start_date` DATETIME NOT NULL ,
   `end_date` DATETIME NOT NULL ,
   `client_id` INT NULL ,
@@ -1418,7 +1418,7 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`component` (`component_id` INT, `name` 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_payment_detail_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history` (`updh_id` INT, `upd_id` INT, `user_id` INT, `cc_type_id` INT, `cc_ac_name` INT, `cc_number` INT, `cc_exp_month` INT, `cc_exp_year` INT, `cc_cvv` INT, `bank_routing` INT, `bank_account` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `ziip` INT, `pay_prefer` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `client_id` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_payment_detail_history` (`updh_id` INT, `upd_id` INT, `user_id` INT, `cc_type_id` INT, `cc_ac_name` INT, `cc_number` INT, `cc_exp_month` INT, `cc_exp_year` INT, `cc_cvv` INT, `bank_routing` INT, `bank_account` INT, `address1` INT, `address2` INT, `city` INT, `state` INT, `country` INT, `zip` INT, `pay_prefer` INT, `action` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`toll_price_history`
@@ -1443,7 +1443,7 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`toll_location_history` (`tlh_id` INT, `
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`user_vehicle_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_history` (`uvh_id` INT, `user_vehicle_id` INT, `user_id` INT, `vehicle_type_id` INT, `is_active` INT, `vehicle_start_date` INT, `vehicle_end_date` INT, `registration_no` INT, `registered_state` INT, `owner_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `action` INT, `client_id` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`user_vehicle_history` (`uvh_id` INT, `user_vehicle_id` INT, `user_id` INT, `vehicle_type_id` INT, `is_active` INT, `vehicle_start_date` INT, `vehicle_end_date` INT, `registration_no` INT, `registered_state` INT, `owner_type_id` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `created_on` INT, `last_modified_on` INT, `last_modified_by` INT, `start_date` INT, `end_date` INT, `action` INT, `client_id` INT);
 
 -- -----------------------------------------------------
 -- View `globaltoll`.`user`
