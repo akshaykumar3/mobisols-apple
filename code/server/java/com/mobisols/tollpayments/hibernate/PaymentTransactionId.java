@@ -8,7 +8,8 @@ import javax.persistence.Embeddable;
  * PaymentTransactionId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class PaymentTransactionId implements java.io.Serializable {
+public class PaymentTransactionId extends GlobalToll implements
+		java.io.Serializable {
 
 	// Fields
 

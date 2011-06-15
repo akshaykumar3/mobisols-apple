@@ -41,7 +41,7 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 	private String city;
 	private String state;
 	private String country;
-	private String ziip;
+	private String zip;
 	private String payPrefer;
 	private String action;
 	private String udf1;
@@ -56,7 +56,7 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 	private String flag5;
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
-	private Timestamp lastModifiedBy;
+	private Integer lastModifiedBy;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private Integer clientId;
@@ -83,11 +83,11 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 			Integer ccExpMonth, Date ccExpYear, Integer ccCvv,
 			Integer bankRouting, Long bankAccount, String address1,
 			String address2, String city, String state, String country,
-			String ziip, String payPrefer, String action, String udf1,
+			String zip, String payPrefer, String action, String udf1,
 			String udf2, String udf3, String udf4, String udf5, String flag1,
 			String flag2, String flag3, String flag4, String flag5,
 			Timestamp createdOn, Timestamp lastModifiedOn,
-			Timestamp lastModifiedBy, Timestamp startDate, Timestamp endDate,
+			Integer lastModifiedBy, Timestamp startDate, Timestamp endDate,
 			Integer clientId, Set<PaymentTransactionAll> paymentTransactionAlls) {
 		this.updId = updId;
 		this.userId = userId;
@@ -104,7 +104,7 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 		this.city = city;
 		this.state = state;
 		this.country = country;
-		this.ziip = ziip;
+		this.zip = zip;
 		this.payPrefer = payPrefer;
 		this.action = action;
 		this.udf1 = udf1;
@@ -274,13 +274,13 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 		this.country = country;
 	}
 
-	@Column(name = "ziip", length = 10)
-	public String getZiip() {
-		return this.ziip;
+	@Column(name = "zip", length = 10)
+	public String getZip() {
+		return this.zip;
 	}
 
-	public void setZiip(String ziip) {
-		this.ziip = ziip;
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 
 	@Column(name = "pay_prefer", length = 1)
@@ -409,12 +409,12 @@ public class UserPaymentDetailHistoryAll implements java.io.Serializable {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
-	@Column(name = "last_modified_by", length = 19)
-	public Timestamp getLastModifiedBy() {
+	@Column(name = "last_modified_by")
+	public Integer getLastModifiedBy() {
 		return this.lastModifiedBy;
 	}
 
-	public void setLastModifiedBy(Timestamp lastModifiedBy) {
+	public void setLastModifiedBy(Integer lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 

@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
  * TollOperatorId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class TollOperatorId implements java.io.Serializable {
+public class TollOperatorId extends GlobalToll implements java.io.Serializable {
 
 	// Fields
 
@@ -106,7 +106,7 @@ public class TollOperatorId implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "is_active", nullable = false, length = 45)
+	@Column(name = "is_active", nullable = false, length = 1)
 	public String getIsActive() {
 		return this.isActive;
 	}

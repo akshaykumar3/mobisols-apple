@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
  * TollPriceId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class TollPriceId implements java.io.Serializable {
+public class TollPriceId extends GlobalToll implements java.io.Serializable {
 
 	// Fields
 

@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
  * ConfigurationId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class ConfigurationId implements java.io.Serializable {
+public class ConfigurationId extends GlobalToll implements java.io.Serializable {
 
 	// Fields
 

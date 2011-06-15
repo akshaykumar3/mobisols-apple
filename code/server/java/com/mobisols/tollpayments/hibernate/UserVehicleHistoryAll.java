@@ -31,7 +31,7 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 	private Timestamp vehicleEndDate;
 	private String registrationNo;
 	private String registeredState;
-	private Integer ownerId;
+	private Integer ownerTypeId;
 	private String udf1;
 	private String udf2;
 	private String udf3;
@@ -78,12 +78,12 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 	public UserVehicleHistoryAll(Integer userVehicleId, Integer userId,
 			Integer vehicleTypeId, String isActive, Timestamp vehicleStartDate,
 			Timestamp vehicleEndDate, String registrationNo,
-			String registeredState, Integer ownerId, String udf1, String udf2,
-			String udf3, String udf4, String udf5, String flag1, String flag2,
-			String flag3, String flag4, String flag5, Timestamp createdOn,
-			Timestamp lastModifiedOn, Integer lastModifiedBy,
-			Timestamp startDate, Timestamp endDate, String action,
-			Integer clientId,
+			String registeredState, Integer ownerTypeId, String udf1,
+			String udf2, String udf3, String udf4, String udf5, String flag1,
+			String flag2, String flag3, String flag4, String flag5,
+			Timestamp createdOn, Timestamp lastModifiedOn,
+			Integer lastModifiedBy, Timestamp startDate, Timestamp endDate,
+			String action, Integer clientId,
 			Set<VehicleMovementLogAll> vehicleMovementLogAlls,
 			Set<VehicleTollUsageAll> vehicleTollUsageAlls) {
 		this.userVehicleId = userVehicleId;
@@ -94,7 +94,7 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 		this.vehicleEndDate = vehicleEndDate;
 		this.registrationNo = registrationNo;
 		this.registeredState = registeredState;
-		this.ownerId = ownerId;
+		this.ownerTypeId = ownerTypeId;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
 		this.udf3 = udf3;
@@ -200,13 +200,13 @@ public class UserVehicleHistoryAll implements java.io.Serializable {
 		this.registeredState = registeredState;
 	}
 
-	@Column(name = "owner_id")
-	public Integer getOwnerId() {
-		return this.ownerId;
+	@Column(name = "owner_type_id")
+	public Integer getOwnerTypeId() {
+		return this.ownerTypeId;
 	}
 
-	public void setOwnerId(Integer ownerId) {
-		this.ownerId = ownerId;
+	public void setOwnerTypeId(Integer ownerTypeId) {
+		this.ownerTypeId = ownerTypeId;
 	}
 
 	@Column(name = "udf1", length = 1000)

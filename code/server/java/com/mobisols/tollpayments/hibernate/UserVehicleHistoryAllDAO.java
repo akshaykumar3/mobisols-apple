@@ -31,7 +31,7 @@ public class UserVehicleHistoryAllDAO extends HibernateDaoSupport {
 	public static final String IS_ACTIVE = "isActive";
 	public static final String REGISTRATION_NO = "registrationNo";
 	public static final String REGISTERED_STATE = "registeredState";
-	public static final String OWNER_ID = "ownerId";
+	public static final String OWNER_TYPE_ID = "ownerTypeId";
 	public static final String UDF1 = "udf1";
 	public static final String UDF2 = "udf2";
 	public static final String UDF3 = "udf3";
@@ -139,8 +139,8 @@ public class UserVehicleHistoryAllDAO extends HibernateDaoSupport {
 		return findByProperty(REGISTERED_STATE, registeredState);
 	}
 
-	public List<UserVehicleHistoryAll> findByOwnerId(Object ownerId) {
-		return findByProperty(OWNER_ID, ownerId);
+	public List<UserVehicleHistoryAll> findByOwnerTypeId(Object ownerTypeId) {
+		return findByProperty(OWNER_TYPE_ID, ownerTypeId);
 	}
 
 	public List<UserVehicleHistoryAll> findByUdf1(Object udf1) {
