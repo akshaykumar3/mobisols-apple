@@ -41,7 +41,7 @@ public class UserPaymentDetailHistoryAllDAO extends HibernateDaoSupport {
 	public static final String CITY = "city";
 	public static final String STATE = "state";
 	public static final String COUNTRY = "country";
-	public static final String ZIIP = "ziip";
+	public static final String ZIP = "zip";
 	public static final String PAY_PREFER = "payPrefer";
 	public static final String ACTION = "action";
 	public static final String UDF1 = "udf1";
@@ -54,6 +54,7 @@ public class UserPaymentDetailHistoryAllDAO extends HibernateDaoSupport {
 	public static final String FLAG3 = "flag3";
 	public static final String FLAG4 = "flag4";
 	public static final String FLAG5 = "flag5";
+	public static final String LAST_MODIFIED_BY = "lastModifiedBy";
 	public static final String CLIENT_ID = "clientId";
 
 	protected void initDao() {
@@ -181,8 +182,8 @@ public class UserPaymentDetailHistoryAllDAO extends HibernateDaoSupport {
 		return findByProperty(COUNTRY, country);
 	}
 
-	public List<UserPaymentDetailHistoryAll> findByZiip(Object ziip) {
-		return findByProperty(ZIIP, ziip);
+	public List<UserPaymentDetailHistoryAll> findByZip(Object zip) {
+		return findByProperty(ZIP, zip);
 	}
 
 	public List<UserPaymentDetailHistoryAll> findByPayPrefer(Object payPrefer) {
@@ -231,6 +232,11 @@ public class UserPaymentDetailHistoryAllDAO extends HibernateDaoSupport {
 
 	public List<UserPaymentDetailHistoryAll> findByFlag5(Object flag5) {
 		return findByProperty(FLAG5, flag5);
+	}
+
+	public List<UserPaymentDetailHistoryAll> findByLastModifiedBy(
+			Object lastModifiedBy) {
+		return findByProperty(LAST_MODIFIED_BY, lastModifiedBy);
 	}
 
 	public List<UserPaymentDetailHistoryAll> findByClientId(Object clientId) {
