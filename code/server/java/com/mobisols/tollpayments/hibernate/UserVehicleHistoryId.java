@@ -8,8 +8,7 @@ import javax.persistence.Embeddable;
  * UserVehicleHistoryId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class UserVehicleHistoryId extends GlobalToll implements
-		java.io.Serializable {
+public class UserVehicleHistoryId implements java.io.Serializable {
 
 	// Fields
 

@@ -8,8 +8,7 @@ import javax.persistence.Embeddable;
  * ComponentVersionId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class ComponentVersionId extends GlobalToll implements
-		java.io.Serializable {
+public class ComponentVersionId implements java.io.Serializable {
 
 	// Fields
 

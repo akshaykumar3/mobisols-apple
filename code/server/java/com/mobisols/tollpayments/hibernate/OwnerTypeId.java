@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
  * OwnerTypeId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class OwnerTypeId extends GlobalToll implements java.io.Serializable {
+public class OwnerTypeId implements java.io.Serializable {
 
 	// Fields
 

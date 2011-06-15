@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
  * ServicePlanId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class ServicePlanId extends GlobalToll implements java.io.Serializable {
+public class ServicePlanId implements java.io.Serializable {
 
 	// Fields
 

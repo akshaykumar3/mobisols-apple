@@ -11,8 +11,7 @@ import javax.persistence.TemporalType;
  * UserPaymentDetailHistoryId entity. @author MyEclipse Persistence Tools
  */
 @Embeddable
-public class UserPaymentDetailHistoryId extends GlobalToll implements
-		java.io.Serializable {
+public class UserPaymentDetailHistoryId implements java.io.Serializable {
 
 	// Fields
 
