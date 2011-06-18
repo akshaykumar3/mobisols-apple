@@ -15,4 +15,4 @@ var carsList = new Ext.data.Store({
         {reg: 'SHISM', state: 'CA',type:'Truck'}
       
     ]
-});
+}); 
