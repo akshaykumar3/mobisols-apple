@@ -4,8 +4,11 @@ Ext.setup({
 	phoneStartupScreen: 'phone_startup.png',
 	glossOnIcon: false,
 	onReady: function() {
+		
 
 		var value=1;
+		
+		var currDate = new Date();
 
 		var position = new google.maps.LatLng(37.49885,-122.198452);
 		var position1=new google.maps.LatLng(37.42980,-122.210674);
@@ -106,18 +109,80 @@ Ext.setup({
 						autoCapitalize : true,
 						useClearIcon: true
 					},{
-						xtype: 'textfield',
+						xtype: 'selectfield',
 						name: 'state',
 						id: 'state',
-						label: 'of State'
+						label: 'of State',
+						required: true,
+						options: [
+							{text: ' ', value: '' }, 
+							{text: 'Alabama', value: 'AL' }, 
+							{text: 'Alaska', value: 'AK'}, 
+							{text: 'Arizona', value: 'AZ'},
+							{text: 'Arkansas', value: 'AR'}, 
+							{text: 'California', value: 'CA'}, 
+							{text: 'Colorado', value: 'CO'}, 
+							{text: 'Connecticut', value: 'CT'}, 
+							{text: 'Delaware', value: 'DE'}, 
+							{text: 'District Of Columbia', value: 'DC'}, 
+							{text: 'Florida', value: 'FL'}, 
+							{text: 'Georgia', value: 'GA'}, 
+							{text: 'Hawaii', value: 'HI'}, 
+							{text: 'Idaho', value: 'ID'}, 
+							{text: 'Illinois', value: 'IL'}, 
+							{text: 'Indiana', value: 'IN'}, 
+							{text: 'Iowa', value: 'IA'}, 
+							{text: 'Kansas', value: 'KS'}, 
+							{text: 'Kentucky', value: 'KY'}, 
+							{text: 'Louisiana', value: 'LA'}, 
+							{text: 'Maine', value: 'ME'}, 
+							{text: 'Maryland', value: 'MD'}, 
+							{text: 'Massachusetts', value: 'MA'}, 
+							{text: 'Michigan', value: 'MI'}, 
+							{text: 'Minnesota', value: 'MN'}, 
+							{text: 'Mississippi', value: 'MS'}, 
+							{text: 'Missouri', value: 'MO'}, 
+							{text: 'Montana', value: 'MT'}, 
+							{text: 'Nebraska', value: 'NE'}, 
+							{text: 'Nevada ', value: 'NV'}, 
+							{text: 'New Hampshire', value: 'NH'}, 
+							{text: 'New Jersey', value: 'NJ'}, 
+							{text: 'New Mexico', value: 'NM'}, 
+							{text: 'New York', value: 'NY'}, 
+							{text: 'North Carolina', value: 'NC'}, 
+							{text: 'North Dakota', value: 'ND'}, 
+							{text: 'Ohio', value: 'OH'}, 
+							{text: 'Oklahoma ', value: 'OK'}, 
+							{text: 'Oregon', value: 'OR'}, 
+							{text: 'Pennsylvania', value: 'PA'}, 
+							{text: 'Rhode Island', value: 'RI'}, 
+							{text: 'South Carolina', value: 'SC'}, 
+							{text: 'South Dakota', value: 'SD'}, 
+							{text: 'Tennessee', value: 'TN'}, 
+							{text: 'Texas', value: 'TX'}, 
+							{text: 'Utah', value: 'UT'}, 
+							{text: 'Vermont', value: 'VT'}, 
+							{text: 'Virginia', value: 'VA'}, 
+							{text: 'Washington', value: 'WA'}, 
+							{text: 'West Virginia', value: 'WV'}, 
+							{text: 'Wisconsin', value: 'WI'}, 
+							{text: 'Wyoming', value: 'WY'}
+						]
+						
 					},{
 						xtype: 'datepickerfield',
 						id: 'from',
 						name: 'from',
 						label: 'From',
 						picker: {
-							yearFrom: 2011,
-							yearTo:2015
+							yearFrom: currDate.getFullYear(),
+							yearTo:currDate.getFullYear()
+						},
+						value :
+						{
+							year:currDate.getFullYear(),
+							month:currDate.getMonth()+1,
+							day:currDate.getDate()
 						}
 					},{
 						xtype: 'datepickerfield',
@@ -125,7 +190,14 @@ Ext.setup({
 						name: 'to',
 						label: 'To',
 						picker: {
-							yearFrom: 2011
+							yearFrom: currDate.getFullYear(),
+							yearTo:currDate.getFullYear()
+						},
+						value :
+						{
+							year:currDate.getFullYear(),
+							month:currDate.getMonth()+1,
+							day:currDate.getDate()
 						}
 					},{
 						xtype: 'selectfield',
@@ -184,18 +256,23 @@ Ext.setup({
 						}
 					}]
 				}]
-			},{
+			},
+			{ 
 				title: 'Paid tolls',
 				id: 'paidtolls',
 				iconCls: 'downloads',
+				
 				//badgeText:'4',
 				layout: Ext.is.Phone ? 'fit' : {
 					type: 'vbox',
 					align: 'center',
 					pack: 'center'
 				},
+			
+			
 				cls: 'demo-list',
 				items: [{
+					
 					//width: Ext.is.Phone ? undefined : 300,
 					//height: 500,
 					xtype: 'list',
@@ -203,9 +280,9 @@ Ext.setup({
 					store: paidTolls,
 					grouped : true,
 					itemTpl: '<div class="contact">{amount}  @ {location} </div>'
+					
 				}]
-			},
-			{
+			},{
 				title: 'Map',
 				id: 'mappanel',
 				xtype: 'map',
@@ -218,7 +295,7 @@ Ext.setup({
 				iconCls: 'locate',
 				listeners: {
 					maprender: function(comp, map) {
-							//map.setCenter(new google.maps.LatLng(gtGeo.latitude, gtGeo.longitude));
+						//map.setCenter(new google.maps.LatLng(gtGeo.latitude, gtGeo.longitude));
 						var marker1= new google.maps.Marker({
 							position: position,
 							title: 'Toll Road 1, Price $1',

@@ -17,3 +17,4 @@ var paidTolls = new Ext.data.Store({
     	    {date:'2011-02-12', amount:'$2.50', location:'1-15N, Escondido', reg: 'SHISM'}
     ]
 });
+ 
