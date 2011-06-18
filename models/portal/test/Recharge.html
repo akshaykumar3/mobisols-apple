@@ -9,12 +9,12 @@
 		<script  type="text/javascript"  src="jquery.js"></script>
 		<script type="text/javascript">
 			$(document).ready( function () {
-				alert('check1');
-				$('#Pay').click('CallService');
+					alert('check1');
+				$('#Pay').click(CallService);
 			});
 			var varType = "POST" ;
-			var varUrl = "http:localhost:6001/testing/getSomeData.jsp";
-			var varData = "";// { $('#payment').val() , $('#State').val()};
+			var varUrl = "http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AddBalance";
+			var varData = '{"amount": "' + $('#payment').val()+'","description": "'+ $('#State').val()+'"}';
 			var varContentType = "application/json; charset=utf-8";
 			var varDataType = "json";
 			var varProcessData = "false";
@@ -22,23 +22,23 @@
 			function CallService() {
 				alert('checking');
 				$.ajax({
-					type          : varType, //GET or POST or PUT or DELETE verb
-					url           : varUrl, // Location of the service
-					data          : varData, //Data sent to server
-					contentType   : varContentType, // content type sent to server
-					dataType      : varDataType, //Expected data format from server
-					processdata   : varProcessData, //True or False
-					success       :   callback("Payment successful") //On Successfull service call
-					//ServiceSucceeded(msg);
-					,
+				type          : varType, //GET or POST or PUT or DELETE verb
+				url           : varUrl, // Location of the service
+				data          : varData, //Data sent to server
+				contentType   : varContentType, // content type sent to server
+				dataType      : varDataType, //Expected data format from server
+				processdata   : varProcessData, //True or False
+				success       :   callback("Payment successful") //On Successfull service call
+				//ServiceSucceeded(msg);
+			,
 
-					error: ServiceFailed// When Service call fails
-				});
+			//error: ServiceFailed// When Service call fails
+			});
 			}
-
 			function callback (msg) {
 				alert(msg);
 			}
+
 		</script>
 	</head>
 	<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 204);"
@@ -154,18 +154,18 @@
 					<br>
 
 					Payment Preference :
-					<input name="payment" value="creditcard"
+					<input name="payment" id="payment" value="credit card"
 					type="radio">
 					Credit card
 					<input
-					name="payment" value="banking" type="radio">
+					name="payment" id="payment" value="banking" type="radio">
 					banking
 					<br>
 					<br>
 
 					Amount :
 					<input
-					size="32" name="Amount">
+					size="32" name="State">
 					<br>
 
 					<br>
