@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta content="text/html; charset=ISO-8859-1"
+		http-equiv="content-type">
+		<title>AccountDetails</title>
+		<style type="text/css">
+		</style>
+		<script  type="text/javascript"  src="jquery.js"></script>
+		<script type="text/javascript">
+	          	$(document).ready( function () {
+					alert('check1');
+				$('#Pay').click(CallService);
+			});
+			var varType = "POST" ;
+			var varUrl = "http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails";
+			'{"amount": "' + $('#payment').val()+'","description": "'+ $('#State').val()+'"}';
+			var varData = '{"request ": "'+'","status":"'+'","version":"1.0"'+'"response:"{"paymentDetails":{"cardNumber":"'+$('#cardNumber').val()+
+			               '","expDate":"'+$('#expDate').val()+'","cardType":"'+$('#cardType').val()+'","bankRouting":"'+$('#bankRouting').val()+
+			               '","bankAccount":"'+$('#bankAccount').val()+'"}'+'","vehicleDetails":[{"registration":"'+$('#registration').val()+
+			               '","State":"'+$('#State').val()+'","type":"'+$('#type').val()+'","isActive":"'+$('#isActive').val()+'","startDate":"'+$('#startDate').val()+
+			               '","endDate":"'+$('#endDate').val()+'"],'+'"tollPayments":[{"registration":"'+$('#registration').val()+'","State":"'+$('#State').val()+
+			               '","tollDetails":{"tollName":"'+$('#tollName').val()+'","tollOperator":"'+$('#tollOperator').val()+'","city":"'+$('#city').val()+
+			               +'","state":"'+$('#state').val()+'","lat":"'+$('#lat').val()+'","longt":"'+$('#longt').val()+'"},"price":"'+$('#price').val()+'","timeStamp":"'
+			               $('#timestamp').val()+'","isPaid":"'+$('#isPaid').val()+'"}],"balanceInfo":{"currentBalance":"'+$.('#currentBalance').val()+'","minBalance":"'
+			               +$('#minBalance').val()+'","balancelog":{"balance":"'+$('#balance').val()+'","description":"'+$('#description').val()+'","timeStamp":"'+
+			               $('#timeStamp').val()+'"}]}}';
+			var varContentType = "application/json; charset=utf-8";
+			var varDataType = "json";
+			var varProcessData = "false";
+
+			function CallService() {
+				alert('checking');
+				$.ajax({
+				type          : varType, //GET or POST or PUT or DELETE verb
+				url           : varUrl, // Location of the service
+				data          : varData, //Data sent to server
+				contentType   : varContentType, // content type sent to server
+				dataType      : varDataType, //Expected data format from server
+				processdata   : varProcessData, //True or False
+				success       :   callback("Payment successful") //On Successfull service call
+				//ServiceSucceeded(msg);
+			,
+
+			//error: ServiceFailed// When Service call fails
+			});
+			}
+			function callback (msg) {
+				alert(msg);
+			}
+
+		</script>
+	</head>
+	<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 204);"
+	alink="#3333ff" link="#3333ff" vlink="red">
+		<table style="text-align: center; width: 1074px; height: 32px;" border="1"
+		cellpadding="2" cellspacing="2">
+			<tbody>
+				<tr>
+					<td
+					style="vertical-align: top; background-color: rgb(51, 153, 153);">
+					<span
+					style="font-weight: bold;"> GLOBAL TOLL</span>
+					<br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<table style="text-align: center; width: 1072px; height: 32px;" border="1"
+		cellpadding="2" cellspacing="2">
+			<tbody>
+				<tr>
+					<td style="vertical-align: top; width: 581px;">
+					<br>
+					</td>
+					<td
+					style="vertical-align: top; width: 157px; background-color: rgb(51, 153, 153);">
+					Home
+					<br>
+					</td>
+					<td style="vertical-align: top; width: 160px;">
+					Maps
+					<br>
+					</td>
+					<td style="vertical-align: top; width: 138px;">
+					Logout
+					<br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<br>
+
+		<span style="font-weight: bold;">Account Details</span>
+		<br>
+		<br>
+		<table style="text-align: center; width: 1057px; height: 323px;"
+		border="0" cellpadding="1" cellspacing="1">
+			<tbody>
+				<tr>
+					<td style="vertical-align: top; width: 159px; height: 316px;">
+					<table style="text-align: center; width: 156px; height: 230px;"
+					border="0" cellpadding="2" cellspacing="2">
+						<tbody>
+							<tr>
+								<td style="vertical-align: top; height: 21px;">
+								Wall
+								<br>
+								</td>
+							</tr>
+							<tr>
+								<td
+								style="vertical-align: top; background-color: rgb(51, 153, 153);">
+								Account Details
+								<br>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;">
+								My cars
+								<br>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;">
+								Recharge
+								<br>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;">
+								List of downloads
+								<br>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;">
+								Service Plans
+								<br>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: top;">
+								Support
+								<br>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					</td>
+					<td style="vertical-align: top; width: 878px; height: 316px;">
+					<table style="text-align: center; width: 853px; height: 282px;"
+					border="0" cellpadding="1" cellspacing="1">
+						<tbody>
+							<tr>
+								<td style="vertical-align: top;">
+								<br>
+								<span
+								style="font-weight: bold;"> Personal Details</span> :
+								<br>
+								<br>
+
+								Mobile No :
+								<input
+								size="32" name="contact_no">
+								<br>
+
+								<br>
+
+								Address
+								:
+								<input size="32"
+								name="address">
+								<br>
+
+								<br>
+
+								City
+								:
+								<input size="32"
+								name="city">
+								<br>
+
+								<br>
+
+								State
+								:
+								<input size="32"
+								name="state">
+								<br>
+								<br>
+
+								Country
+								:
+								<input size="32"
+								name="country">
+								<br>
+								<br>
+
+								Zipcode
+								:
+								<input
+								size="32" name="zipcode">
+								<br>
+								<br>
+								<span
+								style="font-weight: bold;"> Credit Card Details :</span>
+								<br>
+								<br>
+
+								Card No:
+								<input size="32" name="card_no">
+								<br>
+
+								<br>
+
+								Exp Date :
+								<input size="15" name="exp_month">
+								-
+								<input size="15"
+								name="exp_year">
+								<br>
+
+								<br>
+
+								CVV :
+								<input size="15"
+								name="cc_cvv">
+								<br>
+
+								<br>
+								<span
+								style="font-weight: bold;"> Banking Details</span> :
+								<br>
+								<br>
+
+								Account
+								No :
+								<input size="32" name="ac_no">
+								<br>
+								<br>
+
+								Routing
+								No :
+								<input size="32" name="bank_routing">
+								<br>
+								<br>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+
+		<br>
+		<br>
+	</body>
+</html>
+
