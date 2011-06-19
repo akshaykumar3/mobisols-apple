@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>register.html</title>
+  <style type="text/css">
+  </style>
+		<script  type="text/javascript"  src="jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready( function () {
+					alert('check1');
+				$('#Register').click(CallService);
+			});
+			var varType = "POST" ;
+			var varUrl = "http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/User";
+			var varData = '{"username": "' + $('#username').val()+'","password": "'+ $('#password').val()+'"}';
+			var varContentType = "application/json; charset=utf-8";
+			var varDataType = "json";
+			var varProcessData = "false";
+
+			function CallService() {
+				alert('checking');
+				$.ajax({
+				type          : varType, //GET or POST or PUT or DELETE verb
+				url           : varUrl, // Location of the service
+				data          : varData, //Data sent to server
+				contentType   : varContentType, // content type sent to server
+				dataType      : varDataType, //Expected data format from server
+				processdata   : varProcessData, //True or False
+				success       :   callback("Registered succesfully")  //On Successfull service call
+				//ServiceSucceeded(msg);
+			,
+
+			//error: ServiceFailed// When Service call fails
+			});
+			}
+			function callback (msg) {
+				alert(msg);
+			}
+
+		</script>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 204);text-align :center"
+ alink="#000088" link="#0000ff" vlink="#ff0000">
+
+<br>
+<span
+ style  "font-weight: bold;"> Registration Form</span><br>
+<br>
+<form style="text-align:center" method="post" name="registration_form">   
+         
+         
+    Username : <input size="32"
+ name="username" value="email  id" id = "username"><br>
+<br>
+         
+         
+       Password :
+<input value="xxxxxxxxxx" size="32" name="password" id = "password" type="password"><br>
+  <br>
+         
+         
+      
+Retype : <input
+ size="32" name="re_password" value="xxxxxxxx" type="password"><br>
+
+
+  <br>
+<br>
+
+  <input onclick="CallService()" name="register" value="register" type="submit"
+  id = "register"><br>
+  <br>
+</form>
+</body>
+</html>

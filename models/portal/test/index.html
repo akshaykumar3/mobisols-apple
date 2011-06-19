@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>index.html</title>
+  <style type="text/css">
+		</style>
+		<script  type="text/javascript"  src="jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready( function () {
+					alert('check1');
+				$('#Login').click(CallService);
+			});
+			var varType = "POST" ;
+			var varUrl = "http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/login";
+			var varData = '{"username": "' + $('#username').val()+'","password": "'+ $('#password').val()+'"}';
+			var varContentType = "application/json; charset=utf-8";
+			var varDataType = "json";
+			var varProcessData = "false";
+
+			function CallService() {
+				alert('checking');
+				$.ajax({
+				type          : varType, //GET or POST or PUT or DELETE verb
+				url           : varUrl, // Location of the service
+				data          : varData, //Data sent to server
+				contentType   : varContentType, // content type sent to server
+				dataType      : varDataType, //Expected data format from server
+				processdata   : varProcessData, //True or False
+				success       :   callback("Login successfull") //On Successfull service call
+				//ServiceSucceeded(msg);
+			,
+
+			//error: ServiceFailed// When Service call fails
+			});
+			}
+			function callback (msg) {
+				alert(msg);
+			}
+
+		</script>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 204);"
+ alink="#3333ff" link="#3333ff" vlink="red">
+<img style="width: 1034px; height: 378px;" alt="express ways"
+ src="images/i2cie6SJZusDrsD3YBgjuc.JPG">
+<table summary = "login form" style="text-align: center; width: 1033px; height: 250px;"
+ border="0" cellpadding="1" cellspacing="1">
+  <tbody>
+    <tr>
+      <td style="center-align: top; width: 381px;">
+      	<form id= "login form" method="post" action="home.html">
+      <table summary="form" style="text-align: center; height: 207px; width: 469px;"
+ border="0" cellpadding="1" cellspacing="1">
+        <tbody>
+          <tr>
+            <td style="center-align: top; width: 459px;"> <span
+ style="font-weight: bold;">USER LOGIN</span><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="center-align: top; width: 459px;">
+            	Username : <input maxlength="320" size="32" name="username" value="email-id" id ="username"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="center-align: top; width: 459px;">
+Password : <input size="32" name="password" value="xxxxxxxxx" type="password" id="password"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="center-align: top; width: 459px;">
+            	 <input onclick="CallService()" name="login" value="login" id = "login"
+ type="submit"><br>
+  <a href="forpass.html">forgot password?</a><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </form>
+      <br>
+      </td>
+      <td style="center-align: top; width: 373px;"><br>
+      <p>About Us :</p>
+      <p>
+      <span style="font-weight: bold; background-color: white;">Global
+Toll</span><br style="font-weight: bold;">
+      <span style="font-weight: bold;">
+your way to expressways</span><br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<a href="terms.html">Terms and conditions</a> @mobisols.com<br>
+<br>
+</body>
+</html>
