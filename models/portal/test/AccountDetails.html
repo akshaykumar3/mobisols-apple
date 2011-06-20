@@ -7,6 +7,7 @@
 		<style type="text/css">
 		</style>
 		<script  type="text/javascript"  src="jquery.js"></script>
+		<script  type="text/javascript"  src="jquery.validate.js"</script>
 		<script type="text/javascript">
 	          	$(document).ready( function () {
 					alert('check1');
@@ -31,6 +32,7 @@
 
 			function CallService() {
 				alert('checking');
+				$('#detailsForm').validate();
 				$.ajax({
 				type          : varType, //GET or POST or PUT or DELETE verb
 				url           : varUrl, // Location of the service
@@ -156,6 +158,7 @@
 					border="0" cellpadding="1" cellspacing="1">
 						<tbody>
 							<tr>
+							<form class ="detailsform" id= "detailsForm" method="post" action="">
 								<td style="vertical-align: top;">
 								<br>
 								<span
@@ -165,7 +168,7 @@
 
 								Mobile No :
 								<input
-								size="32" name="contact_no">
+								size="32" name="contact_no" class = "required number">
 								<br>
 
 								<br>
@@ -173,7 +176,7 @@
 								Address
 								:
 								<input size="32"
-								name="address">
+								name="address" class = "required">
 								<br>
 
 								<br>
@@ -181,7 +184,7 @@
 								City
 								:
 								<input size="32"
-								name="city">
+								name="city" class ="required">
 								<br>
 
 								<br>
@@ -189,21 +192,21 @@
 								State
 								:
 								<input size="32"
-								name="state">
+								name="state" class="required">
 								<br>
 								<br>
 
 								Country
 								:
 								<input size="32"
-								name="country">
+								name="country" class="required">
 								<br>
 								<br>
 
 								Zipcode
 								:
 								<input
-								size="32" name="zipcode">
+								size="32" name="zipcode" class= "required number">
 								<br>
 								<br>
 								<span
@@ -212,13 +215,13 @@
 								<br>
 
 								Card No:
-								<input size="32" name="card_no">
+								<input size="32" name="card_no" class="required creditcard">
 								<br>
 
 								<br>
 
 								Exp Date :
-								<input size="15" name="exp_month">
+								<input size="15" name="exp_month" class="date">
 								-
 								<input size="15"
 								name="exp_year">
@@ -228,7 +231,7 @@
 
 								CVV :
 								<input size="15"
-								name="cc_cvv">
+								name="cc_cvv" class="required number">
 								<br>
 
 								<br>
@@ -239,19 +242,21 @@
 
 								Account
 								No :
-								<input size="32" name="ac_no">
+								<input size="32" name="ac_no" class="required number">
 								<br>
 								<br>
 
 								Routing
 								No :
-								<input size="32" name="bank_routing">
+								<input size="32" name="bank_routing" class="required number">
 								<br>
 								<br>
+								
 								</td>
 							</tr>
 						</tbody>
 					</table>
+					</form>
 					<br>
 					</td>
 				</tr>
