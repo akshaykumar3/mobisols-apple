@@ -116,7 +116,7 @@ Ext.setup({
 
 		var value=1;
 
-		/*CarList= Ext.extend(Ext.Panel,{
+		CarList= Ext.extend(Ext.Panel,{
 			dockedItems:[{
 				xtype: 'toolbar',
 				dock: 'top',
@@ -150,7 +150,7 @@ Ext.setup({
         	}]
 		});
 		
-		mycar=new CarList();*/
+		mycar=new CarList();
 
 		var position = new google.maps.LatLng(37.49885,-122.198452);
 		var position1=new google.maps.LatLng(37.42980,-122.210674);
