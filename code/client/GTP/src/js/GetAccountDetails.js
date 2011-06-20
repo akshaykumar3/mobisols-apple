@@ -2,8 +2,8 @@ Ext.setup({
 	onReady: function(){
 		console.log('page is setup');
 		Ext.util.JSONP.request({
-	      //url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
-	      url: 'http://localhost:6001/testing/getAccountDetailsJsonp.jsp',
+	      url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
+	      //url: 'http://localhost:6001/testing/getAccountDetailsJsonp.jsp',
 	      /*params: {
 	      	username: 'deepu'
 	      },*/
