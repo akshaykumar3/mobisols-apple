@@ -1,8 +1,8 @@
 Ext.regModel('Cars', {
     fields: [
-    	{name: 'reg'},
-    	{name: 'state'},
-    	{name: 'type'}
+    	{name: 'reg', type: 'string'},
+    	{name: 'state', type: 'string'},
+    	{name: 'type', type: 'string'}
     ]
 });
 
