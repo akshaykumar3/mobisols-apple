@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>home</title>
+  <style type="text/css"></style>
+  <script  type="text/javascript"  src="jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready( function () {
+					alert('check1');
+				$('#show').click(CallService);
+			});
+			var vardate = $('#date').val();
+			var vehicleno = $('#registration').val();
+			var varstate = $('#State').val();
+			var varType = "GET" ;
+			var varUrl = "http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/TollPayments";
+			var varData = '{"date":"'+vardate+'","registration":"'+vehicleno+'","State":"'+varstate+'"}';
+			var varContentType = "application/json; charset=utf-8";
+			var varDataType = "json";
+			var varProcessData = "false";
+
+			function CallService() {
+				alert('checking');
+				$.ajax({
+				type          : varType, //GET or POST or PUT or DELETE verb
+				url           : varUrl, // Location of the service
+				data          : varData, //Data sent to server
+				contentType   : varContentType, // content type sent to server
+				dataType      : varDataType, //Expected data format from server
+				processdata   : varProcessData, //True or False
+				success       : function(){ //On Successfull service call
+				ServiceSucceeded(msg);
+			        }
+
+			//error: ServiceFailed// When Service call fails
+			});
+			}
+			function ServiceSucceeded (msg) {
+				alert(msg);
+				insRow(msg);
+			}
+	         function insRow(msg)
+	         {
+	         	 for(var i=0;i<msg.length;i++)
+	         	 {
+	         	 var x=document.getElementById('tolldetails').insertRow(0);
+	         	 var p=x.insertCell(0);
+	         	 var q=x.insertCell(1);
+	         	 p.innerHTML=msg.TollDetails[i].location;
+	         	 q.innerHTML=msg.TollDetails[i].price;
+			}
+		 }	
+
+			
+</script>			
+ </head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 204);"
+ alink="#3333ff" link="#3333ff" vlink="red">
+<table style="text-align: left; width: 1077px; height: 36px;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(51, 153, 153);">
+         
+GLOBAL TOLL
+
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+ <br>
+<table style="text-align: center; height: 32px; width: 1083px;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+Welcome Mr . Username <br>
+      </td>
+      <td
+ style="vertical-align: top; width: 157px; background-color: rgb(51, 102, 102);">
+   <a href="home.html">Home</a><br>
+      </td>
+      <td style="vertical-align: top; width: 180px;">
+      <a href="maps.html">Maps</a><br>
+      </td>
+      <td style="vertical-align: top; width: 160px;">
+    <a href="logout.html">logout</a><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table style="text-align: center; width: 1064px; height: 236px;"
+ border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 147px;">
+      <table style="text-align: center; width: 151px; height: 212px;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 204); width: 175px;">
+Wall<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 175px;">
+Account <br>
+ details <br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; width: 175px; background-color: rgb(51, 153, 153);">
+My cars <br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 255, 204);">
+List of cars <br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(51, 153, 153);">
+ Toll payments<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 175px;">
+Recharge<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 175px;"> list
+of downloads<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">Service plans<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 175px;">
+Support<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td style="vertical-align: top; width: 897px;">
+      <br>
+
+         
+ <span style="font-weight: bold;"> Toll payment
+details </span><span
+ style="font-weight: bold;">
+      </span><br>
+
+      <br>
+
+Vehicle No : <input size="32" name="vehicle_no"><br>
+ <br>
+
+State :<input
+ size="32" name="State"> <br>
+      <br>
+
+Recent Toll Payments : on Date <input size="32"
+ name="date"><br>
+
+      <br>
+<input  type="button"  name = "show" id ="show" value = "show"/>
+ 
+      <table id = "tolldetails" name= "tolldetails"
+ style="text-align: center; margin-right: auto; height: 89px; margin-left: 0px; width: 892px;"
+ border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; width: 402px;"><br>
+            </td>
+            <td style="vertical-align: top; width: 470px;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; width: 402px;"><br>
+            </td>
+            <td style="vertical-align: top; width: 470px;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+         
+<br>
+</body>
+</html>
