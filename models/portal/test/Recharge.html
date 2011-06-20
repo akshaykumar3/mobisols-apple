@@ -7,6 +7,7 @@
 		<style type="text/css">
 		</style>
 		<script  type="text/javascript"  src="jquery.js"></script>
+		<script  type="text/javascript"  src="jquery.validate.js"</script>
 		<script type="text/javascript">
 			$(document).ready( function () {
 					alert('check1');
@@ -21,6 +22,7 @@
 
 			function CallService() {
 				alert('checking');
+				$('#payForm').validate();
 				$.ajax({
 				type          : varType, //GET or POST or PUT or DELETE verb
 				url           : varUrl, // Location of the service
@@ -144,7 +146,7 @@
 					</td>
 					<td style="vertical-align: top; width: 897px;">
 					<br>
-
+                                        <form class="payform" id="payForm"action="">
 					<span style="font-weight: bold;"> Recharge Account </span>
 					<span
 					style="font-weight: bold;">
@@ -155,7 +157,7 @@
 
 					Payment Preference :
 					<input name="payment" id="payment" value="credit card"
-					type="radio">
+					type="radio" class="required">
 					Credit card
 					<input
 					name="payment" id="payment" value="banking" type="radio">
@@ -165,7 +167,7 @@
 
 					Amount :
 					<input
-					size="32" name="State">
+					size="32" name="State" class="required number">
 					<br>
 
 					<br>
@@ -205,7 +207,7 @@
 				</tr>
 			</tbody>
 		</table>
-
+                </form>
 		<br>
 
 		<br>

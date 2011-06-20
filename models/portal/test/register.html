@@ -7,6 +7,7 @@
   <style type="text/css">
   </style>
 		<script  type="text/javascript"  src="jquery.js"></script>
+		<script  type="text/javascript"  src="jquery.validate.js"</script>
 		<script type="text/javascript">
 			$(document).ready( function () {
 					alert('check1');
@@ -21,6 +22,7 @@
 
 			function CallService() {
 				alert('checking');
+				$('#registerForm').validate();
 				$.ajax({
 				type          : varType, //GET or POST or PUT or DELETE verb
 				url           : varUrl, // Location of the service
@@ -48,22 +50,22 @@
 <span
  style  "font-weight: bold;"> Registration Form</span><br>
 <br>
-<form style="text-align:center" method="post" name="registration_form">   
+<form class = "registerForm" id = "registerform" style="text-align:center" method="post" name="registration_form">   
          
          
     Username : <input size="32"
- name="username" value="email  id" id = "username"><br>
+ name="username" value="email  id" id = "username" class = "required email" ><br>
 <br>
          
          
        Password :
-<input value="xxxxxxxxxx" size="32" name="password" id = "password" type="password"><br>
+<input value="xxxxxxxxxx" size="32" name="password" id = "password" type="password" class ="required" ><br>
   <br>
          
          
       
 Retype : <input
- size="32" name="re_password" value="xxxxxxxx" type="password"><br>
+ size="32" name="re_password" value="xxxxxxxx" type="password" class="required" ><br>
 
 
   <br>

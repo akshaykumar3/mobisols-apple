@@ -6,6 +6,7 @@
   <title>home</title>
   <style type="text/css"></style>
   <script  type="text/javascript"  src="jquery.js"></script>
+  <script  type="text/javascript"  src="jquery.validate.js"</script>
 		<script type="text/javascript">
 			$(document).ready( function () {
 					alert('check1');
@@ -21,6 +22,7 @@
 
 			function CallService() {
 				alert('checking');
+				$('#vehicleForm').validate();
 				$.ajax({
 				type          : varType, //GET or POST or PUT or DELETE verb
 				url           : varUrl, // Location of the service
@@ -143,21 +145,21 @@ Support<br>
 <span
  style="font-weight: bold;"> Vehicle Registration form
 </span> <span style="font-weight: bold;"></span><br>
-         
+<form class="vehicleform" id="vehicleForm" method ="post" action="">         
       <br>
 
-Vehicle type : <input size="32" name="type" id = "type"><br>
+Vehicle type : <input size="32" name="type" id = "type" class="required"><br>
       <br>
 
-Vehicle No : <input size="32" name="registration" id ="registration"><br>
+Vehicle No : <input size="32" name="registration" id ="registration" class="required"><br>
 
       <br>
 
-State     : <input size="32" name="State" id = "State"><br>
+State     : <input size="32" name="State" id = "State" class="required"><br>
       <br>
 
-Active date : <input size="10" name="start_date" id = "start_date">
-to <input size="10" name="end_date" id = "end_date"> <br>
+Active date : <input size="10" name="start_date" id = "start_date" class="required date">
+to <input size="10" name="end_date" id = "end_date" class="required date"> <br>
 <br>
 
 <input  type="button"  name = "Save" id ="Save" value = "Save"/>

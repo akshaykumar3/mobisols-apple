@@ -7,6 +7,7 @@
   <style type="text/css">
 		</style>
 		<script  type="text/javascript"  src="jquery.js"></script>
+		<script  type="text/javascript"  src="jquery.validate.js"</script>
 		<script type="text/javascript">
 			$(document).ready( function () {
 					alert('check1');
@@ -21,6 +22,7 @@
 
 			function CallService() {
 				alert('checking');
+				$('#loginForm').validate();
 				$.ajax({
 				type          : varType, //GET or POST or PUT or DELETE verb
 				url           : varUrl, // Location of the service
@@ -49,28 +51,28 @@
  border="0" cellpadding="1" cellspacing="1">
   <tbody>
     <tr>
-      <td style="center-align: top; width: 381px;">
-      	<form id= "login form" method="post" action="home.html">
+      <td style="text-align: top; width: 381px;">
+      	<form class ="loginform" id= "loginForm" method="post" action="">
       <table summary="form" style="text-align: center; height: 207px; width: 469px;"
  border="0" cellpadding="1" cellspacing="1">
         <tbody>
           <tr>
-            <td style="center-align: top; width: 459px;"> <span
+            <td style="text-align: top; width: 459px;"> <span
  style="font-weight: bold;">USER LOGIN</span><br>
             </td>
           </tr>
           <tr>
-            <td style="center-align: top; width: 459px;">
-            	Username : <input maxlength="320" size="32" name="username" value="email-id" id ="username"><br>
+            <td style="text-align: top; width: 459px;">
+            	Username : <input maxlength="320" size="32" name="username" value="email-id" id ="username" class ="required email"><br>
             </td>
           </tr>
           <tr>
-            <td style="center-align: top; width: 459px;">
-Password : <input size="32" name="password" value="xxxxxxxxx" type="password" id="password"><br>
+            <td style="text-align: top; width: 459px;">
+Password : <input size="32" name="password" value="xxxxxxxxx" type="password" id="password" class ="required"><br>
             </td>
           </tr>
           <tr>
-            <td style="center-align: top; width: 459px;">
+            <td style="text-align: top; width: 459px;">
             	 <input onclick="CallService()" name="login" value="login" id = "login"
  type="submit"><br>
   <a href="forpass.html">forgot password?</a><br>
@@ -81,7 +83,7 @@ Password : <input size="32" name="password" value="xxxxxxxxx" type="password" id
       </form>
       <br>
       </td>
-      <td style="center-align: top; width: 373px;"><br>
+      <td style="text-align: top; width: 373px;"><br>
       <p>About Us :</p>
       <p>
       <span style="font-weight: bold; background-color: white;">Global
