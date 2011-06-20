@@ -1,5 +1,10 @@
 Ext.setup({
 	onReady: function(){
+		Ext.Ajax.defaultHeaders = {
+		    'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Origin': 'http://localhost:6001'
+		};
+
 		Ext.Ajax.request({
 			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AddBalance',
 			params: {
@@ -7,10 +12,11 @@ Ext.setup({
 				description: 'initial deposit'
 			},
 			success: function(response){
+				console.log('success');
 				console.log(response.responseText);
 			},
-			callback: function(){
-				console.log('i am inside callback');
+			failure: function(response){
+				console.log(response.responseText);
 			}
 		});
 	}
