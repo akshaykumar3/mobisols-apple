@@ -1,10 +1,11 @@
 Ext.setup({
 	onReady: function(){
 		console.log('page is setup');
+		//Ext.lib.Ajax.useDefaultXhrHeader = false;
 		Ext.Ajax.request({
-	    	url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
+			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
 	    	success: function(response){
-	      		console.log(response);
+	      		console.log(response.responseText);
 	      		var obj=Ext.decode(response.responseText);
 	      		console.log(obj);
 	    	},
