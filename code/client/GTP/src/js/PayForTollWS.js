@@ -1,23 +1,18 @@
 Ext.setup({
 	onReady: function(){
 		
-		var reqobj={
-				latitude1: 21.0,
-				latitude2: 22.0,
-				longitude1: 23.0,
-				longitude2:24.0
-			};
-		
 		Ext.Ajax.request({
-			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/TollDetailsList',
-			params: {json: Ext.encode(reqobj)},
+			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/PaymentDetails',
+			params: {json: Ext.encode({
+				latitude:21.0,
+				longitude:21.0
+			})},
 			disableCaching: false,
-   			method: 'GET',
-			callbackKey: 'callback',
-			success: function(response){
+   			success: function(response){
 				console.log(response.responseText);
 				var obj=Ext.decode(response.responseText);
 				console.log(obj);
+				Ext.getCmp('target').setValue(obj.response.description);
 			},
 			failure: function(response) {
   				console.log('Failure with status code ' + response.status);
@@ -31,12 +26,12 @@ Ext.setup({
 		
 		var panel=new Ext.Panel({
 			fullscreen: true,
-			html: 'fetching toll details list',
+			html: 'Paying for the toll',
 			items: {
 				xtype: 'textfield',
 				id: 'target',
 				width: '50%',
-				value: 'Toll Details will go here'
+				value: 'Payment is done for the toll'
 			}
 		});
 	}
