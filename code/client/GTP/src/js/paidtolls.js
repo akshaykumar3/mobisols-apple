@@ -16,9 +16,8 @@ Ext.regModel('PaidTolls', {
 
 var paidTolls = new Ext.data.Store({
 	model: 'PaidTolls',
-	sorters: 'reg',
 	getGroupString : function(record) {
-		return record.get('reg')[0];
+		return record.get('date');
 	},
 	data: [{
 		date:'2011-01-01',

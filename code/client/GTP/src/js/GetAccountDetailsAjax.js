@@ -7,9 +7,8 @@ Ext.setup({
 			'Access-Control-Allow-Origin': 'http://localhost:6001'
 		};
 
-		Ext.util.JSONP.request({
-			url: 'http://localhost:6001/testing/jsonpService.jsp?url=com.mobisols.tollpayments.mockwebservices/services/AccountDetails&action=GET',
-			callbackKey: 'callback',
+		Ext.Ajax.request({
+			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
 			method: "GET",
 	    	success: function(response){
 	      		console.log(response.responseText);
@@ -18,10 +17,6 @@ Ext.setup({
 	    	},
 	      	failure: function(response) {
   				console.log('server-side failure with status code ' + response.status);
-			},
-			callback: function(opt,succes,res){
-				console.log(res);
-				console.log('i am from callback');
 			}
 	   	});
 	   	 	

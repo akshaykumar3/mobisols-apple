@@ -2,12 +2,8 @@ Ext.setup({
 	onReady: function(){
 		console.log('page is setup');
 		Ext.util.JSONP.request({
-	      url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
-	      //url: 'http://localhost:6001/testing/getAccountDetailsJsonp.jsp',
-	      /*params: {
-	      	username: 'deepu'
-	      },*/
-	      //callbackKey: 'parseResponse',
+	      //url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
+	      url: 'http://localhost:6001/testing/getAccountDetailsJsonp.jsp',
 	      callbackKey: 'callback',
 	      callback: function(result) {
 	      	console.log('i am from callback');
@@ -30,8 +26,3 @@ Ext.setup({
 	}
 });
 
-function parseResponse(result)
-{
-	console.log('got response');
-	console.log(result);
-}
