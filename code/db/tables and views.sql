@@ -465,6 +465,8 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_location_all` (
   `last_modified_on` DATETIME NOT NULL ,
   `created_on` DATETIME NOT NULL ,
   `client_id` INT NULL ,
+  `latitude` DECIMAL(3,3) NOT NULL,
+  `longitude` DECIMAL(3,3) NOT NULL,
   PRIMARY KEY (`toll_location_id`) ,
   INDEX `fk_toll_op_id` (`toll_operator_id` ASC) ,
   INDEX `fk_last_mod_by_tla` (`last_modified_by` ASC) ,
@@ -1055,6 +1057,8 @@ CREATE  TABLE IF NOT EXISTS `globaltoll`.`toll_location_history_all` (
   `end_date` DATETIME NOT NULL ,
   `action` VARCHAR(20) NOT NULL ,
   `client_id` INT NULL ,
+  `latitude` DECIMAL(3,3) NOT NULL,
+  `longitude` DECIMAL(3,3) NOT NULL,
   PRIMARY KEY (`tlh_id`) )
 ENGINE = InnoDB, 
 COMMENT = 'This table maps the location with corresponding toll operato' /* comment truncated */ ;
@@ -1353,7 +1357,7 @@ CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_toll_usage` (`vtu_id` INT, `uvh
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`vehicle_movement_log`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_movement_log` (`vml_id` INT, `vml_type_id` INT, `uvh_id` INT, `geometry` INT, `timestamp` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_on` INT, `last_modified_by` INT, `created_on` INT, `client_id` INT);
+CREATE TABLE IF NOT EXISTS `globaltoll`.`vehicle_movement_log` (`vml_id` INT, `vml_type_id` INT, `uvh_id` INT, `geometry` INT, `timestamp` INT, `udf1` INT, `udf2` INT, `udf3` INT, `udf4` INT, `udf5` INT, `flag1` INT, `flag2` INT, `flag3` INT, `flag4` INT, `flag5` INT, `last_modified_on` INT, `last_modified_by` INT, `created_on` INT, `client_id` INT,`latitude` DECIMAL(3,3),`longitude` DECIMAL(3,3));
 
 -- -----------------------------------------------------
 -- Placeholder table for view `globaltoll`.`vml_type`
@@ -1505,8 +1509,15 @@ DROP VIEW IF EXISTS `globaltoll`.`toll_location` ;
 DROP TABLE IF EXISTS `globaltoll`.`toll_location`;
 USE `globaltoll`;
 CREATE  OR REPLACE VIEW `globaltoll`.`toll_location` AS
-select * from toll_location_all
-where toll_location_id >0;
+select `toll_location_all`.`toll_location_id` AS `toll_location_id`,`toll_location_all`.`toll_operator_id` AS `toll_operator_id`,`toll_location_all`.`is_covered` AS `is_covered`,
+`toll_location_all`.`is_cash_only` AS `is_cash_only`,`toll_location_all`.`address1` AS `address1`,`toll_location_all`.`address2` AS `address2`,`toll_location_all`.`city` AS `city`,
+`toll_location_all`.`state` AS `state`,`toll_location_all`.`country` AS `country`,`toll_location_all`.`zip` AS `zip`,`toll_location_all`.`udf1` AS `udf1`,
+`toll_location_all`.`udf2` AS `udf2`,`toll_location_all`.`udf3` AS `udf3`,`toll_location_all`.`udf4` AS `udf4`,`toll_location_all`.`udf5` AS `udf5`,
+`toll_location_all`.`flag1` AS `flag1`,`toll_location_all`.`flag2` AS `flag2`,`toll_location_all`.`flag3` AS `flag3`,`toll_location_all`.`flag4` AS `flag4`,
+`toll_location_all`.`flag5` AS `flag5`,`toll_location_all`.`last_modified_by` AS `last_modified_by`,`toll_location_all`.`last_modified_on` AS `last_modified_on`,
+`toll_location_all`.`created_on` AS `created_on`,`toll_location_all`.`client_id` AS `client_id`,`toll_location_all`.`latitude` AS `latitude`,
+`toll_location_all`.`longitude` AS `longitude` from `toll_location_all`
+where (`toll_location_all`.`toll_location_id` > 0)
 
 -- -----------------------------------------------------
 -- View `globaltoll`.`toll_price`
@@ -1537,8 +1548,15 @@ DROP VIEW IF EXISTS `globaltoll`.`vehicle_movement_log` ;
 DROP TABLE IF EXISTS `globaltoll`.`vehicle_movement_log`;
 USE `globaltoll`;
 CREATE  OR REPLACE VIEW `globaltoll`.`vehicle_movement_log` AS
-select * from vehicle_movement_log_all
-where vml_id >0;
+select `vehicle_movement_log_all`.`vml_id` AS `vml_id`,`vehicle_movement_log_all`.`vml_type_id` AS `vml_type_id`,`vehicle_movement_log_all`.`uvh_id` AS `uvh_id`,
+`vehicle_movement_log_all`.`timestamp` AS `timestamp`,`vehicle_movement_log_all`.`udf1` AS `udf1`,`vehicle_movement_log_all`.`udf2` AS `udf2`,
+`vehicle_movement_log_all`.`udf3` AS `udf3`,`vehicle_movement_log_all`.`udf4` AS `udf4`,`vehicle_movement_log_all`.`udf5` AS `udf5`,
+`vehicle_movement_log_all`.`flag1` AS `flag1`,`vehicle_movement_log_all`.`flag2` AS `flag2`,`vehicle_movement_log_all`.`flag3` AS `flag3`,
+`vehicle_movement_log_all`.`flag4` AS `flag4`,`vehicle_movement_log_all`.`flag5` AS `flag5`,`vehicle_movement_log_all`.`last_modified_on` AS `last_modified_on`,
+`vehicle_movement_log_all`.`last_modified_by` AS `last_modified_by`,`vehicle_movement_log_all`.`created_on` AS `created_on`,
+`vehicle_movement_log_all`.`client_id` AS `client_id`,`vehicle_movement_log_all`.`latitude` AS `latitude`,
+`vehicle_movement_log_all`.`longitude` AS `longitude` from `vehicle_movement_log_all`
+where (`vehicle_movement_log_all`.`vml_id` > 0)
 ;
 
 -- -----------------------------------------------------
@@ -1713,8 +1731,19 @@ DROP VIEW IF EXISTS `globaltoll`.`toll_location_history` ;
 DROP TABLE IF EXISTS `globaltoll`.`toll_location_history`;
 USE `globaltoll`;
 CREATE  OR REPLACE VIEW `globaltoll`.`toll_location_history` AS
-select * from toll_location_history_all
-where tlh_id >0;
+select `toll_location_history_all`.`tlh_id` AS `tlh_id`,`toll_location_history_all`.`toll_location_id` AS `toll_location_id`,
+`toll_location_history_all`.`toll_operator_id` AS `toll_operator_id`,`toll_location_history_all`.`is_covered` AS `is_covered`,
+`toll_location_history_all`.`is_cash_only` AS `is_cash_only`,`toll_location_history_all`.`address1` AS `address1`,
+`toll_location_history_all`.`address2` AS `address2`,`toll_location_history_all`.`city` AS `city`,`toll_location_history_all`.`state` AS `state`,
+`toll_location_history_all`.`country` AS `country`,`toll_location_history_all`.`zip` AS `zip`,`toll_location_history_all`.`udf1` AS `udf1`,
+`toll_location_history_all`.`udf2` AS `udf2`,`toll_location_history_all`.`udf3` AS `udf3`,`toll_location_history_all`.`udf4` AS `udf4`,
+`toll_location_history_all`.`udf5` AS `udf5`,`toll_location_history_all`.`flag1` AS `flag1`,`toll_location_history_all`.`flag2` AS `flag2`,
+`toll_location_history_all`.`flag3` AS `flag3`,`toll_location_history_all`.`flag4` AS `flag4`,`toll_location_history_all`.`flag5` AS `flag5`,
+`toll_location_history_all`.`created_on` AS `created_on`,`toll_location_history_all`.`last_modified_on` AS `last_modified_on`,
+`toll_location_history_all`.`last_modified_by` AS `last_modified_by`,`toll_location_history_all`.`start_date` AS `start_date`,
+`toll_location_history_all`.`end_date` AS `end_date`,`toll_location_history_all`.`action` AS `action`,`toll_location_history_all`.`client_id` AS `client_id`,
+`toll_location_history_all`.`latitude` AS `latitude`,`toll_location_history_all`.`longitude` AS `longitude` from `toll_location_history_all`
+where (`toll_location_history_all`.`tlh_id` > 0)
 
 -- -----------------------------------------------------
 -- View `globaltoll`.`user_vehicle_history`
