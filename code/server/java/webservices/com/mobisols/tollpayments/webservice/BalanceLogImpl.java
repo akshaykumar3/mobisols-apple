@@ -26,7 +26,6 @@ public class BalanceLogImpl implements BalanceLog {
 		this.setDelta(ubl.get(0).getDelta());
 		this.setDescription(ubl.get(0).getAction());
 		this.setTimeStamp(ubl.get(0).getTimestamp());
-		s.close();
 	}
 	public Double getDelta() {
 		return delta;

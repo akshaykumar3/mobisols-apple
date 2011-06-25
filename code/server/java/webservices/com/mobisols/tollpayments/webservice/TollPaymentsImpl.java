@@ -54,7 +54,6 @@ public class TollPaymentsImpl implements TollPayments{
 		this.setPrice(tp.get(0).getCostPrice());
 		this.setTimeStamp(vtu.get(0).getTimestamp());
 		this.setTollDetails((TollDetails)new TollDetailsImpl(vtu.get(0).getTollLocId()));
-		s.close();
 	}
 	public String getRegistration() {
 		return registration;

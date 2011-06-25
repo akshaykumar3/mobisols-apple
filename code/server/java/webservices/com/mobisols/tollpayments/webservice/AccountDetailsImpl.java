@@ -34,13 +34,17 @@ public class AccountDetailsImpl implements AccountDetails{
 	@GET
 	@Produces("text/plain")
 	public String getAccountDetails(@QueryParam("username") String user,@QueryParam("clientid")int clientId){
+		Session s= HibernateSessionFactory.getSession();
 		String request="";
 		String status="";
 		System.out.println("creating account details object");
 		AccountDetails ac=new AccountDetailsImpl(user,clientId);
 		System.out.println("created account details object");
 		JsonConverter json=new JsonConverterImpl();
-		return json.getJSON(request, status, ac);
+		String response = json.getJSON(request, status, ac);
+		HibernateSessionFactory.closeSession();
+		return response;
+		
 	}
 	public AccountDetailsImpl() {
 	}
@@ -49,7 +53,6 @@ public class AccountDetailsImpl implements AccountDetails{
 		return null;
 	}
 	public AccountDetailsImpl(String user,int clientid) {
-		
 		System.out.println("getting session factory");
 		Session s= HibernateSessionFactory.getSession();
 		if(s!=null)
@@ -61,8 +64,7 @@ public class AccountDetailsImpl implements AccountDetails{
 		crit.add(Restrictions.eq("user_name", user));
 		crit.add(Restrictions.eq("client_id", clientid));
 		System.out.println("got criteria");
-		List userList=crit.list();
-		
+		List<UserId> userList=crit.list();
 		if(userList.isEmpty())
 		{
 			return;
@@ -91,8 +93,12 @@ public class AccountDetailsImpl implements AccountDetails{
 			}
 		}
 		this.balanceInfo=new BalanceInfoImpl(u.getUserId());
-		s.close();
+		
 	}
+	
+	protected void finalize(){
+		HibernateSessionFactory.closeSession();
+		}
 	
 	public PaymentDetails getPaymentDetails() {
 		return paymentDetails;

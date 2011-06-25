@@ -3,16 +3,13 @@ package com.mobisols.tollpayments.webservice;
 import java.util.List;
 
 
-import javax.ws.rs.QueryParam;
-
-
 public interface BalanceInfo {
 	double currentBalance=(double) 0.0;
 	double minBalance=(double) 0.0;
 	List<BalanceLog> balancelog=null;
 	
 	
-	public String getBalanceInfo(@QueryParam("username") String user);
+	public String getBalanceInfo(String user,int clientId);
 	public double getCurrentBalance();
 	public void setCurrentBalance(double currentBalance);
 	public double getMinBalance();

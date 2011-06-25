@@ -106,7 +106,7 @@ public class TollOperatorId implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "is_active", nullable = false, length = 1)
+	@Column(name = "is_active", nullable = false, length = 45)
 	public String getIsActive() {
 		return this.isActive;
 	}

@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
+
 @Path("/TollDetailsList")
 public class TollDetailsListImpl implements TollDetailsList{
 private List<TollDetails> tollDetailsList;
@@ -42,7 +44,9 @@ private List<TollDetails> tollDetailsList;
 		System.out.println("converted json to the object");
 		TollDetailsList td=new TollDetailsListImpl(((GeometryImpl)g).getLatitude1(),((GeometryImpl)g).getLongitude1(),((GeometryImpl)g).getLatitude2(),((GeometryImpl)g).getLongitude2());
 		System.out.println("created the list");
-		return jc.getJSON(request,status,td);
+		String res = jc.getJSON(request,status,td);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 	/**
 	 * @param tollDetailsList the tollDetailsList to set

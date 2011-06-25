@@ -41,7 +41,7 @@ public class UserVehicleHistory implements java.io.Serializable {
 			@AttributeOverride(name = "vehicleEndDate", column = @Column(name = "vehicle_end_date", length = 19)),
 			@AttributeOverride(name = "registrationNo", column = @Column(name = "registration_no", nullable = false, length = 45)),
 			@AttributeOverride(name = "registeredState", column = @Column(name = "registered_state", nullable = false, length = 45)),
-			@AttributeOverride(name = "ownerTypeId", column = @Column(name = "owner_type_id")),
+			@AttributeOverride(name = "ownerId", column = @Column(name = "owner_id")),
 			@AttributeOverride(name = "udf1", column = @Column(name = "udf1", length = 1000)),
 			@AttributeOverride(name = "udf2", column = @Column(name = "udf2", length = 1000)),
 			@AttributeOverride(name = "udf3", column = @Column(name = "udf3", length = 1000)),

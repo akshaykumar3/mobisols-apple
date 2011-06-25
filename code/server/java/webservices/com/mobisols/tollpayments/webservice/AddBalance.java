@@ -7,7 +7,7 @@ public interface AddBalance {
 	float amount=(float) 0.0;
 	String description=null;
 	
-	public String addBalance(@QueryParam("username") String user,@QueryParam("json")String json);
+	public String addBalance(@QueryParam("username") String user,@QueryParam("json")String json,int clientId);
 	public float getAmount();
 	public void setAmount(float amount);
 	public String getDescription();

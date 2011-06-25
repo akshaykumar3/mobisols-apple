@@ -45,7 +45,6 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		this.setType(vt.get(0).getDescription());
 		this.setStartDate(uv.get(0).getVehicleStartDate());
 		this.setEndDate(uv.get(0).getVehicleEndDate());
-		s.close();
 	}
 	
 	@POST
@@ -58,7 +57,9 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		//TODO update general response details
 		String status="";
 		String request="";
-		return c.getJSON(request, status, response);
+		String res = c.getJSON(request, status, response);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 	
 	@DELETE
@@ -71,7 +72,9 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		//TODO update general response details
 		String status="";
 		String request="";
-		return c.getJSON(request, status, response);
+		String res= c.getJSON(request, status, response);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 	
 	public String getRegistration() {

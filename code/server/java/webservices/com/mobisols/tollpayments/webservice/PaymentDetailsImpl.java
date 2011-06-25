@@ -52,8 +52,6 @@ public class PaymentDetailsImpl implements PaymentDetails{
 			this.setBankRouting(pd.get(0).getBankRouting());
 			this.setBankAccount(pd.get(0).getBankAccount());
 		}
-		s.close();
-		
 	}
 	
 	public PaymentDetailsImpl() {
@@ -71,7 +69,9 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		//TODO update general response details
 		String status="";
 		String request="";
-		return c.getJSON(request, status, response);
+		String res= c.getJSON(request, status, response);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 	
 	public String getCardNumber() {
