@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<title>Toll Payments</title>
+
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="description" content="Site Description Here" />
+<meta name="keywords" content="keywords, here" />
+<meta name="robots" content="index, follow, noarchive" />
+<meta name="googlebot" content="noarchive" />
+
+<link rel="stylesheet" href="images/TechJunkie.css" type="text/css" />
+                <script  type="text/javascript"  src="jquery.js"></script>
+		<script  type="text/javascript"  src="jquery.validate.js"</script>
+		<script type="text/javascript" src="jquery-ui.js></script>
+		<script type="text/javascript">
+			$(document).ready( function () {
+					alert('check1');		
+					$('#login').click(CallService);
+			});
+			var varType = "POST" ;
+			var varUrl = "http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/login";
+			var varData = '{"username": "' + $('#username').val()+'","password": "'+ $('#password').val()+'"}';
+			var varContentType = "application/json; charset=utf-8";
+			var varDataType = "json";
+			var varProcessData = "false";
+
+			function CallService() {
+				alert('checking');
+				$('#loginForm').validate();
+				$.ajax({
+				type          : varType, //GET or POST or PUT or DELETE verb
+				url           : varUrl, // Location of the service
+				data          : varData, //Data sent to server
+				contentType   : varContentType, // content type sent to server
+				dataType      : varDataType, //Expected data format from server
+				processdata   : varProcessData, //True or False
+				success       :  success("Login successfull") //On Successfull service call
+				//ServiceSucceeded(msg);
+               			//error: ServiceFailed// When Service call fails
+			});
+			}
+			function success(msg) {
+				alert(msg);
+			}
+			
+	
+			
+		</script>
+
+</head>
+
+<body>
+<!-- wrap starts here -->
+<div id="wrap">
+
+	<!--header -->
+	<div id="header">			
+				
+		<h1 id="logo-text"><a href="index.html" title="">Global Toll</a></h1>		
+		<p id="slogan">Your way to freeways</p>		
+			
+		<form id="quick-search" action="index.html" method="get" >
+			<p>
+			<label for="qsearch">Search:</label>
+			<input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
+			<input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="images/search.gif" />
+			</p>
+		</form>	
+			
+	<!--header ends-->					
+	</div>
+		
+	<!-- navigation starts-->	
+	<div  id="nav">
+		<ul>
+			<li id="current"><a href="index.html">Home</a></li>
+			<li><a href="style.html">Maps</a></li>
+			<li><a href="index.html">Downloads</a></li>
+			<li><a href="index.html">Service plans</a></li>
+			<li><a href="index.html">Support</a></li>
+			<li><a href="index.html">Coverage</a></li>		
+		</ul>
+	<!-- navigation ends-->	
+	</div>					
+			
+	<!-- content-wrap starts -->
+	<div id="content-wrap">
+	
+		<div id="main">
+				
+			<a name="TemplateInfo"></a>
+			<h2><a href="index.html" title="">Balance Info</a></h2>
+			<p> 
+			   Your current balance is 20$
+			   <br>
+			   Warning: You are low on balance.Please Recharge soon. 
+			   </p>
+			   <br>
+			   <br>
+			<h2><a href=" news.html" title="">Latest News</a></h2>
+ 			<p>
+ 			   Our latest advancements ,partnerships etc
+ 			   </p>
+		
+		<!-- main ends -->	
+		</div>
+				
+		<div id="sidebar">
+			
+			<h3>Navigation</h3>
+			<ul class="sidemenu">				
+				<li><a href="AccountDetails.html">Account Details</a></li>
+				<li><a href="MyCars.html">My Cars</a></li>
+				<li><a href="TollPayments.html">Toll Payments</a></li>
+				<li><a href="Transactions.html">Previous Transactions</a></li>
+				<li><a href="Recharge.html">Recharge</a></li>
+				
+			</ul>	
+				
+			<h3>Links</h3>
+			<ul class="sidemenu">
+				<li><a href="http://www.freephotos.se/">Google Maps</a></li>
+				<li><a href="http://www.alistapart.com">Toll Calculator</a></li>					
+								
+			</ul>
+			
+				
+			<h3>Our Partners</h3>
+			<p>
+			<ul class="sidemenu">
+			        <li><a href="illinoistoll.html">Illinois tollways</a></li>
+			        <li><a href ="newyorktoll.html">New York Toll</a></li>
+			        </ul>
+			</p>
+						
+			
+			<h3>Search Box</h3>	
+			<form class="searchform" action="index.html" method="get">
+				<p>
+				<input name="search_query" class="textbox" type="text" />
+  				<input name="search" class="button" value="Search" type="submit" />
+				</p>			
+			</form>	
+						
+		<!-- sidebar ends -->		
+		</div>		
+		
+	<!-- content-wrap ends-->	
+	</div>
+		
+	<!-- footer starts -->		
+	
+		<div id="footer-bottom">
+			<p>
+			&copy; 2011 <strong>mobisols.com</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+		        <a href="terms and conditions.html"  >Terms and conditions</a> 
+			
+   		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<a href="index.html">Home</a>&nbsp;|&nbsp;
+   		    <a href="index.html">Sitemap</a>&nbsp;|&nbsp;
+	   	    <a href="index.html">RSS Feed</a>
+   		    </p>
+		</div>	
+
+<!-- footer ends-->
+</div></div>
+
+<!-- wrap ends here -->
+</div>
+
+</body>
+</html>
