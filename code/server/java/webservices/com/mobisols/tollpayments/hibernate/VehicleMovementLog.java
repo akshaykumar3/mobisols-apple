@@ -35,7 +35,6 @@ public class VehicleMovementLog implements java.io.Serializable {
 			@AttributeOverride(name = "vmlId", column = @Column(name = "vml_id", nullable = false)),
 			@AttributeOverride(name = "vmlTypeId", column = @Column(name = "vml_type_id", nullable = false)),
 			@AttributeOverride(name = "uvhId", column = @Column(name = "uvh_id", nullable = false)),
-			@AttributeOverride(name = "geometry", column = @Column(name = "geometry", nullable = false)),
 			@AttributeOverride(name = "timestamp", column = @Column(name = "timestamp", nullable = false, length = 19)),
 			@AttributeOverride(name = "udf1", column = @Column(name = "udf1", length = 1000)),
 			@AttributeOverride(name = "udf2", column = @Column(name = "udf2", length = 1000)),
@@ -50,7 +49,9 @@ public class VehicleMovementLog implements java.io.Serializable {
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", nullable = false, length = 19)),
 			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)),
 			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)),
-			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })
+			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")),
+			@AttributeOverride(name = "latitude", column = @Column(name = "latitude", precision = 3, scale = 3)),
+			@AttributeOverride(name = "longitude", column = @Column(name = "longitude", precision = 3, scale = 3)) })
 	public VehicleMovementLogId getId() {
 		return this.id;
 	}

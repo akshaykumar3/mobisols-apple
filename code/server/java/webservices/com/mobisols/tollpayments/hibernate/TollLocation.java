@@ -34,7 +34,6 @@ public class TollLocation implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "tollLocationId", column = @Column(name = "toll_location_id", nullable = false)),
 			@AttributeOverride(name = "tollOperatorId", column = @Column(name = "toll_operator_id", nullable = false)),
-			@AttributeOverride(name = "geometry", column = @Column(name = "geometry", nullable = false)),
 			@AttributeOverride(name = "isCovered", column = @Column(name = "is_covered", nullable = false, length = 1)),
 			@AttributeOverride(name = "isCashOnly", column = @Column(name = "is_cash_only", nullable = false, length = 1)),
 			@AttributeOverride(name = "address1", column = @Column(name = "address1", length = 45)),
@@ -56,7 +55,9 @@ public class TollLocation implements java.io.Serializable {
 			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false)),
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", nullable = false, length = 19)),
 			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", nullable = false, length = 19)),
-			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })
+			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")),
+			@AttributeOverride(name = "latitude", column = @Column(name = "latitude", precision = 3, scale = 3)),
+			@AttributeOverride(name = "longitude", column = @Column(name = "longitude", precision = 3, scale = 3)) })
 	public TollLocationId getId() {
 		return this.id;
 	}

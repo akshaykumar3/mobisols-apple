@@ -35,7 +35,7 @@ public class TollOperator implements java.io.Serializable {
 			@AttributeOverride(name = "tollOperatorId", column = @Column(name = "toll_operator_id", nullable = false)),
 			@AttributeOverride(name = "userId", column = @Column(name = "user_id")),
 			@AttributeOverride(name = "name", column = @Column(name = "name", nullable = false, length = 100)),
-			@AttributeOverride(name = "isActive", column = @Column(name = "is_active", nullable = false, length = 1)),
+			@AttributeOverride(name = "isActive", column = @Column(name = "is_active", nullable = false, length = 45)),
 			@AttributeOverride(name = "website", column = @Column(name = "website", length = 2100)),
 			@AttributeOverride(name = "udf1", column = @Column(name = "udf1", length = 1000)),
 			@AttributeOverride(name = "udf2", column = @Column(name = "udf2", length = 1000)),

@@ -21,7 +21,7 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 	private Timestamp vehicleEndDate;
 	private String registrationNo;
 	private String registeredState;
-	private Integer ownerTypeId;
+	private Integer ownerId;
 	private String udf1;
 	private String udf2;
 	private String udf3;
@@ -66,7 +66,7 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 	public UserVehicleHistoryId(Integer uvhId, Integer userVehicleId,
 			Integer userId, Integer vehicleTypeId, String isActive,
 			Timestamp vehicleStartDate, Timestamp vehicleEndDate,
-			String registrationNo, String registeredState, Integer ownerTypeId,
+			String registrationNo, String registeredState, Integer ownerId,
 			String udf1, String udf2, String udf3, String udf4, String udf5,
 			String flag1, String flag2, String flag3, String flag4,
 			String flag5, Timestamp createdOn, Timestamp lastModifiedOn,
@@ -81,7 +81,7 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 		this.vehicleEndDate = vehicleEndDate;
 		this.registrationNo = registrationNo;
 		this.registeredState = registeredState;
-		this.ownerTypeId = ownerTypeId;
+		this.ownerId = ownerId;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
 		this.udf3 = udf3;
@@ -184,13 +184,13 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 		this.registeredState = registeredState;
 	}
 
-	@Column(name = "owner_type_id")
-	public Integer getOwnerTypeId() {
-		return this.ownerTypeId;
+	@Column(name = "owner_id")
+	public Integer getOwnerId() {
+		return this.ownerId;
 	}
 
-	public void setOwnerTypeId(Integer ownerTypeId) {
-		this.ownerTypeId = ownerTypeId;
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	@Column(name = "udf1", length = 1000)
@@ -395,10 +395,9 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 						&& castOther.getRegisteredState() != null && this
 						.getRegisteredState().equals(
 								castOther.getRegisteredState())))
-				&& ((this.getOwnerTypeId() == castOther.getOwnerTypeId()) || (this
-						.getOwnerTypeId() != null
-						&& castOther.getOwnerTypeId() != null && this
-						.getOwnerTypeId().equals(castOther.getOwnerTypeId())))
+				&& ((this.getOwnerId() == castOther.getOwnerId()) || (this
+						.getOwnerId() != null && castOther.getOwnerId() != null && this
+						.getOwnerId().equals(castOther.getOwnerId())))
 				&& ((this.getUdf1() == castOther.getUdf1()) || (this.getUdf1() != null
 						&& castOther.getUdf1() != null && this.getUdf1()
 						.equals(castOther.getUdf1())))
@@ -492,10 +491,8 @@ public class UserVehicleHistoryId implements java.io.Serializable {
 				* result
 				+ (getRegisteredState() == null ? 0 : this.getRegisteredState()
 						.hashCode());
-		result = 37
-				* result
-				+ (getOwnerTypeId() == null ? 0 : this.getOwnerTypeId()
-						.hashCode());
+		result = 37 * result
+				+ (getOwnerId() == null ? 0 : this.getOwnerId().hashCode());
 		result = 37 * result
 				+ (getUdf1() == null ? 0 : this.getUdf1().hashCode());
 		result = 37 * result

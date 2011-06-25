@@ -53,18 +53,24 @@ public class BalanceInfoImpl implements BalanceInfo {
 		for(Iterator it=(Iterator) ubl.iterator();it.hasNext();){
 			this.balancelog.add(new BalanceLogImpl(ubl.get(it.next()).getUblogId()));
 		}
-		s.close();
 	}
 	
 	@GET
 	@Produces("text/plain")
-	public String getBalanceInfo(@QueryParam("username") String user)
+	public String getBalanceInfo(@QueryParam("username") String user,@QueryParam("clientid")int clientId)
 	{
 		String request="";
 		String status="";
-		BalanceInfo ac=new BalanceInfoImpl();
+		Session s= HibernateSessionFactory.getSession();
+		Criteria crit=s.createCriteria(UserId.class);
+		crit.add(Restrictions.eq("user_name", user));
+		crit.add(Restrictions.eq("client_id", clientId));
+		List<UserId> u=crit.list();
+		BalanceInfo ac=new BalanceInfoImpl(u.get(0).getUserId());
 		JsonConverter json=new JsonConverterImpl();
-		return json.getJSON(request, status, ac);
+		String res = json.getJSON(request, status, ac);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 	
 	public double getCurrentBalance() {

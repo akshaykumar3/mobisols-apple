@@ -48,7 +48,7 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 			@AttributeOverride(name = "city", column = @Column(name = "city", length = 100)),
 			@AttributeOverride(name = "state", column = @Column(name = "state", length = 100)),
 			@AttributeOverride(name = "country", column = @Column(name = "country", length = 100)),
-			@AttributeOverride(name = "zip", column = @Column(name = "zip", length = 10)),
+			@AttributeOverride(name = "ziip", column = @Column(name = "ziip", length = 10)),
 			@AttributeOverride(name = "payPrefer", column = @Column(name = "pay_prefer", length = 1)),
 			@AttributeOverride(name = "action", column = @Column(name = "action", nullable = false, length = 20)),
 			@AttributeOverride(name = "udf1", column = @Column(name = "udf1", length = 1000)),
@@ -63,7 +63,7 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 			@AttributeOverride(name = "flag5", column = @Column(name = "flag5", length = 1)),
 			@AttributeOverride(name = "createdOn", column = @Column(name = "created_on", length = 19)),
 			@AttributeOverride(name = "lastModifiedOn", column = @Column(name = "last_modified_on", length = 19)),
-			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by")),
+			@AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", length = 19)),
 			@AttributeOverride(name = "startDate", column = @Column(name = "start_date", nullable = false, length = 19)),
 			@AttributeOverride(name = "endDate", column = @Column(name = "end_date", nullable = false, length = 19)),
 			@AttributeOverride(name = "clientId", column = @Column(name = "client_id")) })

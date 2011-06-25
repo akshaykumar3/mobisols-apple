@@ -4,10 +4,6 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import org.hibernate.annotations.Type;
-
-import com.vividsolutions.jts.geom.Point;
-
 /**
  * TollLocationId entity. @author MyEclipse Persistence Tools
  */
@@ -18,7 +14,6 @@ public class TollLocationId implements java.io.Serializable {
 
 	private Integer tollLocationId;
 	private Integer tollOperatorId;
-	private Point geometry;
 	private String isCovered;
 	private String isCashOnly;
 	private String address1;
@@ -41,6 +36,8 @@ public class TollLocationId implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private Double latitude;
+	private Double longitude;
 
 	// Constructors
 
@@ -50,12 +47,10 @@ public class TollLocationId implements java.io.Serializable {
 
 	/** minimal constructor */
 	public TollLocationId(Integer tollLocationId, Integer tollOperatorId,
-			Point geometry, String isCovered, String isCashOnly,
-			Integer lastModifiedBy, Timestamp lastModifiedOn,
-			Timestamp createdOn) {
+			String isCovered, String isCashOnly, Integer lastModifiedBy,
+			Timestamp lastModifiedOn, Timestamp createdOn) {
 		this.tollLocationId = tollLocationId;
 		this.tollOperatorId = tollOperatorId;
-		this.geometry = geometry;
 		this.isCovered = isCovered;
 		this.isCashOnly = isCashOnly;
 		this.lastModifiedBy = lastModifiedBy;
@@ -65,15 +60,15 @@ public class TollLocationId implements java.io.Serializable {
 
 	/** full constructor */
 	public TollLocationId(Integer tollLocationId, Integer tollOperatorId,
-			Point geometry, String isCovered, String isCashOnly,
-			String address1, String address2, String city, String state,
-			String country, String zip, String udf1, String udf2, String udf3,
-			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String isCovered, String isCashOnly, String address1,
+			String address2, String city, String state, String country,
+			String zip, String udf1, String udf2, String udf3, String udf4,
+			String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Integer lastModifiedBy,
-			Timestamp lastModifiedOn, Timestamp createdOn, Integer clientId) {
+			Timestamp lastModifiedOn, Timestamp createdOn, Integer clientId,
+			Double latitude, Double longitude) {
 		this.tollLocationId = tollLocationId;
 		this.tollOperatorId = tollOperatorId;
-		this.geometry = geometry;
 		this.isCovered = isCovered;
 		this.isCashOnly = isCashOnly;
 		this.address1 = address1;
@@ -96,6 +91,8 @@ public class TollLocationId implements java.io.Serializable {
 		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
 		this.clientId = clientId;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 
 	// Property accessors
@@ -109,24 +106,13 @@ public class TollLocationId implements java.io.Serializable {
 		this.tollLocationId = tollLocationId;
 	}
 
-	@Column(name = "toll_operator_id",  columnDefinition="Geometry",nullable = false)
+	@Column(name = "toll_operator_id", nullable = false)
 	public Integer getTollOperatorId() {
 		return this.tollOperatorId;
 	}
 
 	public void setTollOperatorId(Integer tollOperatorId) {
 		this.tollOperatorId = tollOperatorId;
-	}
-
-	
-	@Column(name = "geometry", nullable = false)
-	@Type(type="org.hibernatespatial.GeometryUserType" )
-	public Point getGeometry() {
-		return this.geometry;
-	}
-
-	public void setGeometry(Point geometry) {
-		this.geometry = geometry;
 	}
 
 	@Column(name = "is_covered", nullable = false, length = 1)
@@ -327,6 +313,24 @@ public class TollLocationId implements java.io.Serializable {
 		this.clientId = clientId;
 	}
 
+	@Column(name = "latitude", precision = 3, scale = 3)
+	public Double getLatitude() {
+		return this.latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	@Column(name = "longitude", precision = 3, scale = 3)
+	public Double getLongitude() {
+		return this.longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -345,10 +349,6 @@ public class TollLocationId implements java.io.Serializable {
 						&& castOther.getTollOperatorId() != null && this
 						.getTollOperatorId().equals(
 								castOther.getTollOperatorId())))
-				&& ((this.getGeometry() == castOther.getGeometry()) || (this
-						.getGeometry() != null
-						&& castOther.getGeometry() != null && this
-						.getGeometry().equals(castOther.getGeometry())))
 				&& ((this.getIsCovered() == castOther.getIsCovered()) || (this
 						.getIsCovered() != null
 						&& castOther.getIsCovered() != null && this
@@ -424,7 +424,15 @@ public class TollLocationId implements java.io.Serializable {
 				&& ((this.getClientId() == castOther.getClientId()) || (this
 						.getClientId() != null
 						&& castOther.getClientId() != null && this
-						.getClientId().equals(castOther.getClientId())));
+						.getClientId().equals(castOther.getClientId())))
+				&& ((this.getLatitude() == castOther.getLatitude()) || (this
+						.getLatitude() != null
+						&& castOther.getLatitude() != null && this
+						.getLatitude().equals(castOther.getLatitude())))
+				&& ((this.getLongitude() == castOther.getLongitude()) || (this
+						.getLongitude() != null
+						&& castOther.getLongitude() != null && this
+						.getLongitude().equals(castOther.getLongitude())));
 	}
 
 	public int hashCode() {
@@ -438,8 +446,6 @@ public class TollLocationId implements java.io.Serializable {
 				* result
 				+ (getTollOperatorId() == null ? 0 : this.getTollOperatorId()
 						.hashCode());
-		result = 37 * result
-				+ (getGeometry() == null ? 0 : this.getGeometry().hashCode());
 		result = 37 * result
 				+ (getIsCovered() == null ? 0 : this.getIsCovered().hashCode());
 		result = 37
@@ -490,6 +496,10 @@ public class TollLocationId implements java.io.Serializable {
 				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
 		result = 37 * result
 				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
+		result = 37 * result
+				+ (getLatitude() == null ? 0 : this.getLatitude().hashCode());
+		result = 37 * result
+				+ (getLongitude() == null ? 0 : this.getLongitude().hashCode());
 		return result;
 	}
 

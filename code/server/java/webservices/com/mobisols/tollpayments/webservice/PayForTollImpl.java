@@ -4,6 +4,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+
+import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
 @Path("/PayForToll")
 public class PayForTollImpl implements PayForToll{
 
@@ -18,6 +20,8 @@ public class PayForTollImpl implements PayForToll{
 		//TODO update general response details
 		String status="";
 		String request="";
-		return c.getJSON(request, status, response);
+		String res= c.getJSON(request, status, response);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 }
