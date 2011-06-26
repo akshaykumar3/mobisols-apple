@@ -23,36 +23,50 @@ Ext.setup({
 		console.log('count is now'+carsList.getCount());
 		console.log(carsList.getAt(0).get('reg'));
 
-		Ext.util.JSONP.request({
-			//url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
-			url: 'http://localhost:6001/testing/getAccountDetailsJsonp.jsp',
-			callbackKey: 'callback',
-			callback: function(result) {
-				console.log('i am from callback');
-				var pay_details=result.response.paymentDetails;
-				var vehicle_details=result.response.vehicleDetails[0];
-				var paidtoll_details=result.response.tollPayments[0];
-				if(pay_details) {
-					console.log(pay_details.cardNumber);
-					console.log(pay_details.expDate);
-					console.log(pay_details.cardType);
-					console.log(pay_details.bankAccount);
-				}
-				console.log(vehicle_details.registration);
-				carsList.insert(0,Ext.ModelMgr.create({
-					state: vehicle_details.State,
-					reg: vehicle_details.registration,
-					type: vehicle_details.type
+		Ext.Ajax.request({
+	      url: 'http://mbtest.dyndns.com:6001/webservices/services/AccountDetails',
+	      success: function(result) {
+	      	console.log('request is sent successfully');
+	      	
+	      	console.log(result.responseText);
+	      	var res=Ext.decode(result.responseText);
+	      	
+	      	console.log(res);
+	      	
+	      	
+	      	var pay_details=res.response.paymentDetails;
+	      	var vehicle_details=res.response.vehicleDetails;
+	      	var paidtoll_details=res.response.tollPayments;
+	      	
+	      	console.log('Number of vehicles= '+vehicle_details.length);
+	      	console.log('Number of toll payments= '+paidtoll_details.length);
+	      	for(i=0;i<vehicle_details.length;i++)
+	      	{
+	      		carsList.insert(0,Ext.ModelMgr.create({
+					state: vehicle_details[i].State,
+					reg: vehicle_details[i].registration,
+					type: vehicle_details[i].type
 				},'Cars'));
-				paidTolls.insert(0,Ext.ModelMgr.create({
-					date: paidtoll_details.timeStamp,
-					amount: paidtoll_details.price,
-					location: paidtoll_details.tollDetails.tollOperator + paidtoll_details.tollDetails.city,
-					reg: paidtoll_details.registration
+	      	}
+	      	console.log(pay_details.cardNumber);
+	      	console.log(pay_details.expDate);
+	      	console.log(pay_details.cardType);
+	      	console.log(pay_details.bankAccount);
+	      	
+	      	for(i=0;i<paidtoll_details.length;i++)
+	      	{
+		      	paidTolls.insert(0,Ext.ModelMgr.create({
+					date: paidtoll_details[i].timeStamp,
+					amount: paidtoll_details[i].price,
+					location: paidtoll_details[i].tollDetails.tollOperator + paidtoll_details[i].tollDetails.city,
+					reg: paidtoll_details[i].registration
 				}),'PaidTolls');
-
 			}
-		});
+	      },
+	      failure: function(result) {
+	     	console.log('failure with status code'+result.status); 	
+	      }
+	   	});
 
 		//carsList.insert(0,[{reg: '12345',state: 'LB',type: 'sedan'}]);
 		var EntryCar=new Ext.Panel({
@@ -106,7 +120,7 @@ Ext.setup({
 				items:[{
 					xtype: 'selectfield',
 					name: 'state',
-					id: 'state',
+					id: 'st',
 					label: 'of State',
 					required: true,
 					options: [{
@@ -395,34 +409,17 @@ Ext.setup({
 		});
 
 		var position = new google.maps.LatLng(37.49885,-122.198452);
-		var position1=new google.maps.LatLng(37.42980,-122.210674);
-		var position2=new google.maps.LatLng(37.48750,-122.138523);
-
-		var markerDetails = new Array({
-			covered: true,
-			description: "toll no 1, $2",
-			url: "www.tollno1.com"
-		}, {
-			covered: false,
-			description: "toll no 2, $2",
-			url: "www.tollno2.com"
-		}
-		);
+		var mylocation_marker;
+		
 		infowindow = new google.maps.InfoWindow({
 			content: 'Palo Alto entry Toll, 1$</br> Click <a href="www.tollno1.com">here</a> to visit toll website'
 		});
-		infowindow1=new google.maps.InfoWindow({
-			content: markerDetails[0].description+'  '+markerDetails[0].url
-		});
-		infowindow2=new google.maps.InfoWindow({
-			content: markerDetails[1].description+'  '+markerDetails[1].url
-		});
-
+		
 		var imageMarker=new google.maps.MarkerImage(
-		'resources/images/covered.png',
-		new google.maps.Size(20,34),
-		new google.maps.Point(0,0),
-		new google.maps.Point(16,31)
+			'resources/images/covered.png',
+			new google.maps.Size(20,34),
+			new google.maps.Point(0,0),
+			new google.maps.Point(16,31)
 		);
 
 		var curl,avgt,pt,tollop;
@@ -604,13 +601,21 @@ Ext.setup({
 					}],
 					items: [{
 						xtype: 'list',
+						id: 'listid',
 						fullscreen: true,
 						store: carsList,
 						scroll: 'vertical',
 						itemTpl: '<div class="contact"><strong>{reg}</strong> - {state} - {type}</div>',
 						setActiveItem: this,
-						onItemDisclosure: function(record, btn, index) {
+						onItemDisclosure: function() {
 							console.log('clicked an item in the list');
+							var record=Ext.getCmp('listid').getSelectedRecords();
+							
+							console.log(record);
+							
+							Ext.getCmp('DetailPanel.state').setValue(record[0].get('state'));
+							Ext.getCmp('DetailPanel.reg').setValue(record[0].get('reg'));
+							Ext.getCmp('DetailPanel.type').setValue(record[0].get('type'));
 							tabpanel.setActiveItem('details');
 						}
 					},{
@@ -765,52 +770,48 @@ Ext.setup({
 				xtype: 'map',
 				useCurrentLocation: true,
 				mapOptions: {
-					//center: new google.maps.LatLng(37.44885,-122.158592),
-					zoom: 12
+					zoom: 8
 				},
 				cls: 'card5',
 				iconCls: 'locate',
 				listeners: {
 					maprender: function(comp, map) {
+						
+						console.log('map is rendered');
+						console.log('map centered at lat: '+comp.geo.latitude+' long: '+comp.geo.longitude);
+						
+						mylocation_marker=new google.maps.Marker({
+							position: new google.maps.LatLng(37.79885,-122.199452),
+							title: 'U are here right now',
+							map: map
+						});
 						var marker1= new google.maps.Marker({
 							position: position,
 							title: 'Toll Road 1, Price $1',
 							map: map
 						});
-						var marker2=new google.maps.Marker({
-							position: position1,
-							title: 'Toll Road 2, Price $1.5',
-							map: map
-						});
-						var marker3=new google.maps.Marker({
-							position: position2,
-							title: 'Toll road 3, Price $2.0',
-							map: map
-						});
 						google.maps.event.addListener(marker1, 'click', function() {
 							infowindow.open(map, marker1);
 						});
-						google.maps.event.addListener(marker2, 'click', function() {
-							infowindow1.open(map,marker2);
-						});
-						google.maps.event.addListener(marker3, 'click', function() {
-							infowindow2.open(map,marker3);
-						});
+					},
+					centerchange: function(comp,map, center)
+					{
+						geo.updateLocation();
+						mylocation_marker.setPosition(new google.maps.LatLng(comp.geo.latitude,comp.geo.longitude));
 					}
 				}
 			},{
-				title: 'Add Car',
 				id: 'addcar',
-				iconCls: 'add',
-				ui: 'action',
 				cls: 'carcls',
 				items: [EntryCar]
 			},{
 				id: 'details',
-				ui: 'action',
 				cls: 'card7',
 				items: [DetailPanel]
 			}]
 		});
+		
+		// triggering heart beat function here.. 
+		requestHeartBeat();
 	}
 });
