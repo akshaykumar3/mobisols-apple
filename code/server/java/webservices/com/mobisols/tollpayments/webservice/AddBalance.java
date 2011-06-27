@@ -6,10 +6,13 @@ import javax.ws.rs.QueryParam;
 public interface AddBalance {
 	float amount=(float) 0.0;
 	String description=null;
-	
-	public String addBalance(@QueryParam("username") String user,@QueryParam("json")String json,int clientId);
+	int balanceId=0;
+	public String addBalance( String user,String json,int clientId,int hasId);
 	public float getAmount();
 	public void setAmount(float amount);
 	public String getDescription();
 	public void setDescription(String description);
+	public int getbalanceId();
+
+	public void setbalanceId(int balanceId);
 }

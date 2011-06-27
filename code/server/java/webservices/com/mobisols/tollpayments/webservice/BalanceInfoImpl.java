@@ -27,7 +27,10 @@ public class BalanceInfoImpl implements BalanceInfo {
 	private double currentBalance;
 	private double minBalance;
 	private List<BalanceLog> balancelog;
+	private int balanceId;
 	
+	
+
 	public BalanceInfoImpl(){
 		
 	}
@@ -41,6 +44,7 @@ public class BalanceInfoImpl implements BalanceInfo {
 		if(ub.isEmpty())
 			return;
 		this.setCurrentBalance((ub.get(0).getBalance()));
+		this.setBalanceId(ub.get(0).getUbalId());
 		crit=s.createCriteria(UserTypeId.class);
 		List<UserId> u=new UserDAO().findByProperty("user_id", userId);
 		crit.add(Restrictions.eq("user_type_id",u.get(0).getUtypeId()));
@@ -90,5 +94,12 @@ public class BalanceInfoImpl implements BalanceInfo {
 	}
 	public void setBalancelog(List<BalanceLog> balancelog) {
 		this.balancelog = balancelog;
+	}
+	public int getBalanceId() {
+		return balanceId;
+	}
+
+	public void setBalanceId(int balanceId) {
+		this.balanceId = balanceId;
 	}
 }

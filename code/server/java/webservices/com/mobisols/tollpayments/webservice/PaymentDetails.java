@@ -13,9 +13,10 @@ public interface PaymentDetails {
 	String cardType=null;
 	Integer bankRouting=null;
 	Integer bankAccount=null;
+	int paymentId=0;
 	
-	
-	public String postPaymentDetails(@QueryParam("json") String json,@QueryParam("username") String user);
+	public GeneralResponse postPaymentDetails(PaymentDetails pd,int clientId,int paymentId,int userId);
+	public String postPaymentDetails(String json,String user,int clientId,int hasId);
 	public String getCardNumber();
 	public void setCardNumber(String cardNumber);
 	public Integer getExpMonth();
@@ -28,4 +29,6 @@ public interface PaymentDetails {
 	public void setBankRouting(Integer bankRouting);
 	public Long getBankAccount();
 	public void setBankAccount(Long bankAccount);
+	public int getPaymentId();
+	public void setPaymentId(int paymentId);
 }
