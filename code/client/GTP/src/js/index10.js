@@ -40,12 +40,18 @@ Ext.setup({
 	      	
 	      	console.log('Number of vehicles= '+vehicle_details.length);
 	      	console.log('Number of toll payments= '+paidtoll_details.length);
+	      	
 	      	for(i=0;i<vehicle_details.length;i++)
 	      	{
+	      		if(vehicle_details[i].isActive){
+	      			Ext.getCmp('activecar').setValue(vehicle_details[i].registration);
+	      		}
 	      		carsList.insert(0,Ext.ModelMgr.create({
 					state: vehicle_details[i].State,
 					reg: vehicle_details[i].registration,
-					type: vehicle_details[i].type
+					type: vehicle_details[i].type,
+					startDate: new Date(vehicle_details[i].startDate),
+					endDate: new Date(vehicle_details[i].endDate)
 				},'Cars'));
 	      	}
 	      	console.log(pay_details.cardNumber);
@@ -464,14 +470,10 @@ Ext.setup({
 				items: [{
 					xtype: 'togglefield',
 					id: 'tfd',
-					value: 1,
+					animationDuration: 500,
+					//value: 0,
 					name: 'enable',
 					label: 'Enable',
-					handler: function() {
-						console.log("handler");
-						var cloc=Ext.getCmp('home');
-						cloc.curloc.value="Illinois";
-					},
 					listeners: {
 						el: {
 							click: function() {
@@ -482,9 +484,8 @@ Ext.setup({
 								var at=Ext.getCmp('avgtoll');
 								var pt=Ext.getCmp('pdtoll');
 								if(toggle.value==0) {
-									console.log(cl.getValue());
-									console.log(toggle.value);
-									cl.setValue("San Diego");
+									console.log('toggled');
+									cl.setValue(getLocation());
 									to.setValue(TollsData.getAt(0).get('tolloperator'));
 									at.setValue(TollsData.getAt(0).get('avgtoll'));
 									pt.setValue(TollsData.getAt(0).get('tollperday'));
@@ -540,12 +541,13 @@ Ext.setup({
 						xtype: 'selectfield',
 						name: 'activecar',
 						label: 'ActiveCar',
+						id: 'activecar',
 						options: [{
 							text: '4GPB522',
-							value: 'type1'
+							value: '4GPB522'
 						},{
 							text: '4G23VS2',
-							value: 'type2'
+							value: '4G23VS2'
 						}]
 					},{
 						xtype: 'selectfield',
@@ -778,8 +780,6 @@ Ext.setup({
 				listeners: {
 					maprender: function(comp, map) {
 						
-						var tempbool=true;
-						
 						geo.updateLocation();
 						
 						console.log('map is rendered');
@@ -799,6 +799,51 @@ Ext.setup({
 					centerchange: function(comp,map, center)
 					{
 						console.log('centerchange event is triggered');
+						var bounds = map.getBounds();
+						var southWest = bounds.getSouthWest();
+					  	var northEast = bounds.getNorthEast();
+					  	if(geo.latitude || geo.longitude)
+						{
+							Ext.Ajax.Request({
+								url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/Viewport',
+								params: {
+									json: Ext.encode({
+										latitude1: southWest.lat(),
+										longitude1: southWest.lng(),
+										latitude2: northEast.lat(),
+										longitude2: northEast.lng()
+									})
+								},
+								success: function(response){
+									var lomobj=Ext.decode(response.responseText);
+									var iconpath,markertitle;
+									
+									for(i=0; i<lomobj.length; i++)
+									{
+										if(lomobj[i].coverage)
+										{
+											iconpath='resources/images/covered.png';
+											markertitle='covered';
+										}
+										else
+										{
+											iconpath='resources/images/uncovered.png';
+											markertitle='uncovered';
+										}
+									
+										new google.maps.Marker({
+											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].lng),
+											title: markertitle,
+											icon: iconpath,
+											map: map
+										});
+									}
+								},
+								failure: function(response){
+									console.log('viewport request failed with status '+response.status);								
+								}
+							})
+						}
 						// --- 
 					}
 				}
