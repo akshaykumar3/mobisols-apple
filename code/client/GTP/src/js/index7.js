@@ -1,9 +1,10 @@
 Ext.setup({
-	icon: '../../resources/images/icon.png',
-	tabletStartupScreen: '../../resources/images/tablet_startup.png',
-	phoneStartupScreen: '../../resources/images/phone_startup.png',
+	icon: 'resources/images/icon.png',
+	tabletStartupScreen: 'resources/images/tablet_startup.png',
+	phoneStartupScreen: 'resources/images/phone_startup.png',
 	glossOnIcon: false,
 	onReady: function() {
+		
 		console.log('Page is setup ');
 		console.log(carsList.getAt(0).get('reg'));
 		console.log(TollsData.getAt(0).get('tolloperator'));
@@ -24,7 +25,7 @@ Ext.setup({
 		console.log(carsList.getAt(0).get('reg'));
 
 		Ext.Ajax.request({
-	      url: 'http://mbtest.dyndns.com:6001/webservices/services/AccountDetails',
+	      url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
 	      success: function(result) {
 	      	console.log('request is sent successfully');
 	      	
@@ -32,7 +33,6 @@ Ext.setup({
 	      	var res=Ext.decode(result.responseText);
 	      	
 	      	console.log(res);
-	      	
 	      	
 	      	var pay_details=res.response.paymentDetails;
 	      	var vehicle_details=res.response.vehicleDetails;
@@ -56,7 +56,7 @@ Ext.setup({
 	      	for(i=0;i<paidtoll_details.length;i++)
 	      	{
 		      	paidTolls.insert(0,Ext.ModelMgr.create({
-					date: paidtoll_details[i].timeStamp,
+					date: new Date(paidtoll_details[i].timeStamp),
 					amount: paidtoll_details[i].price,
 					location: paidtoll_details[i].tollDetails.tollOperator + paidtoll_details[i].tollDetails.city,
 					reg: paidtoll_details[i].registration
@@ -408,18 +408,19 @@ Ext.setup({
 			}]
 		});
 
-		var position = new google.maps.LatLng(37.49885,-122.198452);
-		var mylocation_marker;
+		var position = new google.maps.LatLng(17.341288,77.907719);
+		//37.49885,-122.198452
+		//var mylocation_marker, markernotset=true;
 		
 		infowindow = new google.maps.InfoWindow({
 			content: 'Palo Alto entry Toll, 1$</br> Click <a href="www.tollno1.com">here</a> to visit toll website'
 		});
 		
 		var imageMarker=new google.maps.MarkerImage(
-			'resources/images/covered.png',
-			new google.maps.Size(20,34),
+			'resources/images/blue_dot.jpg',
+			new google.maps.Size(21,23),
 			new google.maps.Point(0,0),
-			new google.maps.Point(16,31)
+			new google.maps.Point(21,23)
 		);
 
 		var curl,avgt,pt,tollop;
@@ -768,36 +769,35 @@ Ext.setup({
 				title: 'Map',
 				id: 'mappanel',
 				xtype: 'map',
-				useCurrentLocation: true,
 				mapOptions: {
-					zoom: 8
+					center: new google.maps.LatLng(37.44885,-122.158592),
+					zoom: 12
 				},
 				cls: 'card5',
 				iconCls: 'locate',
 				listeners: {
 					maprender: function(comp, map) {
 						
-						console.log('map is rendered');
-						console.log('map centered at lat: '+comp.geo.latitude+' long: '+comp.geo.longitude);
+						geo.updateLocation();
 						
-						mylocation_marker=new google.maps.Marker({
-							position: new google.maps.LatLng(37.79885,-122.199452),
-							title: 'U are here right now',
-							map: map
-						});
+						console.log('map is rendered');
+						console.log('map centered at lat: '+geo.latitude+' long: '+geo.longitude);
+						
 						var marker1= new google.maps.Marker({
 							position: position,
+							icon: 'resources/images/covered.png',
 							title: 'Toll Road 1, Price $1',
 							map: map
 						});
+						
 						google.maps.event.addListener(marker1, 'click', function() {
 							infowindow.open(map, marker1);
 						});
 					},
 					centerchange: function(comp,map, center)
 					{
-						geo.updateLocation();
-						mylocation_marker.setPosition(new google.maps.LatLng(comp.geo.latitude,comp.geo.longitude));
+						console.log('centerchange event is triggered');
+						// --- 
 					}
 				}
 			},{
@@ -812,6 +812,6 @@ Ext.setup({
 		});
 		
 		// triggering heart beat function here.. 
-		requestHeartBeat();
+		setTimeout("requestHeartBeat()",5000);
 	}
 });
