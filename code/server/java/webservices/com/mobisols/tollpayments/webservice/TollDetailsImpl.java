@@ -38,6 +38,7 @@ public class TollDetailsImpl {
 		this.setState(tl.get(0).getState());
 		this.setLatitude(tl.get(0).getLatitude());
 		this.setLongitude(tl.get(0).getLongitude());
+		this.setZip(tl.get(0).getZip());
 	}
 	public String getTollOperator() {
 		return tollOperator;

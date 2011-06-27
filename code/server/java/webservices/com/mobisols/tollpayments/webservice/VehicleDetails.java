@@ -2,6 +2,7 @@ package com.mobisols.tollpayments.webservice;
 
 import java.util.Date;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.QueryParam;
 
 
@@ -12,9 +13,12 @@ public interface VehicleDetails {
 	String isActive=null;
 	Date startDate=null;
 	Date endDate=null;
+	String ownerType=null;
+	int vehicleId=-1;
 	
-	public String postVehicleDetails(@QueryParam("json") String json,@QueryParam("username") String user);
-	public String deleteVechileDetails(@QueryParam("json") String json,@QueryParam("username") String user);
+	public String putVehicleDetails(String json,String user,int clientId,String isNewVehicle,int hasId);
+	public String postVehicleDetails(String json,String user,int clientId,String isNewVehicle,int hasId );
+	public String deleteVechileDetails( String json,String user,int clientId,int hasId);
 	public String getRegistration();
 	public void setRegistration(String registration);
 	public String getState();
@@ -27,4 +31,8 @@ public interface VehicleDetails {
 	public void setStartDate(Date startDate);
 	public Date getEndDate();
 	public void setEndDate(Date endDate);
+	public String getOwnerType();
+	public void setOwnerType(String ownerType);
+	public int getVehicleId();
+	public void setVehicleId(int vehicleId);
 }

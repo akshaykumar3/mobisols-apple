@@ -12,28 +12,23 @@ import javax.ws.rs.QueryParam;
 
 import org.hibernate.*;
 import org.hibernate.criterion.*;
-import org.hibernate.cfg.*;
-
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.User;
-import com.mobisols.tollpayments.hibernate.UserBalanceId;
-import com.mobisols.tollpayments.hibernate.UserDAO;
 import com.mobisols.tollpayments.hibernate.UserId;
-import com.mobisols.tollpayments.hibernate.UserVehicle;
 import com.mobisols.tollpayments.hibernate.UserVehicleId;
-import com.mobisols.tollpayments.hibernate.VehicleTollUsage;
 import com.mobisols.tollpayments.hibernate.VehicleTollUsageId;
 
 @Path("/AccountDetails")
 public class AccountDetailsImpl implements AccountDetails{
+	private String contactNo;
 	private PaymentDetails paymentDetails;
 	private List<VehicleDetails> vehicleDetails;
 	private List<TollPayments> tollPayments;
 	private BalanceInfo balanceInfo;
+	private int userId;
 	
 	@GET
 	@Produces("text/plain")
-	public String getAccountDetails(@QueryParam("username") String user,@QueryParam("clientid")int clientId){
+	public String getAccountDetails(@QueryParam("user_name") String user,@QueryParam("client_id")int clientId){
 		Session s= HibernateSessionFactory.getSession();
 		String request="";
 		String status="";
@@ -70,6 +65,7 @@ public class AccountDetailsImpl implements AccountDetails{
 			return;
 		}
 		UserId u=(UserId) userList.get(0);
+		this.setContactNo(u.getContactNo());
 		this.paymentDetails=new PaymentDetailsImpl(u.getUserId());
 		this.vehicleDetails=new LinkedList<VehicleDetails>();
 		crit=s.createCriteria(UserVehicleId.class);
@@ -93,7 +89,7 @@ public class AccountDetailsImpl implements AccountDetails{
 			}
 		}
 		this.balanceInfo=new BalanceInfoImpl(u.getUserId());
-		
+		this.setUserId(userList.get(0).getUserId());
 	}
 	
 	protected void finalize(){
@@ -123,5 +119,17 @@ public class AccountDetailsImpl implements AccountDetails{
 	}
 	public void setBalanceInfo(BalanceInfo balanceInfo) {
 		this.balanceInfo = balanceInfo;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public void setContactNo(String mobileNo) {
+		this.contactNo = mobileNo;
+	}
+	public String getContactNo() {
+		return contactNo;
 	}
 }

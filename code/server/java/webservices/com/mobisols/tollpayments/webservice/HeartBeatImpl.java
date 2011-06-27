@@ -24,7 +24,8 @@ public class HeartBeatImpl implements HeartBeat {
 	private Double latitude;
 	private Double longitude;
 	private Double angle;
-	
+	private String vmlType;
+	//TODO update vml type in post method
 	public HeartBeatImpl(){
 		
 	}

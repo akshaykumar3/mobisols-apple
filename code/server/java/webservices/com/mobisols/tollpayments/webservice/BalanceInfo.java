@@ -7,7 +7,7 @@ public interface BalanceInfo {
 	double currentBalance=(double) 0.0;
 	double minBalance=(double) 0.0;
 	List<BalanceLog> balancelog=null;
-	
+	int balanceId=0;
 	
 	public String getBalanceInfo(String user,int clientId);
 	public double getCurrentBalance();
@@ -16,4 +16,7 @@ public interface BalanceInfo {
 	public void setMinBalance(double minBalance);
 	public List<BalanceLog> getBalancelog();
 	public void setBalancelog(List<BalanceLog> balancelog);
+	public int getBalanceId();
+
+	public void setBalanceId(int balanceId);
 }
