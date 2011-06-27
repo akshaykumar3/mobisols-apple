@@ -1,9 +1,7 @@
-
+var mylocation_marker, markernotset=true,count=0;
 var gotNewLocation=true;
-var delay=5000;
 var ts1,ts2;
-
-		
+var retvalue;
 
 var geo = new Ext.util.GeoLocation({
 		    autoUpdate: false,
@@ -12,6 +10,22 @@ var geo = new Ext.util.GeoLocation({
 		        	console.log('Got new location');
 		            console.log('New latitude: ' + geo.latitude + 'New Longitude: ' + geo.longitude);
 		            gotNewLocation = true;
+		            if(markernotset && geo.latitude){
+						mylocation_marker=new google.maps.Marker({
+							position: new google.maps.LatLng(geo.latitude,geo.longitude),
+							title: 'U are here right now',
+							icon: 'resources/images/blue_dot.png',
+							map: Ext.getCmp('mappanel').map
+						});
+						markernotset=false;
+					}
+					else if(geo.latitude || geo.longitude){
+						mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+					}
+					Ext.getCmp('mappanel').update({
+						latitude: geo.latitude,
+						longitude: geo.longitude
+					});	
 		        },
 		        locationerror: function (   geo,
 		                                    bTimeout, 
@@ -32,7 +46,6 @@ var geo = new Ext.util.GeoLocation({
 		    }
 		});
 		
-geo.updateLocation();
 		
 /* --- this function is invoked once the page is rendered ----
  * 
@@ -53,21 +66,15 @@ function requestHeartBeat(){
 	 * -- if error occurs in finding geo location 
 	 * -- map remains in the same state as the geo values associated with geo object are not updated 
 	 */	
-	Ext.getCmp('mappanel').update({
-		latitude: geo.latitude,
-		longitude: geo.longitude
-	});
 	
-	var mapcmp=Ext.getCmp('mappanel');
-	//mapcmp.geo.update();
 	/*... if update succeeds send a request to server for next heart beat .....
 	 * ... else trigger the current function after some interval of time ....
 	 * .. Currently the delay i have taken is five seconds.. 
 	 */
 	
-	if(gotNewLocation)
+	if(gotNewLocation && (geo.latitude || geo.longitude))
 	{
-		mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+		
 		var request_jsobject= {
 			latitude: geo.latitude,
 			longitude: geo.longitude,
@@ -77,7 +84,7 @@ function requestHeartBeat(){
 		
 		// works only in same domain... 
 		Ext.Ajax.request({
-			url: 'http://mbtest.dyndns.dk:6001/webservices/services/HeartBeat',
+			url: 'http://localhost:6001/com.mobisols.tollpayments.webservices/services/HeartBeat',
 			params: { json: Ext.encode(request_jsobject)},
 			success: function(response){
 				console.log('got heartbeat');
@@ -98,14 +105,16 @@ function requestHeartBeat(){
 				setTimeout("requestHeartBeat()",10000);
 			}
 		});
-		delay=5000;
 	}
 	else
 	{
 		/*.... request for heart beat after some interval of time ....
 		 * -- the timeout can be cleared using the variable returned --- 
 		 */
-		var retvalue = setTimeout("requestHeartBeat()",delay);
-		delay=delay*2;
+		if(count < 10)
+		{
+			count++;
+			retvalue = setTimeout("requestHeartBeat()",10000);
+		}
 	}	
 }
