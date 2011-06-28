@@ -60,9 +60,8 @@ public class AccountDetailsImpl implements AccountDetails{
 			System.out.println("errror in creating session factory");
 		System.out.println("creating criteria");
 		Criteria crit=s.createCriteria(User.class);
-		crit.createAlias("id", "u");
-		crit.add(Restrictions.eq("u.user_name", user));
-		crit.add(Restrictions.eq("u.client_id", clientid));
+		crit.add(Restrictions.eq("user_name", user));
+		crit.add(Restrictions.eq("client_id", clientid));
 		System.out.println("got criteria");
 		List<User> userList=crit.list();
 		if(userList.isEmpty())
