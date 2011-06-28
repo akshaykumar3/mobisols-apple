@@ -285,8 +285,7 @@ Ext.setup({
 					},{
 						text: 'Wyoming',
 						value: 'WY'
-					}
-					]
+					}]
 				},{
 					xtype: 'textfield',
 					label: 'Reg',
