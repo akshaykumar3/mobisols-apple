@@ -14,25 +14,25 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.VehicleTypeId;
+import com.mobisols.tollpayments.hibernate.VehicleType;
 
 @Path("/VehicleTypeList")
 public class VehicleTypeListImpl implements VehicleTypeList {
-	private List<VehicleType> vehicleTypes;
+	private List<UserVehicleType> vehicleTypes;
 	public VehicleTypeListImpl(){
-		this.vehicleTypes = new LinkedList<VehicleType>();
+		this.vehicleTypes = new LinkedList<UserVehicleType>();
 	}
 	
 	@GET
-	public String getVehicleType(@QueryParam("clientid")int clientId) {
+	public String getVehicleType(@QueryParam("client_id")int clientId) {
 		Session s=HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(VehicleTypeId.class);
+		Criteria crit=s.createCriteria(VehicleType.class);
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<VehicleTypeId> vt=crit.list();
+		List<VehicleType> vt=crit.list();
 		VehicleTypeListImpl vti=new VehicleTypeListImpl();
 		for(Iterator it=  (Iterator) vt.iterator();it.hasNext();)
 		{
-			vti.getVehicleTypes().add(new VehicleTypeImpl(vt.get(it.next()).getVehicleTypeId()));
+			vti.getVehicleTypes().add(new UserVehicleTypeImpl(vt.get(it.next()).getId().getVehicleTypeId()));
 		}
 		String request="";
 		String status="";
@@ -42,11 +42,11 @@ public class VehicleTypeListImpl implements VehicleTypeList {
 		return res;
 	}
 	
-	public void setVehicleTypes(List<VehicleType> vehicleTypes) {
+	public void setVehicleTypes(List<UserVehicleType> vehicleTypes) {
 		this.vehicleTypes = vehicleTypes;
 	}
 	
-	public List<VehicleType> getVehicleTypes() {
+	public List<UserVehicleType> getVehicleTypes() {
 		return vehicleTypes;
 	}
 

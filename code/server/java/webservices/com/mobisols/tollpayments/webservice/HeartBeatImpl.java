@@ -13,9 +13,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.UserId;
-import com.mobisols.tollpayments.hibernate.UserVehicleId;
-import com.mobisols.tollpayments.hibernate.VehicleMovementLogId;
+import com.mobisols.tollpayments.hibernate.User;
+import com.mobisols.tollpayments.hibernate.UserVehicle;
+import com.mobisols.tollpayments.hibernate.VehicleMovementLog;
+import com.mobisols.tollpayments.hibernate.VmlType;
 import com.mobisols.tollpayments.myutils.MyUtils;
 
 @Path("/HeartBeat")
@@ -30,44 +31,50 @@ public class HeartBeatImpl implements HeartBeat {
 		
 	}
 	@POST
-	public String getHeartBeat(@FormParam("username")String user,@FormParam("json")String json) {
+	public String getHeartBeat(@FormParam("user_name")String user,@FormParam("json")String json,@FormParam("client_id")int clientId) {
 		JsonConverter j=new JsonConverterImpl();
 		HeartBeat hb=(HeartBeat) j.getObject(json, "com.mobisols.tollpayments.webservice.HeartBeatImpl");
 		HeartBeatResponseImpl hbr = new HeartBeatResponseImpl();
 		Session s= HibernateSessionFactory.getSession();
 		Transaction tx=s.beginTransaction();
-		VehicleMovementLogId vml=new VehicleMovementLogId();
-		Criteria crit=s.createCriteria(UserId.class);
+		VehicleMovementLog vml=new VehicleMovementLog();
+		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("user_name",user ));
 		crit.add(Restrictions.eq("client_id", 1));
-		List<UserId> u=crit.list();
+		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
-		crit=s.createCriteria(UserVehicleId.class);
-		crit.add(Restrictions.eq("user_id", u.get(0).getUserId()));
+		crit=s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("user_id", u.get(0).getId().getUserId()));
 		crit.add(Restrictions.eq("is_active", "1"));
-		List<UserVehicleId> uv=crit.list();
+		List<UserVehicle> uv=crit.list();
 		if(uv.isEmpty())
 			return null;
-		vml.setClientId(1);
-		vml.setCreatedOn(new MyUtils().getCurrentTimeStamp());
-		vml.setFlag1(null);
-		vml.setFlag2(null);
-		vml.setFlag3(null);
-		vml.setFlag4(null);
-		vml.setFlag5(null);
-		vml.setUdf1(null);
-		vml.setUdf2(null);
-		vml.setUdf3(null);
-		vml.setUdf4(null);
-		vml.setUdf5(null);
-		vml.setLastModifiedBy(-1);
-		vml.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
-		vml.setLatitude(hb.getLatitude());
-		vml.setLongitude(hb.getLongitude());
-		vml.setTimestamp(hb.getTimeStamp());
-		vml.setUvhId(uv.get(0).getUserVehicleId());
-		vml.setVmlTypeId(1);
+		vml.getId().setClientId(1);
+		vml.getId().setCreatedOn(new MyUtils().getCurrentTimeStamp());
+		vml.getId().setFlag1(null);
+		vml.getId().setFlag2(null);
+		vml.getId().setFlag3(null);
+		vml.getId().setFlag4(null);
+		vml.getId().setFlag5(null);
+		vml.getId().setUdf1(null);
+		vml.getId().setUdf2(null);
+		vml.getId().setUdf3(null);
+		vml.getId().setUdf4(null);
+		vml.getId().setUdf5(null);
+		vml.getId().setLastModifiedBy(-1);
+		vml.getId().setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
+		vml.getId().setLatitude(hb.getLatitude());
+		vml.getId().setLongitude(hb.getLongitude());
+		vml.getId().setTimestamp(hb.getTimeStamp());
+		vml.getId().setUvhId(uv.get(0).getId().getUserVehicleId());
+		crit=s.createCriteria(VmlType.class);
+		crit.add(Restrictions.eq("name", hb.getVmlType()));
+		crit.add(Restrictions.eq("client_id", clientId));
+		List<VmlType> vt=crit.list();
+		if(vt.isEmpty())
+			return null;
+		vml.getId().setVmlTypeId(vt.get(0).getId().getVmlTypeId());
 		s.save(vml);
 		tx.commit();
 		hbr.setStatus("success");
@@ -100,6 +107,12 @@ public class HeartBeatImpl implements HeartBeat {
 	}
 	public void setAngle(Double angle) {
 		this.angle = angle;
+	}
+	public void setVmlType(String vmlType) {
+		this.vmlType = vmlType;
+	}
+	public String getVmlType() {
+		return vmlType;
 	}
 	
 }

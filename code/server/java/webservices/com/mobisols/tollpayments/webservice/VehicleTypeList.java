@@ -3,9 +3,9 @@ package com.mobisols.tollpayments.webservice;
 import java.util.List;
 
 public interface VehicleTypeList {
-	List<VehicleType> vehicleTypes=null;
+	List<UserVehicleType> vehicleTypes=null;
 	
 	public String getVehicleType(int clientid);
-	public void setVehicleTypes(List<VehicleType> vehicleTypes);
-	public List<VehicleType> getVehicleTypes();
+	public void setVehicleTypes(List<UserVehicleType> vehicleTypes);
+	public List<UserVehicleType> getVehicleTypes();
 }

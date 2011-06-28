@@ -15,11 +15,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.UserBalanceId;
-import com.mobisols.tollpayments.hibernate.UserBalanceLogId;
+import com.mobisols.tollpayments.hibernate.User;
+import com.mobisols.tollpayments.hibernate.UserBalance;
+import com.mobisols.tollpayments.hibernate.UserBalanceLog;
 import com.mobisols.tollpayments.hibernate.UserDAO;
-import com.mobisols.tollpayments.hibernate.UserId;
-import com.mobisols.tollpayments.hibernate.UserTypeId;
+import com.mobisols.tollpayments.hibernate.User;
+import com.mobisols.tollpayments.hibernate.UserType;
 
 @Path("/BalanceInfo")
 public class BalanceInfoImpl implements BalanceInfo {
@@ -38,39 +39,39 @@ public class BalanceInfoImpl implements BalanceInfo {
 	public BalanceInfoImpl(Integer userId)
 	{
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserBalanceId.class);
+		Criteria crit=s.createCriteria(UserBalance.class);
 		crit.add(Restrictions.eq("user_id", userId));
-		List<UserBalanceId> ub=crit.list();
+		List<UserBalance> ub=crit.list();
 		if(ub.isEmpty())
 			return;
-		this.setCurrentBalance((ub.get(0).getBalance()));
-		this.setBalanceId(ub.get(0).getUbalId());
-		crit=s.createCriteria(UserTypeId.class);
-		List<UserId> u=new UserDAO().findByProperty("user_id", userId);
-		crit.add(Restrictions.eq("user_type_id",u.get(0).getUtypeId()));
-		List<UserTypeId> ut=crit.list();
-		this.setMinBalance(ut.get(0).getMinBalance());
+		this.setCurrentBalance((ub.get(0).getId().getBalance()));
+		this.setBalanceId(ub.get(0).getId().getUbalId());
+		crit=s.createCriteria(UserType.class);
+		List<User> u=new UserDAO().findByProperty("user_id", userId);
+		crit.add(Restrictions.eq("user_type_id",u.get(0).getId().getUtypeId()));
+		List<UserType> ut=crit.list();
+		this.setMinBalance(ut.get(0).getId().getMinBalance());
 		this.balancelog=new LinkedList<BalanceLog>();
-		crit=s.createCriteria(UserBalanceLogId.class);
-		crit.add(Restrictions.eq("ubal_id",ub.get(0).getUbalId()));
-		List<UserBalanceLogId> ubl=crit.list();
+		crit=s.createCriteria(UserBalanceLog.class);
+		crit.add(Restrictions.eq("ubal_id",ub.get(0).getId().getUbalId()));
+		List<UserBalanceLog> ubl=crit.list();
 		for(Iterator it=(Iterator) ubl.iterator();it.hasNext();){
-			this.balancelog.add(new BalanceLogImpl(ubl.get(it.next()).getUblogId()));
+			this.balancelog.add(new BalanceLogImpl(ubl.get(it.next()).getId().getUblogId()));
 		}
 	}
 	
 	@GET
 	@Produces("text/plain")
-	public String getBalanceInfo(@QueryParam("username") String user,@QueryParam("clientid")int clientId)
+	public String getBalanceInfo(@QueryParam("user_name") String user,@QueryParam("client_id")int clientId)
 	{
 		String request="";
 		String status="";
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserId.class);
+		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("user_name", user));
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<UserId> u=crit.list();
-		BalanceInfo ac=new BalanceInfoImpl(u.get(0).getUserId());
+		List<User> u=crit.list();
+		BalanceInfo ac=new BalanceInfoImpl(u.get(0).getId().getUserId());
 		JsonConverter json=new JsonConverterImpl();
 		String res = json.getJSON(request, status, ac);
 		HibernateSessionFactory.closeSession();
