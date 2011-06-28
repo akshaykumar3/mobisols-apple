@@ -7,7 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.UserBalanceLogId;
+import com.mobisols.tollpayments.hibernate.UserBalanceLog;
 
 public class BalanceLogImpl implements BalanceLog {
 	private Double delta;
@@ -19,13 +19,13 @@ public class BalanceLogImpl implements BalanceLog {
 	
 	public BalanceLogImpl(int logid) {	
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserBalanceLogId.class);
-		List<UserBalanceLogId> ubl=crit.list();
+		Criteria crit=s.createCriteria(UserBalanceLog.class);
+		List<UserBalanceLog> ubl=crit.list();
 		if(ubl.isEmpty())
 			return;
-		this.setDelta(ubl.get(0).getDelta());
-		this.setDescription(ubl.get(0).getAction());
-		this.setTimeStamp(ubl.get(0).getTimestamp());
+		this.setDelta(ubl.get(0).getId().getDelta());
+		this.setDescription(ubl.get(0).getId().getAction());
+		this.setTimeStamp(ubl.get(0).getId().getTimestamp());
 	}
 	public Double getDelta() {
 		return delta;

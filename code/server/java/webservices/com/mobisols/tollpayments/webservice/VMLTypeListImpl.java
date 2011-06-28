@@ -14,7 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.VmlTypeId;
+import com.mobisols.tollpayments.hibernate.VmlType;
 @Path("/VMLTypeList")
 public class VMLTypeListImpl implements VMLTypeList {
 	List<VMLType> vmltypes;
@@ -24,15 +24,15 @@ public class VMLTypeListImpl implements VMLTypeList {
 		this.vmltypes=new LinkedList<VMLType>();
 	}
 	@GET
-	public String getVMLTypeList(@QueryParam("clientid")int clientId) {
+	public String getVMLTypeList(@QueryParam("client_id")int clientId) {
 		Session s=HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(VmlTypeId.class);
+		Criteria crit=s.createCriteria(VmlType.class);
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<VmlTypeId> vmlt=crit.list();
+		List<VmlType> vmlt=crit.list();
 		VMLTypeListImpl vm=new VMLTypeListImpl();
 		for(Iterator it=  (Iterator) vmlt.iterator();it.hasNext();)
 		{
-			vm.getVmltypes().add(new VMLTypeImpl(vmlt.get(it.next()).getVmlTypeId()));
+			vm.getVmltypes().add(new VMLTypeImpl(vmlt.get(it.next()).getId().getVmlTypeId()));
 		}
 		String request="";
 		String status="";

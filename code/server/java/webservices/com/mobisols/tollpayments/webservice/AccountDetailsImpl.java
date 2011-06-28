@@ -13,8 +13,11 @@ import javax.ws.rs.QueryParam;
 import org.hibernate.*;
 import org.hibernate.criterion.*;
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.User;
 import com.mobisols.tollpayments.hibernate.UserId;
+import com.mobisols.tollpayments.hibernate.UserVehicle;
 import com.mobisols.tollpayments.hibernate.UserVehicleId;
+import com.mobisols.tollpayments.hibernate.VehicleTollUsage;
 import com.mobisols.tollpayments.hibernate.VehicleTollUsageId;
 
 @Path("/AccountDetails")
@@ -32,6 +35,7 @@ public class AccountDetailsImpl implements AccountDetails{
 		Session s= HibernateSessionFactory.getSession();
 		String request="";
 		String status="";
+		System.out.println(user+"  "+clientId);
 		System.out.println("creating account details object");
 		AccountDetails ac=new AccountDetailsImpl(user,clientId);
 		System.out.println("created account details object");
@@ -55,41 +59,43 @@ public class AccountDetailsImpl implements AccountDetails{
 		else
 			System.out.println("errror in creating session factory");
 		System.out.println("creating criteria");
-		Criteria crit=s.createCriteria(UserId.class);
-		crit.add(Restrictions.eq("user_name", user));
-		crit.add(Restrictions.eq("client_id", clientid));
+		Criteria crit=s.createCriteria(User.class);
+		crit.createAlias("id", "u");
+		crit.add(Restrictions.eq("u.user_name", user));
+		crit.add(Restrictions.eq("u.client_id", clientid));
 		System.out.println("got criteria");
-		List<UserId> userList=crit.list();
+		List<User> userList=crit.list();
 		if(userList.isEmpty())
 		{
+			System.out.println("user list is empty");
 			return;
 		}
-		UserId u=(UserId) userList.get(0);
+		UserId u=(UserId) userList.get(0).getId();
 		this.setContactNo(u.getContactNo());
 		this.paymentDetails=new PaymentDetailsImpl(u.getUserId());
 		this.vehicleDetails=new LinkedList<VehicleDetails>();
-		crit=s.createCriteria(UserVehicleId.class);
+		crit=s.createCriteria(UserVehicle.class);
 		crit.add(Restrictions.eq("user_id", u.getUserId()));
 		crit.add(Restrictions.eq("client_id", clientid));
-		List<UserVehicleId> vehicleList=crit.list();
+		List<UserVehicle> vehicleList=crit.list();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{
-			this.vehicleDetails.add(new VehicleDetailsImpl(vehicleList.get(it.next()).getUserVehicleId()));
+			this.vehicleDetails.add(new VehicleDetailsImpl(vehicleList.get(it.next()).getId().getUserVehicleId()));
 		}
 		
 		this.tollPayments=new LinkedList<TollPayments>();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{
-			Criteria c=s.createCriteria(VehicleTollUsageId.class);
-			c.add(Restrictions.eq("uvh_id", vehicleList.get(it.next()).getUserVehicleId()));
-			List<VehicleTollUsageId> vtuList=c.list();
+			Criteria c=s.createCriteria(VehicleTollUsage.class);
+			c.add(Restrictions.eq("uvh_id", vehicleList.get(it.next()).getId().getUserVehicleId()));
+			List<VehicleTollUsage> vtuList=c.list();
 			for(Iterator i=(Iterator) vtuList.iterator();i.hasNext();)
 			{
-				this.tollPayments.add(new TollPaymentsImpl(vtuList.get(i.next()).getVtuId()));
+				this.tollPayments.add(new TollPaymentsImpl(vtuList.get(i.next()).getId().getVtuId()));
 			}
 		}
 		this.balanceInfo=new BalanceInfoImpl(u.getUserId());
-		this.setUserId(userList.get(0).getUserId());
+		this.setUserId(userList.get(0).getId().getUserId());
 	}
 	
 	protected void finalize(){

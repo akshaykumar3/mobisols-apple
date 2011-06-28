@@ -18,10 +18,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.OwnerTypeId;
-import com.mobisols.tollpayments.hibernate.UserId;
-import com.mobisols.tollpayments.hibernate.UserVehicleId;
-import com.mobisols.tollpayments.hibernate.VehicleTypeId;
+import com.mobisols.tollpayments.hibernate.OwnerType;
+import com.mobisols.tollpayments.hibernate.User;
+import com.mobisols.tollpayments.hibernate.UserVehicle;
+import com.mobisols.tollpayments.hibernate.VehicleType;
 import com.mobisols.tollpayments.myutils.MyUtils;
 
 @Path("/VehicleDetails")
@@ -39,37 +39,31 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	
 	public VehicleDetailsImpl(int userVehicleId){
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserVehicleId.class);
+		Criteria crit=s.createCriteria(UserVehicle.class);
 		crit.add(Restrictions.eq("user_vehicle_id", userVehicleId));
-		List<UserVehicleId> uv=crit.list();
+		List<UserVehicle> uv=crit.list();
 		if(uv.isEmpty())
 			return;
-		this.setIsActive(uv.get(0).getIsActive());
-		this.setRegistration(uv.get(0).getRegistrationNo());
-		this.setState(uv.get(0).getRegisteredState());
-		crit=s.createCriteria(VehicleTypeId.class);
-		crit.add(Restrictions.eq("vehicle_type_id", uv.get(0).getVehicleTypeId()));
-		List<VehicleTypeId> vt=crit.list();
-		crit=s.createCriteria(OwnerTypeId.class);
-		crit.add(Restrictions.eq("owner_type_id", uv.get(0).getOwnerTypeId()));
-		List<OwnerTypeId> ot=crit.list();
-		this.setOwnerType(ot.get(0).getName());
-		this.setType(vt.get(0).getName());
-		this.setStartDate(uv.get(0).getVehicleStartDate());
-		this.setEndDate(uv.get(0).getVehicleEndDate());
-		this.setVehicleId(uv.get(0).getUserVehicleId());
+		this.setIsActive(uv.get(0).getId().getIsActive());
+		this.setRegistration(uv.get(0).getId().getRegistrationNo());
+		this.setState(uv.get(0).getId().getRegisteredState());
+		crit=s.createCriteria(VehicleType.class);
+		crit.add(Restrictions.eq("vehicle_type_id", uv.get(0).getId().getVehicleTypeId()));
+		List<VehicleType> vt=crit.list();
+		crit=s.createCriteria(OwnerType.class);
+		crit.add(Restrictions.eq("owner_type_id", uv.get(0).getId().getOwnerTypeId()));
+		List<OwnerType> ot=crit.list();
+		this.setOwnerType(ot.get(0).getId().getName());
+		this.setType(vt.get(0).getId().getName());
+		this.setStartDate(uv.get(0).getId().getVehicleStartDate());
+		this.setEndDate(uv.get(0).getId().getVehicleEndDate());
+		this.setVehicleId(uv.get(0).getId().getUserVehicleId());
 	}
 	
-	public GeneralResponse putvehicleDetails(VehicleDetails vd,int client_id,int vehicleId,int userId)
-	{
-		Session s=HibernateSessionFactory.getSession();
-		Transaction tx=s.beginTransaction();
-		return null;
-	}
 	
 	@PUT
-	public String putVehicleDetails(@FormParam("json") String json,@FormParam("username") String user,
-			@FormParam("clientid")int clientId,@FormParam("isNewVehicle")String isNewVehicle,
+	public String putVehicleDetails(@FormParam("json") String json,@FormParam("user_name") String user,
+			@FormParam("client_id")int clientId,@FormParam("is_new_vehicle")String isNewVehicle,
 			@FormParam("has_id")int hasId)
 	{
 		if(isNewVehicle=="false")
@@ -77,43 +71,42 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		JsonConverter c=new JsonConverterImpl();
 		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
 		Session s=HibernateSessionFactory.getSession();
-		GeneralResponse response;
-		Criteria crit=s.createCriteria(UserId.class);
+		Transaction tx=s.beginTransaction();
+		GeneralResponse response=new GeneralResponseImpl();
+		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("user_name", user));
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<UserId> u=crit.list();
+		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
-		if(hasId==1)
-		{
-			response = putvehicleDetails(vd, clientId, clientId, u.get(0).getUserId());
-		}
-		UserVehicleId vehicle=new UserVehicleId();
-		vehicle.setClientId(clientId);
-		vehicle.setUserId(u.get(0).getUserId());
-		vehicle.setClientId(clientId);
-		vehicle.setCreatedOn(new MyUtils().getCurrentTimeStamp());
-		vehicle.setIsActive(vd.getIsActive());
-		vehicle.setLastModifiedBy(u.get(0).getUserId());
-		vehicle.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
-		crit=s.createCriteria(OwnerTypeId.class);
+		UserVehicle vehicle=new UserVehicle();
+		vehicle.getId().setClientId(clientId);
+		vehicle.getId().setUserId(u.get(0).getId().getUserId());
+		vehicle.getId().setClientId(clientId);
+		vehicle.getId().setCreatedOn(new MyUtils().getCurrentTimeStamp());
+		vehicle.getId().setIsActive(vd.getIsActive());
+		vehicle.getId().setLastModifiedBy(u.get(0).getId().getUserId());
+		vehicle.getId().setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
+		crit=s.createCriteria(OwnerType.class);
 		crit.add(Restrictions.eq("name",vd.getOwnerType()));
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<OwnerTypeId> ot=crit.list();
+		List<OwnerType> ot=crit.list();
 		if(ot.isEmpty())
 			return null;
-		vehicle.setOwnerTypeId(ot.get(0).getOwnerTypeId());
-		vehicle.setRegisteredState(vd.getState());
-		vehicle.setRegistrationNo(vd.getRegistration());
-		vehicle.setVehicleEndDate(new Timestamp(vd.getEndDate().getTime()));
-		vehicle.setVehicleStartDate(new Timestamp(vd.getStartDate().getTime()));
-		crit=s.createCriteria(VehicleTypeId.class);
+		vehicle.getId().setOwnerTypeId(ot.get(0).getId().getOwnerTypeId());
+		vehicle.getId().setRegisteredState(vd.getState());
+		vehicle.getId().setRegistrationNo(vd.getRegistration());
+		vehicle.getId().setVehicleEndDate(new Timestamp(vd.getEndDate().getTime()));
+		vehicle.getId().setVehicleStartDate(new Timestamp(vd.getStartDate().getTime()));
+		crit=s.createCriteria(VehicleType.class);
 		crit.add(Restrictions.eq("name",vd.getType()));
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<VehicleTypeId> vt=crit.list();
+		List<VehicleType> vt=crit.list();
 		if(vt.isEmpty())
 			return null;
-		vehicle.setVehicleTypeId(vt.get(0).getVehicleTypeId());
+		vehicle.getId().setVehicleTypeId(vt.get(0).getId().getVehicleTypeId());
+		s.save(vehicle);
+		tx.commit();
 		((GeneralResponseImpl) response).setDescription("your vehicles details have been updated successfully");
 		String status="";
 		String request="";
@@ -123,39 +116,39 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	}
 	@POST
 	public String postVehicleDetails(@FormParam("json") String json,@FormParam("username") String user,
-			@FormParam("clientid")int clientId,@FormParam("isNewVehicle")String isNewVehicle,@FormParam("has_id")int hasId){
+			@FormParam("clientid")int clientId,@FormParam("is_new_vehicle")String isNewVehicle,@FormParam("has_id")int hasId){
 		if(isNewVehicle=="true")
 			return putVehicleDetails(json, user, clientId, isNewVehicle,hasId);
 		JsonConverter c=new JsonConverterImpl();
 		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
 		Session s=HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserId.class);
+		Criteria crit=s.createCriteria(User.class);
 		Transaction tx=s.beginTransaction();
 		crit.add(Restrictions.eq("user_name", user));
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<UserId> u=crit.list();
+		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
-		crit=s.createCriteria(UserVehicleId.class);
-		crit.add(Restrictions.eq("user_id", u.get(0).getUserId()));
+		crit=s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("user_id", u.get(0).getId().getUserId()));
 		crit.add(Restrictions.eq("registration_no", vd.getRegistration()));
 		crit.add(Restrictions.eq("state", vd.getState()));
-		List<UserVehicleId> uv=crit.list();
+		List<UserVehicle> uv=crit.list();
 		if(uv.isEmpty())
 			return null;
-		UserVehicleId vehicle=(UserVehicleId) s.get(UserVehicleId.class, uv.get(0).getUserVehicleId());
-		vehicle.setIsActive(vd.getIsActive());
-		vehicle.setVehicleStartDate(new Timestamp(vd.getStartDate().getTime()));
-		vehicle.setVehicleEndDate(new Timestamp(vd.getEndDate().getTime()));
-		crit=s.createCriteria(OwnerTypeId.class);
+		UserVehicle vehicle=(UserVehicle) s.get(UserVehicle.class, uv.get(0).getId().getUserVehicleId());
+		vehicle.getId().setIsActive(vd.getIsActive());
+		vehicle.getId().setVehicleStartDate(new Timestamp(vd.getStartDate().getTime()));
+		vehicle.getId().setVehicleEndDate(new Timestamp(vd.getEndDate().getTime()));
+		crit=s.createCriteria(OwnerType.class);
 		crit.add(Restrictions.eq("name",vd.getOwnerType()));
 		crit.add(Restrictions.eq("client_id", clientId));
-		List<OwnerTypeId> ot=crit.list();
+		List<OwnerType> ot=crit.list();
 		if(ot.isEmpty())
 			return null;
-		vehicle.setOwnerTypeId(ot.get(0).getOwnerTypeId());
-		vehicle.setLastModifiedBy(u.get(0).getUserId());
-		vehicle.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
+		vehicle.getId().setOwnerTypeId(ot.get(0).getId().getOwnerTypeId());
+		vehicle.getId().setLastModifiedBy(u.get(0).getId().getUserId());
+		vehicle.getId().setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
 		GeneralResponse response =new GeneralResponseImpl();
 		s.save(vehicle);
 		tx.commit();
@@ -168,27 +161,27 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	}
 	
 	@DELETE
-	public String deleteVechileDetails(@QueryParam("json") String json,@QueryParam("username") String user
-			,@FormParam("clientid")int clientId,@FormParam("has_id")int hasId){
+	public String deleteVechileDetails(@FormParam("json") String json,@FormParam("user_name") String user
+			,@FormParam("client_id")int clientId,@FormParam("has_id")int hasId){
 		JsonConverter c=new JsonConverterImpl();
 		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
 		GeneralResponse response =new GeneralResponseImpl();
 		
 		Session s=HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserId.class);
+		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("user_name", user));
 		crit.add(Restrictions.eq("client_id",clientId));
-		List<UserId> u=crit.list();
+		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
-		crit=s.createCriteria(UserVehicleId.class);
-		crit.add(Restrictions.eq("user_id", u.get(0).getUserId()));
+		crit=s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("user_id", u.get(0).getId().getUserId()));
 		crit.add(Restrictions.eq("resgistration_no",vd.getRegistration()));
 		crit.add(Restrictions.eq("registered_state", vd.getState()));
-		List<UserVehicleId> uv=crit.list();
+		List<UserVehicle> uv=crit.list();
 		if(uv.isEmpty())
 			return null;
-		String hql="delete from UserVehicleId user_vehicle where user_vehicle_id="+uv.get(0).getUserVehicleId();
+		String hql="delete from UserVehicle user_vehicle where user_vehicle_id="+uv.get(0).getId().getUserVehicleId();
 		Query q=s.createQuery(hql);
 		int row=q.executeUpdate();
 		if(row==0)
