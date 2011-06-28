@@ -1,9 +1,8 @@
 package com.mobisols.tollpayments.webservice;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import javassist.bytecode.Descriptor.Iterator;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -56,7 +55,7 @@ public class BalanceInfoImpl implements BalanceInfo {
 		crit.add(Restrictions.eq("ubal_id",ub.get(0).getId().getUbalId()));
 		List<UserBalanceLog> ubl=crit.list();
 		for(Iterator it=(Iterator) ubl.iterator();it.hasNext();){
-			this.balancelog.add(new BalanceLogImpl(ubl.get(it.next()).getId().getUblogId()));
+			this.balancelog.add(new BalanceLogImpl(((UserBalanceLog)it.next()).getId().getUblogId()));
 		}
 	}
 	
