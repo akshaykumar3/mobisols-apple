@@ -6,15 +6,23 @@ Ext.setup({
 	onReady: function() {
 		
 		console.log('Page is setup ');
-		console.log(carsList.getAt(0).get('reg'));
-		console.log(TollsData.getAt(0).get('tolloperator'));
-		console.log(tolldetails.getAt(1).get('latitude'));
-
+		
 		var car_model_instance= Ext.ModelMgr.create({
 			state: 'RF',
 			reg: 'S23WP',
 			type: 'truck'
 		},'Cars');
+		
+		paidTolls.insert(0,Ext.ModelMgr.create({
+			date: '1/11/2010',
+			amount: 2,
+			location: 'newyork' ,
+			reg: '4GBSV'
+		},'PaidTolls'));
+
+		console.log(carsList.getAt(0).get('reg'));
+		console.log(TollsData.getAt(0).get('tolloperator'));
+		console.log(tolldetails.getAt(1).get('latitude'));
 
 		console.log(carsList.getAt(0).get('reg'));
 		console.log('count is '+carsList.getCount());
@@ -54,6 +62,13 @@ Ext.setup({
 					endDate: new Date(vehicle_details[i].endDate)
 				},'Cars'));
 	      	}
+	      	
+	      	Ext.getCmp('ccnumber').setValue(pay_details.cardNumber);
+	      	Ext.getCmp('cardtype').setValue(pay_details.cardType);
+	      	Ext.getCmp('expirydate').setValue(Date.parseDate(pay_details.expDate,'M j, Y g:i:s A'),true);
+	      	Ext.getCmp('bankaccount').setValue(pay_details.bankAccount);
+	      	console.log('expiry date '+Date.parseDate(pay_details.expDate,'M j, Y g:i:s A').format('Y-m-d'));
+	      	
 	      	console.log(pay_details.cardNumber);
 	      	console.log(pay_details.expDate);
 	      	console.log(pay_details.cardType);
@@ -61,13 +76,20 @@ Ext.setup({
 	      	
 	      	for(i=0;i<paidtoll_details.length;i++)
 	      	{
+	      		//12-6-2011 21:16:12
+	      		console.log(Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'));
 		      	paidTolls.insert(0,Ext.ModelMgr.create({
-					date: paidtoll_details[i].timeStamp,
+					date: Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'),
 					amount: paidtoll_details[i].price,
 					location: paidtoll_details[i].tollDetails.tollOperator + paidtoll_details[i].tollDetails.city,
 					reg: paidtoll_details[i].registration
 				}),'PaidTolls');
 			}
+			console.log(paidTolls.getAt(0).get('date'));
+			console.log(paidTolls.getAt(0).get('amount'));
+	      	console.log(paidTolls.getAt(0).get('location'));
+	      	console.log(paidTolls.getAt(0).get('reg'));
+	      
 	      },
 	      failure: function(result) {
 	     	console.log('failure with status code'+result.status); 	
@@ -110,7 +132,26 @@ Ext.setup({
 								reg: Ext.getCmp('rg').getValue(),
 								type: Ext.getCmp('tp').getValue()
 							},'Cars'));
-							console.log(carsList.getCount());
+							console.log('new car added, count is now '+carsList.getCount());
+							Ext.Ajax.request({
+								url: 'localhost:6004/webservices/services/AddCar',
+								method: 'POST',
+								params: {
+									json: Ext.encode({
+										state: Ext.getCmp('st').getValue(),
+										reg: Ext.getCmp('rg').getValue(),
+										type: Ext.getCmp('tp').getValue(),
+										startDate: new Date(),
+										endDate: ''
+									})
+								},
+								success: function(response){
+									
+								},
+								failure: function(response){
+									
+								}
+							});
 							tabpanel.setActiveItem('mycars');
 						}
 					}
@@ -485,11 +526,43 @@ Ext.setup({
 								var pt=Ext.getCmp('pdtoll');
 								if(toggle.value==0) {
 									console.log('toggled');
-									cl.setValue(getLocation());
-									to.setValue(TollsData.getAt(0).get('tolloperator'));
-									at.setValue(TollsData.getAt(0).get('avgtoll'));
-									pt.setValue(TollsData.getAt(0).get('tollperday'));
 									toggle.value=1;
+									var clat,clong;
+									if(geo.latitude || geo.longitude){
+										clat=geo.latitude;
+										clong=geo.longitude;
+									}
+									else{
+										clat=37.1345;
+										clong=-130.121;
+									}
+									Ext.Ajax.request({
+										url: 'localhost:6004/webservices/services/GetLocation',
+										params: {
+											json: Ext.encode({
+												latitude: clat,
+												longitude: clong
+											})
+										},
+										success: function(response){
+											console.log(response.responseText);
+											var resobj=Ext.decode(response.responseText);
+											console.log(resobj);
+											cl.setValue(resobj.response.city + resobj.response.state);
+											to.setValue(resobj.response.tolloperator);
+											at.setValue(resobj.response.avgtoll);
+											pt.setValue(resobj.response.price);
+										},
+										failure: function(response){
+											console.log('failure with status'+response.status);
+											cl.setValue('San Diego');
+											to.setValue(TollsData.getAt(0).get('tolloperator'));
+											at.setValue(TollsData.getAt(0).get('avgtoll'));
+											pt.setValue(TollsData.getAt(0).get('tollperday'));
+										}
+									})
+									cl.setValue(getLocation());
+									
 								} else {
 									console.log(toggle.value);
 									cl.setValue("");
@@ -639,11 +712,10 @@ Ext.setup({
 					fullscreen: true,
 					scroll: 'vertical',
 					store: paidTolls,
-					itemTpl: '<div class="contact">{amount} on <strong>{date}</strong> @ {location} - {reg}</div>'
+					itemTpl: '<div class="contact">{amount}$ on <strong>{date}</strong> @ {location} - {reg}</div>'
 				}]
 			},{
 				title: 'Settings',
-				scroll: 'vertical',
 				xtype: 'form',
 				id: 'basicform',
 				scroll: 'vertical',
@@ -659,20 +731,10 @@ Ext.setup({
 					},
 					items: [{
 						xtype: 'textfield',
-						name: 'name',
-						label: 'Name',
-						placeHolder: 'Tom Roy',
-						autoCapitalize : true,
-						required: true,
-						useClearIcon: true
-					},{
-						xtype: 'textfield',
 						name: 'userid',
 						label: 'UserID',
 						placeHolder: 'userID',
 						autoCapitalize : false,
-						required: true,
-						useClearIcon: true
 					},{
 						xtype: 'passwordfield',
 						name: 'password',
@@ -688,31 +750,14 @@ Ext.setup({
 						labelWidth: '35%'
 					},
 					items: [{
-						xtype: 'emailfield',
-						name: 'email',
-						label: 'Email',
-						placeHolder: 'me@sencha.com',
-						useClearIcon: true
-					},{
-						xtype: 'checkboxfield',
-						name: 'autopay',
-						label: 'Auto-pay'
-					},{
 						xtype: 'textfield',
-						name: 'ccnumber',
+						id: 'ccnumber',
 						label: 'Credit card#',
 						placeHolder: 'XXXX-XXXX-XXXX-XXXX',
 						useClearIcon: true
 					},{
-						xtype: 'datepickerfield',
-						name: 'expirydate',
-						label: 'Expiry date',
-						picker: {
-							yearFrom: 2011
-						}
-					},{
 						xtype: 'selectfield',
-						name: 'cardtype',
+						id: 'cardtype',
 						label: 'Credit card type',
 						options: [{
 							text: 'Visa',
@@ -728,49 +773,57 @@ Ext.setup({
 							value: 'discover'
 						}]
 					},{
+						xtype: 'datepickerfield',
+						id: 'expirydate',
+						label: 'Expiry date',
+						picker: {
+							yearFrom: 2011
+						}
+					},{
+						xtype: 'textfield',
+						id: 'bankaccount',
+						label: 'A/c No',
+						useClearIcon: true
+					},{
+						xtype: 'checkboxfield',
+						id: 'autopay',
+						label: 'Auto-pay'
+					},{
 						xtype: 'hiddenfield',
 						name: 'secret',
 						value: false
-					},{
-						xtype: 'textareafield',
-						name: 'billingadd',
-						label: 'Billing address'
 					}]
 				},{
-					layout: 'vbox',
-					defaults: {
-						xtype: 'button',
-						flex: 1,
-						style: 'margin: .5em;'
-					},
+					xtype: 'fieldset',
+					title: 'Billing Details',
+					instructions: 'Please provide billing details',
 					items: [{
-						text: 'Disable fields',
-						scope: this,
-						hasDisabled: false,
-						handler: function(btn) {
-							var form = Ext.getCmp('basicform');
-
-							if (btn.hasDisabled) {
-								form.enable();
-								btn.hasDisabled = false;
-								btn.setText('Disable fields');
-							} else {
-								form.disable();
-								btn.hasDisabled = true;
-								btn.setText('Enable fields');
-							}
-						}
+						xtype: 'textfield',
+						label: 'Name',
+						id: 'billname',
+						useClearIcon: true
 					},{
-						text: 'Reset form',
-						handler: function() {
-							Ext.getCmp('basicform').reset();
-						}
+						xtype: 'textfield',
+						label: 'Address',
+						id: 'addr1',
+						useClearIcon: true
+					},{
+						xtype: 'textfield',
+						label: 'City',
+						id: 'billcity',
+						useClearIcon: true
+					},{
+						xtype: 'textfield',
+						label: 'State',
+						id: 'billstate',
+						useClearIcon: true
 					}]
 				}]
 			},{
 				title: 'Map',
 				id: 'mappanel',
 				xtype: 'map',
+				useCurrentLocation: true,
 				mapOptions: {
 					center: new google.maps.LatLng(37.44885,-122.158592),
 					zoom: 12

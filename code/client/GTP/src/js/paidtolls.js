@@ -20,7 +20,7 @@ var paidTolls = new Ext.data.Store({
 		return record.get('date');
 	},
 	data: [{
-		date:'2011-01-01',
+		date: '2011-01-01',
 		amount:'$2.50',
 		location:'I-15N, Escondido',
 		reg: '4GPB522'

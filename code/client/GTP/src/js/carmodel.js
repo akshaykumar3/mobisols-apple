@@ -27,6 +27,7 @@ var carsList = new Ext.data.Store({
 		reg: '4GPB522',
 		state: 'CA',
 		type: 'Sedan',
-		startDate: new Date('12/7/2010')
+		startDate: new Date('12/7/2010'),
+		endDate: new Date('12/12/2010')
 	}]
 });

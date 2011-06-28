@@ -21,11 +21,6 @@ Ext.setup({
 			},
 			failure: function(response) {
   				console.log('Failure with status code ' + response.status);
-			},
-			callback: function(response){
-				console.log(response.responseText);
-				var obj=Ext.decode(response.responseText);
-				console.log(obj);
 			}
 		});
 		

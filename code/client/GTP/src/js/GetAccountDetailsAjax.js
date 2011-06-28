@@ -4,7 +4,7 @@ Ext.setup({
 		//Ext.lib.Ajax.useDefaultXhrHeader = false;
 		Ext.Ajax.defaultHeaders = {
 		    'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Origin': 'http://localhost:6001'
+			'Access-Control-Allow-Origin': 'http://mbtest.dyndns.com:6001'
 		};
 
 		Ext.Ajax.request({
@@ -14,9 +14,10 @@ Ext.setup({
 	      		console.log(response.responseText);
 	      		var obj=Ext.decode(response.responseText);
 	      		console.log(obj);
+	      		console.log('size is '+obj.response.tollPayments.length);
 	    	},
 	      	failure: function(response) {
-  				console.log('server-side failure with status code ' + response.status);
+  				console.log('failure with status code ' + response.status);
 			}
 	   	});
 	   	 	
