@@ -24,7 +24,7 @@ public class AddBalanceImpl implements AddBalance {
 	private String description;
 	private int balanceId;
 	
-	public GeneralResponse addBalance(AddBalance ad,int clientId,int balanceId,int userId)
+	public GeneralResponse addBalance(AddBalance ad,int balanceId,int userId)
 	{
 		GeneralResponse response=new GeneralResponseImpl();
 		Session s= HibernateSessionFactory.getSession();
@@ -41,8 +41,7 @@ public class AddBalanceImpl implements AddBalance {
 	
 	@POST
 	@Produces("text/plain")
-	public String addBalance(@FormParam("user_name") String user,@FormParam("json")String json,
-			@FormParam("client_id")int clientId,@FormParam("has_id")int hasId) {
+	public String addBalance(@FormParam("user_name") String user,@FormParam("json")String json,@FormParam("has_id")int hasId) {
 		JsonConverter c=new JsonConverterImpl();
 		AddBalance ad=new AddBalanceImpl();
 		System.out.println(json);
@@ -52,21 +51,20 @@ public class AddBalanceImpl implements AddBalance {
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId",clientId));
 		List<User> u=crit.list();
 		if(u.isEmpty())
 			return "";
 		
 		if(hasId==1)
 		{
-			response = addBalance(ad, clientId, ad.getbalanceId(),u.get(0).getUserId());
+			response = addBalance(ad, ad.getbalanceId(),u.get(0).getUserId());
 		}
 		crit=s.createCriteria(UserBalance.class);
 		crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
 		List<UserBalance> ubList = crit.list();
 		if(ubList.isEmpty())
 			return "";
-		response=addBalance(ad, clientId, ubList.get(0).getUbalId(),u.get(0).getUserId());
+		response=addBalance(ad, ubList.get(0).getUbalId(),u.get(0).getUserId());
 		String status="";
 		String request="";
 		String res= c.getJSON(request, status, response);

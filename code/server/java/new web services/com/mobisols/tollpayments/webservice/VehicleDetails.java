@@ -16,9 +16,9 @@ public interface VehicleDetails {
 	String ownerType=null;
 	int vehicleId=-1;
 	
-	public String putVehicleDetails(String json,String user,int clientId,String isNewVehicle,int hasId);
-	public String postVehicleDetails(String json,String user,int clientId,String isNewVehicle,int hasId );
-	public String deleteVechileDetails( String json,String user,int clientId,int hasId);
+	public String putVehicleDetails(String json,String user,String isNewVehicle,int hasId);
+	public String postVehicleDetails(String json,String user,String isNewVehicle,int hasId );
+	public String deleteVechileDetails( String json,String user,int hasId);
 	public String getRegistration();
 	public void setRegistration(String registration);
 	public String getState();

@@ -27,13 +27,12 @@ public class AccountDetailsImpl implements AccountDetails{
 	
 	@GET
 	@Produces("text/plain")
-	public String getAccountDetails(@QueryParam("user_name") String user,@QueryParam("client_id")int clientId){
+	public String getAccountDetails(@QueryParam("user_name") String user){
 		HibernateSessionFactory.getSession();
 		String request="";
 		String status="";
-		System.out.println(user+"  "+clientId);
 		System.out.println("creating account details object");
-		AccountDetails ac=new AccountDetailsImpl(user,clientId);
+		AccountDetails ac=new AccountDetailsImpl(user);
 		System.out.println("created account details object");
 		JsonConverter json=new JsonConverterImpl();
 		String response = json.getJSON(request, status, ac);
@@ -43,13 +42,10 @@ public class AccountDetailsImpl implements AccountDetails{
 	}
 	public AccountDetailsImpl() {
 	}
-	
-	public static AccountDetails getInstance(String user,int clientid){
-		return null;
-	}
-	public AccountDetailsImpl(String user,int clientid) {
+	public AccountDetailsImpl(String user) {
 		System.out.println("getting session factory");
 		Session s= HibernateSessionFactory.getSession();
+		
 		if(s!=null)
 		System.out.println("got Session factory");
 		else
@@ -65,7 +61,6 @@ public class AccountDetailsImpl implements AccountDetails{
 		Criteria crit=s.createCriteria(User.class);
 		//crit.createAlias("id", "u");
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId", clientid));
 		System.out.println("got criteria");
 		List userList=crit.list();
 		if(userList.isEmpty())
@@ -79,7 +74,6 @@ public class AccountDetailsImpl implements AccountDetails{
 		this.vehicleDetails=new LinkedList<VehicleDetails>();
 		crit=s.createCriteria(UserVehicle.class);
 		crit.add(Restrictions.eq("userId", u.getUserId()));
-		crit.add(Restrictions.eq("clientId", clientid));
 		List<UserVehicle> vehicleList=crit.list();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{

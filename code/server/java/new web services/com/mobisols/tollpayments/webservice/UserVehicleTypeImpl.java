@@ -15,11 +15,16 @@ public class UserVehicleTypeImpl implements UserVehicleType {
 
 	public UserVehicleTypeImpl(Integer vehicleTypeId) {
 		Session s=HibernateSessionFactory.getSession();
+		System.out.println(vehicleTypeId);
 		Criteria crit=s.createCriteria(VehicleType.class);
 		crit.add(Restrictions.eq("vehicleTypeId", vehicleTypeId));
 		List<VehicleType> vt=crit.list();
 		if(vt.isEmpty())
+		{
+			System.out.println("List is empty");
 			return;
+		}
+		System.out.println("list is not empty");
 		this.setDescription(vt.get(0).getDescription());
 		this.setName(vt.get(0).getName());
 	}

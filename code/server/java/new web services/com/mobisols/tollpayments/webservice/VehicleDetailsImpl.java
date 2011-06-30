@@ -63,11 +63,11 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	
 	@PUT
 	public String putVehicleDetails(@FormParam("json") String json,@FormParam("user_name") String user,
-			@FormParam("client_id")int clientId,@FormParam("is_new_vehicle")String isNewVehicle,
+			@FormParam("is_new_vehicle")String isNewVehicle,
 			@FormParam("has_id")int hasId)
 	{
 		if(isNewVehicle=="false")
-			return postVehicleDetails(json, user, clientId, isNewVehicle,hasId);
+			return postVehicleDetails(json, user, isNewVehicle,hasId);
 		JsonConverter c=new JsonConverterImpl();
 		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
 		Session s=HibernateSessionFactory.getSession();
@@ -75,21 +75,19 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		GeneralResponse response=new GeneralResponseImpl();
 		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
 		UserVehicle vehicle=new UserVehicle();
-		vehicle.setClientId(clientId);
+		//TODO
+		vehicle.setClientId(1);
 		vehicle.setUserId(u.get(0).getUserId());
-		vehicle.setClientId(clientId);
 		vehicle.setCreatedOn(new MyUtils().getCurrentTimeStamp());
 		vehicle.setIsActive(vd.getIsActive());
 		vehicle.setLastModifiedBy(u.get(0).getUserId());
 		vehicle.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
 		crit=s.createCriteria(OwnerType.class);
 		crit.add(Restrictions.eq("name",vd.getOwnerType()));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<OwnerType> ot=crit.list();
 		if(ot.isEmpty())
 			return null;
@@ -100,7 +98,6 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		vehicle.setVehicleStartDate(new Timestamp(vd.getStartDate().getTime()));
 		crit=s.createCriteria(VehicleType.class);
 		crit.add(Restrictions.eq("name",vd.getType()));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<VehicleType> vt=crit.list();
 		if(vt.isEmpty())
 			return null;
@@ -116,16 +113,15 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	}
 	@POST
 	public String postVehicleDetails(@FormParam("json") String json,@FormParam("username") String user,
-			@FormParam("clientid")int clientId,@FormParam("is_new_vehicle")String isNewVehicle,@FormParam("has_id")int hasId){
+			@FormParam("is_new_vehicle")String isNewVehicle,@FormParam("has_id")int hasId){
 		if(isNewVehicle=="true")
-			return putVehicleDetails(json, user, clientId, isNewVehicle,hasId);
+			return putVehicleDetails(json, user, isNewVehicle,hasId);
 		JsonConverter c=new JsonConverterImpl();
 		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(User.class);
 		Transaction tx=s.beginTransaction();
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
@@ -142,7 +138,6 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		vehicle.setVehicleEndDate(new Timestamp(vd.getEndDate().getTime()));
 		crit=s.createCriteria(OwnerType.class);
 		crit.add(Restrictions.eq("name",vd.getOwnerType()));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<OwnerType> ot=crit.list();
 		if(ot.isEmpty())
 			return null;
@@ -162,7 +157,7 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	
 	@DELETE
 	public String deleteVechileDetails(@FormParam("json") String json,@FormParam("user_name") String user
-			,@FormParam("client_id")int clientId,@FormParam("has_id")int hasId){
+			,@FormParam("has_id")int hasId){
 		JsonConverter c=new JsonConverterImpl();
 		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
 		GeneralResponse response =new GeneralResponseImpl();
@@ -170,7 +165,6 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId",clientId));
 		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
