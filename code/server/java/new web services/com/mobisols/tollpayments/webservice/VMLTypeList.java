@@ -1,6 +1,10 @@
 package com.mobisols.tollpayments.webservice;
 
-public interface VMLTypeList {
+import java.util.List;
 
-	public String getVMLTypeList(int clientId);
+public interface VMLTypeList {
+	List<VMLType> vmltypes=null;
+	public String getVMLTypeList();
+	public List<VMLType> getVmltypes();
+	public void setVmltypes(List<VMLType> vmltypes);
 }

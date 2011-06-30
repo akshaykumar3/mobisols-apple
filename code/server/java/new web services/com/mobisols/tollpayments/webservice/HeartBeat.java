@@ -8,7 +8,7 @@ public interface HeartBeat {
 	Double longitude=null;
 	Double angle=null;
 	String vmlType=null;
-	String getHeartBeat(String user,String json,int clientId);
+	String getHeartBeat(String user,String json);
 	public Timestamp getTimeStamp();
 	public void setTimeStamp(Timestamp timeStamp);
 	public Double getLatitude();

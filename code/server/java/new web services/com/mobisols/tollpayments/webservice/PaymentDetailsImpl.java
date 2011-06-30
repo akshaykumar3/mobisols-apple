@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -43,12 +44,10 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		//TODO code to access database using hibernate
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(UserPaymentDetail.class);
-		crit.add(Restrictions.eq("userId", userId));
-		List<UserPaymentDetail> pd=crit.list();
-		if(pd.isEmpty())
-		{
-			return;
-		}
+		String hql ="from UserPaymentDetail userpayment where userpayment.userId=:userId";
+		Query query = s.createQuery(hql);
+		query.setInteger("userId",userId);
+        List<UserPaymentDetail> pd = query.list();
 		Iterator it=pd.iterator();
 		if(it.hasNext())
 		{
@@ -79,7 +78,7 @@ public class PaymentDetailsImpl implements PaymentDetails{
 	}
 	
 	//TODO update about address of the user for payment detail
-	public GeneralResponse postPaymentDetails(PaymentDetails pd,int clientId,int paymentId,int userId)
+	public GeneralResponse postPaymentDetails(PaymentDetails pd,int paymentId,int userId)
 	{
 		GeneralResponse response=new GeneralResponseImpl();
 		Session s=HibernateSessionFactory.getSession();
@@ -90,7 +89,8 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		upd.setCcExpMonth(pd.getExpMonth());
 		upd.setCcExpYear(pd.getExpYear());
 		upd.setCcNumber(pd.getCardNumber());
-		upd.setClientId(clientId);
+		//TODO update clientId setter in post methods
+		upd.setClientId(1);
 		upd.setAddress1(pd.getAddress1());
 		upd.setAddress2(pd.getAddress2());
 		upd.setCcAcName(pd.getCcName());
@@ -101,7 +101,6 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		upd.setState(pd.getState());
 		upd.setZip(pd.getZip());
 		Criteria crit=s.createCriteria(CcType.class);
-		crit.add(Restrictions.eq("clientId", clientId));
 		crit.add(Restrictions.eq("name", pd.getCardType()));
 		List<CcType> cc=crit.list();
 		if(cc.isEmpty())
@@ -116,15 +115,13 @@ public class PaymentDetailsImpl implements PaymentDetails{
 	}
 	@POST
 	@Produces("text/plain")
-	public String postPaymentDetails(@FormParam("json") String json,@FormParam("user_name") String user,
-			@FormParam("client_id")int clientId,@FormParam("has_id")int hasId)
+	public String postPaymentDetails(@FormParam("json") String json,@FormParam("user_name") String user,@FormParam("has_id")int hasId)
 	{
 		JsonConverter c=new JsonConverterImpl();
 		GeneralResponse response ;
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<User> u=crit.list();
 		if(u.isEmpty())
 		{
@@ -132,19 +129,18 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		}
 		PaymentDetails pd=(PaymentDetails)c.getObject(json, "com.mobisols.tollpayments.mockwebservices.PaymentDetails");
 		if(hasId==1)
-			response= postPaymentDetails(pd,clientId,pd.getPaymentId(),u.get(0).getUserId());
+			response= postPaymentDetails(pd,pd.getPaymentId(),u.get(0).getUserId());
 		else
 		{
 			
 			crit=s.createCriteria(UserPaymentDetail.class);
 			crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
-			crit.add(Restrictions.eq("clientId", clientId));
 			List<UserPaymentDetail> upd=crit.list();
 			if(upd.isEmpty())
 			{
 				return null;
 			}
-			response=postPaymentDetails(pd, clientId,upd.get(0).getUpdId(),u.get(0).getUserId());
+			response=postPaymentDetails(pd,upd.get(0).getUpdId(),u.get(0).getUserId());
 		}
 		//TODO update general response details
 		String status="";

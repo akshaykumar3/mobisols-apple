@@ -9,7 +9,7 @@ public interface BalanceInfo {
 	List<BalanceLog> balancelog=null;
 	int balanceId=0;
 	
-	public String getBalanceInfo(String user,int clientId);
+	public String getBalanceInfo(String user);
 	public double getCurrentBalance();
 	public void setCurrentBalance(double currentBalance);
 	public double getMinBalance();

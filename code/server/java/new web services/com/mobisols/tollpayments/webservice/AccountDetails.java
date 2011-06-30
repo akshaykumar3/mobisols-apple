@@ -12,7 +12,7 @@ public interface AccountDetails {
 	List<TollPayments> tollPayments=null;
 	BalanceInfo balanceInfo=null;
 	int user_id=0;
-	public String getAccountDetails(@QueryParam("username") String user,@QueryParam("clientid")int clientId);
+	public String getAccountDetails(@QueryParam("username") String user);
 	public PaymentDetails getPaymentDetails() ;
 	public void setPaymentDetails(PaymentDetails paymentDetails) ;
 	public List<VehicleDetails> getVehicleDetails() ;

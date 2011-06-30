@@ -65,14 +65,13 @@ public class BalanceInfoImpl implements BalanceInfo {
 	
 	@GET
 	@Produces("text/plain")
-	public String getBalanceInfo(@QueryParam("user_name") String user,@QueryParam("client_id")int clientId)
+	public String getBalanceInfo(@QueryParam("user_name") String user)
 	{
 		String request="";
 		String status="";
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("userName", user));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<User> u=crit.list();
 		BalanceInfo ac=new BalanceInfoImpl(u.get(0).getUserId());
 		JsonConverter json=new JsonConverterImpl();

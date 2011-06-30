@@ -24,8 +24,8 @@ public interface PaymentDetails {
 	String zip=null;
 	String payPrefer=null;
 	
-	public GeneralResponse postPaymentDetails(PaymentDetails pd,int clientId,int paymentId,int userId);
-	public String postPaymentDetails(String json,String user,int clientId,int hasId);
+	public GeneralResponse postPaymentDetails(PaymentDetails pd,int paymentId,int userId);
+	public String postPaymentDetails(String json,String user,int hasId);
 	public String getCardNumber();
 	public void setCardNumber(String cardNumber);
 	public Integer getExpMonth();

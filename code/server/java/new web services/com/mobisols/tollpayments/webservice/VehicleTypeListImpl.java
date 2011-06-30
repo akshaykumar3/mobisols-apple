@@ -1,9 +1,8 @@
 package com.mobisols.tollpayments.webservice;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import javassist.bytecode.Descriptor.Iterator;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -24,20 +23,24 @@ public class VehicleTypeListImpl implements VehicleTypeList {
 	}
 	
 	@GET
-	public String getVehicleType(@QueryParam("client_id")int clientId) {
+	public String getVehicleType() {
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(VehicleType.class);
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<VehicleType> vt=crit.list();
 		VehicleTypeListImpl vti=new VehicleTypeListImpl();
-		for(Iterator it=  (Iterator) vt.iterator();it.hasNext();)
+		for(Iterator it=  vt.iterator();it.hasNext();)
 		{
-			vti.getVehicleTypes().add(new UserVehicleTypeImpl(vt.get(it.next()).getVehicleTypeId()));
+			vti.getVehicleTypes().add(new UserVehicleTypeImpl(((VehicleType) it.next()).getVehicleTypeId()));
+		}
+		for(Iterator it=vti.getVehicleTypes().iterator();it.hasNext();)
+		{
+			System.out.println(((UserVehicleType) it.next()).getName());
 		}
 		String request="";
 		String status="";
 		JsonConverter jc=new JsonConverterImpl();
 		String res = jc.getJSON(request, status, vti);
+		System.out.println(res);
 		HibernateSessionFactory.closeSession();
 		return res;
 	}

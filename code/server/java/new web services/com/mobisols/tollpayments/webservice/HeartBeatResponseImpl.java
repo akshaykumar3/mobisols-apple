@@ -3,8 +3,8 @@ package com.mobisols.tollpayments.webservice;
 import java.sql.Timestamp;
 
 public class HeartBeatResponseImpl implements HeartBeatResponse {
-	Timestamp nextTimeStamp;
-	String status;
+	private Timestamp nextTimeStamp;
+	private String status;
 	public Timestamp getNextTimeStamp() {
 		return nextTimeStamp;
 	}

@@ -6,7 +6,7 @@ public interface NearestToll {
 	String tollOperator=null;
 	double tollPrice=0.0;
 	double averagePrice=0.0;
-	public String getNearestToll( String json,int ClientId);
+	public String getNearestToll( String json);
 	public String getCity();
 	public void setCity(String city);
 	public String getState();

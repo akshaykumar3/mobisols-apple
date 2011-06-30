@@ -1,9 +1,8 @@
 package com.mobisols.tollpayments.webservice;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import javassist.bytecode.Descriptor.Iterator;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,22 +16,21 @@ import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
 import com.mobisols.tollpayments.hibernate.VmlType;
 @Path("/VMLTypeList")
 public class VMLTypeListImpl implements VMLTypeList {
-	List<VMLType> vmltypes;
+	private List<VMLType> vmltypes;
 
 	public VMLTypeListImpl()
 	{
 		this.vmltypes=new LinkedList<VMLType>();
 	}
 	@GET
-	public String getVMLTypeList(@QueryParam("client_id")int clientId) {
+	public String getVMLTypeList() {
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(VmlType.class);
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<VmlType> vmlt=crit.list();
 		VMLTypeListImpl vm=new VMLTypeListImpl();
 		for(Iterator it=  (Iterator) vmlt.iterator();it.hasNext();)
 		{
-			vm.getVmltypes().add(new VMLTypeImpl(vmlt.get(it.next()).getVmlTypeId()));
+			vm.getVmltypes().add(new VMLTypeImpl(((VmlType) it.next()).getVmlTypeId()));
 		}
 		String request="";
 		String status="";

@@ -23,7 +23,7 @@ public class NearestTollImpl implements NearestToll {
 		this.setTollPrice(2.7);
 	}
 	@GET
-	public String getNearestToll(@QueryParam("json") String json,@QueryParam("client_id")int ClientId){
+	public String getNearestToll(@QueryParam("json") String json){
 		JsonConverter jc=new JsonConverterImpl();
 		Location l=(Location) jc.getObject(json, "com.mobisols.tollpayments.LocationImpl");
 		System.out.println(l.getLatitude());

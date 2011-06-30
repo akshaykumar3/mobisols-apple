@@ -31,7 +31,7 @@ public class HeartBeatImpl implements HeartBeat {
 		
 	}
 	@POST
-	public String getHeartBeat(@FormParam("user_name")String user,@FormParam("json")String json,@FormParam("client_id")int clientId) {
+	public String getHeartBeat(@FormParam("user_name")String user,@FormParam("json")String json) {
 		JsonConverter j=new JsonConverterImpl();
 		HeartBeat hb=(HeartBeat) j.getObject(json, "com.mobisols.tollpayments.webservice.HeartBeatImpl");
 		HeartBeatResponseImpl hbr = new HeartBeatResponseImpl();
@@ -70,7 +70,6 @@ public class HeartBeatImpl implements HeartBeat {
 		vml.setUvhId(uv.get(0).getUserVehicleId());
 		crit=s.createCriteria(VmlType.class);
 		crit.add(Restrictions.eq("name", hb.getVmlType()));
-		crit.add(Restrictions.eq("clientId", clientId));
 		List<VmlType> vt=crit.list();
 		if(vt.isEmpty())
 			return null;
