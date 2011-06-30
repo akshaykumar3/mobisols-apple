@@ -56,6 +56,8 @@ public class HibernateSessionFactory {
 			session = (sessionFactory != null) ? sessionFactory.openSession()
 					: null;
 			threadLocal.set(session);
+			if(session!=null)
+				session.enableFilter("clientIdFilter").setParameter("clientId", 1);
 		}
 
         return session;

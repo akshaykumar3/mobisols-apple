@@ -57,5 +57,9 @@
             <property name="lastModifiedBy" type="java.lang.Integer">
                 <column name="last_modified_by" />
             </property>
+    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
+    <filter-def name="clientIdFilter">
+    	<filter-param name="clientId" type="java.lang.Integer"/>
+	</filter-def>
 </hibernate-mapping>
