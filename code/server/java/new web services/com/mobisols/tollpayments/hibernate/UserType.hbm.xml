@@ -63,5 +63,9 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
+   <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
+    <filter-def name="clientIdFilter">
+    	<filter-param name="clientId" type="java.lang.Integer"/>
+	</filter-def>
 </hibernate-mapping>

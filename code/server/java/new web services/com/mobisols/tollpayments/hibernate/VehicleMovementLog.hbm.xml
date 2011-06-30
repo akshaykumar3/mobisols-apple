@@ -66,5 +66,9 @@
             <property name="longitude" type="java.lang.Double">
                 <column name="longitude" precision="3" scale="3" />
             </property>
+    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
+    <filter-def name="clientIdFilter">
+    	<filter-param name="clientId" type="java.lang.Integer"/>
+	</filter-def>
 </hibernate-mapping>
