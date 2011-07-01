@@ -13,6 +13,8 @@ public class VehicleMovementLog implements java.io.Serializable {
 	private Integer vmlId;
 	private Integer vmlTypeId;
 	private Integer uvhId;
+	private Integer tollLocationId;
+	private String geometry;
 	private Timestamp timestamp;
 	private String udf1;
 	private String udf2;
@@ -30,6 +32,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 	private Integer clientId;
 	private Double latitude;
 	private Double longitude;
+	private String status;
 
 	// Constructors
 
@@ -39,11 +42,13 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	/** minimal constructor */
 	public VehicleMovementLog(Integer vmlId, Integer vmlTypeId,
-			Integer uvhId, Timestamp timestamp, Timestamp lastModifiedOn,
-			Integer lastModifiedBy, Timestamp createdOn) {
+			Integer uvhId, String geometry, Timestamp timestamp,
+			Timestamp lastModifiedOn, Integer lastModifiedBy,
+			Timestamp createdOn) {
 		this.vmlId = vmlId;
 		this.vmlTypeId = vmlTypeId;
 		this.uvhId = uvhId;
+		this.geometry = geometry;
 		this.timestamp = timestamp;
 		this.lastModifiedOn = lastModifiedOn;
 		this.lastModifiedBy = lastModifiedBy;
@@ -52,14 +57,17 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	/** full constructor */
 	public VehicleMovementLog(Integer vmlId, Integer vmlTypeId,
-			Integer uvhId, Timestamp timestamp, String udf1, String udf2,
-			String udf3, String udf4, String udf5, String flag1, String flag2,
-			String flag3, String flag4, String flag5, Timestamp lastModifiedOn,
+			Integer uvhId, Integer tollLocationId, String geometry,
+			Timestamp timestamp, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp lastModifiedOn,
 			Integer lastModifiedBy, Timestamp createdOn, Integer clientId,
-			Double latitude, Double longitude) {
+			Double latitude, Double longitude, String status) {
 		this.vmlId = vmlId;
 		this.vmlTypeId = vmlTypeId;
 		this.uvhId = uvhId;
+		this.tollLocationId = tollLocationId;
+		this.geometry = geometry;
 		this.timestamp = timestamp;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
@@ -77,6 +85,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 		this.clientId = clientId;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.status = status;
 	}
 
 	// Property accessors
@@ -103,6 +112,22 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	public void setUvhId(Integer uvhId) {
 		this.uvhId = uvhId;
+	}
+
+	public Integer getTollLocationId() {
+		return this.tollLocationId;
+	}
+
+	public void setTollLocationId(Integer tollLocationId) {
+		this.tollLocationId = tollLocationId;
+	}
+
+	public String getGeometry() {
+		return this.geometry;
+	}
+
+	public void setGeometry(String geometry) {
+		this.geometry = geometry;
 	}
 
 	public Timestamp getTimestamp() {
@@ -241,6 +266,14 @@ public class VehicleMovementLog implements java.io.Serializable {
 		this.longitude = longitude;
 	}
 
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -260,6 +293,15 @@ public class VehicleMovementLog implements java.io.Serializable {
 				&& ((this.getUvhId() == castOther.getUvhId()) || (this
 						.getUvhId() != null && castOther.getUvhId() != null && this
 						.getUvhId().equals(castOther.getUvhId())))
+				&& ((this.getTollLocationId() == castOther.getTollLocationId()) || (this
+						.getTollLocationId() != null
+						&& castOther.getTollLocationId() != null && this
+						.getTollLocationId().equals(
+								castOther.getTollLocationId())))
+				&& ((this.getGeometry() == castOther.getGeometry()) || (this
+						.getGeometry() != null
+						&& castOther.getGeometry() != null && this
+						.getGeometry().equals(castOther.getGeometry())))
 				&& ((this.getTimestamp() == castOther.getTimestamp()) || (this
 						.getTimestamp() != null
 						&& castOther.getTimestamp() != null && this
@@ -319,7 +361,10 @@ public class VehicleMovementLog implements java.io.Serializable {
 				&& ((this.getLongitude() == castOther.getLongitude()) || (this
 						.getLongitude() != null
 						&& castOther.getLongitude() != null && this
-						.getLongitude().equals(castOther.getLongitude())));
+						.getLongitude().equals(castOther.getLongitude())))
+				&& ((this.getStatus() == castOther.getStatus()) || (this
+						.getStatus() != null && castOther.getStatus() != null && this
+						.getStatus().equals(castOther.getStatus())));
 	}
 
 	public int hashCode() {
@@ -331,6 +376,12 @@ public class VehicleMovementLog implements java.io.Serializable {
 				+ (getVmlTypeId() == null ? 0 : this.getVmlTypeId().hashCode());
 		result = 37 * result
 				+ (getUvhId() == null ? 0 : this.getUvhId().hashCode());
+		result = 37
+				* result
+				+ (getTollLocationId() == null ? 0 : this.getTollLocationId()
+						.hashCode());
+		result = 37 * result
+				+ (getGeometry() == null ? 0 : this.getGeometry().hashCode());
 		result = 37 * result
 				+ (getTimestamp() == null ? 0 : this.getTimestamp().hashCode());
 		result = 37 * result
@@ -369,6 +420,8 @@ public class VehicleMovementLog implements java.io.Serializable {
 				+ (getLatitude() == null ? 0 : this.getLatitude().hashCode());
 		result = 37 * result
 				+ (getLongitude() == null ? 0 : this.getLongitude().hashCode());
+		result = 37 * result
+				+ (getStatus() == null ? 0 : this.getStatus().hashCode());
 		return result;
 	}
 

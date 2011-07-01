@@ -2,7 +2,6 @@ package com.mobisols.tollpayments.hibernate;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -22,14 +21,14 @@ public class HibernateSessionFactory {
      */
     private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
 	private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
-    private  static Configuration configuration = new AnnotationConfiguration();    
+    private  static Configuration configuration = new Configuration();    
     private static org.hibernate.SessionFactory sessionFactory;
     private static String configFile = CONFIG_FILE_LOCATION;
 
 	static {
     	try {
-			configuration.configure();
-			sessionFactory =configuration.buildSessionFactory();
+			configuration.configure(configFile);
+			sessionFactory = configuration.buildSessionFactory();
 		} catch (Exception e) {
 			System.err
 					.println("%%%% Error Creating SessionFactory %%%%");
@@ -56,8 +55,6 @@ public class HibernateSessionFactory {
 			session = (sessionFactory != null) ? sessionFactory.openSession()
 					: null;
 			threadLocal.set(session);
-			if(session!=null)
-				session.enableFilter("clientIdFilter").setParameter("clientId", 1);
 		}
 
         return session;

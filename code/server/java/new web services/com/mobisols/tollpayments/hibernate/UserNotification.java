@@ -3,18 +3,18 @@ package com.mobisols.tollpayments.hibernate;
 import java.sql.Timestamp;
 
 /**
- * TollPriceId entity. @author MyEclipse Persistence Tools
+ * UserNotificationId entity. @author MyEclipse Persistence Tools
  */
 
-public class TollPrice implements java.io.Serializable {
+public class UserNotification implements java.io.Serializable {
 
 	// Fields
 
-	private Integer tollPriceId;
-	private Integer tollLocationId;
-	private Integer vehicleTypeId;
-	private Double costPrice;
-	private Double sellingPrice;
+	private Integer userNotificationId;
+	private Integer userId;
+	private Integer userNotificationTypeId;
+	private Timestamp timestamp;
+	private String description;
 	private String udf1;
 	private String udf2;
 	private String udf3;
@@ -25,44 +25,39 @@ public class TollPrice implements java.io.Serializable {
 	private String flag3;
 	private String flag4;
 	private String flag5;
-	private Integer lastModifiedBy;
-	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
+	private Timestamp lastModifiedOn;
+	private Integer lastModifiedBy;
 	private Integer clientId;
 
 	// Constructors
 
 	/** default constructor */
-	public TollPrice() {
+	public UserNotification() {
 	}
 
 	/** minimal constructor */
-	public TollPrice(Integer tollPriceId, Integer tollLocationId,
-			Integer vehicleTypeId, Double costPrice, Double sellingPrice,
-			Integer lastModifiedBy, Timestamp lastModifiedOn,
-			Timestamp createdOn) {
-		this.tollPriceId = tollPriceId;
-		this.tollLocationId = tollLocationId;
-		this.vehicleTypeId = vehicleTypeId;
-		this.costPrice = costPrice;
-		this.sellingPrice = sellingPrice;
-		this.lastModifiedBy = lastModifiedBy;
-		this.lastModifiedOn = lastModifiedOn;
+	public UserNotification(Integer userNotificationId, Timestamp createdOn,
+			Timestamp lastModifiedOn, Integer lastModifiedBy, Integer clientId) {
+		this.userNotificationId = userNotificationId;
 		this.createdOn = createdOn;
+		this.lastModifiedOn = lastModifiedOn;
+		this.lastModifiedBy = lastModifiedBy;
+		this.clientId = clientId;
 	}
 
 	/** full constructor */
-	public TollPrice(Integer tollPriceId, Integer tollLocationId,
-			Integer vehicleTypeId, Double costPrice, Double sellingPrice,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Integer lastModifiedBy, Timestamp lastModifiedOn,
-			Timestamp createdOn, Integer clientId) {
-		this.tollPriceId = tollPriceId;
-		this.tollLocationId = tollLocationId;
-		this.vehicleTypeId = vehicleTypeId;
-		this.costPrice = costPrice;
-		this.sellingPrice = sellingPrice;
+	public UserNotification(Integer userNotificationId, Integer userId,
+			Integer userNotificationTypeId, Timestamp timestamp,
+			String description, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
+			String flag4, String flag5, Timestamp createdOn,
+			Timestamp lastModifiedOn, Integer lastModifiedBy, Integer clientId) {
+		this.userNotificationId = userNotificationId;
+		this.userId = userId;
+		this.userNotificationTypeId = userNotificationTypeId;
+		this.timestamp = timestamp;
+		this.description = description;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
 		this.udf3 = udf3;
@@ -73,52 +68,52 @@ public class TollPrice implements java.io.Serializable {
 		this.flag3 = flag3;
 		this.flag4 = flag4;
 		this.flag5 = flag5;
-		this.lastModifiedBy = lastModifiedBy;
-		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
+		this.lastModifiedOn = lastModifiedOn;
+		this.lastModifiedBy = lastModifiedBy;
 		this.clientId = clientId;
 	}
 
 	// Property accessors
 
-	public Integer getTollPriceId() {
-		return this.tollPriceId;
+	public Integer getUserNotificationId() {
+		return this.userNotificationId;
 	}
 
-	public void setTollPriceId(Integer tollPriceId) {
-		this.tollPriceId = tollPriceId;
+	public void setUserNotificationId(Integer userNotificationId) {
+		this.userNotificationId = userNotificationId;
 	}
 
-	public Integer getTollLocationId() {
-		return this.tollLocationId;
+	public Integer getUserId() {
+		return this.userId;
 	}
 
-	public void setTollLocationId(Integer tollLocationId) {
-		this.tollLocationId = tollLocationId;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public Integer getVehicleTypeId() {
-		return this.vehicleTypeId;
+	public Integer getUserNotificationTypeId() {
+		return this.userNotificationTypeId;
 	}
 
-	public void setVehicleTypeId(Integer vehicleTypeId) {
-		this.vehicleTypeId = vehicleTypeId;
+	public void setUserNotificationTypeId(Integer userNotificationTypeId) {
+		this.userNotificationTypeId = userNotificationTypeId;
 	}
 
-	public Double getCostPrice() {
-		return this.costPrice;
+	public Timestamp getTimestamp() {
+		return this.timestamp;
 	}
 
-	public void setCostPrice(Double costPrice) {
-		this.costPrice = costPrice;
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
-	public Double getSellingPrice() {
-		return this.sellingPrice;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setSellingPrice(Double sellingPrice) {
-		this.sellingPrice = sellingPrice;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getUdf1() {
@@ -201,12 +196,12 @@ public class TollPrice implements java.io.Serializable {
 		this.flag5 = flag5;
 	}
 
-	public Integer getLastModifiedBy() {
-		return this.lastModifiedBy;
+	public Timestamp getCreatedOn() {
+		return this.createdOn;
 	}
 
-	public void setLastModifiedBy(Integer lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Timestamp getLastModifiedOn() {
@@ -217,12 +212,12 @@ public class TollPrice implements java.io.Serializable {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
-	public Timestamp getCreatedOn() {
-		return this.createdOn;
+	public Integer getLastModifiedBy() {
+		return this.lastModifiedBy;
 	}
 
-	public void setCreatedOn(Timestamp createdOn) {
-		this.createdOn = createdOn;
+	public void setLastModifiedBy(Integer lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	public Integer getClientId() {
@@ -238,31 +233,32 @@ public class TollPrice implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof TollPrice))
+		if (!(other instanceof UserNotification))
 			return false;
-		TollPrice castOther = (TollPrice) other;
+		UserNotification castOther = (UserNotification) other;
 
-		return ((this.getTollPriceId() == castOther.getTollPriceId()) || (this
-				.getTollPriceId() != null && castOther.getTollPriceId() != null && this
-				.getTollPriceId().equals(castOther.getTollPriceId())))
-				&& ((this.getTollLocationId() == castOther.getTollLocationId()) || (this
-						.getTollLocationId() != null
-						&& castOther.getTollLocationId() != null && this
-						.getTollLocationId().equals(
-								castOther.getTollLocationId())))
-				&& ((this.getVehicleTypeId() == castOther.getVehicleTypeId()) || (this
-						.getVehicleTypeId() != null
-						&& castOther.getVehicleTypeId() != null && this
-						.getVehicleTypeId()
-						.equals(castOther.getVehicleTypeId())))
-				&& ((this.getCostPrice() == castOther.getCostPrice()) || (this
-						.getCostPrice() != null
-						&& castOther.getCostPrice() != null && this
-						.getCostPrice().equals(castOther.getCostPrice())))
-				&& ((this.getSellingPrice() == castOther.getSellingPrice()) || (this
-						.getSellingPrice() != null
-						&& castOther.getSellingPrice() != null && this
-						.getSellingPrice().equals(castOther.getSellingPrice())))
+		return ((this.getUserNotificationId() == castOther
+				.getUserNotificationId()) || (this.getUserNotificationId() != null
+				&& castOther.getUserNotificationId() != null && this
+				.getUserNotificationId().equals(
+						castOther.getUserNotificationId())))
+				&& ((this.getUserId() == castOther.getUserId()) || (this
+						.getUserId() != null && castOther.getUserId() != null && this
+						.getUserId().equals(castOther.getUserId())))
+				&& ((this.getUserNotificationTypeId() == castOther
+						.getUserNotificationTypeId()) || (this
+						.getUserNotificationTypeId() != null
+						&& castOther.getUserNotificationTypeId() != null && this
+						.getUserNotificationTypeId().equals(
+								castOther.getUserNotificationTypeId())))
+				&& ((this.getTimestamp() == castOther.getTimestamp()) || (this
+						.getTimestamp() != null
+						&& castOther.getTimestamp() != null && this
+						.getTimestamp().equals(castOther.getTimestamp())))
+				&& ((this.getDescription() == castOther.getDescription()) || (this
+						.getDescription() != null
+						&& castOther.getDescription() != null && this
+						.getDescription().equals(castOther.getDescription())))
 				&& ((this.getUdf1() == castOther.getUdf1()) || (this.getUdf1() != null
 						&& castOther.getUdf1() != null && this.getUdf1()
 						.equals(castOther.getUdf1())))
@@ -293,20 +289,20 @@ public class TollPrice implements java.io.Serializable {
 				&& ((this.getFlag5() == castOther.getFlag5()) || (this
 						.getFlag5() != null && castOther.getFlag5() != null && this
 						.getFlag5().equals(castOther.getFlag5())))
-				&& ((this.getLastModifiedBy() == castOther.getLastModifiedBy()) || (this
-						.getLastModifiedBy() != null
-						&& castOther.getLastModifiedBy() != null && this
-						.getLastModifiedBy().equals(
-								castOther.getLastModifiedBy())))
+				&& ((this.getCreatedOn() == castOther.getCreatedOn()) || (this
+						.getCreatedOn() != null
+						&& castOther.getCreatedOn() != null && this
+						.getCreatedOn().equals(castOther.getCreatedOn())))
 				&& ((this.getLastModifiedOn() == castOther.getLastModifiedOn()) || (this
 						.getLastModifiedOn() != null
 						&& castOther.getLastModifiedOn() != null && this
 						.getLastModifiedOn().equals(
 								castOther.getLastModifiedOn())))
-				&& ((this.getCreatedOn() == castOther.getCreatedOn()) || (this
-						.getCreatedOn() != null
-						&& castOther.getCreatedOn() != null && this
-						.getCreatedOn().equals(castOther.getCreatedOn())))
+				&& ((this.getLastModifiedBy() == castOther.getLastModifiedBy()) || (this
+						.getLastModifiedBy() != null
+						&& castOther.getLastModifiedBy() != null && this
+						.getLastModifiedBy().equals(
+								castOther.getLastModifiedBy())))
 				&& ((this.getClientId() == castOther.getClientId()) || (this
 						.getClientId() != null
 						&& castOther.getClientId() != null && this
@@ -318,21 +314,19 @@ public class TollPrice implements java.io.Serializable {
 
 		result = 37
 				* result
-				+ (getTollPriceId() == null ? 0 : this.getTollPriceId()
-						.hashCode());
-		result = 37
-				* result
-				+ (getTollLocationId() == null ? 0 : this.getTollLocationId()
-						.hashCode());
-		result = 37
-				* result
-				+ (getVehicleTypeId() == null ? 0 : this.getVehicleTypeId()
-						.hashCode());
+				+ (getUserNotificationId() == null ? 0 : this
+						.getUserNotificationId().hashCode());
 		result = 37 * result
-				+ (getCostPrice() == null ? 0 : this.getCostPrice().hashCode());
+				+ (getUserId() == null ? 0 : this.getUserId().hashCode());
 		result = 37
 				* result
-				+ (getSellingPrice() == null ? 0 : this.getSellingPrice()
+				+ (getUserNotificationTypeId() == null ? 0 : this
+						.getUserNotificationTypeId().hashCode());
+		result = 37 * result
+				+ (getTimestamp() == null ? 0 : this.getTimestamp().hashCode());
+		result = 37
+				* result
+				+ (getDescription() == null ? 0 : this.getDescription()
 						.hashCode());
 		result = 37 * result
 				+ (getUdf1() == null ? 0 : this.getUdf1().hashCode());
@@ -354,16 +348,16 @@ public class TollPrice implements java.io.Serializable {
 				+ (getFlag4() == null ? 0 : this.getFlag4().hashCode());
 		result = 37 * result
 				+ (getFlag5() == null ? 0 : this.getFlag5().hashCode());
-		result = 37
-				* result
-				+ (getLastModifiedBy() == null ? 0 : this.getLastModifiedBy()
-						.hashCode());
+		result = 37 * result
+				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
 		result = 37
 				* result
 				+ (getLastModifiedOn() == null ? 0 : this.getLastModifiedOn()
 						.hashCode());
-		result = 37 * result
-				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
+		result = 37
+				* result
+				+ (getLastModifiedBy() == null ? 0 : this.getLastModifiedBy()
+						.hashCode());
 		result = 37 * result
 				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
 		return result;

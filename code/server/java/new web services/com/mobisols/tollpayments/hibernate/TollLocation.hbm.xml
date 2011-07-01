@@ -12,6 +12,9 @@
             <property name="tollOperatorId" type="java.lang.Integer">
                 <column name="toll_operator_id" />
             </property>
+            <property name="geometry" type="java.lang.String">
+                <column name="geometry" />
+            </property>
             <property name="isCovered" type="java.lang.String">
                 <column name="is_covered" length="1" />
             </property>
@@ -79,12 +82,18 @@
                 <column name="client_id" />
             </property>
             <property name="latitude" type="java.lang.Double">
-                <column name="latitude" precision="3" scale="3" />
+                <column name="latitude" precision="9" scale="6" />
             </property>
             <property name="longitude" type="java.lang.Double">
-                <column name="longitude" precision="3" scale="3" />
+                <column name="longitude" precision="9" scale="6" />
             </property>
-    <filter name="clientIdFilter" condition=":clientId = client_id"/>
+            <property name="direction" type="java.lang.String">
+                <column name="direction" length="45" />
+            </property>
+            <property name="type" type="java.lang.String">
+                <column name="type" length="30" />
+            </property>
+   <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">
     	<filter-param name="clientId" type="java.lang.Integer"/>

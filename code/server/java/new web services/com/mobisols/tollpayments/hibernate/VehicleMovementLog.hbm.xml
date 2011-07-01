@@ -6,69 +6,76 @@
 -->
 <hibernate-mapping>
     <class name="com.mobisols.tollpayments.hibernate.VehicleMovementLog" table="vehicle_movement_log" catalog="globaltoll">
-        	<id name="vmlId" type="java.lang.Integer">
+        <composite-id name="id" class="com.mobisols.tollpayments.hibernate.VehicleMovementLogId">
+            <key-property name="vmlId" type="java.lang.Integer">
                 <column name="vml_id" />
-            </id>
-            <property name="vmlTypeId" type="java.lang.Integer">
+            </key-property>
+            <key-property name="vmlTypeId" type="java.lang.Integer">
                 <column name="vml_type_id" />
-            </property>
-            <property name="uvhId" type="java.lang.Integer">
+            </key-property>
+            <key-property name="uvhId" type="java.lang.Integer">
                 <column name="uvh_id" />
-            </property>
-            <property name="timestamp" type="java.sql.Timestamp">
+            </key-property>
+            <key-property name="tollLocationId" type="java.lang.Integer">
+                <column name="toll_location_id" />
+            </key-property>
+            <key-property name="geometry" type="java.lang.String">
+                <column name="geometry" />
+            </key-property>
+            <key-property name="timestamp" type="java.sql.Timestamp">
                 <column name="timestamp" length="19" />
-            </property>
-            <property name="udf1" type="java.lang.String">
+            </key-property>
+            <key-property name="udf1" type="java.lang.String">
                 <column name="udf1" length="1000" />
-            </property>
-            <property name="udf2" type="java.lang.String">
+            </key-property>
+            <key-property name="udf2" type="java.lang.String">
                 <column name="udf2" length="1000" />
-            </property>
-            <property name="udf3" type="java.lang.String">
+            </key-property>
+            <key-property name="udf3" type="java.lang.String">
                 <column name="udf3" length="1000" />
-            </property>
-            <property name="udf4" type="java.lang.String">
+            </key-property>
+            <key-property name="udf4" type="java.lang.String">
                 <column name="udf4" length="1000" />
-            </property>
-            <property name="udf5" type="java.lang.String">
+            </key-property>
+            <key-property name="udf5" type="java.lang.String">
                 <column name="udf5" length="1000" />
-            </property>
-            <property name="flag1" type="java.lang.String">
+            </key-property>
+            <key-property name="flag1" type="java.lang.String">
                 <column name="flag1" length="1" />
-            </property>
-            <property name="flag2" type="java.lang.String">
+            </key-property>
+            <key-property name="flag2" type="java.lang.String">
                 <column name="flag2" length="1" />
-            </property>
-            <property name="flag3" type="java.lang.String">
+            </key-property>
+            <key-property name="flag3" type="java.lang.String">
                 <column name="flag3" length="1" />
-            </property>
-            <property name="flag4" type="java.lang.String">
+            </key-property>
+            <key-property name="flag4" type="java.lang.String">
                 <column name="flag4" length="1" />
-            </property>
-            <property name="flag5" type="java.lang.String">
+            </key-property>
+            <key-property name="flag5" type="java.lang.String">
                 <column name="flag5" length="1" />
-            </property>
-            <property name="lastModifiedOn" type="java.sql.Timestamp">
+            </key-property>
+            <key-property name="lastModifiedOn" type="java.sql.Timestamp">
                 <column name="last_modified_on" length="19" />
-            </property>
-            <property name="lastModifiedBy" type="java.lang.Integer">
+            </key-property>
+            <key-property name="lastModifiedBy" type="java.lang.Integer">
                 <column name="last_modified_by" />
-            </property>
-            <property name="createdOn" type="java.sql.Timestamp">
+            </key-property>
+            <key-property name="createdOn" type="java.sql.Timestamp">
                 <column name="created_on" length="19" />
-            </property>
-            <property name="clientId" type="java.lang.Integer">
+            </key-property>
+            <key-property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
-            </property>
-            <property name="latitude" type="java.lang.Double">
-                <column name="latitude" precision="3" scale="3" />
-            </property>
-            <property name="longitude" type="java.lang.Double">
-                <column name="longitude" precision="3" scale="3" />
-            </property>
-    <filter name="clientIdFilter" condition=":clientId = client_id"/>
+            </key-property>
+            <key-property name="latitude" type="java.lang.Double">
+                <column name="latitude" precision="9" scale="6" />
+            </key-property>
+            <key-property name="longitude" type="java.lang.Double">
+                <column name="longitude" precision="9" scale="6" />
+            </key-property>
+            <key-property name="status" type="java.lang.String">
+                <column name="status" length="45" />
+            </key-property>
+        </composite-id>
     </class>
-    <filter-def name="clientIdFilter">
-    	<filter-param name="clientId" type="java.lang.Integer"/>
-	</filter-def>
 </hibernate-mapping>

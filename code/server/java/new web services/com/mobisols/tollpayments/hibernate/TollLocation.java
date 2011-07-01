@@ -12,6 +12,7 @@ public class TollLocation implements java.io.Serializable {
 
 	private Integer tollLocationId;
 	private Integer tollOperatorId;
+	private String geometry;
 	private String isCovered;
 	private String isCashOnly;
 	private String address1;
@@ -36,6 +37,8 @@ public class TollLocation implements java.io.Serializable {
 	private Integer clientId;
 	private Double latitude;
 	private Double longitude;
+	private String direction;
+	private String type;
 
 	// Constructors
 
@@ -45,10 +48,12 @@ public class TollLocation implements java.io.Serializable {
 
 	/** minimal constructor */
 	public TollLocation(Integer tollLocationId, Integer tollOperatorId,
-			String isCovered, String isCashOnly, Integer lastModifiedBy,
-			Timestamp lastModifiedOn, Timestamp createdOn) {
+			String geometry, String isCovered, String isCashOnly,
+			Integer lastModifiedBy, Timestamp lastModifiedOn,
+			Timestamp createdOn) {
 		this.tollLocationId = tollLocationId;
 		this.tollOperatorId = tollOperatorId;
+		this.geometry = geometry;
 		this.isCovered = isCovered;
 		this.isCashOnly = isCashOnly;
 		this.lastModifiedBy = lastModifiedBy;
@@ -58,15 +63,16 @@ public class TollLocation implements java.io.Serializable {
 
 	/** full constructor */
 	public TollLocation(Integer tollLocationId, Integer tollOperatorId,
-			String isCovered, String isCashOnly, String address1,
-			String address2, String city, String state, String country,
-			String zip, String udf1, String udf2, String udf3, String udf4,
-			String udf5, String flag1, String flag2, String flag3,
+			String geometry, String isCovered, String isCashOnly,
+			String address1, String address2, String city, String state,
+			String country, String zip, String udf1, String udf2, String udf3,
+			String udf4, String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Integer lastModifiedBy,
 			Timestamp lastModifiedOn, Timestamp createdOn, Integer clientId,
-			Double latitude, Double longitude) {
+			Double latitude, Double longitude, String direction, String type) {
 		this.tollLocationId = tollLocationId;
 		this.tollOperatorId = tollOperatorId;
+		this.geometry = geometry;
 		this.isCovered = isCovered;
 		this.isCashOnly = isCashOnly;
 		this.address1 = address1;
@@ -91,6 +97,8 @@ public class TollLocation implements java.io.Serializable {
 		this.clientId = clientId;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.direction = direction;
+		this.type = type;
 	}
 
 	// Property accessors
@@ -109,6 +117,14 @@ public class TollLocation implements java.io.Serializable {
 
 	public void setTollOperatorId(Integer tollOperatorId) {
 		this.tollOperatorId = tollOperatorId;
+	}
+
+	public String getGeometry() {
+		return this.geometry;
+	}
+
+	public void setGeometry(String geometry) {
+		this.geometry = geometry;
 	}
 
 	public String getIsCovered() {
@@ -303,6 +319,22 @@ public class TollLocation implements java.io.Serializable {
 		this.longitude = longitude;
 	}
 
+	public String getDirection() {
+		return this.direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -321,6 +353,10 @@ public class TollLocation implements java.io.Serializable {
 						&& castOther.getTollOperatorId() != null && this
 						.getTollOperatorId().equals(
 								castOther.getTollOperatorId())))
+				&& ((this.getGeometry() == castOther.getGeometry()) || (this
+						.getGeometry() != null
+						&& castOther.getGeometry() != null && this
+						.getGeometry().equals(castOther.getGeometry())))
 				&& ((this.getIsCovered() == castOther.getIsCovered()) || (this
 						.getIsCovered() != null
 						&& castOther.getIsCovered() != null && this
@@ -404,7 +440,14 @@ public class TollLocation implements java.io.Serializable {
 				&& ((this.getLongitude() == castOther.getLongitude()) || (this
 						.getLongitude() != null
 						&& castOther.getLongitude() != null && this
-						.getLongitude().equals(castOther.getLongitude())));
+						.getLongitude().equals(castOther.getLongitude())))
+				&& ((this.getDirection() == castOther.getDirection()) || (this
+						.getDirection() != null
+						&& castOther.getDirection() != null && this
+						.getDirection().equals(castOther.getDirection())))
+				&& ((this.getType() == castOther.getType()) || (this.getType() != null
+						&& castOther.getType() != null && this.getType()
+						.equals(castOther.getType())));
 	}
 
 	public int hashCode() {
@@ -418,6 +461,8 @@ public class TollLocation implements java.io.Serializable {
 				* result
 				+ (getTollOperatorId() == null ? 0 : this.getTollOperatorId()
 						.hashCode());
+		result = 37 * result
+				+ (getGeometry() == null ? 0 : this.getGeometry().hashCode());
 		result = 37 * result
 				+ (getIsCovered() == null ? 0 : this.getIsCovered().hashCode());
 		result = 37
@@ -472,6 +517,10 @@ public class TollLocation implements java.io.Serializable {
 				+ (getLatitude() == null ? 0 : this.getLatitude().hashCode());
 		result = 37 * result
 				+ (getLongitude() == null ? 0 : this.getLongitude().hashCode());
+		result = 37 * result
+				+ (getDirection() == null ? 0 : this.getDirection().hashCode());
+		result = 37 * result
+				+ (getType() == null ? 0 : this.getType().hashCode());
 		return result;
 	}
 
