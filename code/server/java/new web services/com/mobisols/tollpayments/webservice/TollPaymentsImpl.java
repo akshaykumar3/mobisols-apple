@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.webservice;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -25,10 +26,14 @@ public class TollPaymentsImpl implements TollPayments{
 	public TollPaymentsImpl(){
 		
 	}
-	public TollPaymentsImpl(int vtuId){
+	public TollPaymentsImpl(int vtuId,Date doj){
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(VehicleTollUsage.class);
 		crit.add(Restrictions.eq("vtuId", vtuId));
+		if(doj!=null)
+		{
+			crit.add(Restrictions.eq("timestamp", doj));
+		}
 		List<VehicleTollUsage> vtu=crit.list();
 		if(vtu.isEmpty())
 			return;
