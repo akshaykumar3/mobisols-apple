@@ -3,18 +3,18 @@ package com.mobisols.tollpayments.hibernate;
 import java.sql.Timestamp;
 
 /**
- * TollPriceId entity. @author MyEclipse Persistence Tools
+ * RoadId entity. @author MyEclipse Persistence Tools
  */
 
-public class TollPrice implements java.io.Serializable {
+public class Road implements java.io.Serializable {
 
 	// Fields
 
-	private Integer tollPriceId;
-	private Integer tollLocationId;
-	private Integer vehicleTypeId;
-	private Double costPrice;
-	private Double sellingPrice;
+	private Integer roadId;
+	private String name;
+	private String type;
+	private String startLocation;
+	private String endLocation;
 	private String udf1;
 	private String udf2;
 	private String udf3;
@@ -25,44 +25,37 @@ public class TollPrice implements java.io.Serializable {
 	private String flag3;
 	private String flag4;
 	private String flag5;
-	private Integer lastModifiedBy;
-	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
+	private Timestamp lastModifiedOn;
+	private Integer lastModifiedBy;
 	private Integer clientId;
 
 	// Constructors
 
 	/** default constructor */
-	public TollPrice() {
+	public Road() {
 	}
 
 	/** minimal constructor */
-	public TollPrice(Integer tollPriceId, Integer tollLocationId,
-			Integer vehicleTypeId, Double costPrice, Double sellingPrice,
-			Integer lastModifiedBy, Timestamp lastModifiedOn,
-			Timestamp createdOn) {
-		this.tollPriceId = tollPriceId;
-		this.tollLocationId = tollLocationId;
-		this.vehicleTypeId = vehicleTypeId;
-		this.costPrice = costPrice;
-		this.sellingPrice = sellingPrice;
-		this.lastModifiedBy = lastModifiedBy;
-		this.lastModifiedOn = lastModifiedOn;
+	public Road(Integer roadId, Timestamp createdOn,
+			Timestamp lastModifiedOn, Integer lastModifiedBy) {
+		this.roadId = roadId;
 		this.createdOn = createdOn;
+		this.lastModifiedOn = lastModifiedOn;
+		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	/** full constructor */
-	public TollPrice(Integer tollPriceId, Integer tollLocationId,
-			Integer vehicleTypeId, Double costPrice, Double sellingPrice,
-			String udf1, String udf2, String udf3, String udf4, String udf5,
-			String flag1, String flag2, String flag3, String flag4,
-			String flag5, Integer lastModifiedBy, Timestamp lastModifiedOn,
-			Timestamp createdOn, Integer clientId) {
-		this.tollPriceId = tollPriceId;
-		this.tollLocationId = tollLocationId;
-		this.vehicleTypeId = vehicleTypeId;
-		this.costPrice = costPrice;
-		this.sellingPrice = sellingPrice;
+	public Road(Integer roadId, String name, String type,
+			String startLocation, String endLocation, String udf1, String udf2,
+			String udf3, String udf4, String udf5, String flag1, String flag2,
+			String flag3, String flag4, String flag5, Timestamp createdOn,
+			Timestamp lastModifiedOn, Integer lastModifiedBy, Integer clientId) {
+		this.roadId = roadId;
+		this.name = name;
+		this.type = type;
+		this.startLocation = startLocation;
+		this.endLocation = endLocation;
 		this.udf1 = udf1;
 		this.udf2 = udf2;
 		this.udf3 = udf3;
@@ -73,52 +66,52 @@ public class TollPrice implements java.io.Serializable {
 		this.flag3 = flag3;
 		this.flag4 = flag4;
 		this.flag5 = flag5;
-		this.lastModifiedBy = lastModifiedBy;
-		this.lastModifiedOn = lastModifiedOn;
 		this.createdOn = createdOn;
+		this.lastModifiedOn = lastModifiedOn;
+		this.lastModifiedBy = lastModifiedBy;
 		this.clientId = clientId;
 	}
 
 	// Property accessors
 
-	public Integer getTollPriceId() {
-		return this.tollPriceId;
+	public Integer getRoadId() {
+		return this.roadId;
 	}
 
-	public void setTollPriceId(Integer tollPriceId) {
-		this.tollPriceId = tollPriceId;
+	public void setRoadId(Integer roadId) {
+		this.roadId = roadId;
 	}
 
-	public Integer getTollLocationId() {
-		return this.tollLocationId;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setTollLocationId(Integer tollLocationId) {
-		this.tollLocationId = tollLocationId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Integer getVehicleTypeId() {
-		return this.vehicleTypeId;
+	public String getType() {
+		return this.type;
 	}
 
-	public void setVehicleTypeId(Integer vehicleTypeId) {
-		this.vehicleTypeId = vehicleTypeId;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public Double getCostPrice() {
-		return this.costPrice;
+	public String getStartLocation() {
+		return this.startLocation;
 	}
 
-	public void setCostPrice(Double costPrice) {
-		this.costPrice = costPrice;
+	public void setStartLocation(String startLocation) {
+		this.startLocation = startLocation;
 	}
 
-	public Double getSellingPrice() {
-		return this.sellingPrice;
+	public String getEndLocation() {
+		return this.endLocation;
 	}
 
-	public void setSellingPrice(Double sellingPrice) {
-		this.sellingPrice = sellingPrice;
+	public void setEndLocation(String endLocation) {
+		this.endLocation = endLocation;
 	}
 
 	public String getUdf1() {
@@ -201,12 +194,12 @@ public class TollPrice implements java.io.Serializable {
 		this.flag5 = flag5;
 	}
 
-	public Integer getLastModifiedBy() {
-		return this.lastModifiedBy;
+	public Timestamp getCreatedOn() {
+		return this.createdOn;
 	}
 
-	public void setLastModifiedBy(Integer lastModifiedBy) {
-		this.lastModifiedBy = lastModifiedBy;
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Timestamp getLastModifiedOn() {
@@ -217,12 +210,12 @@ public class TollPrice implements java.io.Serializable {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
-	public Timestamp getCreatedOn() {
-		return this.createdOn;
+	public Integer getLastModifiedBy() {
+		return this.lastModifiedBy;
 	}
 
-	public void setCreatedOn(Timestamp createdOn) {
-		this.createdOn = createdOn;
+	public void setLastModifiedBy(Integer lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
 	}
 
 	public Integer getClientId() {
@@ -238,31 +231,28 @@ public class TollPrice implements java.io.Serializable {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof TollPrice))
+		if (!(other instanceof Road))
 			return false;
-		TollPrice castOther = (TollPrice) other;
+		Road castOther = (Road) other;
 
-		return ((this.getTollPriceId() == castOther.getTollPriceId()) || (this
-				.getTollPriceId() != null && castOther.getTollPriceId() != null && this
-				.getTollPriceId().equals(castOther.getTollPriceId())))
-				&& ((this.getTollLocationId() == castOther.getTollLocationId()) || (this
-						.getTollLocationId() != null
-						&& castOther.getTollLocationId() != null && this
-						.getTollLocationId().equals(
-								castOther.getTollLocationId())))
-				&& ((this.getVehicleTypeId() == castOther.getVehicleTypeId()) || (this
-						.getVehicleTypeId() != null
-						&& castOther.getVehicleTypeId() != null && this
-						.getVehicleTypeId()
-						.equals(castOther.getVehicleTypeId())))
-				&& ((this.getCostPrice() == castOther.getCostPrice()) || (this
-						.getCostPrice() != null
-						&& castOther.getCostPrice() != null && this
-						.getCostPrice().equals(castOther.getCostPrice())))
-				&& ((this.getSellingPrice() == castOther.getSellingPrice()) || (this
-						.getSellingPrice() != null
-						&& castOther.getSellingPrice() != null && this
-						.getSellingPrice().equals(castOther.getSellingPrice())))
+		return ((this.getRoadId() == castOther.getRoadId()) || (this
+				.getRoadId() != null && castOther.getRoadId() != null && this
+				.getRoadId().equals(castOther.getRoadId())))
+				&& ((this.getName() == castOther.getName()) || (this.getName() != null
+						&& castOther.getName() != null && this.getName()
+						.equals(castOther.getName())))
+				&& ((this.getType() == castOther.getType()) || (this.getType() != null
+						&& castOther.getType() != null && this.getType()
+						.equals(castOther.getType())))
+				&& ((this.getStartLocation() == castOther.getStartLocation()) || (this
+						.getStartLocation() != null
+						&& castOther.getStartLocation() != null && this
+						.getStartLocation()
+						.equals(castOther.getStartLocation())))
+				&& ((this.getEndLocation() == castOther.getEndLocation()) || (this
+						.getEndLocation() != null
+						&& castOther.getEndLocation() != null && this
+						.getEndLocation().equals(castOther.getEndLocation())))
 				&& ((this.getUdf1() == castOther.getUdf1()) || (this.getUdf1() != null
 						&& castOther.getUdf1() != null && this.getUdf1()
 						.equals(castOther.getUdf1())))
@@ -293,20 +283,20 @@ public class TollPrice implements java.io.Serializable {
 				&& ((this.getFlag5() == castOther.getFlag5()) || (this
 						.getFlag5() != null && castOther.getFlag5() != null && this
 						.getFlag5().equals(castOther.getFlag5())))
-				&& ((this.getLastModifiedBy() == castOther.getLastModifiedBy()) || (this
-						.getLastModifiedBy() != null
-						&& castOther.getLastModifiedBy() != null && this
-						.getLastModifiedBy().equals(
-								castOther.getLastModifiedBy())))
+				&& ((this.getCreatedOn() == castOther.getCreatedOn()) || (this
+						.getCreatedOn() != null
+						&& castOther.getCreatedOn() != null && this
+						.getCreatedOn().equals(castOther.getCreatedOn())))
 				&& ((this.getLastModifiedOn() == castOther.getLastModifiedOn()) || (this
 						.getLastModifiedOn() != null
 						&& castOther.getLastModifiedOn() != null && this
 						.getLastModifiedOn().equals(
 								castOther.getLastModifiedOn())))
-				&& ((this.getCreatedOn() == castOther.getCreatedOn()) || (this
-						.getCreatedOn() != null
-						&& castOther.getCreatedOn() != null && this
-						.getCreatedOn().equals(castOther.getCreatedOn())))
+				&& ((this.getLastModifiedBy() == castOther.getLastModifiedBy()) || (this
+						.getLastModifiedBy() != null
+						&& castOther.getLastModifiedBy() != null && this
+						.getLastModifiedBy().equals(
+								castOther.getLastModifiedBy())))
 				&& ((this.getClientId() == castOther.getClientId()) || (this
 						.getClientId() != null
 						&& castOther.getClientId() != null && this
@@ -316,23 +306,19 @@ public class TollPrice implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37
-				* result
-				+ (getTollPriceId() == null ? 0 : this.getTollPriceId()
-						.hashCode());
-		result = 37
-				* result
-				+ (getTollLocationId() == null ? 0 : this.getTollLocationId()
-						.hashCode());
-		result = 37
-				* result
-				+ (getVehicleTypeId() == null ? 0 : this.getVehicleTypeId()
-						.hashCode());
 		result = 37 * result
-				+ (getCostPrice() == null ? 0 : this.getCostPrice().hashCode());
+				+ (getRoadId() == null ? 0 : this.getRoadId().hashCode());
+		result = 37 * result
+				+ (getName() == null ? 0 : this.getName().hashCode());
+		result = 37 * result
+				+ (getType() == null ? 0 : this.getType().hashCode());
 		result = 37
 				* result
-				+ (getSellingPrice() == null ? 0 : this.getSellingPrice()
+				+ (getStartLocation() == null ? 0 : this.getStartLocation()
+						.hashCode());
+		result = 37
+				* result
+				+ (getEndLocation() == null ? 0 : this.getEndLocation()
 						.hashCode());
 		result = 37 * result
 				+ (getUdf1() == null ? 0 : this.getUdf1().hashCode());
@@ -354,16 +340,16 @@ public class TollPrice implements java.io.Serializable {
 				+ (getFlag4() == null ? 0 : this.getFlag4().hashCode());
 		result = 37 * result
 				+ (getFlag5() == null ? 0 : this.getFlag5().hashCode());
-		result = 37
-				* result
-				+ (getLastModifiedBy() == null ? 0 : this.getLastModifiedBy()
-						.hashCode());
+		result = 37 * result
+				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
 		result = 37
 				* result
 				+ (getLastModifiedOn() == null ? 0 : this.getLastModifiedOn()
 						.hashCode());
-		result = 37 * result
-				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
+		result = 37
+				* result
+				+ (getLastModifiedBy() == null ? 0 : this.getLastModifiedBy()
+						.hashCode());
 		result = 37 * result
 				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
 		return result;
