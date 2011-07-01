@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -12,6 +13,7 @@ import org.hibernate.Session;
 import com.mobisols.tollpayments.hibernate.CcType;
 import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
 import com.mobisols.tollpayments.hibernate.VehicleType;
+@Path("/CcTypeList")
 
 public class CcTypeListImpl implements CcTypeList {
 
