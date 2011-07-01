@@ -1,0 +1,689 @@
+Tmerge
+v7
+r0
+t331231926.997700
+cCheck dependencies
+cProcessInfoPlistFile /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Info.plist merge-Info.plist
+cPhaseScriptExecution "Check PhoneGap Reference" /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-30E9A9A110B758320022D3BA.sh
+cPhaseScriptExecution "Touch www folder" /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-304B58A110DAC018002A0835.sh
+cCpResource build/Debug-iphonesimulator/merge.app/www www
+cCpResource build/Debug-iphonesimulator/merge.app/VERSION /Users/User/Documents/PhoneGapLib/VERSION
+cCopyPlistFile /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PhoneGap.plist PhoneGap.plist
+cCpResource build/Debug-iphonesimulator/merge.app/PhoneGapBuildSettings.xcconfig PhoneGapBuildSettings.xcconfig
+cCpResource build/Debug-iphonesimulator/merge.app/icon-72.png Resources/icons/icon-72.png
+cCpResource build/Debug-iphonesimulator/merge.app/icon.png Resources/icons/icon.png
+cCpResource build/Debug-iphonesimulator/merge.app/icon@2x.png Resources/icons/icon@2x.png
+cCpResource build/Debug-iphonesimulator/merge.app/Default-Landscape.png Resources/splash/Default-Landscape.png
+cCpResource build/Debug-iphonesimulator/merge.app/Default-Portrait.png Resources/splash/Default-Portrait.png
+cCpResource build/Debug-iphonesimulator/merge.app/Default.png Resources/splash/Default.png
+cCpResource build/Debug-iphonesimulator/merge.app/Default@2x.png Resources/splash/Default@2x.png
+cCpResource build/Debug-iphonesimulator/merge.app/Capture.bundle Resources/Capture.bundle
+cCpResource build/Debug-iphonesimulator/merge.app/Default~ipad.png Resources/splash/Default~ipad.png
+cProcessPCH /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch.gch merge-Prefix.pch normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o /Users/User/Desktop/merge/Classes/../main.m normal i386 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/AppDelegate.o /Users/User/Desktop/merge/Classes/AppDelegate.m normal i386 objective-c com.apple.compilers.llvmgcc42
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk
+c000000004DF3B2600000000000000110
+t1307816544
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/AVFoundation.framework/AVFoundation
+c000000004D5EBEC300000000001340C0
+t1298054851
+s1261760
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVFoundation.h
+c000000004D5EBEBB00000000000007D0
+t1298054843
+s2000
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/AddressBook.framework/AddressBook
+c000000004D54D3440000000000078770
+t1297404740
+s493424
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/AddressBookUI.framework/AddressBookUI
+c000000004D5C9BB80000000000168430
+t1297914808
+s1475632
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004D54CF5D0000000000205F50
+t1297403741
+s2121552
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioServices.h
+c000000004D54CF4A0000000000010AD5
+t1297403722
+s68309
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CFNetwork.framework/CFNetwork
+c000000004D54CF7C00000000001C41F0
+t1297403772
+s1851888
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004D54CFFA00000000002999B0
+t1297403898
+s2726320
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
+c000000004D54DEBC00000000000778F0
+t1297407676
+s489712
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h
+c000000004D54DEB600000000000001D0
+t1297407670
+s464
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreMedia.framework/CoreMedia
+c000000004D5C9AE3000000000006A720
+t1297914595
+s436000
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D54CFE5000000000029DA70
+t1297403877
+s2742896
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D54CFB80000000000001466
+t1297403832
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/MediaPlayer.framework/MediaPlayer
+c000000004D5EBF5300000000001C31B0
+t1298054995
+s1847728
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices
+c000000004D54D0BC000000000005C090
+t1297404092
+s376976
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004D54D4200000000000162C50
+t1297404960
+s1453136
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration
+c000000004D54CF0700000000000689C0
+t1297403655
+s428480
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D5615B40000000000000AA1
+t1297487284
+s2721
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UINavigationController.h
+c000000004D5615B400000000000019AC
+t1297487284
+s6572
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004D5616030000000000766870
+t1297487363
+s7759984
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/usr/include/stdio.h
+c000000004D4F6E9A0000000000004763
+t1297051290
+s18275
+
+N/Users/User/Desktop/merge/Classes/../main.m
+c000000004E0DFB2C00000000000001E7
+t1309539116
+s487
+i<UIKit/UIKit.h>
+i<stdio.h>
+
+N/Users/User/Desktop/merge/Classes/AppDelegate.h
+c000000004E0DFB2C0000000000000639
+t1309539116
+s1593
+i<UIKit/UIKit.h>
+i<PhoneGap/PhoneGapDelegate.h>
+i"PhoneGapDelegate.h"
+
+N/Users/User/Desktop/merge/Classes/AppDelegate.m
+c000000004E0D4C9B0000000000000CEC
+t1309494427
+s3308
+i"AppDelegate.h"
+i<PhoneGap/PhoneGapViewController.h>
+i"PhoneGapViewController.h"
+
+N/Users/User/Desktop/merge/PhoneGap.plist
+c000000004E0D4C9B00000000000004CD
+t1309494427
+s1229
+
+N/Users/User/Desktop/merge/PhoneGapBuildSettings.xcconfig
+c000000004E0D4C9B00000000000000BF
+t1309494427
+s191
+
+N/Users/User/Desktop/merge/Resources/Capture.bundle
+c000000004E0D4C9C0000000000000242
+t1309494428
+s578
+
+N/Users/User/Desktop/merge/Resources/icons/icon-72.png
+c000000004E0D4C9C00000000000013B9
+t1309494428
+s5049
+
+N/Users/User/Desktop/merge/Resources/icons/icon.png
+c000000004E0D4C9C0000000000000C36
+t1309494428
+s3126
+
+N/Users/User/Desktop/merge/Resources/icons/icon@2x.png
+c000000004E0D4C9C00000000000014DC
+t1309494428
+s5340
+
+N/Users/User/Desktop/merge/Resources/splash/Default-Landscape.png
+c000000004E0D4C9C000000000000154E
+t1309494428
+s5454
+
+N/Users/User/Desktop/merge/Resources/splash/Default-Portrait.png
+c000000004E0D4C9C00000000000016C0
+t1309494428
+s5824
+
+N/Users/User/Desktop/merge/Resources/splash/Default.png
+c000000004E0D4C9C0000000000000BAE
+t1309494428
+s2990
+
+N/Users/User/Desktop/merge/Resources/splash/Default@2x.png
+c000000004E0D4C9C000000000000769A
+t1309494428
+s30362
+
+N/Users/User/Desktop/merge/Resources/splash/Default~ipad.png
+c000000004E0D4C9C00000000000016C0
+t1309494428
+s5824
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app
+t1309530087
+s612
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app.dSYM
+t1309530087
+s102
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Capture.bundle
+t1309508007
+s578
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Default-Landscape.png
+t1309508006
+s5454
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Default-Portrait.png
+t1309508006
+s5824
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Default.png
+t1309508006
+s2990
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Default@2x.png
+t1309508006
+s30362
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Default~ipad.png
+t1309508006
+s5824
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Info.plist
+t1309508004
+s927
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PhoneGap.plist
+t1309508006
+s403
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PhoneGapBuildSettings.xcconfig
+t1309508006
+s191
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PkgInfo
+t1309508004
+s8
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/VERSION
+t1309508005
+s13
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/icon-72.png
+t1309508006
+s5049
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/icon.png
+t1309508006
+s3126
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/icon@2x.png
+t1309508006
+s5340
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge
+t1309530087
+s494540
+
+N/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/www
+t1309530086
+s170
+
+N/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/AppDelegate.o
+t2
+s0
+
+N/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o
+t1309539126
+s3564
+
+N/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/merge.LinkFileList
+c000000004E0D81A400000000000000D9
+t1309508004
+s217
+
+N/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-304B58A110DAC018002A0835.sh
+c000000004E0D81A40000000000000027
+t1309508004
+s39
+
+N/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-30E9A9A110B758320022D3BA.sh
+c000000004E0D81A400000000000001C2
+t1309508004
+s450
+
+N/Users/User/Desktop/merge/main.m
+c000000004E0DD7DF00000000000001E7
+t1309530079
+s487
+i<UIKit/UIKit.h>
+i<stdio.h>
+
+N/Users/User/Desktop/merge/merge-Prefix.pch
+c000000004E0D4C9C00000000000000B3
+t1309494428
+s179
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/User/Desktop/merge/www
+c000000004E0DD7E600000000000000AA
+t1309530086
+s170
+
+N/Users/User/Documents/PhoneGapLib/Classes/DebugConsole.h
+c000000004E0A434F0000000000000163
+t1309295439
+s355
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+i"PGPlugin.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/JSON.h
+c000000004D11268000000000000008F9
+t1292969600
+s2297
+i"SBJSON.h"
+i"NSObject+SBJSON.h"
+i"NSString+SBJSON.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/NSObject+SBJSON.h
+c000000004D1126800000000000000A01
+t1292969600
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/NSString+SBJSON.h
+c000000004D1126800000000000000916
+t1292969600
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/SBJSON.h
+c000000004D1126800000000000000AED
+t1292969600
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/SBJsonBase.h
+c000000004D1126800000000000000B82
+t1292969600
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/SBJsonParser.h
+c000000004D1126800000000000000C0B
+t1292969600
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/JSON/SBJsonWriter.h
+c000000004D1126800000000000001140
+t1292969600
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/Location.h
+c000000004E0A434F0000000000000580
+t1309295439
+s1408
+i<UIKit/UIKit.h>
+i<CoreLocation/CoreLocation.h>
+i"PGPlugin.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/PGPlugin.h
+c000000004E0A434F00000000000003EF
+t1309295439
+s1007
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+i"PluginResult.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/PhoneGapDelegate.h
+c000000004E0A434F00000000000007EA
+t1309295439
+s2026
+i<UIKit/UIKit.h>
+i<CoreLocation/CoreLocation.h>
+i<UIKit/UINavigationController.h>
+i"JSON.h"
+i"Location.h"
+i"Sound.h"
+i"DebugConsole.h"
+
+N/Users/User/Documents/PhoneGapLib/Classes/PhoneGapViewController.h
+c000000004DB8B5FA000000000000021A
+t1303950842
+s538
+i<UIKit/UIKit.h>
+i<Foundation/Foundation.h>
+
+N/Users/User/Documents/PhoneGapLib/Classes/PluginResult.h
+c000000004E0A434F0000000000000979
+t1309295439
+s2425
+i<Foundation/Foundation.h>
+
+N/Users/User/Documents/PhoneGapLib/Classes/Sound.h
+c000000004E0A434F00000000000006F6
+t1309295439
+s1782
+i<Foundation/Foundation.h>
+i<AudioToolbox/AudioServices.h>
+i<AVFoundation/AVFoundation.h>
+i"PGPlugin.h"
+
+N/Users/User/Documents/PhoneGapLib/VERSION
+c000000004E0A43D5000000000000000D
+t1309295573
+s13
+
+N/Users/User/Documents/PhoneGapLib/build/Debug-iphonesimulator/libPhoneGap.a
+c000000004E0BE1BE00000000001A3A58
+t1309401534
+s1718872
+
+N/var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch.gch
+t1309508009
+s12262832
+
+Nmerge-Info.plist
+c000000004E0D4C9C00000000000005C0
+t1309494428
+s1472
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies331231923#331231923#0(0"0(0#1#0"8622376608#0"0#
+
+CCompileC build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/AppDelegate.o /Users/User/Desktop/merge/Classes/AppDelegate.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s331231926.140985
+e331231926.997627
+r0
+xCompileC
+xbuild/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/AppDelegate.o
+x/Users/User/Desktop/merge/Classes/AppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+oIn file included from /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h:13,
+o                 from /Users/User/Documents/PhoneGapLib/Classes/PhoneGapDelegate.h:10,
+o                 from /Users/User/Desktop/merge/Classes/AppDelegate.h:16,
+o                 from /Users/User/Desktop/merge/Classes/AppDelegate.m:9:
+o/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CLErrorDomain.h:18: error: expected ';' before 'extern'
+o/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: property 'db' requires method '-db' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: incomplete implementation of class 'AppDelegate'
+o/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: method definition for '-purge_database' not found
+o/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: method definition for '-handle_error:do_abort:' not found
+lSLF07#2@55"Compile /Users/User/Desktop/merge/Classes/AppDelegate.m331231926#331231926#0(1131"In file included from /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h:13,                 from /Users/User/Documents/PhoneGapLib/Classes/PhoneGapDelegate.h:10,                 from /Users/User/Desktop/merge/Classes/AppDelegate.h:16,                 from /Users/User/Desktop/merge/Classes/AppDelegate.m:9:/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CLErrorDomain.h:18: error: expected ';' before 'extern'/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: property 'db' requires method '-db' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: incomplete implementation of class 'AppDelegate'/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: method definition for '-purge_database' not found/Users/User/Desktop/merge/Classes/AppDelegate.m:114: warning: method definition for '-handle_error:do_abort:' not found5(4@28"Expected ';' before 'extern'331231926#416#197#5(7@69"In file included from /Users/User/Desktop/merge/Classes/AppDelegate.m331231926#18446744073709551615#0#0(6@47"/Users/User/Desktop/merge/Classes/AppDelegate.m331187227#9#0#9#0#0"0(7@69"In file included from /Users/User/Desktop/merge/Classes/AppDelegate.h331231926#18446744073709551615#0#0(6@47"/Users/User/Desktop/merge/Classes/AppDelegate.h331231916#16#0#16#0#0"0(7@82"In file included from /Users/User/Documents/PhoneGapLib/Classes/PhoneGapDelegate.h331231926#18446744073709551615#0#0(6@60"/Users/User/Documents/PhoneGapLib/Classes/PhoneGapDelegate.h330988239#10#0#10#0#0"0(7@177"In file included from /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h331231926#18446744073709551615#0#0(6@155"/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h319100470#13#0#13#0#0"0(13@188"Expected ';' before 'extern' in /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CLErrorDomain.h331231926#18446744073709551615#0#0(6@156"/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CLErrorDomain.h319100470#18#0#18#0#0"0(6@156"/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CLErrorDomain.h319100470#18#0#18#0#19"expected * before *0(22@112"Property 'db' requires method '-db' to be defined - use @synthesize, @dynamic or provide a method implementation331231926#613#175#0(6@47"/Users/User/Desktop/merge/Classes/AppDelegate.m331187227#114#0#114#0#0"0(22@48"Incomplete implementation of class 'AppDelegate'331231926#788#111#0(6@47"/Users/User/Desktop/merge/Classes/AppDelegate.m331187227#114#0#114#0#38"incomplete implementation of class '*'0(22@49"Method definition for '-purge_database' not found331231926#899#112#0(6@47"/Users/User/Desktop/merge/Classes/AppDelegate.m331187227#114#0#114#0#35"method definition for '*' not found0(22@57"Method definition for '-handle_error:do_abort:' not found331231926#1011#120#0(6@47"/Users/User/Desktop/merge/Classes/AppDelegate.m331187227#114#0#114#0#35"method definition for '*' not found0(0#0#47"/Users/User/Desktop/merge/Classes/AppDelegate.m8625000032#1861"    cd /Users/User/Desktop/merge    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-generated-files.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-own-target-headers.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-all-target-headers.hmap -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-project-headers.hmap -F/Users/User/Desktop/merge/build/Debug-iphonesimulator -iquote/Users/User/Documents/PhoneGapLib/Classes/JSON -iquote/Users/User/Documents/PhoneGapLib/Classes -I/Users/User/Desktop/merge/build/Debug-iphonesimulator/include -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources/i386 -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources -include /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch -c /Users/User/Desktop/merge/Classes/AppDelegate.m -o /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/AppDelegate.o1#
+
+CCompileC build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o /Users/User/Desktop/merge/Classes/../main.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s331231924.025023
+e331231926.140680
+r1
+xCompileC
+xbuild/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o
+x/Users/User/Desktop/merge/Classes/../main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@51"Compile /Users/User/Desktop/merge/Classes/../main.m331231924#331231926#0(0"0(0#0#43"/Users/User/Desktop/merge/Classes/../main.m8623704352#1850"    cd /Users/User/Desktop/merge    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-generated-files.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-own-target-headers.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-all-target-headers.hmap -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-project-headers.hmap -F/Users/User/Desktop/merge/build/Debug-iphonesimulator -iquote/Users/User/Documents/PhoneGapLib/Classes/JSON -iquote/Users/User/Documents/PhoneGapLib/Classes -I/Users/User/Desktop/merge/build/Debug-iphonesimulator/include -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources/i386 -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources -include /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch -c /Users/User/Desktop/merge/Classes/../main.m -o /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o0#
+
+CCompileC build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o /Users/User/Desktop/merge/main.m normal i386 objective-c com.apple.compilers.llvmgcc42
+s331222886.745297
+e331222887.364698
+r1
+xCompileC
+xbuild/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o
+x/Users/User/Desktop/merge/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@40"Compile /Users/User/Desktop/merge/main.m331222886#331222887#0(0"0(0#0#32"/Users/User/Desktop/merge/main.m8625558464#1839"    cd /Users/User/Desktop/merge    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-generated-files.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-own-target-headers.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-all-target-headers.hmap -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-project-headers.hmap -F/Users/User/Desktop/merge/build/Debug-iphonesimulator -iquote/Users/User/Documents/PhoneGapLib/Classes/JSON -iquote/Users/User/Documents/PhoneGapLib/Classes -I/Users/User/Desktop/merge/build/Debug-iphonesimulator/include -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources/i386 -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources -include /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch -c /Users/User/Desktop/merge/main.m -o /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/main.o0#
+
+CCopyPlistFile /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PhoneGap.plist PhoneGap.plist
+s331200805.169891
+e331200806.050778
+r1
+xCopyPlistFile
+x/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PhoneGap.plist
+xPhoneGap.plist
+lSLF07#2@19"Copy PhoneGap.plist331200805#331200806#0(0"0(0#0#40"/Users/User/Desktop/merge/PhoneGap.plist8614529184#361"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 PhoneGap.plist --outdir /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/Capture.bundle Resources/Capture.bundle
+s331200806.074578
+e331200807.054245
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/Capture.bundle
+xResources/Capture.bundle
+lSLF07#2@29"Copy Resources/Capture.bundle331200806#331200807#0(0"0(0#0#50"/Users/User/Desktop/merge/Resources/Capture.bundle8607366176#441"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/Capture.bundle /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/Default-Landscape.png Resources/splash/Default-Landscape.png
+s331200806.061891
+e331200806.377388
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/Default-Landscape.png
+xResources/splash/Default-Landscape.png
+lSLF07#2@43"Copy Resources/splash/Default-Landscape.png331200806#331200806#0(0"0(0#0#64"/Users/User/Desktop/merge/Resources/splash/Default-Landscape.png8614886048#455"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/splash/Default-Landscape.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/Default-Portrait.png Resources/splash/Default-Portrait.png
+s331200806.065132
+e331200806.375105
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/Default-Portrait.png
+xResources/splash/Default-Portrait.png
+lSLF07#2@42"Copy Resources/splash/Default-Portrait.png331200806#331200806#0(0"0(0#0#63"/Users/User/Desktop/merge/Resources/splash/Default-Portrait.png8614642656#454"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/splash/Default-Portrait.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/Default.png Resources/splash/Default.png
+s331200806.069271
+e331200806.382400
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/Default.png
+xResources/splash/Default.png
+lSLF07#2@33"Copy Resources/splash/Default.png331200806#331200806#0(0"0(0#0#54"/Users/User/Desktop/merge/Resources/splash/Default.png8614459136#445"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/splash/Default.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/Default@2x.png Resources/splash/Default@2x.png
+s331200806.071985
+e331200806.379850
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/Default@2x.png
+xResources/splash/Default@2x.png
+lSLF07#2@36"Copy Resources/splash/Default@2x.png331200806#331200806#0(0"0(0#0#57"/Users/User/Desktop/merge/Resources/splash/Default@2x.png8611858944#448"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/splash/Default@2x.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/Default~ipad.png Resources/splash/Default~ipad.png
+s331200806.079469
+e331200806.513743
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/Default~ipad.png
+xResources/splash/Default~ipad.png
+lSLF07#2@38"Copy Resources/splash/Default~ipad.png331200806#331200806#0(0"0(0#0#59"/Users/User/Desktop/merge/Resources/splash/Default~ipad.png8604565408#450"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/splash/Default~ipad.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/PhoneGapBuildSettings.xcconfig PhoneGapBuildSettings.xcconfig
+s331200806.050869
+e331200806.244817
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/PhoneGapBuildSettings.xcconfig
+xPhoneGapBuildSettings.xcconfig
+lSLF07#2@35"Copy PhoneGapBuildSettings.xcconfig331200806#331200806#0(0"0(0#0#56"/Users/User/Desktop/merge/PhoneGapBuildSettings.xcconfig8618429216#447"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/PhoneGapBuildSettings.xcconfig /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/VERSION /Users/User/Documents/PhoneGapLib/VERSION
+s331200805.164369
+e331200805.215302
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/VERSION
+x/Users/User/Documents/PhoneGapLib/VERSION
+lSLF07#2@46"Copy /Users/User/Documents/PhoneGapLib/VERSION331200805#331200805#0(0"0(0#0#41"/Users/User/Documents/PhoneGapLib/VERSION8614636704#432"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Documents/PhoneGapLib/VERSION /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/icon-72.png Resources/icons/icon-72.png
+s331200806.054395
+e331200806.287493
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/icon-72.png
+xResources/icons/icon-72.png
+lSLF07#2@32"Copy Resources/icons/icon-72.png331200806#331200806#0(0"0(0#0#53"/Users/User/Desktop/merge/Resources/icons/icon-72.png8614641632#444"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/icons/icon-72.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/icon.png Resources/icons/icon.png
+s331200806.056844
+e331200806.333408
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/icon.png
+xResources/icons/icon.png
+lSLF07#2@29"Copy Resources/icons/icon.png331200806#331200806#0(0"0(0#0#50"/Users/User/Desktop/merge/Resources/icons/icon.png8617083328#441"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/icons/icon.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/icon@2x.png Resources/icons/icon@2x.png
+s331200806.059280
+e331200806.339876
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/icon@2x.png
+xResources/icons/icon@2x.png
+lSLF07#2@32"Copy Resources/icons/icon@2x.png331200806#331200806#0(0"0(0#0#53"/Users/User/Desktop/merge/Resources/icons/icon@2x.png8616406016#444"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/Resources/icons/icon@2x.png /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CCpResource build/Debug-iphonesimulator/merge.app/www www
+s331222886.682276
+e331222886.745018
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/merge.app/www
+xwww
+lSLF07#2@8"Copy www331222886#331222886#0(0"0(0#0#29"/Users/User/Desktop/merge/www8607438912#420"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/User/Desktop/merge/www /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
+CGenerateDSYMFile /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app.dSYM /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge
+s331222887.646347
+e331222887.982672
+r1
+xGenerateDSYMFile
+x/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app.dSYM
+x/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge
+lSLF07#2@103"GenerateDSYMFile build/Debug-iphonesimulator/merge.app.dSYM build/Debug-iphonesimulator/merge.app/merge331222887#331222887#0(0"0(0#0#69"/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge8624029184#338"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge -o /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app.dSYM0#
+
+CLd /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge normal i386
+s331222887.364886
+e331222887.644422
+r1
+xLd
+x/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge
+xnormal
+xi386
+lSLF07#2@74"Link /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge331222887#331222887#0(0"0(0#0#0"8626401280#1196"    cd /Users/User/Desktop/merge    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -L/Users/User/Desktop/merge/build/Debug-iphonesimulator -F/Users/User/Desktop/merge/build/Debug-iphonesimulator -filelist /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/merge.LinkFileList -mmacosx-version-min=10.6 -all_load -Obj-C -Xlinker -objc_abi_version -Xlinker 2 /Users/User/Documents/PhoneGapLib/build/Debug-iphonesimulator/libPhoneGap.a -framework Foundation -framework UIKit -framework CoreGraphics -framework AddressBook -framework AddressBookUI -framework AudioToolbox -framework AVFoundation -framework CFNetwork -framework CoreLocation -framework MediaPlayer -framework QuartzCore -framework SystemConfiguration -framework MobileCoreServices -weak_framework CoreMedia -o /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/merge0#
+
+CPhaseScriptExecution "Check PhoneGap Reference" /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-30E9A9A110B758320022D3BA.sh
+s331231923.770830
+e331231923.918529
+r1
+xPhaseScriptExecution
+xCheck PhoneGap Reference
+x/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-30E9A9A110B758320022D3BA.sh
+o/Users/User/Desktop/merge/www/index.html
+lSLF07#2@50"Run custom shell script 'Check PhoneGap Reference'331231923#331231923#0(41"/Users/User/Desktop/merge/www/index.html1(13@41"/Users/User/Desktop/merge/www/index.html331231923#0#41#0(1@0"0(0#0#0"8628518112#16736"    cd /Users/User/Desktop/merge    setenv ACTION build    setenv ALTERNATE_GROUP staff    setenv ALTERNATE_MODE u+w,go-w,a+rX    setenv ALTERNATE_OWNER User    setenv ALWAYS_SEARCH_USER_PATHS NO    setenv APPLE_INTERNAL_DEVELOPER_DIR /AppleInternal/Developer    setenv APPLE_INTERNAL_DIR /AppleInternal    setenv APPLE_INTERNAL_DOCUMENTATION_DIR /AppleInternal/Documentation    setenv APPLE_INTERNAL_LIBRARY_DIR /AppleInternal/Library    setenv APPLE_INTERNAL_TOOLS /AppleInternal/Developer/Tools    setenv APPLY_RULES_IN_COPY_FILES NO    setenv ARCHS i386    setenv ARCHS_STANDARD_32_BIT i386    setenv ARCHS_UNIVERSAL_IPHONE_OS i386    setenv BUILD_COMPONENTS "headers build"    setenv BUILD_DIR /Users/User/Desktop/merge/build    setenv BUILD_ROOT /Users/User/Desktop/merge/build    setenv BUILD_STYLE Debug    setenv BUILD_VARIANTS normal    setenv BUILT_PRODUCTS_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv CACHE_ROOT /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501    setenv CCHROOT /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501    setenv CHMOD /bin/chmod    setenv CHOWN /usr/sbin/chown    setenv CLASS_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/JavaClasses    setenv CLEAN_PRECOMPS YES    setenv CLONE_HEADERS NO    setenv CODESIGNING_FOLDER_PATH /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app    setenv CODE_SIGN_CONTEXT_CLASS XCCodeSignContext    setenv COMMAND_MODE legacy    setenv COMPOSITE_SDK_DIRS /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/CompositeSDKs    setenv COMPRESS_PNG_FILES YES    setenv CONFIGURATION Debug    setenv CONFIGURATION_BUILD_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv CONFIGURATION_TEMP_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator    setenv CONTENTS_FOLDER_PATH merge.app    setenv COPYING_PRESERVES_HFS_DATA NO    setenv COPY_PHASE_STRIP NO    setenv COPY_RESOURCES_FROM_STATIC_FRAMEWORKS YES    setenv CP /bin/cp    setenv CURRENT_ARCH i386    setenv CURRENT_VARIANT normal    setenv DEAD_CODE_STRIPPING NO    setenv DEBUGGING_SYMBOLS YES    setenv DEBUG_INFORMATION_FORMAT dwarf-with-dsym    setenv DEPLOYMENT_LOCATION NO    setenv DEPLOYMENT_POSTPROCESSING NO    setenv DERIVED_FILES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources    setenv DERIVED_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources    setenv DERIVED_SOURCES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources    setenv DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv DEVELOPER_BIN_DIR /Developer/usr/bin    setenv DEVELOPER_DIR /Developer    setenv DEVELOPER_FRAMEWORKS_DIR /Developer/Library/Frameworks    setenv DEVELOPER_FRAMEWORKS_DIR_QUOTED "\"/Developer/Library/Frameworks\""    setenv DEVELOPER_LIBRARY_DIR /Developer/Library    setenv DEVELOPER_SDK_DIR /Developer/SDKs    setenv DEVELOPER_TOOLS_DIR /Developer/Tools    setenv DEVELOPER_USR_DIR /Developer/usr    setenv DEVELOPMENT_LANGUAGE English    setenv DOCUMENTATION_FOLDER_PATH merge.app/English.lproj/Documentation    setenv DO_HEADER_SCANNING_IN_JAM NO    setenv DSTROOT /tmp/merge.dst    setenv DWARF_DSYM_FILE_NAME merge.app.dSYM    setenv DWARF_DSYM_FOLDER_PATH /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv EFFECTIVE_PLATFORM_NAME -iphonesimulator    setenv ENABLE_HEADER_DEPENDENCIES YES    setenv ENABLE_OPENMP_SUPPORT NO    setenv EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS ".svn .git CVS"    setenv EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES "*.nib *.lproj *.framework *.gch (*) CVS .svn .git *.xcodeproj *.xcode *.pbproj *.pbxproj"    setenv EXECUTABLES_FOLDER_PATH merge.app/Executables    setenv EXECUTABLE_FOLDER_PATH merge.app    setenv EXECUTABLE_NAME merge    setenv EXECUTABLE_PATH merge.app/merge    setenv FILE_LIST /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects/LinkFileList    setenv FIXED_FILES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/FixedFiles    setenv FRAMEWORKS_FOLDER_PATH merge.app/Frameworks    setenv FRAMEWORK_FLAG_PREFIX -framework    setenv FRAMEWORK_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator\" "    setenv FRAMEWORK_VERSION A    setenv FULL_PRODUCT_NAME merge.app    setenv GCC3_VERSION 3.3    setenv GCC_C_LANGUAGE_STANDARD c99    setenv GCC_DYNAMIC_NO_PIC NO    setenv GCC_INLINES_ARE_PRIVATE_EXTERN YES    setenv GCC_OBJC_LEGACY_DISPATCH YES    setenv GCC_OPTIMIZATION_LEVEL 0    setenv GCC_PFE_FILE_C_DIALECTS "c objective-c c++ objective-c++"    setenv GCC_PRECOMPILE_PREFIX_HEADER YES    setenv GCC_PREFIX_HEADER merge-Prefix.pch    setenv GCC_SYMBOLS_PRIVATE_EXTERN YES    setenv GCC_TREAT_WARNINGS_AS_ERRORS NO    setenv GCC_VERSION com.apple.compilers.llvmgcc42    setenv GCC_VERSION_IDENTIFIER com_apple_compilers_llvmgcc42    setenv GCC_WARN_ABOUT_RETURN_TYPE YES    setenv GCC_WARN_UNUSED_VARIABLE YES    setenv GENERATE_MASTER_OBJECT_FILE NO    setenv GENERATE_PKGINFO_FILE YES    setenv GENERATE_PROFILING_CODE NO    setenv GID 20    setenv GROUP staff    setenv HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT YES    setenv HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES YES    setenv HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS YES    setenv HEADERMAP_INCLUDES_PROJECT_HEADERS YES    setenv HEADER_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator/include\" "    setenv ICONV /usr/bin/iconv    setenv INFOPLIST_EXPAND_BUILD_SETTINGS YES    setenv INFOPLIST_FILE merge-Info.plist    setenv INFOPLIST_OUTPUT_FORMAT binary    setenv INFOPLIST_PATH merge.app/Info.plist    setenv INFOPLIST_PREPROCESS NO    setenv INFOSTRINGS_PATH merge.app/English.lproj/InfoPlist.strings    setenv INSTALL_DIR /tmp/merge.dst/Applications    setenv INSTALL_GROUP staff    setenv INSTALL_MODE_FLAG u+w,go-w,a+rX    setenv INSTALL_OWNER User    setenv INSTALL_PATH /Applications    setenv INSTALL_ROOT /tmp/merge.dst    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv JAVAC_DEFAULT_FLAGS "-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8"    setenv JAVA_APP_STUB /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub    setenv JAVA_ARCHIVE_CLASSES YES    setenv JAVA_ARCHIVE_TYPE JAR    setenv JAVA_COMPILER /usr/bin/javac    setenv JAVA_FOLDER_PATH merge.app/Java    setenv JAVA_FRAMEWORK_RESOURCES_DIRS Resources    setenv JAVA_JAR_FLAGS cv    setenv JAVA_SOURCE_SUBDIR .    setenv JAVA_USE_DEPENDENCIES YES    setenv JAVA_ZIP_FLAGS -urg    setenv JIKES_DEFAULT_FLAGS "+E +OLDCSO"    setenv KEEP_PRIVATE_EXTERNS NO    setenv LD_GENERATE_MAP_FILE NO    setenv LD_MAP_FILE_PATH /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-LinkMap-normal-i386.txt    setenv LD_OPENMP_FLAGS -fopenmp    setenv LEX /Developer/usr/bin/lex    setenv LIBRARY_FLAG_NOSPACE YES    setenv LIBRARY_FLAG_PREFIX -l    setenv LIBRARY_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator\" "    setenv LINKER_DISPLAYS_MANGLED_NAMES NO    setenv LINK_FILE_LIST_normal_i386 /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/merge.LinkFileList    setenv LINK_WITH_STANDARD_LIBRARIES YES    setenv LOCALIZED_RESOURCES_FOLDER_PATH merge.app/English.lproj    setenv LOCAL_ADMIN_APPS_DIR /Applications/Utilities    setenv LOCAL_APPS_DIR /Applications    setenv LOCAL_DEVELOPER_DIR /Library/Developer    setenv LOCAL_LIBRARY_DIR /Library    setenv MACH_O_TYPE mh_execute    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv MAC_OS_X_PRODUCT_BUILD_VERSION 10J869    setenv MAC_OS_X_VERSION_ACTUAL 1067    setenv MAC_OS_X_VERSION_MAJOR 1060    setenv MAC_OS_X_VERSION_MINOR 0607    setenv NATIVE_ARCH i386    setenv NATIVE_ARCH_32_BIT i386    setenv NATIVE_ARCH_64_BIT x86_64    setenv NATIVE_ARCH_ACTUAL x86_64    setenv NO_COMMON YES    setenv OBJC_ABI_VERSION 2    setenv OBJECT_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects    setenv OBJECT_FILE_DIR_normal /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal    setenv OBJROOT /Users/User/Desktop/merge/build    setenv ONLY_ACTIVE_ARCH NO    setenv OPTIMIZATION_LEVEL 0    setenv OS MACOS    setenv OSAC /usr/bin/osacompile    setenv OTHER_LDFLAGS "-all_load -Obj-C"    setenv PACKAGE_TYPE com.apple.package-type.wrapper.application    setenv PASCAL_STRINGS YES    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES "/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms"    setenv PBDEVELOPMENTPLIST_PATH merge.app/pbdevelopment.plist    setenv PFE_FILE_C_DIALECTS objective-c    setenv PHONEGAPLIB /Users/User/Documents/PhoneGapLib    setenv PKGINFO_FILE_PATH /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/PkgInfo    setenv PKGINFO_PATH merge.app/PkgInfo    setenv PLATFORM_DEVELOPER_APPLICATIONS_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/Applications    setenv PLATFORM_DEVELOPER_BIN_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin    setenv PLATFORM_DEVELOPER_LIBRARY_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/Library    setenv PLATFORM_DEVELOPER_SDK_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs    setenv PLATFORM_DEVELOPER_TOOLS_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/Tools    setenv PLATFORM_DEVELOPER_USR_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/usr    setenv PLATFORM_DIR /Developer/Platforms/iPhoneSimulator.platform    setenv PLATFORM_NAME iphonesimulator    setenv PLATFORM_PRODUCT_BUILD_VERSION 8F192    setenv PLATFORM_VERSION_AVAILABILITY_H_FORMAT 40300    setenv PLIST_FILE_OUTPUT_FORMAT binary    setenv PLUGINS_FOLDER_PATH merge.app/PlugIns    setenv PREBINDING NO    setenv PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR YES    setenv PRECOMP_DESTINATION_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/PrefixHeaders    setenv PRESERVE_DEAD_CODE_INITS_AND_TERMS NO    setenv PRIVATE_HEADERS_FOLDER_PATH merge.app/PrivateHeaders    setenv PRODUCT_NAME merge    setenv PRODUCT_SETTINGS_PATH /Users/User/Desktop/merge/merge-Info.plist    setenv PRODUCT_TYPE com.apple.product-type.application    setenv PROFILING_CODE NO    setenv PROJECT merge    setenv PROJECT_DERIVED_FILE_DIR /Users/User/Desktop/merge/build/merge.build/DerivedSources    setenv PROJECT_DIR /Users/User/Desktop/merge    setenv PROJECT_FILE_PATH /Users/User/Desktop/merge/merge.xcodeproj    setenv PROJECT_NAME merge    setenv PROJECT_TEMP_DIR /Users/User/Desktop/merge/build/merge.build    setenv PUBLIC_HEADERS_FOLDER_PATH merge.app/Headers    setenv RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS YES    setenv REMOVE_CVS_FROM_RESOURCES YES    setenv REMOVE_GIT_FROM_RESOURCES YES    setenv REMOVE_SVN_FROM_RESOURCES YES    setenv REZ_COLLECTOR_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/ResourceManagerResources    setenv REZ_OBJECTS_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/ResourceManagerResources/Objects    setenv REZ_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator\" "    setenv RUN_CLANG_STATIC_ANALYZER NO    setenv SCAN_ALL_SOURCE_FILES_FOR_INCLUDES NO    setenv SCRIPTS_FOLDER_PATH merge.app/Scripts    setenv SCRIPT_INPUT_FILE_COUNT 0    setenv SCRIPT_OUTPUT_FILE_COUNT 0    setenv SDKROOT /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk    setenv SDK_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk    setenv SDK_NAME iphonesimulator4.3    setenv SDK_PRODUCT_BUILD_VERSION 8F192    setenv SED /usr/bin/sed    setenv SEPARATE_STRIP NO    setenv SEPARATE_SYMBOL_EDIT NO    setenv SET_DIR_MODE_OWNER_GROUP YES    setenv SET_FILE_MODE_OWNER_GROUP NO    setenv SHALLOW_BUNDLE YES    setenv SHARED_DERIVED_FILE_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator/DerivedSources    setenv SHARED_FRAMEWORKS_FOLDER_PATH merge.app/SharedFrameworks    setenv SHARED_PRECOMPS_DIR /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders    setenv SHARED_SUPPORT_FOLDER_PATH merge.app/SharedSupport    setenv SKIP_INSTALL YES    setenv SOURCE_ROOT /Users/User/Desktop/merge    setenv SRCROOT /Users/User/Desktop/merge    setenv STANDARD_C_PLUS_PLUS_LIBRARY_TYPE dynamic    setenv STRINGS_FILE_OUTPUT_ENCODING binary    setenv STRIP_INSTALLED_PRODUCT YES    setenv STRIP_STYLE all    setenv SUPPORTED_DEVICE_FAMILIES "1 2"    setenv SYMBOL_REPOSITORY_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/SymbolRepositories    setenv SYMROOT /Users/User/Desktop/merge/build    setenv SYSTEM_ADMIN_APPS_DIR /Applications/Utilities    setenv SYSTEM_APPS_DIR /Applications    setenv SYSTEM_CORE_SERVICES_DIR /System/Library/CoreServices    setenv SYSTEM_DEMOS_DIR /Applications/Extras    setenv SYSTEM_DEVELOPER_APPS_DIR /Developer/Applications    setenv SYSTEM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv SYSTEM_DEVELOPER_DEMOS_DIR "/Developer/Applications/Utilities/Built Examples"    setenv SYSTEM_DEVELOPER_DIR /Developer    setenv SYSTEM_DEVELOPER_DOC_DIR "/Developer/ADC Reference Library"    setenv SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR "/Developer/Applications/Graphics Tools"    setenv SYSTEM_DEVELOPER_JAVA_TOOLS_DIR "/Developer/Applications/Java Tools"    setenv SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR "/Developer/Applications/Performance Tools"    setenv SYSTEM_DEVELOPER_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes"    setenv SYSTEM_DEVELOPER_TOOLS /Developer/Tools    setenv SYSTEM_DEVELOPER_TOOLS_DOC_DIR "/Developer/ADC Reference Library/documentation/DeveloperTools"    setenv SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes/DeveloperTools"    setenv SYSTEM_DEVELOPER_USR_DIR /Developer/usr    setenv SYSTEM_DEVELOPER_UTILITIES_DIR /Developer/Applications/Utilities    setenv SYSTEM_DOCUMENTATION_DIR /Library/Documentation    setenv SYSTEM_LIBRARY_DIR /System/Library    setenv TARGETED_DEVICE_FAMILY 1    setenv TARGETNAME merge    setenv TARGET_BUILD_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv TARGET_NAME merge    setenv TARGET_TEMP_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_FILES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_ROOT /Users/User/Desktop/merge/build    setenv UID 501    setenv UNLOCALIZED_RESOURCES_FOLDER_PATH merge.app    setenv UNSTRIPPED_PRODUCT NO    setenv USER User    setenv USER_APPS_DIR /Users/User/Applications    setenv USER_HEADER_SEARCH_PATHS "\"/Users/User/Documents/PhoneGapLib/Classes/JSON\" \"/Users/User/Documents/PhoneGapLib/Classes\""    setenv USER_LIBRARY_DIR /Users/User/Library    setenv USE_DYNAMIC_NO_PIC YES    setenv USE_HEADERMAP YES    setenv USE_HEADER_SYMLINKS NO    setenv VALIDATE_PRODUCT NO    setenv VALID_ARCHS i386    setenv VERBOSE_PBXCP NO    setenv VERSIONPLIST_PATH merge.app/version.plist    setenv VERSION_INFO_BUILDER User    setenv VERSION_INFO_FILE merge_vers.c    setenv VERSION_INFO_STRING "\"@(#)PROGRAM:merge  PROJECT:merge-\""    setenv WRAPPER_EXTENSION app    setenv WRAPPER_NAME merge.app    setenv WRAPPER_SUFFIX .app    setenv XCODE_APP_SUPPORT_DIR /Developer/Library/Xcode    setenv XCODE_PRODUCT_BUILD_VERSION 10M2518    setenv XCODE_VERSION_ACTUAL 0400    setenv XCODE_VERSION_MAJOR 0400    setenv XCODE_VERSION_MINOR 0400    setenv YACC /Developer/usr/bin/yacc    setenv _REAL_SDKROOT iphoneos    /bin/sh -c /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-30E9A9A110B758320022D3BA.sh0#
+
+CPhaseScriptExecution "Touch www folder" /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-304B58A110DAC018002A0835.sh
+s331231923.918611
+e331231924.024179
+r1
+xPhaseScriptExecution
+xTouch www folder
+x/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-304B58A110DAC018002A0835.sh
+lSLF07#2@42"Run custom shell script 'Touch www folder'331231923#331231924#0(0"0(0#0#0"8627821440#16736"    cd /Users/User/Desktop/merge    setenv ACTION build    setenv ALTERNATE_GROUP staff    setenv ALTERNATE_MODE u+w,go-w,a+rX    setenv ALTERNATE_OWNER User    setenv ALWAYS_SEARCH_USER_PATHS NO    setenv APPLE_INTERNAL_DEVELOPER_DIR /AppleInternal/Developer    setenv APPLE_INTERNAL_DIR /AppleInternal    setenv APPLE_INTERNAL_DOCUMENTATION_DIR /AppleInternal/Documentation    setenv APPLE_INTERNAL_LIBRARY_DIR /AppleInternal/Library    setenv APPLE_INTERNAL_TOOLS /AppleInternal/Developer/Tools    setenv APPLY_RULES_IN_COPY_FILES NO    setenv ARCHS i386    setenv ARCHS_STANDARD_32_BIT i386    setenv ARCHS_UNIVERSAL_IPHONE_OS i386    setenv BUILD_COMPONENTS "headers build"    setenv BUILD_DIR /Users/User/Desktop/merge/build    setenv BUILD_ROOT /Users/User/Desktop/merge/build    setenv BUILD_STYLE Debug    setenv BUILD_VARIANTS normal    setenv BUILT_PRODUCTS_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv CACHE_ROOT /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501    setenv CCHROOT /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501    setenv CHMOD /bin/chmod    setenv CHOWN /usr/sbin/chown    setenv CLASS_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/JavaClasses    setenv CLEAN_PRECOMPS YES    setenv CLONE_HEADERS NO    setenv CODESIGNING_FOLDER_PATH /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app    setenv CODE_SIGN_CONTEXT_CLASS XCCodeSignContext    setenv COMMAND_MODE legacy    setenv COMPOSITE_SDK_DIRS /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/CompositeSDKs    setenv COMPRESS_PNG_FILES YES    setenv CONFIGURATION Debug    setenv CONFIGURATION_BUILD_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv CONFIGURATION_TEMP_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator    setenv CONTENTS_FOLDER_PATH merge.app    setenv COPYING_PRESERVES_HFS_DATA NO    setenv COPY_PHASE_STRIP NO    setenv COPY_RESOURCES_FROM_STATIC_FRAMEWORKS YES    setenv CP /bin/cp    setenv CURRENT_ARCH i386    setenv CURRENT_VARIANT normal    setenv DEAD_CODE_STRIPPING NO    setenv DEBUGGING_SYMBOLS YES    setenv DEBUG_INFORMATION_FORMAT dwarf-with-dsym    setenv DEPLOYMENT_LOCATION NO    setenv DEPLOYMENT_POSTPROCESSING NO    setenv DERIVED_FILES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources    setenv DERIVED_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources    setenv DERIVED_SOURCES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources    setenv DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv DEVELOPER_BIN_DIR /Developer/usr/bin    setenv DEVELOPER_DIR /Developer    setenv DEVELOPER_FRAMEWORKS_DIR /Developer/Library/Frameworks    setenv DEVELOPER_FRAMEWORKS_DIR_QUOTED "\"/Developer/Library/Frameworks\""    setenv DEVELOPER_LIBRARY_DIR /Developer/Library    setenv DEVELOPER_SDK_DIR /Developer/SDKs    setenv DEVELOPER_TOOLS_DIR /Developer/Tools    setenv DEVELOPER_USR_DIR /Developer/usr    setenv DEVELOPMENT_LANGUAGE English    setenv DOCUMENTATION_FOLDER_PATH merge.app/English.lproj/Documentation    setenv DO_HEADER_SCANNING_IN_JAM NO    setenv DSTROOT /tmp/merge.dst    setenv DWARF_DSYM_FILE_NAME merge.app.dSYM    setenv DWARF_DSYM_FOLDER_PATH /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv EFFECTIVE_PLATFORM_NAME -iphonesimulator    setenv ENABLE_HEADER_DEPENDENCIES YES    setenv ENABLE_OPENMP_SUPPORT NO    setenv EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS ".svn .git CVS"    setenv EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES "*.nib *.lproj *.framework *.gch (*) CVS .svn .git *.xcodeproj *.xcode *.pbproj *.pbxproj"    setenv EXECUTABLES_FOLDER_PATH merge.app/Executables    setenv EXECUTABLE_FOLDER_PATH merge.app    setenv EXECUTABLE_NAME merge    setenv EXECUTABLE_PATH merge.app/merge    setenv FILE_LIST /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects/LinkFileList    setenv FIXED_FILES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/FixedFiles    setenv FRAMEWORKS_FOLDER_PATH merge.app/Frameworks    setenv FRAMEWORK_FLAG_PREFIX -framework    setenv FRAMEWORK_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator\" "    setenv FRAMEWORK_VERSION A    setenv FULL_PRODUCT_NAME merge.app    setenv GCC3_VERSION 3.3    setenv GCC_C_LANGUAGE_STANDARD c99    setenv GCC_DYNAMIC_NO_PIC NO    setenv GCC_INLINES_ARE_PRIVATE_EXTERN YES    setenv GCC_OBJC_LEGACY_DISPATCH YES    setenv GCC_OPTIMIZATION_LEVEL 0    setenv GCC_PFE_FILE_C_DIALECTS "c objective-c c++ objective-c++"    setenv GCC_PRECOMPILE_PREFIX_HEADER YES    setenv GCC_PREFIX_HEADER merge-Prefix.pch    setenv GCC_SYMBOLS_PRIVATE_EXTERN YES    setenv GCC_TREAT_WARNINGS_AS_ERRORS NO    setenv GCC_VERSION com.apple.compilers.llvmgcc42    setenv GCC_VERSION_IDENTIFIER com_apple_compilers_llvmgcc42    setenv GCC_WARN_ABOUT_RETURN_TYPE YES    setenv GCC_WARN_UNUSED_VARIABLE YES    setenv GENERATE_MASTER_OBJECT_FILE NO    setenv GENERATE_PKGINFO_FILE YES    setenv GENERATE_PROFILING_CODE NO    setenv GID 20    setenv GROUP staff    setenv HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT YES    setenv HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES YES    setenv HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS YES    setenv HEADERMAP_INCLUDES_PROJECT_HEADERS YES    setenv HEADER_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator/include\" "    setenv ICONV /usr/bin/iconv    setenv INFOPLIST_EXPAND_BUILD_SETTINGS YES    setenv INFOPLIST_FILE merge-Info.plist    setenv INFOPLIST_OUTPUT_FORMAT binary    setenv INFOPLIST_PATH merge.app/Info.plist    setenv INFOPLIST_PREPROCESS NO    setenv INFOSTRINGS_PATH merge.app/English.lproj/InfoPlist.strings    setenv INSTALL_DIR /tmp/merge.dst/Applications    setenv INSTALL_GROUP staff    setenv INSTALL_MODE_FLAG u+w,go-w,a+rX    setenv INSTALL_OWNER User    setenv INSTALL_PATH /Applications    setenv INSTALL_ROOT /tmp/merge.dst    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv JAVAC_DEFAULT_FLAGS "-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8"    setenv JAVA_APP_STUB /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub    setenv JAVA_ARCHIVE_CLASSES YES    setenv JAVA_ARCHIVE_TYPE JAR    setenv JAVA_COMPILER /usr/bin/javac    setenv JAVA_FOLDER_PATH merge.app/Java    setenv JAVA_FRAMEWORK_RESOURCES_DIRS Resources    setenv JAVA_JAR_FLAGS cv    setenv JAVA_SOURCE_SUBDIR .    setenv JAVA_USE_DEPENDENCIES YES    setenv JAVA_ZIP_FLAGS -urg    setenv JIKES_DEFAULT_FLAGS "+E +OLDCSO"    setenv KEEP_PRIVATE_EXTERNS NO    setenv LD_GENERATE_MAP_FILE NO    setenv LD_MAP_FILE_PATH /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-LinkMap-normal-i386.txt    setenv LD_OPENMP_FLAGS -fopenmp    setenv LEX /Developer/usr/bin/lex    setenv LIBRARY_FLAG_NOSPACE YES    setenv LIBRARY_FLAG_PREFIX -l    setenv LIBRARY_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator\" "    setenv LINKER_DISPLAYS_MANGLED_NAMES NO    setenv LINK_FILE_LIST_normal_i386 /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal/i386/merge.LinkFileList    setenv LINK_WITH_STANDARD_LIBRARIES YES    setenv LOCALIZED_RESOURCES_FOLDER_PATH merge.app/English.lproj    setenv LOCAL_ADMIN_APPS_DIR /Applications/Utilities    setenv LOCAL_APPS_DIR /Applications    setenv LOCAL_DEVELOPER_DIR /Library/Developer    setenv LOCAL_LIBRARY_DIR /Library    setenv MACH_O_TYPE mh_execute    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv MAC_OS_X_PRODUCT_BUILD_VERSION 10J869    setenv MAC_OS_X_VERSION_ACTUAL 1067    setenv MAC_OS_X_VERSION_MAJOR 1060    setenv MAC_OS_X_VERSION_MINOR 0607    setenv NATIVE_ARCH i386    setenv NATIVE_ARCH_32_BIT i386    setenv NATIVE_ARCH_64_BIT x86_64    setenv NATIVE_ARCH_ACTUAL x86_64    setenv NO_COMMON YES    setenv OBJC_ABI_VERSION 2    setenv OBJECT_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects    setenv OBJECT_FILE_DIR_normal /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Objects-normal    setenv OBJROOT /Users/User/Desktop/merge/build    setenv ONLY_ACTIVE_ARCH NO    setenv OPTIMIZATION_LEVEL 0    setenv OS MACOS    setenv OSAC /usr/bin/osacompile    setenv OTHER_LDFLAGS "-all_load -Obj-C"    setenv PACKAGE_TYPE com.apple.package-type.wrapper.application    setenv PASCAL_STRINGS YES    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES "/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms"    setenv PBDEVELOPMENTPLIST_PATH merge.app/pbdevelopment.plist    setenv PFE_FILE_C_DIALECTS objective-c    setenv PHONEGAPLIB /Users/User/Documents/PhoneGapLib    setenv PKGINFO_FILE_PATH /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/PkgInfo    setenv PKGINFO_PATH merge.app/PkgInfo    setenv PLATFORM_DEVELOPER_APPLICATIONS_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/Applications    setenv PLATFORM_DEVELOPER_BIN_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin    setenv PLATFORM_DEVELOPER_LIBRARY_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/Library    setenv PLATFORM_DEVELOPER_SDK_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs    setenv PLATFORM_DEVELOPER_TOOLS_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/Tools    setenv PLATFORM_DEVELOPER_USR_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/usr    setenv PLATFORM_DIR /Developer/Platforms/iPhoneSimulator.platform    setenv PLATFORM_NAME iphonesimulator    setenv PLATFORM_PRODUCT_BUILD_VERSION 8F192    setenv PLATFORM_VERSION_AVAILABILITY_H_FORMAT 40300    setenv PLIST_FILE_OUTPUT_FORMAT binary    setenv PLUGINS_FOLDER_PATH merge.app/PlugIns    setenv PREBINDING NO    setenv PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR YES    setenv PRECOMP_DESTINATION_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/PrefixHeaders    setenv PRESERVE_DEAD_CODE_INITS_AND_TERMS NO    setenv PRIVATE_HEADERS_FOLDER_PATH merge.app/PrivateHeaders    setenv PRODUCT_NAME merge    setenv PRODUCT_SETTINGS_PATH /Users/User/Desktop/merge/merge-Info.plist    setenv PRODUCT_TYPE com.apple.product-type.application    setenv PROFILING_CODE NO    setenv PROJECT merge    setenv PROJECT_DERIVED_FILE_DIR /Users/User/Desktop/merge/build/merge.build/DerivedSources    setenv PROJECT_DIR /Users/User/Desktop/merge    setenv PROJECT_FILE_PATH /Users/User/Desktop/merge/merge.xcodeproj    setenv PROJECT_NAME merge    setenv PROJECT_TEMP_DIR /Users/User/Desktop/merge/build/merge.build    setenv PUBLIC_HEADERS_FOLDER_PATH merge.app/Headers    setenv RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS YES    setenv REMOVE_CVS_FROM_RESOURCES YES    setenv REMOVE_GIT_FROM_RESOURCES YES    setenv REMOVE_SVN_FROM_RESOURCES YES    setenv REZ_COLLECTOR_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/ResourceManagerResources    setenv REZ_OBJECTS_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/ResourceManagerResources/Objects    setenv REZ_SEARCH_PATHS "\"/Users/User/Desktop/merge/build/Debug-iphonesimulator\" "    setenv RUN_CLANG_STATIC_ANALYZER NO    setenv SCAN_ALL_SOURCE_FILES_FOR_INCLUDES NO    setenv SCRIPTS_FOLDER_PATH merge.app/Scripts    setenv SCRIPT_INPUT_FILE_COUNT 0    setenv SCRIPT_OUTPUT_FILE_COUNT 0    setenv SDKROOT /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk    setenv SDK_DIR /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk    setenv SDK_NAME iphonesimulator4.3    setenv SDK_PRODUCT_BUILD_VERSION 8F192    setenv SED /usr/bin/sed    setenv SEPARATE_STRIP NO    setenv SEPARATE_SYMBOL_EDIT NO    setenv SET_DIR_MODE_OWNER_GROUP YES    setenv SET_FILE_MODE_OWNER_GROUP NO    setenv SHALLOW_BUNDLE YES    setenv SHARED_DERIVED_FILE_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator/DerivedSources    setenv SHARED_FRAMEWORKS_FOLDER_PATH merge.app/SharedFrameworks    setenv SHARED_PRECOMPS_DIR /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders    setenv SHARED_SUPPORT_FOLDER_PATH merge.app/SharedSupport    setenv SKIP_INSTALL YES    setenv SOURCE_ROOT /Users/User/Desktop/merge    setenv SRCROOT /Users/User/Desktop/merge    setenv STANDARD_C_PLUS_PLUS_LIBRARY_TYPE dynamic    setenv STRINGS_FILE_OUTPUT_ENCODING binary    setenv STRIP_INSTALLED_PRODUCT YES    setenv STRIP_STYLE all    setenv SUPPORTED_DEVICE_FAMILIES "1 2"    setenv SYMBOL_REPOSITORY_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/SymbolRepositories    setenv SYMROOT /Users/User/Desktop/merge/build    setenv SYSTEM_ADMIN_APPS_DIR /Applications/Utilities    setenv SYSTEM_APPS_DIR /Applications    setenv SYSTEM_CORE_SERVICES_DIR /System/Library/CoreServices    setenv SYSTEM_DEMOS_DIR /Applications/Extras    setenv SYSTEM_DEVELOPER_APPS_DIR /Developer/Applications    setenv SYSTEM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv SYSTEM_DEVELOPER_DEMOS_DIR "/Developer/Applications/Utilities/Built Examples"    setenv SYSTEM_DEVELOPER_DIR /Developer    setenv SYSTEM_DEVELOPER_DOC_DIR "/Developer/ADC Reference Library"    setenv SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR "/Developer/Applications/Graphics Tools"    setenv SYSTEM_DEVELOPER_JAVA_TOOLS_DIR "/Developer/Applications/Java Tools"    setenv SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR "/Developer/Applications/Performance Tools"    setenv SYSTEM_DEVELOPER_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes"    setenv SYSTEM_DEVELOPER_TOOLS /Developer/Tools    setenv SYSTEM_DEVELOPER_TOOLS_DOC_DIR "/Developer/ADC Reference Library/documentation/DeveloperTools"    setenv SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes/DeveloperTools"    setenv SYSTEM_DEVELOPER_USR_DIR /Developer/usr    setenv SYSTEM_DEVELOPER_UTILITIES_DIR /Developer/Applications/Utilities    setenv SYSTEM_DOCUMENTATION_DIR /Library/Documentation    setenv SYSTEM_LIBRARY_DIR /System/Library    setenv TARGETED_DEVICE_FAMILY 1    setenv TARGETNAME merge    setenv TARGET_BUILD_DIR /Users/User/Desktop/merge/build/Debug-iphonesimulator    setenv TARGET_NAME merge    setenv TARGET_TEMP_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_FILES_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_FILE_DIR /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build    setenv TEMP_ROOT /Users/User/Desktop/merge/build    setenv UID 501    setenv UNLOCALIZED_RESOURCES_FOLDER_PATH merge.app    setenv UNSTRIPPED_PRODUCT NO    setenv USER User    setenv USER_APPS_DIR /Users/User/Applications    setenv USER_HEADER_SEARCH_PATHS "\"/Users/User/Documents/PhoneGapLib/Classes/JSON\" \"/Users/User/Documents/PhoneGapLib/Classes\""    setenv USER_LIBRARY_DIR /Users/User/Library    setenv USE_DYNAMIC_NO_PIC YES    setenv USE_HEADERMAP YES    setenv USE_HEADER_SYMLINKS NO    setenv VALIDATE_PRODUCT NO    setenv VALID_ARCHS i386    setenv VERBOSE_PBXCP NO    setenv VERSIONPLIST_PATH merge.app/version.plist    setenv VERSION_INFO_BUILDER User    setenv VERSION_INFO_FILE merge_vers.c    setenv VERSION_INFO_STRING "\"@(#)PROGRAM:merge  PROJECT:merge-\""    setenv WRAPPER_EXTENSION app    setenv WRAPPER_NAME merge.app    setenv WRAPPER_SUFFIX .app    setenv XCODE_APP_SUPPORT_DIR /Developer/Library/Xcode    setenv XCODE_PRODUCT_BUILD_VERSION 10M2518    setenv XCODE_VERSION_ACTUAL 0400    setenv XCODE_VERSION_MAJOR 0400    setenv XCODE_VERSION_MINOR 0400    setenv YACC /Developer/usr/bin/yacc    setenv _REAL_SDKROOT iphoneos    /bin/sh -c /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/Script-304B58A110DAC018002A0835.sh0#
+
+CProcessInfoPlistFile /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Info.plist merge-Info.plist
+s331200804.749185
+e331200804.765287
+r1
+xProcessInfoPlistFile
+x/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Info.plist
+xmerge-Info.plist
+lSLF07#2@24"Process merge-Info.plist331200804#331200804#0(0"0(0#0#42"/Users/User/Desktop/merge/merge-Info.plist8612377248#434"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility merge-Info.plist -genpkginfo /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app/Info.plist0#
+
+CProcessPCH /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch.gch merge-Prefix.pch normal i386 objective-c com.apple.compilers.llvmgcc42
+s331200807.054354
+e331200809.891810
+r1
+xProcessPCH
+x/var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch.gch
+xmerge-Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@27"Precompile merge-Prefix.pch331200807#331200809#0(0"0(0#0#42"/Users/User/Desktop/merge/merge-Prefix.pch8612720928#1746"    cd /Users/User/Desktop/merge    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-generated-files.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-own-target-headers.hmap -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-all-target-headers.hmap -iquote /Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/merge-project-headers.hmap -F/Users/User/Desktop/merge/build/Debug-iphonesimulator -iquote/Users/User/Documents/PhoneGapLib/Classes/JSON -iquote/Users/User/Documents/PhoneGapLib/Classes -I/Users/User/Desktop/merge/build/Debug-iphonesimulator/include -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources/i386 -I/Users/User/Desktop/merge/build/merge.build/Debug-iphonesimulator/merge.build/DerivedSources -c /Users/User/Desktop/merge/merge-Prefix.pch -o /var/folders/7Y/7Y4tTerQFgmM1bQkdYUifk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/merge-Prefix-henjjkndlkyaxfewqzfgpaolchjw/merge-Prefix.pch.gch0#
+
+CTouch /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app
+s331222887.982761
+e331222887.992990
+r1
+xTouch
+x/Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app
+lSLF07#2@69"Touch /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app331222887#331222887#0(0"0(0#0#0"8623105408#250"    cd /Users/User/Desktop/merge    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/User/Desktop/merge/build/Debug-iphonesimulator/merge.app0#
+
