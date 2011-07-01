@@ -88,7 +88,7 @@ public class AccountDetailsImpl implements AccountDetails{
 			List<VehicleTollUsage> vtuList=c.list();
 			for(Iterator i=(Iterator) vtuList.iterator();i.hasNext();)
 			{
-				this.tollPayments.add(new TollPaymentsImpl(((VehicleTollUsage)i.next()).getVtuId()));
+				this.tollPayments.add(new TollPaymentsImpl(((VehicleTollUsage)i.next()).getVtuId(),((VehicleTollUsage)i.next()).getTimestamp()));
 			}
 		}
 		this.balanceInfo=new BalanceInfoImpl(u.getUserId());
