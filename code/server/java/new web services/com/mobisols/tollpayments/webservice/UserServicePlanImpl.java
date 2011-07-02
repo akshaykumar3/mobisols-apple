@@ -18,7 +18,7 @@ public class UserServicePlanImpl implements UserServicePlan{
 	public UserServicePlanImpl(Integer servicePlanId) {
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(ServicePlan.class);
-		crit.add(Restrictions.eq("service_plan_id", servicePlanId));
+		crit.add(Restrictions.eq("servicePlanId", servicePlanId));
 		List<ServicePlan> st=crit.list();
 		if(st.isEmpty())
 			return;
