@@ -16,7 +16,7 @@ public class OwnerTypeImpl implements UserOwnerType {
 	public OwnerTypeImpl(Integer OwnerTypeId){
     Session s = HibernateSessionFactory.getSession();
     Criteria crit = s.createCriteria(OwnerType.class);
-    crit.add(Restrictions.eq("owner_type_id", OwnerTypeId));
+    crit.add(Restrictions.eq("ownerTypeId", OwnerTypeId));
     List <OwnerType> ot = crit.list();
     if(ot.isEmpty())
     { System.out.println("List is empty");
