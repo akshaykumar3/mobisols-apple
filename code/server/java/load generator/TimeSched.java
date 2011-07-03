@@ -1,4 +1,4 @@
-package test;
+package com.mobisols.tollpayments.loadtest;
 
 import java.util.Timer;
 import java.util.TimerTask;
