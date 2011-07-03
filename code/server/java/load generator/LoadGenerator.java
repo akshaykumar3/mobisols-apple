@@ -1,4 +1,4 @@
-package test;
+package com.mobisols.tollpayments.loadtest;
 
 
 public class LoadGenerator extends Thread{

@@ -1,8 +1,10 @@
-package test;
+package com.mobisols.tollpayments.loadtest;
 
 import java.sql.Timestamp;
 import java.util.Timer;
 import java.lang.*;
+
+import com.mobisols.tollpayments.webservice.HeartBeatImpl;
 
 
 public class LoadThread implements Runnable{
@@ -26,6 +28,7 @@ public class LoadThread implements Runnable{
 	  runner = new Thread(this); 
 	  runner.start();
 	  try {
+		 runner.wait(100000);
 		runner.join(lifeTime);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
@@ -44,7 +47,7 @@ public class LoadThread implements Runnable{
 	  String vmlType = "4-wheeler";
 	  String input="{"+"timestamp:"+timestamp+","+"latitude:"+latitude+","+"longitude:"+longitude+
 	  ","+"angle:"+angle+","+vmlType+"}";
-	  HeartBeatImpl service = new HearBeatImpl();
+	  HeartBeatImpl service = new HeartBeatImpl();
 	  result = service.getHeartBeat(runner.getName(),input);
 	  System.out.println(result);
   }
