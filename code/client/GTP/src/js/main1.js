@@ -26,7 +26,7 @@ Ext.setup({
 					else if(geo.latitude || geo.longitude){
 						mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					}
-					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
+					//Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
 					
 					console.log('map centered at latitude '+Ext.getCmp('mappanel').map.getCenter().lat());
@@ -872,14 +872,12 @@ Ext.setup({
 				xtype: 'map',
 				useCurrentLocation: true,
 				mapOptions: {
-					center: new google.maps.LatLng(geo.latitude,geo.longitude),
 					zoom: 12
 				},
 				cls: 'card5',
 				iconCls: 'locate',
 				listeners: {
 					maprender: function(comp, map) {
-						
 						geo.updateLocation();
 						
 						console.log('map is rendered');
