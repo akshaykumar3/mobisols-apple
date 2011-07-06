@@ -33,8 +33,35 @@ public class UserVehicle implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private OwnerType ownerType;
+	private User user;
+    private UserVehicleHistory userVehicleHistory;	
 
 	// Constructors
+
+	public OwnerType getOwnerType() {
+		return ownerType;
+	}
+
+	public void setOwnerType(OwnerType ownerType) {
+		this.ownerType = ownerType;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public UserVehicleHistory getUserVehicleHistory() {
+		return userVehicleHistory;
+	}
+
+	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
+		this.userVehicleHistory = userVehicleHistory;
+	}
 
 	/** default constructor */
 	public UserVehicle() {

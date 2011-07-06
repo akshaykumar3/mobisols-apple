@@ -72,11 +72,9 @@
 			
 			<one-to-one name="UserBalanceLogPaymentTransaction"
              class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
-             property-ref="PaymentTransactionUserBalanceLog"/>
+             property-ref="PaymentTransactionUserBalanceLog"
+              fetch="join" cascade="all"/>
              
-             <one-to-one name="UserBalanceLogPaymentTransaction1"
-             class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
-             property-ref="PaymentTransactionUserBalanceLog1"/>
              
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

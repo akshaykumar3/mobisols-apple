@@ -31,8 +31,36 @@ public class PaymentTransaction implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private VehicleTollUsage vehicleTollUsage;
+	private UserBalanceLog userBalanceLog;
+	private UserPaymentDetailHistory userPaymentDetailHistory;
 
 	// Constructors
+
+	public UserPaymentDetailHistory getUserPaymentDetailHistory() {
+		return userPaymentDetailHistory;
+	}
+
+	public void setUserPaymentDetailHistory(
+			UserPaymentDetailHistory userPaymentDetailHistory) {
+		this.userPaymentDetailHistory = userPaymentDetailHistory;
+	}
+
+	public VehicleTollUsage getVehicleTollUsage() {
+		return vehicleTollUsage;
+	}
+
+	public void setVehicleTollUsage(VehicleTollUsage vehicleTollUsage) {
+		this.vehicleTollUsage = vehicleTollUsage;
+	}
+
+	public UserBalanceLog getUserBalanceLog() {
+		return userBalanceLog;
+	}
+
+	public void setUserBalanceLog(UserBalanceLog userBalanceLog) {
+		this.userBalanceLog = userBalanceLog;
+	}
 
 	/** default constructor */
 	public PaymentTransaction() {

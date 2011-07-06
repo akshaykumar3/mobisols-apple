@@ -60,11 +60,13 @@
             
             <one-to-one name="VehicleTypeTollPrice"
 			 class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
-			 property-ref="TollPriceVehicleType"/>
+			 property-ref="TollPriceVehicleType"
+			  fetch="join" cascade="all"/>
 			 
 			 <one-to-one name="VehicleTypeTollPriceHistory"
 			 class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
-			 property-ref="TollPriceHistoryVehicleType"/>
+			 property-ref="TollPriceHistoryVehicleType"
+			  fetch="join" cascade="all"/>
 			 
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

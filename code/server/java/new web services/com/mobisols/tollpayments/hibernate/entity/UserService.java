@@ -30,8 +30,26 @@ public class UserService implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private Integer clientId;
+	private ServicePlan servicePlan;
+	private User user;
 
 	// Constructors
+
+	public ServicePlan getServicePlan() {
+		return servicePlan;
+	}
+
+	public void setServicePlan(ServicePlan servicePlan) {
+		this.servicePlan = servicePlan;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	/** default constructor */
 	public UserService() {

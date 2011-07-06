@@ -68,7 +68,7 @@
 			cascade="save-update"
 			unique="true"/>
 			
-			<many-to-one name="ConfigurationUser"
+	    <many-to-one name="ConfigurationUser"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="last_modified_by"
 			cascade="save-update"

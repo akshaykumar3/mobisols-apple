@@ -77,7 +77,7 @@
             
             <many-to-one name="VehicleTollUsageTollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
-				column="toll_location_id"
+				column="toll_loc_id"
 				cascade="save-update"
 				unique="true"/>
 				
@@ -92,12 +92,7 @@
 				column="uvh_id"
 				cascade="save-update"
 				unique="true"/>
-			
-			<many-to-one name="VehicleTollUsageTollLocation"
-                class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
-				column="toll_loc_id"
-				cascade="save-update"
-				unique="true"/>	
+		
 				
 			<many-to-one name="VehicleTollUsageTollPriceHistory"
                 class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"

@@ -59,7 +59,9 @@
             </property>
             <one-to-one name="OnwerTypeUserVehicle"
       		class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
-			property-ref="UserVehicleOwnerType"/>
+			property-ref="UserVehicleOwnerType"
+			fetch="join"
+			cascade="all"/>
             
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

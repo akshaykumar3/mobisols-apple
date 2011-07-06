@@ -28,8 +28,26 @@ public class ServicePlan implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private UserService userService;
+	private TollOperator tollOperator;
 
 	// Constructors
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public TollOperator getTollOperator() {
+		return tollOperator;
+	}
+
+	public void setTollOperator(TollOperator tollOperator) {
+		this.tollOperator = tollOperator;
+	}
 
 	/** default constructor */
 	public ServicePlan() {

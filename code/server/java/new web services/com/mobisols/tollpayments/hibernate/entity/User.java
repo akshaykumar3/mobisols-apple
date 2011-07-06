@@ -1,6 +1,9 @@
 package com.mobisols.tollpayments.hibernate.entity;
 
 import java.sql.Timestamp;
+import java.util.Set;
+
+
 
 /**
  * UserId entity. @author MyEclipse Persistence Tools
@@ -32,8 +35,112 @@ public class User implements java.io.Serializable {
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
+	private Set<UserVehicle> userVehicle;
+	private UserPaymentDetail userPaymentDetails;
+	private UserBalance userBalance;
+	private Configuration configuration;
+	private TollOperator tollOperator;
+	private UserService userService;
+	private UserNotification userNotification;
+	private UserNotificationSettings userNotificationSettings;
+	private UserHistory userHistory;
+	private UserType userType;
+	private UserVehicleHistory userVehicleHistory;
+	
+	
 
 	// Constructors
+
+	public Set<UserVehicle> getUserVehicle() {
+		return userVehicle;
+	}
+
+	public void setUserVehicle(Set<UserVehicle> userVehicle) {
+		this.userVehicle = userVehicle;
+	}
+
+
+
+	public UserPaymentDetail getUserPaymentDetails() {
+		return userPaymentDetails;
+	}
+
+	public void setUserPaymentDetails(UserPaymentDetail userPaymentDetails) {
+		this.userPaymentDetails = userPaymentDetails;
+	}
+
+	public UserBalance getUserBalance() {
+		return userBalance;
+	}
+
+	public void setUserBalance(UserBalance userBalance) {
+		this.userBalance = userBalance;
+	}
+
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
+
+	public TollOperator getTollOperator() {
+		return tollOperator;
+	}
+
+	public void setTollOperator(TollOperator tollOperator) {
+		this.tollOperator = tollOperator;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserNotification getUserNotification() {
+		return userNotification;
+	}
+
+	public void setUserNotification(UserNotification userNotification) {
+		this.userNotification = userNotification;
+	}
+
+	public UserNotificationSettings getUserNotificationSettings() {
+		return userNotificationSettings;
+	}
+
+	public void setUserNotificationSettings(
+			UserNotificationSettings userNotificationSettings) {
+		this.userNotificationSettings = userNotificationSettings;
+	}
+
+	public UserHistory getUserHistory() {
+		return userHistory;
+	}
+
+	public void setUserHistory(UserHistory userHistory) {
+		this.userHistory = userHistory;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+
+	public UserVehicleHistory getUserVehicleHistory() {
+		return userVehicleHistory;
+	}
+
+	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
+		this.userVehicleHistory = userVehicleHistory;
+	}
 
 	/** default constructor */
 	public User() {

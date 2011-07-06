@@ -62,13 +62,14 @@
                 <column name="version" length="20" />
             </property>
             <many-to-one name="ComponentVersionComponent"
-                class="com.mobisols.tollpayments.hibernate.entity.Component"
+             class="com.mobisols.tollpayments.hibernate.entity.Component"
 				column="component_id"
 				cascade="save-update"
 				unique="true"/>
-			<one-to-one name="ComponentVersionConfiguration"
-			class="com.mobisols.tollpayments.hibernate.entity.Configuration"
-            property-ref="ConfigurationComponentVersion"/>
+	   <one-to-one name="ComponentVersionConfiguration"
+	   class="com.mobisols.tollpayments.hibernate.entity.Configuration"
+            property-ref="ConfigurationComponentVersion"
+            fetch="join"/>
 				
     </class>
 </hibernate-mapping>
