@@ -63,7 +63,9 @@
             
             <one-to-one name="ServicePlanUserService"
 			class="com.mobisols.tollpayments.hibernate.entity.UserService"
-            property-ref="UserServiceServicePlan"/>
+            property-ref="UserServiceServicePlan"
+            fetch="join"
+            cascade="all"/>
             
             <many-to-one name="ServicePlanTollOperator"
 			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"

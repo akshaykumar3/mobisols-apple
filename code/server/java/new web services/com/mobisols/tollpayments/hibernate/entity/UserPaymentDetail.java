@@ -42,8 +42,28 @@ public class UserPaymentDetail implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private CcType ccType;
+	private UserPaymentDetailHistory userPaymentDetailHistory;
+	
 
 	// Constructors
+
+	public CcType getCcType() {
+		return ccType;
+	}
+
+	public void setCcType(CcType ccType) {
+		this.ccType = ccType;
+	}
+
+	public UserPaymentDetailHistory getUserPaymentDetailHistory() {
+		return userPaymentDetailHistory;
+	}
+
+	public void setUserPaymentDetailHistory(
+			UserPaymentDetailHistory userPaymentDetailHistory) {
+		this.userPaymentDetailHistory = userPaymentDetailHistory;
+	}
 
 	/** default constructor */
 	public UserPaymentDetail() {

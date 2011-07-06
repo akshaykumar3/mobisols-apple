@@ -66,15 +66,18 @@
             
             <one-to-one name="TollOperatorTollLocation"
 			class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
-            property-ref="TollLocationTollOperator"/>
+            property-ref="TollLocationTollOperator"
+            fetch="join" cascade="all" />
             
             <one-to-one name="TollOperatorServicePlan"
 			class="com.mobisols.tollpayments.hibernate.entity.ServicePlan"
-            property-ref="ServicePlanTollOperator"/>
+            property-ref="ServicePlanTollOperator"
+             fetch="join" cascade="all"/>
             
             <one-to-one name="TollOperatorTollLocationHistory"
 			class="com.mobisols.tollpayments.hibernate.entity.TollLocationHistory"
-            property-ref="TollLocationHistoryTollOperator"/>
+            property-ref="TollLocationHistoryTollOperator"
+             fetch="join" cascade="all"/>
             
             <many-to-one name="TollOperatorUser"
 			class="com.mobisols.tollpayments.hibernate.entity.User"

@@ -40,8 +40,26 @@ public class TollLocationHistory implements java.io.Serializable {
 	private Integer clientId;
 	private Double latitude;
 	private Double longitude;
+	private TollLocation tollLocation;
+	private TollOperator tollOperator;
 
 	// Constructors
+
+	public TollLocation getTollLocation() {
+		return tollLocation;
+	}
+
+	public void setTollLocation(TollLocation tollLocation) {
+		this.tollLocation = tollLocation;
+	}
+
+	public TollOperator getTollOperator() {
+		return tollOperator;
+	}
+
+	public void setTollOperator(TollOperator tollOperator) {
+		this.tollOperator = tollOperator;
+	}
 
 	/** default constructor */
 	public TollLocationHistory() {

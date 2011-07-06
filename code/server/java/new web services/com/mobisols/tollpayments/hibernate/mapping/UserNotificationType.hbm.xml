@@ -63,12 +63,14 @@
              class="com.mobisols.tollpayments.hibernate.entity.UserNotificationSettings" 
              property-ref="UserNotificationSettingsUserNotificationType"
              fetch="join"
+             cascade="all"
              lazy="no-proxy"/>
              
              <one-to-one name="UserNotificationTypeUserNotification"
              class="com.mobisols.tollpayments.hibernate.entity.UserNotification" 
              property-ref="UserNotificationUserNotificationType"
              fetch="join"
+             cascade="all"
              lazy="no-proxy"/>
              
         <filter name="clientIdFilter" condition=":clientId = client_id"/>

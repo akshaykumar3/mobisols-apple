@@ -37,8 +37,34 @@ public class UserVehicleHistory implements java.io.Serializable {
 	private Timestamp endDate;
 	private String action;
 	private Integer clientId;
-
+    private UserVehicle userVehicle;
+    private User user;
+    private VehicleMovementLog vehicleMovementLog;
 	// Constructors
+
+	public UserVehicle getUserVehicle() {
+		return userVehicle;
+	}
+
+	public void setUserVehicle(UserVehicle userVehicle) {
+		this.userVehicle = userVehicle;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public VehicleMovementLog getVehicleMovementLog() {
+		return vehicleMovementLog;
+	}
+
+	public void setVehicleMovementLog(VehicleMovementLog vehicleMovementLog) {
+		this.vehicleMovementLog = vehicleMovementLog;
+	}
 
 	/** default constructor */
 	public UserVehicleHistory() {

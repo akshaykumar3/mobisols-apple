@@ -27,8 +27,26 @@ public class UserBalance implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private User user;
+	private UserBalanceLog userBalanceLog;
 
 	// Constructors
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public UserBalanceLog getUserBalanceLog() {
+		return userBalanceLog;
+	}
+
+	public void setUserBalanceLog(UserBalanceLog userBalanceLog) {
+		this.userBalanceLog = userBalanceLog;
+	}
 
 	/** default constructor */
 	public UserBalance() {

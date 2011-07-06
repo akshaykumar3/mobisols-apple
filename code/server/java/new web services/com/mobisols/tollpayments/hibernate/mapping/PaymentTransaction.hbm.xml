@@ -72,7 +72,9 @@
             
             <one-to-one name="PaymentTransactionVehicleTollUsage"
              class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-             property-ref="VehicleTollUsagePaymentTransaction"/>
+             property-ref="VehicleTollUsagePaymentTransaction"
+             fetch="join"
+             cascade="all"/>
              
              <many-to-one name="PaymentTransactionUserBalanceLog"
 			class="com.mobisols.tollpayments.hibernate.entity.UserbalanceLog"

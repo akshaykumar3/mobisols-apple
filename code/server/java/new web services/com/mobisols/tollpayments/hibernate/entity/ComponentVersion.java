@@ -28,8 +28,26 @@ public class ComponentVersion implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private String version;
+	private Component component;
+	private Configuration configuration;
 
 	// Constructors
+
+	public Component getComponent() {
+		return component;
+	}
+
+	public void setComponent(Component component) {
+		this.component = component;
+	}
+
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
 
 	/** default constructor */
 	public ComponentVersion() {

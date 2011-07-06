@@ -33,8 +33,44 @@ public class VehicleMovementLog implements java.io.Serializable {
 	private Double latitude;
 	private Double longitude;
 	private String status;
+	private TollLocation tollLocation;
+	private VehicleTollUsage vechicleTollUsage;
+	private VmlType vmlType;
+	private UserVehicleHistory userVehicleHistory;
 
 	// Constructors
+
+	public TollLocation getTollLocation() {
+		return tollLocation;
+	}
+
+	public void setTollLocation(TollLocation tollLocation) {
+		this.tollLocation = tollLocation;
+	}
+
+	public VehicleTollUsage getVechicleTollUsage() {
+		return vechicleTollUsage;
+	}
+
+	public void setVechicleTollUsage(VehicleTollUsage vechicleTollUsage) {
+		this.vechicleTollUsage = vechicleTollUsage;
+	}
+
+	public VmlType getVmlType() {
+		return vmlType;
+	}
+
+	public void setVmlType(VmlType vmlType) {
+		this.vmlType = vmlType;
+	}
+
+	public UserVehicleHistory getUserVehicleHistory() {
+		return userVehicleHistory;
+	}
+
+	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
+		this.userVehicleHistory = userVehicleHistory;
+	}
 
 	/** default constructor */
 	public VehicleMovementLog() {

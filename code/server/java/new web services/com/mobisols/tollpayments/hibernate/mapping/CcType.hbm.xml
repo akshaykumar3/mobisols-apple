@@ -61,7 +61,7 @@
   </property>
   <one-to-one 
   name="userPaymentDetail" 
-  class="com.mobisols.tollpayments.hibernate.entity.userPaymentDetail"
+  class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
   property-ref="ccType"
   cascade="all"
    />

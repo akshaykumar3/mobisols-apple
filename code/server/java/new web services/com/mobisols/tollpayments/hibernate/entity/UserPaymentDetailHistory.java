@@ -46,8 +46,26 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private Integer clientId;
+	private UserPaymentDetail userPaymentDetail;
+	private PaymentTransaction paymentTransaction;
 
 	// Constructors
+
+	public UserPaymentDetail getUserPaymentDetail() {
+		return userPaymentDetail;
+	}
+
+	public void setUserPaymentDetail(UserPaymentDetail userPaymentDetail) {
+		this.userPaymentDetail = userPaymentDetail;
+	}
+
+	public PaymentTransaction getPaymentTransaction() {
+		return paymentTransaction;
+	}
+
+	public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
+		this.paymentTransaction = paymentTransaction;
+	}
 
 	/** default constructor */
 	public UserPaymentDetailHistory() {

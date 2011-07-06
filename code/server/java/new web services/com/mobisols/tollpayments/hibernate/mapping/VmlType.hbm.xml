@@ -60,7 +60,8 @@
             
             <one-to-one name="VmlTypeVehicleMovementLog"
 			class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
-            property-ref="VehicleMovementLogVmlType"/>
+            property-ref="VehicleMovementLogVmlType"
+             fetch="join" cascade="all"/>
             
    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

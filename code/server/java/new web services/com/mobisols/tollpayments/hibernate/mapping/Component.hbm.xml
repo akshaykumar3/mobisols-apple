@@ -62,6 +62,7 @@
             <one-to-one name="ComponentComponentVersion"
              class="com.mobisols.tollpayments.hibernate.entity.ComponentVersion"
              property-ref="ComponentVersionComponent"
+             fetch="join"
              cascade="all"/>
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

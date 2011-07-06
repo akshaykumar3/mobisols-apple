@@ -31,7 +31,13 @@ public class VehicleTollUsage implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
-
+	private PaymentTransaction paymentTransaction;
+    private TollLocation tollLocation;
+    private VehicleMovementLog vehicleMovementLog;
+    private UserVehicleHistory uservehicleHistory;
+    private TollPriceHistory tollPriceHistory;
+    
+    
 	// Constructors
 
 	/** default constructor */
@@ -83,9 +89,51 @@ public class VehicleTollUsage implements java.io.Serializable {
 	}
 
 	// Property accessors
+	
+	
 
 	public Integer getVtuId() {
 		return this.vtuId;
+	}
+
+	public PaymentTransaction getPaymentTransaction() {
+		return paymentTransaction;
+	}
+
+	public void setPaymentTransaction(PaymentTransaction paymentTransaction) {
+		this.paymentTransaction = paymentTransaction;
+	}
+
+	public TollLocation getTollLocation() {
+		return tollLocation;
+	}
+
+	public void setTollLocation(TollLocation tollLocation) {
+		this.tollLocation = tollLocation;
+	}
+
+	public VehicleMovementLog getVehicleMovementLog() {
+		return vehicleMovementLog;
+	}
+
+	public void setVehicleMovementLog(VehicleMovementLog vehicleMovementLog) {
+		this.vehicleMovementLog = vehicleMovementLog;
+	}
+
+	public UserVehicleHistory getUservehicleHistory() {
+		return uservehicleHistory;
+	}
+
+	public void setUservehicleHistory(UserVehicleHistory uservehicleHistory) {
+		this.uservehicleHistory = uservehicleHistory;
+	}
+
+	public TollPriceHistory getTollPriceHistory() {
+		return tollPriceHistory;
+	}
+
+	public void setTollPriceHistory(TollPriceHistory tollPriceHistory) {
+		this.tollPriceHistory = tollPriceHistory;
 	}
 
 	public void setVtuId(Integer vtuId) {

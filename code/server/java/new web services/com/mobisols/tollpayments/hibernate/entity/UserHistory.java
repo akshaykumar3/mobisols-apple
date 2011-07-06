@@ -36,8 +36,17 @@ public class UserHistory implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private Timestamp startDate;
 	private Timestamp endDate;
+	private User user;
 
 	// Constructors
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	/** default constructor */
 	public UserHistory() {

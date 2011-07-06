@@ -27,8 +27,17 @@ public class VmlType implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private VehicleMovementLog vehicleMovementLog;
 
 	// Constructors
+
+	public VehicleMovementLog getVehicleMovementLog() {
+		return vehicleMovementLog;
+	}
+
+	public void setVehicleMovementLog(VehicleMovementLog vehicleMovementLog) {
+		this.vehicleMovementLog = vehicleMovementLog;
+	}
 
 	/** default constructor */
 	public VmlType() {

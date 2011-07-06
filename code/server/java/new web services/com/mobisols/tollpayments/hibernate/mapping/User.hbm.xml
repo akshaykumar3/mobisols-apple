@@ -93,7 +93,7 @@
             fetch="join"
             constrained="false"
             lazy="no-proxy"
-            class="com.mobisols.tollpayments.hibernate.entity.PaymentDetails"
+            class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
              />
             
              <one-to-one
@@ -116,11 +116,6 @@
              fetch="join"
              lazy="no-proxy"/>
              
-             <one-to-one name="UserUserBalance"
-             class="com.mobisols.tollpayments.hibernate.entity.UserBalance" 
-             property-ref="UserBalanceUser"
-             fetch="join"
-             lazy="no-proxy"/>
              
              <one-to-one name="UserUserService"
              class="com.mobisols.tollpayments.hibernate.entity.UserService" 

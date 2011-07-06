@@ -95,23 +95,28 @@
             </property>
             <one-to-one name="TollLocationTollPrice"
 			class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
-            property-ref="TollPriceTollLocation"/>
+            property-ref="TollPriceTollLocation"
+            fetch="join" cascade="all"/>
             
             <one-to-one name="TollLocationTollPriceHistory"
 			class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
-            property-ref="TollPriceHistoryTollLocation"/>
+            property-ref="TollPriceHistoryTollLocation"
+             fetch="join" cascade="all"/>
             
             <one-to-one name="TollLocationVehicleTollUsage"
 			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-            property-ref="VehicleTollUsageTollLocation"/>
+            property-ref="VehicleTollUsageTollLocation"
+             fetch="join" cascade="all"/>
             
             <one-to-one name="TollLocationVehicleMovementLog"
 			class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
-            property-ref="VehicleMovementLogTollLocation"/>
+            property-ref="VehicleMovementLogTollLocation"
+             fetch="join" cascade="all"/>
             
             <one-to-one name="TollLocationTollLocationHistory"
 			class="com.mobisols.tollpayments.hibernate.entity.TollLocationHistory"
-            property-ref="TollLocationHistoryTollLocation"/>
+            property-ref="TollLocationHistoryTollLocation"
+             fetch="join" cascade="all"/>
             
             <many-to-one name="TollLocationTollOperator"
 			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
@@ -119,9 +124,6 @@
 			cascade="save-update"
 			unique="true"/>
             
-            <one-to-one name="TollLocationVehicleTollUsage"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-            property-ref="VehicleTollUsageTollLocation"/>
             
             
             

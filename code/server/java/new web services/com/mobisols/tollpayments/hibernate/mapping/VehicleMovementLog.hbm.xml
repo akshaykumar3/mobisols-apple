@@ -83,7 +83,8 @@
 				
 			<one-to-one name="VehicleMovementLogVehicleTollUsage"
 			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-            property-ref="VehicleTollUsageVehicleMovementLog"/>
+            property-ref="VehicleTollUsageVehicleMovementLog"
+            fetch="join" cascade="all" />
             
             <many-to-one name="VehicleMovementLogVmlType"
                 class="com.mobisols.tollpayments.hibernate.entity.VmlType"
