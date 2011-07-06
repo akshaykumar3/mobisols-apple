@@ -63,11 +63,22 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <many-to-one name="parTollLocation"
+            <many-to-one name="TollPriceTollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
 				column="toll_location_id"
 				cascade="save-update"
 				unique="true"/>
+			
+			<many-to-one name="TollPriceVehicleType"
+                class="com.mobisols.tollpayments.hibernate.entity.VehicleType"
+				column="vehicle_type_id"
+				cascade="save-update"
+				unique="true"/>	
+				
+				
+			<one-to-one name="TollPriceTollPriceHistory"
+			 class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
+			 property-ref="TollPriceHistoryTollPrice"/>
         
   <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

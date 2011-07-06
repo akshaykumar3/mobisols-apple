@@ -62,13 +62,13 @@
             </property>
             </component>
             
-            <many-to-one name="parComponentVersion"
+            <many-to-one name="ConfigurationComponentVersion"
 			class="com.mobisols.tollpayments.hibernate.entity.ComponentVersion"
 			column="comp_version_id"
 			cascade="save-update"
 			unique="true"/>
 			
-			<many-to-one name="parUser"
+			<many-to-one name="ConfigurationUser"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="last_modified_by"
 			cascade="save-update"

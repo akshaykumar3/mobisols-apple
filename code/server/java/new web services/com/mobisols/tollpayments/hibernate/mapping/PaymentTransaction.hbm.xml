@@ -70,9 +70,29 @@
                 <column name="client_id" />
             </property>
             
-            <one-to-one name="chVehicleTollUsage"
+            <one-to-one name="PaymentTransactionVehicleTollUsage"
              class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-             property-ref="parPaymentTransaction"/>
+             property-ref="VehicleTollUsagePaymentTransaction"/>
+             
+             <many-to-one name="PaymentTransactionUserBalanceLog"
+			class="com.mobisols.tollpayments.hibernate.entity.UserbalanceLog"
+			column="user_bl_id"
+			cascade="save-update"
+			unique="true"/>
+			
+			<many-to-one name="PaymentTransactionUserBalanceLog1"
+			class="com.mobisols.tollpayments.hibernate.entity.UserbalanceLog"
+			column="to_bl_id"
+			cascade="save-update"
+			unique="true"/>
+			
+			<many-to-one name="PaymentTransactionUserPaymentDetailHistory"
+			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetailHistory"
+			column="updh_id"
+			cascade="save-update"
+			unique="true"/>
+			
+			
    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

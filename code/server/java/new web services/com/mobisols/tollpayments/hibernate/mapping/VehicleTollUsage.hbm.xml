@@ -69,18 +69,44 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <many-to-one name="parPaymentTransaction"
+            <many-to-one name="VehicleTollUsagePaymentTransaction"
             class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
             column="ptran_id"
             cascade="save-update"
             unique="true"/>
             
-            <many-to-one name="parTollLocation1"
+            <many-to-one name="VehicleTollUsageTollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
 				column="toll_location_id"
 				cascade="save-update"
 				unique="true"/>
+				
+			<many-to-one name="VehicleTollUsageVehicleMovementLog"
+                class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
+				column="vml_id"
+				cascade="save-update"
+				unique="true"/>	
             
+            <many-to-one name="VehicleTollUsageUserVehicleHistory"
+                class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory"
+				column="uvh_id"
+				cascade="save-update"
+				unique="true"/>
+			
+			<many-to-one name="VehicleTollUsageTollLocation"
+                class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
+				column="toll_loc_id"
+				cascade="save-update"
+				unique="true"/>	
+				
+			<many-to-one name="VehicleTollUsageTollPriceHistory"
+                class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
+				column="tph_id"
+				cascade="save-update"
+				unique="true"/>		
+				
+				
+					
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

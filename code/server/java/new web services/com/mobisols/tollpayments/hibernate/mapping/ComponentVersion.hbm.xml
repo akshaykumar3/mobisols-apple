@@ -61,14 +61,14 @@
             <property name="version" type="java.lang.String">
                 <column name="version" length="20" />
             </property>
-            <many-to-one name="parComponent"
+            <many-to-one name="ComponentVersionComponent"
                 class="com.mobisols.tollpayments.hibernate.entity.Component"
 				column="component_id"
 				cascade="save-update"
 				unique="true"/>
-			<one-to-one name="chConfiguration"
+			<one-to-one name="ComponentVersionConfiguration"
 			class="com.mobisols.tollpayments.hibernate.entity.Configuration"
-            property-ref="parComponentVersion"/>
+            property-ref="ConfigurationComponentVersion"/>
 				
     </class>
 </hibernate-mapping>

@@ -64,6 +64,19 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
+            
+            <many-to-one name="UserNotificationUser"
+			class="com.mobisols.tollpayments.hibernate.entity.User"
+			column="user_id"
+			cascade="save-update"
+			unique="true"/>
+			
+			<many-to-one name="UserNotificationUserNotificationType"
+			class="com.mobisols.tollpayments.hibernate.entity.UserNotificationType"
+			column="user_notification_type_id"
+			cascade="save-update"
+			unique="true"/>
+			
        
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

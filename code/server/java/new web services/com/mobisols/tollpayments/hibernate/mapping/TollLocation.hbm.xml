@@ -93,17 +93,37 @@
             <property name="type" type="java.lang.String">
                 <column name="type" length="30" />
             </property>
-            <one-to-one name="chTollPrice"
+            <one-to-one name="TollLocationTollPrice"
 			class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
-            property-ref="parTollLocation"/>
+            property-ref="TollPriceTollLocation"/>
             
-            <one-to-one name="chVehicleTollUsage1"
-			class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
-            property-ref="parTollLocation1"/>
+            <one-to-one name="TollLocationTollPriceHistory"
+			class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
+            property-ref="TollPriceHistoryTollLocation"/>
             
-            <one-to-one name="chTollVehicleMovementLog"
-			class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
-            property-ref="parTollLocation2"/>
+            <one-to-one name="TollLocationVehicleTollUsage"
+			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
+            property-ref="VehicleTollUsageTollLocation"/>
+            
+            <one-to-one name="TollLocationVehicleMovementLog"
+			class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
+            property-ref="VehicleMovementLogTollLocation"/>
+            
+            <one-to-one name="TollLocationTollLocationHistory"
+			class="com.mobisols.tollpayments.hibernate.entity.TollLocationHistory"
+            property-ref="TollLocationHistoryTollLocation"/>
+            
+            <many-to-one name="TollLocationTollOperator"
+			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
+			column="toll_operator_id"
+			cascade="save-update"
+			unique="true"/>
+            
+            <one-to-one name="TollLocationVehicleTollUsage"
+			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
+            property-ref="VehicleTollUsageTollLocation"/>
+            
+            
             
    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
