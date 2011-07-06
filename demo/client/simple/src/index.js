@@ -1,53 +1,71 @@
+var geo,gotNewLocation=true;
 Ext.setup({
-	icon: 'icon.png',
-	tabletStartupScreen: 'tablet_startup.png',
-	phoneStartupScreen: 'phone_startup.png',
+	icon: 'resources/images/icon.png',
+	tabletStartupScreen: 'resources/images/tablet_startup.png',
+	phoneStartupScreen: 'resources/images/phone_startup.png',
 	glossOnIcon: false,
+	
 	onReady: function() {
-		
- 
-		var value=1;
-		
-		var currDate = new Date();
+ 		var markernotset=true,mylocation_marker;
+ 	
+		geo = new Ext.util.GeoLocation({
+		    autoUpdate: false,
+		    listeners: {
+		        locationupdate: function (geo) {
+		        	console.log('Got new location');
+		            console.log('New latitude: ' + geo.latitude + 'New Longitude: ' + geo.longitude);
+		            if(markernotset){
+						mylocation_marker=new google.maps.Marker({
+							position: new google.maps.LatLng(geo.latitude,geo.longitude),
+							title: 'U are here right now',
+							icon: 'resources/images/blue_dot.png',
+							map: Ext.getCmp('mappanel').map
+						});
+						markernotset=false;
+					}
+					else if(geo.latitude || geo.longitude){
+						mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+					}
+					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
+					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
+					
+					console.log('map centered at latitude '+Ext.getCmp('mappanel').map.getCenter().lat());
+					console.log('end of location update');	
+		        },
+		        locationerror: function (   geo,
+		                                    bTimeout, 
+		                                    bPermissionDenied, 
+		                                    bLocationUnavailable, 
+		                                    message) {
+		            if(bTimeout){
+		            	console.log('timeout occurred');
+		                //Ext.Msg.alert('Timeout occurred.');
+		            }
+		            else{
+		            	console.log('error finding gps location');
+		            	console.log('error message: '+message);
+		                //Ext.Msg.alert('Error message: '+ message); 
+		            }
+		        }
+		    }
+		});
+		geo.updateLocation();
 
+		var currDate = new Date();
 		var position = new google.maps.LatLng(37.49885,-122.198452);
-		var position1=new google.maps.LatLng(37.42980,-122.210674);
-		var position2=new google.maps.LatLng(37.4875,-122.138523);
-		var markerDetails = new Array({
-			covered: true,
-			description: "toll no 1, $2",
-			url: "www.tollno1.com"
-		}, {
-			covered: false,
-			description: "toll no 2, $2",
-			url: "www.tollno2.com"
-		}
-		);
+		
 		infowindow = new google.maps.InfoWindow({
 			content: 'Palo Alto entry Toll, 1$</br> Click <a href="www.tollno1.com">here</a> to visit toll website'
 		});
-		infowindow1=new google.maps.InfoWindow({
-			content: markerDetails[0].description+'  '+markerDetails[0].url
-		});
-		infowindow2=new google.maps.InfoWindow({
-			content: markerDetails[1].description+'  '+markerDetails[1].url
-		});
-
+		
 		var imageMarker=new google.maps.MarkerImage(
-		'resources/images/covered.png',
-		new google.maps.Size(20,34),
-		new google.maps.Point(0,0),
-		new google.maps.Point(16,31)
+			'resources/images/covered.png',
+			new google.maps.Size(20,34),
+			new google.maps.Point(0,0),
+			new google.maps.Point(16,31)
 		);
 
-		newcomponent=new Ext.Component({
-			tpl: [
-			'I am wrapped to a component'
-			]
-		});
-
 		var curl,avgt,pt,tollop;
-
 		var center;
 
 		var tabpanel = new Ext.TabPanel({
@@ -65,9 +83,6 @@ Ext.setup({
 				cover: true
 			},
 
-			/*defaults: {
-			 scroll: 'vertical'
-			 },*/
 			items: [{
 				title: 'Home',
 				scroll: 'vertical',
@@ -229,8 +244,7 @@ Ext.setup({
 							id: record.getId()
 						});
 					}
-				}
-				,{
+				},{
 					layout: 'vbox',
 					defaults: {
 						xtype: 'button',
@@ -272,7 +286,6 @@ Ext.setup({
 			
 				cls: 'demo-list',
 				items: [{
-					
 					//width: Ext.is.Phone ? undefined : 300,
 					//height: 500,
 					xtype: 'list',
@@ -286,46 +299,33 @@ Ext.setup({
 				title: 'Map',
 				id: 'mappanel',
 				xtype: 'map',
+				useCurrentLocation: true,
 				mapOptions: {
-					center: new google.maps.LatLng(37.44885,-122.158592),
-					//center: new google.maps.LatLng(gtGeo.latitude, gtGeo.longitude),
 					zoom: 12
 				},
 				cls: 'card5',
 				iconCls: 'locate',
 				listeners: {
 					maprender: function(comp, map) {
-						//map.setCenter(new google.maps.LatLng(gtGeo.latitude, gtGeo.longitude));
-						var marker1= new google.maps.Marker({
+						if(markernotset)
+						geo.updateLocation();
+						var marker= new google.maps.Marker({
 							position: position,
 							title: 'Toll Road 1, Price $1',
 							map: map
 						});
-						var marker2=new google.maps.Marker({
-							position: position1,
-							title: 'Toll Road 2, Price $1.5',
-							map: map
+						google.maps.event.addListener(marker, 'click', function() {
+							infowindow.open(map, marker);
 						});
-						var marker3=new google.maps.Marker({
-							position: position2,
-							title: 'Toll road 3, Price $2.0',
-							map: map
-						});
-						google.maps.event.addListener(marker1, 'click', function() {
-							infowindow.open(map, marker1);
-						});
-						google.maps.event.addListener(marker2, 'click', function() {
-							infowindow1.open(map,marker2);
-						});
-						google.maps.event.addListener(marker3, 'click', function() {
-							infowindow2.open(map,marker3);
-						});
+					},
+					centerchange: function(comp,map, center)
+					{
+						console.log('center is changed');
+						// call the webservice to Get the toll locations here.
 					}
 				}
-			}
-
-			]
+			}]
 		});
-
+		requestHeartBeat();
 	}
 });
