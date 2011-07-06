@@ -104,6 +104,10 @@
              column="cc_type_id"
              cascade="save-update"
              unique="true"/>
+             <one-to-one name="UserPaymentDetailUserPaymentDetailHistory"
+			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetailHistory"
+            property-ref="UserPaymentDetailHistoryUserPaymentDetail"/>
+            
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

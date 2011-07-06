@@ -76,19 +76,19 @@
             </property>
             
              <set
-                name="userVehicles"
-            >
-                <key update="false">
-                    <column name="user_id" />
+                name="userVehicles" inverse="true">
+                <key update="false" >
+                    <column name="user_id" not-null="true"/>
                 </key>
                 <one-to-many
                     class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
                 />
             </set>
             
+            
      
             <one-to-one
-            name="userPaymentDetails"
+            name="UserUserPaymentDetails"
             property-ref="userId"
             fetch="join"
             constrained="false"
@@ -97,16 +97,66 @@
              />
             
              <one-to-one
-            name="userBalanceInfo"
+            name="UserUserBalance"
             property-ref="userId"
             fetch="join"
             constrained="false"
             lazy="no-proxy"
             class="com.mobisols.tollpayments.hibernate.entity.UserBalance"
              />
-             <one-to-one name="chConfiguration"
+             <one-to-one name="UserConfiguration"
              class="com.mobisols.tollpayments.hibernate.entity.Configuration" 
-             property-ref="parConfiguration"/>
+             property-ref="ConfigurationUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+             <one-to-one name="UserTollOperator"
+             class="com.mobisols.tollpayments.hibernate.entity.TollOperator" 
+             property-ref="TollOperatorUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+             <one-to-one name="UserUserBalance"
+             class="com.mobisols.tollpayments.hibernate.entity.UserBalance" 
+             property-ref="UserBalanceUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+             <one-to-one name="UserUserService"
+             class="com.mobisols.tollpayments.hibernate.entity.UserService" 
+             property-ref="UserServiceUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+              <one-to-one name="UserUserNotification"
+             class="com.mobisols.tollpayments.hibernate.entity.UserNotification" 
+             property-ref="UserNotificationUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+             <one-to-one name="UserUserNotificationSettings"
+             class="com.mobisols.tollpayments.hibernate.entity.UserNotificationSettings" 
+             property-ref="UserNotificationSettingsUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+             <one-to-one name="UserUserHistory"
+             class="com.mobisols.tollpayments.hibernate.entity.UserHistory" 
+             property-ref="UserHistoryUser"
+             fetch="join"
+             lazy="no-proxy"/>
+             
+              <many-to-one name="UserUserType"
+			class="com.mobisols.tollpayments.hibernate.entity.UserType"
+			column="utype_id"
+			cascade="save-update"
+			unique="true"/>
+			
+			 <one-to-one name="UserUserVehicleHistory"
+             class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory" 
+             property-ref="UserVehicleHistoryUser"
+             fetch="join"
+             lazy="no-proxy"/>
              
              
             <filter name="clientIdFilter" condition=":clientId = client_id"/>

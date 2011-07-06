@@ -63,6 +63,13 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
+            
+            <one-to-one name="UserTypeUser"
+             class="com.mobisols.tollpayments.hibernate.entity.User" 
+             property-ref="UserUserType"
+             fetch="join"
+             lazy="no-proxy"/>
+             
    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

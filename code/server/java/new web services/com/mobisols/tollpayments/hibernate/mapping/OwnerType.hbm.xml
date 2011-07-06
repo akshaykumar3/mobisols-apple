@@ -57,9 +57,9 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <one-to-one name="chOnwerType"
+            <one-to-one name="OnwerTypeUserVehicle"
       		class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
-			property-ref="parOwnerType"/>
+			property-ref="UserVehicleOwnerType"/>
             
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

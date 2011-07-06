@@ -59,9 +59,9 @@
                 <column name="last_modified_by" />
             </property>
             
-            <one-to-one name="chComponentVersion"
+            <one-to-one name="ComponentComponentVersion"
              class="com.mobisols.tollpayments.hibernate.entity.ComponentVersion"
-             property-ref="parComponent"
+             property-ref="ComponentVersionComponent"
              cascade="all"/>
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

@@ -66,11 +66,17 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <many-to-one name="parServicePlan"
+            <many-to-one name="UserServiceServicePlan"
                 class="com.mobisols.tollpayments.hibernate.entity.ServicePlan"
 				column="service_id"
 				cascade="save-update"
 				unique="true"/>
+			<many-to-one name="UserServiceUser"
+                class="com.mobisols.tollpayments.hibernate.entity.User"
+				column="user_id"
+				cascade="save-update"
+				unique="true"/>	
+				
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

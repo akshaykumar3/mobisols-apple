@@ -96,6 +96,18 @@
             <property name="longitude" type="java.lang.Double">
                 <column name="longitude" precision="3" scale="3" />
             </property>
+            <many-to-one name="TollLocationHistoryTollLocation"
+                class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
+				column="toll_location_id"
+				cascade="save-update"
+				unique="true"/>
+				
+			<many-to-one name="TollLocationHistoryTollOperator"
+                class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
+				column="toll_operator_id"
+				cascade="save-update"
+				unique="true"/>	
+			
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">
