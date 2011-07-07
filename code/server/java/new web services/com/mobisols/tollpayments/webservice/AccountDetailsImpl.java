@@ -3,6 +3,7 @@ package com.mobisols.tollpayments.webservice;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,15 +12,15 @@ import javax.ws.rs.QueryParam;
 
 import org.hibernate.*;
 import org.hibernate.criterion.*;
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.User;
-import com.mobisols.tollpayments.hibernate.UserVehicle;
-import com.mobisols.tollpayments.hibernate.VehicleTollUsage;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.User;
+import com.mobisols.tollpayments.hibernate.entity.UserVehicle;
+import com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage;
 
 @Path("/AccountDetails")
 public class AccountDetailsImpl implements AccountDetails{
 	private String contactNo;
-	private PaymentDetails paymentDetails;
+	private PaymentDetailsImpl paymentDetails;
 	private List<VehicleDetails> vehicleDetails;
 	private List<TollPayments> tollPayments;
 	private BalanceInfo balanceInfo;
@@ -70,11 +71,9 @@ public class AccountDetailsImpl implements AccountDetails{
 		}
 		User u=(User) ((User) userList.get(0));
 		this.setContactNo(u.getContactNo());
-		this.paymentDetails=new PaymentDetailsImpl(u.getUserId());
+		this.paymentDetails=new PaymentDetailsImpl(u.getUserPaymentDetails().getUpdId());
 		this.vehicleDetails=new LinkedList<VehicleDetails>();
-		crit=s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("userId", u.getUserId()));
-		List<UserVehicle> vehicleList=crit.list();
+		Set <UserVehicle> vehicleList =u.getUserVehicle();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{
 			 this.vehicleDetails.add(new VehicleDetailsImpl(((UserVehicle)it.next()).getUserVehicleId()));
@@ -88,10 +87,10 @@ public class AccountDetailsImpl implements AccountDetails{
 			List<VehicleTollUsage> vtuList=c.list();
 			for(Iterator i=(Iterator) vtuList.iterator();i.hasNext();)
 			{
-				this.tollPayments.add(new TollPaymentsImpl(((VehicleTollUsage)i.next()).getVtuId(),((VehicleTollUsage)i.next()).getTimestamp()));
+				this.tollPayments.add(new TollPaymentsImpl(((VehicleTollUsage)i.next()).getVtuId()));
 			}
 		}
-		this.balanceInfo=new BalanceInfoImpl(u.getUserId());
+		this.balanceInfo=new BalanceInfoImpl(u.getUserBalance().getUbalId());
 		this.setUserId(((User) userList.get(0)).getUserId());
 	}
 	
@@ -99,10 +98,10 @@ public class AccountDetailsImpl implements AccountDetails{
 		HibernateSessionFactory.closeSession();
 		}
 	
-	public PaymentDetails getPaymentDetails() {
+	public PaymentDetailsImpl getPaymentDetails() {
 		return paymentDetails;
 	}
-	public void setPaymentDetails(PaymentDetails paymentDetails) {
+	public void setPaymentDetails(PaymentDetailsImpl paymentDetails) {
 		this.paymentDetails = paymentDetails;
 	}
 	public List<VehicleDetails> getVehicleDetails() {

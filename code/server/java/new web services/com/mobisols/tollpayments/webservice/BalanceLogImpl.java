@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.UserBalanceLog;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.UserBalanceLog;
 
 public class BalanceLogImpl implements BalanceLog {
 	private Double delta;
@@ -20,12 +21,11 @@ public class BalanceLogImpl implements BalanceLog {
 	public BalanceLogImpl(int logid) {	
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(UserBalanceLog.class);
-		List<UserBalanceLog> ubl=crit.list();
-		if(ubl.isEmpty())
-			return;
-		this.setDelta(ubl.get(0).getDelta());
-		this.setDescription(ubl.get(0).getAction());
-		this.setTimeStamp(ubl.get(0).getTimestamp());
+		crit.add(Restrictions.eq("ublogId",logid));
+		UserBalanceLog ub=(UserBalanceLog) crit.uniqueResult();
+		this.setDelta(ub.getDelta());
+		this.setDescription(ub.getAction());
+		this.setTimeStamp(ub.getTimestamp());
 	}
 	public Double getDelta() {
 		return delta;

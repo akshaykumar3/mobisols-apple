@@ -36,7 +36,7 @@ public class User implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private Set<UserVehicle> userVehicle;
-	private UserPaymentDetail userPaymentDetails;
+	private UserPaymentDetails userPaymentDetails;
 	private UserBalance userBalance;
 	private Configuration configuration;
 	private TollOperator tollOperator;
@@ -61,11 +61,11 @@ public class User implements java.io.Serializable {
 
 
 
-	public UserPaymentDetail getUserPaymentDetails() {
+	public UserPaymentDetails getUserPaymentDetails() {
 		return userPaymentDetails;
 	}
 
-	public void setUserPaymentDetails(UserPaymentDetail userPaymentDetails) {
+	public void setUserPaymentDetails(UserPaymentDetails userPaymentDetails) {
 		this.userPaymentDetails = userPaymentDetails;
 	}
 

@@ -6,8 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.OwnerType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.OwnerType;
 
 
 public class OwnerTypeImpl implements UserOwnerType {
@@ -17,14 +17,10 @@ public class OwnerTypeImpl implements UserOwnerType {
     Session s = HibernateSessionFactory.getSession();
     Criteria crit = s.createCriteria(OwnerType.class);
     crit.add(Restrictions.eq("ownerTypeId", OwnerTypeId));
-    List <OwnerType> ot = crit.list();
-    if(ot.isEmpty())
-    { System.out.println("List is empty");
-    	return;
-    }
+    OwnerType ot = (OwnerType) crit.uniqueResult();
     System.out.println("List is not empty");
-    this.setDescription(ot.get(0).getDescription());
-	this.setName(ot.get(0).getName());
+    this.setDescription(ot.getDescription());
+	this.setName(ot.getName());
 	}
 	public String getName() {
 		return name;

@@ -6,9 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.TollLocation;
-import com.mobisols.tollpayments.hibernate.TollOperator;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.TollLocation;
+import com.mobisols.tollpayments.hibernate.entity.TollOperator;
 
 public class TollDetailsImpl {
 	private String tollOperator;
@@ -25,20 +25,13 @@ public class TollDetailsImpl {
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(TollLocation.class);
 		crit.add(Restrictions.eq("tollLocationId", tollid));
-		List<TollLocation> tl=crit.list();
-		if(tl.isEmpty())
-			return;
-		crit=s.createCriteria(TollOperator.class);
-		crit.add(Restrictions.eq("tollOperatorId", tl.get(0).getTollOperatorId()));
-		List<TollOperator> to=crit.list();
-		if(to.isEmpty())
-			return;
-		this.setTollOperator(to.get(0).getName());
-		this.setCity(tl.get(0).getCity());
-		this.setState(tl.get(0).getState());
-		this.setLatitude(tl.get(0).getLatitude());
-		this.setLongitude(tl.get(0).getLongitude());
-		this.setZip(tl.get(0).getZip());
+		TollLocation tl=(TollLocation) crit.uniqueResult();
+		this.setTollOperator(tl.getTollOperator().getName());
+		this.setCity(tl.getCity());
+		this.setState(tl.getState());
+		this.setLatitude(tl.getLatitude());
+		this.setLongitude(tl.getLongitude());
+		this.setZip(tl.getZip());
 	}
 	public String getTollOperator() {
 		return tollOperator;

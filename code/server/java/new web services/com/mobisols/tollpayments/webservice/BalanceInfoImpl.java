@@ -3,6 +3,7 @@ package com.mobisols.tollpayments.webservice;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,11 +14,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.User;
-import com.mobisols.tollpayments.hibernate.UserBalance;
-import com.mobisols.tollpayments.hibernate.UserBalanceLog;
-import com.mobisols.tollpayments.hibernate.UserType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.User;
+import com.mobisols.tollpayments.hibernate.entity.UserBalance;
+import com.mobisols.tollpayments.hibernate.entity.UserBalanceLog;
+import com.mobisols.tollpayments.hibernate.entity.UserType;
 
 @Path("/BalanceInfo")
 public class BalanceInfoImpl implements BalanceInfo {
@@ -33,31 +34,19 @@ public class BalanceInfoImpl implements BalanceInfo {
 		
 	}
 	
-	public BalanceInfoImpl(Integer userId)
+	public BalanceInfoImpl(Integer ubalId)
 	{
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(UserBalance.class);
-		crit.add(Restrictions.eq("userId", userId));
-		List<UserBalance> ub=crit.list();
-		if(ub.isEmpty())
+		crit.add(Restrictions.eq("ubalId", ubalId));
+		UserBalance ub=(UserBalance) crit.uniqueResult();
+		if(ub==null)
 			return;
-		this.setCurrentBalance((ub.get(0).getBalance()));
-		this.setBalanceId(ub.get(0).getUbalId());
-		crit=s.createCriteria(User.class);
-		crit.add(Restrictions.eq("userId", userId));
-		List<User> u=crit.list();
-		crit=s.createCriteria(UserType.class);
-		crit.add(Restrictions.eq("userTypeId",u.get(0).getUtypeId()));
-		List<UserType> ut=crit.list();
-		if(ut.isEmpty())
-		{
-			return;
-		}
-		//this.setMinBalance(ut.get(0).getMinBalance());
+		this.setCurrentBalance((ub.getBalance()));
+		this.setBalanceId(ub.getUbalId());
+		this.setMinBalance(ub.getUser().getUserType().getMinBalance());
 		this.balancelog=new LinkedList<BalanceLog>();
-		crit=s.createCriteria(UserBalanceLog.class);
-		crit.add(Restrictions.eq("ubalId",ub.get(0).getUbalId()));
-		List<UserBalanceLog> ubl=crit.list();
+		Set<UserBalanceLog> ubl=ub.getUserBalanceLog();
 		for(Iterator it=(Iterator) ubl.iterator();it.hasNext();){
 			this.balancelog.add(new BalanceLogImpl(((UserBalanceLog)it.next()).getUblogId()));
 		}

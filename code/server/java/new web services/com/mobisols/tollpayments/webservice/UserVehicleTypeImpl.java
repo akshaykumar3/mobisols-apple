@@ -6,8 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.VehicleType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 
 public class UserVehicleTypeImpl implements UserVehicleType {
 	private String name;
@@ -18,15 +18,10 @@ public class UserVehicleTypeImpl implements UserVehicleType {
 		System.out.println(vehicleTypeId);
 		Criteria crit=s.createCriteria(VehicleType.class);
 		crit.add(Restrictions.eq("vehicleTypeId", vehicleTypeId));
-		List<VehicleType> vt=crit.list();
-		if(vt.isEmpty())
-		{
-			System.out.println("List is empty");
-			return;
-		}
+		VehicleType vt=(VehicleType) crit.uniqueResult();
 		System.out.println("list is not empty");
-		this.setDescription(vt.get(0).getDescription());
-		this.setName(vt.get(0).getName());
+		this.setDescription(vt.getDescription());
+		this.setName(vt.getName());
 	}
 
 	public String getName() {
