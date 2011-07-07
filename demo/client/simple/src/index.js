@@ -65,11 +65,32 @@ Ext.setup({
 			new google.maps.Point(16,31)
 		);
 
+		Ext.Ajax.request({
+			url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+			params: {json: Ext.encode({
+					userID: 'mobisolsUDID',
+					password: 'mobisols'
+				})
+			},
+			success: function(response){
+				console.log('request success');
+				var resobj=Ext.decode(response);
+				if(resobj.confirm)
+				{
+					tabpanel.setActiveItem('home');
+				}//show home page
+			},
+			failure: function(response){
+				console.log('request failure');
+			}
+		});
+
 		var curl,avgt,pt,tollop;
 		var center;
 
 		var tabpanel = new Ext.TabPanel({
 			tabBar: {
+				id: 'tabpanelbar',
 				dock: 'bottom',
 				layout: {
 					pack: 'center'
@@ -326,6 +347,6 @@ Ext.setup({
 				}
 			}]
 		});
-		requestHeartBeat();
+		//requestHeartBeat();
 	}
 });
