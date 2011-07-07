@@ -424,8 +424,10 @@ Ext.setup({
 
 		var DetailPanel= new Ext.Panel({
 			id: 'detailpanel',
+			cardSwitchAnimation: 'slide',
 			layout: 'vbox',
 			scroll: 'vertical',
+			//height: '90%',
 			dockedItems: [{
 				xtype: 'toolbar',
 				title: 'Edit Car',
@@ -493,13 +495,13 @@ Ext.setup({
 					id: 'DetailPanel.to',
 					name: 'ed'
 				}]
-			},{
+			}/*,{
 				xtype: 'button',
 				text: 'done',
 				handler: function(){
 					tabpanel.setActiveItem('mycars');
 				}
-			}]
+			}*/]
 		});
 
 		var position = new google.maps.LatLng(17.341288,77.907719);
@@ -658,17 +660,10 @@ Ext.setup({
 						id: 'pdtoll',
 						label: 'Per Day'
 					},{
-						xtype: 'selectfield',
+						xtype: 'textfield',
 						name: 'activecar',
 						label: 'ActiveCar',
-						id: 'activecar',
-						options: [{
-							text: '4GPB522',
-							value: '4GPB522'
-						},{
-							text: '4G23VS2',
-							value: '4G23VS2'
-						}]
+						id: 'activecar'
 					},{
 						xtype: 'selectfield',
 						name: 'serviceplan',
@@ -727,10 +722,11 @@ Ext.setup({
 						id: 'listid',
 						fullscreen: true,
 						store: carsList,
+						singleSelect: true,
 						scroll: 'vertical',
 						itemTpl: '<div class="contact"><strong>{reg}</strong> - {state} - {type}</div>',
 						setActiveItem: this,
-						onItemDisclosure: function() {
+						onItemDisclosure: function(){
 							console.log('clicked an item in the list');
 							var record=Ext.getCmp('listid').getSelectedRecords();
 							
@@ -740,12 +736,8 @@ Ext.setup({
 							Ext.getCmp('DetailPanel.reg').setValue(record[0].get('reg'));
 							Ext.getCmp('DetailPanel.type').setValue(record[0].get('type'));
 							tabpanel.setActiveItem('details');
+							console.log('is selected '+this.isSelected(record[0]));	
 						}
-					},{
-						html: 'i am detail panel',
-						fullscreen: true,
-						id: 'detailpanel',
-						tpl: '<div class="contact">{state} {reg} {type}</div>'
 					}]
 				}]
 			},{
@@ -901,19 +893,19 @@ Ext.setup({
 						console.log('centerchange event is triggered');
 						var bounds = map.getBounds();
 						console.log(bounds);						
-						/*var southWest = bounds.getSouthWest();
-					  	var northEast = bounds.getNorthEast();
+						var northEast = bounds.getNorthEast();
+					  	var southWest = bounds.getSouthWest();
 					  	
 					  	if(geo.latitude || geo.longitude)
 						{
 							Ext.Ajax.request({
-								url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/Vehicles',
+								url: 'http://mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/Viewport',
 								params: {
 									json: Ext.encode({
-										latitude1: southWest.lat(),
-										longitude1: southWest.lng(),
-										latitude2: northEast.lat(),
-										longitude2: northEast.lng()
+										latitude2: southWest.lat(),
+										longitude2: southWest.lng(),
+										latitude1: northEast.lat(),
+										longitude1: northEast.lng()
 									})
 								},
 								success: function(response){
@@ -945,7 +937,7 @@ Ext.setup({
 									console.log('viewport request failed with status '+response.status);								
 								}
 							})
-						}*/
+						}
 						// --- 
 					}
 				}
