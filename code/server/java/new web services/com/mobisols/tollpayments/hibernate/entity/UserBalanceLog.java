@@ -29,17 +29,17 @@ public class UserBalanceLog implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
-	private UserBalance userbalance;
+	private UserBalance userBalance;
 	private PaymentTransaction paymentTransaction;
 
 	// Constructors
 
 	public UserBalance getUserbalance() {
-		return userbalance;
+		return userBalance;
 	}
 
 	public void setUserbalance(UserBalance userbalance) {
-		this.userbalance = userbalance;
+		this.userBalance = userbalance;
 	}
 
 	public PaymentTransaction getPaymentTransaction() {

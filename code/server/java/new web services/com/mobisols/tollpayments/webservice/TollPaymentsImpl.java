@@ -8,10 +8,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.TollPrice;
-import com.mobisols.tollpayments.hibernate.UserVehicle;
-import com.mobisols.tollpayments.hibernate.VehicleTollUsage;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.TollPrice;
+import com.mobisols.tollpayments.hibernate.entity.UserVehicle;
+import com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage;
 
 
 public class TollPaymentsImpl implements TollPayments{
@@ -26,38 +26,20 @@ public class TollPaymentsImpl implements TollPayments{
 	public TollPaymentsImpl(){
 		
 	}
-	public TollPaymentsImpl(int vtuId,Date doj){
+	public TollPaymentsImpl(int vtuId){
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(VehicleTollUsage.class);
 		crit.add(Restrictions.eq("vtuId", vtuId));
-		if(doj!=null)
-		{
-			crit.add(Restrictions.eq("timestamp", doj));
-		}
-		List<VehicleTollUsage> vtu=crit.list();
-		if(vtu.isEmpty())
-			return;
-		crit=s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("userVehicleId", vtu.get(0).getUvhId()));
-		List<UserVehicle> uv=crit.list();
-		if(uv.isEmpty())
-			return;
-		this.setRegistration(uv.get(0).getRegistrationNo());
-		this.setState(uv.get(0).getRegisteredState());
-		if(vtu.get(0).getPtranId()==-1)
+		VehicleTollUsage vtu=(VehicleTollUsage) crit.uniqueResult();
+		this.setRegistration(vtu.getUservehicleHistory().getRegistrationNo());
+		this.setState(vtu.getUservehicleHistory().getRegisteredState());
+		if(vtu.getPtranId()==-1)
 			this.setIsPaid("false");
 		else
 			this.setIsPaid("true");
-		
-		crit=s.createCriteria(TollPrice.class);
-		crit.add(Restrictions.eq("tollLocationId", vtu.get(0).getTollLocId()));
-		crit.add(Restrictions.eq("vehicleTypeId", uv.get(0).getVehicleTypeId()));
-		List<TollPrice> tp=crit.list();
-		if(tp.isEmpty())
-			return;
-		this.setPrice(tp.get(0).getCostPrice());
-		this.setTimeStamp(vtu.get(0).getTimestamp());
-		this.setTollDetails((TollDetails)new TollDetailsImpl(vtu.get(0).getTollLocId()));
+		this.setPrice(vtu.getTollPriceHistory().getCostPrice());
+		this.setTimeStamp(vtu.getTimestamp());
+		this.setTollDetails((TollDetails)new TollDetailsImpl(vtu.getTollLocId()));
 	}
 	public String getRegistration() {
 		return registration;

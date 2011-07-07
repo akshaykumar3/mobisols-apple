@@ -12,9 +12,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.User;
-import com.mobisols.tollpayments.hibernate.UserBalance;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.User;
+import com.mobisols.tollpayments.hibernate.entity.UserBalance;
 import com.mobisols.tollpayments.myutils.MyUtils;
 
 @Path("/AddBalance")
@@ -59,12 +59,11 @@ public class AddBalanceImpl implements AddBalance {
 		{
 			response = addBalance(ad, ad.getbalanceId(),u.get(0).getUserId());
 		}
+		
 		crit=s.createCriteria(UserBalance.class);
 		crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
-		List<UserBalance> ubList = crit.list();
-		if(ubList.isEmpty())
-			return "";
-		response=addBalance(ad, ubList.get(0).getUbalId(),u.get(0).getUserId());
+		UserBalance ub = u.get(0).getUserBalance();
+		response=addBalance(ad, ub.getUbalId(),u.get(0).getUserId());
 		String status="";
 		String request="";
 		String res= c.getJSON(request, status, response);

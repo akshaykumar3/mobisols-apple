@@ -27,15 +27,15 @@ public class CcType implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private Integer clientId;
-	private UserPaymentDetail userPaymentDetail;
+	private UserPaymentDetails userPaymentDetail;
 
 	// Constructors
 
-	public UserPaymentDetail getUserPaymentDetail() {
+	public UserPaymentDetails getUserPaymentDetail() {
 		return userPaymentDetail;
 	}
 
-	public void setUserPaymentDetail(UserPaymentDetail userPaymentDetail) {
+	public void setUserPaymentDetail(UserPaymentDetails userPaymentDetail) {
 		this.userPaymentDetail = userPaymentDetail;
 	}
 

@@ -10,9 +10,9 @@ import javax.ws.rs.Path;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
-import com.mobisols.tollpayments.hibernate.CcType;
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.VehicleType;
+import com.mobisols.tollpayments.hibernate.entity.CcType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 @Path("/CcTypeList")
 
 public class CcTypeListImpl implements CcTypeList {

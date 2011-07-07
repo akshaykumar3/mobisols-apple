@@ -10,8 +10,8 @@ import javax.ws.rs.Path;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.OwnerType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.OwnerType;
 
 @Path("/OwnerTypesList")
 public class OwnerTypeListImpl implements OwnerTypeList{

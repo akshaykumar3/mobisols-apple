@@ -6,9 +6,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.ServicePlan;
-import com.mobisols.tollpayments.hibernate.VehicleType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.ServicePlan;
+import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 
 public class UserServicePlanImpl implements UserServicePlan{
 	String tollOpName =null;
@@ -19,12 +19,10 @@ public class UserServicePlanImpl implements UserServicePlan{
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(ServicePlan.class);
 		crit.add(Restrictions.eq("servicePlanId", servicePlanId));
-		List<ServicePlan> st=crit.list();
-		if(st.isEmpty())
-			return;
-		TollDetailsImpl toll = new TollDetailsImpl(st.get(0).getTollOperatorId());
-		this.setDescription(st.get(0).getDescription());
-		this.setName(st.get(0).getName());
+		ServicePlan st=(ServicePlan) crit.uniqueResult();
+		TollDetailsImpl toll = new TollDetailsImpl(st.getTollOperatorId());
+		this.setDescription(st.getDescription());
+		this.setName(st.getName());
 		this.setTollOpName(toll.getTollOperator());
 	}
 	

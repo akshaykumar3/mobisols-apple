@@ -11,9 +11,9 @@ import javax.ws.rs.Path;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.ServicePlan;
-import com.mobisols.tollpayments.hibernate.VehicleType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.ServicePlan;
+import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 
 @Path("/ServicesList")
 public class ServicePlanListImpl implements ServicePlanList {

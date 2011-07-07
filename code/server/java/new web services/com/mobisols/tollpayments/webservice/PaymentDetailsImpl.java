@@ -15,10 +15,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.CcType;
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.User;
-import com.mobisols.tollpayments.hibernate.UserPaymentDetail;
+import com.mobisols.tollpayments.hibernate.entity.CcType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.User;
+import com.mobisols.tollpayments.hibernate.entity.UserPaymentDetails;
 import com.mobisols.tollpayments.myutils.MyUtils;
 @Path("/PaymentDetails")
 public class PaymentDetailsImpl implements PaymentDetails{
@@ -40,50 +40,43 @@ public class PaymentDetailsImpl implements PaymentDetails{
 	private String zip;
 	private String payPrefer;
 	
-	public PaymentDetailsImpl(int userId) {
+	public PaymentDetailsImpl(int updId) {
 		//TODO code to access database using hibernate
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserPaymentDetail.class);
+		Criteria crit=s.createCriteria(UserPaymentDetails.class);
 		String hql ="from UserPaymentDetail userpayment where userpayment.userId=:userId";
 		Query query = s.createQuery(hql);
-		query.setInteger("userId",userId);
-        List<UserPaymentDetail> pd = query.list();
-		Iterator it=pd.iterator();
-		if(it.hasNext())
-		{
-			
-			this.setCardNumber(pd.get(0).getCcNumber());
-			this.setCcName(pd.get(0).getCcAcName());
-			crit=s.createCriteria(CcType.class);
-			crit.add(Restrictions.eq("ccTypeId", pd.get(0).getCcTypeId()));
-			List<CcType> cctype=crit.list();
-			this.setCardType(cctype.get(0).getName());
-			this.setExpMonth(pd.get(0).getCcExpMonth());
-			this.setExpYear(pd.get(0).getCcExpYear());
-			this.setBankRouting(pd.get(0).getBankRouting());
-			this.setBankAccount(pd.get(0).getBankAccount());
-			this.setPaymentId(pd.get(0).getUpdId());
-			this.setAddress1(pd.get(0).getAddress1());
-			this.setAddress2(pd.get(0).getAddress2());
-			this.setCcCVV(pd.get(0).getCcCvv());
-			this.setCity(pd.get(0).getCity());
-			this.setCountry(pd.get(0).getCountry());
-			this.setPayPrefer(pd.get(0).getPayPrefer());
-			this.setState(pd.get(0).getState());
-			this.setZip(pd.get(0).getZip());
+		query.setInteger("updId",updId);
+        UserPaymentDetails pd = (UserPaymentDetails) query.uniqueResult();
+			this.setCardNumber(pd.getCcNumber());
+			this.setCcName(pd.getCcAcName());
+			this.setCardType(pd.getCcType().getDescription());
+			this.setExpMonth(pd.getCcExpMonth());
+			this.setExpYear(pd.getCcExpYear());
+			this.setBankRouting(pd.getBankRouting());
+			this.setBankAccount(pd.getBankAccount());
+			this.setPaymentId(pd.getUpdId());
+			this.setAddress1(pd.getAddress1());
+			this.setAddress2(pd.getAddress2());
+			this.setCcCVV(pd.getCcCvv());
+			this.setCity(pd.getCity());
+			this.setCountry(pd.getCountry());
+			this.setPayPrefer(pd.getPayPrefer());
+			this.setState(pd.getState());
+			this.setZip(pd.getZip());
 		}
-	}
+
 	
 	public PaymentDetailsImpl() {
 	}
 	
 	//TODO update about address of the user for payment detail
-	public GeneralResponse postPaymentDetails(PaymentDetails pd,int paymentId,int userId)
+	public GeneralResponse postPaymentDetails(UserPaymentDetails upd,int paymentId,int userId)
 	{
 		GeneralResponse response=new GeneralResponseImpl();
 		Session s=HibernateSessionFactory.getSession();
 		Transaction tx=s.beginTransaction();
-		UserPaymentDetail upd=(UserPaymentDetail) s.get(UserPaymentDetail.class, paymentId);
+		PaymentDetailsImpl pd=(PaymentDetailsImpl) s.get(UserPaymentDetails.class, paymentId);
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
 		upd.setCcExpMonth(pd.getExpMonth());
@@ -100,14 +93,7 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		upd.setPayPrefer(pd.getPayPrefer());
 		upd.setState(pd.getState());
 		upd.setZip(pd.getZip());
-		Criteria crit=s.createCriteria(CcType.class);
-		crit.add(Restrictions.eq("name", pd.getCardType()));
-		List<CcType> cc=crit.list();
-		if(cc.isEmpty())
-		{
-			return null;
-		}
-		upd.setCcTypeId(cc.get(0).getCcTypeId());
+		upd.setCcTypeId(pd.getCardType());
 		upd.setLastModifiedBy(userId);
 		upd.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
 		((GeneralResponseImpl) response).setDescription("your account details have been updated successfully");
@@ -133,9 +119,9 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		else
 		{
 			
-			crit=s.createCriteria(UserPaymentDetail.class);
+			crit=s.createCriteria(UserPaymentDetails.class);
 			crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
-			List<UserPaymentDetail> upd=crit.list();
+			List<UserPaymentDetails> upd=crit.list();
 			if(upd.isEmpty())
 			{
 				return null;
@@ -269,4 +255,7 @@ public class PaymentDetailsImpl implements PaymentDetails{
 	public void setPayPrefer(String payPrefer) {
 		this.payPrefer = payPrefer;
 	}
+
+
+
 }

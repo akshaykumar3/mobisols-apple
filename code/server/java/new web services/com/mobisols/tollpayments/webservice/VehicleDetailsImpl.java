@@ -17,11 +17,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.OwnerType;
-import com.mobisols.tollpayments.hibernate.User;
-import com.mobisols.tollpayments.hibernate.UserVehicle;
-import com.mobisols.tollpayments.hibernate.VehicleType;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.OwnerType;
+import com.mobisols.tollpayments.hibernate.entity.User;
+import com.mobisols.tollpayments.hibernate.entity.UserVehicle;
+import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 import com.mobisols.tollpayments.myutils.MyUtils;
 
 @Path("/VehicleDetails")
@@ -47,14 +47,8 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		this.setIsActive(uv.get(0).getIsActive());
 		this.setRegistration(uv.get(0).getRegistrationNo());
 		this.setState(uv.get(0).getRegisteredState());
-		crit=s.createCriteria(VehicleType.class);
-		crit.add(Restrictions.eq("vehicleTypeId", uv.get(0).getVehicleTypeId()));
-		List<VehicleType> vt=crit.list();
-		crit=s.createCriteria(OwnerType.class);
-		crit.add(Restrictions.eq("ownerTypeId", uv.get(0).getOwnerTypeId()));
-		List<OwnerType> ot=crit.list();
-		this.setOwnerType(ot.get(0).getName());
-		this.setType(vt.get(0).getName());
+		this.setOwnerType(uv.get(0).getOwnerType().getName());
+		this.setType(uv.get(0).getUserVehicleHistory().getVehicleType().getName());
 		this.setStartDate(uv.get(0).getVehicleStartDate());
 		this.setEndDate(uv.get(0).getVehicleEndDate());
 		this.setVehicleId(uv.get(0).getUserVehicleId());

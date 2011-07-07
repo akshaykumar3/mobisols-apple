@@ -13,11 +13,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.mobisols.tollpayments.hibernate.CcType;
-import com.mobisols.tollpayments.hibernate.Component;
-import com.mobisols.tollpayments.hibernate.ComponentVersion;
-import com.mobisols.tollpayments.hibernate.Configuration;
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.CcType;
+import com.mobisols.tollpayments.hibernate.entity.Component;
+import com.mobisols.tollpayments.hibernate.entity.ComponentVersion;
+import com.mobisols.tollpayments.hibernate.entity.Configuration;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
 
 @Path("/ClientConfiguration")
 public class ClientConfigurationImpl implements ClientConfiguration{

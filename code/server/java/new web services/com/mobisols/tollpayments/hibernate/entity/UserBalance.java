@@ -1,6 +1,8 @@
 package com.mobisols.tollpayments.hibernate.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 /**
  * UserBalanceId entity. @author MyEclipse Persistence Tools
@@ -28,7 +30,7 @@ public class UserBalance implements java.io.Serializable {
 	private Timestamp createdOn;
 	private Integer clientId;
 	private User user;
-	private UserBalanceLog userBalanceLog;
+	private Set<UserBalanceLog> userBalanceLog;
 
 	// Constructors
 
@@ -40,11 +42,11 @@ public class UserBalance implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public UserBalanceLog getUserBalanceLog() {
+	public Set<UserBalanceLog> getUserBalanceLog() {
 		return userBalanceLog;
 	}
 
-	public void setUserBalanceLog(UserBalanceLog userBalanceLog) {
+	public void setUserBalanceLog(Set<UserBalanceLog> userBalanceLog) {
 		this.userBalanceLog = userBalanceLog;
 	}
 

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.ws.rs.QueryParam;
 
+import com.mobisols.tollpayments.hibernate.entity.UserPaymentDetails;
+
 
 public interface PaymentDetails {
 	String ccName=null;
@@ -24,7 +26,7 @@ public interface PaymentDetails {
 	String zip=null;
 	String payPrefer=null;
 	
-	public GeneralResponse postPaymentDetails(PaymentDetails pd,int paymentId,int userId);
+	public GeneralResponse postPaymentDetails(UserPaymentDetails upd,int paymentId,int userId);
 	public String postPaymentDetails(String json,String user,int hasId);
 	public String getCardNumber();
 	public void setCardNumber(String cardNumber);

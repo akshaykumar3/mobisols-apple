@@ -40,7 +40,16 @@ public class UserVehicleHistory implements java.io.Serializable {
     private UserVehicle userVehicle;
     private User user;
     private VehicleMovementLog vehicleMovementLog;
+    private VehicleType vehicleType;
 	// Constructors
+
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
 
 	public UserVehicle getUserVehicle() {
 		return userVehicle;

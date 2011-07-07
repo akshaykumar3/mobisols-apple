@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import com.mobisols.tollpayments.hibernate.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
 @Path("/PayForToll")
 public class PayForTollImpl implements PayForToll{
 
