@@ -26,7 +26,7 @@ Ext.setup({
 					else if(geo.latitude || geo.longitude){
 						mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					}
-					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
+					//Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
 					
 					console.log('map centered at latitude '+Ext.getCmp('mappanel').map.getCenter().lat());
@@ -66,7 +66,7 @@ Ext.setup({
 		);
 
 		Ext.Ajax.request({
-			url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+			url: 'http://mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
 			params: {json: Ext.encode({
 					userID: 'mobisolsUDID',
 					password: 'mobisols'
