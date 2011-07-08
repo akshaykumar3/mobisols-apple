@@ -9,7 +9,8 @@ Ext.setup({
 			};
 		
 		Ext.Ajax.request({
-			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/TollDetailsList',
+			url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
+			//url: 'http:/mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/TollDetailsList',
 			params: {json: Ext.encode(reqobj)},
 			disableCaching: false,
    			method: 'GET',
