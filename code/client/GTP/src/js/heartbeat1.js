@@ -17,6 +17,16 @@ function changeCoords(){
 			map: Ext.getCmp('mappanel').map
 		});
 	}
+	if(repeatno==2){
+		console.log('inside repeatno 2');
+		new google.maps.Marker({
+			position: new google.maps.LatLng(37.4485,-121.50592),
+			icon: 'resources/images/covered.png',
+			title: 'this is dynamically created marker',
+			map: Ext.getCmp('mappanel').map
+		});
+	}
+	
 	if(repeatno < 3)
 	{
 		console.log('inside repeat');

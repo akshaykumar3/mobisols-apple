@@ -1,7 +1,5 @@
-/* Things that are added:
- * Maps Page working.
- * Blut dot is centered to the screen.
- * There is no flickering
+/*	Implemented Getting Toll Locations inside ViewPort
+ * 	Written inside the centerchange event 
  */
 
 Ext.setup({
@@ -86,7 +84,7 @@ Ext.setup({
 		console.log(carsList.getAt(0).get('reg'));
 
 		Ext.Ajax.request({
-	      url: 'http://mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
+	      url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
 	      success: function(result) {
 	      	console.log('request is sent successfully');
 	      	
@@ -905,7 +903,7 @@ Ext.setup({
 					  	if(geo.latitude || geo.longitude)
 						{
 							Ext.Ajax.request({
-								url: 'http://mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/Viewport',
+								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
 								params: {
 									json: Ext.encode({
 										latitude2: southWest.lat(),

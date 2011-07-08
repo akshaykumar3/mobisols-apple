@@ -1,16 +1,54 @@
-/* Things that are added:
- * Maps Page working.
- * Blut dot is centered to the screen.
- * There is no flickering
- */
+Ext.regApplication({
+    name: "gtp",
+    
+    icon: 'resources/images/sunpass.png',
+    glossOnIcon: false,
+    tabletStartupScreen: 'resources/images/tablet_startup.png',
+    phoneStartupScreen: 'resources/images/phone_startup.png',    
+    /**
+     * This function is automatically called when the document has finished loading. All we do here
+     * is launch the application by calling the loans controller's 'list' action (see app/controllers/loans.js)
+     */
+    launch: function() {
+    	Ext.dispatch({
+            controller: 'load',
+            action    : 'show'
+    	});
+    }
+});
 
-Ext.setup({
-	icon: 'resources/images/icon.png',
-	tabletStartupScreen: 'resources/images/tablet_startup.png',
-	phoneStartupScreen: 'resources/images/phone_startup.png',
-	glossOnIcon: false,
-	onReady: function() {
-		
+gtp.controller=Ext.regController("load",{
+	show: function() {
+		console.log('i am from controller show action');
+		gtp.views.loginPage=new Ext.Panel({
+			fullscreen: true,
+			layout: 'vbox',
+			items: [{
+				html: 'email ID:',
+				align: 'left'
+			},{
+				xtype: 'textfield',
+				id: 'emailid'
+			},{
+				html: 'password:',
+				align: 'left'
+			},{
+				xtype: 'passwordfield',
+				id: 'password'
+			},{
+				xtype: 'button',
+				text: 'Sign in',
+				handler: function(){
+					Ext.dispatch({
+						controller: 'load',
+						action: 'view'
+					})
+				}
+			}]
+		});
+	},
+	view: function(){
+		console.log('i am from controller view action');
 		var mylocation_marker, markernotset=true;
 		
 		var geo = new Ext.util.GeoLocation({
@@ -32,7 +70,7 @@ Ext.setup({
 					else if(geo.latitude || geo.longitude){
 						mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					}
-					//Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
+					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
 					
 					console.log('map centered at latitude '+Ext.getCmp('mappanel').map.getCenter().lat());
@@ -905,7 +943,7 @@ Ext.setup({
 					  	if(geo.latitude || geo.longitude)
 						{
 							Ext.Ajax.request({
-								url: 'http://mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/Viewport',
+								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
 								params: {
 									json: Ext.encode({
 										latitude2: southWest.lat(),
@@ -957,8 +995,5 @@ Ext.setup({
 				items: [DetailPanel]
 			}]
 		});
-		
-		// triggering heart beat function here.. 
-		//setTimeout("requestHeartBeat()",5000);
 	}
-});
+})
