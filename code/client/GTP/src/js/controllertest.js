@@ -1,8 +1,9 @@
 controller=Ext.regController("clickButton",{
 	show: function() {
 		console.log('i am from controller');
-		var id=new Ext.ux.UUID();
-		console.log('UUID: '+id);
+		console.log('Is phone? '+Ext.is.Phone);
+		console.log('Is android? '+Ext.is.Android);
+		console.log('Is desktop? '+Ext.is.Desktop);
 	}
 })
 
