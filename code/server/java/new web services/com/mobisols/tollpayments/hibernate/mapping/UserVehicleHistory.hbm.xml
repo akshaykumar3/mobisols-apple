@@ -88,27 +88,13 @@
                 <column name="client_id" />
             </property>
             
-            <many-to-one name="UserVehicleHistoryUserVehicle"
+            <many-to-one name="userVehicle"
 			class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
 			column="user_vehicle_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
-			
-			 <many-to-one name="UserVehicleHistoryUser"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
-			column="user_id"
-			cascade="save-update"
-			unique="true"/>
-			
-            <many-to-one name="UserVehicleHistoryVehicleType"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleType"
-			column="vehicle_type_id"
-			cascade="save-update"
-			unique="true"/>
-            
-            <one-to-one name="UserVehicleHistoryVehicleMovementLog"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
-            property-ref="VehicleMovementLogUserVehicleHistory"/>
             
             <set name="tollDetails" inverse="true">
              <key update="false">

@@ -1,20 +1,23 @@
 package com.mobisols.tollpayments.webservice;
 
-import java.util.HashMap;
+import java.sql.Timestamp;
 
 public class HeartBeatResponseImpl implements HeartBeatResponse {
-	private HashMap<String, String> hash;
-
-	public HeartBeatResponseImpl()
-	{
-		this.hash= new HashMap<String, String>();
+	private Timestamp nextTimeStamp;
+	private String status;
+	public Timestamp getNextTimeStamp() {
+		return nextTimeStamp;
 	}
-	
-	public HashMap<String, String> getHash() {
-		return hash;
+	public void setNextTimeStamp(Timestamp nextTimeStamp) {
+		this.nextTimeStamp = nextTimeStamp;
 	}
-
-	public void setHash(HashMap<String, String> hash) {
-		this.hash = hash;
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public HeartBeatResponseImpl(){
+		
 	}
 }

@@ -59,16 +59,20 @@
                 <column name="client_id" />
             </property>
      
-             <many-to-one name="UserNotificationSettingsUser"
+             <many-to-one name="user"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="user_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
 			
-			<many-to-one name="UserNotificationSettingsUserNotificationType"
+			<many-to-one name="userNotificationType"
 			class="com.mobisols.tollpayments.hibernate.entity.UserNotificationType"
 			column="user_notification_type_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
 			
      

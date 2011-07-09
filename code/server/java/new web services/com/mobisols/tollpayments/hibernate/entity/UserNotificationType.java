@@ -27,27 +27,8 @@ public class UserNotificationType implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private Integer clientId;
-	private UserNotificationSettings userNotificationSettings;
-	private UserNotification userNotification;
 
 	// Constructors
-
-	public UserNotificationSettings getUserNotificationSettings() {
-		return userNotificationSettings;
-	}
-
-	public void setUserNotificationSettings(
-			UserNotificationSettings userNotificationSettings) {
-		this.userNotificationSettings = userNotificationSettings;
-	}
-
-	public UserNotification getUserNotification() {
-		return userNotification;
-	}
-
-	public void setUserNotification(UserNotification userNotification) {
-		this.userNotification = userNotification;
-	}
 
 	/** default constructor */
 	public UserNotificationType() {

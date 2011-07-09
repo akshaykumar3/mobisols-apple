@@ -31,8 +31,8 @@ public class PaymentTransaction implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
-	private VehicleTollUsage vehicleTollUsage;
-	private UserBalanceLog userBalanceLog;
+	private UserBalanceLog fromUserBalanceLog;
+	private UserBalanceLog toUserBalanceLog;
 	private UserPaymentDetailHistory userPaymentDetailHistory;
 
 	// Constructors
@@ -46,20 +46,22 @@ public class PaymentTransaction implements java.io.Serializable {
 		this.userPaymentDetailHistory = userPaymentDetailHistory;
 	}
 
-	public VehicleTollUsage getVehicleTollUsage() {
-		return vehicleTollUsage;
+	
+
+	public UserBalanceLog getFromUserBalanceLog() {
+		return fromUserBalanceLog;
 	}
 
-	public void setVehicleTollUsage(VehicleTollUsage vehicleTollUsage) {
-		this.vehicleTollUsage = vehicleTollUsage;
+	public void setFromUserBalanceLog(UserBalanceLog fromUserBalanceLog) {
+		this.fromUserBalanceLog = fromUserBalanceLog;
 	}
 
-	public UserBalanceLog getUserBalanceLog() {
-		return userBalanceLog;
+	public UserBalanceLog getToUserBalanceLog() {
+		return toUserBalanceLog;
 	}
 
-	public void setUserBalanceLog(UserBalanceLog userBalanceLog) {
-		this.userBalanceLog = userBalanceLog;
+	public void setToUserBalanceLog(UserBalanceLog toUserBalanceLog) {
+		this.toUserBalanceLog = toUserBalanceLog;
 	}
 
 	/** default constructor */

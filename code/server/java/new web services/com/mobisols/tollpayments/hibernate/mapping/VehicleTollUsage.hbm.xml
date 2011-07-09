@@ -69,35 +69,45 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <many-to-one name="VehicleTollUsagePaymentTransaction"
+            <many-to-one name="paymentTransaction"
             class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
             column="ptran_id"
             cascade="save-update"
+            insert="false"
+			update="false"
             unique="true"/>
             
-            <many-to-one name="VehicleTollUsageTollLocation"
+            <many-to-one name="tollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
 				column="toll_loc_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>
 				
-			<many-to-one name="VehicleTollUsageVehicleMovementLog"
+			<many-to-one name="vehicleMovementLog"
                 class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
 				column="vml_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>	
             
-            <many-to-one name="VehicleTollUsageUserVehicleHistory"
+            <many-to-one name="userVehicleHistory"
                 class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory"
 				column="uvh_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>
 		
 				
-			<many-to-one name="VehicleTollUsageTollPriceHistory"
+			<many-to-one name="tollPriceHistory"
                 class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
 				column="tph_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>		
 				
 				

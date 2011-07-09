@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -46,12 +47,13 @@ public class AddBalanceImpl implements AddBalance {
 		AddBalance ad=new AddBalanceImpl();
 		System.out.println(json);
 		GeneralResponse response;
-		ad=(AddBalance)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.AddBalance");
+		ad=(AddBalance)c.getObject(json,"com.mobisols.tollpayments.webservice.AddBalanceImpl");
 		System.out.println("got the gson object");
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(User.class);
-		crit.add(Restrictions.eq("userName", user));
-		List<User> u=crit.list();
+		Query query = s.createQuery("from User u where u.userName = :user").setString("user", user);
+		//Criteria crit=s.createCriteria(User.class);
+		//crit.add(Restrictions.eq("userName", user));
+		List<User> u= query.list();
 		if(u.isEmpty())
 			return "";
 		
@@ -60,8 +62,8 @@ public class AddBalanceImpl implements AddBalance {
 			response = addBalance(ad, ad.getbalanceId(),u.get(0).getUserId());
 		}
 		
-		crit=s.createCriteria(UserBalance.class);
-		crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
+		//crit=s.createCriteria(UserBalance.class);
+		//crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
 		UserBalance ub = u.get(0).getUserBalance();
 		response=addBalance(ad, ub.getUbalId(),u.get(0).getUserId());
 		String status="";

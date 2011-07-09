@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
 import com.mobisols.tollpayments.hibernate.entity.CcType;
 import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
 import com.mobisols.tollpayments.hibernate.entity.User;
-import com.mobisols.tollpayments.hibernate.entity.UserPaymentDetails;
+import com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.MyUtils;
 @Path("/PaymentDetails")
 public class PaymentDetailsImpl implements PaymentDetails{
@@ -43,11 +43,11 @@ public class PaymentDetailsImpl implements PaymentDetails{
 	public PaymentDetailsImpl(int updId) {
 		//TODO code to access database using hibernate
 		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(UserPaymentDetails.class);
+		Criteria crit=s.createCriteria(UserPaymentDetail.class);
 		String hql ="from UserPaymentDetail userpayment where userpayment.userId=:userId";
 		Query query = s.createQuery(hql);
 		query.setInteger("updId",updId);
-        UserPaymentDetails pd = (UserPaymentDetails) query.uniqueResult();
+        UserPaymentDetail pd = (UserPaymentDetail) query.uniqueResult();
 			this.setCardNumber(pd.getCcNumber());
 			this.setCcName(pd.getCcAcName());
 			this.setCardType(pd.getCcType().getDescription());
@@ -71,12 +71,12 @@ public class PaymentDetailsImpl implements PaymentDetails{
 	}
 	
 	//TODO update about address of the user for payment detail
-	public GeneralResponse postPaymentDetails(UserPaymentDetails upd,int paymentId,int userId)
+	public GeneralResponse postPaymentDetails(PaymentDetails pd,int paymentId,int userId)
 	{
 		GeneralResponse response=new GeneralResponseImpl();
 		Session s=HibernateSessionFactory.getSession();
 		Transaction tx=s.beginTransaction();
-		PaymentDetailsImpl pd=(PaymentDetailsImpl) s.get(UserPaymentDetails.class, paymentId);
+		UserPaymentDetail upd= (UserPaymentDetail) s.get(UserPaymentDetail.class, paymentId);
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
 		upd.setCcExpMonth(pd.getExpMonth());
@@ -93,7 +93,7 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		upd.setPayPrefer(pd.getPayPrefer());
 		upd.setState(pd.getState());
 		upd.setZip(pd.getZip());
-		upd.setCcTypeId(pd.getCardType());
+		upd.setCcTypeId(1);
 		upd.setLastModifiedBy(userId);
 		upd.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
 		((GeneralResponseImpl) response).setDescription("your account details have been updated successfully");
@@ -113,15 +113,15 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		{
 			return null;
 		}
-		PaymentDetails pd=(PaymentDetails)c.getObject(json, "com.mobisols.tollpayments.mockwebservices.PaymentDetails");
+		PaymentDetails pd=(PaymentDetails)c.getObject(json, "com.mobisols.tollpayments.webservice.PaymentDetailsImpl");
 		if(hasId==1)
 			response= postPaymentDetails(pd,pd.getPaymentId(),u.get(0).getUserId());
 		else
 		{
 			
-			crit=s.createCriteria(UserPaymentDetails.class);
+			crit=s.createCriteria(UserPaymentDetail.class);
 			crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
-			List<UserPaymentDetails> upd=crit.list();
+			List<UserPaymentDetail> upd=crit.list();
 			if(upd.isEmpty())
 			{
 				return null;

@@ -48,7 +48,7 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		this.setRegistration(uv.get(0).getRegistrationNo());
 		this.setState(uv.get(0).getRegisteredState());
 		this.setOwnerType(uv.get(0).getOwnerType().getName());
-		this.setType(uv.get(0).getUserVehicleHistory().getVehicleType().getName());
+		this.setType(uv.get(0).getVehicleType().getName());
 		this.setStartDate(uv.get(0).getVehicleStartDate());
 		this.setEndDate(uv.get(0).getVehicleEndDate());
 		this.setVehicleId(uv.get(0).getUserVehicleId());
@@ -63,7 +63,7 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		if(isNewVehicle=="false")
 			return postVehicleDetails(json, user, isNewVehicle,hasId);
 		JsonConverter c=new JsonConverterImpl();
-		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
+		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.webservice.VehicleDetailsImpl");
 		Session s=HibernateSessionFactory.getSession();
 		Transaction tx=s.beginTransaction();
 		GeneralResponse response=new GeneralResponseImpl();
@@ -111,7 +111,7 @@ public class VehicleDetailsImpl implements VehicleDetails{
 		if(isNewVehicle=="true")
 			return putVehicleDetails(json, user, isNewVehicle,hasId);
 		JsonConverter c=new JsonConverterImpl();
-		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
+		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.webservice.VehicleDetailsImpl");
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(User.class);
 		Transaction tx=s.beginTransaction();
@@ -153,7 +153,7 @@ public class VehicleDetailsImpl implements VehicleDetails{
 	public String deleteVechileDetails(@FormParam("json") String json,@FormParam("user_name") String user
 			,@FormParam("has_id")int hasId){
 		JsonConverter c=new JsonConverterImpl();
-		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.mockwebservices.VehicleDetails");
+		VehicleDetails vd=(VehicleDetails)c.getObject(json,"com.mobisols.tollpayments.webservice.VehicleDetailsImpl");
 		GeneralResponse response =new GeneralResponseImpl();
 		
 		Session s=HibernateSessionFactory.getSession();

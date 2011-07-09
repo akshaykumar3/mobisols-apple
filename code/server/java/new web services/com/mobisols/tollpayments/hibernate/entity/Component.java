@@ -27,17 +27,7 @@ public class Component implements java.io.Serializable {
 	private Timestamp createdOn;
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
-	private ComponentVersion componentVersion;
 
-	// Constructors
-
-	public ComponentVersion getComponentVersion() {
-		return componentVersion;
-	}
-
-	public void setComponentVersion(ComponentVersion componentVersion) {
-		this.componentVersion = componentVersion;
-	}
 
 	/** default constructor */
 	public Component() {

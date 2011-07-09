@@ -27,35 +27,8 @@ public class VehicleType implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private Integer clientId;
-	private TollPrice tollprice;
-	private TollPriceHistory tollPriceHistory;
-	private UserVehicleHistory userVehicleHistory;
 
 	// Constructors
-
-	public UserVehicleHistory getUserVehicleHistory() {
-		return userVehicleHistory;
-	}
-
-	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
-		this.userVehicleHistory = userVehicleHistory;
-	}
-
-	public TollPrice getTollprice() {
-		return tollprice;
-	}
-
-	public void setTollprice(TollPrice tollprice) {
-		this.tollprice = tollprice;
-	}
-
-	public TollPriceHistory getTollPriceHistory() {
-		return tollPriceHistory;
-	}
-
-	public void setTollPriceHistory(TollPriceHistory tollPriceHistory) {
-		this.tollPriceHistory = tollPriceHistory;
-	}
 
 	/** default constructor */
 	public VehicleType() {

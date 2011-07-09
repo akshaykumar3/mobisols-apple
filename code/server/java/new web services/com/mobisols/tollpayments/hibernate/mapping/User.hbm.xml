@@ -10,72 +10,89 @@
             <id name="userId" type="java.lang.Integer">
                 <column name="user_id" />
             </id>
-            <property name="clientId" type="java.lang.Integer" access="field" >
+            <property name="clientId" type="java.lang.Integer" >
                 <column name="client_id" />
                 
             </property>
-            <property name="utypeId" type="java.lang.Integer" access="property">
+            <property name="utypeId" type="java.lang.Integer" >
                 <column name="utype_id" />
             </property>
-            <property name="userName" type="java.lang.String" access="field">
+            <property name="userName" type="java.lang.String" >
                 <column name="user_name" length="320" />
             </property>
-            <property name="password" type="java.lang.String" access="field">
+            <property name="password" type="java.lang.String">
                 <column name="password" length="40" />
             </property>
-            <property name="locale" type="java.lang.String" access="field">
+            <property name="locale" type="java.lang.String" >
                 <column name="locale" length="20" />
             </property>
-            <property name="isActive" type="java.lang.String" access="field">
+            <property name="isActive" type="java.lang.String" >
                 <column name="is_active" length="1" />
             </property>
-            <property name="contactNo" type="java.lang.String" access="field">
+            <property name="contactNo" type="java.lang.String" >
                 <column name="contact_no" length="20" />
             </property>
-            <property name="lastLoginTime" type="java.sql.Timestamp" access="field">
+            <property name="lastLoginTime" type="java.sql.Timestamp" >
                 <column name="last_login_time" length="19" />
             </property>
-            <property name="udf1" type="java.lang.String" access="field">
+            <property name="udf1" type="java.lang.String" >
                 <column name="udf1" length="1000" />
             </property>
-            <property name="udf2" type="java.lang.String" access="field">
+            <property name="udf2" type="java.lang.String" >
                 <column name="udf2" length="1000" />
             </property>
-            <property name="udf3" type="java.lang.String" access="field">
+            <property name="udf3" type="java.lang.String" >
                 <column name="udf3" length="1000" />
             </property>
-            <property name="udf4" type="java.lang.String" access="field">
+            <property name="udf4" type="java.lang.String" >
                 <column name="udf4" length="1000" />
             </property>
-            <property name="udf5" type="java.lang.String" access="field">
-                <column name="udf5" length="1000" />
+            <property name="udf5" type="java.lang.String" >
+                            <column name="udf5" length="1000" />
             </property>
-            <property name="flag1" type="java.lang.String" access="field">
+            <property name="flag1" type="java.lang.String" >
                 <column name="flag1" length="1" />
             </property>
-            <property name="flag2" type="java.lang.String" access="field">
+            <property name="flag2" type="java.lang.String" >
                 <column name="flag2" length="1" />
             </property>
-            <property name="flag3" type="java.lang.String" access="field">
+            <property name="flag3" type="java.lang.String" >
                 <column name="flag3" length="1" />
             </property>
-            <property name="flag4" type="java.lang.String" access="field">
-                <column name="flag4" length="1" />
+            <property name="flag4" type="java.lang.String" >
+                            <column name="flag4" length="1" />
             </property>
-            <property name="flag5" type="java.lang.String" access="field">
+            <property name="flag5" type="java.lang.String" >
                 <column name="flag5" length="1" />
             </property>
-            <property name="createdOn" type="java.sql.Timestamp" access="field">
+            <property name="createdOn" type="java.sql.Timestamp" >
                 <column name="created_on" length="19" />
             </property>
-            <property name="lastModifiedOn" type="java.sql.Timestamp" access="field">
+            <property name="lastModifiedOn" type="java.sql.Timestamp" >
                 <column name="last_modified_on" length="19" />
             </property>
-            <property name="lastModifiedBy" type="java.lang.Integer" access="field">
+            <property name="lastModifiedBy" type="java.lang.Integer" >
                 <column name="last_modified_by" />
             </property>
             
-             <set
+            <many-to-one name="userType"
+			class="com.mobisols.tollpayments.hibernate.entity.UserType"
+			column="utype_id"
+			insert="false"
+			update="false"
+			cascade="save-update"
+			unique="true"/>
+			
+			<many-to-one name="userPaymentDetails"
+			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
+			column="user_id"
+			property-ref="userId"
+			insert="false"
+			update="false"
+			cascade="save-update"
+			unique="true"/>
+			
+		     <set
                 name="userVehicles" inverse="true">
                 <key update="false" >
                     <column name="user_id" not-null="true"/>
@@ -84,74 +101,7 @@
                     class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
                 />
             </set>
-            
-            
-     
-            <one-to-one
-            name="UserUserPaymentDetails"
-            property-ref="userId"
-            fetch="join"
-            constrained="false"
-            lazy="no-proxy"
-            class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
-             />
-            
-             <one-to-one
-            name="UserUserBalance"
-            property-ref="userId"
-            fetch="join"
-            constrained="false"
-            lazy="no-proxy"
-            class="com.mobisols.tollpayments.hibernate.entity.UserBalance"
-             />
-             <one-to-one name="UserConfiguration"
-             class="com.mobisols.tollpayments.hibernate.entity.Configuration" 
-             property-ref="ConfigurationUser"
-             fetch="join"
-             lazy="no-proxy"/>
-             
-             <one-to-one name="UserTollOperator"
-             class="com.mobisols.tollpayments.hibernate.entity.TollOperator" 
-             property-ref="TollOperatorUser"
-             fetch="join"
-             lazy="no-proxy"/>
-             
-             
-             <one-to-one name="UserUserService"
-             class="com.mobisols.tollpayments.hibernate.entity.UserService" 
-             property-ref="UserServiceUser"
-             fetch="join"
-             lazy="no-proxy"/>
-             
-              <one-to-one name="UserUserNotification"
-             class="com.mobisols.tollpayments.hibernate.entity.UserNotification" 
-             property-ref="UserNotificationUser"
-             fetch="join"
-             lazy="no-proxy"/>
-             
-             <one-to-one name="UserUserNotificationSettings"
-             class="com.mobisols.tollpayments.hibernate.entity.UserNotificationSettings" 
-             property-ref="UserNotificationSettingsUser"
-             fetch="join"
-             lazy="no-proxy"/>
-             
-             <one-to-one name="UserUserHistory"
-             class="com.mobisols.tollpayments.hibernate.entity.UserHistory" 
-             property-ref="UserHistoryUser"
-             fetch="join"
-             lazy="no-proxy"/>
-             
-              <many-to-one name="UserUserType"
-			class="com.mobisols.tollpayments.hibernate.entity.UserType"
-			column="utype_id"
-			cascade="save-update"
-			unique="true"/>
 			
-			 <one-to-one name="UserUserVehicleHistory"
-             class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory" 
-             property-ref="UserVehicleHistoryUser"
-             fetch="join"
-             lazy="no-proxy"/>
              
              
             <filter name="clientIdFilter" condition=":clientId = client_id"/>

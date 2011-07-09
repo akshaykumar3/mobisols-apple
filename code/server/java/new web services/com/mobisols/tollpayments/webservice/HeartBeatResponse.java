@@ -1,12 +1,12 @@
 package com.mobisols.tollpayments.webservice;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 
 public interface HeartBeatResponse {
-	HashMap<String, String> hash=null;
-	
-	public HashMap<String, String> getHash();
-
-	public void setHash(HashMap<String, String> hash);
+	Timestamp nextTimeStamp=null;
+	String status=null;
+	public Timestamp getNextTimeStamp();
+	public void setNextTimeStamp(Timestamp nextTimeStamp);
+	public String getStatus();
+	public void setStatus(String status);
 }

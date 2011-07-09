@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.hibernate.entity;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * UserVehicleHistoryId entity. @author MyEclipse Persistence Tools
@@ -38,18 +39,9 @@ public class UserVehicleHistory implements java.io.Serializable {
 	private String action;
 	private Integer clientId;
     private UserVehicle userVehicle;
-    private User user;
-    private VehicleMovementLog vehicleMovementLog;
-    private VehicleType vehicleType;
+    private Set<VehicleTollUsage> tollDetails;
+ 
 	// Constructors
-
-	public VehicleType getVehicleType() {
-		return vehicleType;
-	}
-
-	public void setVehicleType(VehicleType vehicleType) {
-		this.vehicleType = vehicleType;
-	}
 
 	public UserVehicle getUserVehicle() {
 		return userVehicle;
@@ -59,20 +51,12 @@ public class UserVehicleHistory implements java.io.Serializable {
 		this.userVehicle = userVehicle;
 	}
 
-	public User getUser() {
-		return user;
+	public Set<VehicleTollUsage> getTollDetails() {
+		return tollDetails;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public VehicleMovementLog getVehicleMovementLog() {
-		return vehicleMovementLog;
-	}
-
-	public void setVehicleMovementLog(VehicleMovementLog vehicleMovementLog) {
-		this.vehicleMovementLog = vehicleMovementLog;
+	public void setTollDetails(Set<VehicleTollUsage> tollDetails) {
+		this.tollDetails = tollDetails;
 	}
 
 	/** default constructor */

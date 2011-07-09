@@ -43,7 +43,7 @@ public class UserPaymentDetail implements java.io.Serializable {
 	private Timestamp createdOn;
 	private Integer clientId;
 	private CcType ccType;
-	private UserPaymentDetailHistory userPaymentDetailHistory;
+	private User user;
 	
 
 	// Constructors
@@ -56,13 +56,12 @@ public class UserPaymentDetail implements java.io.Serializable {
 		this.ccType = ccType;
 	}
 
-	public UserPaymentDetailHistory getUserPaymentDetailHistory() {
-		return userPaymentDetailHistory;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserPaymentDetailHistory(
-			UserPaymentDetailHistory userPaymentDetailHistory) {
-		this.userPaymentDetailHistory = userPaymentDetailHistory;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	/** default constructor */

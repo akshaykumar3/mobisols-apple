@@ -93,35 +93,13 @@
             <property name="type" type="java.lang.String">
                 <column name="type" length="30" />
             </property>
-            <one-to-one name="TollLocationTollPrice"
-			class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
-            property-ref="TollPriceTollLocation"
-            fetch="join" cascade="all"/>
             
-            <one-to-one name="TollLocationTollPriceHistory"
-			class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
-            property-ref="TollPriceHistoryTollLocation"
-             fetch="join" cascade="all"/>
-            
-            <one-to-one name="TollLocationVehicleTollUsage"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-            property-ref="VehicleTollUsageTollLocation"
-             fetch="join" cascade="all"/>
-            
-            <one-to-one name="TollLocationVehicleMovementLog"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
-            property-ref="VehicleMovementLogTollLocation"
-             fetch="join" cascade="all"/>
-            
-            <one-to-one name="TollLocationTollLocationHistory"
-			class="com.mobisols.tollpayments.hibernate.entity.TollLocationHistory"
-            property-ref="TollLocationHistoryTollLocation"
-             fetch="join" cascade="all"/>
-            
-            <many-to-one name="TollLocationTollOperator"
+            <many-to-one name="tollOperator"
 			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
 			column="toll_operator_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
             
             

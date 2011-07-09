@@ -37,7 +37,6 @@ public class TollPriceHistory implements java.io.Serializable {
 	private TollPrice tollPrice;
 	private TollLocation tollLocation;
 	private VehicleType vehicleType;
-	private VehicleTollUsage vehicleTollUsage;
 
 	// Constructors
 
@@ -65,13 +64,6 @@ public class TollPriceHistory implements java.io.Serializable {
 		this.vehicleType = vehicleType;
 	}
 
-	public VehicleTollUsage getVehicleTollUsage() {
-		return vehicleTollUsage;
-	}
-
-	public void setVehicleTollUsage(VehicleTollUsage vehicleTollUsage) {
-		this.vehicleTollUsage = vehicleTollUsage;
-	}
 
 	/** default constructor */
 	public TollPriceHistory() {

@@ -29,7 +29,6 @@ public class ComponentVersion implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private String version;
 	private Component component;
-	private Configuration configuration;
 
 	// Constructors
 
@@ -41,13 +40,6 @@ public class ComponentVersion implements java.io.Serializable {
 		this.component = component;
 	}
 
-	public Configuration getConfiguration() {
-		return configuration;
-	}
-
-	public void setConfiguration(Configuration configuration) {
-		this.configuration = configuration;
-	}
 
 	/** default constructor */
 	public ComponentVersion() {

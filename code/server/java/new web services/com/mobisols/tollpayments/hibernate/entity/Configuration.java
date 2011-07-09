@@ -28,7 +28,6 @@ public class Configuration implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private ComponentVersion componentVersion;
-	private User user;
 
 	// Constructors
 
@@ -40,13 +39,6 @@ public class Configuration implements java.io.Serializable {
 		this.componentVersion = componentVersion;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	/** default constructor */
 	public Configuration() {

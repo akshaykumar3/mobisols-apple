@@ -10,13 +10,13 @@
             <id name="componentId" type="java.lang.Integer">
                 <column name="component_id" />
             </id>
-            <property name="name" type="java.lang.String" access="property">
+            <property name="name" type="java.lang.String" >
                 <column name="name" length="45" />
             </property>
-            <property name="description" type="java.lang.String" access="property">
+            <property name="description" type="java.lang.String" >
                 <column name="description" length="45" />
             </property>
-            <property name="clientId" type="java.lang.Integer" access="property">
+            <property name="clientId" type="java.lang.Integer" >
                 <column name="client_id" />
             </property>
             <property name="udf1" type="java.lang.String">
@@ -59,11 +59,6 @@
                 <column name="last_modified_by" />
             </property>
             
-            <one-to-one name="ComponentComponentVersion"
-             class="com.mobisols.tollpayments.hibernate.entity.ComponentVersion"
-             property-ref="ComponentVersionComponent"
-             fetch="join"
-             cascade="all"/>
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

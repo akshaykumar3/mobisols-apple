@@ -85,11 +85,14 @@
                 <column name="end_date" length="19" />
             </property>
             
-            <many-to-one name="UserHistoryUser"
+            <many-to-one name="user"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="user_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
+			
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

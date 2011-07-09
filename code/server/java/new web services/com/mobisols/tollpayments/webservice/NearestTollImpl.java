@@ -25,7 +25,7 @@ public class NearestTollImpl implements NearestToll {
 	@GET
 	public String getNearestToll(@QueryParam("json") String json){
 		JsonConverter jc=new JsonConverterImpl();
-		Location l=(Location) jc.getObject(json, "com.mobisols.tollpayments.LocationImpl");
+		Location l=(Location) jc.getObject(json, "com.mobisols.tollpayments.webservice.LocationImpl");
 		System.out.println(l.getLatitude());
 		System.out.println(l.getLongitude());
 		NearestToll nt=new NearestTollImpl(l.getLatitude(),l.getLongitude());

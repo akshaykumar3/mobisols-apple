@@ -34,7 +34,7 @@ public class VehicleTollUsage implements java.io.Serializable {
 	private PaymentTransaction paymentTransaction;
     private TollLocation tollLocation;
     private VehicleMovementLog vehicleMovementLog;
-    private UserVehicleHistory uservehicleHistory;
+    private UserVehicleHistory userVehicleHistory;
     private TollPriceHistory tollPriceHistory;
     
     
@@ -120,12 +120,12 @@ public class VehicleTollUsage implements java.io.Serializable {
 		this.vehicleMovementLog = vehicleMovementLog;
 	}
 
-	public UserVehicleHistory getUservehicleHistory() {
-		return uservehicleHistory;
+	public UserVehicleHistory getUserVehicleHistory() {
+		return userVehicleHistory;
 	}
 
-	public void setUservehicleHistory(UserVehicleHistory uservehicleHistory) {
-		this.uservehicleHistory = uservehicleHistory;
+	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
+		this.userVehicleHistory = userVehicleHistory;
 	}
 
 	public TollPriceHistory getTollPriceHistory() {
