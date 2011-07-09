@@ -930,7 +930,7 @@ Ext.setup({
 										}
 									
 										new google.maps.Marker({
-											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].lng),
+											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].longt),
 											title: markertitle,
 											icon: iconpath,
 											map: map
