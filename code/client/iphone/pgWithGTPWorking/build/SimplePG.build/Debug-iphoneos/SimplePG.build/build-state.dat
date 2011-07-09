@@ -1,0 +1,813 @@
+TSimplePG
+v7
+r0
+t331945531.344300
+cCheck dependencies
+cCpResource build/Debug-iphoneos/SimplePG.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+cProcessInfoPlistFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Info.plist SimplePG-Info.plist
+cPhaseScriptExecution "Check PhoneGap Reference" /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-30E9A9A110B758320022D3BA.sh
+cPhaseScriptExecution "Touch www folder" /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-304B58A110DAC018002A0835.sh
+cCpResource build/Debug-iphoneos/SimplePG.app/www www
+cCpResource build/Debug-iphoneos/SimplePG.app/VERSION /Users/harishq/Documents/PhoneGapLib/VERSION
+cCopyPlistFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PhoneGap.plist PhoneGap.plist
+cCpResource build/Debug-iphoneos/SimplePG.app/PhoneGapBuildSettings.xcconfig PhoneGapBuildSettings.xcconfig
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon-72.png Resources/icons/icon-72.png
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon.png Resources/icons/icon.png
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon@2x.png Resources/icons/icon@2x.png
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Landscape.png Resources/splash/Default-Landscape.png
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Portrait.png Resources/splash/Default-Portrait.png
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default.png Resources/splash/Default.png
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default@2x.png Resources/splash/Default@2x.png
+cCpResource build/Debug-iphoneos/SimplePG.app/Capture.bundle Resources/Capture.bundle
+cCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default~ipad.png Resources/splash/Default~ipad.png
+cProcessPCH /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch.gch SimplePG-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+cProcessPCH /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch.gch SimplePG-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/main.o /Users/harishq/SimplePG/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/AppDelegate.o /Users/harishq/SimplePG/Classes/AppDelegate.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+cLd /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG normal armv6
+cCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/main.o /Users/harishq/SimplePG/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/AppDelegate.o /Users/harishq/SimplePG/Classes/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+cLd /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG normal armv7
+cCreateUniversalBinary /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG normal "armv6 armv7"
+cGenerateDSYMFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app.dSYM /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG
+cProcessProductPackaging "/Users/harishq/Library/MobileDevice/Provisioning Profiles/F9EEDDF2-5E26-4524-AAF5-6DE1545CF5A0.mobileprovision" /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision
+cTouch /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent
+cCodeSign /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk
+c000000004D7401890000000000000110
+t1299448201
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist
+c000000004D4F6A4700000000000001A7
+t1297050183
+s423
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+c000000004D4F6A4700000000000001E5
+t1297050183
+s485
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AVFoundation.framework/AVFoundation
+c000000004D5EBED1000000000022E2B0
+t1298054865
+s2286256
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVFoundation.h
+c000000004D5EBEC500000000000007D0
+t1298054853
+s2000
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AddressBook.framework/AddressBook
+c000000004D54D36E00000000000CE260
+t1297404782
+s844384
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AddressBookUI.framework/AddressBookUI
+c000000004D5B4D19000000000026B860
+t1297829145
+s2537568
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004D5A25CF00000000003FF380
+t1297753551
+s4191104
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioServices.h
+c000000004D5A259E0000000000010AD5
+t1297753502
+s68309
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CFNetwork.framework/CFNetwork
+c000000004D54D1B500000000002CAD60
+t1297404341
+s2927968
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004D54D18C00000000003532A0
+t1297404300
+s3486368
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
+c000000004D5DE7AF00000000000FD4D0
+t1297999791
+s1037520
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h
+c000000004D5DE7A400000000000001D0
+t1297999780
+s464
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreMedia.framework/CoreMedia
+c000000004D5C99E400000000000EBFA0
+t1297914340
+s966560
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004D54D1F500000000003E22F0
+t1297404405
+s4072176
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004D54D1DD0000000000001466
+t1297404381
+s5222
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/MediaPlayer.framework/MediaPlayer
+c000000004D5DEAE900000000003A84E0
+t1298000617
+s3835104
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/MobileCoreServices.framework/MobileCoreServices
+c000000004D54D32D0000000000094C50
+t1297404717
+s609360
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004D54D608000000000026CB10
+t1297405448
+s2542352
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/SystemConfiguration.framework/SystemConfiguration
+c000000004D54D0E700000000000B0CA0
+t1297404135
+s724128
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004D5A28AB0000000000000AA1
+t1297754283
+s2721
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UINavigationController.h
+c000000004D5A28AB00000000000019AC
+t1297754283
+s6572
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004D5A292A0000000000CA2AE0
+t1297754410
+s13249248
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/DebugConsole.h
+c000000004E0A434F0000000000000163
+t1309295439
+s355
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+i"PGPlugin.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/JSON.h
+c000000004D11268000000000000008F9
+t1292969600
+s2297
+i"SBJSON.h"
+i"NSObject+SBJSON.h"
+i"NSString+SBJSON.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/NSObject+SBJSON.h
+c000000004D1126800000000000000A01
+t1292969600
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/NSString+SBJSON.h
+c000000004D1126800000000000000916
+t1292969600
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/SBJSON.h
+c000000004D1126800000000000000AED
+t1292969600
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/SBJsonBase.h
+c000000004D1126800000000000000B82
+t1292969600
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/SBJsonParser.h
+c000000004D1126800000000000000C0B
+t1292969600
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/JSON/SBJsonWriter.h
+c000000004D1126800000000000001140
+t1292969600
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/Location.h
+c000000004E0A434F0000000000000580
+t1309295439
+s1408
+i<UIKit/UIKit.h>
+i<CoreLocation/CoreLocation.h>
+i"PGPlugin.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/PGPlugin.h
+c000000004E0A434F00000000000003EF
+t1309295439
+s1007
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+i"PluginResult.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/PhoneGapDelegate.h
+c000000004E0A434F00000000000007EA
+t1309295439
+s2026
+i<UIKit/UIKit.h>
+i<CoreLocation/CoreLocation.h>
+i<UIKit/UINavigationController.h>
+i"JSON.h"
+i"Location.h"
+i"Sound.h"
+i"DebugConsole.h"
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/PhoneGapViewController.h
+c000000004DB8B5FA000000000000021A
+t1303950842
+s538
+i<UIKit/UIKit.h>
+i<Foundation/Foundation.h>
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/PluginResult.h
+c000000004E0A434F0000000000000979
+t1309295439
+s2425
+i<Foundation/Foundation.h>
+
+N/Users/harishq/Documents/PhoneGapLib/Classes/Sound.h
+c000000004E0A434F00000000000006F6
+t1309295439
+s1782
+i<Foundation/Foundation.h>
+i<AudioToolbox/AudioServices.h>
+i<AVFoundation/AVFoundation.h>
+i"PGPlugin.h"
+
+N/Users/harishq/Documents/PhoneGapLib/VERSION
+c000000004E0A43D5000000000000000D
+t1309295573
+s13
+
+N/Users/harishq/Documents/PhoneGapLib/build/Debug-iphoneos/libPhoneGap.a
+c000000004E11F59A00000000003175B8
+t1309799834
+s3241400
+
+N/Users/harishq/Library/MobileDevice/Provisioning Profiles/F9EEDDF2-5E26-4524-AAF5-6DE1545CF5A0.mobileprovision
+c000000004E17CA5D0000000000001C48
+t1310181981
+s7240
+
+N/Users/harishq/SimplePG/Classes/AppDelegate.h
+c000000004E182D150000000000000295
+t1310207253
+s661
+i<UIKit/UIKit.h>
+i<PhoneGap/PhoneGapDelegate.h>
+i"PhoneGapDelegate.h"
+
+N/Users/harishq/SimplePG/Classes/AppDelegate.m
+c000000004E182D150000000000000CF5
+t1310207253
+s3317
+i"AppDelegate.h"
+i<PhoneGap/PhoneGapViewController.h>
+i"PhoneGapViewController.h"
+
+N/Users/harishq/SimplePG/PhoneGap.plist
+c000000004E182D1500000000000004CD
+t1310207253
+s1229
+
+N/Users/harishq/SimplePG/PhoneGapBuildSettings.xcconfig
+c000000004E182D1500000000000000C2
+t1310207253
+s194
+
+N/Users/harishq/SimplePG/Resources/Capture.bundle
+c000000004E182D150000000000000242
+t1310207253
+s578
+
+N/Users/harishq/SimplePG/Resources/icons/icon-72.png
+c000000004E182D1500000000000013B9
+t1310207253
+s5049
+
+N/Users/harishq/SimplePG/Resources/icons/icon.png
+c000000004E182D150000000000000C36
+t1310207253
+s3126
+
+N/Users/harishq/SimplePG/Resources/icons/icon@2x.png
+c000000004E182D1500000000000014DC
+t1310207253
+s5340
+
+N/Users/harishq/SimplePG/Resources/splash/Default-Landscape.png
+c000000004E182D15000000000000154E
+t1310207253
+s5454
+
+N/Users/harishq/SimplePG/Resources/splash/Default-Portrait.png
+c000000004E182D1500000000000016C0
+t1310207253
+s5824
+
+N/Users/harishq/SimplePG/Resources/splash/Default.png
+c000000004E182D150000000000000BAE
+t1310207253
+s2990
+
+N/Users/harishq/SimplePG/Resources/splash/Default@2x.png
+c000000004E182D15000000000000769A
+t1310207253
+s30362
+
+N/Users/harishq/SimplePG/Resources/splash/Default~ipad.png
+c000000004E182D1500000000000016C0
+t1310207253
+s5824
+
+N/Users/harishq/SimplePG/SimplePG-Prefix.pch
+c000000004E182D1500000000000000B9
+t1310207253
+s185
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+t1310252731
+s748
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app.dSYM
+t1310208122
+s102
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Capture.bundle
+t1310208119
+s578
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Landscape.png
+t1310208119
+s6245
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Portrait.png
+t1310208119
+s6630
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default.png
+t1310208119
+s3198
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default@2x.png
+t1310208119
+s17711
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default~ipad.png
+t1310208119
+s6630
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Info.plist
+t1310234743
+s1203
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PhoneGap.plist
+t1310208119
+s403
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PhoneGapBuildSettings.xcconfig
+t1310208119
+s194
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PkgInfo
+t1310234743
+s8
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/ResourceRules.plist
+t1310208119
+s485
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG
+t1310208122
+s799232
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/VERSION
+t1310208119
+s13
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision
+t1310208122
+s7240
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon-72.png
+t1310208119
+s7734
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon.png
+t1310208119
+s4584
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon@2x.png
+t1310208119
+s6059
+
+N/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/www
+t1310252730
+s442
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/AppDelegate.o
+t1310208121
+s45328
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG
+t1310208121
+s377908
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG.LinkFileList
+c000000004E18307700000000000000D5
+t1310208119
+s213
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/main.o
+t1310208121
+s3260
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/AppDelegate.o
+t1310208121
+s45392
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG
+t1310208122
+s398284
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG.LinkFileList
+c000000004E18307700000000000000D5
+t1310208119
+s213
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/main.o
+t1310208121
+s3260
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-304B58A110DAC018002A0835.sh
+c000000004E1830770000000000000027
+t1310208119
+s39
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-30E9A9A110B758320022D3BA.sh
+c000000004E18307700000000000001C2
+t1310208119
+s450
+
+N/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent
+t1310234743
+s400
+
+N/Users/harishq/SimplePG/main.m
+c000000004E182D15000000000000017A
+t1310207253
+s378
+i<UIKit/UIKit.h>
+
+N/Users/harishq/SimplePG/www
+c000000004E18DE8300000000000001BA
+t1310252675
+s442
+
+N/var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch.gch
+t1310208120
+s8406940
+
+N/var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch.gch
+t1310208120
+s7915420
+
+NSimplePG-Info.plist
+c000000004E18987600000000000005DA
+t1310234742
+s1498
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies331945530#331945530#0(0"0(0#1#0"8638455488#0"0#
+
+CCodeSign /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+s331945530.845304
+e331945531.344264
+r1
+xCodeSign
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+o/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app: replacing existing signature
+lSLF07#2@42"CodeSign build/Debug-iphoneos/SimplePG.app331945530#331945531#0(88"/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app: replacing existing signature0(0#0#57"/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app8605198080#599"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv _CODESIGN_ALLOCATE_ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    /usr/bin/codesign -f -s "iPhone Developer: Harish Balijepalli (9YGWSJ2293)" --resource-rules=/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/ResourceRules.plist --entitlements /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/AppDelegate.o /Users/harishq/SimplePG/Classes/AppDelegate.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s331900921.007978
+e331900921.212819
+r1
+xCompileC
+xbuild/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/AppDelegate.o
+x/Users/harishq/SimplePG/Classes/AppDelegate.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@53"Compile /Users/harishq/SimplePG/Classes/AppDelegate.m331900921#331900921#0(0"0(0#0#45"/Users/harishq/SimplePG/Classes/AppDelegate.m8637099072#1715"    cd /Users/harishq/SimplePG    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-generated-files.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-own-target-headers.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-all-target-headers.hmap -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-project-headers.hmap -F/Users/harishq/SimplePG/build/Debug-iphoneos -iquote/Users/harishq/Documents/PhoneGapLib/Classes/JSON -iquote/Users/harishq/Documents/PhoneGapLib/Classes -I/Users/harishq/SimplePG/build/Debug-iphoneos/include -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources/armv6 -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources -include /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch -c /Users/harishq/SimplePG/Classes/AppDelegate.m -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/AppDelegate.o0#
+
+CCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/main.o /Users/harishq/SimplePG/main.m normal armv6 objective-c com.apple.compilers.llvmgcc42
+s331900921.006061
+e331900921.141467
+r1
+xCompileC
+xbuild/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/main.o
+x/Users/harishq/SimplePG/main.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@38"Compile /Users/harishq/SimplePG/main.m331900921#331900921#0(0"0(0#0#30"/Users/harishq/SimplePG/main.m8637726272#1693"    cd /Users/harishq/SimplePG    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-generated-files.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-own-target-headers.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-all-target-headers.hmap -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-project-headers.hmap -F/Users/harishq/SimplePG/build/Debug-iphoneos -iquote/Users/harishq/Documents/PhoneGapLib/Classes/JSON -iquote/Users/harishq/Documents/PhoneGapLib/Classes -I/Users/harishq/SimplePG/build/Debug-iphoneos/include -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources/armv6 -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources -include /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch -c /Users/harishq/SimplePG/main.m -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/main.o0#
+
+CCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/AppDelegate.o /Users/harishq/SimplePG/Classes/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s331900921.009669
+e331900921.208395
+r1
+xCompileC
+xbuild/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/AppDelegate.o
+x/Users/harishq/SimplePG/Classes/AppDelegate.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@53"Compile /Users/harishq/SimplePG/Classes/AppDelegate.m331900921#331900921#0(0"0(0#0#45"/Users/harishq/SimplePG/Classes/AppDelegate.m8634754464#1715"    cd /Users/harishq/SimplePG    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-generated-files.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-own-target-headers.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-all-target-headers.hmap -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-project-headers.hmap -F/Users/harishq/SimplePG/build/Debug-iphoneos -iquote/Users/harishq/Documents/PhoneGapLib/Classes/JSON -iquote/Users/harishq/Documents/PhoneGapLib/Classes -I/Users/harishq/SimplePG/build/Debug-iphoneos/include -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources/armv7 -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources -include /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch -c /Users/harishq/SimplePG/Classes/AppDelegate.m -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/AppDelegate.o0#
+
+CCompileC build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/main.o /Users/harishq/SimplePG/main.m normal armv7 objective-c com.apple.compilers.llvmgcc42
+s331900921.008689
+e331900921.141116
+r1
+xCompileC
+xbuild/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/main.o
+x/Users/harishq/SimplePG/main.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@38"Compile /Users/harishq/SimplePG/main.m331900921#331900921#0(0"0(0#0#30"/Users/harishq/SimplePG/main.m8635020096#1693"    cd /Users/harishq/SimplePG    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-generated-files.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-own-target-headers.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-all-target-headers.hmap -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-project-headers.hmap -F/Users/harishq/SimplePG/build/Debug-iphoneos -iquote/Users/harishq/Documents/PhoneGapLib/Classes/JSON -iquote/Users/harishq/Documents/PhoneGapLib/Classes -I/Users/harishq/SimplePG/build/Debug-iphoneos/include -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources/armv7 -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources -include /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch -c /Users/harishq/SimplePG/main.m -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/main.o0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Landscape.png Resources/splash/Default-Landscape.png
+s331900919.408519
+e331900919.785553
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Landscape.png
+xResources/splash/Default-Landscape.png
+lSLF07#2@106"CopyPNGFile build/Debug-iphoneos/SimplePG.app/Default-Landscape.png Resources/splash/Default-Landscape.png331900919#331900919#0(0"0(0#0#62"/Users/harishq/SimplePG/Resources/splash/Default-Landscape.png8634868448#455"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/splash/Default-Landscape.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Landscape.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Portrait.png Resources/splash/Default-Portrait.png
+s331900919.409820
+e331900919.800398
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Portrait.png
+xResources/splash/Default-Portrait.png
+lSLF07#2@104"CopyPNGFile build/Debug-iphoneos/SimplePG.app/Default-Portrait.png Resources/splash/Default-Portrait.png331900919#331900919#0(0"0(0#0#61"/Users/harishq/SimplePG/Resources/splash/Default-Portrait.png8638406208#453"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/splash/Default-Portrait.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default-Portrait.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default.png Resources/splash/Default.png
+s331900919.410279
+e331900919.706342
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default.png
+xResources/splash/Default.png
+lSLF07#2@86"CopyPNGFile build/Debug-iphoneos/SimplePG.app/Default.png Resources/splash/Default.png331900919#331900919#0(0"0(0#0#52"/Users/harishq/SimplePG/Resources/splash/Default.png8638135392#435"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/splash/Default.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default@2x.png Resources/splash/Default@2x.png
+s331900919.410714
+e331900919.800986
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default@2x.png
+xResources/splash/Default@2x.png
+lSLF07#2@92"CopyPNGFile build/Debug-iphoneos/SimplePG.app/Default@2x.png Resources/splash/Default@2x.png331900919#331900919#0(0"0(0#0#55"/Users/harishq/SimplePG/Resources/splash/Default@2x.png8637814432#441"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/splash/Default@2x.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default@2x.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default~ipad.png Resources/splash/Default~ipad.png
+s331900919.527034
+e331900919.799607
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default~ipad.png
+xResources/splash/Default~ipad.png
+lSLF07#2@96"CopyPNGFile build/Debug-iphoneos/SimplePG.app/Default~ipad.png Resources/splash/Default~ipad.png331900919#331900919#0(0"0(0#0#57"/Users/harishq/SimplePG/Resources/splash/Default~ipad.png8636295904#445"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/splash/Default~ipad.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Default~ipad.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon-72.png Resources/icons/icon-72.png
+s331900919.400958
+e331900919.683795
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon-72.png
+xResources/icons/icon-72.png
+lSLF07#2@85"CopyPNGFile build/Debug-iphoneos/SimplePG.app/icon-72.png Resources/icons/icon-72.png331900919#331900919#0(0"0(0#0#51"/Users/harishq/SimplePG/Resources/icons/icon-72.png8608260384#434"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/icons/icon-72.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon-72.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon.png Resources/icons/icon.png
+s331900919.401739
+e331900919.680197
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon.png
+xResources/icons/icon.png
+lSLF07#2@79"CopyPNGFile build/Debug-iphoneos/SimplePG.app/icon.png Resources/icons/icon.png331900919#331900919#0(0"0(0#0#48"/Users/harishq/SimplePG/Resources/icons/icon.png8630349056#428"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/icons/icon.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon.png0#
+
+CCopyPNGFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon@2x.png Resources/icons/icon@2x.png
+s331900919.407977
+e331900919.681073
+r1
+xCopyPNGFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon@2x.png
+xResources/icons/icon@2x.png
+lSLF07#2@85"CopyPNGFile build/Debug-iphoneos/SimplePG.app/icon@2x.png Resources/icons/icon@2x.png331900919#331900919#0(0"0(0#0#51"/Users/harishq/SimplePG/Resources/icons/icon@2x.png8622101376#434"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/harishq/SimplePG/Resources/icons/icon@2x.png /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/icon@2x.png0#
+
+CCopyPlistFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PhoneGap.plist PhoneGap.plist
+s331900919.399836
+e331900919.526416
+r1
+xCopyPlistFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PhoneGap.plist
+xPhoneGap.plist
+lSLF07#2@19"Copy PhoneGap.plist331900919#331900919#0(0"0(0#0#38"/Users/harishq/SimplePG/PhoneGap.plist8625238208#346"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copyplist --convert binary1 PhoneGap.plist --outdir /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCpResource build/Debug-iphoneos/SimplePG.app/Capture.bundle Resources/Capture.bundle
+s331900919.526495
+e331900919.547782
+r1
+xCpResource
+xbuild/Debug-iphoneos/SimplePG.app/Capture.bundle
+xResources/Capture.bundle
+lSLF07#2@29"Copy Resources/Capture.bundle331900919#331900919#0(0"0(0#0#48"/Users/harishq/SimplePG/Resources/Capture.bundle8636810912#424"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/harishq/SimplePG/Resources/Capture.bundle /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCpResource build/Debug-iphoneos/SimplePG.app/PhoneGapBuildSettings.xcconfig PhoneGapBuildSettings.xcconfig
+s331900919.400330
+e331900919.409634
+r1
+xCpResource
+xbuild/Debug-iphoneos/SimplePG.app/PhoneGapBuildSettings.xcconfig
+xPhoneGapBuildSettings.xcconfig
+lSLF07#2@35"Copy PhoneGapBuildSettings.xcconfig331900919#331900919#0(0"0(0#0#54"/Users/harishq/SimplePG/PhoneGapBuildSettings.xcconfig8621990176#430"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/harishq/SimplePG/PhoneGapBuildSettings.xcconfig /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCpResource build/Debug-iphoneos/SimplePG.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+s331900919.305196
+e331900919.359583
+r1
+xCpResource
+xbuild/Debug-iphoneos/SimplePG.app/ResourceRules.plist
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist
+lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist331900919#331900919#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist8636873856#465"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/ResourceRules.plist /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCpResource build/Debug-iphoneos/SimplePG.app/VERSION /Users/harishq/Documents/PhoneGapLib/VERSION
+s331900919.399376
+e331900919.409546
+r1
+xCpResource
+xbuild/Debug-iphoneos/SimplePG.app/VERSION
+x/Users/harishq/Documents/PhoneGapLib/VERSION
+lSLF07#2@49"Copy /Users/harishq/Documents/PhoneGapLib/VERSION331900919#331900919#0(0"0(0#0#44"/Users/harishq/Documents/PhoneGapLib/VERSION8631030848#420"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/harishq/Documents/PhoneGapLib/VERSION /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCpResource build/Debug-iphoneos/SimplePG.app/www www
+s331945530.771530
+e331945530.842529
+r1
+xCpResource
+xbuild/Debug-iphoneos/SimplePG.app/www
+xwww
+lSLF07#2@8"Copy www331945530#331945530#0(0"0(0#0#27"/Users/harishq/SimplePG/www8638423040#403"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/harishq/SimplePG/www /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
+CCreateUniversalBinary /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG normal "armv6 armv7"
+s331900922.111472
+e331900922.253828
+r1
+xCreateUniversalBinary
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG
+xnormal
+xarmv6 armv7
+lSLF07#2@85"CreateUniversalBinary build/Debug-iphoneos/SimplePG.app/SimplePG normal "armv6 armv7"331900922#331900922#0(0"0(0#0#35"/Users/harishq/SimplePG/armv6 armv78633561760#466"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/lipo -create /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG -output /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG0#
+
+CGenerateDSYMFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app.dSYM /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG
+s331900922.253908
+e331900922.402778
+r1
+xGenerateDSYMFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app.dSYM
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG
+lSLF07#2@98"GenerateDSYMFile build/Debug-iphoneos/SimplePG.app.dSYM build/Debug-iphoneos/SimplePG.app/SimplePG331900922#331900922#0(0"0(0#0#66"/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG8633176544#320"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/SimplePG -o /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app.dSYM0#
+
+CLd /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG normal armv6
+s331900921.212943
+e331900922.082942
+r1
+xLd
+x/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG
+xnormal
+xarmv6
+lSLF07#2@109"Link /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG331900921#331900922#0(0"0(0#0#0"8633899328#1157"    cd /Users/harishq/SimplePG    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/harishq/SimplePG/build/Debug-iphoneos -F/Users/harishq/SimplePG/build/Debug-iphoneos -filelist /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG.LinkFileList -dead_strip -all_load -Obj-C -miphoneos-version-min=3.0 /Users/harishq/Documents/PhoneGapLib/build/Debug-iphoneos/libPhoneGap.a -framework Foundation -framework UIKit -framework CoreGraphics -framework AddressBook -framework AddressBookUI -framework AudioToolbox -framework AVFoundation -framework CFNetwork -framework CoreLocation -framework MediaPlayer -framework QuartzCore -framework SystemConfiguration -framework MobileCoreServices -weak_framework CoreMedia -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG0#
+
+CLd /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG normal armv7
+s331900921.208488
+e331900922.111353
+r1
+xLd
+x/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG
+xnormal
+xarmv7
+lSLF07#2@109"Link /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG331900921#331900922#0(0"0(0#0#0"8634074944#1157"    cd /Users/harishq/SimplePG    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -L/Users/harishq/SimplePG/build/Debug-iphoneos -F/Users/harishq/SimplePG/build/Debug-iphoneos -filelist /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG.LinkFileList -dead_strip -all_load -Obj-C -miphoneos-version-min=3.0 /Users/harishq/Documents/PhoneGapLib/build/Debug-iphoneos/libPhoneGap.a -framework Foundation -framework UIKit -framework CoreGraphics -framework AddressBook -framework AddressBookUI -framework AudioToolbox -framework AVFoundation -framework CFNetwork -framework CoreLocation -framework MediaPlayer -framework QuartzCore -framework SystemConfiguration -framework MobileCoreServices -weak_framework CoreMedia -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG0#
+
+CPhaseScriptExecution "Check PhoneGap Reference" /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-30E9A9A110B758320022D3BA.sh
+s331945530.423064
+e331945530.762111
+r1
+xPhaseScriptExecution
+xCheck PhoneGap Reference
+x/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-30E9A9A110B758320022D3BA.sh
+o/Users/harishq/SimplePG/www:0: warning: Missing - A reference to 'phonegap.0.9.6.js' or 'phonegap.0.9.6.min.js' was not found in your HTML file(s).
+lSLF07#2@50"Run custom shell script 'Check PhoneGap Reference'331945530#331945530#0(148"/Users/harishq/SimplePG/www:0: warning: Missing - A reference to 'phonegap.0.9.6.js' or 'phonegap.0.9.6.min.js' was not found in your HTML file(s).1(22@107"Missing - A reference to 'phonegap.0.9.6.js' or 'phonegap.0.9.6.min.js' was not found in your HTML file(s).331945530#0#148#0(6@27"/Users/harishq/SimplePG/www331945475#0#0#0#0#0"0(0#0#0"8631469216#17104"    cd /Users/harishq/SimplePG    setenv ACTION build    setenv AD_HOC_CODE_SIGNING_ALLOWED NO    setenv ALTERNATE_GROUP staff    setenv ALTERNATE_MODE u+w,go-w,a+rX    setenv ALTERNATE_OWNER harishq    setenv ALWAYS_SEARCH_USER_PATHS NO    setenv APPLE_INTERNAL_DEVELOPER_DIR /AppleInternal/Developer    setenv APPLE_INTERNAL_DIR /AppleInternal    setenv APPLE_INTERNAL_DOCUMENTATION_DIR /AppleInternal/Documentation    setenv APPLE_INTERNAL_LIBRARY_DIR /AppleInternal/Library    setenv APPLE_INTERNAL_TOOLS /AppleInternal/Developer/Tools    setenv APPLY_RULES_IN_COPY_FILES NO    setenv ARCHS "armv6 armv7"    setenv ARCHS_STANDARD_32_64_BIT "armv6 armv7"    setenv ARCHS_STANDARD_32_BIT "armv6 armv7"    setenv ARCHS_UNIVERSAL_IPHONE_OS armv7    setenv BUILD_COMPONENTS "headers build"    setenv BUILD_DIR /Users/harishq/SimplePG/build    setenv BUILD_ROOT /Users/harishq/SimplePG/build    setenv BUILD_STYLE Debug    setenv BUILD_VARIANTS normal    setenv BUILT_PRODUCTS_DIR /Users/harishq/SimplePG/build/Debug-iphoneos    setenv CACHE_ROOT /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501    setenv CCHROOT /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501    setenv CHMOD /bin/chmod    setenv CHOWN /usr/sbin/chown    setenv CLASS_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/JavaClasses    setenv CLEAN_PRECOMPS YES    setenv CLONE_HEADERS NO    setenv CODESIGNING_FOLDER_PATH /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app    setenv CODE_SIGNING_ALLOWED YES    setenv CODE_SIGNING_REQUIRED YES    setenv CODE_SIGN_CONTEXT_CLASS XCiPhoneOSCodeSignContext    setenv CODE_SIGN_IDENTITY "iPhone Developer"    setenv COMMAND_MODE legacy    setenv COMPOSITE_SDK_DIRS /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/CompositeSDKs    setenv COMPRESS_PNG_FILES YES    setenv CONFIGURATION Debug    setenv CONFIGURATION_BUILD_DIR /Users/harishq/SimplePG/build/Debug-iphoneos    setenv CONFIGURATION_TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos    setenv CONTENTS_FOLDER_PATH SimplePG.app    setenv COPYING_PRESERVES_HFS_DATA NO    setenv COPY_PHASE_STRIP NO    setenv COPY_RESOURCES_FROM_STATIC_FRAMEWORKS YES    setenv CP /bin/cp    setenv CURRENT_ARCH armv7    setenv CURRENT_VARIANT normal    setenv DEAD_CODE_STRIPPING YES    setenv DEBUGGING_SYMBOLS YES    setenv DEBUG_INFORMATION_FORMAT dwarf-with-dsym    setenv DEPLOYMENT_LOCATION NO    setenv DEPLOYMENT_POSTPROCESSING NO    setenv DERIVED_FILES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources    setenv DERIVED_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources    setenv DERIVED_SOURCES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources    setenv DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv DEVELOPER_BIN_DIR /Developer/usr/bin    setenv DEVELOPER_DIR /Developer    setenv DEVELOPER_FRAMEWORKS_DIR /Developer/Library/Frameworks    setenv DEVELOPER_FRAMEWORKS_DIR_QUOTED "\"/Developer/Library/Frameworks\""    setenv DEVELOPER_LIBRARY_DIR /Developer/Library    setenv DEVELOPER_SDK_DIR /Developer/SDKs    setenv DEVELOPER_TOOLS_DIR /Developer/Tools    setenv DEVELOPER_USR_DIR /Developer/usr    setenv DEVELOPMENT_LANGUAGE English    setenv DOCUMENTATION_FOLDER_PATH SimplePG.app/English.lproj/Documentation    setenv DO_HEADER_SCANNING_IN_JAM NO    setenv DSTROOT /tmp/SimplePG.dst    setenv DWARF_DSYM_FILE_NAME SimplePG.app.dSYM    setenv DWARF_DSYM_FOLDER_PATH /Users/harishq/SimplePG/build/Debug-iphoneos    setenv EFFECTIVE_PLATFORM_NAME -iphoneos    setenv EMBEDDED_PROFILE_NAME embedded.mobileprovision    setenv ENABLE_HEADER_DEPENDENCIES YES    setenv ENABLE_OPENMP_SUPPORT NO    setenv ENTITLEMENTS_ALLOWED YES    setenv ENTITLEMENTS_REQUIRED YES    setenv EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS ".svn .git CVS"    setenv EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES "*.nib *.lproj *.framework *.gch (*) CVS .svn .git *.xcodeproj *.xcode *.pbproj *.pbxproj"    setenv EXECUTABLES_FOLDER_PATH SimplePG.app/Executables    setenv EXECUTABLE_FOLDER_PATH SimplePG.app    setenv EXECUTABLE_NAME SimplePG    setenv EXECUTABLE_PATH SimplePG.app/SimplePG    setenv FILE_LIST /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects/LinkFileList    setenv FIXED_FILES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/FixedFiles    setenv FRAMEWORKS_FOLDER_PATH SimplePG.app/Frameworks    setenv FRAMEWORK_FLAG_PREFIX -framework    setenv FRAMEWORK_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos\" "    setenv FRAMEWORK_VERSION A    setenv FULL_PRODUCT_NAME SimplePG.app    setenv GCC3_VERSION 3.3    setenv GCC_C_LANGUAGE_STANDARD c99    setenv GCC_DYNAMIC_NO_PIC NO    setenv GCC_INLINES_ARE_PRIVATE_EXTERN YES    setenv GCC_OPTIMIZATION_LEVEL 0    setenv GCC_PFE_FILE_C_DIALECTS "c objective-c c++ objective-c++"    setenv GCC_PRECOMPILE_PREFIX_HEADER YES    setenv GCC_PREFIX_HEADER SimplePG-Prefix.pch    setenv GCC_SYMBOLS_PRIVATE_EXTERN YES    setenv GCC_THUMB_SUPPORT YES    setenv GCC_TREAT_WARNINGS_AS_ERRORS NO    setenv GCC_VERSION com.apple.compilers.llvmgcc42    setenv GCC_VERSION_IDENTIFIER com_apple_compilers_llvmgcc42    setenv GCC_WARN_ABOUT_RETURN_TYPE YES    setenv GCC_WARN_UNUSED_VARIABLE YES    setenv GENERATE_MASTER_OBJECT_FILE NO    setenv GENERATE_PKGINFO_FILE YES    setenv GENERATE_PROFILING_CODE NO    setenv GID 20    setenv GROUP staff    setenv HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT YES    setenv HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES YES    setenv HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS YES    setenv HEADERMAP_INCLUDES_PROJECT_HEADERS YES    setenv HEADER_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos/include\" "    setenv ICONV /usr/bin/iconv    setenv INFOPLIST_EXPAND_BUILD_SETTINGS YES    setenv INFOPLIST_FILE SimplePG-Info.plist    setenv INFOPLIST_OUTPUT_FORMAT binary    setenv INFOPLIST_PATH SimplePG.app/Info.plist    setenv INFOPLIST_PREPROCESS NO    setenv INFOSTRINGS_PATH SimplePG.app/English.lproj/InfoPlist.strings    setenv INSTALL_DIR /tmp/SimplePG.dst/Applications    setenv INSTALL_GROUP staff    setenv INSTALL_MODE_FLAG u+w,go-w,a+rX    setenv INSTALL_OWNER harishq    setenv INSTALL_PATH /Applications    setenv INSTALL_ROOT /tmp/SimplePG.dst    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv JAVAC_DEFAULT_FLAGS "-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8"    setenv JAVA_APP_STUB /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub    setenv JAVA_ARCHIVE_CLASSES YES    setenv JAVA_ARCHIVE_TYPE JAR    setenv JAVA_COMPILER /usr/bin/javac    setenv JAVA_FOLDER_PATH SimplePG.app/Java    setenv JAVA_FRAMEWORK_RESOURCES_DIRS Resources    setenv JAVA_JAR_FLAGS cv    setenv JAVA_SOURCE_SUBDIR .    setenv JAVA_USE_DEPENDENCIES YES    setenv JAVA_ZIP_FLAGS -urg    setenv JIKES_DEFAULT_FLAGS "+E +OLDCSO"    setenv KEEP_PRIVATE_EXTERNS NO    setenv LD_GENERATE_MAP_FILE NO    setenv LD_MAP_FILE_PATH /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-LinkMap-normal-armv7.txt    setenv LD_OPENMP_FLAGS -fopenmp    setenv LEX /Developer/usr/bin/lex    setenv LIBRARY_FLAG_NOSPACE YES    setenv LIBRARY_FLAG_PREFIX -l    setenv LIBRARY_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos\" "    setenv LINKER_DISPLAYS_MANGLED_NAMES NO    setenv LINK_FILE_LIST_normal_armv6 /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG.LinkFileList    setenv LINK_FILE_LIST_normal_armv7 /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG.LinkFileList    setenv LINK_WITH_STANDARD_LIBRARIES YES    setenv LOCALIZED_RESOURCES_FOLDER_PATH SimplePG.app/English.lproj    setenv LOCAL_ADMIN_APPS_DIR /Applications/Utilities    setenv LOCAL_APPS_DIR /Applications    setenv LOCAL_DEVELOPER_DIR /Library/Developer    setenv LOCAL_LIBRARY_DIR /Library    setenv MACH_O_TYPE mh_execute    setenv MAC_OS_X_PRODUCT_BUILD_VERSION 10J3210    setenv MAC_OS_X_VERSION_ACTUAL 1066    setenv MAC_OS_X_VERSION_MAJOR 1060    setenv MAC_OS_X_VERSION_MINOR 0606    setenv NATIVE_ARCH i386    setenv NATIVE_ARCH_32_BIT i386    setenv NATIVE_ARCH_64_BIT x86_64    setenv NATIVE_ARCH_ACTUAL x86_64    setenv NO_COMMON YES    setenv OBJECT_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects    setenv OBJECT_FILE_DIR_normal /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal    setenv OBJROOT /Users/harishq/SimplePG/build    setenv ONLY_ACTIVE_ARCH NO    setenv OPTIMIZATION_LEVEL 0    setenv OS MACOS    setenv OSAC /usr/bin/osacompile    setenv OTHER_LDFLAGS "-all_load -Obj-C"    setenv PACKAGE_TYPE com.apple.package-type.wrapper.application    setenv PASCAL_STRINGS YES    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES "/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms"    setenv PBDEVELOPMENTPLIST_PATH SimplePG.app/pbdevelopment.plist    setenv PFE_FILE_C_DIALECTS objective-c    setenv PHONEGAPLIB /Users/harishq/Documents/PhoneGapLib    setenv PKGINFO_FILE_PATH /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/PkgInfo    setenv PKGINFO_PATH SimplePG.app/PkgInfo    setenv PLATFORM_DEVELOPER_APPLICATIONS_DIR /Developer/Platforms/iPhoneOS.platform/Developer/Applications    setenv PLATFORM_DEVELOPER_BIN_DIR /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin    setenv PLATFORM_DEVELOPER_LIBRARY_DIR /Developer/Platforms/iPhoneOS.platform/Developer/Library    setenv PLATFORM_DEVELOPER_SDK_DIR /Developer/Platforms/iPhoneOS.platform/Developer/SDKs    setenv PLATFORM_DEVELOPER_TOOLS_DIR /Developer/Platforms/iPhoneOS.platform/Developer/Tools    setenv PLATFORM_DEVELOPER_USR_DIR /Developer/Platforms/iPhoneOS.platform/Developer/usr    setenv PLATFORM_DIR /Developer/Platforms/iPhoneOS.platform    setenv PLATFORM_NAME iphoneos    setenv PLATFORM_PRODUCT_BUILD_VERSION 8F192    setenv PLIST_FILE_OUTPUT_FORMAT binary    setenv PLUGINS_FOLDER_PATH SimplePG.app/PlugIns    setenv PREBINDING NO    setenv PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR YES    setenv PRECOMP_DESTINATION_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/PrefixHeaders    setenv PRESERVE_DEAD_CODE_INITS_AND_TERMS NO    setenv PRIVATE_HEADERS_FOLDER_PATH SimplePG.app/PrivateHeaders    setenv PRODUCT_NAME SimplePG    setenv PRODUCT_SETTINGS_PATH /Users/harishq/SimplePG/SimplePG-Info.plist    setenv PRODUCT_TYPE com.apple.product-type.application    setenv PROFILING_CODE NO    setenv PROJECT SimplePG    setenv PROJECT_DERIVED_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/DerivedSources    setenv PROJECT_DIR /Users/harishq/SimplePG    setenv PROJECT_FILE_PATH /Users/harishq/SimplePG/SimplePG.xcodeproj    setenv PROJECT_NAME SimplePG    setenv PROJECT_TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build    setenv PROVISIONING_PROFILE_REQUIRED YES    setenv PUBLIC_HEADERS_FOLDER_PATH SimplePG.app/Headers    setenv RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS YES    setenv REMOVE_CVS_FROM_RESOURCES YES    setenv REMOVE_GIT_FROM_RESOURCES YES    setenv REMOVE_SVN_FROM_RESOURCES YES    setenv RESOURCE_RULES_REQUIRED YES    setenv REZ_COLLECTOR_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/ResourceManagerResources    setenv REZ_OBJECTS_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/ResourceManagerResources/Objects    setenv REZ_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos\" "    setenv RUN_CLANG_STATIC_ANALYZER NO    setenv SCAN_ALL_SOURCE_FILES_FOR_INCLUDES NO    setenv SCRIPTS_FOLDER_PATH SimplePG.app/Scripts    setenv SCRIPT_INPUT_FILE_COUNT 0    setenv SCRIPT_OUTPUT_FILE_COUNT 0    setenv SDKROOT /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk    setenv SDK_DIR /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk    setenv SDK_NAME iphoneos4.3    setenv SDK_PRODUCT_BUILD_VERSION 8F191m    setenv SED /usr/bin/sed    setenv SEPARATE_STRIP NO    setenv SEPARATE_SYMBOL_EDIT NO    setenv SET_DIR_MODE_OWNER_GROUP YES    setenv SET_FILE_MODE_OWNER_GROUP NO    setenv SHALLOW_BUNDLE YES    setenv SHARED_DERIVED_FILE_DIR /Users/harishq/SimplePG/build/Debug-iphoneos/DerivedSources    setenv SHARED_FRAMEWORKS_FOLDER_PATH SimplePG.app/SharedFrameworks    setenv SHARED_PRECOMPS_DIR /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders    setenv SHARED_SUPPORT_FOLDER_PATH SimplePG.app/SharedSupport    setenv SKIP_INSTALL YES    setenv SOURCE_ROOT /Users/harishq/SimplePG    setenv SRCROOT /Users/harishq/SimplePG    setenv STANDARD_C_PLUS_PLUS_LIBRARY_TYPE dynamic    setenv STRINGS_FILE_OUTPUT_ENCODING binary    setenv STRIP_INSTALLED_PRODUCT YES    setenv STRIP_STYLE all    setenv SUPPORTED_DEVICE_FAMILIES 1,2    setenv SYMBOL_REPOSITORY_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SymbolRepositories    setenv SYMROOT /Users/harishq/SimplePG/build    setenv SYSTEM_ADMIN_APPS_DIR /Applications/Utilities    setenv SYSTEM_APPS_DIR /Applications    setenv SYSTEM_CORE_SERVICES_DIR /System/Library/CoreServices    setenv SYSTEM_DEMOS_DIR /Applications/Extras    setenv SYSTEM_DEVELOPER_APPS_DIR /Developer/Applications    setenv SYSTEM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv SYSTEM_DEVELOPER_DEMOS_DIR "/Developer/Applications/Utilities/Built Examples"    setenv SYSTEM_DEVELOPER_DIR /Developer    setenv SYSTEM_DEVELOPER_DOC_DIR "/Developer/ADC Reference Library"    setenv SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR "/Developer/Applications/Graphics Tools"    setenv SYSTEM_DEVELOPER_JAVA_TOOLS_DIR "/Developer/Applications/Java Tools"    setenv SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR "/Developer/Applications/Performance Tools"    setenv SYSTEM_DEVELOPER_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes"    setenv SYSTEM_DEVELOPER_TOOLS /Developer/Tools    setenv SYSTEM_DEVELOPER_TOOLS_DOC_DIR "/Developer/ADC Reference Library/documentation/DeveloperTools"    setenv SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes/DeveloperTools"    setenv SYSTEM_DEVELOPER_USR_DIR /Developer/usr    setenv SYSTEM_DEVELOPER_UTILITIES_DIR /Developer/Applications/Utilities    setenv SYSTEM_DOCUMENTATION_DIR /Library/Documentation    setenv SYSTEM_LIBRARY_DIR /System/Library    setenv TARGETED_DEVICE_FAMILY 1    setenv TARGETNAME SimplePG    setenv TARGET_BUILD_DIR /Users/harishq/SimplePG/build/Debug-iphoneos    setenv TARGET_NAME SimplePG    setenv TARGET_TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_FILES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_ROOT /Users/harishq/SimplePG/build    setenv UID 501    setenv UNLOCALIZED_RESOURCES_FOLDER_PATH SimplePG.app    setenv UNSTRIPPED_PRODUCT NO    setenv USER harishq    setenv USER_APPS_DIR /Users/harishq/Applications    setenv USER_HEADER_SEARCH_PATHS "\"/Users/harishq/Documents/PhoneGapLib/Classes/JSON\" \"/Users/harishq/Documents/PhoneGapLib/Classes\""    setenv USER_LIBRARY_DIR /Users/harishq/Library    setenv USE_DYNAMIC_NO_PIC YES    setenv USE_HEADERMAP YES    setenv USE_HEADER_SYMLINKS NO    setenv VALIDATE_PRODUCT NO    setenv VALID_ARCHS "armv6 armv7"    setenv VERBOSE_PBXCP NO    setenv VERSIONPLIST_PATH SimplePG.app/version.plist    setenv VERSION_INFO_BUILDER harishq    setenv VERSION_INFO_FILE SimplePG_vers.c    setenv VERSION_INFO_STRING "\"@(#)PROGRAM:SimplePG  PROJECT:SimplePG-\""    setenv WRAPPER_EXTENSION app    setenv WRAPPER_NAME SimplePG.app    setenv WRAPPER_SUFFIX .app    setenv XCODE_APP_SUPPORT_DIR /Developer/Library/Xcode    setenv XCODE_PRODUCT_BUILD_VERSION 10M2518    setenv XCODE_VERSION_ACTUAL 0400    setenv XCODE_VERSION_MAJOR 0400    setenv XCODE_VERSION_MINOR 0400    setenv YACC /Developer/usr/bin/yacc    setenv _REAL_SDKROOT iphoneos    /bin/sh -c /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-30E9A9A110B758320022D3BA.sh0#
+
+CPhaseScriptExecution "Touch www folder" /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-304B58A110DAC018002A0835.sh
+s331945530.762242
+e331945530.771458
+r1
+xPhaseScriptExecution
+xTouch www folder
+x/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-304B58A110DAC018002A0835.sh
+lSLF07#2@42"Run custom shell script 'Touch www folder'331945530#331945530#0(0"0(0#0#0"8638563296#17104"    cd /Users/harishq/SimplePG    setenv ACTION build    setenv AD_HOC_CODE_SIGNING_ALLOWED NO    setenv ALTERNATE_GROUP staff    setenv ALTERNATE_MODE u+w,go-w,a+rX    setenv ALTERNATE_OWNER harishq    setenv ALWAYS_SEARCH_USER_PATHS NO    setenv APPLE_INTERNAL_DEVELOPER_DIR /AppleInternal/Developer    setenv APPLE_INTERNAL_DIR /AppleInternal    setenv APPLE_INTERNAL_DOCUMENTATION_DIR /AppleInternal/Documentation    setenv APPLE_INTERNAL_LIBRARY_DIR /AppleInternal/Library    setenv APPLE_INTERNAL_TOOLS /AppleInternal/Developer/Tools    setenv APPLY_RULES_IN_COPY_FILES NO    setenv ARCHS "armv6 armv7"    setenv ARCHS_STANDARD_32_64_BIT "armv6 armv7"    setenv ARCHS_STANDARD_32_BIT "armv6 armv7"    setenv ARCHS_UNIVERSAL_IPHONE_OS armv7    setenv BUILD_COMPONENTS "headers build"    setenv BUILD_DIR /Users/harishq/SimplePG/build    setenv BUILD_ROOT /Users/harishq/SimplePG/build    setenv BUILD_STYLE Debug    setenv BUILD_VARIANTS normal    setenv BUILT_PRODUCTS_DIR /Users/harishq/SimplePG/build/Debug-iphoneos    setenv CACHE_ROOT /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501    setenv CCHROOT /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501    setenv CHMOD /bin/chmod    setenv CHOWN /usr/sbin/chown    setenv CLASS_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/JavaClasses    setenv CLEAN_PRECOMPS YES    setenv CLONE_HEADERS NO    setenv CODESIGNING_FOLDER_PATH /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app    setenv CODE_SIGNING_ALLOWED YES    setenv CODE_SIGNING_REQUIRED YES    setenv CODE_SIGN_CONTEXT_CLASS XCiPhoneOSCodeSignContext    setenv CODE_SIGN_IDENTITY "iPhone Developer"    setenv COMMAND_MODE legacy    setenv COMPOSITE_SDK_DIRS /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/CompositeSDKs    setenv COMPRESS_PNG_FILES YES    setenv CONFIGURATION Debug    setenv CONFIGURATION_BUILD_DIR /Users/harishq/SimplePG/build/Debug-iphoneos    setenv CONFIGURATION_TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos    setenv CONTENTS_FOLDER_PATH SimplePG.app    setenv COPYING_PRESERVES_HFS_DATA NO    setenv COPY_PHASE_STRIP NO    setenv COPY_RESOURCES_FROM_STATIC_FRAMEWORKS YES    setenv CP /bin/cp    setenv CURRENT_ARCH armv7    setenv CURRENT_VARIANT normal    setenv DEAD_CODE_STRIPPING YES    setenv DEBUGGING_SYMBOLS YES    setenv DEBUG_INFORMATION_FORMAT dwarf-with-dsym    setenv DEPLOYMENT_LOCATION NO    setenv DEPLOYMENT_POSTPROCESSING NO    setenv DERIVED_FILES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources    setenv DERIVED_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources    setenv DERIVED_SOURCES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources    setenv DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv DEVELOPER_BIN_DIR /Developer/usr/bin    setenv DEVELOPER_DIR /Developer    setenv DEVELOPER_FRAMEWORKS_DIR /Developer/Library/Frameworks    setenv DEVELOPER_FRAMEWORKS_DIR_QUOTED "\"/Developer/Library/Frameworks\""    setenv DEVELOPER_LIBRARY_DIR /Developer/Library    setenv DEVELOPER_SDK_DIR /Developer/SDKs    setenv DEVELOPER_TOOLS_DIR /Developer/Tools    setenv DEVELOPER_USR_DIR /Developer/usr    setenv DEVELOPMENT_LANGUAGE English    setenv DOCUMENTATION_FOLDER_PATH SimplePG.app/English.lproj/Documentation    setenv DO_HEADER_SCANNING_IN_JAM NO    setenv DSTROOT /tmp/SimplePG.dst    setenv DWARF_DSYM_FILE_NAME SimplePG.app.dSYM    setenv DWARF_DSYM_FOLDER_PATH /Users/harishq/SimplePG/build/Debug-iphoneos    setenv EFFECTIVE_PLATFORM_NAME -iphoneos    setenv EMBEDDED_PROFILE_NAME embedded.mobileprovision    setenv ENABLE_HEADER_DEPENDENCIES YES    setenv ENABLE_OPENMP_SUPPORT NO    setenv ENTITLEMENTS_ALLOWED YES    setenv ENTITLEMENTS_REQUIRED YES    setenv EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS ".svn .git CVS"    setenv EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES "*.nib *.lproj *.framework *.gch (*) CVS .svn .git *.xcodeproj *.xcode *.pbproj *.pbxproj"    setenv EXECUTABLES_FOLDER_PATH SimplePG.app/Executables    setenv EXECUTABLE_FOLDER_PATH SimplePG.app    setenv EXECUTABLE_NAME SimplePG    setenv EXECUTABLE_PATH SimplePG.app/SimplePG    setenv FILE_LIST /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects/LinkFileList    setenv FIXED_FILES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/FixedFiles    setenv FRAMEWORKS_FOLDER_PATH SimplePG.app/Frameworks    setenv FRAMEWORK_FLAG_PREFIX -framework    setenv FRAMEWORK_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos\" "    setenv FRAMEWORK_VERSION A    setenv FULL_PRODUCT_NAME SimplePG.app    setenv GCC3_VERSION 3.3    setenv GCC_C_LANGUAGE_STANDARD c99    setenv GCC_DYNAMIC_NO_PIC NO    setenv GCC_INLINES_ARE_PRIVATE_EXTERN YES    setenv GCC_OPTIMIZATION_LEVEL 0    setenv GCC_PFE_FILE_C_DIALECTS "c objective-c c++ objective-c++"    setenv GCC_PRECOMPILE_PREFIX_HEADER YES    setenv GCC_PREFIX_HEADER SimplePG-Prefix.pch    setenv GCC_SYMBOLS_PRIVATE_EXTERN YES    setenv GCC_THUMB_SUPPORT YES    setenv GCC_TREAT_WARNINGS_AS_ERRORS NO    setenv GCC_VERSION com.apple.compilers.llvmgcc42    setenv GCC_VERSION_IDENTIFIER com_apple_compilers_llvmgcc42    setenv GCC_WARN_ABOUT_RETURN_TYPE YES    setenv GCC_WARN_UNUSED_VARIABLE YES    setenv GENERATE_MASTER_OBJECT_FILE NO    setenv GENERATE_PKGINFO_FILE YES    setenv GENERATE_PROFILING_CODE NO    setenv GID 20    setenv GROUP staff    setenv HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT YES    setenv HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES YES    setenv HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS YES    setenv HEADERMAP_INCLUDES_PROJECT_HEADERS YES    setenv HEADER_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos/include\" "    setenv ICONV /usr/bin/iconv    setenv INFOPLIST_EXPAND_BUILD_SETTINGS YES    setenv INFOPLIST_FILE SimplePG-Info.plist    setenv INFOPLIST_OUTPUT_FORMAT binary    setenv INFOPLIST_PATH SimplePG.app/Info.plist    setenv INFOPLIST_PREPROCESS NO    setenv INFOSTRINGS_PATH SimplePG.app/English.lproj/InfoPlist.strings    setenv INSTALL_DIR /tmp/SimplePG.dst/Applications    setenv INSTALL_GROUP staff    setenv INSTALL_MODE_FLAG u+w,go-w,a+rX    setenv INSTALL_OWNER harishq    setenv INSTALL_PATH /Applications    setenv INSTALL_ROOT /tmp/SimplePG.dst    setenv IPHONEOS_DEPLOYMENT_TARGET 3.0    setenv JAVAC_DEFAULT_FLAGS "-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8"    setenv JAVA_APP_STUB /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub    setenv JAVA_ARCHIVE_CLASSES YES    setenv JAVA_ARCHIVE_TYPE JAR    setenv JAVA_COMPILER /usr/bin/javac    setenv JAVA_FOLDER_PATH SimplePG.app/Java    setenv JAVA_FRAMEWORK_RESOURCES_DIRS Resources    setenv JAVA_JAR_FLAGS cv    setenv JAVA_SOURCE_SUBDIR .    setenv JAVA_USE_DEPENDENCIES YES    setenv JAVA_ZIP_FLAGS -urg    setenv JIKES_DEFAULT_FLAGS "+E +OLDCSO"    setenv KEEP_PRIVATE_EXTERNS NO    setenv LD_GENERATE_MAP_FILE NO    setenv LD_MAP_FILE_PATH /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-LinkMap-normal-armv7.txt    setenv LD_OPENMP_FLAGS -fopenmp    setenv LEX /Developer/usr/bin/lex    setenv LIBRARY_FLAG_NOSPACE YES    setenv LIBRARY_FLAG_PREFIX -l    setenv LIBRARY_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos\" "    setenv LINKER_DISPLAYS_MANGLED_NAMES NO    setenv LINK_FILE_LIST_normal_armv6 /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv6/SimplePG.LinkFileList    setenv LINK_FILE_LIST_normal_armv7 /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal/armv7/SimplePG.LinkFileList    setenv LINK_WITH_STANDARD_LIBRARIES YES    setenv LOCALIZED_RESOURCES_FOLDER_PATH SimplePG.app/English.lproj    setenv LOCAL_ADMIN_APPS_DIR /Applications/Utilities    setenv LOCAL_APPS_DIR /Applications    setenv LOCAL_DEVELOPER_DIR /Library/Developer    setenv LOCAL_LIBRARY_DIR /Library    setenv MACH_O_TYPE mh_execute    setenv MAC_OS_X_PRODUCT_BUILD_VERSION 10J3210    setenv MAC_OS_X_VERSION_ACTUAL 1066    setenv MAC_OS_X_VERSION_MAJOR 1060    setenv MAC_OS_X_VERSION_MINOR 0606    setenv NATIVE_ARCH i386    setenv NATIVE_ARCH_32_BIT i386    setenv NATIVE_ARCH_64_BIT x86_64    setenv NATIVE_ARCH_ACTUAL x86_64    setenv NO_COMMON YES    setenv OBJECT_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects    setenv OBJECT_FILE_DIR_normal /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Objects-normal    setenv OBJROOT /Users/harishq/SimplePG/build    setenv ONLY_ACTIVE_ARCH NO    setenv OPTIMIZATION_LEVEL 0    setenv OS MACOS    setenv OSAC /usr/bin/osacompile    setenv OTHER_LDFLAGS "-all_load -Obj-C"    setenv PACKAGE_TYPE com.apple.package-type.wrapper.application    setenv PASCAL_STRINGS YES    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES "/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms"    setenv PBDEVELOPMENTPLIST_PATH SimplePG.app/pbdevelopment.plist    setenv PFE_FILE_C_DIALECTS objective-c    setenv PHONEGAPLIB /Users/harishq/Documents/PhoneGapLib    setenv PKGINFO_FILE_PATH /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/PkgInfo    setenv PKGINFO_PATH SimplePG.app/PkgInfo    setenv PLATFORM_DEVELOPER_APPLICATIONS_DIR /Developer/Platforms/iPhoneOS.platform/Developer/Applications    setenv PLATFORM_DEVELOPER_BIN_DIR /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin    setenv PLATFORM_DEVELOPER_LIBRARY_DIR /Developer/Platforms/iPhoneOS.platform/Developer/Library    setenv PLATFORM_DEVELOPER_SDK_DIR /Developer/Platforms/iPhoneOS.platform/Developer/SDKs    setenv PLATFORM_DEVELOPER_TOOLS_DIR /Developer/Platforms/iPhoneOS.platform/Developer/Tools    setenv PLATFORM_DEVELOPER_USR_DIR /Developer/Platforms/iPhoneOS.platform/Developer/usr    setenv PLATFORM_DIR /Developer/Platforms/iPhoneOS.platform    setenv PLATFORM_NAME iphoneos    setenv PLATFORM_PRODUCT_BUILD_VERSION 8F192    setenv PLIST_FILE_OUTPUT_FORMAT binary    setenv PLUGINS_FOLDER_PATH SimplePG.app/PlugIns    setenv PREBINDING NO    setenv PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR YES    setenv PRECOMP_DESTINATION_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/PrefixHeaders    setenv PRESERVE_DEAD_CODE_INITS_AND_TERMS NO    setenv PRIVATE_HEADERS_FOLDER_PATH SimplePG.app/PrivateHeaders    setenv PRODUCT_NAME SimplePG    setenv PRODUCT_SETTINGS_PATH /Users/harishq/SimplePG/SimplePG-Info.plist    setenv PRODUCT_TYPE com.apple.product-type.application    setenv PROFILING_CODE NO    setenv PROJECT SimplePG    setenv PROJECT_DERIVED_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/DerivedSources    setenv PROJECT_DIR /Users/harishq/SimplePG    setenv PROJECT_FILE_PATH /Users/harishq/SimplePG/SimplePG.xcodeproj    setenv PROJECT_NAME SimplePG    setenv PROJECT_TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build    setenv PROVISIONING_PROFILE_REQUIRED YES    setenv PUBLIC_HEADERS_FOLDER_PATH SimplePG.app/Headers    setenv RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS YES    setenv REMOVE_CVS_FROM_RESOURCES YES    setenv REMOVE_GIT_FROM_RESOURCES YES    setenv REMOVE_SVN_FROM_RESOURCES YES    setenv RESOURCE_RULES_REQUIRED YES    setenv REZ_COLLECTOR_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/ResourceManagerResources    setenv REZ_OBJECTS_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/ResourceManagerResources/Objects    setenv REZ_SEARCH_PATHS "\"/Users/harishq/SimplePG/build/Debug-iphoneos\" "    setenv RUN_CLANG_STATIC_ANALYZER NO    setenv SCAN_ALL_SOURCE_FILES_FOR_INCLUDES NO    setenv SCRIPTS_FOLDER_PATH SimplePG.app/Scripts    setenv SCRIPT_INPUT_FILE_COUNT 0    setenv SCRIPT_OUTPUT_FILE_COUNT 0    setenv SDKROOT /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk    setenv SDK_DIR /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk    setenv SDK_NAME iphoneos4.3    setenv SDK_PRODUCT_BUILD_VERSION 8F191m    setenv SED /usr/bin/sed    setenv SEPARATE_STRIP NO    setenv SEPARATE_SYMBOL_EDIT NO    setenv SET_DIR_MODE_OWNER_GROUP YES    setenv SET_FILE_MODE_OWNER_GROUP NO    setenv SHALLOW_BUNDLE YES    setenv SHARED_DERIVED_FILE_DIR /Users/harishq/SimplePG/build/Debug-iphoneos/DerivedSources    setenv SHARED_FRAMEWORKS_FOLDER_PATH SimplePG.app/SharedFrameworks    setenv SHARED_PRECOMPS_DIR /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders    setenv SHARED_SUPPORT_FOLDER_PATH SimplePG.app/SharedSupport    setenv SKIP_INSTALL YES    setenv SOURCE_ROOT /Users/harishq/SimplePG    setenv SRCROOT /Users/harishq/SimplePG    setenv STANDARD_C_PLUS_PLUS_LIBRARY_TYPE dynamic    setenv STRINGS_FILE_OUTPUT_ENCODING binary    setenv STRIP_INSTALLED_PRODUCT YES    setenv STRIP_STYLE all    setenv SUPPORTED_DEVICE_FAMILIES 1,2    setenv SYMBOL_REPOSITORY_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SymbolRepositories    setenv SYMROOT /Users/harishq/SimplePG/build    setenv SYSTEM_ADMIN_APPS_DIR /Applications/Utilities    setenv SYSTEM_APPS_DIR /Applications    setenv SYSTEM_CORE_SERVICES_DIR /System/Library/CoreServices    setenv SYSTEM_DEMOS_DIR /Applications/Extras    setenv SYSTEM_DEVELOPER_APPS_DIR /Developer/Applications    setenv SYSTEM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv SYSTEM_DEVELOPER_DEMOS_DIR "/Developer/Applications/Utilities/Built Examples"    setenv SYSTEM_DEVELOPER_DIR /Developer    setenv SYSTEM_DEVELOPER_DOC_DIR "/Developer/ADC Reference Library"    setenv SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR "/Developer/Applications/Graphics Tools"    setenv SYSTEM_DEVELOPER_JAVA_TOOLS_DIR "/Developer/Applications/Java Tools"    setenv SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR "/Developer/Applications/Performance Tools"    setenv SYSTEM_DEVELOPER_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes"    setenv SYSTEM_DEVELOPER_TOOLS /Developer/Tools    setenv SYSTEM_DEVELOPER_TOOLS_DOC_DIR "/Developer/ADC Reference Library/documentation/DeveloperTools"    setenv SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes/DeveloperTools"    setenv SYSTEM_DEVELOPER_USR_DIR /Developer/usr    setenv SYSTEM_DEVELOPER_UTILITIES_DIR /Developer/Applications/Utilities    setenv SYSTEM_DOCUMENTATION_DIR /Library/Documentation    setenv SYSTEM_LIBRARY_DIR /System/Library    setenv TARGETED_DEVICE_FAMILY 1    setenv TARGETNAME SimplePG    setenv TARGET_BUILD_DIR /Users/harishq/SimplePG/build/Debug-iphoneos    setenv TARGET_NAME SimplePG    setenv TARGET_TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_FILES_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_FILE_DIR /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build    setenv TEMP_ROOT /Users/harishq/SimplePG/build    setenv UID 501    setenv UNLOCALIZED_RESOURCES_FOLDER_PATH SimplePG.app    setenv UNSTRIPPED_PRODUCT NO    setenv USER harishq    setenv USER_APPS_DIR /Users/harishq/Applications    setenv USER_HEADER_SEARCH_PATHS "\"/Users/harishq/Documents/PhoneGapLib/Classes/JSON\" \"/Users/harishq/Documents/PhoneGapLib/Classes\""    setenv USER_LIBRARY_DIR /Users/harishq/Library    setenv USE_DYNAMIC_NO_PIC YES    setenv USE_HEADERMAP YES    setenv USE_HEADER_SYMLINKS NO    setenv VALIDATE_PRODUCT NO    setenv VALID_ARCHS "armv6 armv7"    setenv VERBOSE_PBXCP NO    setenv VERSIONPLIST_PATH SimplePG.app/version.plist    setenv VERSION_INFO_BUILDER harishq    setenv VERSION_INFO_FILE SimplePG_vers.c    setenv VERSION_INFO_STRING "\"@(#)PROGRAM:SimplePG  PROJECT:SimplePG-\""    setenv WRAPPER_EXTENSION app    setenv WRAPPER_NAME SimplePG.app    setenv WRAPPER_SUFFIX .app    setenv XCODE_APP_SUPPORT_DIR /Developer/Library/Xcode    setenv XCODE_PRODUCT_BUILD_VERSION 10M2518    setenv XCODE_VERSION_ACTUAL 0400    setenv XCODE_VERSION_MAJOR 0400    setenv XCODE_VERSION_MINOR 0400    setenv YACC /Developer/usr/bin/yacc    setenv _REAL_SDKROOT iphoneos    /bin/sh -c /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/Script-304B58A110DAC018002A0835.sh0#
+
+CProcessInfoPlistFile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Info.plist SimplePG-Info.plist
+s331927543.188803
+e331927543.192352
+r1
+xProcessInfoPlistFile
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Info.plist
+xSimplePG-Info.plist
+lSLF07#2@27"Process SimplePG-Info.plist331927543#331927543#0(0"0(0#0#43"/Users/harishq/SimplePG/SimplePG-Info.plist8635705568#506"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility SimplePG-Info.plist -genpkginfo /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/ResourceRules.plist -o /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/Info.plist0#
+
+CProcessPCH /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch.gch SimplePG-Prefix.pch normal armv7 objective-c com.apple.compilers.llvmgcc42
+s331900919.801751
+e331900920.862953
+r1
+xProcessPCH
+x/var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch.gch
+xSimplePG-Prefix.pch
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@30"Precompile SimplePG-Prefix.pch331900919#331900920#0(0"0(0#0#43"/Users/harishq/SimplePG/SimplePG-Prefix.pch8632700192#1605"    cd /Users/harishq/SimplePG    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-generated-files.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-own-target-headers.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-all-target-headers.hmap -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-project-headers.hmap -F/Users/harishq/SimplePG/build/Debug-iphoneos -iquote/Users/harishq/Documents/PhoneGapLib/Classes/JSON -iquote/Users/harishq/Documents/PhoneGapLib/Classes -I/Users/harishq/SimplePG/build/Debug-iphoneos/include -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources/armv7 -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources -c /Users/harishq/SimplePG/SimplePG-Prefix.pch -o /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-cfideberxfniczgcryuoezyfeqin/SimplePG-Prefix.pch.gch0#
+
+CProcessPCH /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch.gch SimplePG-Prefix.pch normal armv6 objective-c com.apple.compilers.llvmgcc42
+s331900919.801061
+e331900921.005972
+r1
+xProcessPCH
+x/var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch.gch
+xSimplePG-Prefix.pch
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.llvmgcc42
+lSLF07#2@30"Precompile SimplePG-Prefix.pch331900919#331900921#0(0"0(0#0#43"/Users/harishq/SimplePG/SimplePG-Prefix.pch8633328160#1605"    cd /Users/harishq/SimplePG    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/llvm-gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-generated-files.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-own-target-headers.hmap -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-all-target-headers.hmap -iquote /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG-project-headers.hmap -F/Users/harishq/SimplePG/build/Debug-iphoneos -iquote/Users/harishq/Documents/PhoneGapLib/Classes/JSON -iquote/Users/harishq/Documents/PhoneGapLib/Classes -I/Users/harishq/SimplePG/build/Debug-iphoneos/include -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources/armv6 -I/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/DerivedSources -c /Users/harishq/SimplePG/SimplePG-Prefix.pch -o /var/folders/YL/YLOVwZj7F7i9rTVKhmNmf++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/SimplePG-Prefix-fsjimtwfksnebxapwujuctfzitrx/SimplePG-Prefix.pch.gch0#
+
+CProcessProductPackaging "/Users/harishq/Library/MobileDevice/Provisioning Profiles/F9EEDDF2-5E26-4524-AAF5-6DE1545CF5A0.mobileprovision" /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision
+s331900922.402910
+e331900922.448511
+r1
+xProcessProductPackaging
+x/Users/harishq/Library/MobileDevice/Provisioning Profiles/F9EEDDF2-5E26-4524-AAF5-6DE1545CF5A0.mobileprovision
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision
+lSLF07#2@195"ProcessProductPackaging "/Users/harishq/Library/MobileDevice/Provisioning Profiles/F9EEDDF2-5E26-4524-AAF5-6DE1545CF5A0.mobileprovision" build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision331900922#331900922#0(0"0(0#0#82"/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision8631699776#396"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/harishq/Library/MobileDevice/Provisioning Profiles/F9EEDDF2-5E26-4524-AAF5-6DE1545CF5A0.mobileprovision" -o /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app/embedded.mobileprovision0#
+
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent
+s331927543.220904
+e331927543.237259
+r1
+xProcessProductPackaging
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist
+x/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent
+lSLF07#2@178"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent331927543#331927543#0(0"0(0#0#89"/Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent8596334784#405"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/Entitlements.plist -entitlements -format xml -o /Users/harishq/SimplePG/build/SimplePG.build/Debug-iphoneos/SimplePG.build/SimplePG.xcent0#
+
+CTouch /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+s331945530.843298
+e331945530.845181
+r1
+xTouch
+x/Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app
+lSLF07#2@63"Touch /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app331945530#331945530#0(0"0(0#0#0"8618580032#235"    cd /Users/harishq/SimplePG    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/harishq/SimplePG/build/Debug-iphoneos/SimplePG.app0#
+
