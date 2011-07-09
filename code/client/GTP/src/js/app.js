@@ -1,15 +1,68 @@
+/* 
+ * Author: A. Pradeep
+ * Last Modified: July 09,2011
+ * Added Login Page and Registration Page
+ * Changed from setting up a page to Sencha application
+ * Defined the namespace 
+ * Defined controllers for different actions.
+ * Added Device Registration.
+ *
+ */
+
 Ext.regApplication({
     name: "gtp",
-    
     icon: 'resources/images/sunpass.png',
     glossOnIcon: false,
     tabletStartupScreen: 'resources/images/tablet_startup.png',
-    phoneStartupScreen: 'resources/images/phone_startup.png',    
-    /**
-     * This function is automatically called when the document has finished loading. All we do here
-     * is launch the application by calling the loans controller's 'list' action (see app/controllers/loans.js)
-     */
-    launch: function() {
+    phoneStartupScreen: 'resources/images/phone_startup.png',
+    launch: function(){
+    	console.log('application is launched');
+    	gtp.registerDevice({
+    		uuid: '312m12kl3123;h12k312lkj312312352342fa',
+    		type: gtp.detectDeviceType()
+    	})
+    }, 
+    registerDevice: function(deviceDetails) {
+    	console.log('gtp is launched');
+    	console.log(deviceDetails.uuid);
+    	console.log(deviceDetails.type);
+    	// Do the device registration here.
+    	Ext.Ajax.request({
+    		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
+    		params: {
+    			json: Ext.encode({
+    				uuid: deviceDetails.uuid,
+    				type: deviceDetails.type
+    			})
+    		},
+    		success: function(response){
+    			console.log('DevReg request Success');
+    			console.log('DevReg response '+response.responseText);
+    			var resobj=Ext.encode(response.responseText);
+    			console.log('DevReg response object '+resobj);
+    			// if device registration is succeeded login page will be launched from here
+    		},
+    		failure: function(response){
+    			console.log('DevReg request failed with response '+response.status);
+    		}
+    	});
+    	gtp.launchLoginPage({
+    		user: 'known',
+    		emailID: 'harish@mobisols.com',
+    	});
+    },
+    detectDeviceType: function(){
+    	if(Ext.is.Phone)
+    	return 'iphone'
+    },
+    launchLoginPage: function(options){
+    	// Login Page is launched here
+    	console.log('login page is launched');
+    	console.log(options);
+    	console.log('user '+options.user);
+    	console.log('user '+options.emailID);
+    	console.log('user '+options.password);
+    	
     	Ext.dispatch({
             controller: 'load',
             action    : 'show'
@@ -22,28 +75,71 @@ gtp.controller=Ext.regController("load",{
 		console.log('i am from controller show action');
 		gtp.views.loginPage=new Ext.Panel({
 			fullscreen: true,
-			layout: 'vbox',
+			layout: 'card',
 			items: [{
-				html: 'email ID:',
-				align: 'left'
+				id: 'loginpage',
+				layout: 'vbox',
+				items: [{
+					html: 'email ID:'
+				},{
+					xtype: 'emailfield',
+					ui: 'round',
+					id: 'lpemailid'
+				},{
+					html: 'password:',
+					align: 'left'
+				},{
+					xtype: 'passwordfield',
+					ui: 'round',
+					id: 'lppassword'
+				},{
+					layout: 'hbox',
+					items: [{
+						xtype: 'button',
+						ui: 'round',
+						text: 'Sign in',
+						handler: function(){
+							gtp.views.loginPage.setActiveItem('regpage');
+						}
+					},{
+						html: '<u>Register</u>',
+					}]				
+				}]
 			},{
-				xtype: 'textfield',
-				id: 'emailid'
-			},{
-				html: 'password:',
-				align: 'left'
-			},{
-				xtype: 'passwordfield',
-				id: 'password'
-			},{
-				xtype: 'button',
-				text: 'Sign in',
-				handler: function(){
-					Ext.dispatch({
-						controller: 'load',
-						action: 'view'
-					})
-				}
+				id: 'regpage',
+				layout: 'vbox',
+				items: [{
+					pack: 'left',
+					html: 'email ID:'
+				},{
+					xtype: 'emailfield',
+					required: true,
+					id: 'rpemailid'
+				},{
+					html: 'Password:',
+					pack: 'left'
+				},{
+					xtype: 'passwordfield',
+					required: true,
+					id: 'password'
+				},{
+					html: 'Confirm Password:',
+					pack: 'left'
+				},{
+					xtype: 'passwordfield',
+					required: true,
+					id: 'conpwd'
+				},{
+					xtype: 'button',
+					ui: 'round',
+					text: 'Register',
+					handler: function(){
+						Ext.dispatch({
+							controller: 'load',
+							action: 'view'
+						})
+					}
+				}]
 			}]
 		});
 	},
@@ -970,7 +1066,7 @@ gtp.controller=Ext.regController("load",{
 										}
 									
 										new google.maps.Marker({
-											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].lng),
+											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].longt),
 											title: markertitle,
 											icon: iconpath,
 											map: map
