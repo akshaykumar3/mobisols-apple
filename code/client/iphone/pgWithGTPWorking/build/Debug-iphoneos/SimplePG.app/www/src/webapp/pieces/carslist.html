@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>CarsList</title>
+		<script src="resources/sencha-touch.js" type="text/javascript" />
+		<link href="resources/sencha-touch.css" rel="stylesheet" type="text/css" />				
+		<script type="text/javascript" >
+			var CarList=new Ext.Application({
+				name: "CarList",
+				launch: function(){
+					CarList.listPanel=new Ext.List({
+						id: 'indexlist',
+						store: CarList.ListStore,
+						itemTpl: '<div><strong>{reg}</strong>  - {state} - {type} </div>'
+					});
+					CarLIst.Viewport=new Ext.Panel({
+						fullscreen: true,
+						layout: 'fit',
+						items: [CarList.listPanel]
+					});
+				}
+			});
+		</script>
+		<script src="carslist.js" type="text/javascript" />
+	</head>
+	<body></body>
+</html>
+					
+		
