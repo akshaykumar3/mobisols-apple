@@ -24,16 +24,14 @@ Ext.regApplication({
     }, 
     registerDevice: function(deviceDetails) {
     	console.log('gtp is launched');
-    	console.log(deviceDetails.uuid);
-    	console.log(deviceDetails.type);
+    	console.log('UUID '+deviceDetails.uuid);
+    	console.log('Device type '+deviceDetails.type);
     	// Do the device registration here.
     	Ext.Ajax.request({
     		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
     		params: {
-    			json: Ext.encode({
     				uuid: deviceDetails.uuid,
     				type: deviceDetails.type
-    			})
     		},
     		success: function(response){
     			console.log('DevReg request Success');
@@ -52,8 +50,18 @@ Ext.regApplication({
     	});
     },
     detectDeviceType: function(){
-    	if(Ext.is.Phone)
+    	if(Ext.is.iPhone)
     	return 'iphone'
+    	else if(Ext.is.Android)
+    	return 'android'
+    	else if(Ext.is.Blackberry)
+    	return 'blackberry'
+    	else if(Ext.is.iPod)
+    	return 'ipod'
+    	else if(Ext.is.iPad)
+    	return 'ipad'
+    	else if(Ext.is.Desktop)
+    	return 'desktop'
     },
     launchLoginPage: function(options){
     	// Login Page is launched here
@@ -61,18 +69,35 @@ Ext.regApplication({
     	console.log(options);
     	console.log('user '+options.user);
     	console.log('user '+options.emailID);
-    	console.log('user '+options.password);
-    	
-    	Ext.dispatch({
-            controller: 'load',
-            action    : 'show'
-    	});
+    	var existing;
+    	if(options.user=='known')
+    	{
+    		console.log('if condition known user')
+    		Ext.dispatch({
+	            controller: 'load',
+	            action    : 'show',
+	            exists: true, 
+	            userName: options.emailID
+	    	});
+	    }
+	    else
+	    {
+	    	Ext.dispatch({
+	    		controller: 'load',
+	    		action: 'show',
+	    		exists: false
+	    	})
+	    }
     }
 });
 
 gtp.controller=Ext.regController("load",{
-	show: function() {
+	show: function(options) {
 		console.log('i am from controller show action');
+		console.log('Exists ?'+options.exists);
+		if(options.exists)
+		console.log(options.userName);
+		
 		gtp.views.loginPage=new Ext.Panel({
 			fullscreen: true,
 			layout: 'card',
@@ -84,7 +109,8 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'emailfield',
 					ui: 'round',
-					id: 'lpemailid'
+					id: 'lpemailid',
+					value: options.exists ? options.userName : ''
 				},{
 					html: 'password:',
 					align: 'left'
@@ -99,10 +125,29 @@ gtp.controller=Ext.regController("load",{
 						ui: 'round',
 						text: 'Sign in',
 						handler: function(){
-							gtp.views.loginPage.setActiveItem('regpage');
+							if(!options.exists)
+							Ext.Msg.alert('User Name is required');
+							else if(!Ext.getCmp('lppassword').getValue())
+							{
+								Ext.Msg.alert('Password required')
+							}
+							else
+							{
+								Ext.dispatch({
+									controller: 'load',
+									action: 'view'
+								});// Do user authertication here.
+							}
+							//gtp.views.loginPage.setActiveItem('regpage');
 						}
 					},{
-						html: '<u>Register</u>',
+						//html: '<u>Register</u>'
+						xtype: 'button',
+						text: 'Register',
+						ui: 'normal',
+						handler: function(){
+							gtp.views.loginPage.setActiveItem('regpage');
+						}
 					}]				
 				}]
 			},{
@@ -130,15 +175,18 @@ gtp.controller=Ext.regController("load",{
 					required: true,
 					id: 'conpwd'
 				},{
-					xtype: 'button',
-					ui: 'round',
-					text: 'Register',
-					handler: function(){
-						Ext.dispatch({
-							controller: 'load',
-							action: 'view'
-						})
-					}
+					layout: 'hbox',
+					items: [{
+						xtype: 'button',
+						ui: 'round',
+						text: 'Register',
+						handler: function(){
+							Ext.dispatch({
+								controller: 'load',
+								action: 'view'
+							});
+						}
+					}]
 				}]
 			}]
 		});
@@ -147,7 +195,7 @@ gtp.controller=Ext.regController("load",{
 		console.log('i am from controller view action');
 		var mylocation_marker, markernotset=true;
 		
-		var geo = new Ext.util.GeoLocation({
+		gtp.geo = new Ext.util.GeoLocation({
 		    autoUpdate: false,
 		    listeners: {
 		        locationupdate: function (geo) {
@@ -190,7 +238,7 @@ gtp.controller=Ext.regController("load",{
 		    }
 		});
 
-		geo.updateLocation();
+		gtp.geo.updateLocation();
 		
 		console.log('Page is setup ');
 		
@@ -717,9 +765,9 @@ gtp.controller=Ext.regController("load",{
 									console.log('toggled');
 									toggle.value=1;
 									var clat,clong;
-									if(geo.latitude || geo.longitude){
-										clat=geo.latitude;
-										clong=geo.longitude;
+									if(gtp.geo.latitude || gtp.geo.longitude){
+										clat=gtp.geo.latitude;
+										clong=gtp.geo.longitude;
 									}
 									else{
 										clat=37.1345;
@@ -774,7 +822,6 @@ gtp.controller=Ext.regController("load",{
 					},
 					items: [{
 						xtype: 'textfield',
-						name: 'currloc',
 						id: 'curloc',
 						label: 'CurrLoc',
 						value: 'Illinois',
@@ -784,36 +831,32 @@ gtp.controller=Ext.regController("load",{
 					},{
 						xtype: 'textfield',
 						disabled: true,
-						name: 'oper',
 						id: 'operator',
 						label: 'Operator'
 					},{
 						xtype: 'textfield',
 						disabled: true,
-						name: 'avgtoll',
 						id: 'avgtoll',
 						label: 'AvgToll'
 					},{
 						xtype: 'textfield',
 						disabled: true,
-						name: 'perdaytoll',
 						id: 'pdtoll',
 						label: 'Per Day'
 					},{
 						xtype: 'textfield',
-						name: 'activecar',
+						disabled: true,
 						label: 'ActiveCar',
 						id: 'activecar'
 					},{
 						xtype: 'selectfield',
-						name: 'serviceplan',
 						label: 'Service',
 						required: true,
 						options: [{
 							text: 'GT- Pass',
 							value: 'gtpass'
 						},{
-							text: 'L-Pass',
+							text: 'Sun-Pass',
 							value: 'lpass'
 						},{
 							text: 'Fast-Pass',
@@ -1010,7 +1053,7 @@ gtp.controller=Ext.regController("load",{
 				iconCls: 'locate',
 				listeners: {
 					maprender: function(comp, map) {
-						geo.updateLocation();
+						gtp.geo.updateLocation();
 						
 						console.log('map is rendered');
 						console.log('map centered at lat: '+map.getCenter().lat()+' long: '+map.getCenter().lng());
@@ -1036,7 +1079,7 @@ gtp.controller=Ext.regController("load",{
 						var northEast = bounds.getNorthEast();
 					  	var southWest = bounds.getSouthWest();
 					  	
-					  	if(geo.latitude || geo.longitude)
+					  	if(gtp.geo.latitude || gtp.geo.longitude)
 						{
 							Ext.Ajax.request({
 								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
@@ -1091,5 +1134,6 @@ gtp.controller=Ext.regController("load",{
 				items: [DetailPanel]
 			}]
 		});
+		requestHeartBeat();
 	}
 })
