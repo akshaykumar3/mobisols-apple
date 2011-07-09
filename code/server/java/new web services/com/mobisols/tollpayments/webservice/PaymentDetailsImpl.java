@@ -44,7 +44,7 @@ public class PaymentDetailsImpl implements PaymentDetails{
 		//TODO code to access database using hibernate
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(UserPaymentDetail.class);
-		String hql ="from UserPaymentDetail userpayment where userpayment.userId=:userId";
+		String hql ="from UserPaymentDetail userpayment where userpayment.updId=:updId";
 		Query query = s.createQuery(hql);
 		query.setInteger("updId",updId);
         UserPaymentDetail pd = (UserPaymentDetail) query.uniqueResult();
