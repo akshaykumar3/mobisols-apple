@@ -73,7 +73,7 @@ public class AccountDetailsImpl implements AccountDetails{
 		this.setContactNo(u.getContactNo());
 		this.paymentDetails=new PaymentDetailsImpl(u.getUserPaymentDetails().getUpdId());
 		this.vehicleDetails=new LinkedList<VehicleDetails>();
-		Set <UserVehicle> vehicleList =u.getUserVehicle();
+		Set<UserVehicle> vehicleList =u.getUserVehicles();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{
 			 this.vehicleDetails.add(new VehicleDetailsImpl(((UserVehicle)it.next()).getUserVehicleId()));

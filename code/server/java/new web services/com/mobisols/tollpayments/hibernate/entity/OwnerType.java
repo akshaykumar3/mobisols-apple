@@ -27,17 +27,7 @@ public class OwnerType implements java.io.Serializable {
 	private Timestamp lastModifiedeOn;
 	private Integer lastModifiedBy;
 	private Integer clientId;
-	private UserVehicle userVehicle;
 
-	// Constructors
-
-	public UserVehicle getUserVehicle() {
-		return userVehicle;
-	}
-
-	public void setUserVehicle(UserVehicle userVehicle) {
-		this.userVehicle = userVehicle;
-	}
 
 	/** default constructor */
 	public OwnerType() {

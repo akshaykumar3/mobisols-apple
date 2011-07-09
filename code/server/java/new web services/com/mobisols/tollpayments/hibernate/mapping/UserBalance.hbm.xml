@@ -58,9 +58,11 @@
                 <column name="client_id" />
             </property>
             
-            <many-to-one name="UserBalanceUser"
+            <many-to-one name="user"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="user_id"
+			insert="false"
+			update="false"
 			cascade="save-update"
 			unique="true"/>
 			

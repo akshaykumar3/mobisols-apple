@@ -64,15 +64,11 @@
                 <column name="client_id" />
             </property>
             
-             <many-to-one name="UserBalanceLogUserBalance"
+             <many-to-one name="userBalance"
 			class="com.mobisols.tollpayments.hibernate.entity.UserBalance"
 			column="ubal_id"
+			insert="false" update="false"
 			not-null="true"/>
-			
-			<one-to-one name="UserBalanceLogPaymentTransaction"
-             class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
-             property-ref="PaymentTransactionUserBalanceLog"
-              fetch="join" cascade="all"/>
              
              
     <filter name="clientIdFilter" condition=":clientId = client_id"/>

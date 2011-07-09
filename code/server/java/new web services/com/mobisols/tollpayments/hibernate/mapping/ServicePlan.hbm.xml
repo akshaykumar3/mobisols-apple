@@ -61,17 +61,15 @@
                 <column name="client_id" />
             </property>
             
-            <one-to-one name="ServicePlanUserService"
-			class="com.mobisols.tollpayments.hibernate.entity.UserService"
-            property-ref="UserServiceServicePlan"
-            fetch="join"
-            cascade="all"/>
-            
-            <many-to-one name="ServicePlanTollOperator"
+           
+            <many-to-one name="tollOperator"
 			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
 			column="toll_operator_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
+			
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

@@ -29,35 +29,9 @@ public class TollOperator implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 	private Integer clientId;
-	private TollLocation tollLocation;
-	private ServicePlan servicePlan;
-	private TollLocationHistory tollLocationHistory;
 	private User user;
+	
 	// Constructors
-
-	public TollLocation getTollLocation() {
-		return tollLocation;
-	}
-
-	public void setTollLocation(TollLocation tollLocation) {
-		this.tollLocation = tollLocation;
-	}
-
-	public ServicePlan getServicePlan() {
-		return servicePlan;
-	}
-
-	public void setServicePlan(ServicePlan servicePlan) {
-		this.servicePlan = servicePlan;
-	}
-
-	public TollLocationHistory getTollLocationHistory() {
-		return tollLocationHistory;
-	}
-
-	public void setTollLocationHistory(TollLocationHistory tollLocationHistory) {
-		this.tollLocationHistory = tollLocationHistory;
-	}
 
 	public User getUser() {
 		return user;

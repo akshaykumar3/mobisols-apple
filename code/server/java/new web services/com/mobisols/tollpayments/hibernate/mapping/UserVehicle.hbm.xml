@@ -75,23 +75,31 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <many-to-one name="UserVehicleOwnerType"
+            
+            <many-to-one name="ownerType"
 			class="com.mobisols.tollpayments.hibernate.entity.OwnerType"
             column="owner_type_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
 			
-			<many-to-one name="UserVehicleUser"
+			<many-to-one name="user"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="user_id"
 			cascade="all"
+			insert="false"
+			update="false"
 			not-null="true"/>
 			
-			<one-to-one name="UserVehicleUserVehicleHistory"
-             class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory" 
-             property-ref="UserVehicleHistoryUserVehicle"
-             fetch="join"
-             lazy="no-proxy"/>
+			<many-to-one name="vehicleType"
+			class="com.mobisols.tollpayments.hibernate.entity.VehicleType"
+            column="vehicle_type_id"
+			cascade="save-update"
+			insert="false"
+			update="false"
+			unique="true"/>
+			
              
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

@@ -11,6 +11,5 @@ public interface AddBalance {
 	public String getDescription();
 	public void setDescription(String description);
 	public int getbalanceId();
-
 	public void setbalanceId(int balanceId);
 }

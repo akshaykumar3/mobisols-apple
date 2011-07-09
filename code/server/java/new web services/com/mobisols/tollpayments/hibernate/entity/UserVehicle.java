@@ -35,9 +35,17 @@ public class UserVehicle implements java.io.Serializable {
 	private Integer clientId;
 	private OwnerType ownerType;
 	private User user;
-    private UserVehicleHistory userVehicleHistory;	
+    private VehicleType vehicleType;	
 
 	// Constructors
+    public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
 
 	public OwnerType getOwnerType() {
 		return ownerType;
@@ -55,13 +63,6 @@ public class UserVehicle implements java.io.Serializable {
 		this.user = user;
 	}
 
-	public UserVehicleHistory getUserVehicleHistory() {
-		return userVehicleHistory;
-	}
-
-	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
-		this.userVehicleHistory = userVehicleHistory;
-	}
 
 	/** default constructor */
 	public UserVehicle() {

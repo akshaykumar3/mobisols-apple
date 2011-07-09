@@ -31,8 +31,8 @@ public class TollPaymentsImpl implements TollPayments{
 		Criteria crit=s.createCriteria(VehicleTollUsage.class);
 		crit.add(Restrictions.eq("vtuId", vtuId));
 		VehicleTollUsage vtu=(VehicleTollUsage) crit.uniqueResult();
-		this.setRegistration(vtu.getUservehicleHistory().getRegistrationNo());
-		this.setState(vtu.getUservehicleHistory().getRegisteredState());
+		this.setRegistration(vtu.getUserVehicleHistory().getRegistrationNo());
+		this.setState(vtu.getUserVehicleHistory().getRegisteredState());
 		if(vtu.getPtranId()==-1)
 			this.setIsPaid("false");
 		else

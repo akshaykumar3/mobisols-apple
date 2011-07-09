@@ -10,13 +10,13 @@
             <id name="compVersionId" type="java.lang.Integer">
                 <column name="comp_version_id" />
             </id>
-            <property name="componentId" type="java.lang.Integer" access="property">
+            <property name="componentId" type="java.lang.Integer" >
                 <column name="component_id" />
             </property>
-            <property name="description" type="java.lang.String" access="property">
+            <property name="description" type="java.lang.String" >
                 <column name="description" length="45" />
             </property>
-            <property name="listOfChanges" type="java.lang.String" access="property">
+            <property name="listOfChanges" type="java.lang.String" >
                 <column name="list_of_changes" length="4000" />
             </property>
             <property name="udf1" type="java.lang.String">
@@ -61,15 +61,13 @@
             <property name="version" type="java.lang.String">
                 <column name="version" length="20" />
             </property>
-            <many-to-one name="ComponentVersionComponent"
+            <many-to-one name="component"
              class="com.mobisols.tollpayments.hibernate.entity.Component"
 				column="component_id"
 				cascade="save-update"
+				insert="false"
+				update="false"
 				unique="true"/>
-	   <one-to-one name="ComponentVersionConfiguration"
-	   class="com.mobisols.tollpayments.hibernate.entity.Configuration"
-            property-ref="ConfigurationComponentVersion"
-            fetch="join"/>
-				
+			
     </class>
 </hibernate-mapping>

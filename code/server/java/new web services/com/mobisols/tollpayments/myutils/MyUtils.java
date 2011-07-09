@@ -9,4 +9,10 @@ public class MyUtils {
 		return new Timestamp(new Date().getTime());
 	}
 
+
+	public String toString(Timestamp timestamp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

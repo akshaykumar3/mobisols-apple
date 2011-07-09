@@ -34,7 +34,6 @@ public class VehicleMovementLog implements java.io.Serializable {
 	private Double longitude;
 	private String status;
 	private TollLocation tollLocation;
-	private VehicleTollUsage vechicleTollUsage;
 	private VmlType vmlType;
 	private UserVehicleHistory userVehicleHistory;
 
@@ -48,13 +47,6 @@ public class VehicleMovementLog implements java.io.Serializable {
 		this.tollLocation = tollLocation;
 	}
 
-	public VehicleTollUsage getVechicleTollUsage() {
-		return vechicleTollUsage;
-	}
-
-	public void setVechicleTollUsage(VehicleTollUsage vechicleTollUsage) {
-		this.vechicleTollUsage = vechicleTollUsage;
-	}
 
 	public VmlType getVmlType() {
 		return vmlType;

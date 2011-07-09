@@ -63,26 +63,13 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            
-            <one-to-one name="TollOperatorTollLocation"
-			class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
-            property-ref="TollLocationTollOperator"
-            fetch="join" cascade="all" />
-            
-            <one-to-one name="TollOperatorServicePlan"
-			class="com.mobisols.tollpayments.hibernate.entity.ServicePlan"
-            property-ref="ServicePlanTollOperator"
-             fetch="join" cascade="all"/>
-            
-            <one-to-one name="TollOperatorTollLocationHistory"
-			class="com.mobisols.tollpayments.hibernate.entity.TollLocationHistory"
-            property-ref="TollLocationHistoryTollOperator"
-             fetch="join" cascade="all"/>
-            
-            <many-to-one name="TollOperatorUser"
+             
+            <many-to-one name="user"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="user_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
             
     <filter name="clientIdFilter" condition=":clientId = client_id"/>

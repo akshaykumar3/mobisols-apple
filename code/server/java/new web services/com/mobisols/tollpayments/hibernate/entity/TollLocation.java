@@ -39,52 +39,9 @@ public class TollLocation implements java.io.Serializable {
 	private Double longitude;
 	private String direction;
 	private String type;
-	private TollPrice tollPrice;
-	private TollPriceHistory tollPriceHistory;
-	private VehicleTollUsage vehicleTollUsage;
-	private VehicleMovementLog vehicleMovementLog;
-	private TollLocationHistory tollLocationHistory;
+	private TollOperator tollOperator;
 	
-	public TollPrice getTollPrice() {
-		return tollPrice;
-	}
-
-	public void setTollPrice(TollPrice tollPrice) {
-		this.tollPrice = tollPrice;
-	}
-
-	public TollPriceHistory getTollPriceHistory() {
-		return tollPriceHistory;
-	}
-
-	public void setTollPriceHistory(TollPriceHistory tollPriceHistory) {
-		this.tollPriceHistory = tollPriceHistory;
-	}
-
-	public VehicleTollUsage getVehicleTollUsage() {
-		return vehicleTollUsage;
-	}
-
-	public void setVehicleTollUsage(VehicleTollUsage vehicleTollUsage) {
-		this.vehicleTollUsage = vehicleTollUsage;
-	}
-
-	public VehicleMovementLog getVehicleMovementLog() {
-		return vehicleMovementLog;
-	}
-
-	public void setVehicleMovementLog(VehicleMovementLog vehicleMovementLog) {
-		this.vehicleMovementLog = vehicleMovementLog;
-	}
-
-	public TollLocationHistory getTollLocationHistory() {
-		return tollLocationHistory;
-	}
-
-	public void setTollLocationHistory(TollLocationHistory tollLocationHistory) {
-		this.tollLocationHistory = tollLocationHistory;
-	}
-
+	
 	public TollOperator getTollOperator() {
 		return tollOperator;
 	}
@@ -93,7 +50,6 @@ public class TollLocation implements java.io.Serializable {
 		this.tollOperator = tollOperator;
 	}
 
-	TollOperator tollOperator;
 	
 
 	// Constructors

@@ -79,28 +79,29 @@
                 <column name="client_id" />
             </property>
             
-            <many-to-one name="TollPriceHistoryTollPrice"
+            <many-to-one name="tollPrice"
 			class="com.mobisols.tollpayments.hibernate.entity.TollPrice"
 			column="toll_price_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
 			
-			<many-to-one name="TollPriceHistoryTollLocation"
+			<many-to-one name="tollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
 				column="toll_location_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>
 				
-				<many-to-one name="TollPriceHistoryVehicleType"
+				<many-to-one name="vehicleType"
                 class="com.mobisols.tollpayments.hibernate.entity.VehicleType"
 				column="vehicle_type_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>	
-			
-			<one-to-one name="TollPriceHistoryVehicleTollUsage"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-            property-ref="VehicleTollUsageTollPriceHistory"
-             fetch="join" cascade="all"/>
 			
    <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

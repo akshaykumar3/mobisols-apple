@@ -14,65 +14,107 @@
 			jdbc:mysql://localhost/globaltoll
 		</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password">raghu</property>
+		<property name="connection.password">vinu</property>
 		<property name="connection.driver_class">
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="myeclipse.connection.profile">mysql</property>
+		
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/VmlType.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/CcType.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/ComponentVersion.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/Client.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/TollLocation.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/Component.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/Configuration.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/ComponentVersion.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserPaymentDetailHistory.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/Configuration.hbm.xml" />	
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/VehicleTollUsage.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/OwnerType.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserBalanceLog.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/PaymentTransaction.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserService.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/Road.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserPaymentDetail.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/ServicePlan.hbm.xml" />	
+		
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/User.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/TollLocation.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/VehicleMovementLog.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/TollLocationHistory.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserBalance.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/TollOperator.hbm.xml" />
+				
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/TollLocationHistory.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/TollPrice.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserVehicle.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/TollPriceHistory.hbm.xml" />
+		
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/VehicleType.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/User.hbm.xml" />	
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/Component.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserBalance.hbm.xml" />	
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/CcType.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserBalanceLog.hbm.xml" />	
+		
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/TollPrice.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserHistory.hbm.xml" />
+			
+		
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserHistory.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserNotification.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/OwnerType.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserNotificationSettings.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/ServicePlan.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserNotificationType.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserType.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserPaymentDetail.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/TollOperator.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserPaymentDetailHistory.hbm.xml" />
+		
+		
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/TollPriceHistory.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserService.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/Client.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserType.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/UserVehicleHistory.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserVehicle.hbm.xml" />
+			
 		<mapping
-			resource="com/mobisols/tollpayments/hibernate/PaymentTransaction.hbm.xml" />
+			resource="com/mobisols/tollpayments/hibernate/mapping/UserVehicleHistory.hbm.xml" />	
+			
+		<mapping
+			resource="com/mobisols/tollpayments/hibernate/mapping/VehicleMovementLog.hbm.xml" />
+			
+		<mapping
+			resource="com/mobisols/tollpayments/hibernate/mapping/VehicleTollUsage.hbm.xml" />
+			
+		<mapping
+			resource="com/mobisols/tollpayments/hibernate/mapping/VehicleType.hbm.xml" />
+			
+		<mapping
+			resource="com/mobisols/tollpayments/hibernate/mapping/VmlType.hbm.xml" />	
+			
 
 	</session-factory>
 

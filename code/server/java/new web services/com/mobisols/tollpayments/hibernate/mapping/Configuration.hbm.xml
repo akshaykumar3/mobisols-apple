@@ -10,13 +10,13 @@
             <id name="configId" type="java.lang.Integer">
                 <column name="config_id" />
             </id>
-            <property name="compVersionId" type="java.lang.Integer" access="property">
+            <property name="compVersionId" type="java.lang.Integer" >
                 <column name="comp_version_id" />
             </property>
-            <property name="key" type="java.lang.String" access="field">
+            <property name="key" type="java.lang.String" >
                 <column name="key" length="45" />
             </property>
-            <property name="value" type="java.lang.String" access="field">
+            <property name="value" type="java.lang.String">
                 <column name="value" length="1000" />
             </property>
             <property name="udf1" type="java.lang.String">
@@ -49,8 +49,6 @@
             <property name="flag5" type="java.lang.String">
                 <column name="flag5" length="1" />
             </property>
-            <component name="ChangeAudit"
-            class="com.mobisols.tollpayments.hibernate.component.ChangeAudit">
             <property name="createdOn" type="java.sql.Timestamp">
                 <column name="created_on" length="19" />
             </property>
@@ -60,18 +58,14 @@
             <property name="lastModifiedBy" type="java.lang.Integer">
                 <column name="last_modified_by" />
             </property>
-            </component>
             
-            <many-to-one name="ConfigurationComponentVersion"
+            <many-to-one name="componentVersion"
 			class="com.mobisols.tollpayments.hibernate.entity.ComponentVersion"
 			column="comp_version_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
 			
-	    <many-to-one name="ConfigurationUser"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
-			column="last_modified_by"
-			cascade="save-update"
-			unique="true"/>
     </class>
 </hibernate-mapping>

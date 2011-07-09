@@ -75,27 +75,29 @@
             <property name="status" type="java.lang.String">
                 <column name="status" length="45" />
             </property>
-            <many-to-one name="VehicleMovementLogTollLocation"
+            <many-to-one name="tollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
 				column="toll_location_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>
 				
-			<one-to-one name="VehicleMovementLogVehicleTollUsage"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
-            property-ref="VehicleTollUsageVehicleMovementLog"
-            fetch="join" cascade="all" />
             
-            <many-to-one name="VehicleMovementLogVmlType"
+            <many-to-one name="vmlType"
                 class="com.mobisols.tollpayments.hibernate.entity.VmlType"
 				column="vml_type_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>
 				
-			<many-to-one name="VehicleMovementLogUserVehicleHistory"
+			<many-to-one name="userVehicleHistory"
                 class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory"
 				column="uvh_id"
 				cascade="save-update"
+				insert="false"
+			update="false"
 				unique="true"/>
             	
             <filter name="clientIdFilter" condition=":clientId = client_id"/>

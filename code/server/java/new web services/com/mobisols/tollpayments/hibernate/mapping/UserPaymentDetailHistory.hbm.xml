@@ -112,17 +112,14 @@
                 <column name="client_id" />
             </property>
             
-            <many-to-one name="UserPaymentDetailHistoryUserPaymentDetail"
+            <many-to-one name="userPaymentDetail"
 			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
 			column="upd_id"
 			cascade="save-update"
+			insert="false"
+			update="false"
 			unique="true"/>
 			
-			<one-to-one name="UserPaymentDetailHistoryPaymentTransaction"
-             class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
-             property-ref="PaymentTransactionUserPaymentDetailHistory"
-             fetch="join"
-             lazy="no-proxy"/>
              
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
