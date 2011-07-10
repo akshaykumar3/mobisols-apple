@@ -26,8 +26,8 @@ function requestHeartBeat(){
 	{
 		
 		var request_jsobject= {
-			latitude: geo.latitude,
-			longitude: geo.longitude,
+			latitude: gtp.geo.latitude,
+			longitude: gtp.geo.longitude,
 			direction: 0,
 			timestamp: new Date()
 		}
