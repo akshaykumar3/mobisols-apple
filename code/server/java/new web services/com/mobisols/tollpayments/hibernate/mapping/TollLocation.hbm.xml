@@ -97,10 +97,11 @@
             <many-to-one name="tollOperator"
 			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
 			column="toll_operator_id"
+			property-ref="tollOperatorId"
 			cascade="save-update"
 			insert="false"
 			update="false"
-			unique="true"/>
+			/>
             
             
             

@@ -1,7 +1,10 @@
 package com.mobisols.tollpayments.webservice;
 
 import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -40,15 +43,23 @@ public class HeartBeatImpl implements HeartBeat {
 		VehicleMovementLog vml=new VehicleMovementLog();
 		Criteria crit=s.createCriteria(User.class);
 		crit.add(Restrictions.eq("userName",user ));
-		crit.add(Restrictions.eq("clientId", 1));
 		List<User> u=crit.list();
 		if(u.isEmpty())
 			return null;
-		crit=s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("userId", u.get(0).getUserId()));
-		crit.add(Restrictions.eq("isActive", "1"));
-		List<UserVehicle> uv=crit.list();
+		Set<UserVehicle> uv=u.get(0).getUserVehicles();
 		if(uv.isEmpty())
+			return null;
+		UserVehicle vehicle=null;
+		for(Iterator i=(Iterator) uv.iterator();i.hasNext();)
+		{
+			UserVehicle v=(UserVehicle) i.next();
+			if(v.getIsActive()=="y")
+			{
+				vehicle=v;
+				break;
+			}
+		}
+		if(vehicle==null)
 			return null;
 		vml.setClientId(1);
 		vml.setCreatedOn(new MyUtils().getCurrentTimeStamp());
@@ -67,7 +78,7 @@ public class HeartBeatImpl implements HeartBeat {
 		vml.setLatitude(hb.getLatitude());
 		vml.setLongitude(hb.getLongitude());
 		vml.setTimestamp(hb.getTimeStamp());
-		vml.setUvhId(uv.get(0).getUserVehicleId());
+		vml.setUvhId(vehicle.getUserVehicleId());
 		crit=s.createCriteria(VmlType.class);
 		crit.add(Restrictions.eq("name", hb.getVmlType()));
 		List<VmlType> vt=crit.list();
@@ -76,8 +87,10 @@ public class HeartBeatImpl implements HeartBeat {
 		vml.setVmlTypeId(vt.get(0).getVmlTypeId());
 		s.save(vml);
 		tx.commit();
-		hbr.setStatus("success");
-		hbr.setNextTimeStamp(new Timestamp(hb.getTimeStamp().getTime()+10*60*1000));
+		hbr.getHash().put("status", "success");
+		hbr.getHash().put("nextTimeStamp",new MyUtils().toString(new Timestamp(hb.getTimeStamp().getTime()+10*60*1000)));
+		hbr.getHash().put("distance", "200.000");
+		hbr.getHash().put("timeInterval", "3600");
 		String res= j.getJSON("", "", hbr);
 		HibernateSessionFactory.closeSession();
 		return res;

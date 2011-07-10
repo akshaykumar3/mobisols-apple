@@ -44,6 +44,14 @@ public class BalanceInfoImpl implements BalanceInfo {
 			return;
 		this.setCurrentBalance((ub.getBalance()));
 		this.setBalanceId(ub.getUbalId());
+		if(ub.getUser().getUserType()==null)
+		{
+			System.out.println("UserType is null");
+		}
+		else
+		{
+			System.out.println("UserType is not null");
+		}
 		this.setMinBalance(ub.getUser().getUserType().getMinBalance());
 		this.balancelog=new LinkedList<BalanceLog>();
 		Set<UserBalanceLog> ubl=ub.getUserBalanceLog();

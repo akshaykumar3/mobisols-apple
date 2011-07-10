@@ -1,14 +1,19 @@
 package com.mobisols.tollpayments.webservice;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import org.hibernate.Criteria;
+
 import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
+import com.mobisols.tollpayments.hibernate.entity.TollLocation;
 
 @Path("/TollDetailsList")
 public class TollDetailsListImpl implements TollDetailsList{
@@ -20,13 +25,19 @@ private List<TollDetails> tollDetailsList;
 		
 	}
 	
-	public TollDetailsListImpl(double latitude1,double longitude1,double latitude2,double logitude2){
+	public TollDetailsListImpl(double latitude1,double longitude1,double latitude2,double longitude2){
 		//TODO write an algorithm to find the toll details in the bounds
 		//and populate the list
-		int id=0;
 		System.out.println("creating a new list");
 		this.tollDetailsList=new LinkedList<TollDetails>();
-		this.tollDetailsList.add((TollDetails) new TollDetailsImpl(id));
+		Criteria crit=HibernateSessionFactory.getSession().createCriteria(TollLocation.class);
+		List<TollLocation> tollList=crit.list();
+		for(Iterator<TollLocation> it= tollList.iterator();it.hasNext();)
+		{
+			TollLocation t=it.next();
+			if(t.getLatitude()>=latitude2 && t.getLatitude() <=latitude1 && t.getLongitude()>=longitude2 && t.getLongitude() <=longitude1)
+				this.tollDetailsList.add((TollDetails) new TollDetailsImpl(t.getTollLocationId()));
+		}
 		System.out.println("got the object and added it to the list");
 	}
 	

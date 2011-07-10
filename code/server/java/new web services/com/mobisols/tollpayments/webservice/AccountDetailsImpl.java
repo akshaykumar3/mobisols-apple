@@ -58,6 +58,7 @@ public class AccountDetailsImpl implements AccountDetails{
 		  {
 			  User insurance=(User)i1.next();
 			  System.out.println("ID: " + insurance.getUserId());
+			  System.out.println("user name : "+insurance.getUserName());
 		  }
 		Criteria crit=s.createCriteria(User.class);
 		//crit.createAlias("id", "u");
