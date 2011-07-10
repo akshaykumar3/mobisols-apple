@@ -4,6 +4,7 @@ controller=Ext.regController("clickButton",{
 		console.log('Is phone? '+Ext.is.Phone);
 		console.log('Is android? '+Ext.is.Android);
 		console.log('Is desktop? '+Ext.is.Desktop);
+		console.log('Date: '+new Date());
 	}
 })
 

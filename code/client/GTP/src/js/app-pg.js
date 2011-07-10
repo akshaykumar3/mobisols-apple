@@ -1,12 +1,8 @@
 /* 
  * Author: A. Pradeep
- * Last Modified: July 09,2011
- * Added Login Page and Registration Page
- * Changed from setting up a page to Sencha application
- * Defined the namespace 
- * Defined controllers for different actions.
- * Added Device Registration.
- *
+ * Last Modified: July 10,2011
+ * Extension to app.js
+ * Used Phone Gap API
  */
 
 Ext.regApplication({
@@ -15,21 +11,21 @@ Ext.regApplication({
     glossOnIcon: false,
     tabletStartupScreen: 'resources/images/tablet_startup.png',
     phoneStartupScreen: 'resources/images/phone_startup.png',
-    isPhoneGapSenchaReady: false,
     responseFetched: true,
     launch: function(){
-    	console.log('application is launched');
-    	this.launched=true;
-    	this.registerDevice({
-    		uuid: '312m12kl3123;h12k312lkj312312352342fa',
-    		type: this.detectDeviceType()
-    	})
+    	console.log('Sencha application is launched');
+    	this.isSenchaReady=true;
+    	this.mainLaunch();
     },
-    mainLaunch: function(deviceDetails){
-    	if(this.launched) //&& device)
-    	{
-    		console.log(this.isPhoneGapSenchaReady);
-    	}
+    mainLaunch: function(){
+    	if(!this.isSenchaReady && !device)
+    	return;
+    	// Both sencha and phonegap are ready.
+    	// Can use phonegap API here.
+    	this.registerDevice({
+    		uuid: device.uuid,
+    		type: this.deviceType()
+    	})
     },
     registerDevice: function(deviceDetails) {
     	console.log('registerdevice is invoked');	
@@ -56,7 +52,7 @@ Ext.regApplication({
     		emailID: 'harish@mobisols.com',
     	});
     },
-    detectDeviceType: function(){
+    deviceType: function(){
     	if(Ext.is.iPhone)
     	return 'iphone'
     	else if(Ext.is.Android)
@@ -1083,14 +1079,15 @@ gtp.controller=Ext.regController("load",{
 						console.log('centerchange event is triggered');
 						// responseFetched variable is used to prevent multiple ajax calls.
 						// since by scrolling the map this event is fired multiple times. 
-						if(gtp.responseFetched && (gtp.geo.latitude || gtp.geo.longitude))
+						
+					  	if(gtp.responseFetched && (gtp.geo.latitude || gtp.geo.longitude))
 						{
 							gtp.responseFetched=false;
 							var bounds = map.getBounds();
 							console.log(bounds);						
 							var northEast = bounds.getNorthEast();
 						  	var southWest = bounds.getSouthWest();
-					  	
+						  	
 							Ext.Ajax.request({
 								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
 								params: {
@@ -1117,6 +1114,7 @@ gtp.controller=Ext.regController("load",{
 											iconpath='resources/images/uncovered.png';
 											markertitle='uncovered';
 										}
+									
 										new google.maps.Marker({
 											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].longt),
 											title: markertitle,
@@ -1124,14 +1122,11 @@ gtp.controller=Ext.regController("load",{
 											map: map
 										});
 									}
-									
-									// Variable is released here.
 									gtp.responseFetched=true;
 								},
 								failure: function(response){
-									console.log('viewport request failed with status '+response.status);
-									// Variable is released here.
-									gtp.responseFetched=true;								
+									gtp.responseFetched=true;
+									console.log('viewport request failed with status '+response.status);								
 								}
 							})
 						}

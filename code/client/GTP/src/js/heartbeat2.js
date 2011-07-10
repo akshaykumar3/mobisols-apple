@@ -1,4 +1,4 @@
-var markernotset=true,count=0,delay=10000;
+var count=0,delay=10000;
 
 
 function requestHeartBeat(){
