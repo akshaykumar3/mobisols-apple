@@ -20,7 +20,7 @@ Ext.regApplication({
     mainLaunch: function(){
     	if(!this.isSenchaReady && !device)
     	return;
-    	// Both sencha and phonegap are ready.
+    	// Both sencha and phonegap are ready now.
     	// Can use phonegap API here.
     	this.registerDevice({
     		uuid: device.uuid,
@@ -28,13 +28,14 @@ Ext.regApplication({
     	})
     },
     registerDevice: function(deviceDetails) {
-    	console.log('registerdevice is invoked');	
+    	console.log('registerdevice is invoked');
+		console.log('Device details '+deviceDetails);
     	// Do the device registration here.
     	Ext.Ajax.request({
     		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
     		params: {
-    				uuid: deviceDetails.uuid,
-    				type: deviceDetails.type
+				uuid: deviceDetails.uuid,
+				type: deviceDetails.type
     		},
     		success: function(response){
     			console.log('DevReg request Success');
@@ -196,7 +197,7 @@ gtp.controller=Ext.regController("load",{
 	},
 	view: function(){
 		console.log('i am from controller view action');
-		var mylocation_marker, markernotset=true;
+		var markernotset=true;
 		
 		gtp.geo = new Ext.util.GeoLocation({
 		    autoUpdate: false,
@@ -206,7 +207,7 @@ gtp.controller=Ext.regController("load",{
 		            console.log('New latitude: ' + geo.latitude + 'New Longitude: ' + geo.longitude);
 		            gotNewLocation = true;
 		            if(markernotset){
-						mylocation_marker=new google.maps.Marker({
+						gtp.mylocation_marker=new google.maps.Marker({
 							position: new google.maps.LatLng(geo.latitude,geo.longitude),
 							title: 'U are here right now',
 							icon: 'resources/images/blue_dot.png',
@@ -215,7 +216,7 @@ gtp.controller=Ext.regController("load",{
 						markernotset=false;
 					}
 					else if(geo.latitude || geo.longitude){
-						mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+						gtp.mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					}
 					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
@@ -243,8 +244,7 @@ gtp.controller=Ext.regController("load",{
 
 		gtp.geo.updateLocation();
 		
-		console.log('Page is setup ');
-		
+		// Creating a Model instance followed by adding it to a store.
 		var car_model_instance= Ext.ModelMgr.create({
 			state: 'RF',
 			reg: 'S23WP',
