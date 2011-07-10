@@ -15,4 +15,16 @@ public class MyUtils {
 		return null;
 	}
 
+
+	public Object toString(Date timeStamp) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Timestamp toTimeStamp(Object string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

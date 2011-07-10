@@ -26,12 +26,15 @@ public class TollDetailsImpl {
 		Criteria crit=s.createCriteria(TollLocation.class);
 		crit.add(Restrictions.eq("tollLocationId", tollid));
 		TollLocation tl=(TollLocation) crit.uniqueResult();
-		this.setTollOperator(tl.getTollOperator().getName());
-		this.setCity(tl.getCity());
-		this.setState(tl.getState());
-		this.setLatitude(tl.getLatitude());
-		this.setLongitude(tl.getLongitude());
-		this.setZip(tl.getZip());
+		if(tl!=null)
+		{
+			this.setTollOperator(tl.getTollOperator().getName());
+			this.setCity(tl.getCity());
+			this.setState(tl.getState());
+			this.setLatitude(tl.getLatitude());
+			this.setLongitude(tl.getLongitude());
+			this.setZip(tl.getZip());
+		}
 	}
 	public String getTollOperator() {
 		return tollOperator;

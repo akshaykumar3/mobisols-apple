@@ -61,6 +61,7 @@
             <many-to-one name="user"
 			class="com.mobisols.tollpayments.hibernate.entity.User"
 			column="user_id"
+			property-ref="userId"
 			insert="false"
 			update="false"
 			cascade="save-update"
