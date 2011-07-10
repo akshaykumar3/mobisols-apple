@@ -15,17 +15,23 @@ Ext.regApplication({
     glossOnIcon: false,
     tabletStartupScreen: 'resources/images/tablet_startup.png',
     phoneStartupScreen: 'resources/images/phone_startup.png',
+    isPhoneGapSenchaReady: false,
     launch: function(){
     	console.log('application is launched');
-    	gtp.registerDevice({
+    	this.launched=true;
+    	this.registerDevice({
     		uuid: '312m12kl3123;h12k312lkj312312352342fa',
-    		type: gtp.detectDeviceType()
+    		type: this.detectDeviceType()
     	})
-    }, 
+    },
+    mainLaunch: function(deviceDetails){
+    	if(this.launched) //&& device)
+    	{
+    		console.log(this.isPhoneGapSenchaReady);
+    	}
+    },
     registerDevice: function(deviceDetails) {
-    	console.log('gtp is launched');
-    	console.log('UUID '+deviceDetails.uuid);
-    	console.log('Device type '+deviceDetails.type);
+    	console.log('registerdevice is invoked');	
     	// Do the device registration here.
     	Ext.Ajax.request({
     		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
@@ -44,7 +50,7 @@ Ext.regApplication({
     			console.log('DevReg request failed with response '+response.status);
     		}
     	});
-    	gtp.launchLoginPage({
+    	this.launchLoginPage({
     		user: 'known',
     		emailID: 'harish@mobisols.com',
     	});
@@ -94,7 +100,7 @@ Ext.regApplication({
 gtp.controller=Ext.regController("load",{
 	show: function(options) {
 		console.log('i am from controller show action');
-		console.log('Exists ?'+options.exists);
+		console.log('Exists ? '+options.exists);
 		if(options.exists)
 		console.log(options.userName);
 		
