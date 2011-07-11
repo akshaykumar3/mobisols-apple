@@ -8,8 +8,12 @@ Ext.setup({
 		};
 
 		Ext.Ajax.request({
-			url: 'http://localhost:6001/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
+			url: 'http://mbtest.dyndns.dk:6003/webservices/services/AccountDetails',
 			method: "GET",
+			params: {
+				user_name: 'harish@mobisols.com',
+				client_id: 1
+			},
 	    	success: function(response){
 	      		console.log(response.responseText);
 	      		var obj=Ext.decode(response.responseText);

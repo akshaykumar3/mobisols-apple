@@ -12,6 +12,7 @@ Ext.regApplication({
     tabletStartupScreen: 'resources/images/tablet_startup.png',
     phoneStartupScreen: 'resources/images/phone_startup.png',
     responseFetched: true,
+	isSenchaReady: false,
     launch: function(){
     	console.log('Sencha application is launched');
     	this.isSenchaReady=true;

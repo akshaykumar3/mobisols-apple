@@ -2,10 +2,10 @@ Ext.setup({
 	onReady: function(){
 		
 		var reqobj={
-				latitude1: 21.0,
-				latitude2: 22.0,
-				longitude1: 23.0,
-				longitude2:24.0
+				latitude1: 34.83660702062764,
+				latitude2: -113.78949585253906,
+				longitude1: 31.94776694234097,
+				longitude2: -120.82074585253906
 			};
 		
 		Ext.Ajax.request({
