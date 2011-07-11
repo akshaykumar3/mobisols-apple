@@ -5,7 +5,7 @@
  * Login Authentication.
  * 
  * Limitations: Adds Markers on top of the existing markers.
- * 
+ * Used static deviced Id and compass heading
  */
 
 Ext.regApplication({
@@ -19,37 +19,18 @@ Ext.regApplication({
     launch: function(){
     	console.log('application is launched');
     	console.log('Today '+this.today);
-    	this.launched=true;
-    	this.registerDevice({
+    	this.launchLoginPage({
     		uuid: '312m12kl3123;h12k312lkj312312352342fa',
     		type: this.detectDeviceType()
-    	})
+    	});
     },
-    registerDevice: function(deviceDetails) {
-    	console.log('registerdevice is invoked');	
-    	// Do the device registration here.
-    	Ext.Ajax.request({
-    		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
-    		params: {
-    				uuid: deviceDetails.uuid,
-    				type: deviceDetails.type,
-    				timestamp: new Date()
-    		},
-    		success: function(response){
-    			console.log('DevReg request Success');
-    			console.log('DevReg response '+response.responseText);
-    			var resobj=Ext.encode(response.responseText);
-    			console.log('DevReg response object '+resobj);
-    			// if device registration is succeeded login page will be launched from here
-    		},
-    		failure: function(response){
-    			console.log('DevReg request failed with response '+response.status);
-    		}
-    	});
-    	this.launchLoginPage({
-    		user: 'known',
-    		emailID: 'harish@mobisols.com',
-    	});
+    launchLoginPage: function(options){
+    	// Login Page is launched here
+    	Ext.dispatch({
+            controller: 'load',
+            action    : 'show',
+            deviceDetails: options
+	    });
     },
     detectDeviceType: function(){
     	if(Ext.is.iPhone)
@@ -64,31 +45,6 @@ Ext.regApplication({
     	return 'ipad'
     	else if(Ext.is.Desktop)
     	return 'desktop'
-    },
-    launchLoginPage: function(options){
-    	// Login Page is launched here
-    	console.log('login page is launched');
-    	console.log(options);
-    	console.log('user '+options.user);
-    	console.log('user '+options.emailID);
-    	if(options.user=='known')
-    	{
-    		console.log('if condition known user')
-    		Ext.dispatch({
-	            controller: 'load',
-	            action    : 'show',
-	            exists: true, 
-	            userName: options.emailID
-	    	});
-	    }
-	    else
-	    {
-	    	Ext.dispatch({
-	    		controller: 'load',
-	    		action: 'show',
-	    		exists: false
-	    	})
-	    }
     }
 });
 
@@ -97,9 +53,6 @@ Ext.regApplication({
 gtp.controller=Ext.regController("load",{
 	show: function(options) {
 		console.log('i am from controller show action');
-		console.log('Exists ? '+options.exists);
-		if(options.exists)
-		console.log(options.userName);
 		
 		gtp.views.loginPage=new Ext.Panel({
 			fullscreen: true,
@@ -115,8 +68,7 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'emailfield',
 					border: '10 5 3 10',
-					id: 'lpemailid',
-					value: options.exists ? options.userName : ''
+					id: 'lpemailid'
 				},{
 					html: 'password:',
 					align: 'left'
@@ -875,7 +827,7 @@ gtp.controller=Ext.regController("load",{
 				iconCls: 'favorites',
 				//badgeText:'4',
 				//activeItem: '1',
-				layout: 'auto',
+				layout: 'card',
 				xtype: 'panel',
 				id: 'mycars',
 				/*layout: Ext.is.Phone ? 'fit' : {
