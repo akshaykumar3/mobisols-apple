@@ -75,6 +75,12 @@
             <property name="status" type="java.lang.String">
                 <column name="status" length="45" />
             </property>
+            <property name="tollSessionId" type="java.lang.String">
+                <column name="toll_session_id" length="1000" />
+            </property>
+            <property name="distance" type="java.lang.Double">
+                <column name="distance" />
+            </property>
             <many-to-one name="tollLocation"
                 class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
 				column="toll_location_id"

@@ -36,6 +36,8 @@ public class VehicleMovementLog implements java.io.Serializable {
 	private TollLocation tollLocation;
 	private VmlType vmlType;
 	private UserVehicleHistory userVehicleHistory;
+	private String tollSessionId;
+	private Double distance;
 
 	// Constructors
 
@@ -300,6 +302,22 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getTollSessionId() {
+		return tollSessionId;
+	}
+
+	public void setTollSessionId(String tollSessionId) {
+		this.tollSessionId = tollSessionId;
+	}
+
+	public Double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
 	}
 
 	public boolean equals(Object other) {
