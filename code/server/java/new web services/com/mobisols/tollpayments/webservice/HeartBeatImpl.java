@@ -1,34 +1,39 @@
 package com.mobisols.tollpayments.webservice;
 
+import java.awt.Point;
 import java.sql.Timestamp;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import com.mobisols.tollpayments.hibernate.entity.Device;
 import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.entity.User;
-import com.mobisols.tollpayments.hibernate.entity.UserVehicle;
 import com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog;
 import com.mobisols.tollpayments.hibernate.entity.VmlType;
+import com.mobisols.tollpayments.hibernate.entity.TollLocation;
 import com.mobisols.tollpayments.myutils.MyUtils;
+import com.mobisols.tollpayments.myutils.TollLocationUtil;
+import com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory;
 
 @Path("/HeartBeat")
 public class HeartBeatImpl implements HeartBeat {
+	private String deviceId;
+	private String deviceType;
 	private Timestamp timeStamp;
 	private Double latitude;
 	private Double longitude;
 	private Double angle;
 	private String vmlType;
+	private String tollSessionId;
+	
 	//TODO update vml type in post method
 	public HeartBeatImpl(){
 		
@@ -41,26 +46,12 @@ public class HeartBeatImpl implements HeartBeat {
 		Session s= HibernateSessionFactory.getSession();
 		Transaction tx=s.beginTransaction();
 		VehicleMovementLog vml=new VehicleMovementLog();
-		Criteria crit=s.createCriteria(User.class);
-		crit.add(Restrictions.eq("userName",user ));
-		List<User> u=crit.list();
-		if(u.isEmpty())
-			return null;
-		Set<UserVehicle> uv=u.get(0).getUserVehicles();
-		if(uv.isEmpty())
-			return null;
-		UserVehicle vehicle=null;
-		for(Iterator i=(Iterator) uv.iterator();i.hasNext();)
-		{
-			UserVehicle v=(UserVehicle) i.next();
-			if(v.getIsActive()=="y")
-			{
-				vehicle=v;
-				break;
-			}
-		}
-		if(vehicle==null)
-			return null;
+		Criteria crit=s.createCriteria(Device.class);
+		crit.add(Restrictions.eq("deviceUuid",hb.getDeviceId() ));
+		crit.add(Restrictions.eq("deviceType", hb.getDeviceType()));
+		Device d=(Device) crit.uniqueResult();
+		MyUtils mu=new MyUtils();
+		
 		vml.setClientId(1);
 		vml.setCreatedOn(new MyUtils().getCurrentTimeStamp());
 		vml.setFlag1(null);
@@ -73,12 +64,52 @@ public class HeartBeatImpl implements HeartBeat {
 		vml.setUdf3(null);
 		vml.setUdf4(null);
 		vml.setUdf5(null);
-		vml.setLastModifiedBy(-1);
-		vml.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
+		vml.setLastModifiedBy(d.getUserId());
+		vml.setLastModifiedOn(mu.getCurrentTimeStamp());
 		vml.setLatitude(hb.getLatitude());
 		vml.setLongitude(hb.getLongitude());
 		vml.setTimestamp(hb.getTimeStamp());
-		vml.setUvhId(vehicle.getUserVehicleId());
+		
+		TollLocationUtil tlu=new TollLocationUtil();
+		Point p=new Point();
+		p.setLocation(hb.getLatitude(), hb.getLongitude());
+		Point np=tlu.getNearestToll(p);
+		double dist = tlu.getDistance(p, np);
+		vml.setDistance(dist);
+		
+		String qu="from TollLocation tl where tl.latitude=:lat,tl.longitude=:long";
+		Query qury1=s.createQuery(qu);
+		qury1.setParameter("lat", np.getX());
+		qury1.setParameter("long", hb.getLongitude());
+		TollLocation t=(TollLocation) qury1.uniqueResult();
+		vml.setTollLocationId(t.getTollLocationId());
+		
+		String q="from UserVehicleHistory uvh order by uvh.startDate dsc";
+		Query query=s.createQuery(q);
+		List<UserVehicleHistory> uvh=query.list();
+		vml.setUvhId(uvh.get(0).getUvhId());
+		
+		String tollSessionId;
+		int index=hb.getTollSessionId().indexOf('#');
+		if(index==-1)
+		{
+			tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + mu.getCurrentTimeStamp();
+		}
+		else
+		{
+			int tollId=Integer.getInteger(hb.getTollSessionId().substring(0,index).trim());
+			if(tollId==t.getTollLocationId())
+			{
+				tollSessionId=hb.getTollSessionId();
+			}
+			else
+			{
+				tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + mu.getCurrentTimeStamp();
+			}
+		}
+		vml.setTollSessionId(tollSessionId);
+		
+		String substr=hb.getTollSessionId().substring(0, index);
 		crit=s.createCriteria(VmlType.class);
 		crit.add(Restrictions.eq("name", hb.getVmlType()));
 		List<VmlType> vt=crit.list();
@@ -88,14 +119,26 @@ public class HeartBeatImpl implements HeartBeat {
 		s.save(vml);
 		tx.commit();
 		hbr.getHash().put("status", "success");
-		hbr.getHash().put("nextTimeStamp",new MyUtils().toString(new Timestamp(hb.getTimeStamp().getTime()+10*60*1000)));
+		hbr.getHash().put("timeInterval",Double.toString(10*60));
 		hbr.getHash().put("distance", "200.000");
-		hbr.getHash().put("timeInterval", "3600");
+		hbr.getHash().put("tollSessionId", tollSessionId);
 		String res= j.getJSON("", "", hbr);
 		HibernateSessionFactory.closeSession();
 		return res;
 	}
 
+	public String getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
+	public String getDeviceType() {
+		return deviceType;
+	}
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
+	}
 	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
@@ -127,4 +170,10 @@ public class HeartBeatImpl implements HeartBeat {
 		return vmlType;
 	}
 	
+	public String getTollSessionId() {
+		return tollSessionId;
+	}
+	public void setTollSessionId(String tollSessionId) {
+		this.tollSessionId = tollSessionId;
+	}
 }

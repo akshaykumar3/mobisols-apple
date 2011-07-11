@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.webservice;
 
-import java.util.Date;
+import java.awt.Point;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.ws.rs.FormParam;
@@ -10,81 +11,173 @@ import javax.ws.rs.Path;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import com.mobisols.tollpayments.hibernate.entity.Device;
 import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
-import com.mobisols.tollpayments.hibernate.entity.User;
+import com.mobisols.tollpayments.hibernate.entity.TollLocation;
 import com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory;
 import com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog;
+import com.mobisols.tollpayments.hibernate.entity.VmlType;
 import com.mobisols.tollpayments.myutils.MyUtils;
+import com.mobisols.tollpayments.myutils.TollLocationUtil;
 
 @Path("/PeriodicHeartBeat")
 public class PeriodicHeartBeatImpl implements PeriodicHeartBeat {
 	
-	private double latitude;
-	private double longitude;
-	private Date timeStamp;
+	private String deviceId;
+	private String deviceType;
+	private Timestamp timeStamp;
+	private Double latitude;
+	private Double longitude;
+	private Double angle;
+	private String vmlType;
+	private String tollSessionId;
 	
 	public PeriodicHeartBeatImpl(){
 		
 	}
 
-	@POST
-	public String postPeriodicHeartBeat(@FormParam("json") String json,@FormParam("user_name")String user){
-		JsonConverter jc=new JsonConverterImpl();
-		MyUtils mu=new MyUtils();
-		PeriodicHeartBeat phb = (PeriodicHeartBeat) jc.getObject(json, "com.mobisols.tollpayments.PeriodicHeartBeatImpl");
-		HeartBeatResponse hbr=new HeartBeatResponseImpl();
-		Session s= HibernateSessionFactory.getSession();
-		Criteria crit=s.createCriteria(User.class);
-		crit.add(Restrictions.eq("userName", user));
-		List<User> u=crit.list();
-		s.beginTransaction();
-		VehicleMovementLog vml=new VehicleMovementLog();
-		vml.setClientId(1);
-		vml.setCreatedOn(mu.getCurrentTimeStamp());
-		vml.setLastModifiedBy(u.get(0).getUserId());
-		vml.setLastModifiedOn(new MyUtils().getCurrentTimeStamp());
-		vml.setLatitude(phb.getLatitude());
-		vml.setLongitude(phb.getLongitude());
-		vml.setStatus("n");
-		vml.setTimestamp(mu.toTimeStamp(mu.toString(timeStamp)));
-		vml.setTollLocationId(-1);
-		String query="";
-		Query q=s.createQuery(query);
-		vml.setUvhId(((UserVehicleHistory)q.list().get(0)).getUvhId());
-		vml.setVmlTypeId(1);
-		hbr.getHash().put("notificationId", "1");
-		hbr.getHash().put("notification", "This notification is sent from periodic heart beat");
-		String request="";
-		String status="";
-		String response=jc.getJSON(request, status, hbr);
-		HibernateSessionFactory.closeSession();
-		return response;
-	}
 	
-	public double getLatitude() {
-		return latitude;
+	@POST
+	public String postPeriodicHeartBeat(@FormParam("user_name")String user,@FormParam("json")String json) {
+		JsonConverter j=new JsonConverterImpl();
+		HeartBeat hb=(HeartBeat) j.getObject(json, "com.mobisols.tollpayments.webservice.HeartBeatImpl");
+		HeartBeatResponseImpl hbr = new HeartBeatResponseImpl();
+		Session s= HibernateSessionFactory.getSession();
+		Transaction tx=s.beginTransaction();
+		
+		VehicleMovementLog vml=new VehicleMovementLog();
+		Criteria crit=s.createCriteria(Device.class);
+		crit.add(Restrictions.eq("deviceUuid",hb.getDeviceId() ));
+		crit.add(Restrictions.eq("deviceType", hb.getDeviceType()));
+		Device d=(Device) crit.uniqueResult();
+		MyUtils mu=new MyUtils();
+		
+		vml.setClientId(1);
+		vml.setCreatedOn(new MyUtils().getCurrentTimeStamp());
+		vml.setFlag1(null);
+		vml.setFlag2(null);
+		vml.setFlag3(null);
+		vml.setFlag4(null);
+		vml.setFlag5(null);
+		vml.setUdf1(null);
+		vml.setUdf2(null);
+		vml.setUdf3(null);
+		vml.setUdf4(null);
+		vml.setUdf5(null);
+		vml.setLastModifiedBy(d.getUserId());
+		vml.setLastModifiedOn(mu.getCurrentTimeStamp());
+		vml.setLatitude(hb.getLatitude());
+		vml.setLongitude(hb.getLongitude());
+		vml.setTimestamp(hb.getTimeStamp());
+		
+		TollLocationUtil tlu=new TollLocationUtil();
+		Point p=new Point();
+		p.setLocation(hb.getLatitude(), hb.getLongitude());
+		Point np=tlu.getNearestToll(p);
+		double dist = tlu.getDistance(p, np);
+		vml.setDistance(dist);
+		
+		String qu="from TollLocation tl where tl.latitude=:lat,tl.longitude=:long";
+		Query qury1=s.createQuery(qu);
+		qury1.setParameter("lat", np.getX());
+		qury1.setParameter("long", hb.getLongitude());
+		TollLocation t=(TollLocation) qury1.uniqueResult();
+		vml.setTollLocationId(t.getTollLocationId());
+		
+		String q="from UserVehicleHistory uvh order by uvh.startDate dsc";
+		Query query=s.createQuery(q);
+		List<UserVehicleHistory> uvh=query.list();
+		vml.setUvhId(uvh.get(0).getUvhId());
+		
+		String tollSessionId;
+		int index=hb.getTollSessionId().indexOf('#');
+		if(index==-1)
+		{
+			tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + mu.getCurrentTimeStamp();
+		}
+		else
+		{
+			int tollId=Integer.getInteger(hb.getTollSessionId().substring(0,index).trim());
+			if(tollId==t.getTollLocationId())
+			{
+				tollSessionId=hb.getTollSessionId();
+			}
+			else
+			{
+				tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + mu.getCurrentTimeStamp();
+			}
+		}
+		vml.setTollSessionId(tollSessionId);
+		
+		String substr=hb.getTollSessionId().substring(0, index);
+		crit=s.createCriteria(VmlType.class);
+		crit.add(Restrictions.eq("name", hb.getVmlType()));
+		List<VmlType> vt=crit.list();
+		if(vt.isEmpty())
+			return null;
+		vml.setVmlTypeId(vt.get(0).getVmlTypeId());
+		s.save(vml);
+		tx.commit();
+		hbr.getHash().put("status", "success");
+		hbr.getHash().put("timeInterval",Double.toString(10*60));
+		hbr.getHash().put("distance", "200.000");
+		hbr.getHash().put("tollSessionId", tollSessionId);
+		hbr.getHash().put("notification", "This notification is sent from periodic heart beat");
+		String res= j.getJSON("", "", hbr);
+		HibernateSessionFactory.closeSession();
+		return res;
 	}
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public String getDeviceId() {
+		return deviceId;
 	}
-
-	public double getLongitude() {
-		return longitude;
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+	public String getDeviceType() {
+		return deviceType;
 	}
-
-	public Date getTimeStamp() {
+	public void setDeviceType(String deviceType) {
+		this.deviceType = deviceType;
+	}
+	public Timestamp getTimeStamp() {
 		return timeStamp;
 	}
-
-	public void setTimeStamp(Date timeStamp) {
+	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	public Double getAngle() {
+		return angle;
+	}
+	public void setAngle(Double angle) {
+		this.angle = angle;
+	}
+	public void setVmlType(String vmlType) {
+		this.vmlType = vmlType;
+	}
+	public String getVmlType() {
+		return vmlType;
+	}
+	
+	public String getTollSessionId() {
+		return tollSessionId;
+	}
+	public void setTollSessionId(String tollSessionId) {
+		this.tollSessionId = tollSessionId;
+	}
 }
