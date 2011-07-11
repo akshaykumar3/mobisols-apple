@@ -61,7 +61,11 @@ function requestHeartBeat(){
 		/*.... request for heart beat after some interval of time ....
 		 * -- the timeout can be cleared using the variable returned --- 
 		 */
-		retvalue = setTimeout("requestHeartBeat()",10000);
-		delay=delay+1000;
+		if(count < 5)
+		{
+			retvalue = setTimeout("requestHeartBeat()",delay);
+			delay=delay+5000;
+			count++;
+		}
 	}	
 }

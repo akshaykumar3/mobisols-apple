@@ -1,6 +1,10 @@
 /* 
  * Author: A. Pradeep
- * Last Modified: July 09,2011
+ * Last Modified: July 11,2011
+ * Modified to consume webservices instead mockwebservices.
+ * Login Authentication.
+ * 
+ * Limitations: Adds Markers on top of the existing markers.
  * 
  */
 
@@ -10,21 +14,16 @@ Ext.regApplication({
     glossOnIcon: false,
     tabletStartupScreen: 'resources/images/tablet_startup.png',
     phoneStartupScreen: 'resources/images/phone_startup.png',
-    isPhoneGapSenchaReady: false,
     responseFetched: true,
+    today: new Date(),
     launch: function(){
     	console.log('application is launched');
+    	console.log('Today '+this.today);
     	this.launched=true;
     	this.registerDevice({
     		uuid: '312m12kl3123;h12k312lkj312312352342fa',
     		type: this.detectDeviceType()
     	})
-    },
-    mainLaunch: function(deviceDetails){
-    	if(this.launched) //&& device)
-    	{
-    		console.log(this.isPhoneGapSenchaReady);
-    	}
     },
     registerDevice: function(deviceDetails) {
     	console.log('registerdevice is invoked');	
@@ -33,7 +32,8 @@ Ext.regApplication({
     		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
     		params: {
     				uuid: deviceDetails.uuid,
-    				type: deviceDetails.type
+    				type: deviceDetails.type,
+    				timestamp: new Date()
     		},
     		success: function(response){
     			console.log('DevReg request Success');
@@ -71,7 +71,6 @@ Ext.regApplication({
     	console.log(options);
     	console.log('user '+options.user);
     	console.log('user '+options.emailID);
-    	var existing;
     	if(options.user=='known')
     	{
     		console.log('if condition known user')
@@ -92,6 +91,8 @@ Ext.regApplication({
 	    }
     }
 });
+
+// Controllers are defined here.
 
 gtp.controller=Ext.regController("load",{
 	show: function(options) {
@@ -130,6 +131,7 @@ gtp.controller=Ext.regController("load",{
 						ui: 'round',
 						text: 'Sign in',
 						handler: function(){
+							console.log('Entered Password '+Ext.getCmp('lppassword').getValue());
 							if(!options.exists)
 							Ext.Msg.alert('User Name is required');
 							else if(!Ext.getCmp('lppassword').getValue())
@@ -138,6 +140,19 @@ gtp.controller=Ext.regController("load",{
 							}
 							else
 							{
+								Ext.Ajax.request({
+									url: 'http:mbtest.dyndns.dk:6004/webservices/services/',
+									params: {
+										user_name: Ext.getCmp('lpemailid'),
+										password: Ext.getCmp('lppassword')
+									},
+									success: function(response){
+										
+									},
+									failure: function(response){
+										
+									}
+								})
 								Ext.dispatch({
 									controller: 'load',
 									action: 'view'
@@ -246,16 +261,6 @@ gtp.controller=Ext.regController("load",{
 		    }
 		});
 
-		gtp.geo.updateLocation();
-		
-		console.log('Page is setup ');
-		
-		var car_model_instance= Ext.ModelMgr.create({
-			state: 'RF',
-			reg: 'S23WP',
-			type: 'truck'
-		},'Cars');
-		
 		paidTolls.insert(0,Ext.ModelMgr.create({
 			date: '1/11/2010',
 			amount: 2,
@@ -263,20 +268,13 @@ gtp.controller=Ext.regController("load",{
 			reg: '4GBSV'
 		},'PaidTolls'));
 
-		console.log(carsList.getAt(0).get('reg'));
-		console.log(TollsData.getAt(0).get('tolloperator'));
-		console.log(tolldetails.getAt(1).get('latitude'));
-
-		console.log(carsList.getAt(0).get('reg'));
-		console.log('count is '+carsList.getCount());
-
-		carsList.insert(0,car_model_instance);
-
-		console.log('count is now'+carsList.getCount());
-		console.log(carsList.getAt(0).get('reg'));
-
 		Ext.Ajax.request({
-	      url: 'http://mbtest.dyndns.dk:6004/com.mobisols.tollpayments.mockwebservices/services/AccountDetails',
+	      url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+	      method: 'GET',
+	      params: {
+	      	user_name: 'harish@mobisols.com',
+	      	client_id: 1
+	      },
 	      success: function(result) {
 	      	console.log('request is sent successfully');
 	      	
@@ -307,8 +305,8 @@ gtp.controller=Ext.regController("load",{
 	      	}
 	      	
 	      	Ext.getCmp('ccnumber').setValue(pay_details.cardNumber);
-	      	Ext.getCmp('cardtype').setValue(pay_details.cardType);
-	      	Ext.getCmp('expirydate').setValue(Date.parseDate(pay_details.expDate,'M j, Y g:i:s A'),true);
+	      	//Ext.getCmp('cardtype').setValue(pay_details.cardType);
+	      	Ext.getCmp('expirydate').setValue(Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),true);
 	      	Ext.getCmp('bankaccount').setValue(pay_details.bankAccount);
 	      	console.log('expiry date '+Date.parseDate(pay_details.expDate,'M j, Y g:i:s A').format('Y-m-d'));
 	      	
@@ -1055,7 +1053,7 @@ gtp.controller=Ext.regController("load",{
 				xtype: 'map',
 				useCurrentLocation: true,
 				mapOptions: {
-					zoom: 12
+					zoom: 16
 				},
 				cls: 'card5',
 				iconCls: 'locate',
@@ -1082,6 +1080,12 @@ gtp.controller=Ext.regController("load",{
 					centerchange: function(comp,map, center)
 					{
 						console.log('centerchange event is triggered');
+						console.log(map.getBounds());
+						console.log(map.getBounds().getNorthEast().lat());
+						console.log(map.getBounds().getNorthEast().lng());
+						console.log(map.getBounds().getSouthWest().lat());
+						console.log(map.getBounds().getSouthWest().lng());
+						
 						// responseFetched variable is used to prevent multiple ajax calls.
 						// since by scrolling the map this event is fired multiple times. 
 						if(gtp.responseFetched && (gtp.geo.latitude || gtp.geo.longitude))
@@ -1149,6 +1153,6 @@ gtp.controller=Ext.regController("load",{
 				items: [DetailPanel]
 			}]
 		});
-		requestHeartBeat();
+		setTimeout("requestHeartBeat()",10000);
 	}
 })
