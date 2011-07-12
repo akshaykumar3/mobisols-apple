@@ -50,15 +50,15 @@ create trigger trg_tol_loc_bfr_del
 before delete on toll_location_all 
 for each row begin
 update toll_location_history_all
-set end_date := GetEndDate()
+set end_date = GetEndDate()
 where 
 toll_location_id = old.toll_location_id
 and end_date = GetInfFuture(); 
 insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
-udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,latitude,longitude,direction,type) 
 values(null,old.toll_location_id,old.toll_operator_id,old.geometry,old.is_covered,old.is_cash_only,old.address1,old.address2,old.city,old.state,old.country,old.zip,
 old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,
-GetStartDate(),GetStartDate(),'delete',old.client_id);
+GetStartDate(),GetStartDate(),'delete',old.client_id,old.latitude,old.longitude,old.direction,old.type);
 end;
 
 drop trigger if exists trg_tol_loc_aft_ins;
@@ -66,10 +66,10 @@ create trigger trg_tol_loc_aft_ins
 after insert on toll_location_all 
 for each row begin
 insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
-udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,latitude,longitude,direction,type) 
 values(null,new.toll_location_id,new.toll_operator_id,new.geometry,new.is_covered,new.is_cash_only,new.address1,new.address2,new.city,new.state,new.country,zip,
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
-GetStartDate(),GetInfFuture(),'insert',new.client_id);
+GetStartDate(),GetInfFuture(),'insert',new.client_id,new.latitude,new.longitude,new.direction,new.type);
 end;
 
 drop trigger if exists trg_tol_loc_aft_upd; 
@@ -82,10 +82,10 @@ where
 toll_location_id = new.toll_location_id
 and end_date = GetInfFuture();
 insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
-udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id) 
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,latitude,longitude,direction,type) 
 values(null,new.toll_location_id,new.toll_operator_id,new.geometry,new.is_covered,new.is_cash_only,new.address1,new.address2,new.city,new.state,new.country,new.zip,
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
-GetStartDate(),GetInfFuture(),'update',new.client_id);
+GetStartDate(),GetInfFuture(),'update',new.client_id,new.latitude,new.longitude,new.direction,new.type);
 end;
 
 drop trigger if exists trg_tol_price_bfr_del;
@@ -97,9 +97,9 @@ set end_date = GetEndDate()
 where 
 toll_price_id = old.toll_price_id
 and end_date = GetInfFuture(); 
-insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,direction,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
+insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
 flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id)
-values(null,old.toll_price_id,old.toll_location_id,old.vehicle_type_id,old.direction,old.cost_price,old.selling_price,'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,
+values(null,old.toll_price_id,old.toll_location_id,old.vehicle_type_id,old.cost_price,old.selling_price,'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,
 old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate(),old.client_id);
 end;
 
@@ -107,9 +107,9 @@ drop trigger if exists trg_toll_price_all_aft_ins;
 create trigger trg_toll_price_all_aft_ins 
 after insert on toll_price_all 
 for each row begin
-insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,direction,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
+insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
 flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id)
-values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.direction,new.cost_price,new.selling_price,'insert',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,
+values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.cost_price,new.selling_price,'insert',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,
 new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
 end;
 
@@ -122,9 +122,9 @@ set end_date = GetEndDate()
 where 
 toll_price_id = new.toll_price_id
 and end_date = GetInfFuture();
-insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,direction,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
+insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
 flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id)
-values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.direction,new.cost_price,new.selling_price,'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,
+values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.cost_price,new.selling_price,'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,
 new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
 end;
 
@@ -238,6 +238,51 @@ values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end;
 
+drop trigger if exists trg_dev_his_bfr_del;
+create trigger trg_dev_his_bfr_del
+before delete on device_all
+for each row begin
+update user_vehicle_history_all
+set end_date = GetEndDate()
+where 
+user_vehicle_id = old.user_vehicle_id
+and end_date = GetInfFuture();
+insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
+last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+created_on,start_date,end_date,action)
+values(null,old.device_id,old.user_id,old.device_uuid,old.device_type,old.vehicle_id,old.is_active,
+old.last_login_time,old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,
+old.flag4,old.flag5,old.client_id,old.last_modified_by,old.last_modified_on,old.created_on,GetStartDate(),GetStartDate(),'delete');
+end;
+
+drop trigger if exists trg_dev_his_aft_ins;
+create trigger trg_dev_his_aft_ins
+after insert on device_all
+for each row begin
+insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
+last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+created_on,start_date,end_date,action)
+values(null,new.device_id,new.user_id,new.device_uuid,new.device_type,new.vehicle_id,new.is_active,
+new.last_login_time,new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,
+new.flag4,new.flag5,new.client_id,new.last_modified_by,new.last_modified_on,new.created_on,GetStartDate(),GetInfFuture(),'insert');
+end;
+
+drop trigger if exists trg_dev_his_aft_upd;
+create trigger trg_dev_his_aft_upd 
+after update on device_all
+for each row begin
+update device_history_all
+set end_date = GetEndDate()
+where 
+user_vehicle_id = new.user_vehicle_id
+and end_date = GetInfFuture();
+insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
+last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+created_on,start_date,end_date,action)
+values(null,new.device_id,new.user_id,new.device_uuid,new.device_type,new.vehicle_id,new.is_active,
+new.last_login_time,new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,
+new.flag4,new.flag5,new.client_id,new.last_modified_by,new.last_modified_on,new.created_on,GetStartDate(),GetInfFuture(),'update');
+end;
 //
 
 delimiter ;
