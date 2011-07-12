@@ -34,7 +34,7 @@
                 <column name="registered_state" length="45" />
             </property>
             <property name="ownerId" type="java.lang.Integer">
-                <column name="owner_id" />
+                <column name="owner_type_id" />
             </property>
             <property name="udf1" type="java.lang.String">
                 <column name="udf1" length="1000" />

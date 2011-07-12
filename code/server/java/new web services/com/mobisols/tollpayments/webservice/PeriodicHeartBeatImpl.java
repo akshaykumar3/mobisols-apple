@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.entity.Device;
@@ -74,22 +75,25 @@ public class PeriodicHeartBeatImpl implements PeriodicHeartBeat {
 		vml.setTimestamp(hb.getTimeStamp());
 		
 		TollLocationUtil tlu=new TollLocationUtil();
-		Point p=new Point();
-		p.setLocation(hb.getLatitude(), hb.getLongitude());
-		Point np=tlu.getNearestToll(p);
+		Location p=new LocationImpl();
+		p.setLatitude(hb.getLatitude());
+		Location np=tlu.getNearestToll(p);
 		double dist = tlu.getDistance(p, np);
 		vml.setDistance(dist);
 		
-		String qu="from TollLocation tl where tl.latitude=:lat,tl.longitude=:long";
+		String qu="from TollLocation tl where tl.latitude=:lat and tl.longitude=:long";
 		Query qury1=s.createQuery(qu);
-		qury1.setParameter("lat", np.getX());
-		qury1.setParameter("long", hb.getLongitude());
+		qury1.setParameter("lat", np.getLatitude());
+		qury1.setParameter("long", np.getLongitude());
 		TollLocation t=(TollLocation) qury1.uniqueResult();
 		vml.setTollLocationId(t.getTollLocationId());
 		
-		String q="from UserVehicleHistory uvh order by uvh.startDate dsc";
-		Query query=s.createQuery(q);
-		List<UserVehicleHistory> uvh=query.list();
+		//String q="from UserVehicleHistory uvh order by uvh.startDate desc";
+		//Query query=s.createQuery(q);
+		//List<UserVehicleHistory> uvh=query.list();
+		crit=s.createCriteria(UserVehicleHistory.class);
+		crit.addOrder(Order.desc("startDate"));
+		List<UserVehicleHistory> uvh=crit.list();
 		vml.setUvhId(uvh.get(0).getUvhId());
 		
 		String tollSessionId;
