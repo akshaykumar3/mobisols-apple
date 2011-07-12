@@ -17,9 +17,9 @@ import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 
 @Path("/ServicesList")
 public class ServicePlanListImpl implements ServicePlanList {
-	private List<UserServicePlan> servicePlans;
+	private List<UserServicePlanImpl> servicePlans;
 	public  ServicePlanListImpl(){
-		this.servicePlans  = new LinkedList<UserServicePlan>();
+		this.servicePlans  = new LinkedList<UserServicePlanImpl>();
 	}
    
 	@GET
@@ -48,12 +48,12 @@ public class ServicePlanListImpl implements ServicePlanList {
 	}
 
 	@Override
-	public void setServicePlans(List<UserServicePlan> servicePlans) {
+	public void setServicePlans(List<UserServicePlanImpl> servicePlans) {
 		this.servicePlans = servicePlans;
 	}
 
 	@Override
-	public List<UserServicePlan> getServicePlans() {
+	public List<UserServicePlanImpl> getServicePlans() {
 		return servicePlans;
 	}
 

@@ -21,8 +21,8 @@ import com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage;
 public class AccountDetailsImpl implements AccountDetails{
 	private String contactNo;
 	private PaymentDetailsImpl paymentDetails;
-	private List<VehicleDetails> vehicleDetails;
-	private List<TollPayments> tollPayments;
+	private List<VehicleDetailsImpl> vehicleDetails;
+	private List<TollPaymentsImpl> tollPayments;
 	private BalanceInfo balanceInfo;
 	private int userId;
 	
@@ -73,14 +73,14 @@ public class AccountDetailsImpl implements AccountDetails{
 		User u=(User) ((User) userList.get(0));
 		this.setContactNo(u.getContactNo());
 		this.paymentDetails=new PaymentDetailsImpl(u.getUserPaymentDetails().getUpdId());
-		this.vehicleDetails=new LinkedList<VehicleDetails>();
+		this.vehicleDetails=new LinkedList<VehicleDetailsImpl>();
 		Set<UserVehicle> vehicleList =u.getUserVehicles();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{
 			 this.vehicleDetails.add(new VehicleDetailsImpl(((UserVehicle)it.next()).getUserVehicleId()));
 		}
 		
-		this.tollPayments=new LinkedList<TollPayments>();
+		this.tollPayments=new LinkedList<TollPaymentsImpl>();
 		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
 		{
 			Criteria c=s.createCriteria(VehicleTollUsage.class);
@@ -105,16 +105,16 @@ public class AccountDetailsImpl implements AccountDetails{
 	public void setPaymentDetails(PaymentDetailsImpl paymentDetails) {
 		this.paymentDetails = paymentDetails;
 	}
-	public List<VehicleDetails> getVehicleDetails() {
+	public List<VehicleDetailsImpl> getVehicleDetails() {
 		return vehicleDetails;
 	}
-	public void setVehicleDetails(List<VehicleDetails> vehicleDetails) {
+	public void setVehicleDetails(List<VehicleDetailsImpl> vehicleDetails) {
 		this.vehicleDetails = vehicleDetails;
 	}
-	public List<TollPayments> getTollPayments() {
+	public List<TollPaymentsImpl> getTollPayments() {
 		return tollPayments;
 	}
-	public void setTollPayments(List<TollPayments> tollPayments) {
+	public void setTollPayments(List<TollPaymentsImpl> tollPayments) {
 		this.tollPayments = tollPayments;
 	}
 	public BalanceInfo getBalanceInfo() {

@@ -1,6 +1,5 @@
 package com.mobisols.tollpayments.webservice;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 
 public interface HeartBeatResponse {

@@ -1,23 +1,22 @@
 package com.mobisols.tollpayments.webservice;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
 import com.mobisols.tollpayments.hibernate.entity.TollLocation;
-import com.mobisols.tollpayments.hibernate.entity.TollOperator;
 
-public class TollDetailsImpl {
+public class TollDetailsImpl implements TollDetails{
 	private String tollOperator;
 	private String city;
 	private String State;
 	private String zip;
 	private double latitude;
 	private double longitude;
-
+	private String isCovered;
+	
+	
 	public TollDetailsImpl(){
 		
 	}
@@ -34,6 +33,7 @@ public class TollDetailsImpl {
 			this.setLatitude(tl.getLatitude());
 			this.setLongitude(tl.getLongitude());
 			this.setZip(tl.getZip());
+			this.setIsCovered(tl.getIsCovered());
 		}
 	}
 	public String getTollOperator() {
@@ -71,5 +71,11 @@ public class TollDetailsImpl {
 	}
 	public double getLongitude() {
 		return longitude;
+	}
+	public String getIsCovered() {
+		return isCovered;
+	}
+	public void setIsCovered(String isCovered) {
+		this.isCovered = isCovered;
 	}
 }

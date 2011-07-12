@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface OwnerTypeList {
 	
-	List <UserOwnerType> ownerTypes =null;
+	List <OwnerTypeImpl> ownerTypes =null;
 	public String getOwnerType();
-	public void setOwnerTypes(List<UserOwnerType> ownerTypes);
-	public List<UserOwnerType> getOwnerTypes();
+	public void setOwnerTypes(List<OwnerTypeImpl> ownerTypes);
+	public List<OwnerTypeImpl> getOwnerTypes();
 
 }

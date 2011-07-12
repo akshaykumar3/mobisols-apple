@@ -6,7 +6,7 @@ import java.util.List;
 public interface BalanceInfo {
 	double currentBalance=(double) 0.0;
 	double minBalance=(double) 0.0;
-	List<BalanceLog> balancelog=null;
+	List<BalanceLogImpl> balancelog=null;
 	int balanceId=0;
 	
 	public String getBalanceInfo(String user);
@@ -14,8 +14,8 @@ public interface BalanceInfo {
 	public void setCurrentBalance(double currentBalance);
 	public double getMinBalance();
 	public void setMinBalance(double minBalance);
-	public List<BalanceLog> getBalancelog();
-	public void setBalancelog(List<BalanceLog> balancelog);
+	public List<BalanceLogImpl> getBalancelog();
+	public void setBalancelog(List<BalanceLogImpl> balancelog);
 	public int getBalanceId();
 
 	public void setBalanceId(int balanceId);

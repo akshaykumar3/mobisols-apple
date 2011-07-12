@@ -17,9 +17,9 @@ import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 
 @Path("/VehicleTypeList")
 public class VehicleTypeListImpl implements VehicleTypeList {
-	private List<UserVehicleType> vehicleTypes;
+	private List<UserVehicleTypeImpl> vehicleTypes;
 	public VehicleTypeListImpl(){
-		this.vehicleTypes = new LinkedList<UserVehicleType>();
+		this.vehicleTypes = new LinkedList<UserVehicleTypeImpl>();
 	}
 	
 	@GET
@@ -45,11 +45,11 @@ public class VehicleTypeListImpl implements VehicleTypeList {
 		return res;
 	}
 	
-	public void setVehicleTypes(List<UserVehicleType> vehicleTypes) {
+	public void setVehicleTypes(List<UserVehicleTypeImpl> vehicleTypes) {
 		this.vehicleTypes = vehicleTypes;
 	}
 	
-	public List<UserVehicleType> getVehicleTypes() {
+	public List<UserVehicleTypeImpl> getVehicleTypes() {
 		return vehicleTypes;
 	}
 
