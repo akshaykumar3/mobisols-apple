@@ -2,7 +2,7 @@
  * Supported only in Android and iPhone platforms
  * 
  * Heart Beat function is to be optimized.
- * Limitations: Doesn't avoid from multiple requests.
+ * Limitations: Doesn't prevent multiple requests made to server.
  * 
  */
 
@@ -61,7 +61,11 @@ function requestHeartBeat(){
 			},
 			failure: function(response){
 				console.log('heart beat request failed with status ='+response.status);
-				setTimeout("requestHeartBeat()",10000);
+				if(count<5)
+				{
+					setTimeout("requestHeartBeat()",delay);
+					count++;
+				}
 			}
 		});
 	}
@@ -70,8 +74,12 @@ function requestHeartBeat(){
 		/*.... request for heart beat after some interval of time ....
 		 * -- the timeout can be cleared using the variable returned --- 
 		 */
-		retvalue = setTimeout("requestHeartBeat()",10000);
-		delay=delay+1000;
+		 if(count < 5)
+		{
+			retvalue = setTimeout("requestHeartBeat()",10000);
+			delay=delay+1000;
+			count++;
+		}
 	}	
 }
 

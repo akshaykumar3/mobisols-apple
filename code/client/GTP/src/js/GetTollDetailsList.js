@@ -3,8 +3,8 @@ Ext.setup({
 		
 		var reqobj={
 				latitude1: 34.83660702062764,
-				latitude2: -113.78949585253906,
-				longitude1: 31.94776694234097,
+				longitude1: -113.78949585253906,
+				latitude2: 31.94776694234097,
 				longitude2: -120.82074585253906
 			};
 		
@@ -14,10 +14,10 @@ Ext.setup({
 			params: {json: Ext.encode(reqobj)},
 			disableCaching: false,
    			method: 'GET',
-			callbackKey: 'callback',
 			success: function(response){
 				console.log(response.responseText);
 				var obj=Ext.decode(response.responseText);
+				Ext.getCmp('target').setValue(obj.response.tollDetails);
 				console.log(obj);
 			},
 			failure: function(response) {

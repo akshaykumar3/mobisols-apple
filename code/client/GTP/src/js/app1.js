@@ -1,6 +1,6 @@
 /* 
  * Author: A. Pradeep
- * Last Modified: July 11,2011
+ * Last Modified: July 12,2011
  * Modified to consume webservices instead mockwebservices.
  * Login Authentication.
  * 
@@ -64,7 +64,7 @@ gtp.controller=Ext.regController("load",{
 					pack: 'center'
 				},
 				items: [{
-					html: 'email ID:'
+					html: 'Username:'
 				},{
 					xtype: 'emailfield',
 					border: '10 5 3 10',
@@ -84,8 +84,10 @@ gtp.controller=Ext.regController("load",{
 						text: 'Sign in',
 						handler: function(){
 							console.log('Entered Password '+Ext.getCmp('lppassword').getValue());
-							if(!options.exists)
-							Ext.Msg.alert('User Name is required');
+							if(!Ext.getCmp('lpemailid').getValue())
+							{
+								Ext.Msg.alert('UserName Required');
+							}
 							else if(!Ext.getCmp('lppassword').getValue())
 							{
 								Ext.Msg.alert('Password required')
@@ -1038,6 +1040,10 @@ gtp.controller=Ext.regController("load",{
 						console.log(map.getBounds().getSouthWest().lat());
 						console.log(map.getBounds().getSouthWest().lng());
 						
+						console.log('responseFetched: '+gtp.responseFetched);
+						console.log('geo.latitude: '+gtp.geo.latitude);
+						console.log('geo.longitude: '+gtp.geo.longitude);
+						
 						// responseFetched variable is used to prevent multiple ajax calls.
 						// since by scrolling the map this event is fired multiple times. 
 						if(gtp.responseFetched && (gtp.geo.latitude || gtp.geo.longitude))
@@ -1050,32 +1056,34 @@ gtp.controller=Ext.regController("load",{
 					  	
 							Ext.Ajax.request({
 								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
+								method: 'GET',
 								params: {
 									json: Ext.encode({
-										latitude2: southWest.lat(),
-										longitude2: southWest.lng(),
 										latitude1: northEast.lat(),
-										longitude1: northEast.lng()
+										longitude1: northEast.lng(),
+										latitude2: southWest.lat(),
+										longitude2: southWest.lng()
 									})
 								},
 								success: function(response){
-									var lomobj=Ext.decode(response.responseText);
+									var obj=Ext.decode(response.responseText);
+									var lomobj=obj.response.tollDetailsList;
 									var iconpath,markertitle;
 									
 									for(i=0; i<lomobj.length; i++)
 									{
-										if(lomobj[i].coverage)
+										if(lomobj[i].isCovered=='Y')
 										{
 											iconpath='resources/images/covered.png';
-											markertitle='covered';
+											markertitle=lomobj[i].tollOperator;
 										}
 										else
 										{
 											iconpath='resources/images/uncovered.png';
-											markertitle='uncovered';
+											markertitle=lomobj[i].tollOperator;
 										}
 										new google.maps.Marker({
-											position: new google.maps.LatLng(lomobj[i].lat,lomobj[i].longt),
+											position: new google.maps.LatLng(lomobj[i].latitude,lomobj[i].longitude),
 											title: markertitle,
 											icon: iconpath,
 											map: map
