@@ -9,6 +9,7 @@
     <meta attribute="class-description">This class contains user login details.</meta>
             <id name="userId" type="java.lang.Integer">
                 <column name="user_id" />
+                 <generator class="native"/>
             </id>
             <property name="clientId" type="java.lang.Integer" >
                 <column name="client_id" />

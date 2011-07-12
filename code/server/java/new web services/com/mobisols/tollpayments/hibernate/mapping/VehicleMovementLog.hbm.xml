@@ -8,6 +8,7 @@
     <class name="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog" table="vehicle_movement_log" catalog="globaltoll">
             <id name="vmlId" type="java.lang.Integer">
                 <column name="vml_id" />
+                <generator class="native"/>
             </id>
             <property name="vmlTypeId" type="java.lang.Integer">
                 <column name="vml_type_id" />

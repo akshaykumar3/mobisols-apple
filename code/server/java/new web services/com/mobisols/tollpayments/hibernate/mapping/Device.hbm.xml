@@ -8,6 +8,7 @@
     <class name="com.mobisols.tollpayments.hibernate.entity.Device" table="device" catalog="globaltoll">
             <id name="deviceId" type="java.lang.Integer">
                 <column name="device_id" />
+                 <generator class="native"/>
             </id>
             <property name="userId" type="java.lang.Integer">
                 <column name="user_id" />
