@@ -2,11 +2,14 @@ Ext.setup({
 	onReady: function(){
 		
 		var request_jsobject= {
+			deviceId: '123456789',
+			deviceType: 'iphone',
 			latitude: 37.1345,
 			longitude: -122.34565,
 			angle: 0,
-			timeStamp: new Date(),
-			vmlType: 'heartbeat'
+			timeStamp: 'Jan 1, 2020 12:00:00 AM',
+			vmlType: 'test',
+			tollSessionId: ''
 		}
 		
 		Ext.Ajax.request({

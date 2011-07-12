@@ -1,6 +1,5 @@
 var count=0,delay=10000;
 
-
 function requestHeartBeat(){
 	console.log('heart beat function invoked');
 	
@@ -24,19 +23,24 @@ function requestHeartBeat(){
 	
 	if(gtp.geo.latitude || gtp.geo.longitude)
 	{
-		
 		var request_jsobject= {
-			user_name: 'harish@mobisols.com',
+			deviceId: '123456789',//gtp.uuid,
+			deviceType: 'iphone',
+			timestamp: 'Jul 12, 2011 10:40:25 PM',//new Date(),
 			latitude: gtp.geo.latitude,
 			longitude: gtp.geo.longitude,
-			direction: 0,
-			timestamp: new Date()
+			angle: 0,
+			vmlType: 'test',
+			tollSessionId: ''
 		}
 		
 		// works only in same domain... 
 		Ext.Ajax.request({
 			url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
-			params: { json: Ext.encode(request_jsobject)},
+			params: {
+				user_name: 'harish@mobisols.com',
+				json: Ext.encode(request_jsobject)
+			},
 			success: function(response){
 				console.log('got heartbeat');
 				console.log(response.responseText);
