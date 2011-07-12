@@ -238,14 +238,13 @@ values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end;
 
-drop trigger if exists trg_dev_his_bfr_del;
 create trigger trg_dev_his_bfr_del
 before delete on device_all
 for each row begin
-update user_vehicle_history_all
+update device_history_all
 set end_date = GetEndDate()
 where 
-user_vehicle_id = old.user_vehicle_id
+device_id = old.device_id
 and end_date = GetInfFuture();
 insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
 last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
@@ -274,7 +273,7 @@ for each row begin
 update device_history_all
 set end_date = GetEndDate()
 where 
-user_vehicle_id = new.user_vehicle_id
+device_id = new.device_id
 and end_date = GetInfFuture();
 insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
 last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
