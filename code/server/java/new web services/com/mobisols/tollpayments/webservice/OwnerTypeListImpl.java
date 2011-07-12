@@ -15,9 +15,9 @@ import com.mobisols.tollpayments.hibernate.entity.OwnerType;
 
 @Path("/OwnerTypesList")
 public class OwnerTypeListImpl implements OwnerTypeList{
-		private List<UserOwnerType> ownerTypes;
+		private List<OwnerTypeImpl> ownerTypes;
 		public OwnerTypeListImpl(){
-			this.ownerTypes = new LinkedList<UserOwnerType>();
+			this.ownerTypes = new LinkedList<OwnerTypeImpl>();
 		}
 		
 		@GET
@@ -43,11 +43,11 @@ public class OwnerTypeListImpl implements OwnerTypeList{
 			return res;
 		}
 		
-		public void setOwnerTypes(List<UserOwnerType> ownerTypes) {
+		public void setOwnerTypes(List<OwnerTypeImpl> ownerTypes) {
 			this.ownerTypes = ownerTypes;
 		}
 		
-		public List<UserOwnerType> getOwnerTypes() {
+		public List<OwnerTypeImpl> getOwnerTypes() {
 			return ownerTypes;
 		}
 

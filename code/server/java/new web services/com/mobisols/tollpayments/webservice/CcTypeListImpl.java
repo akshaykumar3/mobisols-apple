@@ -17,9 +17,9 @@ import com.mobisols.tollpayments.hibernate.entity.VehicleType;
 
 public class CcTypeListImpl implements CcTypeList {
 
-	private List<UserCcType> ccTypes;
+	private List<UserCcTypeImpl> ccTypes;
 	public CcTypeListImpl(){
-		this.ccTypes = new LinkedList<UserCcType>();
+		this.ccTypes = new LinkedList<UserCcTypeImpl>();
 	}
 	
 	@GET
@@ -45,11 +45,11 @@ public class CcTypeListImpl implements CcTypeList {
 		return res;
 	}
 	
-	public void setCcTypes(List<UserCcType> ccTypes) {
+	public void setCcTypes(List<UserCcTypeImpl> ccTypes) {
 		this.ccTypes = ccTypes;
 	}
 	
-	public List<UserCcType> getCcTypes() {
+	public List<UserCcTypeImpl> getCcTypes() {
 		return ccTypes;
 	}
 

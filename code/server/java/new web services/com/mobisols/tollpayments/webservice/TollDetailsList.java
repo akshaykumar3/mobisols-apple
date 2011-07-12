@@ -6,10 +6,10 @@ import javax.ws.rs.QueryParam;
 
 
 public interface TollDetailsList {
-	List<TollDetails> tollDetailsList=null;
+	List<TollDetailsImpl> tollDetailsList=null;
 	
 	public String generateTollDetailsList(@QueryParam("username") String user,@QueryParam("json") String json);
-	public void setTollDetailsList(List<TollDetails> tollDetailsList);
-	public List<TollDetails> getTollDetailsList();
+	public void setTollDetailsList(List<TollDetailsImpl> tollDetailsList);
+	public List<TollDetailsImpl> getTollDetailsList();
 
 }

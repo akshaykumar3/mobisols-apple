@@ -25,7 +25,7 @@ public class BalanceInfoImpl implements BalanceInfo {
 
 	private double currentBalance;
 	private double minBalance;
-	private List<BalanceLog> balancelog;
+	private List<BalanceLogImpl> balancelog;
 	private int balanceId;
 	
 	
@@ -53,7 +53,7 @@ public class BalanceInfoImpl implements BalanceInfo {
 			System.out.println("UserType is not null");
 		}
 		this.setMinBalance(ub.getUser().getUserType().getMinBalance());
-		this.balancelog=new LinkedList<BalanceLog>();
+		this.balancelog=new LinkedList<BalanceLogImpl>();
 		Set<UserBalanceLog> ubl=ub.getUserBalanceLog();
 		for(Iterator it=(Iterator) ubl.iterator();it.hasNext();){
 			this.balancelog.add(new BalanceLogImpl(((UserBalanceLog)it.next()).getUblogId()));
@@ -89,10 +89,10 @@ public class BalanceInfoImpl implements BalanceInfo {
 	public void setMinBalance(double minBalance) {
 		this.minBalance = minBalance;
 	}
-	public List<BalanceLog> getBalancelog() {
+	public List<BalanceLogImpl> getBalancelog() {
 		return balancelog;
 	}
-	public void setBalancelog(List<BalanceLog> balancelog) {
+	public void setBalancelog(List<BalanceLogImpl> balancelog) {
 		this.balancelog = balancelog;
 	}
 	public int getBalanceId() {

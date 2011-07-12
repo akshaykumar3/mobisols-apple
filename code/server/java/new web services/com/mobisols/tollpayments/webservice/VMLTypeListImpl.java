@@ -16,11 +16,11 @@ import com.mobisols.tollpayments.hibernate.entity.HibernateSessionFactory;
 import com.mobisols.tollpayments.hibernate.entity.VmlType;
 @Path("/VMLTypeList")
 public class VMLTypeListImpl implements VMLTypeList {
-	private List<VMLType> vmltypes;
+	private List<VMLTypeImpl> vmltypes;
 
 	public VMLTypeListImpl()
 	{
-		this.vmltypes=new LinkedList<VMLType>();
+		this.vmltypes=new LinkedList<VMLTypeImpl>();
 	}
 	@GET
 	public String getVMLTypeList() {
@@ -40,11 +40,11 @@ public class VMLTypeListImpl implements VMLTypeList {
 		return res;
 	}
 
-	public List<VMLType> getVmltypes() {
+	public List<VMLTypeImpl> getVmltypes() {
 		return vmltypes;
 	}
 
-	public void setVmltypes(List<VMLType> vmltypes) {
+	public void setVmltypes(List<VMLTypeImpl> vmltypes) {
 		this.vmltypes = vmltypes;
 	}
 }
