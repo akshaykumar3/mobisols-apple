@@ -130,7 +130,7 @@ public class HeartBeatImpl implements HeartBeat {
 		hbr.getHash().put("timeInterval",Double.toString(10*60));
 		hbr.getHash().put("distance", "200.000");
 		hbr.getHash().put("tollSessionId", tollSessionId);
-		String res= j.getJSON("", "", hbr);
+		String res= j.getJSON("", "", hbr.getHash());
 		HibernateSessionFactory.closeSession();
 		return res;
 	}
