@@ -26,6 +26,7 @@ function requestHeartBeat(){
 	{
 		
 		var request_jsobject= {
+			user_name: 'harish@mobisols.com',
 			latitude: gtp.geo.latitude,
 			longitude: gtp.geo.longitude,
 			direction: 0,
@@ -34,7 +35,7 @@ function requestHeartBeat(){
 		
 		// works only in same domain... 
 		Ext.Ajax.request({
-			url: 'http://mbtest.dyndns.dk:6004/webservices/services/PeriodicHeartBeat',
+			url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
 			params: { json: Ext.encode(request_jsobject)},
 			success: function(response){
 				console.log('got heartbeat');
@@ -52,7 +53,12 @@ function requestHeartBeat(){
 			},
 			failure: function(response){
 				console.log('heart beat request failed with status ='+response.status);
-				setTimeout("requestHeartBeat()",10000);
+				if(count < 5)
+				{
+					setTimeout("requestHeartBeat()",delay);
+					count++;
+					delay=delay+5000;
+				}
 			}
 		});
 	}

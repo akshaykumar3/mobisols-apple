@@ -8,9 +8,9 @@
 Ext.regApplication({
     name: "gtp",
     icon: 'resources/images/sunpass.png',
-    glossOnIcon: false,
     tabletStartupScreen: 'resources/images/tablet_startup.png',
     phoneStartupScreen: 'resources/images/phone_startup.png',
+    glossOnIcon: false,
     responseFetched: true,
 	isSenchaReady: false,
     launch: function(){
@@ -23,36 +23,10 @@ Ext.regApplication({
     	return;
     	// Both sencha and phonegap are ready now.
     	// Can use phonegap API here.
-    	this.registerDevice({
+    	this.launchLoginPage({
     		uuid: device.uuid,
     		type: this.deviceType()
     	})
-    },
-    registerDevice: function(deviceDetails) {
-    	console.log('registerdevice is invoked');
-		console.log('Device details '+deviceDetails);
-    	// Do the device registration here.
-    	Ext.Ajax.request({
-    		url: 'http:mbtest.dyndns.dk:6004/webservices/services/RegisterDevice',
-    		params: {
-				uuid: deviceDetails.uuid,
-				type: deviceDetails.type
-    		},
-    		success: function(response){
-    			console.log('DevReg request Success');
-    			console.log('DevReg response '+response.responseText);
-    			var resobj=Ext.encode(response.responseText);
-    			console.log('DevReg response object '+resobj);
-    			// if device registration is succeeded login page will be launched from here
-    		},
-    		failure: function(response){
-    			console.log('DevReg request failed with response '+response.status);
-    		}
-    	});
-    	this.launchLoginPage({
-    		user: 'known',
-    		emailID: 'harish@mobisols.com',
-    	});
     },
     deviceType: function(){
     	if(Ext.is.iPhone)
@@ -68,32 +42,19 @@ Ext.regApplication({
     	else if(Ext.is.Desktop)
     	return 'desktop'
     },
-    launchLoginPage: function(options){
+    launchLoginPage: function(deviceDetails){
     	// Login Page is launched here
     	console.log('login page is launched');
-    	console.log(options);
-    	console.log('user '+options.user);
-    	console.log('user '+options.emailID);
-    	var existing;
-    	if(options.user=='known')
-    	{
-    		console.log('if condition known user')
-    		Ext.dispatch({
-	            controller: 'load',
-	            action    : 'show',
-	            exists: true, 
-	            userName: options.emailID
-	    	});
-	    }
-	    else
-	    {
-	    	Ext.dispatch({
-	    		controller: 'load',
-	    		action: 'show',
-	    		exists: false
-	    	})
-	    }
-    }
+		console.log(deviceDetails);
+		Ext.dispatch({
+			controller: 'load',
+			action    : 'show',
+			devDetails: deviceDetails
+		});
+    }/*,
+	geotracker: new Ext.util.GeoLocation({
+		
+	});*/
 });
 
 gtp.controller=Ext.regController("load",{

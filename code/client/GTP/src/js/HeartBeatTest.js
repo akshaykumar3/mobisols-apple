@@ -4,13 +4,17 @@ Ext.setup({
 		var request_jsobject= {
 			latitude: 37.1345,
 			longitude: -122.34565,
-			direction: 0,
-			timestamp: new Date()
+			angle: 0,
+			timeStamp: new Date(),
+			vmlType: 'heartbeat'
 		}
 		
 		Ext.Ajax.request({
-			url: 'http://mbtest.dyndns.dk:6004/webservices/services/PeriodicHeartBeat',
-			params: { json: Ext.encode(request_jsobject)},
+			url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
+			params: {
+				user_name: 'harish@mobisols.com',
+				json: Ext.encode(request_jsobject)
+			},
 			success: function(response){
 				console.log('got heartbeat');
 				console.log(response.responseText);
