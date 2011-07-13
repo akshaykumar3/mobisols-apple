@@ -247,7 +247,7 @@ where
 device_id = old.device_id
 and end_date = GetInfFuture();
 insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
-last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+last_login_time,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
 created_on,start_date,end_date,action)
 values(null,old.device_id,old.user_id,old.device_uuid,old.device_type,old.vehicle_id,old.is_active,
 old.last_login_time,old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,
@@ -259,7 +259,7 @@ create trigger trg_dev_his_aft_ins
 after insert on device_all
 for each row begin
 insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
-last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+last_login_time,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
 created_on,start_date,end_date,action)
 values(null,new.device_id,new.user_id,new.device_uuid,new.device_type,new.vehicle_id,new.is_active,
 new.last_login_time,new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,
@@ -276,7 +276,7 @@ where
 device_id = new.device_id
 and end_date = GetInfFuture();
 insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,vehicle_id,is_active,
-last_login_time,udf1,udf2,udf3,ud4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+last_login_time,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
 created_on,start_date,end_date,action)
 values(null,new.device_id,new.user_id,new.device_uuid,new.device_type,new.vehicle_id,new.is_active,
 new.last_login_time,new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,
