@@ -238,6 +238,8 @@ values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end;
 
+
+drop trigger if exists trg_dev_his_bfr_del;
 create trigger trg_dev_his_bfr_del
 before delete on device_all
 for each row begin
