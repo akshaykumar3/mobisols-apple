@@ -664,9 +664,7 @@ gtp.controller=Ext.regController("load",{
 				dock: 'bottom',
 				layout: {
 					pack: 'center'
-				},
-				style: 'background-color: #27AE5B',
-				cls: 'background-color: pink'
+				}
 			},
 			defaultActiveTab: 'home',
 			fullscreen: true,
@@ -688,9 +686,15 @@ gtp.controller=Ext.regController("load",{
 					dock: 'top',
 					title: 'Sun Pass',
 					layout: {
-						pack: 'right'
+						pack: 'left'
 					},
 					items: [{
+						iconMask: true,
+						ui: 'plain',
+						iconCls: 'SunPassLogo'
+					},{
+						xtype: 'spacer'
+					},{
 						text: 'help',
 						ui: 'green'
 					}]
@@ -818,7 +822,7 @@ gtp.controller=Ext.regController("load",{
 				}]
 			},{
 				title: 'My cars',
-				iconCls: 'favorites',
+				iconCls: 'Car',
 				//badgeText:'4',
 				//activeItem: '1',
 				layout: 'card',
@@ -877,8 +881,8 @@ gtp.controller=Ext.regController("load",{
 				}]
 			},{
 				title: 'Paid tolls',
-				id: 'paidtolls',
-				iconCls: 'downloads',
+				id: 'CashStack',
+				iconCls: 'CashStack',
 				cls: 'demo-list',
 				items: [{
 					xtype: 'list',
@@ -893,7 +897,7 @@ gtp.controller=Ext.regController("load",{
 				xtype: 'form',
 				id: 'basicform',
 				scroll: 'vertical',
-				iconCls: 'settings',
+				iconCls: 'AccountSettings',
 				cls: 'card4',
 				items: [{
 					xtype: 'fieldset',
@@ -1002,7 +1006,7 @@ gtp.controller=Ext.regController("load",{
 					zoom: 16
 				},
 				cls: 'card5',
-				iconCls: 'locate',
+				iconCls: 'MapIcon',
 				listeners: {
 					maprender: function(comp, map) {
 						gtp.geo.updateLocation();
