@@ -13,7 +13,7 @@ Ext.setup({
 		}
 		
 		Ext.Ajax.request({
-			url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
+			url: 'http://mbtest.dyndns.dk:6004/webservices/services/PeriodicHeartBeat',
 			params: {
 				user_name: 'harish@mobisols.com',
 				json: Ext.encode(request_jsobject)
@@ -23,7 +23,6 @@ Ext.setup({
 				console.log(response.responseText);
 				var resobj=Ext.decode(response.responseText);
 				var estimatedDelay;
-				nextTimeStamp= resobj.timestamp;
 				Ext.getCmp('target').setValue(response.responseText);
 				// --- Need to be coded yet -----
 				if(resobj.status)

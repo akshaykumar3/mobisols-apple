@@ -2,33 +2,15 @@ var count=0,delay=10000;
 
 function requestHeartBeat(){
 	console.log('heart beat function invoked');
-	
-	gtp.geo.updateLocation();
-	/*--- gets geolocation --
-	 * -- fires location update event if gps location is correctly found  
-	 * -- fires location error event if not correctly found or  
-	 * -- some internal error occurred in finding the geolocation
-	 * -- gotNewLocation is set to true if succeded..
-	 */ 
-	
-	/* --- Centers map to current location ---
-	 * -- if error occurs in finding geo location 
-	 * -- map remains in the same state as the geo values associated with geo object are not updated 
-	 */	
-	
-	/* ... if update succeeds send a request to server for next heart beat .....
-	 * ... else trigger the current function after some interval of time ....
-	 * .. Currently the delay i have taken is five seconds .. 
-	 */
-	
-	if(gtp.geo.latitude || gtp.geo.longitude)
+	console.log('IsAppEnabled? '+gtp.isAppEnabled);
+	if(gtp.isAppEnabled)//gtp.geo.latitude || gtp.geo.longitude)
 	{
 		var request_jsobject= {
 			deviceId: '123456789',//gtp.uuid,
 			deviceType: 'iphone',
-			timestamp: 'Jul 12, 2011 10:40:25 PM',//new Date(),
-			latitude: gtp.geo.latitude,
-			longitude: gtp.geo.longitude,
+			timeStamp: 'Jul 12, 2011 10:40:25 PM',//new Date(),
+			latitude: getGeoLatitude(),
+			longitude: getGeoLongitude(),
 			angle: 0,
 			vmlType: 'test',
 			tollSessionId: ''
@@ -46,14 +28,15 @@ function requestHeartBeat(){
 				console.log(response.responseText);
 				var resobj=Ext.decode(response.responseText);
 				var estimatedDelay;
-				nextTimeStamp= resobj.timestamp;
-				// --- Need to be coded yet -----
-				if(resobj.status)
+				estimatedDelay=resobj.response.timeInterval
+				console.log('Estimated TimeInterval is: '+estimatedDelay);
+				
+				if(resobj.response.status=='success')
 				Ext.Msg.alert('U have just crossed a toll');
 				
 				//Calculate the next timestamp to call this function.. 
 				// trigger this function
-				setTimeout("requestHeartBeat()",estimatedDelay); 
+				setTimeout("requestHeartBeat()",estimatedDelay*1000); 
 			},
 			failure: function(response){
 				console.log('heart beat request failed with status ='+response.status);
@@ -68,6 +51,7 @@ function requestHeartBeat(){
 	}
 	else
 	{
+		console.log('i am from else loop');
 		/*.... request for heart beat after some interval of time ....
 		 * -- the timeout can be cleared using the variable returned --- 
 		 */
@@ -78,4 +62,19 @@ function requestHeartBeat(){
 			count++;
 		}
 	}	
+}
+
+
+function getGeoLatitude() {
+	if(gtp.geo.latitude)
+	return gtp.geo.latitude;
+	else
+	return 31.2234;
+}
+
+function getGeoLongitude() {
+	if(gtp.geo.longitude)
+	return gtp.geo.longitude;
+	else
+	return -122.1213;
 }

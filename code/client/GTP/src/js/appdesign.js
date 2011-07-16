@@ -1,25 +1,15 @@
 /* 
  * Author: A. Pradeep
- * Last Modified: July 15,2011
- * Modified to consume webservices instead mockwebservices.
- * Login Authentication.
- * Tested Viewport working succesfully. 
+ * Last Modified: July 16,2011
  * 
- * Limitations: AutoCenters for every new location fetched. 
- * Adds Markers on top of the existing markers.
- * Used static deviced Id and compass heading
- * 
- * Todo: Complete HeartBeat, testing and Notifications.
- * Testing device registration.
- * Adding Animation to makers.
  */
 
 Ext.regApplication({
     name: "gtp",
     icon: 'resources/images/sunpass.png',
-    glossOnIcon: false,
     tabletStartupScreen: 'resources/images/tablet_startup.png',
     phoneStartupScreen: 'resources/images/phone_startup.png',
+    glossOnIcon: false,
     responseFetched: true,
     today: new Date(),
     isAppEnabled: 0,
@@ -220,12 +210,12 @@ gtp.controller=Ext.regController("load",{
 		    }
 		});
 
-		paidTolls.insert(0,Ext.ModelMgr.create({
+		/*paidTolls.insert(0,Ext.ModelMgr.create({
 			date: '1/11/2010',
 			amount: 2,
 			location: 'newyork' ,
 			reg: '4GBSV'
-		},'PaidTolls'));
+		},'PaidTolls'));*/
 
 		Ext.Ajax.request({
 	      url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
@@ -624,6 +614,16 @@ gtp.controller=Ext.regController("load",{
 					label: 'Type',
 					id: 'DetailPanel.type',
 					disabled: true
+				},{
+					xtype: 'togglefield',
+					label: 'Activate',
+					listeners: {
+						el: {
+							click: function(){
+								console.log('Car is activated');
+							}
+						}
+					}
 				}]
 			},{
 				xtype: 'fieldset',
@@ -664,7 +664,9 @@ gtp.controller=Ext.regController("load",{
 				dock: 'bottom',
 				layout: {
 					pack: 'center'
-				}
+				},
+				style: 'background-color: #27AE5B',
+				cls: 'background-color: pink'
 			},
 			defaultActiveTab: 'home',
 			fullscreen: true,
@@ -684,12 +686,10 @@ gtp.controller=Ext.regController("load",{
 				dockedItems: [{
 					xtype: 'toolbar',
 					dock: 'top',
-					ui: 'light',
-					title: 'Global Toll Pass',
+					title: 'Sun Pass',
 					layout: {
 						pack: 'right'
 					},
-					ui: 'light',
 					items: [{
 						text: 'help',
 						ui: 'green'
@@ -698,7 +698,7 @@ gtp.controller=Ext.regController("load",{
 				items: [{
 					xtype: 'togglefield',
 					id: 'tfd',
-					animationDuration: 500,
+					animationDuration: 200,
 					//value: 0,
 					name: 'enable',
 					label: 'Enable',
@@ -713,6 +713,7 @@ gtp.controller=Ext.regController("load",{
 								var pt=Ext.getCmp('pdtoll');
 								if(toggle.value==0) {
 									gtp.isAppEnabled=1;
+									console.log('toggled');
 									toggle.value=1;
 									var clat,clong;
 									if(gtp.geo.latitude || gtp.geo.longitude){
@@ -724,7 +725,7 @@ gtp.controller=Ext.regController("load",{
 										clong=-130.121;
 									}
 									Ext.Ajax.request({
-										url: 'localhost:6004/webservices/services/GetLocation',
+										url: 'http://mbtest.dyndns.dk:6004/webservices/services/GetLocation',
 										params: {
 											json: Ext.encode({
 												latitude: clat,
@@ -742,14 +743,15 @@ gtp.controller=Ext.regController("load",{
 										},
 										failure: function(response){
 											console.log('failure with status'+response.status);
-											cl.setValue('San Diego');
+											cl.setValue('Tallahassee, Florida');
 											to.setValue(TollsData.getAt(0).get('tolloperator'));
 											at.setValue(TollsData.getAt(0).get('avgtoll'));
 											pt.setValue(TollsData.getAt(0).get('tollperday'));
 										}
 									})
-									cl.setValue(getLocation());
-									
+									console.log('before heartbeat request');
+									requestHeartBeat();
+									console.log('after heartbeat request');
 								} else {
 									gtp.isAppEnabled=0;
 									console.log(toggle.value);
@@ -774,8 +776,7 @@ gtp.controller=Ext.regController("load",{
 					items: [{
 						xtype: 'textfield',
 						id: 'curloc',
-						label: 'CurrLoc',
-						value: 'Illinois',
+						label: 'CurLoc',
 						disabled: true,
 						autoCapitalize : true,
 						useClearIcon: true
@@ -804,14 +805,14 @@ gtp.controller=Ext.regController("load",{
 						label: 'Service',
 						required: true,
 						options: [{
-							text: 'GT- Pass',
-							value: 'gtpass'
+							text: 'daily',
+							value: 'daily'
 						},{
-							text: 'Sun-Pass',
-							value: 'lpass'
+							text: 'weekly',
+							value: 'weekly'
 						},{
-							text: 'Fast-Pass',
-							value: 'fpass'
+							text: 'monthly',
+							value: 'monthly'
 						}]
 					}]
 				}]
@@ -833,10 +834,10 @@ gtp.controller=Ext.regController("load",{
 					xtype: 'panel',
 					fullscreen: true,
 					id: 'dp',
-					layout: 'card',
+					layout: 'fit',
 					dockedItems:[{
 						xtype: 'toolbar',
-						ui: 'light',
+						id: 'mycarstb',
 						dock: 'top',
 						title: 'My Cars',
 						layout: {
@@ -858,7 +859,7 @@ gtp.controller=Ext.regController("load",{
 						store: carsList,
 						singleSelect: true,
 						scroll: 'vertical',
-						itemTpl: '<div class="contact"><strong>{reg}</strong> - {state} - {type}</div>',
+						itemTpl: '<div class="contact"><strong>{reg}</strong>, {state}</div>',
 						setActiveItem: this,
 						onItemDisclosure: function(){
 							console.log('clicked an item in the list');
@@ -1085,6 +1086,5 @@ gtp.controller=Ext.regController("load",{
 				items: [DetailPanel]
 			}]
 		});
-		setTimeout("requestHeartBeat()",10000);
 	}
 })
