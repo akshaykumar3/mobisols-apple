@@ -14,6 +14,9 @@ Ext.regModel('Cars', {
 	},{
 		name: 'endDate',
 		type: 'date'
+	},{
+		name: 'active',
+		type: 'boolean'
 	}]
 });
 
@@ -28,6 +31,7 @@ var carsList = new Ext.data.Store({
 		state: 'CA',
 		type: 'Sedan',
 		startDate: new Date('12/7/2010'),
-		endDate: new Date('12/12/2010')
+		endDate: new Date('12/12/2010'),
+		active: true
 	}]
 });

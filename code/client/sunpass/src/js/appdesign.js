@@ -589,6 +589,7 @@ gtp.controller=Ext.regController("load",{
 					ui: 'action',
 					handler: function() {
 						console.log('clicked done');
+						tabpanel.setActiveItem('mycars');
 					}
 				}]
 			}],
@@ -617,10 +618,28 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'togglefield',
 					label: 'Activate',
+					value: 0,
+					id: 'DetailPanel.toggle',
 					listeners: {
 						el: {
 							click: function(){
 								console.log('Car is activated');
+								if(Ext.getCmp('DetailPanel.toggle').value)
+								{
+									console.log('i am from if');
+									console.log(togglecomp.label);
+									Ext.getCmp('DetailPanel.toggle').label='Activate';
+									Ext.getCmp('DetailPanel.toggle').value=0;
+								}
+								else
+								{
+									console.log('i am from else');
+									console.log(togglecomp.label);
+									Ext.getCmp('DetailPanel.toggle').label='Deactivate';
+									Ext.getCmp('DetailPanel.toggle').value=1;
+								}
+								var record=Ext.getCmp('listid').getSelectedRecords();
+								console.log(record);
 							}
 						}
 					}
@@ -874,6 +893,11 @@ gtp.controller=Ext.regController("load",{
 							Ext.getCmp('DetailPanel.state').setValue(record[0].get('state'));
 							Ext.getCmp('DetailPanel.reg').setValue(record[0].get('reg'));
 							Ext.getCmp('DetailPanel.type').setValue(record[0].get('type'));
+							if(record[0].get('active'))
+							{
+								Ext.getCmp('DetailPanel.toggle').value=1;
+								Ext.getCmp('DetailPanel.toggle').label='Deactivate';
+							}
 							tabpanel.setActiveItem('details');
 							console.log('is selected '+this.isSelected(record[0]));	
 						}
