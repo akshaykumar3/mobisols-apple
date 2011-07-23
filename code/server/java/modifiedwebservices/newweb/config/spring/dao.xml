@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans
+    PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd"
+>
+<beans>
+    <bean id="online.daoTemplate" abstract="true" dependency-check="all">
+        <property name="sessionFactory" ref="onlineSessionFactory" />
+    </bean>
+
+    <bean id="dao.tolls.accountDeatailsDao" class="com.mobisol.tolls.daoImpl.HibernateAccountDetailsDao" parent="online.daoTemplate"/>
+	<bean id="dao.tollpayments.vehicleTypeDao" class="com.mobisols.tollpayments.daoImpl.VehicleTypeDao" parent="online.daoTemplate"/>
+
+</beans>

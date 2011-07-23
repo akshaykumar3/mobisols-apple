@@ -13,7 +13,7 @@
   	</servlet-class>
   	<init-param>
   		<param-name>com.sun.jersey.config.property.packages</param-name>
-  		<param-value>com.mobisols.tollpayments.webservice</param-value>
+  		<param-value>com.mobisols.tollpayments.serviceImpl</param-value>
   	</init-param>
   	<init-param>
   		<param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
@@ -23,7 +23,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>JAX-RS REST Servlet</servlet-name>
-  	<url-pattern>/services/*</url-pattern>
+  	<url-pattern>/*</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
