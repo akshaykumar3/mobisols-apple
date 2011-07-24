@@ -12,6 +12,8 @@ Ext.regApplication({
     responseFetched: true,
     today: new Date(),
     isAppEnabled: 0,
+    tollMarkers: new Array(),
+    infoWindows: new Array(),
     launch: function(){
     	console.log('application is launched');
     	this.launchLoginPage({
@@ -94,7 +96,7 @@ gtp.controller=Ext.regController("load",{
 							else
 							{
 								Ext.Ajax.request({
-									url: 'http://mbtest.dyndns.dk:6004/webservices/services/LoginAuthentication',
+									url: 'http://172.30.102.62:8081/web/services/LoginAuthentication',
 									params: {
 										user_name: Ext.getCmp('lpemailid'),
 										password: Ext.getCmp('lppassword')
@@ -199,7 +201,6 @@ gtp.controller=Ext.regController("load",{
 		        locationupdate: function (geo) {
 		        	console.log('GeoLocation: Got new location');
 		            console.log('New latitude: ' + geo.latitude + 'New Longitude: ' + geo.longitude);
-		            gotNewLocation = true;
 		            if(markernotset){
 						mylocation_marker=new google.maps.Marker({
 							position: new google.maps.LatLng(geo.latitude,geo.longitude),
@@ -244,7 +245,7 @@ gtp.controller=Ext.regController("load",{
 		},'PaidTolls'));*/
 
 		Ext.Ajax.request({
-	      url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+	      url: 'http://172.30.102.62:8081/web/services/AccountDetails',
 	      method: 'GET',
 	      params: {
 	      	user_name: 'harish@mobisols.com',
@@ -287,7 +288,7 @@ gtp.controller=Ext.regController("load",{
 	      	//Ext.getCmp('cardtype').setValue(pay_details.cardType);
 	      	Ext.getCmp('expirydate').setValue(Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),true);
 	      	Ext.getCmp('bankaccount').setValue(pay_details.bankAccount);
-	      	console.log('expiry date '+Date.parseDate(pay_details.expDate,'M j, Y g:i:s A').format('Y-m-d'));
+	      	//console.log('expiry date '+Date.parseDate(pay_details.expDate,'M j, Y g:i:s A').format('Y-m-d'));
 	      	
 	      	for(i=0;i<paidtoll_details.length;i++)
 	      	{
@@ -784,7 +785,7 @@ gtp.controller=Ext.regController("load",{
 										clong=-130.121;
 									}
 									/*Ext.Ajax.request({
-										url: 'http://mbtest.dyndns.dk:6004/webservices/services/GetLocation',
+										url: 'http://172.30.102.62:8081/web/services/GetLocation',
 										params: {
 											json: Ext.encode({
 												latitude: clat,
@@ -816,15 +817,17 @@ gtp.controller=Ext.regController("load",{
 										at.setValue(TollsData.getAt(0).get('avgtoll'));
 										pt.setValue(TollsData.getAt(0).get('tollperday'));
 										console.log('before heartbeat request');
-										//setTimeout("requestHeartBeat()",5000);
+										setTimeout("requestHeartBeat()",5000);
 										console.log('after heartbeat request');
 										
-										message='Settings have been saved '+'activated';
-										Ext.Msg.alert('HeartBeat','Toll crossing: I-15 Exp lanes, Cost: $2');
+										message='Settings are saved, Car '+Ext.getCmp('activecar').getValue()+' is active';
+										console.log(message);
+										Ext.Msg.alert('Activated',message);
+										Ext.getCmp('activecar').disabled=true;
 									}
 									else
 									{
-										Ext.Msg.alert('One car should be activated');
+										Ext.Msg.alert('Car should be selected');
 									}
 								} else {
 									gtp.isAppEnabled=0;
@@ -834,6 +837,7 @@ gtp.controller=Ext.regController("load",{
 									at.setValue("");
 									pt.setValue("");
 									toggle.value=0;
+									Ext.getCmp('activecar').disabled=false;
 								}
 							}
 						},
@@ -877,13 +881,7 @@ gtp.controller=Ext.regController("load",{
 						options: [{
 							text: '4GPB5',
 							value: '4GPB5'
-						},{
-							text: '4GPB522',
-							value: '4GPB522'
-						}]/*,{
-							text: '821CT',
-							value: '821CT'
-						}]*/
+						}]
 					},{
 						xtype: 'selectfield',
 						name: 'service',
@@ -1112,10 +1110,12 @@ gtp.controller=Ext.regController("load",{
 				title: 'Map',
 				id: 'mappanel',
 				xtype: 'map',
-				useCurrentLocation: true,
+				//useCurrentLocation: true,
+				// if useCurrentLocation is set, By default map centers around palo alto if location is not fetched.
+				// If u want to control centering the map donot set the useCurrentLocation set to true.
 				mapOptions: {
 					center: new google.maps.LatLng(32.95008700,-117.10962200),
-					zoom: 16
+					zoom: 15
 				},
 				cls: 'card5',
 				iconCls: 'MapIcon',
@@ -1127,22 +1127,8 @@ gtp.controller=Ext.regController("load",{
 						console.log('map centered at lat: '+map.getCenter().lat()+' long: '+map.getCenter().lng());
 						
 						new google.maps.Marker({
-							position: new google.maps.LatLng(32.42131,-117.1062200),
-							title: '',
-							icon: 'resources/images/covered.png',
-							map: map
-						});
-						
-						new google.maps.Marker({
-							position: new google.maps.LatLng(32.965856499359,-117.129014192652),
-							title: '',
-							icon: 'resources/images/covered.png',
-							map: map
-						});
-						
-						new google.maps.Marker({
-							position: new google.maps.LatLng(32.949888,-117.109406),
-							title: '',
+							position: new google.maps.LatLng(32.942888,-117.109406),
+							title: 'Paseo Montril',
 							icon: 'resources/images/covered.png',
 							map: map
 						});
@@ -1154,6 +1140,34 @@ gtp.controller=Ext.regController("load",{
 							map: map
 						});
 						
+						var staticmarker=new google.maps.Marker({
+							position: new google.maps.LatLng(32.942888,-117.109406),
+							icon: 'resources/images/covered.png',
+							map: map
+						});
+						
+						staticinfowindow=new google.maps.InfoWindow({
+							content: 'Entry Toll Gate <br/>Price: $1<br/>Avg Price: $2'
+						});
+						
+						google.maps.event.addListener(staticmarker,'click',function(){
+							staticinfowindow.open(map,staticmarker);
+						});
+						
+						var markertemp=new google.maps.Marker({
+							position: new google.maps.LatLng(28.345338,-81.44018),
+							icon: 'resources/images/covered.png',
+							map: map
+						});
+						
+						infowindowtemp=new google.maps.InfoWindow({
+							content: 'Shingle Creek'+'<br/>Price: $1<br/>Avg Price: $2'
+						});
+						
+						google.maps.event.addListener(markertemp,'click',function(){
+							infowindowtemp.open(map,markertemp);
+						});
+						
 					},
 					centerchange: function(comp,map, center)
 					{
@@ -1163,7 +1177,7 @@ gtp.controller=Ext.regController("load",{
 						
 						// responseFetched variable is used to prevent multiple ajax calls.
 						// since by scrolling the map this event is fired multiple times. 
-						if(gtp.responseFetched )//&& (gtp.geo.latitude || gtp.geo.longitude))
+						if(gtp.responseFetched)
 						{
 							gtp.responseFetched=false;
 							var bounds = map.getBounds();
@@ -1172,7 +1186,7 @@ gtp.controller=Ext.regController("load",{
 						  	var southWest = bounds.getSouthWest();
 					  	
 							Ext.Ajax.request({
-								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
+								url: 'http://172.30.102.62:8081/web/services/TollDetailsList',
 								method: 'GET',
 								params: {
 									json: Ext.encode({
@@ -1189,6 +1203,15 @@ gtp.controller=Ext.regController("load",{
 									
 									for(i=0; i<lomobj.length; i++)
 									{
+										gtp.infoWindows[i]=new google.maps.InfoWindow({
+											content: lomobj[i].tollOperator+'<br/>Price: $1<br/>Avg Price: $2'
+										});
+									}
+										
+									console.log('info windows created');	
+										
+									for(i=0; i<lomobj.length; i++)
+									{
 										if(lomobj[i].isCovered=='Y')
 										{
 											iconpath='resources/images/covered.png';
@@ -1200,19 +1223,19 @@ gtp.controller=Ext.regController("load",{
 											markertitle=lomobj[i].tollOperator;
 										}
 										
-										tollmarker=new google.maps.Marker({
+										gtp.tollMarkers[i]=new google.maps.Marker({
 											position: new google.maps.LatLng(lomobj[i].latitude,lomobj[i].longitude),
 											title: markertitle,
 											icon: iconpath,
 											map: map
 										});
-										
-										infowindow=new google.maps.InfoWindow({
-											content: lomobj[i].tollOperator+'<br/>Price: $1<br/>Avg Price: $2'
-										});
-										
-										google.maps.event.addListener(tollmarker,'click',function(){
-											infowindow.open(map,tollmarker);
+									}
+									
+									for(i=0; i<lomobj.length; i++)
+									{
+										google.maps.event.addListener(gtp.tollMarkers[i],'click',function(){
+											console.log('clicked toll marker '+i);
+											gtp.infoWindows[i].open(map,gtp.tollMarkers[i]);
 										});
 									}
 									
