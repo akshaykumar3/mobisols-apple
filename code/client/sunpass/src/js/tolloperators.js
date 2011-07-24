@@ -8,6 +8,6 @@ var TollsData = new Ext.data.Store({
 	model: 'TollOperators',
 	storeId: 'tollops',
 	data: [{
-		tolloperator: 'Florida Entry Toll', tollperday: '2$', avgtoll: '4$'
+		tolloperator: 'Pass Track', tollperday: '2$', avgtoll: '4$'
 	}]
 });

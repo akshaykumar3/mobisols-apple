@@ -158,7 +158,7 @@ Ext.setup({
 			covered: true,
 			description: "toll no 1, $2",
 			url: "www.tollno1.com"
-		}, {
+		},{
 			covered: false,
 			description: "toll no 2, $2",
 			url: "www.tollno2.com"

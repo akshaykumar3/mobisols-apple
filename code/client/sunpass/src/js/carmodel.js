@@ -27,7 +27,7 @@ var carsList = new Ext.data.Store({
 		return record.get('reg')[0];
 	},
 	data: [{
-		reg: '4GPB522',
+		reg: '4GPB5',
 		state: 'CA',
 		type: 'Sedan',
 		startDate: new Date('12/7/2010'),
