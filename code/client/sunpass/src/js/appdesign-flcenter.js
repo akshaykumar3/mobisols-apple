@@ -1,19 +1,21 @@
 /* 
  * Author: A. Pradeep
  * Last Modified: July 16,2011
+ * 
  */
 
 Ext.regApplication({
     name: "gtp",
-    icon: 'resources/images/launchiconapple.png',
-    tabletStartupScreen: 'resources/images/launchimageipad.png',
-    phoneStartupScreen: 'resources/images/launchimageiphone.png',
+    icon: 'resources/images/sunpass.png',
+    tabletStartupScreen: 'resources/images/tablet_startup.png',
+    phoneStartupScreen: 'resources/images/phone_startup.png',
     glossOnIcon: false,
     responseFetched: true,
     today: new Date(),
     isAppEnabled: 0,
     launch: function(){
     	console.log('application is launched');
+    	console.log('Today '+this.today);
     	this.launchLoginPage({
     		uuid: '00012121235923472398461',
     		type: this.detectDeviceType()
@@ -40,10 +42,6 @@ Ext.regApplication({
     	return 'ipad'
     	else if(Ext.is.Desktop)
     	return 'desktop'
-    },
-    registerLaunch: function(){
-    	console.log('device is registered');
-    	gtp.views.loginPage.setActiveItem('regpage');
     }
 });
 
@@ -94,7 +92,7 @@ gtp.controller=Ext.regController("load",{
 							else
 							{
 								Ext.Ajax.request({
-									url: 'http://mbtest.dyndns.dk:6004/webservices/services/LoginAuthentication',
+									url: 'http:mbtest.dyndns.dk:6004/webservices/services/',
 									params: {
 										user_name: Ext.getCmp('lpemailid'),
 										password: Ext.getCmp('lppassword')
@@ -108,20 +106,16 @@ gtp.controller=Ext.regController("load",{
 								})
 								Ext.dispatch({
 									controller: 'load',
-									action: 'view',
-									loginDetails: {
-										username: Ext.getCmp('lpemailid').getValue(),
-										password: Ext.getCmp('lppassword').getValue()
-									}
+									action: 'view'
 								});// Do user authertication here.
 							}
 							//gtp.views.loginPage.setActiveItem('regpage');
 						}
 					},{
-						//html: '<a onclick="gtp.registerLaunch()"><u><font color="#2e4bc5"> Register</font></u></a>'
+						//html: '<u>Register</u>'
 						xtype: 'button',
 						text: 'Register',
-						ui: 'round',
+						ui: 'normal',
 						handler: function(){
 							gtp.views.loginPage.setActiveItem('regpage');
 						}
@@ -146,7 +140,7 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'passwordfield',
 					border: '10 5 3 10',
-					id: 'rppassword'
+					id: 'password'
 				},{
 					html: 'Confirm Password:',
 					pack: 'left'
@@ -159,40 +153,22 @@ gtp.controller=Ext.regController("load",{
 					items: [{
 						xtype: 'button',
 						ui: 'round',
-						style: 'margin-left: 1px',
 						text: 'Register',
 						handler: function(){
-							if(Ext.getCmp('rppassword').getValue() == Ext.getCmp('conpwd').getValue())
 							Ext.dispatch({
 								controller: 'load',
-								action: 'view',
-								loginDetails: {
-									username: Ext.getCmp('rpemailid').getValue(),
-									password: Ext.getCmp('rppassword').getValue()
-								}
+								action: 'view'
 							});
-							else
-							Ext.Msg.alert('Passwords do not match');
-						}
-					},{
-						xtype: 'button',
-						ui: 'round',
-						text: 'Go back',
-						handler: function(){
-							gtp.views.loginPage.setActiveItem('loginpage');
 						}
 					}]
 				}]
 			}]
 		});
 	},
-	view: function(options){
+	view: function(){
 		console.log('i am from controller view action');
 		var mylocation_marker, markernotset=true;
 		
-		/*Ext.getCmp('userid').setValue(options.loginDetails.username);
-		Ext.getCmp('setpwd').setValue(options.loginDetails.password);
-		*/
 		gtp.geo = new Ext.util.GeoLocation({
 		    autoUpdate: true,
 		    listeners: {
@@ -210,7 +186,6 @@ gtp.controller=Ext.regController("load",{
 						Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 						markernotset=false;
 					}
-					else
 					mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
@@ -277,17 +252,18 @@ gtp.controller=Ext.regController("load",{
 					startDate: new Date(vehicle_details[i].startDate),
 					endDate: new Date(vehicle_details[i].endDate)
 				},'Cars'));
-				Ext.getCmp('activecar').setOptions([{
-					text: vehicle_details[i].registration,
-					value: vehicle_details[i].registration
-				}],true);
-			}
+	      	}
 	      	
 	      	Ext.getCmp('ccnumber').setValue(pay_details.cardNumber);
 	      	//Ext.getCmp('cardtype').setValue(pay_details.cardType);
 	      	Ext.getCmp('expirydate').setValue(Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),true);
 	      	Ext.getCmp('bankaccount').setValue(pay_details.bankAccount);
 	      	console.log('expiry date '+Date.parseDate(pay_details.expDate,'M j, Y g:i:s A').format('Y-m-d'));
+	      	
+	      	console.log(pay_details.cardNumber);
+	      	console.log(pay_details.expDate);
+	      	console.log(pay_details.cardType);
+	      	console.log(pay_details.bankAccount);
 	      	
 	      	for(i=0;i<paidtoll_details.length;i++)
 	      	{
@@ -300,6 +276,11 @@ gtp.controller=Ext.regController("load",{
 					reg: paidtoll_details[i].registration
 				}),'PaidTolls');
 			}
+			console.log(paidTolls.getAt(0).get('date'));
+			console.log(paidTolls.getAt(0).get('amount'));
+	      	console.log(paidTolls.getAt(0).get('location'));
+	      	console.log(paidTolls.getAt(0).get('reg'));
+	      
 	      },
 	      failure: function(result) {
 	     	console.log('failure with status code'+result.status); 	
@@ -342,11 +323,6 @@ gtp.controller=Ext.regController("load",{
 								reg: Ext.getCmp('rg').getValue(),
 								type: Ext.getCmp('tp').getValue()
 							},'Cars'));
-							
-							Ext.getCmp('activecar').setOptions([{
-								text: Ext.getCmp('rg').getValue(),
-								value: Ext.getCmp('rg').getValue()
-							}],true);
 							console.log('new car added, count is now '+carsList.getCount());
 							Ext.Ajax.request({
 								url: 'localhost:6004/webservices/services/AddCar',
@@ -555,13 +531,13 @@ gtp.controller=Ext.regController("load",{
 					required: true,
 					options: [{
 						text: '2 axle',
-						value: '2 axle'
+						value: 'twoaxle'
 					},{
-						text: '3 axle',
-						value: '3 axle'
+						text: 'under 7ft 6in',
+						value: 'many'
 					},{
-						text: '4 axle',
-						value: '4 axle'
+						text: 'other',
+						value: 'other'
 					}]
 				}]
 			},{
@@ -690,15 +666,6 @@ gtp.controller=Ext.regController("load",{
 				},{
 					label: 'To',
 					id: 'DetailPanel.to',
-					picker: {
-						yearFrom: gtp.today.getFullYear(),
-						yearTo: gtp.today.getFullYear()
-					},/*
-					value: {
-						year: gtp.today.getFullYear(),
-						month: gtp.today.getMonth()+1,
-						day: gtp.getDate()
-					},*/
 					name: 'ed'
 				}]
 			}/*,{
@@ -737,7 +704,7 @@ gtp.controller=Ext.regController("load",{
 				dockedItems: [{
 					xtype: 'toolbar',
 					dock: 'top',
-					title: 'Mobile Toll Pass',
+					title: 'Sun Pass',
 					layout: {
 						pack: 'left'
 					},
@@ -769,8 +736,6 @@ gtp.controller=Ext.regController("load",{
 								var at=Ext.getCmp('avgtoll');
 								var pt=Ext.getCmp('pdtoll');
 								if(toggle.value==0) {
-									console.log(this);
-									console.log(Ext.getCmp('tfd'));
 									gtp.isAppEnabled=1;
 									console.log('toggled');
 									toggle.value=1;
@@ -783,7 +748,7 @@ gtp.controller=Ext.regController("load",{
 										clat=37.1345;
 										clong=-130.121;
 									}
-									/*Ext.Ajax.request({
+									Ext.Ajax.request({
 										url: 'http://mbtest.dyndns.dk:6004/webservices/services/GetLocation',
 										params: {
 											json: Ext.encode({
@@ -807,25 +772,10 @@ gtp.controller=Ext.regController("load",{
 											at.setValue(TollsData.getAt(0).get('avgtoll'));
 											pt.setValue(TollsData.getAt(0).get('tollperday'));
 										}
-									})*/
-									
-									if(Ext.getCmp('activecar').getValue())
-									{
-										cl.setValue('Tallahassee, Florida');
-										to.setValue(TollsData.getAt(0).get('tolloperator'));
-										at.setValue(TollsData.getAt(0).get('avgtoll'));
-										pt.setValue(TollsData.getAt(0).get('tollperday'));
-										console.log('before heartbeat request');
-										//setTimeout("requestHeartBeat()",5000);
-										console.log('after heartbeat request');
-										
-										message='Settings have been saved '+'activated';
-										Ext.Msg.alert('HeartBeat','Toll crossing: I-15 Exp lanes, Cost: $2');
-									}
-									else
-									{
-										Ext.Msg.alert('One car should be activated');
-									}
+									})
+									console.log('before heartbeat request');
+									requestHeartBeat();
+									console.log('after heartbeat request');
 								} else {
 									gtp.isAppEnabled=0;
 									console.log(toggle.value);
@@ -870,23 +820,12 @@ gtp.controller=Ext.regController("load",{
 						id: 'pdtoll',
 						label: 'Per Day'
 					},{
-						xtype: 'selectfield',
-						//disabled: true,
+						xtype: 'textfield',
+						disabled: true,
 						label: 'ActiveCar',
-						id: 'activecar',
-						options: [{
-							text: '4GPB5',
-							value: '4GPB5'
-						},{
-							text: '4GPB522',
-							value: '4GPB522'
-						}]/*,{
-							text: '821CT',
-							value: '821CT'
-						}]*/
+						id: 'activecar'
 					},{
 						xtype: 'selectfield',
-						name: 'service',
 						label: 'Service',
 						required: true,
 						options: [{
@@ -933,9 +872,6 @@ gtp.controller=Ext.regController("load",{
 							ui: 'plain',
 							iconCls: 'add',
 							handler: function() {
-								Ext.getCmp('st').setValue('');
-								Ext.getCmp('rg').setValue('');
-								Ext.getCmp('tp').setValue('');
 								tabpanel.setActiveItem('addcar');
 							}
 						}]
@@ -961,7 +897,7 @@ gtp.controller=Ext.regController("load",{
 							if(record[0].get('active'))
 							{
 								Ext.getCmp('DetailPanel.toggle').value=1;
-								Ext.getCmp('DetailPanel.toggle').label='Disable';
+								Ext.getCmp('DetailPanel.toggle').label='Deactivate';
 							}
 							tabpanel.setActiveItem('details');
 							console.log('is selected '+this.isSelected(record[0]));	
@@ -1006,17 +942,12 @@ gtp.controller=Ext.regController("load",{
 					items: [{
 						xtype: 'textfield',
 						name: 'userid',
-						id: 'userid',
-						value: options.loginDetails.username,
 						label: 'UserID',
-						cls: 'customField',
 						placeHolder: 'userID',
 						autoCapitalize : false,
 					},{
 						xtype: 'passwordfield',
 						name: 'password',
-						id: 'setpwd',
-						value: options.loginDetails.password,
 						label: 'Password',
 						useClearIcon: true
 					}]
@@ -1080,31 +1011,21 @@ gtp.controller=Ext.regController("load",{
 						xtype: 'textfield',
 						label: 'Name',
 						id: 'billname',
-						value: 'Harish',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
 						label: 'Address',
-						value: '10009, Paseo Montril',
 						id: 'addr1',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
 						label: 'City',
-						value: 'San Diego',
 						id: 'billcity',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
 						label: 'State',
-						value: 'California',
 						id: 'billstate',
-						useClearIcon: true
-					},{
-						xtype: 'textfield',
-						label: 'Zip',
-						value: '92129',
-						id: 'zip',
 						useClearIcon: true
 					}]
 				}]
@@ -1112,9 +1033,9 @@ gtp.controller=Ext.regController("load",{
 				title: 'Map',
 				id: 'mappanel',
 				xtype: 'map',
-				useCurrentLocation: true,
+				//useCurrentLocation: true,
 				mapOptions: {
-					center: new google.maps.LatLng(32.95008700,-117.10962200),
+					center: new google.maps.LatLng(),
 					zoom: 16
 				},
 				cls: 'card5',
@@ -1126,34 +1047,6 @@ gtp.controller=Ext.regController("load",{
 						console.log('map is rendered');
 						console.log('map centered at lat: '+map.getCenter().lat()+' long: '+map.getCenter().lng());
 						
-						new google.maps.Marker({
-							position: new google.maps.LatLng(32.42131,-117.1062200),
-							title: '',
-							icon: 'resources/images/covered.png',
-							map: map
-						});
-						
-						new google.maps.Marker({
-							position: new google.maps.LatLng(32.965856499359,-117.129014192652),
-							title: '',
-							icon: 'resources/images/covered.png',
-							map: map
-						});
-						
-						new google.maps.Marker({
-							position: new google.maps.LatLng(32.949888,-117.109406),
-							title: '',
-							icon: 'resources/images/covered.png',
-							map: map
-						});
-						
-						new google.maps.Marker({
-							position: new google.maps.LatLng(32.95008700,-117.10962200),
-							title: '',
-							icon: 'resources/images/covered.png',
-							map: map
-						});
-						
 					},
 					centerchange: function(comp,map, center)
 					{
@@ -1163,7 +1056,7 @@ gtp.controller=Ext.regController("load",{
 						
 						// responseFetched variable is used to prevent multiple ajax calls.
 						// since by scrolling the map this event is fired multiple times. 
-						if(gtp.responseFetched )//&& (gtp.geo.latitude || gtp.geo.longitude))
+						if(gtp.responseFetched && (gtp.geo.latitude || gtp.geo.longitude))
 						{
 							gtp.responseFetched=false;
 							var bounds = map.getBounds();
@@ -1199,20 +1092,11 @@ gtp.controller=Ext.regController("load",{
 											iconpath='resources/images/uncovered.png';
 											markertitle=lomobj[i].tollOperator;
 										}
-										
-										tollmarker=new google.maps.Marker({
+										new google.maps.Marker({
 											position: new google.maps.LatLng(lomobj[i].latitude,lomobj[i].longitude),
 											title: markertitle,
 											icon: iconpath,
 											map: map
-										});
-										
-										infowindow=new google.maps.InfoWindow({
-											content: lomobj[i].tollOperator+'<br/>Price: $1<br/>Avg Price: $2'
-										});
-										
-										google.maps.event.addListener(tollmarker,'click',function(){
-											infowindow.open(map,tollmarker);
 										});
 									}
 									

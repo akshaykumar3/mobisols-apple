@@ -32,7 +32,7 @@ function requestHeartBeat(){
 				console.log('Estimated TimeInterval is: '+estimatedDelay);
 				
 				if(resobj.response.status=='success')
-				Ext.Msg.alert('U have just crossed a toll');
+				Ext.Msg.alert('U have crossed a toll <br/> deducted 1$ from ur account');
 				
 				//Calculate the next timestamp to call this function.. 
 				// trigger this function
