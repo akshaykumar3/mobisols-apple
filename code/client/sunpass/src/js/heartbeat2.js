@@ -18,7 +18,7 @@ function requestHeartBeat(){
 		
 		// works only in same domain... 
 		Ext.Ajax.request({
-			url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
+			url: 'http://172.30.102.62:8081/web/services/HeartBeat',
 			params: {
 				user_name: 'harish@mobisols.com',
 				json: Ext.encode(request_jsobject)
@@ -30,9 +30,6 @@ function requestHeartBeat(){
 				var estimatedDelay;
 				estimatedDelay=resobj.response.timeInterval
 				console.log('Estimated TimeInterval is: '+estimatedDelay);
-				
-				if(resobj.response.status=='success')
-				Ext.Msg.alert('U have crossed a toll <br/> deducted 1$ from ur account');
 				
 				//Calculate the next timestamp to call this function.. 
 				// trigger this function
@@ -69,12 +66,12 @@ function getGeoLatitude() {
 	if(gtp.geo.latitude)
 	return gtp.geo.latitude;
 	else
-	return 31.2234;
+	return Ext.getCmp('mappanel').map.getCenter().lat();
 }
 
 function getGeoLongitude() {
 	if(gtp.geo.longitude)
 	return gtp.geo.longitude;
 	else
-	return -122.1213;
+	return Ext.getCmp('mappanel').map.getCenter().lng();
 }
