@@ -28,7 +28,7 @@ public class HibernateSessionFactory {
 
 	static {
     	try {
-			configuration.configure("config/hibernate.cfg.xml");
+			configuration.configure(configFile);
 			sessionFactory =configuration.buildSessionFactory();
 		} catch (Exception e) {
 			System.err

@@ -3,6 +3,7 @@
     <wb-module deploy-name="newweb">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config"/>
         <property name="context-root" value="newweb"/>
         <property name="java-output-path" value="/newweb/build/classes"/>
     </wb-module>
