@@ -18,7 +18,7 @@ function requestHeartBeat(){
 		
 		// works only in same domain... 
 		Ext.Ajax.request({
-			url: 'http://172.30.102.62:8081/web/services/HeartBeat',
+			url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
 			params: {
 				user_name: 'harish@mobisols.com',
 				json: Ext.encode(request_jsobject)
