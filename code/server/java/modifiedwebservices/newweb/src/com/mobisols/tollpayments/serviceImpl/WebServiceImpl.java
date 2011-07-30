@@ -34,7 +34,7 @@ public class WebServiceImpl {
 	            };
 	        ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
 	        accountDetailsService = (AccountDetailsService) ctx.getBean("service.tollpayments.accountDetailsService");
-	        addBalanceService=(AddBalanceService)ctx.getBean("service.tollpayments.addBalanceService");
+	        //addBalanceService=(AddBalanceService)ctx.getBean("service.tollpayments.addBalanceService");
 	        vehicleTypeListService= (VehicleTypeListService) ctx.getBean("service.tollpayments.vehicleTypeListService");
 	        jsonConverter=(JsonConverter) ctx.getBean("myutils.tollpayments.jsonConverter");
 	}
@@ -81,6 +81,23 @@ public class WebServiceImpl {
 		String status =null;
 		AddBalanceRequest ar= (AddBalanceRequest) jsonConverter.getObject(json, "import com.mobisols.tollpayments.request.post.AddBalanceRequest");
 		return jsonConverter.getJSON(request, status, addBalanceService.postaddBalanceResponse(ar,username));
+	}
+
+	public VehicleTypeListService getVehicleTypeListService() {
+		return vehicleTypeListService;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+
+	public void setVehicleTypeListService(
+			VehicleTypeListService vehicleTypeListService) {
+		this.vehicleTypeListService = vehicleTypeListService;
 	}
 }
 
