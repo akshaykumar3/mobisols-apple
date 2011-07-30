@@ -19,7 +19,7 @@
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="myeclipse.connection.profile">mysql</property>
-		<mapping
+		<!-- <mapping
 			resource="/hbm/model/VmlType.hbm.xml" />
 		<mapping
 			resource="/hbm/model/ComponentVersion.hbm.xml" />
@@ -46,10 +46,10 @@
 		<mapping
 			resource="/hbm/model/TollLocationHistory.hbm.xml" />
 		<mapping
-			resource="/hbm/model/UserVehicle.hbm.xml" />
+			resource="/hbm/model/UserVehicle.hbm.xml" />-->
 		<mapping
 			resource="/hbm/model/VehicleType.hbm.xml" />
-		<mapping
+		<!-- <mapping
 			resource="/hbm/model/Component.hbm.xml" />
 		<mapping
 			resource="/hbm/model/CcType.hbm.xml" />
@@ -72,7 +72,7 @@
 		<mapping
 			resource="/hbm/model/UserVehicleHistory.hbm.xml" />
 		<mapping
-			resource="/hbm/model/PaymentTransaction.hbm.xml" />
+			resource="/hbm/model/PaymentTransaction.hbm.xml" />-->
 
 	</session-factory>
 
