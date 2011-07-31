@@ -11,11 +11,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
+import com.mobisols.tollpayments.response.get.CcTypeListResponse;
+import com.mobisols.tollpayments.response.get.OwnerTypeListResponse;
 import com.mobisols.tollpayments.response.get.VehicleTypeListResponse;
+import com.mobisols.tollpayments.response.get.VmlTypeListResponse;
 import com.mobisols.tollpayments.service.AccountDetailsService;
 import com.mobisols.tollpayments.service.AddBalanceService;
+import com.mobisols.tollpayments.service.CcTypeListService;
 import com.mobisols.tollpayments.service.GeneralService;
+import com.mobisols.tollpayments.service.OwnerTypeListService;
 import com.mobisols.tollpayments.service.VehicleTypeListService;
+import com.mobisols.tollpayments.service.VmlTypeListService;
 
 
 @Path("/services")
@@ -24,6 +30,9 @@ public class WebServiceImpl {
 	AccountDetailsService accountDetailsService;
 	AddBalanceService addBalanceService;
 	VehicleTypeListService vehicleTypeListService;
+	CcTypeListService ccTypeListService;
+	OwnerTypeListService ownerTypeListService;
+	VmlTypeListService vmlTypeListService;
 	JsonConverter jsonConverter;
 	
 	
@@ -36,6 +45,9 @@ public class WebServiceImpl {
 	        accountDetailsService = (AccountDetailsService) ctx.getBean("service.tollpayments.accountDetailsService");
 	        //addBalanceService=(AddBalanceService)ctx.getBean("service.tollpayments.addBalanceService");
 	        vehicleTypeListService= (VehicleTypeListService) ctx.getBean("service.tollpayments.vehicleTypeListService");
+	        ccTypeListService= (CcTypeListService) ctx.getBean("service.tollpayments,ccTypeListService");
+	        ownerTypeListService= (OwnerTypeListService) ctx.getBean("service.tollpayments.ownerTypeListService");
+	        vmlTypeListService= (VmlTypeListService) ctx.getBean("service.tollpayments.vmlTypeListService");
 	        jsonConverter=(JsonConverter) ctx.getBean("myutils.tollpayments.jsonConverter");
 	}
 
@@ -71,6 +83,39 @@ public class WebServiceImpl {
 		VehicleTypeListResponse vr=vehicleTypeListService.getVehicleTypeList();
 		return jsonConverter.getJSON(request, status, vr);
 	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/CcTypesList")
+	public String getCcTypesList()
+	{
+		String request="";
+		String status="";
+		CcTypeListResponse cr=ccTypeListService.getCcTypeList();
+		return jsonConverter.getJSON(request, status, cr);
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/OwnerTypesList")
+	public String getOwnerTypesList()
+	{
+		String request="";
+		String status="";
+		OwnerTypeListResponse cr=ownerTypeListService.getOwnerTypeList();
+		return jsonConverter.getJSON(request, status, cr);
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/VmlTypesList")
+	public String getVmlTypesList()
+	{
+		String request="";
+		String status="";
+		VmlTypeListResponse cr=vmlTypeListService.getVmlTypeList();
+		return jsonConverter.getJSON(request, status, cr);
+	}
 
 	@POST
 	@Produces("text/plain")
@@ -98,6 +143,30 @@ public class WebServiceImpl {
 	public void setVehicleTypeListService(
 			VehicleTypeListService vehicleTypeListService) {
 		this.vehicleTypeListService = vehicleTypeListService;
+	}
+
+	public AccountDetailsService getAccountDetailsService() {
+		return accountDetailsService;
+	}
+
+	public void setAccountDetailsService(AccountDetailsService accountDetailsService) {
+		this.accountDetailsService = accountDetailsService;
+	}
+
+	public AddBalanceService getAddBalanceService() {
+		return addBalanceService;
+	}
+
+	public void setAddBalanceService(AddBalanceService addBalanceService) {
+		this.addBalanceService = addBalanceService;
+	}
+
+	public CcTypeListService getCcTypeListService() {
+		return ccTypeListService;
+	}
+
+	public void setCcTypeListService(CcTypeListService ccTypeListService) {
+		this.ccTypeListService = ccTypeListService;
 	}
 }
 
