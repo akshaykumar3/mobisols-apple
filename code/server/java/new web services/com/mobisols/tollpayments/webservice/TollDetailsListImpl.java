@@ -25,6 +25,21 @@ private List<TollDetailsImpl> tollDetailsList;
 		
 	}
 	
+	private TollDetailsList getTollDetailsListImpl() {
+		// TODO Auto-generated method stub
+		List<TollDetailsImpl> tollDetailsList=new LinkedList<TollDetailsImpl>();;
+		Criteria crit=HibernateSessionFactory.getSession().createCriteria(TollLocation.class);
+		List<TollLocation> tollList=crit.list();
+		for(Iterator<TollLocation> it= tollList.iterator();it.hasNext();)
+		{
+			TollLocation t=it.next();
+			tollDetailsList.add( new TollDetailsImpl(t.getTollLocationId()));
+		}
+		TollDetailsList tdl=new TollDetailsListImpl();
+		tdl.setTollDetailsList(tollDetailsList);
+		return tdl;
+	}
+	
 	public TollDetailsList getTollDetailsListImpl(double latitude1,double longitude1,double latitude2,double longitude2){
 		//TODO write an algorithm to find the toll details in the bounds
 		//and populate the list
@@ -59,12 +74,18 @@ private List<TollDetailsImpl> tollDetailsList;
 		Geometry g;
 		g = (GeometryImpl)jc.getObject(json,"com.mobisols.tollpayments.webservice.GeometryImpl");
 		System.out.println("converted json to the object");
-		TollDetailsList td=getTollDetailsListImpl(((GeometryImpl)g).getLatitude1(),((GeometryImpl)g).getLongitude1(),((GeometryImpl)g).getLatitude2(),((GeometryImpl)g).getLongitude2());
+		TollDetailsList td;
+		if(g!=null)
+		td=getTollDetailsListImpl(((GeometryImpl)g).getLatitude1(),((GeometryImpl)g).getLongitude1(),((GeometryImpl)g).getLatitude2(),((GeometryImpl)g).getLongitude2());
+		else
+		td=getTollDetailsListImpl();
 		System.out.println("created the list");
 		String res = jc.getJSON(request,status,td);
 		HibernateSessionFactory.closeSession();
 		return res;
 	}
+	
+
 	/**
 	 * @param tollDetailsList the tollDetailsList to set
 	 */
