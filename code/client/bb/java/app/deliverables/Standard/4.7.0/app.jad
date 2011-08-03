@@ -1,0 +1,247 @@
+Manifest-Version: 1.0
+MIDlet-Jar-Size: 3808241
+RIM-COD-URL-77: app-77.cod
+RIM-COD-URL-76: app-76.cod
+RIM-COD-URL-75: app-75.cod
+RIM-COD-URL-74: app-74.cod
+RIM-COD-URL-73: app-73.cod
+MicroEdition-Configuration: CLDC-1.1
+RIM-COD-URL-72: app-72.cod
+RIM-COD-URL-71: app-71.cod
+RIM-COD-URL-70: app-70.cod
+RIM-COD-Size-77: 65176
+MIDlet-Version: 1.0.0
+RIM-COD-Size-76: 59468
+RIM-COD-Size-75: 55324
+RIM-COD-Size: 37780
+RIM-COD-Size-74: 50836
+RIM-COD-URL-69: app-69.cod
+RIM-COD-Size-73: 58492
+RIM-COD-URL-68: app-68.cod
+RIM-COD-Size-72: 50860
+RIM-COD-URL-67: app-67.cod
+RIM-COD-Size-71: 51688
+RIM-COD-URL-66: app-66.cod
+RIM-COD-Size-70: 50884
+RIM-COD-URL-65: app-65.cod
+RIM-COD-URL-64: app-64.cod
+RIM-COD-URL-63: app-63.cod
+RIM-COD-URL-62: app-62.cod
+RIM-COD-URL-61: app-61.cod
+RIM-COD-URL-60: app-60.cod
+RIM-MIDlet-Flags-1: 0
+MIDlet-Name: app
+RIM-COD-Size-69: 50884
+RIM-COD-Size-68: 58600
+RIM-COD-Size-67: 50884
+RIM-COD-Size-66: 50876
+RIM-COD-Size-65: 50864
+RIM-COD-Size-64: 56452
+RIM-COD-URL-59: app-59.cod
+RIM-COD-Size-63: 50836
+RIM-COD-URL-58: app-58.cod
+RIM-COD-Size-62: 50836
+RIM-COD-URL-57: app-57.cod
+RIM-COD-Size-61: 50836
+RIM-COD-URL-56: app-56.cod
+RIM-COD-Size-60: 50836
+RIM-COD-URL-55: app-55.cod
+RIM-COD-URL-54: app-54.cod
+RIM-COD-URL-53: app-53.cod
+RIM-COD-URL-52: app-52.cod
+RIM-COD-URL-51: app-51.cod
+RIM-COD-URL-50: app-50.cod
+RIM-COD-Size-59: 50836
+RIM-COD-Size-58: 50812
+RIM-COD-Size-57: 59052
+RIM-COD-Size-56: 50812
+RIM-COD-URL-9: app-9.cod
+RIM-COD-Size-55: 51584
+RIM-COD-URL-8: app-8.cod
+RIM-COD-Size-54: 50812
+RIM-COD-URL-49: app-49.cod
+RIM-COD-URL-7: app-7.cod
+RIM-COD-Size-53: 50804
+RIM-COD-URL-48: app-48.cod
+RIM-COD-URL-6: app-6.cod
+MicroEdition-Profile: MIDP-2.0
+RIM-COD-Size-52: 56704
+RIM-COD-URL-47: app-47.cod
+RIM-COD-URL-5: app-5.cod
+RIM-COD-Size-51: 50788
+RIM-COD-URL-46: app-46.cod
+RIM-COD-URL-4: app-4.cod
+RIM-COD-Size-50: 57844
+RIM-COD-URL-45: app-45.cod
+RIM-COD-URL-3: app-3.cod
+RIM-COD-URL-44: app-44.cod
+RIM-COD-URL-2: app-2.cod
+RIM-COD-URL-1: app-1.cod
+RIM-COD-URL-43: app-43.cod
+RIM-COD-URL-42: app-42.cod
+RIM-COD-URL-41: app-41.cod
+RIM-COD-Size-9: 49908
+RIM-COD-URL-40: app-40.cod
+RIM-COD-Size-8: 45340
+RIM-COD-Size-7: 54828
+RIM-COD-Size-6: 54324
+RIM-COD-Size-5: 58768
+RIM-COD-Size-4: 59080
+RIM-COD-Size-3: 59144
+RIM-COD-Size-2: 56404
+RIM-COD-Size-1: 52732
+RIM-COD-Size-49: 50764
+RIM-COD-Size-48: 50764
+RIM-COD-Size-47: 55352
+RIM-COD-Size-46: 59240
+RIM-COD-Size-45: 50884
+RIM-COD-Size-44: 50872
+RIM-COD-URL-39: app-39.cod
+RIM-COD-Size-43: 50360
+RIM-COD-URL-38: app-38.cod
+RIM-COD-URL-37: app-37.cod
+RIM-COD-Size-42: 50864
+RIM-COD-URL-36: app-36.cod
+RIM-COD-Size-41: 50864
+RIM-COD-URL-35: app-35.cod
+RIM-COD-Size-40: 50844
+RIM-COD-URL-34: app-34.cod
+RIM-COD-URL-33: app-33.cod
+RIM-COD-URL-32: app-32.cod
+RIM-COD-URL-31: app-31.cod
+RIM-COD-URL-30: app-30.cod
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_os,net_rim_bbapi_invoke,net_rim_bb_browser_field_api,net_rim_bbapi_browser,net_rim_pdap,net_rim_locationapi
+MIDlet-Vendor: BlackBerry Developer
+RIM-COD-Size-39: 50836
+RIM-COD-Size-38: 55808
+RIM-COD-Size-37: 50836
+RIM-COD-Size-36: 50836
+RIM-COD-Size-35: 59096
+RIM-COD-URL-29: app-29.cod
+RIM-COD-Size-34: 50836
+RIM-COD-URL-28: app-28.cod
+RIM-COD-Size-33: 50836
+RIM-COD-URL-27: app-27.cod
+RIM-COD-Size-32: 50828
+RIM-COD-URL-26: app-26.cod
+RIM-COD-Size-31: 53412
+RIM-COD-URL-25: app-25.cod
+RIM-COD-Size-30: 50816
+RIM-COD-URL-24: app-24.cod
+RIM-COD-URL-23: app-23.cod
+RIM-COD-URL-22: app-22.cod
+RIM-COD-URL-21: app-21.cod
+RIM-COD-URL-20: app-20.cod
+RIM-COD-SHA1-77: 4d d5 9d dc 4e 36 09 5c e0 87 bb 0f 77 ab 0e 70 a1 dd 16 ef
+RIM-COD-SHA1-76: 7f c2 e0 c7 d8 fe 8d 34 2f 4b 30 46 e6 a3 b0 69 c3 1f 84 b3
+RIM-COD-SHA1-75: c6 95 f1 0d 9c 5c b8 6a 3a e4 79 86 bc 3d e3 04 61 f6 77 8a
+RIM-COD-SHA1-74: 2e 28 1c ee 3c cf 31 a2 54 d0 e6 6f 59 53 00 11 53 52 47 b5
+RIM-COD-SHA1-73: aa 18 7b b4 0e 32 d1 b2 fd 13 76 b5 be e1 79 c9 ed ad 6f df
+RIM-COD-URL: app.cod
+RIM-COD-SHA1-72: 59 5e b9 e4 f5 4b d4 76 ab 62 6d 12 5b 4e 3c 8c 18 41 04 d1
+RIM-COD-SHA1-71: 15 63 28 64 02 e0 c1 3a 47 4f 21 09 69 a6 53 b8 00 31 8a e7
+RIM-COD-SHA1-70: 2a 56 8e 33 57 97 67 c7 40 79 db aa 99 90 b5 79 67 95 25 ab
+RIM-COD-Module-Name: app
+RIM-COD-Size-29: 50808
+RIM-COD-Size-28: 50788
+RIM-COD-Size-27: 50780
+RIM-COD-Size-26: 54424
+RIM-COD-Size-25: 50932
+RIM-COD-URL-19: app-19.cod
+RIM-COD-Size-24: 32912
+RIM-COD-URL-18: app-18.cod
+RIM-COD-Size-23: 50932
+RIM-COD-URL-17: app-17.cod
+RIM-COD-Size-22: 50920
+RIM-COD-URL-16: app-16.cod
+RIM-COD-Size-21: 50912
+RIM-COD-URL-15: app-15.cod
+RIM-COD-Size-20: 56428
+RIM-COD-URL-14: app-14.cod
+RIM-COD-URL-13: app-13.cod
+RIM-COD-URL-12: app-12.cod
+RIM-COD-URL-11: app-11.cod
+RIM-COD-SHA1-69: bf 8d 8f 08 d4 7c c4 ee a1 dd a2 30 fa a1 69 97 ec 2c f0 5d
+RIM-COD-URL-10: app-10.cod
+RIM-COD-SHA1-68: 1b 6d c2 51 42 67 57 e5 74 13 44 ea 8e bf 1b d8 69 75 6e e0
+RIM-COD-SHA1-67: b9 8d 34 e2 c7 0d d6 f3 c6 26 7b 5f 87 f3 de 9f 6d 03 4d ef
+RIM-COD-SHA1-66: c1 81 57 d3 ad e1 44 74 cb 1a 9a 8f 19 a3 55 37 ea e1 80 be
+RIM-COD-SHA1-65: 2c b3 49 fb 6f 66 f7 b4 8e 72 59 45 d1 c0 f0 6c 55 2c 4b 3e
+RIM-COD-SHA1-64: 89 ee 30 89 15 c2 04 78 a6 0c 67 5a 4f ab 4b 9d 9e f4 47 91
+RIM-COD-SHA1-63: 28 89 59 9f 72 4e 09 38 9f 9a e2 81 b5 9f 5f ee c5 36 d6 98
+RIM-COD-SHA1-62: 38 02 77 c0 3f 2e 1b 33 6d ad bc fb 87 04 80 ef cb 3f 2f d4
+RIM-COD-SHA1-61: 9b 86 b1 d9 bb 97 e4 9f 78 26 34 87 a9 0e ac bd b9 15 e7 7a
+RIM-COD-SHA1-60: c5 d5 9a 5f ad 41 45 49 4a 89 76 b4 c7 62 a5 48 27 95 c9 ad
+RIM-COD-Size-19: 50792
+RIM-COD-Size-18: 50792
+RIM-COD-Size-17: 50792
+RIM-COD-Size-16: 50792
+RIM-COD-Size-15: 50784
+RIM-COD-Size-14: 50764
+RIM-COD-Size-13: 52180
+RIM-COD-Size-12: 50756
+RIM-COD-Size-11: 56636
+RIM-COD-Size-10: 36364
+RIM-COD-SHA1-59: 41 8f 90 d6 ce 89 4e 00 cd e8 c7 47 08 47 2c 0c c0 6c 57 0d
+RIM-COD-SHA1-58: 9b 9b 1b 88 70 4d 91 09 28 67 d3 59 b9 97 4e 6d 43 75 84 23
+RIM-COD-SHA1-57: 5a c0 38 df 7c f3 7f a6 8f 1e 54 77 ee 14 7d 4f 5d 23 db 79
+RIM-COD-SHA1-56: aa c6 92 f5 69 37 f1 6c 4c b3 b9 0a 85 e5 6d a1 e2 59 be c9
+RIM-COD-SHA1-55: 0d b3 a9 f9 05 ea cd 83 ee 2d c5 0a aa d3 8a d2 ef 6f 71 b9
+RIM-COD-SHA1-54: 5b 92 07 fb 52 fb 49 82 19 c2 7b 78 15 40 53 4a 14 6a 4f 51
+RIM-COD-SHA1-53: 52 21 2f 2c da 96 a1 c2 2b 5d 29 fb 99 5f 06 85 1b 35 6c 03
+MIDlet-1: ,img/icon.png,
+RIM-COD-SHA1-52: cf e9 28 1e b2 b6 44 de 16 2b 46 00 42 11 fa 9b ef 87 5a 89
+RIM-COD-SHA1-51: 33 d5 81 87 50 68 dd 72 6e 58 f0 a9 f7 75 e1 92 92 fe 3e 18
+RIM-COD-SHA1-50: 65 ff b0 ef 1e 67 61 6e ee 2d b3 2a 1c 98 e5 9b d9 cf 3c a7
+RIM-COD-SHA1: ca 6c ab 9d ff 9f 1e 52 f1 bf 0a d7 0e 26 51 72 b8 32 2d db
+RIM-COD-SHA1-49: eb 80 26 ec 92 88 5c 38 f8 8c d3 39 e4 bf 74 ed 95 f8 4c c8
+RIM-COD-SHA1-48: a2 80 52 df fa 78 b2 fa 40 ad 03 06 7f 49 5f b2 55 71 db c4
+RIM-COD-SHA1-47: 2a 9f 5a 47 77 10 1e 26 7d 70 28 e7 c2 21 ab 5c 63 57 86 ad
+RIM-COD-SHA1-46: 7a 2e 58 d2 f5 02 89 5c 08 ac 9e b1 f7 30 9f 36 38 a1 e9 31
+RIM-COD-SHA1-45: 53 d3 51 bf e8 50 aa b8 6d 96 e1 ec 78 16 95 29 c7 76 00 9d
+RIM-COD-SHA1-44: 09 43 23 0e be 80 f9 3d 03 21 7a 1f 5f 90 6e 95 08 b8 ca 07
+RIM-COD-SHA1-43: cd 46 ab 74 3e da a5 a5 e1 a0 ba 11 79 a7 75 72 55 4b 55 73
+RIM-COD-SHA1-42: 91 bd 6e 57 be 6a 5f 40 cb e1 a7 95 c0 4b fa a9 2c 8c 8f c2
+RIM-COD-SHA1-41: 9e 92 0d 4d c8 b9 cf a2 43 15 64 8b 8f a0 99 70 90 01 2a 60
+RIM-COD-SHA1-40: 86 a0 19 6a d4 e3 ef 1a c9 6a 18 b7 af 4a 68 d8 7e 63 7b e2
+RIM-COD-SHA1-39: e0 7c dd 1f 2b 37 50 ab b5 47 b1 aa aa 95 86 04 a7 2b e0 62
+RIM-COD-SHA1-38: 09 cd 29 63 61 0e 07 90 b9 d7 86 74 3f 7f f5 bf 7e 85 cf 81
+RIM-COD-SHA1-37: a0 33 2d 13 13 1c d0 13 ff 48 96 fc 77 0e e7 f2 fc e5 a9 c8
+RIM-COD-SHA1-36: 49 74 64 74 5b 11 eb ad ac 11 94 c8 c9 be d1 dd c8 c7 54 5c
+MIDlet-Jar-URL: app.jar
+RIM-COD-SHA1-35: 5b f1 0e 0d c5 95 58 4f 91 d7 4c cc 26 a4 67 de 7e 30 6b 2c
+RIM-COD-SHA1-34: 85 d9 d3 19 42 46 56 c6 80 90 d4 aa 6b 0f 4d e1 6e a7 15 e6
+RIM-COD-SHA1-33: eb d7 cb 89 ec 0e 1c 81 12 88 93 e7 4f 50 97 d2 4f cc 73 74
+RIM-COD-SHA1-32: 16 62 6e 29 c6 f7 f1 40 d0 40 01 d8 9c db f6 1a 69 d6 c6 7d
+RIM-COD-SHA1-31: 9e fe d0 8b f7 b1 c1 3d a1 45 05 34 b0 f0 33 09 55 2f 3e 44
+RIM-COD-SHA1-30: af 83 f4 33 67 68 36 7c 07 61 be 03 6c 59 57 4d c9 75 e1 6c
+RIM-COD-SHA1-9: 86 42 16 37 51 ce 42 b5 8e 01 53 8d c3 19 b7 17 0e a7 0d 5e
+RIM-COD-SHA1-8: df 90 92 c0 fa 39 20 ed 0f ce d4 a7 80 64 28 e4 43 2d c1 b3
+RIM-COD-SHA1-7: b7 74 74 78 e9 70 be f4 92 f1 a8 b9 01 07 42 6a 79 48 2b 59
+RIM-COD-SHA1-6: 3c 7d ac e6 9e 0b 5a 71 c3 ae 7f 7d e8 69 d0 ca 1c 5b f4 41
+RIM-COD-SHA1-5: e8 d3 bc 3b 09 c9 3e 08 7a 8c 44 d9 54 16 f1 32 d4 8d b9 74
+RIM-COD-SHA1-4: ad f1 22 b3 6b 51 2f 22 09 28 89 2d 5e 3d 15 94 c6 6b 99 37
+RIM-COD-SHA1-3: 9e 48 20 58 cc 4f 22 80 c0 f5 9d 4a 14 16 bc 40 fd a1 11 b9
+RIM-COD-SHA1-2: 44 db 68 45 d5 9b bb 35 4c cb 89 d5 76 97 aa ad 3b d1 9c 56
+RIM-COD-SHA1-1: d3 31 34 87 7d ac 5b 35 c8 77 2c 44 14 93 09 06 a4 94 a5 55
+RIM-COD-SHA1-29: 3c 5f 4f 30 c4 50 19 e7 66 4a 48 db 81 ac 3b af ec 1a 79 00
+RIM-COD-SHA1-28: 9c 3b 76 9f af e3 d9 64 c8 a5 1a 75 ac a5 40 af 9d a3 24 2f
+RIM-COD-SHA1-27: eb ed d7 d5 a0 03 22 2e 56 a8 60 1c c2 34 15 d2 90 34 6f 2e
+RIM-COD-SHA1-26: b3 46 ea 14 83 5c 53 e6 7c db e3 52 90 ce 05 4c a7 80 c7 44
+RIM-COD-SHA1-25: 4d 4b 03 2c ee e7 ab 0f f2 95 05 a6 79 4a 48 66 d9 44 51 8c
+RIM-COD-SHA1-24: 1e b0 df 80 93 a1 e7 2a 39 e6 51 34 e7 ec d8 dc 84 cb 1d a5
+RIM-COD-SHA1-23: d1 25 2f da 4b 9e 5f 21 ec 9f 50 ca 4b 63 9e 14 ee 27 f1 79
+RIM-COD-SHA1-22: cf 6d e7 1f 37 a0 9f 7a 7b 5d 68 fd 85 bf 9c a6 aa 48 ec 94
+RIM-COD-SHA1-21: 05 cf f5 71 0b 3a 0a 9f c9 0d 16 3b 2f a1 e3 9c 30 82 04 ee
+RIM-COD-SHA1-20: 08 a1 4a ca 6f 8e 3f 6b c2 6c ae 77 68 3d 72 fb 8a a1 6b d3
+RIM-COD-Creation-Time: 1312213539
+RIM-COD-SHA1-19: c9 92 19 8e 9b ee 94 94 6c b7 69 56 87 b7 66 5d fc 19 10 b2
+RIM-COD-SHA1-18: 89 63 84 4b 5c fd f0 df 65 77 5d d2 3e a2 6d a8 32 90 35 80
+RIM-COD-SHA1-17: b5 b6 41 b1 5a 71 c6 2e 63 f4 1f d5 03 24 f4 63 f3 9a 9c a5
+RIM-COD-SHA1-16: f4 8d 51 01 9c 5c ef 93 01 d2 76 13 f1 37 8a c5 d9 04 a5 97
+RIM-COD-SHA1-15: 69 a9 ff 2b ca 14 19 16 7f 8c 66 a5 7d 35 03 6d 13 69 7a d8
+RIM-COD-SHA1-14: 66 62 6b b2 45 66 68 e7 9a fc 82 50 0f 92 f0 9a dd 13 6a cc
+RIM-COD-SHA1-13: 0f aa c9 37 17 80 ce 4d 20 1c d3 ba 45 a1 20 ae 8b 0f 1a 50
+RIM-COD-SHA1-12: 58 93 3b 80 e5 07 b3 40 fc e6 a7 26 af 33 f8 84 df ed 30 98
+RIM-COD-SHA1-11: f7 da 5c 86 fb 9c 27 9e 34 38 73 5b 4f 39 6f aa 52 22 99 9e
+RIM-COD-SHA1-10: 49 eb 64 34 9e 88 43 ca b9 78 23 34 06 86 38 a7 fd dc f6 85
