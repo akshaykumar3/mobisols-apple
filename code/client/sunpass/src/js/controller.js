@@ -287,11 +287,7 @@ gtp.controller=Ext.regController("load",{
 						else if(Ext.getCmp('rg').getValue()=="")
 							Ext.Msg.alert("Enter registration number");
 						else {
-							carsList.insert(0,Ext.ModelMgr.create({
-								state: Ext.getCmp('st').getValue(),
-								reg: Ext.getCmp('rg').getValue(),
-								type: Ext.getCmp('tp').getValue()
-							},'Cars'));
+							
 							
 							Ext.getCmp('activecar').setOptions([{
 								text: Ext.getCmp('rg').getValue(),
@@ -311,7 +307,11 @@ gtp.controller=Ext.regController("load",{
 									})
 								},
 								success: function(response){
-									
+									carsList.insert(0,Ext.ModelMgr.create({
+								state: Ext.getCmp('st').getValue(),
+								reg: Ext.getCmp('rg').getValue(),
+								type: Ext.getCmp('tp').getValue()
+								},'Cars'));
 								},
 								failure: function(response){
 									
