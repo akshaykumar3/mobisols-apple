@@ -60,7 +60,7 @@
             </property>
             
             <many-to-one name="componentVersion"
-			class="com.mobisols.tollpayments.hibernate.entity.ComponentVersion"
+			class="com.mobisols.tollpayments.model.ComponentVersion"
 			column="comp_version_id"
 			cascade="save-update"
 			insert="false"

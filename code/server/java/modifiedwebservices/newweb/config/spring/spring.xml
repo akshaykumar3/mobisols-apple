@@ -18,14 +18,20 @@
   	<bean id="service.tollpayments.vehicleTypeListService" class="com.mobisols.tollpayments.serviceImpl.VehicleTypeListServiceImpl">
     	<property name="vehicleTypeDao" ref="dao.tollpayments.vehicleTypeDao"></property>
     </bean>
-    <bean id="service.tollpayments.ccTypeListService" class = "com.mobisols.tollpayments.serviceImpl.CcTypeListServiceImpl">
-      <property name="ccTypeDao" ref="dao.tollpayments.ccTypeDao"></property>
+    <bean id="service.tollpayments.ccTypeListService" class="com.mobisols.tollpayments.serviceImpl.CcTypeListServiceImpl">
+    	<property name="ccTypeDao" ref="dao.tollpayments.ccTypeDao"></property>
     </bean>
-    <bean id="service.tollpayments.ownerTypeListService" class = "com.mobisols.tollpayments.serviceImpl.OwnerTypeListServiceImpl">
-      <property name="ownerTypeDao" ref="dao.tollpayments.ownerTypeDao"></property>
+    <bean id="service.tollpayments.ownerTypeListService" class="com.mobisols.tollpayments.serviceImpl.OwnerTypeListServiceImpl">
+    	<property name="ownerTypeDao" ref="dao.tollpayments.ownerTypeDao"></property>
     </bean>
-    <bean id="service.tollpayments.vmlTypeListService" class = "com.mobisols.tollpayments.serviceImpl.VmlTypeListServiceImpl">
-      <property name="vmlTypeDao" ref="dao.tollpayments.vmlTypeDao"></property>
+    <bean id="service.tollpayments.vmlTypeListService" class="com.mobisols.tollpayments.serviceImpl.VmlTypeListServiceImpl">
+    	<property name="vmlTypeDao" ref="dao.tollpayments.vmlTypeDao"></property>
+    </bean>
+    <bean id="service.tollpayments.balanceInfoService" class="com.mobisols.tollpayments.serviceImpl.BalanceInfoServiceImpl">
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    </bean>
+    <bean id="service.tollpayments.tollDetailsListService" class="com.mobisols.tollpayments.serviceImpl.TollDetailsListServiceImpl">
+    	<property name="TollLocationDao" ref="dao.tollpayments.tollLocationDao"></property>
     </bean>
 </beans>
   

@@ -62,7 +62,7 @@
                 <column name="version" length="20" />
             </property>
             <many-to-one name="component"
-             class="com.mobisols.tollpayments.hibernate.entity.Component"
+             class="com.mobisols.tollpayments.model.Component"
 				column="component_id"
 				cascade="save-update"
 				insert="false"

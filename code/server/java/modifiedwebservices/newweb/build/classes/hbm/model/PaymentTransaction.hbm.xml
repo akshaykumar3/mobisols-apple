@@ -71,7 +71,7 @@
             </property>
        
              <many-to-one name="fromUserBalanceLog"
-			class="com.mobisols.tollpayments.hibernate.entity.UserBalanceLog"
+			class="com.mobisols.tollpayments.model.UserBalanceLog"
 			column="user_bl_id"
 			cascade="save-update"
 			insert="false"
@@ -79,7 +79,7 @@
 			unique="true"/>
 			
 			<many-to-one name="toUserBalanceLog"
-			class="com.mobisols.tollpayments.hibernate.entity.UserBalanceLog"
+			class="com.mobisols.tollpayments.model.UserBalanceLog"
 			column="to_bl_id"
 			cascade="save-update"
 			insert="false"
@@ -87,7 +87,7 @@
 			unique="true"/>
 			
 			<many-to-one name="userPaymentDetailHistory"
-			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetailHistory"
+			class="com.mobisols.tollpayments.model.UserPaymentDetailHistory"
 			column="updh_id"
 			cascade="save-update"
 			insert="false"

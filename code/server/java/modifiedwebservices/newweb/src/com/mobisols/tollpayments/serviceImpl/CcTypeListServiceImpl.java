@@ -10,7 +10,7 @@ import com.mobisols.tollpayments.response.get.CcTypeListResponse;
 import com.mobisols.tollpayments.service.CcTypeListService;
 
 public class CcTypeListServiceImpl implements CcTypeListService{
-	public CcTypeDao ccTypeDao;
+	private CcTypeDao ccTypeDao;
 	
     public CcTypeListServiceImpl()
     {

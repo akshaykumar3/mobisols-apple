@@ -83,7 +83,7 @@
             </property>
             
              <many-to-one name="user"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
+			class="com.mobisols.tollpayments.model.User"
 			column="user_id"
 			property-ref="userId"
 			insert="false"
@@ -92,7 +92,7 @@
 			unique="true"/> 
 			
 			 <many-to-one name="device"
-			class="com.mobisols.tollpayments.hibernate.entity.Device"
+			class="com.mobisols.tollpayments.model.Device"
 			column="device_id"
 			property-ref="deviceId"
 			insert="false"

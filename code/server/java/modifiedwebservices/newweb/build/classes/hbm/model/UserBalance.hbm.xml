@@ -60,7 +60,7 @@
             </property>
             
             <many-to-one name="user"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
+			class="com.mobisols.tollpayments.model.User"
 			column="user_id"
 			property-ref="userId"
 			insert="false"
@@ -70,7 +70,7 @@
 			
 			<set name="userBalanceLog" inverse="true">
 			<key column="ubal_id" not-null="true"/>
-			<one-to-many class="com.mobisols.tollpayments.hibernate.entity.UserBalanceLog"/>
+			<one-to-many class="com.mobisols.tollpayments.model.UserBalanceLog"/>
              </set>
              
 			

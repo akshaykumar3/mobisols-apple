@@ -113,7 +113,7 @@
             </property>
             
             <many-to-one name="userPaymentDetail"
-			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
+			class="com.mobisols.tollpayments.model.UserPaymentDetail"
 			column="upd_id"
 			cascade="save-update"
 			insert="false"
