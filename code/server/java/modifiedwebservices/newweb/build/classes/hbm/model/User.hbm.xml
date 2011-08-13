@@ -77,7 +77,7 @@
             </property>
             
             <many-to-one name="userType"
-			class="com.mobisols.tollpayments.hibernate.entity.UserType"
+			class="com.mobisols.tollpayments..model.UserType"
 			column="utype_id"
 			property-ref="userTypeId"
 			insert="false"
@@ -86,7 +86,7 @@
 			/>
 			
 			<many-to-one name="userPaymentDetails"
-			class="com.mobisols.tollpayments.hibernate.entity.UserPaymentDetail"
+			class="com.mobisols.tollpayments.model.UserPaymentDetail"
 			column="user_id"
 			property-ref="userId"
 			insert="false"
@@ -95,7 +95,7 @@
 			unique="true"/>
 			
 			<many-to-one name="userBalance"
-			class="com.mobisols.tollpayments.hibernate.entity.UserBalance"
+			class="com.mobisols.tollpayments.model.UserBalance"
 			column="user_id"
 			property-ref="userId"
 			insert="false"
@@ -109,7 +109,7 @@
                     <column name="user_id" not-null="true"/>
                 </key>
                 <one-to-many
-                    class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
+                    class="com.mobisols.tollpayments.model.UserVehicle"
                 />
             </set>
 			

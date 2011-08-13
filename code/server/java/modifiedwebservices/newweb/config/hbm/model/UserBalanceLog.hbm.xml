@@ -65,7 +65,7 @@
             </property>
             
              <many-to-one name="userBalance"
-			class="com.mobisols.tollpayments.hibernate.entity.UserBalance"
+			class="com.mobisols.tollpayments.model.UserBalance"
 			column="ubal_id"
 			insert="false" update="false"
 			not-null="true"/>

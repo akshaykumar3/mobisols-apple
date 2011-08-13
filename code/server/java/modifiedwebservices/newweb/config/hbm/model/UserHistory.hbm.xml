@@ -86,7 +86,7 @@
             </property>
             
             <many-to-one name="user"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
+			class="com.mobisols.tollpayments.model.User"
 			column="user_id"
 			cascade="save-update"
 			insert="false"

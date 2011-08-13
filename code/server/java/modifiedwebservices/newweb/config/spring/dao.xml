@@ -15,4 +15,5 @@
 	<bean id="dao.tollpayments.ccTypeDao" class="com.mobisols.tollpayments.daoImpl.CcTypeDaoImpl"/>
 	<bean id="dao.tollpayments.ownerTypeDao" class="com.mobisols.tollpayments.daoImpl.OwnerTypeDaoImpl"/>
 	<bean id="dao.tollpayments.vmlTypeDao" class="com.mobisols.tollpayments.daoImpl.VmlTypeDaoImpl"/>
+	<bean id="dao.tollpayments.tollLocationDao" class="com.mobisols.tollpayments.daoImpl.TollLocationDaoImpl"/>
 </beans>

@@ -102,7 +102,7 @@
             </property>
             
             <many-to-one name="ccType"
-             class="com.mobisols.tollpayments.hibernate.entity.CcType"
+             class="com.mobisols.tollpayments.model.CcType"
              column="cc_type_id"
              cascade="save-update"
              insert="false"
@@ -110,7 +110,7 @@
              unique="true"/>
              
              <many-to-one name="user"
-             class="com.mobisols.tollpayments.hibernate.entity.User"
+             class="com.mobisols.tollpayments.model.User"
              column="user_id"
              cascade="save-update"
              insert="false"

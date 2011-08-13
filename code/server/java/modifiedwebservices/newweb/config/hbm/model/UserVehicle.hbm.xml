@@ -78,7 +78,7 @@
             </property>
             
             <many-to-one name="ownerType"
-			class="com.mobisols.tollpayments.hibernate.entity.OwnerType"
+			class="com.mobisols.tollpayments.model.OwnerType"
             column="owner_type_id"
 			cascade="save-update"
 			insert="false"
@@ -86,7 +86,7 @@
 			unique="true"/>
 			
 			<many-to-one name="user"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
+			class="com.mobisols.tollpayments.model.User"
 			column="user_id"
 			cascade="all"
 			insert="false"
@@ -94,7 +94,7 @@
 			not-null="true"/>
 			
 			<many-to-one name="vehicleType"
-			class="com.mobisols.tollpayments.hibernate.entity.VehicleType"
+			class="com.mobisols.tollpayments.model.VehicleType"
             column="vehicle_type_id"
 			cascade="save-update"
 			insert="false"

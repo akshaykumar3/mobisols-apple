@@ -10,16 +10,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.request.get.TollRange;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
-import com.mobisols.tollpayments.response.get.CcTypeListResponse;
-import com.mobisols.tollpayments.response.get.OwnerTypeListResponse;
 import com.mobisols.tollpayments.response.get.VehicleTypeListResponse;
-import com.mobisols.tollpayments.response.get.VmlTypeListResponse;
 import com.mobisols.tollpayments.service.AccountDetailsService;
 import com.mobisols.tollpayments.service.AddBalanceService;
+import com.mobisols.tollpayments.service.BalanceInfoService;
 import com.mobisols.tollpayments.service.CcTypeListService;
 import com.mobisols.tollpayments.service.GeneralService;
 import com.mobisols.tollpayments.service.OwnerTypeListService;
+import com.mobisols.tollpayments.service.TollDetailsListService;
 import com.mobisols.tollpayments.service.VehicleTypeListService;
 import com.mobisols.tollpayments.service.VmlTypeListService;
 
@@ -33,6 +33,9 @@ public class WebServiceImpl {
 	CcTypeListService ccTypeListService;
 	OwnerTypeListService ownerTypeListService;
 	VmlTypeListService vmlTypeListService;
+	BalanceInfoService balanceInfoService;
+	TollDetailsListService tollDetailsService;
+
 	JsonConverter jsonConverter;
 	
 	
@@ -45,10 +48,12 @@ public class WebServiceImpl {
 	        accountDetailsService = (AccountDetailsService) ctx.getBean("service.tollpayments.accountDetailsService");
 	        //addBalanceService=(AddBalanceService)ctx.getBean("service.tollpayments.addBalanceService");
 	        vehicleTypeListService= (VehicleTypeListService) ctx.getBean("service.tollpayments.vehicleTypeListService");
-	        ccTypeListService= (CcTypeListService) ctx.getBean("service.tollpayments,ccTypeListService");
-	        ownerTypeListService= (OwnerTypeListService) ctx.getBean("service.tollpayments.ownerTypeListService");
-	        vmlTypeListService= (VmlTypeListService) ctx.getBean("service.tollpayments.vmlTypeListService");
 	        jsonConverter=(JsonConverter) ctx.getBean("myutils.tollpayments.jsonConverter");
+	        ccTypeListService = (CcTypeListService) ctx.getBean("service.tollpayments.ccTypeListService");
+	        ownerTypeListService = (OwnerTypeListService) ctx.getBean("service.tollpayments.ownerTypeListService");
+	        vmlTypeListService = (VmlTypeListService) ctx.getBean("service.tollpayments.vmlTypeListService");
+	        balanceInfoService=(BalanceInfoService) ctx.getBean("service.tollpayments.balanceInfoService");
+	        tollDetailsService=(TollDetailsListService) ctx.getBean("service.tollpayments.tollDetailsListService");
 	}
 
 	@GET
@@ -83,39 +88,6 @@ public class WebServiceImpl {
 		VehicleTypeListResponse vr=vehicleTypeListService.getVehicleTypeList();
 		return jsonConverter.getJSON(request, status, vr);
 	}
-	
-	@GET
-	@Produces("text/plain")
-	@Path("/CcTypesList")
-	public String getCcTypesList()
-	{
-		String request="";
-		String status="";
-		CcTypeListResponse cr=ccTypeListService.getCcTypeList();
-		return jsonConverter.getJSON(request, status, cr);
-	}
-	
-	@GET
-	@Produces("text/plain")
-	@Path("/OwnerTypesList")
-	public String getOwnerTypesList()
-	{
-		String request="";
-		String status="";
-		OwnerTypeListResponse cr=ownerTypeListService.getOwnerTypeList();
-		return jsonConverter.getJSON(request, status, cr);
-	}
-	
-	@GET
-	@Produces("text/plain")
-	@Path("/VmlTypesList")
-	public String getVmlTypesList()
-	{
-		String request="";
-		String status="";
-		VmlTypeListResponse cr=vmlTypeListService.getVmlTypeList();
-		return jsonConverter.getJSON(request, status, cr);
-	}
 
 	@POST
 	@Produces("text/plain")
@@ -127,7 +99,58 @@ public class WebServiceImpl {
 		AddBalanceRequest ar= (AddBalanceRequest) jsonConverter.getObject(json, "import com.mobisols.tollpayments.request.post.AddBalanceRequest");
 		return jsonConverter.getJSON(request, status, addBalanceService.postaddBalanceResponse(ar,username));
 	}
-
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/CcTypeList")
+	public String getCcTypeList()
+	{
+		String request="get CCTypeList";
+		String status=null;
+		return jsonConverter.getJSON(request,status,ccTypeListService.getCcTypeList());
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/OwnerTypeList")
+	public String getOwnerTypeList()
+	{
+		String request="get OwnerTypeList";
+		String status=null;
+		return jsonConverter.getJSON(request,status,ownerTypeListService.getOwnerTypeList());
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/VmlTypeList")
+	public String getVMLTypeList()
+	{
+		String request="get VMLTypeList";
+		String status=null;
+		return jsonConverter.getJSON(request,status,vmlTypeListService.getVmlTypeList());
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/BalanceInfo")
+	public String getBalanceInfo(@QueryParam("user_name") String username)
+	{
+		String request="get BlanceInfo";
+		String status=null;
+		return jsonConverter.getJSON(request,status,balanceInfoService.getBalanceInfo(username));
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/TollDetailsList")
+	public String getTollDetailsList(@QueryParam("json") String json)
+	{
+		String request="get BlanceInfo";
+		String status=null;
+		TollRange tr=(TollRange) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.TollRange");
+		return jsonConverter.getJSON(request,status,tollDetailsService.getTollLocations());
+	}
+	
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}
@@ -144,7 +167,6 @@ public class WebServiceImpl {
 			VehicleTypeListService vehicleTypeListService) {
 		this.vehicleTypeListService = vehicleTypeListService;
 	}
-
 	public AccountDetailsService getAccountDetailsService() {
 		return accountDetailsService;
 	}
@@ -167,6 +189,37 @@ public class WebServiceImpl {
 
 	public void setCcTypeListService(CcTypeListService ccTypeListService) {
 		this.ccTypeListService = ccTypeListService;
+	}
+	
+	public OwnerTypeListService getOwnerTypeListService() {
+		return ownerTypeListService;
+	}
+
+	public void setOwnerTypeListService(OwnerTypeListService ownerTypeListService) {
+		this.ownerTypeListService = ownerTypeListService;
+	}
+	
+	public VmlTypeListService getVmlTypeListService() {
+		return vmlTypeListService;
+	}
+
+	public void setVmlTypeListService(VmlTypeListService vmlTypeListService) {
+		this.vmlTypeListService = vmlTypeListService;
+	}
+	
+	public BalanceInfoService getBalanceInfoService() {
+		return balanceInfoService;
+	}
+
+	public void setBalanceInfoService(BalanceInfoService balanceInfo) {
+		this.balanceInfoService = balanceInfo;
+	}
+	public TollDetailsListService getTollDetailsService() {
+		return tollDetailsService;
+	}
+
+	public void setTollDetailsService(TollDetailsListService tollDetailsService) {
+		this.tollDetailsService = tollDetailsService;
 	}
 }
 

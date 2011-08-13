@@ -95,7 +95,7 @@
             </property>
             
             <many-to-one name="tollOperator"
-			class="com.mobisols.tollpayments.hibernate.entity.TollOperator"
+			class="com.mobisols.tollpayments.model.TollOperator"
 			column="toll_operator_id"
 			property-ref="tollOperatorId"
 			cascade="save-update"

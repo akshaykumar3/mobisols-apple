@@ -89,7 +89,7 @@
             </property>
             
             <many-to-one name="userVehicle"
-			class="com.mobisols.tollpayments.hibernate.entity.UserVehicle"
+			class="com.mobisols.tollpayments.model.UserVehicle"
 			column="user_vehicle_id"
 			cascade="save-update"
 			insert="false"
@@ -101,7 +101,7 @@
              <column name="uvh_id" not-null="true"/>
              </key>
              <one-to-many
-                class="com.mobisols.tollpayments.hibernate.entity.VehicleTollUsage"
+                class="com.mobisols.tollpayments.model.VehicleTollUsage"
                 />
              </set>
             

@@ -60,7 +60,7 @@
             </property>
      
              <many-to-one name="user"
-			class="com.mobisols.tollpayments.hibernate.entity.User"
+			class="com.mobisols.tollpayments.model.User"
 			column="user_id"
 			cascade="save-update"
 			insert="false"
@@ -68,7 +68,7 @@
 			unique="true"/>
 			
 			<many-to-one name="userNotificationType"
-			class="com.mobisols.tollpayments.hibernate.entity.UserNotificationType"
+			class="com.mobisols.tollpayments.model.UserNotificationType"
 			column="user_notification_type_id"
 			cascade="save-update"
 			insert="false"

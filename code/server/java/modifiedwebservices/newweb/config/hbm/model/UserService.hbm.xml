@@ -67,7 +67,7 @@
                 <column name="client_id" />
             </property>
             <many-to-one name="servicePlan"
-                class="com.mobisols.tollpayments.hibernate.entity.ServicePlan"
+                class="com.mobisols.tollpayments.model.ServicePlan"
 				column="service_id"
 				cascade="save-update"
 				insert="false"
@@ -75,7 +75,7 @@
 				unique="true"/>
 				
 			<many-to-one name="user"
-                class="com.mobisols.tollpayments.hibernate.entity.User"
+                class="com.mobisols.tollpayments.model.User"
 				column="user_id"
 				cascade="save-update"
 				insert="false"

@@ -70,7 +70,7 @@
                 <column name="client_id" />
             </property>
             <many-to-one name="paymentTransaction"
-            class="com.mobisols.tollpayments.hibernate.entity.PaymentTransaction"
+            class="com.mobisols.tollpayments.model.PaymentTransaction"
             column="ptran_id"
             cascade="save-update"
             insert="false"
@@ -78,7 +78,7 @@
             unique="true"/>
             
             <many-to-one name="tollLocation"
-                class="com.mobisols.tollpayments.hibernate.entity.TollLocation"
+                class="com.mobisols.tollpayments.model.TollLocation"
 				column="toll_loc_id"
 				cascade="save-update"
 				insert="false"
@@ -86,7 +86,7 @@
 				unique="true"/>
 				
 			<many-to-one name="vehicleMovementLog"
-                class="com.mobisols.tollpayments.hibernate.entity.VehicleMovementLog"
+                class="com.mobisols.tollpayments.model.VehicleMovementLog"
 				column="vml_id"
 				cascade="save-update"
 				insert="false"
@@ -94,7 +94,7 @@
 				unique="true"/>	
             
             <many-to-one name="userVehicleHistory"
-                class="com.mobisols.tollpayments.hibernate.entity.UserVehicleHistory"
+                class="com.mobisols.tollpayments.model.UserVehicleHistory"
 				column="uvh_id"
 				cascade="save-update"
 				insert="false"
@@ -103,7 +103,7 @@
 		
 				
 			<many-to-one name="tollPriceHistory"
-                class="com.mobisols.tollpayments.hibernate.entity.TollPriceHistory"
+                class="com.mobisols.tollpayments.model.TollPriceHistory"
 				column="tph_id"
 				cascade="save-update"
 				insert="false"
