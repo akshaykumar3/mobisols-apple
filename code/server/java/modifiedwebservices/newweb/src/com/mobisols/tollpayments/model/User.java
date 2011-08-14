@@ -150,7 +150,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public Integer getUtypeId() {
-		return this.utypeId;
+	return this.utypeId;
 	}
 
 	public void setUtypeId(Integer utypeId) {
@@ -309,7 +309,7 @@ public class User implements java.io.Serializable {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	public boolean equals(Object other) {
+	/*public boolean equals(Object other) {
 		if ((this == other))
 			return true;
 		if ((other == null))
@@ -453,5 +453,5 @@ public class User implements java.io.Serializable {
 						.hashCode());
 		return result;
 	}
-
+*/
 }

@@ -16,4 +16,8 @@
 	<bean id="dao.tollpayments.ownerTypeDao" class="com.mobisols.tollpayments.daoImpl.OwnerTypeDaoImpl"/>
 	<bean id="dao.tollpayments.vmlTypeDao" class="com.mobisols.tollpayments.daoImpl.VmlTypeDaoImpl"/>
 	<bean id="dao.tollpayments.tollLocationDao" class="com.mobisols.tollpayments.daoImpl.TollLocationDaoImpl"/>
+	<bean id="dao.tollpayments.servicePlanDao" class="com.mobisols.tollpayments.daoImpl.ServicePlanDaoImpl"/>
+	<bean id="dao.tollpayments.vmlDao" class="com.mobisols.tollpayments.daoImpl.VmlDaoImpl"/>
+	<bean id="dao.tollpayments.deviceDao" class="com.mobisols.tollpayments.daoImpl.DeviceDaoImpl"/>
+	<bean id="dao.tollpayments.userVehicleHistoryDao" class="com.mobisols.tollpayments.daoImpl.UserVehicleHistoryDaoImpl"/>
 </beans>
