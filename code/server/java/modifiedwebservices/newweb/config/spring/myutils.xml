@@ -6,4 +6,8 @@
 <beans>
 	<bean id="myutils.tollpayments.jsonConverter" class="com.mobisols.tollpayments.myutilsImpl.JsonConverterImpl">
 	</bean>
+	<bean id="myutils.tollpayments.myUtilDate" class="com.mobisols.tollpayments.myutilsImpl.MyUtilDateImpl">
+	</bean>
+	<bean id="myutils.tollpayments.tollLocationUtil" class="com.mobisols.tollpayments.myutilsImpl.TollLocationUtilImpl">
+	</bean>
 </beans>
