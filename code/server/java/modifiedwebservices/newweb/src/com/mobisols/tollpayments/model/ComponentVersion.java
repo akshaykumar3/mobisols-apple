@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * ComponentVersionId entity. @author MyEclipse Persistence Tools
@@ -29,11 +30,19 @@ public class ComponentVersion implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private String version;
 	private Component component;
-
+	private Set<Configuration> configuration;
 	// Constructors
 
 	public Component getComponent() {
 		return component;
+	}
+
+	public Set<Configuration> getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Set<Configuration> configuration) {
+		this.configuration = configuration;
 	}
 
 	public void setComponent(Component component) {

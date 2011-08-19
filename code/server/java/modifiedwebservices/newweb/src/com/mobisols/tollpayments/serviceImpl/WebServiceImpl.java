@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,6 +18,7 @@ import com.mobisols.tollpayments.request.get.TollRange;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
+import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
 import com.mobisols.tollpayments.response.get.VehicleTypeListResponse;
 import com.mobisols.tollpayments.service.AccountDetailsService;
 import com.mobisols.tollpayments.service.AddBalanceService;
@@ -29,6 +32,7 @@ import com.mobisols.tollpayments.service.PaymentDetailsService;
 import com.mobisols.tollpayments.service.PeriodicHeartBeatService;
 import com.mobisols.tollpayments.service.ServicePlanService;
 import com.mobisols.tollpayments.service.TollDetailsListService;
+import com.mobisols.tollpayments.service.VehicleDetailsService;
 import com.mobisols.tollpayments.service.VehicleTypeListService;
 import com.mobisols.tollpayments.service.VmlTypeListService;
 
@@ -50,6 +54,7 @@ public class WebServiceImpl {
 	NearestTollService nearestTollService;
 	PaymentDetailsService paymentDetailsService;
 	ClientConfigurationService clientConfigurationService;
+	VehicleDetailsService vehicleDetailsService;
 	JsonConverter jsonConverter;
 	
 	
@@ -74,6 +79,7 @@ public class WebServiceImpl {
 	        nearestTollService= (NearestTollService) ctx.getBean("service.tollpayments.nearestToll");
 	        paymentDetailsService = (PaymentDetailsService) ctx.getBean("service.tollpayments.paymentDetailsService");
 	        clientConfigurationService=(ClientConfigurationService) ctx.getBean("service.tollpayments.clientConfigurationService");
+	        vehicleDetailsService = (VehicleDetailsService) ctx.getBean("service.tollpayments.vehicleDetailsService");
 	}
 
 	@GET
@@ -110,7 +116,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/AddBalance")
-	public String postAddBalance(@QueryParam("json")String json,@QueryParam("username")String username)
+	public String postAddBalance(@FormParam("json")String json,@FormParam("username")String username)
 	{
 		String request = "RETRIEVE ACC_DETAILS";
 		String status =null;
@@ -186,7 +192,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/PeriodicHeartBeat")
-	public String postPeriodicHeartBeat(@QueryParam("json") String json)
+	public String postPeriodicHeartBeat(@FormParam("json") String json)
 	{
 		String request="post periodic heartbeat";
 		String status="success";
@@ -197,7 +203,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/HeartBeat")
-	public String postHeartBeat(@QueryParam("json") String json)
+	public String postHeartBeat(@FormParam("json") String json)
 	{
 		String request="post heartbeat";
 		String status="success";
@@ -219,7 +225,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/PaymentDetails")
-	public String postPaymentDetails(@QueryParam("json") String json,@QueryParam("user_name")String username)
+	public String postPaymentDetails(@FormParam("json") String json,@FormParam("user_name")String username)
 	{
 		String request="update paymentDetails";
 		String status="success";
@@ -236,6 +242,28 @@ public class WebServiceImpl {
 		String status="success";
 		ClientConfigurationRequest r= (ClientConfigurationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.ClientConfigurationRequest");
 		return jsonConverter.getJSON(request, status,clientConfigurationService.getClientConfig(r));
+	}
+	
+	@POST
+	@Produces("text/plain")
+	@Path("/VehicleDetailsService")
+	public String postVehicleDetails(@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@FormParam("user_name") String username)
+	{
+		String request="post vehicleDetails";
+		String status="success";
+		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
+		return jsonConverter.getJSON(request, status,vehicleDetailsService.postVehicleDetails(r, username, isNewVehicle));
+	}
+	
+	@DELETE
+	@Produces("text/plain")
+	@Path("/VehicleDetailsService")
+	public String deleteVehicleDetails(@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@FormParam("user_name") String username)
+	{
+		String request="post vehicleDetails";
+		String status="success";
+		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
+		return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(r, username));
 	}
 	
 	public VehicleTypeListService getVehicleTypeListService() {

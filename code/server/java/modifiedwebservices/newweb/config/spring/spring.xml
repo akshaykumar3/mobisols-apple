@@ -61,5 +61,20 @@
     	<property name="tollLocationDao" ref="dao.tollpayments.tollLocationDao"></property>
     	<property name="tollLocationUtil" ref="myutils.tollpayments.tollLocationUtil"></property>
     </bean>
+    <bean id="service.tollpayments.paymentDetailsService" class="com.mobisols.tollpayments.serviceImpl.PaymentDetailsServiceImpl">
+    	<property name="userPaymentDetailDao" ref="dao.tollpayments.userPaymentDetailDao"></property>
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="myUtilDate" ref="myutils.tollpayments.myUtilDate"></property>
+    </bean>
+    <bean id="service.tollpayments.clientConfigurationService" class="com.mobisols.tollpayments.serviceImpl.ClientConfigurationServiceImpl">
+    	<property name="clientConfigurationDao" ref="dao.tollpayments.clientConfigurationDao"></property>
+    </bean>
+     <bean id="service.tollpayments.vehicleDetailsService" class="com.mobisols.tollpayments.serviceImpl.VehicleDetailsServiceImpl">
+    	<property name="userVehicleDao" ref="dao.tollpayments.userVehicleDao"></property>
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="myUtilDate" ref="myutils.tollpayments.myUtilDate"></property>
+    	<property name="ownerTypeDao" ref="dao.tollpayments.ownerTypeDao"></property>
+    	<property name="vehicleTypeDao" ref="dao.tollpayments.vehicleTypeDao"></property>
+    </bean>
 </beans>
   
