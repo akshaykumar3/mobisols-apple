@@ -68,6 +68,16 @@
 				insert="false"
 				update="false"
 				unique="true"/>
+				
+			<set
+                name="configuration" inverse="true">
+                <key update="false" >
+                    <column name="comp_version_id" not-null="true"/>
+                </key>
+                <one-to-many
+                    class="com.mobisols.tollpayments.model.Configuration"
+                />
+            </set>
 			
     </class>
 </hibernate-mapping>

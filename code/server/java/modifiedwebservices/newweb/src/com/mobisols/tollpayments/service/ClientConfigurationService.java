@@ -1,9 +1,12 @@
 package com.mobisols.tollpayments.service;
 
-import com.mobisols.tollpayments.dao.ClientConfigurationDao;
+import com.mobisols.tollpayments.dao.ComponentDao;
+import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
+import com.mobisols.tollpayments.response.get.ClientConfigurationResponse;
+
 
 public interface ClientConfigurationService {
 
-	ClientConfigurationDao clinetConfigurationDao=null;
-	
+	ComponentDao componentDao=null;
+	public ClientConfigurationResponse getClientConfig(ClientConfigurationRequest r );
 }
