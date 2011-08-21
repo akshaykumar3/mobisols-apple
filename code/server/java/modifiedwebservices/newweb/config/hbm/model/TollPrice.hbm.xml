@@ -72,8 +72,8 @@
 			    update="false"
 				unique="true"/>
 			
-			<many-to-one name="vehicleType"
-                class="com.mobisols.tollpayments..model.VehicleType"
+			 <many-to-one name="vehicleType"
+                class="com.mobisols.tollpayments.model.VehicleType"
 				column="vehicle_type_id"
 				cascade="save-update"
 				insert="false"

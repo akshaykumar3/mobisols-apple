@@ -59,6 +59,16 @@
                 <column name="last_modified_by" />
             </property>
             
+            <set
+                name="componentVersion" inverse="true">
+                <key update="false" >
+                    <column name="component_id" not-null="true"/>
+                </key>
+                <one-to-many
+                    class="com.mobisols.tollpayments.model.ComponentVersion"
+                />
+            </set>
+            
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">

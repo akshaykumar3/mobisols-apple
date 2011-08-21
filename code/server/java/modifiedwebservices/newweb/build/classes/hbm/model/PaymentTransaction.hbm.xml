@@ -70,7 +70,7 @@
                 <column name="client_id" />
             </property>
        
-             <many-to-one name="fromUserBalanceLog"
+            <many-to-one name="fromUserBalanceLog"
 			class="com.mobisols.tollpayments.model.UserBalanceLog"
 			column="user_bl_id"
 			cascade="save-update"
@@ -78,7 +78,7 @@
 			update="false"
 			unique="true"/>
 			
-			<many-to-one name="toUserBalanceLog"
+			 <many-to-one name="toUserBalanceLog"
 			class="com.mobisols.tollpayments.model.UserBalanceLog"
 			column="to_bl_id"
 			cascade="save-update"
@@ -86,7 +86,7 @@
 			update="false"
 			unique="true"/>
 			
-			<many-to-one name="userPaymentDetailHistory"
+			 <many-to-one name="userPaymentDetailHistory"
 			class="com.mobisols.tollpayments.model.UserPaymentDetailHistory"
 			column="updh_id"
 			cascade="save-update"

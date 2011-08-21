@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -74,9 +76,9 @@ public class WebServiceImpl {
 	        balanceInfoService=(BalanceInfoService) ctx.getBean("service.tollpayments.balanceInfoService");
 	        tollDetailsService=(TollDetailsListService) ctx.getBean("service.tollpayments.tollDetailsListService");
 	        servicePlanService=(ServicePlanService) ctx.getBean("service.tollpayments.servicePlanService");
-	        periodicHeartBeatService = (PeriodicHeartBeatService) ctx.getBean("service.tollpayments.periodicHeartBeat");
+	        periodicHeartBeatService = (PeriodicHeartBeatService) ctx.getBean("service.tollpayments.periodicHeartBeatService");
 	        heartBeatService = (HeartBeatService) ctx.getBean("service.tollpayments.heartBeatService");
-	        nearestTollService= (NearestTollService) ctx.getBean("service.tollpayments.nearestToll");
+	        nearestTollService= (NearestTollService) ctx.getBean("service.tollpayments.nearestTollService");
 	        paymentDetailsService = (PaymentDetailsService) ctx.getBean("service.tollpayments.paymentDetailsService");
 	        clientConfigurationService=(ClientConfigurationService) ctx.getBean("service.tollpayments.clientConfigurationService");
 	        vehicleDetailsService = (VehicleDetailsService) ctx.getBean("service.tollpayments.vehicleDetailsService");

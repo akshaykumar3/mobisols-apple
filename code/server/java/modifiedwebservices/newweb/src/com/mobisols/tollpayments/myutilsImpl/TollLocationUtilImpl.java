@@ -3,8 +3,10 @@ package com.mobisols.tollpayments.myutilsImpl;
 import java.util.Iterator;
 import java.util.List;
 
+import com.mobisols.tollpayments.myutils.TollLocationUtil;
 
-public class TollLocationUtilImpl {
+
+public class TollLocationUtilImpl implements TollLocationUtil{
 	
 	public Location getNearestToll(Location p){
 		double minDist=100000000.0000;
