@@ -61,13 +61,23 @@
             <property name="version" type="java.lang.String">
                 <column name="version" length="20" />
             </property>
-            <many-to-one name="component"
+           <many-to-one name="component"
              class="com.mobisols.tollpayments.model.Component"
 				column="component_id"
+				property-ref="componentId"
 				cascade="save-update"
 				insert="false"
 				update="false"
 				unique="true"/>
-			
+				
+			<set
+                name="configuration" inverse="true">
+                <key update="false" >
+                    <column name="comp_version_id" not-null="true"/>
+                </key>
+                <one-to-many
+                    class="com.mobisols.tollpayments.model.Configuration"
+                />
+            </set>
     </class>
 </hibernate-mapping>

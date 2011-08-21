@@ -21,6 +21,7 @@
 	<bean id="dao.tollpayments.deviceDao" class="com.mobisols.tollpayments.daoImpl.DeviceDaoImpl"/>
 	<bean id="dao.tollpayments.userVehicleHistoryDao" class="com.mobisols.tollpayments.daoImpl.UserVehicleHistoryDaoImpl"/>
 	<bean id="dao.tollpayments.userPaymentDetailDao" class="com.mobisols.tollpayments.daoImpl.UserPaymentDetailDaoImpl"/>
-	<bean id="dao.tollpayments.clientConfigurationDao" class="com.mobisols.tollpayments.daoImpl.ClientConfigurationDaoImpl"/>
+	<bean id="dao.tollpayments.componentDao" class="com.mobisols.tollpayments.daoImpl.ComponentDaoImpl"/>
 	<bean id="dao.tollpayments.userVehicleDao" class="com.mobisols.tollpayments.daoImpl.UserVehicleDaoImpl"/>
+	<bean id="dao.tollpayments.userBalanceDao" class="com.mobisols.tollpayments.daoImpl.UserBalanceDaoImpl"/>
 </beans>

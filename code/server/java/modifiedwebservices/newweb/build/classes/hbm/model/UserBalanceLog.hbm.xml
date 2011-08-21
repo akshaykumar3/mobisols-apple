@@ -64,7 +64,7 @@
                 <column name="client_id" />
             </property>
             
-             <many-to-one name="userBalance"
+            <many-to-one name="userBalance"
 			class="com.mobisols.tollpayments.model.UserBalance"
 			column="ubal_id"
 			insert="false" update="false"

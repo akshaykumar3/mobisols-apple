@@ -19,15 +19,16 @@
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="myeclipse.connection.profile">mysql</property>
-		<!-- <mapping
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		 <mapping
 			resource="/hbm/model/VmlType.hbm.xml" />
-		<mapping
-			resource="/hbm/model/ComponentVersion.hbm.xml" />-->
+		 <mapping
+			resource="/hbm/model/ComponentVersion.hbm.xml" />
 		<mapping
 			resource="/hbm/model/TollLocation.hbm.xml" />
-		 <!-- <mapping
+		  <mapping
 			resource="/hbm/model/Configuration.hbm.xml" />
-		<mapping
+		 <mapping
 			resource="/hbm/model/UserPaymentDetailHistory.hbm.xml" />
 		<mapping
 			resource="/hbm/model/VehicleTollUsage.hbm.xml" />
@@ -36,14 +37,14 @@
 		<mapping
 			resource="/hbm/model/UserService.hbm.xml" />
 		<mapping
-			resource="/hbm/model/UserPaymentDetail.hbm.xml" />-->
+			resource="/hbm/model/UserPaymentDetail.hbm.xml" />
 		<mapping
 			resource="/hbm/model/User.hbm.xml" />
-		<!-- <mapping
+		 <mapping
 			resource="/hbm/model/VehicleMovementLog.hbm.xml" />
 		<mapping
 			resource="/hbm/model/UserBalance.hbm.xml" />
-		<mapping
+		 <mapping
 			resource="/hbm/model/TollLocationHistory.hbm.xml" />
 		<mapping
 			resource="/hbm/model/UserVehicle.hbm.xml" />
@@ -62,17 +63,17 @@
 		<mapping
 			resource="/hbm/model/ServicePlan.hbm.xml" />
 		<mapping
-			resource="/hbm/model/UserType.hbm.xml" />-->
+			resource="/hbm/model/UserType.hbm.xml" />
 		<mapping
 			resource="/hbm/model/TollOperator.hbm.xml" />
-		<!-- <mapping
+		 <mapping
 			resource="/hbm/model/TollPriceHistory.hbm.xml" />
 		<mapping
 			resource="/hbm/model/Client.hbm.xml" />
 		<mapping
 			resource="/hbm/model/UserVehicleHistory.hbm.xml" />
-		<mapping
-			resource="/hbm/model/PaymentTransaction.hbm.xml" />-->
+		 <mapping
+			resource="/hbm/model/PaymentTransaction.hbm.xml" />
 
 	</session-factory>
 

@@ -34,10 +34,10 @@
     	<property name="tollLocationDao" ref="dao.tollpayments.tollLocationDao"></property>
     </bean>
     <bean id="service.tollpayments.servicePlanService" class="com.mobisols.tollpayments.serviceImpl.ServicePlanServiceImpl">
-    	<property name="servicePlanDao" ref="dao.tollpayments.ServicePlanDao"></property>
+    	<property name="servicePlanDao" ref="dao.tollpayments.servicePlanDao"></property>
     </bean>
     <bean id="service.tollpayments.addBalanceService" class="com.mobisols.tollpayments.serviceImpl.AddBalanceServiceImpl">
-    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="userBalanceDao" ref="dao.tollpayments.userBalanceDao"></property>
     </bean>
      <bean id="service.tollpayments.periodicHeartBeatService" class="com.mobisols.tollpayments.serviceImpl.PeriodicHeartBeatServiceImpl">
     	<property name="vmlDao" ref="dao.tollpayments.vmlDao"></property>
@@ -67,7 +67,7 @@
     	<property name="myUtilDate" ref="myutils.tollpayments.myUtilDate"></property>
     </bean>
     <bean id="service.tollpayments.clientConfigurationService" class="com.mobisols.tollpayments.serviceImpl.ClientConfigurationServiceImpl">
-    	<property name="clientConfigurationDao" ref="dao.tollpayments.clientConfigurationDao"></property>
+    	<property name="componentDao" ref="dao.tollpayments.componentDao"></property>
     </bean>
      <bean id="service.tollpayments.vehicleDetailsService" class="com.mobisols.tollpayments.serviceImpl.VehicleDetailsServiceImpl">
     	<property name="userVehicleDao" ref="dao.tollpayments.userVehicleDao"></property>

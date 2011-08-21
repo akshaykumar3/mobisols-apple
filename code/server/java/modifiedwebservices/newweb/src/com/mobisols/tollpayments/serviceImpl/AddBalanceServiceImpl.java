@@ -20,4 +20,12 @@ public class AddBalanceServiceImpl implements AddBalanceService {
 		gr.setDescription("Balance successfully updated");
 		return gr;
 	}
+
+	public UserBalanceDao getUserBalanceDao() {
+		return userBalanceDao;
+	}
+
+	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
+		this.userBalanceDao = userBalanceDao;
+	}
 }
