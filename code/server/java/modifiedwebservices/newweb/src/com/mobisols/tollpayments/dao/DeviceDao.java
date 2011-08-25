@@ -5,4 +5,8 @@ import com.mobisols.tollpayments.model.Device;
 public interface DeviceDao {
 
 	public Device getDevice(String deviceid,String deviceType);
+
+	public void save(Device d);
+
+	public Device getDevice(Integer userId);
 }
