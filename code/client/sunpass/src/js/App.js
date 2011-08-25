@@ -13,6 +13,18 @@ gtp.App=Ext.extend(Ext.TabPanel,{
 		cover: true
 	},
 	initComponent: function() {
-			
+		if(navigator.onLine){
+			this.items=[{
+				xtype: 'home',
+				iconCls: 'home',
+				title: 'home'
+			}];
+		} else {
+			this.on('render',function() {
+				this.el.mask('Internet Connection is required');
+			},this)
+		}
+		
+		gtp.App.superclass.initComponent.call(this);
 	}
 })
