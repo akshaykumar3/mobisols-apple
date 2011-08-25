@@ -44,14 +44,15 @@ gtp.controller=Ext.regController("load",{
 							}
 							else
 							{
+								var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
+								console.log('encoded string'+encodedString);
 								Ext.Ajax.request({
 									url: 'http://mbtest.dyndns.dk:6004/webservices/services/LoginAuthentication',
 									params: {
-										user_name: Ext.getCmp('lpemailid'),
-										password: Ext.getCmp('lppassword')
+										enc: encodedString
 									},
 									success: function(response){
-										
+										console.log('login succeded');
 									},
 									failure: function(response){
 										
@@ -678,7 +679,6 @@ gtp.controller=Ext.regController("load",{
 			},
 			items: [{
 				title: 'Home',
-				scroll: 'vertical',
 				xtype: 'formpanel',
 				id: 'home',
 				scroll: 'vertical',
