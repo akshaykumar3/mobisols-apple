@@ -18,8 +18,11 @@ import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.request.get.TollRange;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
+import com.mobisols.tollpayments.request.post.DeviceRegistrationRequest;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
+import com.mobisols.tollpayments.request.post.LoginRequest;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
+import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
 import com.mobisols.tollpayments.response.get.VehicleTypeListResponse;
 import com.mobisols.tollpayments.service.AccountDetailsService;
@@ -27,11 +30,14 @@ import com.mobisols.tollpayments.service.AddBalanceService;
 import com.mobisols.tollpayments.service.BalanceInfoService;
 import com.mobisols.tollpayments.service.CcTypeListService;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
+import com.mobisols.tollpayments.service.DeviceRegistrationService;
 import com.mobisols.tollpayments.service.HeartBeatService;
+import com.mobisols.tollpayments.service.LoginService;
 import com.mobisols.tollpayments.service.NearestTollService;
 import com.mobisols.tollpayments.service.OwnerTypeListService;
 import com.mobisols.tollpayments.service.PaymentDetailsService;
 import com.mobisols.tollpayments.service.PeriodicHeartBeatService;
+import com.mobisols.tollpayments.service.RegistrationService;
 import com.mobisols.tollpayments.service.ServicePlanService;
 import com.mobisols.tollpayments.service.TollDetailsListService;
 import com.mobisols.tollpayments.service.VehicleDetailsService;
@@ -57,6 +63,9 @@ public class WebServiceImpl {
 	PaymentDetailsService paymentDetailsService;
 	ClientConfigurationService clientConfigurationService;
 	VehicleDetailsService vehicleDetailsService;
+	RegistrationService registrationService;
+	DeviceRegistrationService deviceRegistrationService;
+	LoginService loginService;
 	JsonConverter jsonConverter;
 	
 	
@@ -82,6 +91,7 @@ public class WebServiceImpl {
 	        paymentDetailsService = (PaymentDetailsService) ctx.getBean("service.tollpayments.paymentDetailsService");
 	        clientConfigurationService=(ClientConfigurationService) ctx.getBean("service.tollpayments.clientConfigurationService");
 	        vehicleDetailsService = (VehicleDetailsService) ctx.getBean("service.tollpayments.vehicleDetailsService");
+	        registrationService = (RegistrationService) ctx.getBean("service.tollpayments.RegistrationService");
 	}
 
 	@GET
@@ -268,6 +278,39 @@ public class WebServiceImpl {
 		return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(r, username));
 	}
 	
+	@POST
+	@Produces("text/plain")
+	@Path("/UserRegistration")
+	public String registerUser(@FormParam("json") String json)
+	{
+		String request="register user";
+		String status="success";
+		RegistrationServiceRequest request1= (RegistrationServiceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.RegistrationServiceRequest");
+		return jsonConverter.getJSON(request, status,registrationService.createUser(request1));
+	}
+	
+	@POST
+	@Produces("text/plain")
+	@Path("/UserRegistration")
+	public String registerDevice(@FormParam("json") String json)
+	{
+		String request="register device";
+		String status="success";
+		DeviceRegistrationRequest request1=  (DeviceRegistrationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.DeviceRegistrationRequest");
+		return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1));
+	}
+
+	@POST
+	@Produces("text/plain")
+	@Path("/UserRegistration")
+	public String loginUser(@FormParam("json") String json)
+	{
+		String request="post vehicleDetails";
+		String status="success";
+		LoginRequest request1=  (LoginRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.LoginRequest");
+		return jsonConverter.getJSON(request, status,loginService.login(request1));
+	}
+
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}
@@ -386,6 +429,39 @@ public class WebServiceImpl {
 	public void setClientConfigurationService(
 			ClientConfigurationService clientConfigurationService) {
 		this.clientConfigurationService = clientConfigurationService;
+	}
+
+	public VehicleDetailsService getVehicleDetailsService() {
+		return vehicleDetailsService;
+	}
+
+	public void setVehicleDetailsService(VehicleDetailsService vehicleDetailsService) {
+		this.vehicleDetailsService = vehicleDetailsService;
+	}
+
+	public RegistrationService getRegistrationService() {
+		return registrationService;
+	}
+
+	public void setRegistrationService(RegistrationService registrationService) {
+		this.registrationService = registrationService;
+	}
+
+	public DeviceRegistrationService getDeviceRegistrationService() {
+		return deviceRegistrationService;
+	}
+
+	public void setDeviceRegistrationService(
+			DeviceRegistrationService deviceRegistrationService) {
+		this.deviceRegistrationService = deviceRegistrationService;
+	}
+
+	public LoginService getLoginService() {
+		return loginService;
+	}
+
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
 	}
 
 }

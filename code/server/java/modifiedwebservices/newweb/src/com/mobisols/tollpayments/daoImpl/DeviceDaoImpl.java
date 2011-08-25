@@ -2,6 +2,7 @@ package com.mobisols.tollpayments.daoImpl;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
@@ -16,6 +17,22 @@ public class DeviceDaoImpl implements DeviceDao {
 		Criteria crit=s.createCriteria(Device.class);
 		crit.add(Restrictions.eq("deviceUuid",deviceId));
 		crit.add(Restrictions.eq("deviceType", deviceType));
+		return (Device) crit.uniqueResult();
+	}
+
+	@Override
+	public void save(Device d) {
+		Session s=HibernateSessionFactory.getSession();
+		Transaction tx=s.beginTransaction();
+		s.save(d);
+		tx.commit();
+	}
+
+	@Override
+	public Device getDevice(Integer userId) {
+		Session s=HibernateSessionFactory.getSession();
+		Criteria crit=s.createCriteria(Device.class);
+		crit.add(Restrictions.eq("userId",userId));
 		return (Device) crit.uniqueResult();
 	}
 	
