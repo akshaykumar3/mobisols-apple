@@ -46,6 +46,9 @@ Ext.regApplication({
     registerLaunch: function(){
     	console.log('device is registered');
     	gtp.views.loginPage.setActiveItem('regpage');
+    },
+    getUserName: function(){
+    	
     }
 });
 
