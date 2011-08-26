@@ -47,7 +47,7 @@ gtp.controller=Ext.regController("load",{
 								var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
 								console.log('encoded string'+encodedString);
 								Ext.Ajax.request({
-									url: 'http://mbtest.dyndns.dk:6004/webservices/services/LoginAuthentication',
+									url: webServices.getAt(webServices.findExact('service','logging')).get('url'),
 									params: {
 										enc: encodedString
 									},
@@ -195,7 +195,7 @@ gtp.controller=Ext.regController("load",{
 		},'PaidTolls'));*/
 
 		Ext.Ajax.request({
-	      url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+	      url: webServices.getAt(webServices.findExact('service','acdetails')).get('url'),
 	      method: 'GET',
 	      params: {
 	      	user_name: 'harish@mobisols.com',// options.loginDetails.username
@@ -296,7 +296,7 @@ gtp.controller=Ext.regController("load",{
 							}],true);
 							console.log('new car added, count is now '+carsList.getCount());
 							Ext.Ajax.request({
-								url: 'localhost:6004/webservices/services/AddCar',
+								url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
 								method: 'POST',
 								params: {
 									json: Ext.encode({
@@ -1135,7 +1135,7 @@ gtp.controller=Ext.regController("load",{
 						  	var southWest = bounds.getSouthWest();
 					  	
 							Ext.Ajax.request({
-								url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
+								url: webServices.getAt(webServices.findExact('service','tolldetails')).get('url'),
 								method: 'GET',
 								params: {
 									json: Ext.encode({
