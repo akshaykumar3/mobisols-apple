@@ -9,20 +9,20 @@ import com.mobisols.tollpayments.service.DeviceRegistrationService;
 
 public class DeviceRegistrationServiceImpl implements DeviceRegistrationService {
 	private DeviceDao deviceDao;
-	private MyUtilDate mydateUtil;
+	private MyUtilDate myUtilDate;
 	
 	public DeviceRegistrationResponse registerDevice(DeviceRegistrationRequest r)
 	{
 		DeviceRegistrationResponse response=new DeviceRegistrationResponse();
-		String deviceId=r.getIpAddress()+mydateUtil.getCurrentTimeStamp();
+		String deviceId=r.getIpAddress()+myUtilDate.getCurrentTimeStamp();
 		Device d=new Device();
 		d.setClientId(1);
-		d.setCreatedOn(mydateUtil.getCurrentTimeStamp());
+		d.setCreatedOn(myUtilDate.getCurrentTimeStamp());
 		d.setDeviceUuid(deviceId);
 		d.setDeviceType(r.getDeviceName());
-		d.setIsActive("n");
+		d.setIsActive(Device.IN_ACTIVE);
 		d.setLastModifiedBy(-1);
-		d.setLastModifiedOn(mydateUtil.getCurrentTimeStamp());
+		d.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		d.setUserId(-1);
 		d.setVehicleId(-1);
 		deviceDao.save(d);
@@ -37,11 +37,11 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
 	}
-	public MyUtilDate getMydateUtil() {
-		return mydateUtil;
+	public MyUtilDate getMyUtilDate() {
+		return myUtilDate;
 	}
-	public void setMydateUtil(MyUtilDate mydateUtil) {
-		this.mydateUtil = mydateUtil;
+	public void setMyUtilDate(MyUtilDate myUtilDate) {
+		this.myUtilDate = myUtilDate;
 	}
 	
 }
