@@ -65,3 +65,33 @@ var paidTolls = new Ext.data.Store({
 		reg: '4GPB5'
 	}]
 });
+
+// Store for webservice urls.
+var webServices=new Ext.data.Store({
+	model: 'WebServices',
+	data: [{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/LoginAuthentication',
+		service: 'logging'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+		service: 'acdetails'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
+		service: 'heartbeat'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/AddCar',
+		service: 'addcar'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
+		service: 'tolldetails'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/VehicleTypeList',
+		service: 'vehicletypes'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/CcTypeList',
+		service: 'cctypes'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/OwnerTypeList',
+		service: 'ownertypes'
+	}] 
+});

@@ -47,8 +47,11 @@ Ext.regApplication({
     	console.log('device is registered');
     	gtp.views.loginPage.setActiveItem('regpage');
     },
-    getUserName: function(){
-    	
+    getDeviceId: function(){
+    	if(localStorage.getItem('gtp-deviceID'))
+    	{
+    		return localStorage.getItem('gtp-deviceID'); 
+    	}
     }
 });
 

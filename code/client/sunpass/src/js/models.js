@@ -61,3 +61,13 @@ Ext.regModel('PaidTolls', {
 	}]
 });
 
+// Model for webservices._anomFunkMap
+Ext.regModel('WebServices',{
+	fields: [{
+		name: 'url',
+		type: 'string'
+	},{
+		name: 'service',
+		type: 'string'
+	}]
+})
