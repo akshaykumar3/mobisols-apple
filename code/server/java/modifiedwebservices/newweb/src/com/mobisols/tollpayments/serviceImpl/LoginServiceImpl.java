@@ -25,12 +25,10 @@ public class LoginServiceImpl implements LoginService {
 		else
 		{
 			response.getResponse().put("userExists","y");
-			if(u.getPassword()!=r.getPassword())
+			
+			if(u.getPassword().equals(r.getPassword()))
 			{
-				response.getResponse().put("passwordCorrect", "n");
-			}
-			else
-			{
+				
 				response.getResponse().put("passwordCorrect", "y");
 				Device d=deviceDao.getDevice(r.getDeviceDetails().getDeviceId(),r.getDeviceDetails().getDeviceName());
 				if(d==null)
@@ -48,6 +46,11 @@ public class LoginServiceImpl implements LoginService {
 					response.getResponse().put("anotherUserLoggedIn", "y");
 				}
 				d.setUserId(u.getUserId());
+				deviceDao.save(d);
+			}
+			else
+			{
+				response.getResponse().put("passwordCorrect", "n");
 			}
 		}
 		return response;

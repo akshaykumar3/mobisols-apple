@@ -32,7 +32,7 @@ public class Device implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private Integer clientId;
 	private User user;
-
+	public static final String IN_ACTIVE="N";
 	// Constructors
 
 

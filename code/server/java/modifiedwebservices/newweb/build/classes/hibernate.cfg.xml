@@ -74,7 +74,10 @@
 			resource="/hbm/model/UserVehicleHistory.hbm.xml" />
 		 <mapping
 			resource="/hbm/model/PaymentTransaction.hbm.xml" />
-
+		<mapping
+			resource="/hbm/model/Device.hbm.xml" />
+		<mapping
+			resource="/hbm/model/DeviceHistory.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

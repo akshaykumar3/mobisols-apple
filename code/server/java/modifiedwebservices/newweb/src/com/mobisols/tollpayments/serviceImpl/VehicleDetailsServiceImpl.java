@@ -54,7 +54,9 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setOwnerTypeId(ot.getOwnerTypeId());
 			uv.setRegisteredState(vdr.getState());
 			uv.setRegistrationNo(vdr.getRegistration());
+			if(vdr.getEndDate()!=null)
 			uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));
+			if(vdr.getStartDate()!=null)
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			VehicleType vt=vehicleTypeDao.getVehicleType(vdr.getType());
 			uv.setVehicleTypeId(vt.getVehicleTypeId());
