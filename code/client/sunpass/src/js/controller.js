@@ -45,17 +45,32 @@ gtp.controller=Ext.regController("load",{
 							else
 							{
 								var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
-								console.log('encoded string'+encodedString);
+								Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
 								Ext.Ajax.request({
 									url: webServices.getAt(webServices.findExact('service','logging')).get('url'),
 									params: {
-										enc: encodedString
+										json: Ext.encode({
+											username: Ext.getCmp('lpemailid').getValue(),
+											password: Ext.getCmp('lppassword').getValue(),
+											deviceDetails: {
+												deviceId: options.deviceId,
+												deviceName: options.deviceName
+											} 
+										})
 									},
 									success: function(response){
 										console.log('login succeded');
+										Ext.dispatch({
+											controller: 'load',
+											action: 'view',
+											loginDetails: {
+												username: Ext.getCmp('lpemailid').getValue(),
+												password: Ext.getCmp('lppassword').getValue()
+											}
+										});
 									},
 									failure: function(response){
-										
+										console.log('Loggin in..');
 									}
 								})
 								Ext.dispatch({
@@ -65,7 +80,8 @@ gtp.controller=Ext.regController("load",{
 										username: Ext.getCmp('lpemailid').getValue(),
 										password: Ext.getCmp('lppassword').getValue()
 									}
-								});// Do user authertication here.
+								});
+								// Do user authertication here.
 							}
 							//gtp.views.loginPage.setActiveItem('regpage');
 						}
