@@ -53,6 +53,7 @@ Ext.regApplication({
     getDeviceId: function(){
     	if(localStorage.getItem('gtp-deviceID'))
     	{
+    		console.log(localStorage.getItem('gtp-deviceID'));
     		return localStorage.getItem('gtp-deviceID'); 
     	}
     	else
@@ -60,7 +61,9 @@ Ext.regApplication({
     		Ext.Ajax.request({
     			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
     			params: {
-    				json: Ext.encode({})
+    				json: Ext.encode({
+    					deviceId: ''
+    				})
     			},
     			success: function(response){
     				var obj=Ext.decode(response.responseText);

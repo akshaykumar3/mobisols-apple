@@ -70,6 +70,9 @@ var paidTolls = new Ext.data.Store({
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
+		url: 'http://mbtest.dyndns.dk:6004/webservices/services/UserRegistration',
+		service: 'regnewuser'
+	},{
 		url: 'http://mbtest.dyndns.dk:6004/webservices/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
