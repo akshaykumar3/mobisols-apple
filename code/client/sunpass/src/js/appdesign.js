@@ -16,8 +16,11 @@ Ext.regApplication({
     infoWindows: new Array(),
     launch: function(){
     	console.log('application is launched');
+    	Ext.Ajax.defaultHeaders = {
+    		'Accept': 'application/json'
+    	};
     	this.launchLoginPage({
-    		uuid: '00012121235923472398461',
+    		deviceId: this.getDeviceId(), 
     		type: this.detectDeviceType()
     	});
     },
@@ -51,6 +54,23 @@ Ext.regApplication({
     	if(localStorage.getItem('gtp-deviceID'))
     	{
     		return localStorage.getItem('gtp-deviceID'); 
+    	}
+    	else
+    	{
+    		Ext.Ajax.request({
+    			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
+    			params: {
+    				json: Ext.encode({})
+    			},
+    			success: function(response){
+    				var obj=Ext.decode(response.responseText);
+    				return obj.response.deviceId;
+    			},
+    			failure: function(){
+    				console.log('error in device registration web service');
+    				return "FAILED";
+    			}
+    		})
     	}
     }
 });
