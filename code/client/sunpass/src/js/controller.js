@@ -2,6 +2,7 @@
 
 gtp.controller=Ext.regController("load",{
 	show: function(options) {
+		console.log(options.deviceDetails.deviceId);
 		console.log('i am from controller show action');
 		
 		gtp.views.loginPage=new Ext.Panel({
@@ -131,14 +132,41 @@ gtp.controller=Ext.regController("load",{
 						text: 'Register',
 						handler: function(){
 							if(Ext.getCmp('rppassword').getValue() == Ext.getCmp('conpwd').getValue())
-							Ext.dispatch({
-								controller: 'load',
-								action: 'view',
-								loginDetails: {
-									username: Ext.getCmp('rpemailid').getValue(),
-									password: Ext.getCmp('rppassword').getValue()
-								}
-							});
+							{
+								console.log('registration: passwords matched');
+								console.log(webServices.getAt(webServices.findExact('service','regnewuser')).get('url'));
+								Ext.Ajax.request({
+									url: webServices.getAt(webServices.findExact('service','regnewuser')).get('url'),
+									method: 'POST',
+									params: {
+										json: Ext.encode({
+											username: Ext.getCmp('rpemailid').getValue(),
+											password: Ext.getCmp('rppassword').getValue()
+										})
+									},
+									success: function(response) {
+										Ext.dispatch({
+											controller: 'load',
+											action: 'view',
+											loginDetails: {
+												username: Ext.getCmp('rpemailid').getValue(),
+												password: Ext.getCmp('rppassword').getValue()
+											}
+										});
+									},
+									failure: function(response) {
+										
+									}
+								});
+								Ext.dispatch({
+									controller: 'load',
+									action: 'view',
+									loginDetails: {
+										username: Ext.getCmp('rpemailid').getValue(),
+										password: Ext.getCmp('rppassword').getValue()
+									}
+								});
+							}
 							else
 							Ext.Msg.alert('Passwords do not match');
 						}
