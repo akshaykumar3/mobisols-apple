@@ -22,11 +22,13 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	private MyUtilDate myUtilDate;
 	private OwnerTypeDao ownerTypeDao;
 	private VehicleTypeDao vehicleTypeDao;
+	public static final String IS_NEW_VEHICLE_TRUE="Y";
+	public static final String IS_NEW_VEHICLE_FALSE="N";
 	
 	public GeneralResponse postVehicleDetails(VehicleDetailsRequest vdr,String user,String isNewVehicle)
 	{
 		GeneralResponse response = new GeneralResponse();
-		if(isNewVehicle=="n")
+		if(isNewVehicle==IS_NEW_VEHICLE_FALSE)
 		{
 			User u=userDao.getUser(user);
 			UserVehicle uv=userVehicleDao.getVehicle(vdr.getRegistration(), vdr.getState(),u.getUserId());

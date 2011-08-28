@@ -26,6 +26,7 @@ public class Client implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Integer lastModifiedBy;
 
+	public static final int PRESENT_CLIENT=1;
 	// Constructors
 
 	/** default constructor */

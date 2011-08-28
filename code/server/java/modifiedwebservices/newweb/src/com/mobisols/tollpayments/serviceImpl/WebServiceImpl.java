@@ -3,6 +3,7 @@ package com.mobisols.tollpayments.serviceImpl;
 
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -103,7 +104,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/AccountDetails")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getAccountDetailsResponse(@Context HttpHeaders httpHeader){
 		String request = "RETRIEVE ACC_DETAILS";
 		String status =null;
@@ -323,12 +324,13 @@ public class WebServiceImpl {
 	@Produces("text/plain")
 	@Path("/DeviceRegistration")
 	@RolesAllowed("user")
-	public String registerDevice(@FormParam("json") String json)
+	public String registerDevice(@FormParam("json") String json,@Context HttpServletRequest servletRequest)
 	{
 		String request="register device";
 		String status="success";
+		//System.out.println(servletRequest.getRemoteAddr());
 		DeviceRegistrationRequest request1=  (DeviceRegistrationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.DeviceRegistrationRequest");
-		return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1));
+		return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1,servletRequest.getRemoteAddr()));
 	}
 
 	@POST

@@ -37,7 +37,7 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  	<security-constraint>
+  <!-- 	<security-constraint>
         <web-resource-collection>
                 <web-resource-name>Services</web-resource-name>
                 <description> accessible by authenticated users of the client role</description>
@@ -63,5 +63,5 @@
 	</security-role>
 	<security-role>
         <role-name>user</role-name>
-	</security-role>
+	</security-role>-->
 </web-app>

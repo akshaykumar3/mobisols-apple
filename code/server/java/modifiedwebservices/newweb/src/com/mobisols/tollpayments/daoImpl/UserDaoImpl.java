@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.daoImpl;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -35,5 +37,16 @@ public class UserDaoImpl implements UserDao {
 		s.saveOrUpdate(u);
 		tx.commit();
 		
+	}
+
+	@Override
+	public List<String> getUserList() {
+		List<String> u=new LinkedList<String>();
+		Session s=HibernateSessionFactory.getSession();
+		Criteria c=s.createCriteria(User.class);
+		List<User> user=c.list();
+		for(Iterator it=user.iterator();it.hasNext();)
+			u.add(((User)it.next()).getUserName());
+		return u;
 	}
 }

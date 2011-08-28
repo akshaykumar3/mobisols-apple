@@ -9,5 +9,5 @@ public interface DeviceRegistrationService {
 	DeviceDao deviceDao=null;
 	MyUtilDate mydateUtil=null;
 
-	public DeviceRegistrationResponse registerDevice(DeviceRegistrationRequest r);
+	public DeviceRegistrationResponse registerDevice(DeviceRegistrationRequest r, String ipAddress);
 }
