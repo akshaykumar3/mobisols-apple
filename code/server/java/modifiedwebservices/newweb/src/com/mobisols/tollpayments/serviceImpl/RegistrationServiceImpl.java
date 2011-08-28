@@ -16,6 +16,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private UserDao userDao;
 	private DeviceDao deviceDao;
 	private MyUtilDate myUtilDate;
+	public static final String PASSWORD_CORRECT_FALSE="N";
+	public static final String PASSWORD_CORRECT_TRUE="Y";
+	
+	public static final String ANOTHER_USER_LOGGED_IN_TRUE="Y";
+	public static final String ANOTHER_USER_LOGGED_IN_FALSE="N";
 	
 	public RegistrationResponse createUser(RegistrationServiceRequest r)
 	{
@@ -23,30 +28,30 @@ public class RegistrationServiceImpl implements RegistrationService {
 		User u=userDao.getUser(r.getUserName());
 		if(u!=null)
 		{
-			response.getResponse().put("userNameExists", "y");
+			response.getResponse().put("userNameExists", User.USER_EXISTS);
 			Device d= deviceDao.getDevice(r.getDeviceDetails().getDeviceId(), r.getDeviceDetails().getDeviceName());
 			if(d==null)
-				response.getResponse().put("deviceRegistered","n");
+				response.getResponse().put("deviceExists",Device.DEVICE_NOT_EXISTS);
 			else
-				response.getResponse().put("deviceRegistered","y");
+				response.getResponse().put("deviceExists",Device.DEVICE_EXISTS);
 			return response;
 		}
 		else
 		{
-			response.getResponse().put("userNameExists", "n");
+			response.getResponse().put("userNameExists", User.USER_NOT_EXISTS);
 			Device d= deviceDao.getDevice(r.getDeviceDetails().getDeviceId(), r.getDeviceDetails().getDeviceName());
 			if(d==null)
 				{
-					response.getResponse().put("deviceRegistered","n"); 
+					response.getResponse().put("deviceExists",Device.DEVICE_NOT_EXISTS); 
 					return response;
 				}
 			else
-				response.getResponse().put("deviceRegistered","y");
+				response.getResponse().put("deviceExists",Device.DEVICE_EXISTS);
 			if(d.getUserId()==-1)
-				response.getResponse().put("anotherUserLoggedIn", "n");
+				response.getResponse().put("anotherUserLoggedIn", ANOTHER_USER_LOGGED_IN_FALSE);
 			else
 			{
-				response.getResponse().put("anotherUserLoggedIn", "y");
+				response.getResponse().put("anotherUserLoggedIn", ANOTHER_USER_LOGGED_IN_TRUE);
 				d.setUserId(-1);
 			}
 			
@@ -87,6 +92,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public UserDao getUserDao() {
 		return userDao;
 	}
+	
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}

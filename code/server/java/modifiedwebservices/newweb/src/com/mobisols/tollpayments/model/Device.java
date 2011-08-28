@@ -33,8 +33,10 @@ public class Device implements java.io.Serializable {
 	private Integer clientId;
 	private User user;
 	public static final String IN_ACTIVE="N";
+	public static final String ACTIVE="Y";
 	// Constructors
-
+	public static final String DEVICE_EXISTS="Y";
+	public static final String DEVICE_NOT_EXISTS="N";
 
 	public User getUser() {
 		return user;

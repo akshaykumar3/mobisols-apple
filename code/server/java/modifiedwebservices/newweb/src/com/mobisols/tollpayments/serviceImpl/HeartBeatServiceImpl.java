@@ -5,6 +5,7 @@ import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
 import com.mobisols.tollpayments.dao.VmlDao;
 import com.mobisols.tollpayments.dao.VmlTypeDao;
+import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.TollLocation;
 import com.mobisols.tollpayments.model.VehicleMovementLog;
@@ -23,12 +24,14 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	private TollLocationDao tollLocationDao;
 	private UserVehicleHistoryDao userVehicleHistoryDao;
 	private VmlTypeDao vmlTypeDao;
+	public static final double DEFAULT_TIME=10*60;
+	public static final double DEFAULT_DISTANCE=200;
 	
 	public HeartBeatResponse saveHeartBeat(HeartBeatRequest hbr) {
 		HeartBeatResponse response = new HeartBeatResponse();
 		VehicleMovementLog vml=new VehicleMovementLog();
 		Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());
-		vml.setClientId(1);
+		vml.setClientId(Client.PRESENT_CLIENT);
 		vml.setCreatedOn(myUtilDate.getCurrentTimeStamp());
 		vml.setFlag1(null);
 		vml.setFlag2(null);
@@ -79,11 +82,12 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		vml.setVmlTypeId(vmlTypeDao.getVmlTypeId(hbr.getVmlType()));
 		vmlDao.save(vml);
 		response.getHash().put("status", "success");
-		response.getHash().put("timeInterval",Double.toString(10*60));
-		response.getHash().put("distance", "200.000");
+		response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
+		response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
 		response.getHash().put("tollSessionId", tollSessionId);
 		return response;
 	}
+	
 	
 	public MyUtilDate getMyUtilDate() {
 		return myUtilDate;

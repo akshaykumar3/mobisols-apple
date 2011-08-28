@@ -2,6 +2,8 @@ package com.mobisols.tollpayments.serviceImpl;
 
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
+import com.mobisols.tollpayments.model.CcType;
+import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
@@ -21,7 +23,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setCcExpYear(pd.getExpYear());
 		upd.setCcNumber(pd.getCardNumber());
 		//TODO update clientId setter in post methods
-		upd.setClientId(1);
+		upd.setClientId(Client.PRESENT_CLIENT);
 		upd.setAddress1(pd.getAddress1());
 		upd.setAddress2(pd.getAddress2());
 		upd.setCcAcName(pd.getCcName());
@@ -31,7 +33,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setPayPrefer(pd.getPayPrefer());
 		upd.setState(pd.getState());
 		upd.setZip(pd.getZip());
-		upd.setCcTypeId(1);
+		upd.setCcTypeId(CcType.CCTYPE_ID);
 		upd.setLastModifiedBy(userDao.getUser(username).getUserId());
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		GeneralResponse response=new GeneralResponse();

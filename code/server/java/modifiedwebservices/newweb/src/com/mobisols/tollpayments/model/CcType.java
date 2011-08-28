@@ -28,6 +28,7 @@ public class CcType implements java.io.Serializable {
 	private Integer lastModifiedBy;
 	private Integer clientId;
 
+	public static final int CCTYPE_ID=1;
 	// Constructors
 
 

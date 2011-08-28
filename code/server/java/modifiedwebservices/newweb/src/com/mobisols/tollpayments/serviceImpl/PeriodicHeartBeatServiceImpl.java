@@ -23,6 +23,8 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 	private TollLocationDao tollLocationDao;
 	private UserVehicleHistoryDao userVehicleHistoryDao;
 	private VmlTypeDao vmlTypeDao;
+	public static final double DEFAULT_TIME=10*60;
+	public static final double DEFAULT_DISTANCE=200;
 	
 	public HeartBeatResponse saveHeartBeat(HeartBeatRequest hbr) {
 		HeartBeatResponse response = new HeartBeatResponse();
@@ -79,8 +81,8 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		vml.setVmlTypeId(vmlTypeDao.getVmlTypeId(hbr.getVmlType()));
 		vmlDao.save(vml);
 		response.getHash().put("status", "success");
-		response.getHash().put("timeInterval",Double.toString(10*60));
-		response.getHash().put("distance", "200.000");
+		response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
+		response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
 		response.getHash().put("tollSessionId", tollSessionId);
 		return response;
 	}
