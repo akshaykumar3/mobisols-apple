@@ -86,6 +86,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			userDao.save(u);
 			u=userDao.getUser(r.getUserName());
 			d.setUserId(u.getUserId());
+			deviceDao.save(d);
 			return response;
 		}
 	}

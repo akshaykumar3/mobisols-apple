@@ -3,11 +3,10 @@ package com.mobisols.tollpayments.request.post;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CheckUserBalanceRequest {
-
+public class MakeTollPaymentsRequest {
 	private List<String> users;
-
-	public CheckUserBalanceRequest()
+	
+	public MakeTollPaymentsRequest()
 	{
 		this.users=new LinkedList<String>();
 	}
@@ -15,7 +14,7 @@ public class CheckUserBalanceRequest {
 		return users;
 	}
 
-	public void setUses(List<String> users) {
+	public void setUsers(List<String> users) {
 		this.users = users;
 	} 
 }

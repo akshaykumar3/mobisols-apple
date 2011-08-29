@@ -30,6 +30,21 @@ public class UserDaoImpl implements UserDao {
 		return u;
 	}
 
+	public User getUser(int userId)
+	{
+		Session s=HibernateSessionFactory.getSession();
+		Criteria c=s.createCriteria(User.class);
+		c.add(Restrictions.eq("userId",userId));
+		List userList=c.list();
+		if(userList.isEmpty())
+		{
+			System.out.println("user list is empty");
+			return null;
+		}
+		User u=(User) ((User) userList.get(0));
+		return u;
+	}
+	
 	public void save(User u) {
 		// TODO Auto-generated method stub
 		Session s=HibernateSessionFactory.getSession();
