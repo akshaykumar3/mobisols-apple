@@ -1,3 +1,5 @@
+Ext.ns('gtp.stores');
+
 // Store for Cars Model
 var carsList = new Ext.data.Store({
 	model: 'Cars',
@@ -66,38 +68,38 @@ var paidTolls = new Ext.data.Store({
 	}]
 });
 
-// Store for webservice urls.
+// Store for newwebservice urls.
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/UserRegistration',
+		url: 'http://localhost:6001/newweb/services/UserRegistration',
 		service: 'regnewuser'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/DeviceRegistration',
+		url: 'http://localhost:6001/newweb/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/Login',
+		url: 'http://localhost:6001/newweb/services/Login',
 		service: 'logging'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/AccountDetails',
+		url: 'http://localhost:6001/newweb/services/private/AccountDetails',
 		service: 'acdetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/HeartBeat',
+		url: 'http://localhost:6001/newweb/services/private/HeartBeat',
 		service: 'heartbeat'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/AddCar',
+		url: 'http://localhost:6001/newweb/services/private/AddCar',
 		service: 'addcar'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/TollDetailsList',
+		url: 'http://localhost:6001/newweb/services/private/TollDetailsList',
 		service: 'tolldetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/VehicleTypeList',
+		url: 'http://localhost:6001/newweb/services/private/VehicleTypeList',
 		service: 'vehicletypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/CcTypeList',
+		url: 'http://localhost:6001/newweb/services/private/CcTypeList',
 		service: 'cctypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/webservices/services/OwnerTypeList',
+		url: 'http://localhost:6001/newweb/services/private/OwnerTypeList',
 		service: 'ownertypes'
 	}] 
 });

@@ -17,12 +17,24 @@ Ext.regApplication({
     launch: function(){
     	console.log('application is launched');
     	Ext.Ajax.defaultHeaders = {
-    		'Accept': 'application/json'
+    		//'Accept': 'application/json'
     	};
-    	this.launchLoginPage({
-    		deviceId: this.getDeviceId(), 
-    		type: this.detectDeviceType()
-    	});
+    	var devret=this.getDeviceId();
+    	if(devret!="FAILED")
+    	{
+    		this.launchLoginPage({
+	    		deviceId: devret, 
+	    		type: this.detectDeviceType()
+	    	});
+    	}
+    	else
+    	{
+    		console.log('i am from else');
+    		this.pan=new Ext.Panel({
+    			fullscreen: true,
+    			html: 'Could not connect to server'
+    		});
+    	}
     },
     launchLoginPage: function(options){
     	// Login Page is launched here
@@ -34,27 +46,29 @@ Ext.regApplication({
     },
     detectDeviceType: function(){
     	if(Ext.is.iPhone)
-    	return 'iphone'
+    	return 'iphone';
     	else if(Ext.is.Android)
-    	return 'android'
+    	return 'android';
     	else if(Ext.is.Blackberry)
-    	return 'blackberry'
+    	return 'blackberry';
     	else if(Ext.is.iPod)
-    	return 'ipod'
+    	return 'ipod';
     	else if(Ext.is.iPad)
-    	return 'ipad'
+    	return 'ipad';
     	else if(Ext.is.Desktop)
-    	return 'desktop'
+    	return 'desktop';
     },
     registerLaunch: function(){
     	console.log('device is registered');
     	gtp.views.loginPage.setActiveItem('regpage');
     },
     getDeviceId: function(){
-    	if(localStorage.getItem('gtp-deviceID'))
+    	// open the database check if the device id is present.
+    	// create the database 
+    	if(gtp.utils.dataStore.getValueOfKey('gtp-deviceID'))
     	{
-    		console.log(localStorage.getItem('gtp-deviceID'));
-    		return localStorage.getItem('gtp-deviceID'); 
+    		console.log(gtp.utils.dataStore.getValueOfKey('gtp-deviceID'));
+    		return gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
     	}
     	else
     	{
@@ -62,18 +76,27 @@ Ext.regApplication({
     			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
     			params: {
     				json: Ext.encode({
-    					deviceId: ''
+    					deviceName: this.detectDeviceType()
     				})
     			},
     			success: function(response){
+    				console.log("response status"+response.status);
     				var obj=Ext.decode(response.responseText);
+    				console.log('Device Registration response '+response.responseText);
+    				console.log('Generated device ID is: '+obj.response.deviceId);
+    				gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
     				return obj.response.deviceId;
     			},
-    			failure: function(){
+    			failure: function(response){
+    				// Check the status. if the response status is 404. 
+    				// Prompt a message saying could not connect to internet.
+    				if(response.status==404)
+    				{
+    					return "FAILED";
+    	    		}
     				console.log('error in device registration web service');
-    				return "FAILED";
     			}
-    		})
+    		});
     	}
     }
 });

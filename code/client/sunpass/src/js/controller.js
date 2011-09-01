@@ -2,9 +2,7 @@
 
 gtp.controller=Ext.regController("load",{
 	show: function(options) {
-		console.log(options.deviceDetails.deviceId);
-		console.log('i am from controller show action');
-		
+		console.log('Login Page loaded');
 		gtp.views.loginPage=new Ext.Panel({
 			fullscreen: true,
 			layout: 'card',
@@ -41,45 +39,47 @@ gtp.controller=Ext.regController("load",{
 							}
 							else if(!Ext.getCmp('lppassword').getValue())
 							{
-								Ext.Msg.alert('Password required')
+								Ext.Msg.alert('Password required');
 							}
 							else
 							{
-								var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
-								Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
 								Ext.Ajax.request({
 									url: webServices.getAt(webServices.findExact('service','logging')).get('url'),
 									params: {
 										json: Ext.encode({
-											username: Ext.getCmp('lpemailid').getValue(),
+											userName: Ext.getCmp('lpemailid').getValue(),
 											password: Ext.getCmp('lppassword').getValue(),
 											deviceDetails: {
-												deviceId: options.deviceId,
-												deviceName: options.deviceName
+												deviceId: options.deviceDetails.deviceId,
+												deviceName: options.deviceDetails.type
 											} 
 										})
 									},
 									success: function(response){
-										console.log('login succeded');
-										Ext.dispatch({
-											controller: 'load',
-											action: 'view',
-											loginDetails: {
-												username: Ext.getCmp('lpemailid').getValue(),
-												password: Ext.getCmp('lppassword').getValue()
-											}
-										});
+										console.log('Login succeded response: '+response.responseText);
+										var decres=Ext.decode(response.responseText);
+										var res=decres.response.response;
+										console.log(res.userExists);
+										if(res.userExists=="Y" && res.passwordCorrect=="Y") {
+											var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
+											Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
+											Ext.dispatch({
+												controller: 'load',
+												action: 'view',
+												loginDetails: {
+													username: Ext.getCmp('lpemailid').getValue(),
+													password: Ext.getCmp('lppassword').getValue()
+												}
+											});
+										}
+										else if(res.userExists=="Y" && res.passwordCorrect=="N"){
+											Ext.Msg.alert('Password is incorrect');
+										}
+										else
+										Ext.Msg.alert('username or password is incorrect');	
 									},
 									failure: function(response){
-										console.log('Loggin in..');
-									}
-								})
-								Ext.dispatch({
-									controller: 'load',
-									action: 'view',
-									loginDetails: {
-										username: Ext.getCmp('lpemailid').getValue(),
-										password: Ext.getCmp('lppassword').getValue()
+										console.log('Login Authentication failed with status: '+response.status);
 									}
 								});
 								// Do user authertication here.
@@ -141,10 +141,17 @@ gtp.controller=Ext.regController("load",{
 									params: {
 										json: Ext.encode({
 											username: Ext.getCmp('rpemailid').getValue(),
-											password: Ext.getCmp('rppassword').getValue()
+											password: Ext.getCmp('rppassword').getValue(),
+											deviceDetails: {
+												deviceId: options.deviceDetails.deviceId,
+												deviceName: options.deviceDetails.type
+											}
 										})
 									},
 									success: function(response) {
+										console.log(Ext.decode(response.responseText));
+										var encodedString=base64_encode(Ext.getCmp('rpemailid').getValue()+':'+Ext.getCmp('rppassword').getValue());
+										Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
 										Ext.dispatch({
 											controller: 'load',
 											action: 'view',
@@ -155,15 +162,7 @@ gtp.controller=Ext.regController("load",{
 										});
 									},
 									failure: function(response) {
-										
-									}
-								});
-								Ext.dispatch({
-									controller: 'load',
-									action: 'view',
-									loginDetails: {
-										username: Ext.getCmp('rpemailid').getValue(),
-										password: Ext.getCmp('rppassword').getValue()
+										console.log('user registration failed with status code'+response.status);
 									}
 								});
 							}
@@ -332,8 +331,6 @@ gtp.controller=Ext.regController("load",{
 						else if(Ext.getCmp('rg').getValue()=="")
 							Ext.Msg.alert("Enter registration number");
 						else {
-							
-							
 							Ext.getCmp('activecar').setOptions([{
 								text: Ext.getCmp('rg').getValue(),
 								value: Ext.getCmp('rg').getValue()
@@ -577,7 +574,7 @@ gtp.controller=Ext.regController("load",{
 							}
 						}
 					},
-					name: 'sd',
+					name: 'sd'
 				},{
 					label: 'To',
 					name: 'ed'
@@ -681,7 +678,7 @@ gtp.controller=Ext.regController("load",{
 							}
 						}
 					},
-					name: 'sd',
+					name: 'sd'
 				},{
 					label: 'To',
 					id: 'DetailPanel.to',
@@ -1002,7 +999,7 @@ gtp.controller=Ext.regController("load",{
 						label: 'UserID',
 						cls: 'customField',
 						placeHolder: 'userID',
-						autoCapitalize : false,
+						autoCapitalize : false
 					},{
 						xtype: 'passwordfield',
 						name: 'password',
