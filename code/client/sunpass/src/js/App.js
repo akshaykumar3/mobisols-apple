@@ -22,9 +22,9 @@ gtp.App=Ext.extend(Ext.TabPanel,{
 		} else {
 			this.on('render',function() {
 				this.el.mask('Internet Connection is required');
-			},this)
+			},this);
 		}
 		
 		gtp.App.superclass.initComponent.call(this);
 	}
-})
+});
