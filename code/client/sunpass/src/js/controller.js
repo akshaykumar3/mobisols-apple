@@ -1237,7 +1237,7 @@ gtp.controller=Ext.regController("load",{
 									// Variable is released here.
 									gtp.responseFetched=true;								
 								}
-							})
+							});
 						}
 						// --- 
 					}

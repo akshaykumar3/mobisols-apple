@@ -14,7 +14,7 @@ function requestHeartBeat(){
 			angle: 0,
 			vmlType: 'test',
 			tollSessionId: ''
-		}
+		};
 		
 		// works only in same domain... 
 		Ext.Ajax.request({
@@ -28,7 +28,7 @@ function requestHeartBeat(){
 				console.log(response.responseText);
 				var resobj=Ext.decode(response.responseText);
 				var estimatedDelay;
-				estimatedDelay=resobj.response.timeInterval
+				estimatedDelay=resobj.response.timeInterval;
 				console.log('Estimated TimeInterval is: '+estimatedDelay);
 				
 				//Calculate the next timestamp to call this function.. 

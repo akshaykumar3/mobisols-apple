@@ -9,4 +9,3 @@ Encryption.encrypt= function(plaintext){
 Encryption.decrypt= function(encodedtext) {
 	return Tea.decrypt(encodedtext, this.keyword);
 };
-

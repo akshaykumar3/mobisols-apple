@@ -20,6 +20,7 @@ Ext.regApplication({
     		//'Accept': 'application/json'
     	};
     	var devret=this.getDeviceId();
+    	gtp.clientsidehb();
     	if(devret!="FAILED")
     	{
     		this.launchLoginPage({
