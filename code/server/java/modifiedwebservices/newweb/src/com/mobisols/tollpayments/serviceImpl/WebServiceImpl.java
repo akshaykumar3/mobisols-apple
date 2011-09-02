@@ -273,7 +273,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/ClientConfiguration")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getClientConfiguration(@QueryParam("json") String json)
 	{
 		String request="get ClientConfiguration";
