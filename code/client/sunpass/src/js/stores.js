@@ -72,6 +72,9 @@ var paidTolls = new Ext.data.Store({
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
+		url: 'http://localhost:6001/newweb/services/ClientConfiguration',
+		service: 'clientconfig'
+	},{
 		url: 'http://localhost:6001/newweb/services/UserRegistration',
 		service: 'regnewuser'
 	},{
@@ -90,7 +93,7 @@ var webServices=new Ext.data.Store({
 		url: 'http://localhost:6001/newweb/services/private/AddCar',
 		service: 'addcar'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/TollDetailsList',
+		url: 'http://localhost:6001/newweb/services/TollDetailsList',
 		service: 'tolldetails'
 	},{
 		url: 'http://localhost:6001/newweb/services/private/VehicleTypeList',
@@ -102,4 +105,9 @@ var webServices=new Ext.data.Store({
 		url: 'http://localhost:6001/newweb/services/private/OwnerTypeList',
 		service: 'ownertypes'
 	}] 
+});
+
+// Stores for logging heartbeat.
+gtp.stores.LogHeartBeat= new Ext.data.Store({
+	model: 'HeartBeatLog'
 });

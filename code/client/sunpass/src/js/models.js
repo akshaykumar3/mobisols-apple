@@ -41,6 +41,9 @@ Ext.regModel('Tolls',{
 	},{
 		name: 'url',
 		type: 'string'
+	},{
+		name: 'tollid',
+		type: 'int'
 	}]
 });
 
@@ -70,4 +73,18 @@ Ext.regModel('WebServices',{
 		name: 'service',
 		type: 'string'
 	}]
-})
+});
+
+// Model for logging heartbeat details.
+Ext.regModel('HeartBeatLog',{
+	fields: [{
+		name: 'sessionid',
+		type: 'int'
+	},{
+		name: 'tollid',
+		type: 'string'
+	},{
+		name: 'distance',
+		type: 'float'
+	}]
+});
