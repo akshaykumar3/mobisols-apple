@@ -59,7 +59,7 @@ Ext.setup({
 		
 		var storyPanel = new Array();
 		var i=0;
-		/*for(i=0;i<18;i++)
+		for(i=0;i<18;i++)
 		{
 		storyPanel[i]=new Ext.Panel({
 			height:100,
@@ -72,32 +72,37 @@ Ext.setup({
 			align:'left'
 			},
 			items:[{
-			html:'story1'
+				height:100,
+				width:100,
+				xtype:'button',
+				ui:'round',
+				text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
+				align:'center'
 			}]
 		});
-		}*/
+		}
 
-		for(i=0;i<18;i++)
+		/*for(i=0;i<18;i++)
 		{
 			storyPanel[i]=new Ext.Button({
+				height:100,
+				width:100,
 				ui:'round',
-				text:"<img src='resources/img/icon.png'  style='float:left; height:22; width:22;' />",
+				text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
 				align:'center'
 			})
-		}
+		}*/
 		
 		var storiesHorizontalPanel=new Array();
 		for(i=0;i<18/3;i++)
 		{
 		 storiesHorizontalPanel[i]=new Ext.Panel({
-			defaults:{
-				flex:1
-			},
+			
 			//fullscreen:true,
 			layout:{
 			type:'hbox',
 			align:'stretch',
-			pack:'end'
+			pack:'center'
 			},
 			items:[storyPanel[i*3+0],storyPanel[i*3+1],storyPanel[i*3+2]]
 		});
