@@ -3,7 +3,7 @@ gtp.clientsidehb= function() {
 	this.timefactor=2;
 	this.sessionid=1;
 	this.getTolls();
-	this.utils.dataStore.getConfiguration();
+	//this.utils.dataStore.getConfiguration();
 	//this.geo.updateLocation();
 };
 
@@ -22,6 +22,7 @@ gtp.getTolls= function() {
 					description: gtp.tolls[i].tollOperator
 				},'Tolls'));
 			}
+			gtp.loop();
 		},
 		failure: function(response) {
 			gtp.tolls=false;
@@ -33,21 +34,48 @@ gtp.getTolls= function() {
 gtp.currentNTid=0;
 gtp.currentSTid=0;
 
+gtp.curlat = 34.139427;
+gtp.curlon = -118.095533;
+
+gtp.count=0;
+
+function nextCoordinate(lat,long) {
+	var nextCoord=MidPointOf(gtp.curlat,gtp.curlon,lat,long);
+	var dis=CalcDistanceBetween(gtp.curlat, gtp.curlon, nextCoord._lat, nextCoord._lon);
+	if( dis < 2) {
+		console.log('Client is with in the proximity of the toll ');
+	}
+	gtp.curlat=nextCoord._lat;
+	gtp.curlon=nextCoord._lon;
+	console.log('mid point is '+gtp.curlat+' '+gtp.curlon);
+};
+
 gtp.loop= function() {
-	if(gtp.tolls && gtp.geo.latitude && gtp.cfg) {
+	//if(gtp.tolls && gtp.geo.latitude ) {
+	if(gtp.tolls && gtp.curlat && gtp.curlon && gtp.count < 15) {
+		gtp.count++;
+		console.log('i am from gtp.loop');
+			
 		var mindis=1000000;
-		var nearestToll;
-		var currentLocation=new LatLon(gtp.geo.latitude,gtp.geo.longitude);
+		var nearestTollLat,nearestTollLong;
+		var curLat=gtp.curlat;//gtp.geo.latitude;
+		var curLon=gtp.curlon;//gtp.geo.longitude;
+		
 		for(i=0; i<gtp.tolls.length; i++){
-			var tollpoint=new LatLon(gtp.tolls[i].latitude,gtp.tolls[i].longitude);
-			var dis=currentLocation.distanceTo(tollpoint);
+			var dis = CalcDistanceBetween(curLat, curLon, gtp.tolls[i].latitude, gtp.tolls[i].longitude);
 			if(dis < mindis) {
-				nearestToll=tollpoint;
+				nearestTollLat=gtp.tolls[i].latitude;
+				nearestTollLong=gtp.tolls[i].longitude;
+				mindis=dis;
+				gtp.currenNTid=i;
 			}
 		}
 		
+		console.log('min distance is '+mindis);
+		console.log('nearest toll is '+nearestTollLat+' '+nearestTollLong);
+		console.log('gtp.currentNTid '+gtp.currentNTid);
+		
 		var gslhb=gtp.stores.LogHeartBeat;
-		gtp.currentNTid=tolldetails.getAt(tolldetails.findExact('latitude',nearestToll._lat)).get('tollid');
 		if(gtp.currentSTid) {
 			gtp.currentSTid=gslhb.getAt(gslhb.findExact('sessionid',gtp.sessionid)).get('tollid');
 			if(gtp.currentNTid!=gtp.currentSTid) {
@@ -59,7 +87,7 @@ gtp.loop= function() {
 		 if((mindis * 1000) < 100) {
 			gtp.sessionid++;
 		} 
-		 */
+		*/
 		
 		if(gslhb.data.length>9) {
 			var tsid=gslhb.getAt(0).get('sessionid');
@@ -81,7 +109,7 @@ gtp.loop= function() {
 			if(!sidchange && !tidchange) {
 				// Examine the distances from the toll
 				var afterCrossingRise=false;
-				var beforCrossingFall=false;
+				var beforeCrossingFall=false;
 				var crossingDistance,crossingDistanceNext;
 				var previousDistance=gslhb.getAt(0).get('distance');
 				var currentDistance=0;
@@ -113,22 +141,31 @@ gtp.loop= function() {
 					
 					if((currentDistance > previousDistance) && beforeCrossingFall && afterCrossingRise)
 						continue;
+					
+					break;
 				}
 				
 				if(i==10 && ((crossingDistance < 100) || (crossingDistanceNext < 100)) )
+				{
+					console.log('toll is crossed');
 					gtp.sessionid++;
+				}
 			}
 		}
 		
 		gslhb.insert(0,Ext.ModelMgr.create({
 			sessionid: gtp.sessionid,
 			tollid: gtp.currentNTid,
-			distance: min
+			distance: mindis
 		},'HeartBeatLog'));
 		
 		gtp.currentSTid=gtp.sessionid;
 		
 		var timeToTravel= (mindis * 1000) / (gtp.avgspeed * 5 / 18); 
+		console.log('Time for next heartbeat '+timeToTravel);
 		setTimeout("gtp.loop()", (timeToTravel/gtp.timefactor) * 1000);
+		
+		// Fetch Current Location
+		nextCoordinate(nearestTollLat, nearestTollLong);
 	}
 };

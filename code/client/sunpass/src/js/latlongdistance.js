@@ -44,3 +44,47 @@ LatLon.prototype.distanceTo = function(point, precision) {
   return d.toPrecisionFixed(precision);
 };
 
+function toRad(Value) {
+    /** Converts numeric degrees to radians */
+    return Value * Math.PI / 180;
+}
+
+function toDeg(Value) {
+	return Value * 180 / Math.PI;
+}
+
+Number.prototype.toRad = function() {
+   return this * Math.PI / 180;
+};
+
+Number.prototype.toDeg = function() {
+   return this * 180 / Math.PI;
+};
+
+function CalcDistanceBetween(lat1, lon1, lat2, lon2) {
+    //Radius of the earth in:  1.609344 miles,  6371 km  | var R = (6371 / 1.609344);
+    var R = 3958.7558657440545; // Radius of earth in Miles 
+    var dLat = toRad(lat2-lat1);
+    var dLon = toRad(lon2-lon1); 
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c;
+    return d;
+}
+
+function MidPointOf(lt1, ln1, lt2, ln2) {
+	  lat1 = toRad(lt1), lon1 = toRad(ln1);
+	  lat2 = toRad(lt2);
+	  var dLon = toRad((ln2-ln1));
+
+	  var Bx = Math.cos(lat2) * Math.cos(dLon);
+	  var By = Math.cos(lat2) * Math.sin(dLon);
+
+	  lat3 = Math.atan2(Math.sin(lat1)+Math.sin(lat2),
+	                    Math.sqrt( (Math.cos(lat1)+Bx)*(Math.cos(lat1)+Bx) + By*By) );
+	  lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+
+	  return new LatLon(toDeg(lat3), toDeg(lon3));
+}
