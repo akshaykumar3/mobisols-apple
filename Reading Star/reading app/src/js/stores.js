@@ -5,11 +5,11 @@ var usersList = new Ext.data.Store({
 		return record.get('reg')[0];
 	},
 	data: [{
-		name:'raghu'
-	},
-	{
-		name='pradeep'
-	}]
+			name:'raghu'
+		},
+		{
+			name:'pradeep'
+		}]
 });
 
 var storiesList = new Ext.data.Store({
@@ -43,3 +43,23 @@ var storiesList = new Ext.data.Store({
 			}]
 		}]
 });
+
+var ChaptersStore = new Ext.data.Store({
+	model: 'chapters',
+	sorters: 'name',
+	getGroupString : function(record) {
+        return record.get('name')[0];
+    },
+	data:[{
+			name : 'chapter1',
+			content:'fashflaflka'
+		},
+		{
+			name : 'chapter1',
+			content:'fashflaflka'
+		},
+		{
+			name : 'chapter1',
+			content:'fashflaflka'
+		}]
+})
