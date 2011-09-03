@@ -59,7 +59,7 @@ Ext.setup({
 		
 		var storyPanel = new Array();
 		var i=0;
-		for(i=0;i<18;i++)
+		/*for(i=0;i<18;i++)
 		{
 		storyPanel[i]=new Ext.Panel({
 			height:100,
@@ -75,8 +75,17 @@ Ext.setup({
 			html:'story1'
 			}]
 		});
-		}
+		}*/
 
+		for(i=0;i<18;i++)
+		{
+			storyPanel[i]=new Ext.Button({
+				ui:'round',
+				text:"<img src='resources/img/icon.png'  style='float:left; height:22; width:22;' />",
+				align:'center'
+			})
+		}
+		
 		var storiesHorizontalPanel=new Array();
 		for(i=0;i<18/3;i++)
 		{
@@ -151,7 +160,7 @@ Ext.setup({
 			items:[usersList,storiesCarousel,graph]
 		});
 		
-		mainPanel.setActiveItem("usersList");
+		mainPanel.setActiveItem("storiesCarousel");
 		
 		new Ext.Panel({
 			fullscreen:true,
