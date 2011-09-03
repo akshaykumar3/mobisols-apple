@@ -5,7 +5,7 @@ Ext.setup({
     glossOnIcon: false,
     onReady: function() {
         
-		var carousel = new Ext.Carousel({
+		var usersCarousel = new Ext.Carousel({
             ui : 'light',
 			defaults: {
                 cls: 'card'
@@ -27,7 +27,8 @@ Ext.setup({
        var screen1ToolBar = new Ext.Toolbar({
 			dock:'top',
 			title:'Toolbar',
-			items:[{text:'About'}]
+			items:[{text:'About'
+					}]
 	   });
 	   
        var userSlider = new Ext.Panel({
@@ -39,7 +40,7 @@ Ext.setup({
             defaults: {
                 flex: 1
             },
-            items: [carousel]
+            items: [usersCarousel]
         });
 		
 		var usersList=new Ext.Panel({
@@ -56,63 +57,101 @@ Ext.setup({
 			dockedItems:[screen1ToolBar,userSlider]
 		});
 		
-		var storyPanel=new Ext.Panel({
-			fullscreen:true,
+		var storyPanel = new Array();
+		var i=0;
+		for(i=0;i<18;i++)
+		{
+		storyPanel[i]=new Ext.Panel({
+			height:100,
+			width:100,
+			
+			//fullscreen:true,
 			style:"background-color: #fee;",
 			layout:{
 			type:'hbox',
-			align:'stretch'
+			align:'left'
 			},
-			items:[]
+			items:[{
+			html:'story1'
+			}]
 		});
-		
-		var storyPanel2=new Ext.Panel({
-			fullscreen:true,
-			style:"background-color: #fcc;",
+		}
+
+		var storiesHorizontalPanel=new Array();
+		for(i=0;i<18/3;i++)
+		{
+		 storiesHorizontalPanel[i]=new Ext.Panel({
+			defaults:{
+				flex:1
+			},
+			//fullscreen:true,
 			layout:{
 			type:'hbox',
-			align:'stretch'
+			align:'stretch',
+			pack:'end'
 			},
-			items:[]
+			items:[storyPanel[i*3+0],storyPanel[i*3+1],storyPanel[i*3+2]]
 		});
+		}
 		
-		var storyPanel3=new Ext.Panel({
-			fullscreen:true,
-			style:"background-color: #caa;",
-			layout:{
-			type:'hbox',
-			align:'stretch'
+		var storiesList = new Array();
+		for(i=0;i<2;i++)
+		{
+		storiesList[i] = new Ext.Panel({
+			id:"storiesList"+i,
+			height:300,
+			width:300,
+			defaults:{
+				flex:1
 			},
-			items:[]
-		});
-		
-		var storiesHorizontalPanel=new Ext.Panel({
-			fullscreen:true,
-			layout:{
-			type:'hbox',
-			align:'stretch'
-			},
-			dockedItems:[storyPanel,storyPanel2,storyPanel3]
-		});
-		
-		var storiesList = new Ext.Panel({
-			id:"storiesList",
-			fullscreen:true,
 			layout:{
 			type:'vbox',
 			align:'stretch'
 			},
-			dockedItems:[storiesHorizontalPanel,storiesHorizontalPanel,storiesHorizontalPanel]
+			items:[storiesHorizontalPanel[i*3+0],storiesHorizontalPanel[i*3+1],storiesHorizontalPanel[i*3+2]]
+		});
+		}
+		
+		var storiesCarousel = new Ext.Carousel({
+			id:"storiesCarousel",
+			fullscreen:true,
+			ui : 'light',
+            items: [storiesList[0],storiesList[1]]
+		});
+		
+		/*var chaptersList = new Ext.Panel({
+			id:"chaptersList",
+			fullscreen:true,
+			ui: 'light',
+			items:[
+				{
+				xtype:'list',
+				width:300,
+				height:500,
+				onItemDisclosure: function(record, btn, index) {
+					Ext.Msg.alert('Tap','you have selected chapter'+i);
+				},
+				store: ChaptersStore, 
+				itemTpl: '<strong>{name}</strong>'
+				}
+			]
+		});
+		*/
+		
+		var graph = new Ext.Panel({
+			id:"graph",
+			fullscreen:true,
+			items:[]
 		});
 		
 		//main panel to switch all panels
 		var mainPanel=new Ext.Panel({
 			fullscreen:true,
 			layout:'card',
-			items:[usersList,storiesList]
+			items:[usersList,storiesCarousel,graph]
 		});
 		
-		mainPanel.setActiveItem("storiesList");
+		mainPanel.setActiveItem("usersList");
 		
 		new Ext.Panel({
 			fullscreen:true,
