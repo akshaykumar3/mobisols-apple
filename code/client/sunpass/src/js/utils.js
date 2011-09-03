@@ -35,15 +35,3 @@ gtp.utils.dataStore.setValueOfKey=function(key,value) {
 	localStorage.setItem(Encryption.encrypt(key),Encryption.encrypt(value));
 };
 
-gtp.utils.dataStore.getValueOfKeyFromDb=function(key) {
-	this.queryDb=QueryDatabase;
-	gtp.db.transaction(this.queryDb,this.errorDb);
-};
-
-function QueryDatabase(tx) {
-	tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCb);
-}
-
-function querySuccess(tx, results) {
-	
-}

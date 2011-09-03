@@ -17,14 +17,16 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'emailfield',
 					border: '10 5 3 10',
-					id: 'lpemailid'
+					id: 'lpemailid',
+					value: gtp.utils.dataStore.getValueOfKey('username')
 				},{
 					html: 'password:',
 					align: 'left'
 				},{
 					xtype: 'passwordfield',
 					border: '10 5 3 10',
-					id: 'lppassword'
+					id: 'lppassword',
+					value: gtp.utils.dataStore.getValueOfKey('password')
 				},{
 					layout: 'hbox',
 					items: [{
@@ -60,7 +62,13 @@ gtp.controller=Ext.regController("load",{
 										var decres=Ext.decode(response.responseText);
 										var res=decres.response.response;
 										console.log(res.userExists);
+										
+										
 										if(res.userExists=="Y" && res.passwordCorrect=="Y") {
+											// Store username and password locally.
+											gtp.utils.dataStore.setValueOfKey('username',Ext.getCmp('lpemailid').getValue());
+											gtp.utils.dataStore.setValueOfKey('password',Ext.getCmp('lppassword').getValue());
+											
 											var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
 											Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
 											Ext.dispatch({
