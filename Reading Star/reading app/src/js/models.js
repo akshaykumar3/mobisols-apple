@@ -5,7 +5,7 @@ Ext.regModel('Users', {
 		}]
 });
 
-Ext.regModel('Stories', {
+/*Ext.regModel('Stories', {
 	fields: [{
 			name: 'name',
 			type: 'string'
@@ -15,7 +15,7 @@ Ext.regModel('Stories', {
 			type: 'number'
 		}],
 	 hasMany: {model: 'Chapter', name: 'chapters'}
-});
+});*/
 
 Ext.regModel('chapters', {
 	fields: [{
