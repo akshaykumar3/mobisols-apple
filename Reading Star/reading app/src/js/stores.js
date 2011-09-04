@@ -12,7 +12,7 @@ var usersList = new Ext.data.Store({
 		}]
 });
 
-var storiesList = new Ext.data.Store({
+/*var storiesList = new Ext.data.Store({
 	model: 'Stories',
 	sorters: 'reg',
 	getGroupString : function(record) {
@@ -43,10 +43,9 @@ var storiesList = new Ext.data.Store({
 			}]
 		}]
 });
-
-var ChaptersStore = new Ext.data.Store({
+*/
+var chaptersStore = new Ext.data.Store({
 	model: 'chapters',
-	sorters: 'name',
 	getGroupString : function(record) {
         return record.get('name')[0];
     },
@@ -55,11 +54,11 @@ var ChaptersStore = new Ext.data.Store({
 			content:'fashflaflka'
 		},
 		{
-			name : 'chapter1',
+			name : 'chapter2',
 			content:'fashflaflka'
 		},
 		{
-			name : 'chapter1',
+			name : 'chapter3',
 			content:'fashflaflka'
 		}]
 })
