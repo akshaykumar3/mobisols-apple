@@ -18,12 +18,5 @@ Ext.regModel('Users', {
 });*/
 
 Ext.regModel('chapters', {
-	fields: [{
-		name: 'name',
-		type: 'string'
-		},
-		{
-		name:'content',
-		type:'string'
-		}]
+	fields: ['name','content']
 });

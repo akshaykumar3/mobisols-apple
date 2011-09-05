@@ -46,9 +46,9 @@ var usersList = new Ext.data.Store({
 */
 var chaptersStore = new Ext.data.Store({
 	model: 'chapters',
-	getGroupString : function(record) {
+	/*getGroupString : function(record) {
         return record.get('name')[0];
-    },
+    },*/
 	data:[{
 			name : 'chapter1',
 			content:'fashflaflka'
