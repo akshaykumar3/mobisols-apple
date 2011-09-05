@@ -2,7 +2,7 @@ Ext.setup({
     tabletStartupScreen: 'tablet_startup.png',
     phoneStartupScreen: 'phone_startup.png',
     icon: 'icon.png',
-    glossOnIcon: false,
+    glossOnIcon: true,
     onReady: function() {
         
 		var userButton = new Array();
@@ -62,7 +62,10 @@ Ext.setup({
 					xtype:'button',
 					ui:'round',
 					text:'Add',
-					align:'right'
+					align:'right',
+					handler: function(){
+						Ext.Msg.prompt("Welcome!", "What is your name?", Ext.emptyFn);
+					}
 				}
 			]
 	   });
@@ -178,7 +181,7 @@ Ext.setup({
 						marginRight:'25px',
 						marginLeft:'25px'
 					},
-					handle:function(){
+					handler:function(){
 						mainPanel.setActiveItem('usersList');
 					}
 				}
@@ -195,7 +198,7 @@ Ext.setup({
 				fullscreen:true,
 				store: chaptersStore, 
 				scroll: 'vertical',
-				itemTpl: '<strong>{name}</strong>',
+				itemTpl: '{name}',
 				onItemDisclosure: function() {
 					Ext.Msg.alert('Tap','you have selected chapter'+i);
 					}
@@ -204,7 +207,6 @@ Ext.setup({
 		});*/
 		
 	var content=new Ext.Panel({
-				autoRender: true,
 				floating: true,
 				modal: true,
 				centered: true,
@@ -248,14 +250,14 @@ Ext.setup({
 							text:'Stop',
 							dock:'right',
 							handler:function(){
-								//content.hide();
 								mainPanel.setActiveItem('graph');
 							}
 						}
 					]
 				}
 			]
-				});
+		});
+		
 		var readingPanel = new Ext.Panel({ 
 			id:'readingPanel',
 			items:[content]
