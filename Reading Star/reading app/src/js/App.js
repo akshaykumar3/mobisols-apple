@@ -112,8 +112,7 @@ Ext.setup({
 				text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
 				align:'center',
 				handler: function(){
-					content.show();
-					mainPanel.setActiveItem('readingPanel');	
+					mainPanel.setActiveItem("chaptersPanel");	
 				},
 				story:'hfjadsfhlasf'
 			})
@@ -191,12 +190,12 @@ Ext.setup({
 		/*var chaptersList = new Ext.Panel({
 			id:"chaptersList",
 			fullscreen:true,
-			ui: 'light',	
+			ui: 'light',
 			items:[
 				{
 				xtype:'list',
 				fullscreen:true,
-				store: chaptersStore, 
+				store: chaptersStore,
 				scroll: 'vertical',
 				itemTpl: '{name}',
 				onItemDisclosure: function() {
@@ -206,9 +205,52 @@ Ext.setup({
 			]
 		});*/
 		
+	chapterButton=new Array();
+	i=0;
+	for(i=0;i<10;i++)
+	{
+	  chapterButton[i]= new Ext.Button({
+		ui:'round',
+		height:50,
+		width:150,
+		centered:true,
+		style:{
+			marginTop:'20px',
+			marginBottom:'20px',
+			marginRight:'20px',
+			marginBottom:'20px'
+		},
+		text:'<center>Chapter '+i+'</center>',
+		handler:function(){
+			content.show();
+			mainPanel.setActiveItem('readingPanel');
+		}
+	  });
+	}
+	
+	var chaptersList = new Ext.Panel({
+		id:'chaptersList',
+		height:500,
+		width:300,
+		scroll:'vertical',
+		layout:{
+		type:'vbox',
+		align:'center'
+		},
+		items:chapterButton
+	});
+		
+	var chaptersPanel = new Ext.Panel({
+		id:'chaptersPanel',
+		fullscreen:true,
+		ui:'light',
+		dockedItems:[
+			chaptersList
+		]
+	});
+	
 	var content=new Ext.Panel({
 				floating: true,
-				modal: true,
 				centered: true,
 				hideOnMaskTap: false,
 				height: 500,
@@ -222,7 +264,7 @@ Ext.setup({
 				{
 					dock : 'bottom',
 					xtype: 'panel',
-					height:100,
+					height:80,
 					width:300,
 					layout:{
 						type:'hbox',
@@ -266,11 +308,40 @@ Ext.setup({
 		var graph = new Ext.Panel({
 			id:"graph",
 			fullscreen:true,
+			height:600,
+			width:300,
+			layout:{
+				type:'vbox',
+				align:'center'
+			},
 			items:[
 				{
+				  xtype:'panel',
+				  height:450,
+				  width:300,
+				  style:{
+					backgroundColor:'white'
+				  }
+				},
+				{
+				  xtype:'panel',
+				  layout:{
+				  type: 'hbox',
+				  align:'right'
+				  },
+				  items:[
+					{
 					xtype:'button',
-					ui:'button',
-					text:'home'
+					ui:'back',
+					html:'Chapters',
+					style:{
+						marginTop:'10px'
+					},
+					handler: function(){
+						mainPanel.setActiveItem('storiesPanel');
+					}
+					}
+				  ]
 				}
 			]
 		});
@@ -279,7 +350,7 @@ Ext.setup({
 		var mainPanel=new Ext.Panel({
 			fullscreen:true,
 			layout:'card',
-			items:[usersList,storiesPanel,readingPanel,graph]
+			items:[usersList,storiesPanel,chaptersPanel,readingPanel,graph]
 		});
 		
 		mainPanel.setActiveItem("usersList");
