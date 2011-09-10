@@ -1,4 +1,4 @@
-var usersList = new Ext.data.Store({
+/*var usersStore = new Ext.data.Store({
 	model: 'Users',
 	sorters: 'reg',
 	getGroupString : function(record) {
@@ -11,7 +11,7 @@ var usersList = new Ext.data.Store({
 			name:'pradeep'
 		}]
 });
-
+*/
 /*var storiesList = new Ext.data.Store({
 	model: 'Stories',
 	sorters: 'reg',
@@ -44,11 +44,20 @@ var usersList = new Ext.data.Store({
 		}]
 });
 */
-var chaptersStore = new Ext.data.Store({
+/*var chaptersStore = new Ext.data.Store({
 	model: 'chapters',
 	/*getGroupString : function(record) {
         return record.get('name')[0];
-    },*/
+    },
+	/*proxy: {
+        type: 'ajax',
+        url : 'resources/data/chapters.json',
+        reader: {
+            type: 'json',
+            root: 'chapters'
+        }
+    },
+    autoLoad: true,
 	data:[{
 			name : 'chapter1',
 			content:'fashflaflka'
@@ -61,4 +70,4 @@ var chaptersStore = new Ext.data.Store({
 			name : 'chapter3',
 			content:'fashflaflka'
 		}]
-})
+})*/

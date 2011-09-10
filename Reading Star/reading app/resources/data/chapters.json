@@ -1,0 +1,14 @@
+{
+chapters:[	{
+			name : 'chapter1',
+			content:'fashflaflka'
+		},
+		{
+			name : 'chapter2',
+			content:'fashflaflka'
+		},
+		{
+			name : 'chapter3',
+			content:'fashflaflka'
+		}]
+	}
