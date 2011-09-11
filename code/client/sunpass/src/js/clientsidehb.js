@@ -13,7 +13,7 @@ gtp.getTolls= function() {
 		success: function(response){
 			var resobj=Ext.decode(response.responseText);
 			gtp.tolls=resobj.response.tollDetailsList;
-			for(i=0;i<gtp.tolls.length;i++) {
+			for(var i=0;i<gtp.tolls.length;i++) {
 				tolldetails.insert(0,Ext.ModelMgr.create({
 					latitude: gtp.tolls[i].latitude,
 					longitude: gtp.tolls[i].longitude,
@@ -61,7 +61,7 @@ gtp.loop= function() {
 		var curLat=gtp.curlat;//gtp.geo.latitude;
 		var curLon=gtp.curlon;//gtp.geo.longitude;
 		
-		for(i=0; i<gtp.tolls.length; i++){
+		for(var i=0; i<gtp.tolls.length; i++){
 			var dis = CalcDistanceBetween(curLat, curLon, gtp.tolls[i].latitude, gtp.tolls[i].longitude);
 			if(dis < mindis) {
 				nearestTollLat=gtp.tolls[i].latitude;
