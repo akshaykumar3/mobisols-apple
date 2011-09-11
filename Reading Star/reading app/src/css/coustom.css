@@ -24,7 +24,18 @@ body {
             line-height: 18px;
         }
 		.btn-icon{
-			background: url(../../resources/img/icon.png);
-			width: 72px;
-			height: 72px;
+			background: url(../../resources/img/s.png);
+			width: 200px;
+			height: 200px;
 		}
+		.filter-btn .x-btn-text {
+			background-image: url(../../resources/img/example.png);
+		}
+
+.x-item-disabled.filter-btn .x-btn-text {
+   background-image: url('../../resources/img/example.png');
+}
+
+.x-btn-pressed.filter-btn .x-btn-text {
+   background-image: url('../../resources/img/example.png');
+}
