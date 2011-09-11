@@ -20,14 +20,15 @@ Ext.setup({
 				items:[
 					{
 						xtype:'button',
-						height:200,
-						width:200,
+						cls:'btn-icon',
+						height:72,
+						width:72,
 						style: {
 							marginTop: '75px',
 							marginBottom: '50px'
 						},
 						ui:'round',
-						text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
+						//text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
 						align:'center',
 						handler:function(){
 							mainPanel.setActiveItem("storiesPanel");
@@ -92,7 +93,6 @@ Ext.setup({
 			defaults:{
 			flex : 1
 			},
-			//items:[userSlider],
 			dockedItems:[screen1ToolBar,userSlider]
 		});
 		
@@ -187,50 +187,33 @@ Ext.setup({
 			]
 		})
 		
-		/*var chaptersList = new Ext.Panel({
-			id:"chaptersList",
-			fullscreen:true,
-			ui: 'light',
-			items:[
-				{
-				xtype:'list',
-				fullscreen:true,
-				store: chaptersStore,
-				scroll: 'vertical',
-				itemTpl: '{name}',
-				onItemDisclosure: function() {
-					Ext.Msg.alert('Tap','you have selected chapter'+i);
-					}
-				}
-			]
-		});*/
-		
 	chapterButton=new Array();
 	i=0;
 	for(i=0;i<10;i++)
 	{
 	  chapterButton[i]= new Ext.Button({
 		ui:'round',
-		height:50,
+		height:30,
 		width:150,
 		centered:true,
 		style:{
-			marginTop:'20px',
-			marginBottom:'20px',
+			marginTop:'10px',
+			marginBottom:'10px',
 			marginRight:'20px',
 			marginBottom:'20px'
 		},
 		text:'<center>Chapter '+i+'</center>',
 		handler:function(){
-			content.show();
-			mainPanel.setActiveItem('readingPanel');
+			var c=Ext.getCmp('content');
+			this.popup=modePopUp;
+			this.popup.show('pop');
 		}
 	  });
 	}
 	
 	var chaptersList = new Ext.Panel({
 		id:'chaptersList',
-		height:500,
+		height:400,
 		width:300,
 		scroll:'vertical',
 		layout:{
@@ -245,11 +228,117 @@ Ext.setup({
 		fullscreen:true,
 		ui:'light',
 		dockedItems:[
-			chaptersList
+			chaptersList,
+			{
+				xtype:'panel',
+				layout:{
+					type:'vbox',
+					align:'center'
+				},
+				centered:true,
+				style:{
+					marginTop:'20px'
+				},
+				items:[
+					{
+						xtype:'button',
+						ui:'confirm',
+						text:'Stories',
+						centered:true,
+						handler:function(){
+							mainPanel.setActiveItem('storiesPanel');
+						}
+					}
+				]
+			}
+		]
+	});
+	
+	var contentPopUp =new Ext.Panel({
+		id:'content.items.pause.popup',
+		floating: true,
+		modal: true,
+		centered: true,
+		width: 200,
+		styleHtmlContent: true,
+		items:[
+			{
+				xtype:'button',
+				ui:'round',
+				text:'Finish',
+				handler:function(){
+					Ext.getCmp('content.items.pause.popup').hide();
+					mainPanel.setActiveItem('chaptersPanel');
+				}
+			},
+			{
+				xtype:'button',
+				ui:'round',
+				text:'Change Mode',
+				style:{
+					marginTop:'20px'
+				},
+				handler:function(){
+					var p=Ext.getCmp('content.items.pause.popup');
+					p.hide();
+					Ext.getCmp('content.items.pause.popup').hide();
+					var c=Ext.getCmp('content');
+					this.popup=modePopUp;
+					this.popup.show('pop');
+				}
+			}
+		]
+	});
+	
+	var modePopUp =new Ext.Panel({
+		id:'content.mode.popup',
+		floating: true,
+		modal: true,
+		centered: true,
+		width: 200,
+		styleHtmlContent: true,
+		items:[
+			{
+				xtype:'button',
+				ui:'round',
+				text:'Mode1',
+				handler:function(){
+					Ext.getCmp('content.mode.popup').hide();
+						content.show();
+						mainPanel.setActiveItem('readingPanel');
+					}
+			},
+			{
+				xtype:'button',
+				ui:'round',
+				text:'Mode2',
+				style:{
+					marginTop:'20px'
+				},
+				handler:function(){
+					Ext.getCmp('content.mode.popup').hide();
+						content.show();
+						mainPanel.setActiveItem('readingPanel');
+					}
+			},
+			{
+				xtype:'button',
+				ui:'round',
+				text:'Mode3',
+				style:{
+					marginTop:'20px'
+				},
+				handler:function(){
+					Ext.getCmp('content.mode.popup').hide();
+						content.show();
+						mainPanel.setActiveItem('readingPanel');
+					}
+			}
 		]
 	});
 	
 	var content=new Ext.Panel({
+				id:'content',
 				floating: true,
 				centered: true,
 				hideOnMaskTap: false,
@@ -271,16 +360,17 @@ Ext.setup({
 						align:'center'
 					},
 					style:{
-						marginTop:'30px'
+						marginTop:'10px'
 					},
 					items:[
 						{
 							dock:'left',
 							xtype:'button',
-							ui:'confirm-round',
-							text:'Play',
+							ui:'round',
+							text:'Pause',
 							handler:function(){
-								//mainPanel.setActiveItem('usersList');
+							this.popup=contentPopUp;
+							this.popup.show('pop');
 							}
 						},
 						{
@@ -288,11 +378,11 @@ Ext.setup({
 						},
 						{
 							xtype:'button',
-							ui:'decline-round',
-							text:'Stop',
+							ui:'round',
+							text:'Finish',
 							dock:'right',
 							handler:function(){
-								mainPanel.setActiveItem('graph');
+								mainPanel.setActiveItem('chaptersPanel');
 							}
 						}
 					]
@@ -338,7 +428,7 @@ Ext.setup({
 						marginTop:'10px'
 					},
 					handler: function(){
-						mainPanel.setActiveItem('storiesPanel');
+						mainPanel.setActiveItem('chaptersPanel');
 					}
 					}
 				  ]
