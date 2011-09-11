@@ -35,7 +35,7 @@ Ext.setup({
 						}
 					},
 					{
-						html: '<center>user '+i+'</center>'
+						html: '<font size="4" face="Comic Sans MS" color="#462C2C"><center>Raghu</center></font>'
 					}
 				]
             }
