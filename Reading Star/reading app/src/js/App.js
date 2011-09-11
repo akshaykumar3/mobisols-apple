@@ -101,7 +101,7 @@ Ext.setup({
 		for(i=0;i<18;i++)
 		{
 			storyButton[i]=new Ext.Button({
-				height:80,
+				height:75,
 				width:75,
 				cls:'story-icon',
 				style: {
