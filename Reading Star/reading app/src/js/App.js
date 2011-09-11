@@ -21,8 +21,8 @@ Ext.setup({
 					{
 						xtype:'button',
 						cls:'btn-icon',
-						height:72,
-						width:72,
+						height:200,
+						width:200,
 						style: {
 							marginTop: '75px',
 							marginBottom: '50px'
