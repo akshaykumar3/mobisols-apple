@@ -28,7 +28,7 @@ Ext.setup({
 							marginBottom: '50px'
 						},
 						ui:'round',
-						//text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
+						//text:"<center><img src='resources/img/s.png'  style='float:center; height:200; width:200;' /></center>",
 						align:'center',
 						handler:function(){
 							mainPanel.setActiveItem("storiesPanel");
@@ -101,15 +101,17 @@ Ext.setup({
 		for(i=0;i<18;i++)
 		{
 			storyButton[i]=new Ext.Button({
-				height:72,
-				width:72,
+				height:80,
+				width:75,
+				cls:'story-icon',
 				style: {
-						marginTop: '25px',
-						marginBottom: '25px',
-						marginRight:'25px'
+						marginTop: '10px',
+						marginBottom: '10px',
+						marginRight:'10px',
+						marginLeft:'10px'
 					},
 				ui:'round',
-				text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
+				//text:"<center><img src='resources/img/icon.png'  style='float:center; height:72; width:72;' /></center>",
 				align:'center',
 				handler: function(){
 					mainPanel.setActiveItem("chaptersPanel");	
@@ -345,9 +347,10 @@ Ext.setup({
 				height: 500,
 				width: 300,
 				scroll: 'vertical',
+				bodyStyle: "background-image:url(resources/img/horse1.jpg) !important",
 				html: [
-						'<p>Story here',
-						'</p>'
+						'<center><p> Sti Tumma had always wanted to have beautiful beaded shooflies attached to her saddle, on the breastplate and under the horses tummy on the cinch. She had already made a couple for her favorite bridle! The shooflies were made from a small amount of horsehair being folded in half, wrapped with buckskin, and beadwork put over the buckskin. The shoofly would then be clipped onto the favorite spot selected by each rider. So when the horses had their tails cleaned, the hair was saved for StiTumma who then went to work to make herself some beautiful and colorful shooflies. Sometimes Gilly, StiTummas sister, would do the beadwork on a dozen shooflies at a time for the trail guides. The shooflies would move with the horse and keep some of the flies from settling on the horse!',
+						'</p></center>'
 					].join(""),
 				dockedItems:[
 				{
