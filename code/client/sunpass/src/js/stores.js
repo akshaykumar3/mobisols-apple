@@ -72,37 +72,37 @@ var paidTolls = new Ext.data.Store({
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://localhost:6001/newweb/services/ClientConfiguration',
+		url: 'http://172.30.102.242:6001/newweb/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{
-		url: 'http://localhost:6001/newweb/services/UserRegistration',
+		url: 'http://172.30.102.242:6001/newweb/services/UserRegistration',
 		service: 'regnewuser'
 	},{
-		url: 'http://localhost:6001/newweb/services/DeviceRegistration',
+		url: 'http://172.30.102.242:6001/newweb/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
-		url: 'http://localhost:6001/newweb/services/Login',
+		url: 'http://172.30.102.242:6001/newweb/services/Login',
 		service: 'logging'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/AccountDetails',
+		url: 'http://172.30.102.242:6001/newweb/services/AccountDetails',
 		service: 'acdetails'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/HeartBeat',
+		url: 'http://172.30.102.242:6001/newweb/services/private/HeartBeat',
 		service: 'heartbeat'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/AddCar',
+		url: 'http://172.30.102.242:6001/newweb/services/VehicleDetails',
 		service: 'addcar'
 	},{
-		url: 'http://localhost:6001/newweb/services/TollDetailsList',
+		url: 'http://172.30.102.242:6001/newweb/services/TollDetailsList',
 		service: 'tolldetails'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/VehicleTypeList',
+		url: 'http://172.30.102.242:6001/newweb/services/private/VehicleTypeList',
 		service: 'vehicletypes'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/CcTypeList',
+		url: 'http://172.30.102.242:6001/newweb/services/private/CcTypeList',
 		service: 'cctypes'
 	},{
-		url: 'http://localhost:6001/newweb/services/private/OwnerTypeList',
+		url: 'http://172.30.102.242:6001/newweb/services/private/OwnerTypeList',
 		service: 'ownertypes'
 	}] 
 });
