@@ -88,3 +88,37 @@ Ext.regModel('HeartBeatLog',{
 		type: 'float'
 	}]
 });
+
+Ext.regModel('Settings',{
+	fields: [{
+		name: 'userid',
+		text: 'string'
+	},{
+		name: 'ccnumber',
+		text: 'int'
+	},{
+		name: 'cardtype',
+		text: 'string'
+	},{
+		name: 'expdate',
+		text: 'date'
+	},{
+		name: 'acnumber',
+		text: 'int'
+	},{
+		name: 'name',
+		text: 'string'
+	},{
+		name: 'address',
+		text: 'string'
+	},{
+		name: 'city',
+		text: 'string'
+	},{
+		name: 'state',
+		text: 'string'
+	},{
+		name: 'zipcode',
+		text: 'string'
+	}]
+});

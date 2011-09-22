@@ -9,18 +9,16 @@ Ext.regApplication({
     tabletStartupScreen: 'resources/images/launchimageipad.png',
     phoneStartupScreen: 'resources/images/launchimageiphone.png',
     glossOnIcon: false,
-    responseFetched: true,
     today: new Date(),
+    isCarValid: false,
+    arePaymentDetailsValid: false,
     isAppEnabled: 0,
     tollMarkers: new Array(),
-    infoWindows: new Array(),
+    infoWindow: null,
     launch: function(){
     	console.log('application is launched');
-    	Ext.Ajax.defaultHeaders = {
-    		//'Accept': 'application/json'
-    	};
+    	Ext.Ajax.defaultHeaders = {};
     	var devret=this.getDeviceId();
-    	//gtp.clientsidehb();
     	if(devret!="FAILED")
     	{
     		this.launchLoginPage({
