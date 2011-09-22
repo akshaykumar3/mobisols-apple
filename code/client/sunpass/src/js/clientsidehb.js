@@ -2,17 +2,21 @@ gtp.clientsidehb= function() {
 	this.avgspeed=75;
 	this.timefactor=2;
 	this.sessionid=1;
-	this.getTolls();
-	//this.utils.dataStore.getConfiguration();
-	//this.geo.updateLocation();
+	gtp.loop();
+	this.utils.dataStore.getConfiguration();
+	this.geo.updateLocation();
 };
 
 gtp.getTolls= function() {
 	Ext.Ajax.request({
 		url: webServices.getAt(webServices.findExact('service','tolldetails')).get('url'),
 		success: function(response){
+			
 			var resobj=Ext.decode(response.responseText);
 			gtp.tolls=resobj.response.tollDetailsList;
+			var iconpath,markertitle;
+			
+			// Inserts all the tolls into the datastore.
 			for(var i=0;i<gtp.tolls.length;i++) {
 				tolldetails.insert(0,Ext.ModelMgr.create({
 					latitude: gtp.tolls[i].latitude,
@@ -22,7 +26,43 @@ gtp.getTolls= function() {
 					description: gtp.tolls[i].tollOperator
 				},'Tolls'));
 			}
-			gtp.loop();
+			
+			for(var i=0; i<gtp.tolls.length; i++) 
+			{
+				if(gtp.tolls[i].isCovered=='Y')
+				{
+					iconpath='resources/images/covered.png';
+					markertitle=gtp.tolls[i].tollOperator;
+				}
+				else
+				{
+					iconpath='resources/images/uncovered.png';
+					markertitle=gtp.tolls[i].tollOperator;
+				}
+				
+				gtp.tollMarkers[i]=new google.maps.Marker({
+					position: new google.maps.LatLng(gtp.tolls[i].latitude,gtp.tolls[i].longitude),
+					title: markertitle,
+					icon: iconpath,
+					map: Ext.getCmp('mappanel').map,
+					html: gtp.tolls[i].tollOperator+'<br/>Price: $1<br/>Avg Price: $2'
+				});
+			}
+			
+			gtp.infoWindow= new google.maps.InfoWindow({
+				content: "Toll Gate here"
+			});
+			
+			for(var i=0; i<gtp.tolls.length; i++)
+			{
+				var marker = gtp.tollMarkers[i];
+				google.maps.event.addListener(marker,'click',function(){
+					//console.log('Marker latitude '+this.getPosition().lat()+' longitude '+this.getPostion().lng());
+					gtp.infoWindow.setContent(this.html);
+					gtp.infoWindow.open(Ext.getCmp('mappanel').map, this);
+				});	
+			}
+			
 		},
 		failure: function(response) {
 			gtp.tolls=false;
@@ -52,7 +92,7 @@ function nextCoordinate(lat,long) {
 
 gtp.loop= function() {
 	//if(gtp.tolls && gtp.geo.latitude ) {
-	if(gtp.tolls && gtp.curlat && gtp.curlon && gtp.count < 15) {
+	if(gtp.tolls && gtp.curlat && gtp.curlon && gtp.isAppEnabled && gtp.count < 15) {
 		gtp.count++;
 		console.log('i am from gtp.loop');
 			
@@ -145,8 +185,9 @@ gtp.loop= function() {
 					break;
 				}
 				
-				if(i==10 && ((crossingDistance < 100) || (crossingDistanceNext < 100)) )
+				if(i==10 && afterCrossingRise && beforeCrossingFall && ((crossingDistance < 100) || (crossingDistanceNext < 100)) )
 				{
+					Ext.Msg.alert('Toll is crossed');
 					console.log('toll is crossed');
 					gtp.sessionid++;
 				}

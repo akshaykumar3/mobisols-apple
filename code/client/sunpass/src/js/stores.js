@@ -6,42 +6,12 @@ var carsList = new Ext.data.Store({
 	sorters: 'reg',
 	getGroupString : function(record) {
 		return record.get('reg')[0];
-	},
-	data: [{
-		reg: '4GPB5',
-		state: 'CA',
-		type: 'Sedan',
-		startDate: new Date('12/7/2010'),
-		endDate: new Date('12/12/2010'),
-		active: true
-	}]
+	}
 });
 
 // Store for Tolls.
 var tolldetails=new Ext.data.Store({
-	model: 'Tolls',
-	data: [{
-		 latitude: 37.49885,
-		 longitude: -122.198452,
-		 covered: true,
-		 description: "illinois entry toll road",
-		 price: '$1',
-		 url: 'www.toll1.com'
-	},{
-		 latitude: 37.42980,
-		 longitude: -122.210674,
-		 covered: false,
-		 description: "illinois exit toll road",
-		 price: '$2',
-		 url: 'www.toll2.com'
-	},{
-		 latitude: 37.48750,
-		 longitude: -122.138523,
-		 covered: true,
-		 description: 'toll no 3',
-		 price: '$3',
-		 url: 'www.toll3.com'
-	}]
+	model: 'Tolls'
 });
 
 // Store for paid Tolls.
@@ -51,19 +21,9 @@ var paidTolls = new Ext.data.Store({
 		return record.get('date');
 	},
 	data: [{
-		date: '2011-01-01',
-		amount:'$2.50',
-		location:'I-15N, Escondido',
-		reg: '4GPB5'
-	},{
 		date:'2011-02-21',
 		amount:'$2.50',
 		location:'I-15N, Kentucky',
-		reg: '4GPB5'
-	},{
-		date:'2011-01-15',
-		amount:'$1.50',
-		location:'76W, Long beach', 
 		reg: '4GPB5'
 	}]
 });
@@ -72,38 +32,47 @@ var paidTolls = new Ext.data.Store({
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://172.30.102.242:6001/newweb/services/ClientConfiguration',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/UserRegistration',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/UserRegistration',
 		service: 'regnewuser'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/DeviceRegistration',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/Login',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/Login',
 		service: 'logging'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/AccountDetails',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/AccountDetails',
 		service: 'acdetails'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/private/HeartBeat',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/HeartBeat',
 		service: 'heartbeat'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/VehicleDetails',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/VehicleDetails',
 		service: 'addcar'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/TollDetailsList',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/TollDetailsList',
 		service: 'tolldetails'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/private/VehicleTypeList',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/VehicleTypeList',
 		service: 'vehicletypes'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/private/CcTypeList',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/CcTypeList',
 		service: 'cctypes'
 	},{
-		url: 'http://172.30.102.242:6001/newweb/services/private/OwnerTypeList',
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/OwnerTypeList',
 		service: 'ownertypes'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/ServicePlansList',
+		service: 'serviceplans'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/NearestToll',
+		service: 'nearesttoll'
+	},{
+		url: 'http://mbtest.dyndns.dk:6004/newweb/services/PaymentDetails',
+		service: 'paymentdetails'
 	}] 
 });
 

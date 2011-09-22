@@ -2,7 +2,6 @@
 
 gtp.controller=Ext.regController("load",{
 	show: function(options) {
-		console.log('Login Page loaded');
 		gtp.views.loginPage=new Ext.Panel({
 			fullscreen: true,
 			layout: 'card',
@@ -34,7 +33,6 @@ gtp.controller=Ext.regController("load",{
 						ui: 'round',
 						text: 'Sign in',
 						handler: function(){
-							console.log('Entered Password '+Ext.getCmp('lppassword').getValue());
 							if(!Ext.getCmp('lpemailid').getValue())
 							{
 								Ext.Msg.alert('UserName Required');
@@ -87,14 +85,6 @@ gtp.controller=Ext.regController("load",{
 									},
 									failure: function(response){
 										console.log('Login Authentication failed with status: '+response.status);
-										Ext.dispatch({
-											controller: 'load',
-											action: 'view',
-											loginDetails: {
-												username: Ext.getCmp('lpemailid').getValue(),
-												password: Ext.getCmp('lppassword').getValue()
-											}
-										});
 									}
 								});
 							}
@@ -105,7 +95,7 @@ gtp.controller=Ext.regController("load",{
 						text: 'Register',
 						ui: 'round',
 						handler: function(){
-							gtp.views.loginPage.setActiveItem('regpage');
+							gtp.views.loginPage.setActiveItem('regpage', 'fade');
 						}
 					}]				
 				}]
@@ -153,7 +143,7 @@ gtp.controller=Ext.regController("load",{
 									method: 'POST',
 									params: {
 										json: Ext.encode({
-											username: Ext.getCmp('rpemailid').getValue(),
+											userName: Ext.getCmp('rpemailid').getValue(),
 											password: Ext.getCmp('rppassword').getValue(),
 											deviceDetails: {
 												deviceId: options.deviceDetails.deviceId,
@@ -187,7 +177,7 @@ gtp.controller=Ext.regController("load",{
 						ui: 'round',
 						text: 'Go back',
 						handler: function(){
-							gtp.views.loginPage.setActiveItem('loginpage');
+							gtp.views.loginPage.setActiveItem('loginpage', 'fade');
 						}
 					}]
 				}]
@@ -202,8 +192,7 @@ gtp.controller=Ext.regController("load",{
 		    autoUpdate: true,
 		    listeners: {
 		        locationupdate: function (geo) {
-		        	console.log('GeoLocation: Got new location');
-		            console.log('New latitude: ' + geo.latitude + 'New Longitude: ' + geo.longitude);
+		            console.log('Got New latitude: ' + geo.latitude + 'New Longitude: ' + geo.longitude);
 		            if(markernotset){
 						mylocation_marker=new google.maps.Marker({
 							position: new google.maps.LatLng(geo.latitude,geo.longitude),
@@ -217,10 +206,6 @@ gtp.controller=Ext.regController("load",{
 					else
 					mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
-					//Ext.getCmp('mappanel').update(new google.maps.LatLng(geo.latitude,geo.longitude));
-					
-					console.log('map centered at latitude '+Ext.getCmp('mappanel').map.getCenter().lat());
-					console.log('end of location update');	
 		        },
 		        locationerror: function (   geo,
 		                                    bTimeout, 
@@ -228,12 +213,12 @@ gtp.controller=Ext.regController("load",{
 		                                    bLocationUnavailable, 
 		                                    message) {
 		            if(bTimeout){
-		            	console.log('timeout occurred');
+		            	//console.log('timeout occurred');
 		                //Ext.Msg.alert('Timeout occurred.');
 		            }
 		            else{
-		            	console.log('error finding gps location');
-		            	console.log('error message: '+message);
+		            	//console.log('error finding gps location');
+		            	//console.log('error message: '+message);
 		                //Ext.Msg.alert('Error message: '+ message); 
 		            }
 		        }
@@ -249,479 +234,131 @@ gtp.controller=Ext.regController("load",{
 	      },
 	      success: function(result) {
 	      	console.log('Account Details request is sent successfully');
-	      	
 	      	console.log(result.responseText);
 	      	var res=Ext.decode(result.responseText);
 	      	
-	      	console.log(res);
-	      	
-	      	var pay_details=res.response.paymentDetails;
-	      	var vehicle_details=res.response.vehicleDetails;
-	      	var paidtoll_details=res.response.tollPayments;
-	      	
-	      	console.log('Number of vehicles= '+vehicle_details.length);
-	      	console.log('Number of toll payments= '+paidtoll_details.length);
-	      	
-	      	for(var i=0;i<vehicle_details.length;i++)
-	      	{
-	      		if(vehicle_details[i].isActive){
-	      			Ext.getCmp('activecar').setValue(vehicle_details[i].registration);
-	      		}
-	      		carsList.insert(0,Ext.ModelMgr.create({
-					state: vehicle_details[i].State,
-					reg: vehicle_details[i].registration,
-					type: vehicle_details[i].type,
-					startDate: new Date(vehicle_details[i].startDate),
-					endDate: new Date(vehicle_details[i].endDate)
-				},'Cars'));
-				Ext.getCmp('activecar').setOptions([{
-					text: vehicle_details[i].registration,
-					value: vehicle_details[i].registration
-				}],true);
-			}
-	      	
-	      	Ext.getCmp('ccnumber').setValue(pay_details.cardNumber);
-	      	//Ext.getCmp('cardtype').setValue(pay_details.cardType);
-	      	Ext.getCmp('expirydate').setValue(Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),true);
-	      	Ext.getCmp('bankaccount').setValue(pay_details.bankAccount);
-	      	//console.log('expiry date '+Date.parseDate(pay_details.expDate,'M j, Y g:i:s A').format('Y-m-d'));
-	      	
-	      	for(i=0;i<paidtoll_details.length;i++)
-	      	{
-	      		//12-6-2011 21:16:12
-	      		console.log(Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'));
-		      	paidTolls.insert(0,Ext.ModelMgr.create({
-					date: Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'),
-					amount: paidtoll_details[i].price,
-					location: paidtoll_details[i].tollDetails.tollOperator + paidtoll_details[i].tollDetails.city,
-					reg: paidtoll_details[i].registration
-				}),'PaidTolls');
-			}
+	      	if(res.response) {
+			  	var pay_details=res.response.paymentDetails;
+			  	var vehicle_details=res.response.vehicleDetails;
+			  	var paidtoll_details=res.response.tollPayments;
+		      	
+		      	for(var i=0;i<vehicle_details.length;i++)
+		      	{
+		      		if(vehicle_details[i].isActive){
+		      			Ext.getCmp('activecar').setValue(vehicle_details[i].registration);
+		      		}
+		      		carsList.insert(0,Ext.ModelMgr.create({
+						state: vehicle_details[i].State,
+						reg: vehicle_details[i].registration,
+						type: vehicle_details[i].type,
+						startDate: new Date(vehicle_details[i].startDate),
+						endDate: new Date(vehicle_details[i].endDate)
+					},'Cars'));
+					Ext.getCmp('activecar').setOptions([{
+						text: vehicle_details[i].registration,
+						value: vehicle_details[i].registration
+					}],true);
+				}
+		      	
+		      	var userSettings = Ext.ModelMgr.create({
+		      		userid: options.loginDetails.username,
+		      		ccnumber: pay_details.cardNumber,
+		      		expdate: Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),
+		      		acnumber: pay_details.bankAccount,
+		      		name: pay_details.ccName,
+		      		address: pay_details.address1,
+		      		state: pay_details.state,
+		      		city: pay_details.city,
+		      		zipcode: pay_details.zip
+		      	},'Settings');
+		      	
+		      	gtp.tabpanel.getComponent(3).load(userSettings);
+		      	
+		      	for(i=0;i<paidtoll_details.length;i++)
+		      	{
+		      		//12-6-2011 21:16:12
+		      		console.log(Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'));
+			      	paidTolls.insert(0,Ext.ModelMgr.create({
+						date: Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'),
+						amount: paidtoll_details[i].price,
+						location: paidtoll_details[i].tollDetails.tollOperator +' '+ paidtoll_details[i].tollDetails.city,
+						reg: paidtoll_details[i].registration
+					},'PaidTolls'));
+				}
+	      	}
 	      },
 	      failure: function(result) {
-	     	console.log('Account Details failure with status code'+result.status); 	
+	     	console.log('Account Details failure with status code'+result.status);
 	      }
 	   	});
-
-		//carsList.insert(0,[{reg: '12345',state: 'LB',type: 'sedan'}]);
-		var EntryCar=new Ext.Panel({
-			id: 'entrycar',
-			cardSwitchAnimation: 'slide',
-			scroll: 'vertical',
-			layout: 'vbox',
-			dockedItems: [{
-				xtype: 'toolbar',
-				title: 'New Car',
-				dock: 'top',
-				ui: 'light',
-				items: [{
-					text: 'back',
-					ui: 'back',
-					handler: function() {
-						tabpanel.setActiveItem('mycars');
-					}
-				},{
-					xtype: 'spacer'
-				},{
-					text: 'ok',
-					ui: 'confirm',
-					handler: function() {
-						console.log('clicked ok');
-						console.log(Ext.getCmp('tp').getValue());
-						console.log(Ext.getCmp('st').getValue());
-						if(Ext.getCmp('st').getValue()=="")
-							Ext.Msg.alert('enter state field');
-						else if(Ext.getCmp('rg').getValue()=="")
-							Ext.Msg.alert("Enter registration number");
-						else {
-							Ext.getCmp('activecar').setOptions([{
-								text: Ext.getCmp('rg').getValue(),
-								value: Ext.getCmp('rg').getValue()
-							}],true);
-							console.log('new car added, count is now '+carsList.getCount());
-							Ext.Ajax.request({
-								url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
-								method: 'POST',
-								params: {
-									json: Ext.encode({
-										state: Ext.getCmp('st').getValue(),
-										registration: Ext.getCmp('rg').getValue(),
-										type: Ext.getCmp('tp').getValue(),
-										isActive: "N",
-										startDate: new Date(),
-										endDate: '',
-										ownerType: 'rental', 
-										vehicleId: 1
-									})
-								},
-								success: function(response){
-									carsList.insert(0,Ext.ModelMgr.create({
-								state: Ext.getCmp('st').getValue(),
-								reg: Ext.getCmp('rg').getValue(),
-								type: Ext.getCmp('tp').getValue()
-								},'Cars'));
-								},
-								failure: function(response){
-									
-								}
-							});
-							tabpanel.setActiveItem('mycars');
-						}
-					}
-				}]
-			}],
-			items:[{
-				xtype: 'fieldset',
-				title: 'CarInfo',
-				dock: 'top',
-				defaults: {
-					labelWidth: '40%'
-				},
-				items:[{
-					xtype: 'selectfield',
-					name: 'state',
-					id: 'st',
-					label: 'of State',
-					required: true,
-					options: [{
-						text: ' ',
-						value: ''
-					},{
-						text: 'Alabama',
-						value: 'AL'
-					},{
-						text: 'Alaska',
-						value: 'AK'
-					},{
-						text: 'Arizona',
-						value: 'AZ'
-					},{
-						text: 'Arkansas',
-						value: 'AR'
-					},{
-						text: 'California',
-						value: 'CA'
-					},{
-						text: 'Colorado',
-						value: 'CO'
-					},{
-						text: 'Connecticut',
-						value: 'CT'
-					},{
-						text: 'Delaware',
-						value: 'DE'
-					},{
-						text: 'District Of Columbia',
-						value: 'DC'
-					},{
-						text: 'Florida',
-						value: 'FL'
-					},{
-						text: 'Georgia',
-						value: 'GA'
-					},{
-						text: 'Hawaii',
-						value: 'HI'
-					},{
-						text: 'Idaho',
-						value: 'ID'
-					},{
-						text: 'Illinois',
-						value: 'IL'
-					},{
-						text: 'Indiana',
-						value: 'IN'
-					},{
-						text: 'Iowa',
-						value: 'IA'
-					},{
-						text: 'Kansas',
-						value: 'KS'
-					},{
-						text: 'Kentucky',
-						value: 'KY'
-					},{
-						text: 'Louisiana',
-						value: 'LA'
-					},{
-						text: 'Maine',
-						value: 'ME'
-					},{
-						text: 'Maryland',
-						value: 'MD'
-					},{
-						text: 'Massachusetts',
-						value: 'MA'
-					},{
-						text: 'Michigan',
-						value: 'MI'
-					},{
-						text: 'Minnesota',
-						value: 'MN'
-					},{
-						text: 'Mississippi',
-						value: 'MS'
-					},{
-						text: 'Missouri',
-						value: 'MO'
-					},{
-						text: 'Montana',
-						value: 'MT'
-					},{
-						text: 'Nebraska',
-						value: 'NE'
-					},{
-						text: 'Nevada ',
-						value: 'NV'
-					},{
-						text: 'New Hampshire',
-						value: 'NH'
-					},{
-						text: 'New Jersey',
-						value: 'NJ'
-					},{
-						text: 'New Mexico',
-						value: 'NM'
-					},{
-						text: 'New York',
-						value: 'NY'
-					},{
-						text: 'North Carolina',
-						value: 'NC'
-					},{
-						text: 'North Dakota',
-						value: 'ND'
-					},{
-						text: 'Ohio',
-						value: 'OH'
-					},{
-						text: 'Oklahoma ',
-						value: 'OK'
-					},{
-						text: 'Oregon',
-						value: 'OR'
-					},{
-						text: 'Pennsylvania',
-						value: 'PA'
-					},{
-						text: 'Rhode Island',
-						value: 'RI'
-					},{
-						text: 'South Carolina',
-						value: 'SC'
-					},{
-						text: 'South Dakota',
-						value: 'SD'
-					},{
-						text: 'Tennessee',
-						value: 'TN'
-					},{
-						text: 'Texas',
-						value: 'TX'
-					},{
-						text: 'Utah',
-						value: 'UT'
-					},{
-						text: 'Vermont',
-						value: 'VT'
-					},{
-						text: 'Virginia',
-						value: 'VA'
-					},{
-						text: 'Washington',
-						value: 'WA'
-					},{
-						text: 'West Virginia',
-						value: 'WV'
-					},{
-						text: 'Wisconsin',
-						value: 'WI'
-					},{
-						text: 'Wyoming',
-						value: 'WY'
-					}
-					]
-				},{
-					xtype: 'textfield',
-					label: 'Reg',
-					required: true,
-					id: 'rg'
-				},{
-					xtype: 'selectfield',
-					label: 'Type',
-					id: 'tp',
-					required: true,
-					options: [{
-						text: '2 axle',
-						value: '2 axle'
-					},{
-						text: '3 axle',
-						value: '3 axle'
-					},{
-						text: '4 axle',
-						value: '4 axle'
-					}]
-				}]
-			},{
-				xtype: 'fieldset',
-				title: 'Car Period',
-				//dock: 'top',
-				defaults: {
-					xtype: 'datepickerfield'
-				},
-				items: [{
-					label: 'From',
-					disabled: true,
-					value: new Date(),
-					listener: {
-						el: {
-							click: function() {
-
-							}
-						}
-					},
-					name: 'sd'
-				},{
-					label: 'To',
-					name: 'ed'
-				}]
-			}]
-		});
-
-		var DetailPanel= new Ext.Panel({
-			id: 'detailpanel',
-			cardSwitchAnimation: 'slide',
-			layout: 'vbox',
-			scroll: 'vertical',
-			//height: '90%',
-			dockedItems: [{
-				xtype: 'toolbar',
-				title: 'Edit Car',
-				dock: 'top',
-				ui: 'light',
-				items: [{
-					text: 'back',
-					ui: 'back',
-					handler: function() {
-						tabpanel.setActiveItem('mycars');
-					}
-				},{
-					xtype: 'spacer'
-				},{
-					text: 'done',
-					ui: 'action',
-					handler: function() {
-						console.log('clicked done');
-						tabpanel.setActiveItem('mycars');
-					}
-				}]
-			}],
-			items:[{
-				xtype: 'fieldset',
-				title: 'CarInfo',
-				dock: 'top',
-				defaults: {
-					labelWidth: '40%'
-				},
-				items:[{
-					xtype: 'textfield',
-					label: 'State',
-					disabled: true,
-					id: 'DetailPanel.state'
-				},{
-					xtype: 'textfield',
-					label: 'Reg',
-					disabled: true,
-					id: 'DetailPanel.reg'
-				},{
-					xtype: 'textfield',
-					label: 'Type',
-					id: 'DetailPanel.type',
-					disabled: true
-				},{
-					xtype: 'togglefield',
-					label: 'Activate',
-					value: 0,
-					id: 'DetailPanel.toggle',
-					listeners: {
-						el: {
-							click: function(){
-								console.log('Car is activated');
-								if(Ext.getCmp('DetailPanel.toggle').value)
-								{
-									console.log('i am from if');
-									console.log(togglecomp.label);
-									Ext.getCmp('DetailPanel.toggle').label='Activate';
-									Ext.getCmp('DetailPanel.toggle').value=0;
-								}
-								else
-								{
-									console.log('i am from else');
-									console.log(togglecomp.label);
-									Ext.getCmp('DetailPanel.toggle').label='Deactivate';
-									Ext.getCmp('DetailPanel.toggle').value=1;
-								}
-								var record=Ext.getCmp('listid').getSelectedRecords();
-								console.log(record);
-							}
-						}
-					}
-				}]
-			},{
-				xtype: 'fieldset',
-				title: 'Car Period',
-				defaults: {
-					xtype: 'datepickerfield'
-				},
-				items: [{
-					label: 'From',
-					id: 'DetailPanel.from',
-					disabled: true,
-					value: new Date(),
-					listener: {
-						el: {
-							click: function() {
-							}
-						}
-					},
-					name: 'sd'
-				},{
-					label: 'To',
-					id: 'DetailPanel.to',
-					picker: {
-						yearFrom: gtp.today.getFullYear(),
-						yearTo: gtp.today.getFullYear()
-					},/*
-					value: {
-						year: gtp.today.getFullYear(),
-						month: gtp.today.getMonth()+1,
-						day: gtp.getDate()
-					},*/
-					name: 'ed'
-				}]
-			}/*,{
-				xtype: 'button',
-				text: 'done',
-				handler: function(){
-					tabpanel.setActiveItem('mycars');
+		
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','cctypes')).get('url'),
+			success: function(response) {
+				var resobj=Ext.decode(response.responseText);
+				var ccl=resobj.response.ccTypeList;
+				var ctsfid=Ext.getCmp('cardtype');
+				for(var i=0; i<ccl.length; i++) {
+					ctsfid.setOptions([{
+						text: ccl[i].name,
+						value: ccl[i].name
+					}],true);
 				}
-			}*/]
+			},
+			failure: function(response) {
+				console.log('Fetching CCtypelist failure with status '+response.status);
+			}
+		});
+		
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','serviceplans')).get('url'),
+			success: function(response) {
+				var resobj = Ext.decode(response.responseText);
+				var spl = resobj.response.servicePlanList;
+				var spsfid = Ext.getCmp('serviceplan'); 
+				for(var i=0; i<spl.length; i++) {
+					spsfid.setOptions([{
+						text: spl[i].name,
+						value: spl[i].name
+					}],true);
+				}
+			},
+			failure: function(response) {
+				console.log('Fetching Sevices list failed');
+			}
+		});
+		
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','vehicletypes')).get('url'),
+			success: function(response) {
+				var resobj = Ext.decode(response.responseText);
+				var vtl = resobj.response.vehicleTypeList;
+				var vtsfid = Ext.getCmp('tp'); 
+				for(var i=0; i<vtl.length; i++) {
+					vtsfid.setOptions([{
+						text: vtl[i].name,
+						value: vtl[i].name
+					}],true);
+				}
+			},
+			failure: function(response) {
+				console.log('Fetching Sevices list failed');
+			}
 		});
 
-		var curl,avgt,pt,tollop;
-
-		var tabpanel = new Ext.TabPanel({
+		gtp.tabpanel = new Ext.TabPanel({
 			tabBar: {
 				dock: 'bottom',
 				layout: {
 					pack: 'center'
 				}
 			},
+			layout: 'card',
 			defaultActiveTab: 'home',
 			fullscreen: true,
 			ui: 'light',
 			cardSwitchAnimation: {
-				type: 'slide',
+				type: 'fade',
 				cover: true
 			},
 			items: [{
@@ -750,105 +387,123 @@ gtp.controller=Ext.regController("load",{
 					}]
 				}],
 				items: [{
-					xtype: 'togglefield',
-					id: 'tfd',
-					animationDuration: 200,
-					//value: 0,
-					name: 'enable',
-					label: 'Enable',
-					listeners: {
-						el: {
-							click: function() {
-								console.log(Ext.getCmp('tfd').value);
-								var toggle=Ext.getCmp('tfd');
-								var cl=Ext.getCmp('curloc');
-								var to=Ext.getCmp('operator');
-								var at=Ext.getCmp('avgtoll');
-								var pt=Ext.getCmp('pdtoll');
-								if(toggle.value==0) {
-									console.log(this);
-									console.log(Ext.getCmp('tfd'));
-									gtp.isAppEnabled=1;
-									console.log('toggled');
-									toggle.value=1;
-									var clat,clong;
-									if(gtp.geo.latitude || gtp.geo.longitude){
-										clat=gtp.geo.latitude;
-										clong=gtp.geo.longitude;
-									}
-									else{
-										clat=37.1345;
-										clong=-130.121;
-									}
-									/*Ext.Ajax.request({
-										url: 'http://mbtest.dyndns.dk:6004/webservices/services/GetLocation',
-										params: {
-											json: Ext.encode({
-												latitude: clat,
-												longitude: clong
-											})
-										},
-										success: function(response){
-											console.log(response.responseText);
-											var resobj=Ext.decode(response.responseText);
-											console.log(resobj);
-											cl.setValue(resobj.response.city + resobj.response.state);
-											to.setValue(resobj.response.tolloperator);
-											at.setValue(resobj.response.avgtoll);
-											pt.setValue(resobj.response.price);
-										},
-										failure: function(response){
-											console.log('failure with status'+response.status);
+					xtype: 'fieldset',
+					items: [{
+						xtype: 'togglefield',
+						id: 'tfd',
+						animationDuration: 200,
+						name: 'enable',
+						label: 'Enable',
+						listeners: {
+							el: {
+								click: function(slider, thumb, newValue, oldValue) {
+									
+									console.log('toggle button is clicked');
+									if( this == Ext.getCmp('tfd') )
+										console.log('speculation is true');
+									var toggle=Ext.getCmp('tfd');
+									var cl=Ext.getCmp('curloc');
+									var to=Ext.getCmp('operator');
+									var at=Ext.getCmp('avgtoll');
+									var pt=Ext.getCmp('pdtoll');
+									if(toggle.value==0) {
+										gtp.isAppEnabled=1;
+										console.log('toggled');
+										toggle.value=1;
+										var clat,clong;
+										if(gtp.geo.latitude || gtp.geo.longitude){
+											clat=gtp.geo.latitude;
+											clong=gtp.geo.longitude;
+										}
+										else{
+											clat=37.1345;
+											clong=-130.121;
+										}
+										/*Ext.Ajax.request({
+											url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
+											params: {
+												json: Ext.encode({
+													latitude: clat,
+													longitude: clong
+												})
+											},
+											success: function(response){
+												console.log('Nearest Toll Webservice request fetched');
+												console.log(response.responseText);
+												var resobj=Ext.decode(response.responseText);
+												cl.setValue(resobj.response.city + resobj.response.state);
+												to.setValue(resobj.response.tolloperator);
+												at.setValue(resobj.response.avgtoll);
+												pt.setValue(resobj.response.price);
+											},
+											failure: function(response){
+												console.log('failure with status'+response.status);
+												cl.setValue('Tallahassee, Florida');
+												to.setValue(TollsData.getAt(0).get('tolloperator'));
+												at.setValue(TollsData.getAt(0).get('avgtoll'));
+												pt.setValue(TollsData.getAt(0).get('tollperday'));
+											}
+										});*/
+										
+										if(Ext.getCmp('activecar').getValue())
+										{
 											cl.setValue('Tallahassee, Florida');
 											to.setValue(TollsData.getAt(0).get('tolloperator'));
 											at.setValue(TollsData.getAt(0).get('avgtoll'));
 											pt.setValue(TollsData.getAt(0).get('tollperday'));
+											setTimeout("requestHeartBeat()",5000);
+											// This invokes client side heartbeat.
+											gtp.clientsidehb();
+	    									message='Settings are saved, Car '+Ext.getCmp('activecar').getValue()+' is active';
+											Ext.Msg.alert('Activated',message);
+											Ext.getCmp('activecar').disabled=true;
 										}
-									})*/
-									
-									if(Ext.getCmp('activecar').getValue())
-									{
-										cl.setValue('Tallahassee, Florida');
-										to.setValue(TollsData.getAt(0).get('tolloperator'));
-										at.setValue(TollsData.getAt(0).get('avgtoll'));
-										pt.setValue(TollsData.getAt(0).get('tollperday'));
-										console.log('before heartbeat request');
-										setTimeout("requestHeartBeat()",5000);
-										console.log('after heartbeat request');
-										
-										message='Settings are saved, Car '+Ext.getCmp('activecar').getValue()+' is active';
-										console.log(message);
-										Ext.Msg.alert('Activated',message);
-										Ext.getCmp('activecar').disabled=true;
+										else
+										{
+											Ext.Msg.alert('Car should be selected');
+										}
+									} else {
+										gtp.isAppEnabled=0;
+										console.log(toggle.value);
+										cl.setValue("");
+										to.setValue("");
+										at.setValue("");
+										pt.setValue("");
+										toggle.value=0;
+										Ext.getCmp('activecar').disabled=false;
 									}
-									else
-									{
-										Ext.Msg.alert('Car should be selected');
-									}
-								} else {
-									gtp.isAppEnabled=0;
-									console.log(toggle.value);
-									cl.setValue("");
-									to.setValue("");
-									at.setValue("");
-									pt.setValue("");
-									toggle.value=0;
-									Ext.getCmp('activecar').disabled=false;
 								}
+							},
+							drag: function(slider, thumb, value) {
+								console.log('toggle field value is '+value);
 							}
-						},
-						scope: this
-					}
+						}
+					}]
 				},{
 					xtype: 'fieldset',
-					title: 'Car & Service',
-					id: 'fset',
-					defaults: {
-						// labelAlign: 'right'
-						labelWidth: '35%'
-					},
+					title: 'Configuration',
+					items: [{
+						xtype: 'selectfield',
+						name: 'activecar',
+						label: 'ActiveCar',
+						id: 'activecar'
+					},{
+						xtype: 'selectfield',
+						name: 'serviceplan',
+						id: 'serviceplan',
+						label: 'Service',
+						required: true,
+						options: [{
+							text: 'daily',
+							value: 'daily'
+						}]
+					}]
+				},{
+					xtype: 'fieldset',
+					title: 'Current Location Operator',
 					items: [{
 						xtype: 'textfield',
+						name: 'currentlocation',
 						id: 'curloc',
 						label: 'CurLoc',
 						disabled: true,
@@ -856,64 +511,34 @@ gtp.controller=Ext.regController("load",{
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
+						name: 'operator',
 						disabled: true,
 						id: 'operator',
 						label: 'Operator'
 					},{
 						xtype: 'textfield',
+						name: 'averagetoll',
 						disabled: true,
 						id: 'avgtoll',
 						label: 'AvgToll'
 					},{
 						xtype: 'textfield',
+						name: 'perdaytoll',
 						disabled: true,
 						id: 'pdtoll',
 						label: 'Per Day'
-					},{
-						xtype: 'selectfield',
-						//disabled: true,
-						label: 'ActiveCar',
-						id: 'activecar',
-						options: [{
-							text: '4GPB5',
-							value: '4GPB5'
-						}]
-					},{
-						xtype: 'selectfield',
-						name: 'service',
-						label: 'Service',
-						required: true,
-						options: [{
-							text: 'daily',
-							value: 'daily'
-						},{
-							text: 'weekly',
-							value: 'weekly'
-						},{
-							text: 'monthly',
-							value: 'monthly'
-						}]
 					}]
 				}]
 			},{
 				title: 'My cars',
 				iconCls: 'Car',
-				//badgeText:'4',
-				//activeItem: '1',
-				layout: 'card',
-				xtype: 'panel',
 				id: 'mycars',
-				/*layout: Ext.is.Phone ? 'fit' : {
-				 type: 'vbox',
-				 align: 'center',
-				 pack: 'center'
-				 },*/
 				cls: 'card2',
 				items: [{
 					xtype: 'panel',
 					fullscreen: true,
-					id: 'dp',
 					layout: 'fit',
+					id: 'dp',
 					dockedItems:[{
 						xtype: 'toolbar',
 						id: 'mycarstb',
@@ -926,11 +551,15 @@ gtp.controller=Ext.regController("load",{
 							iconMask: true,
 							ui: 'plain',
 							iconCls: 'add',
-							handler: function() {
-								Ext.getCmp('st').setValue('');
-								Ext.getCmp('rg').setValue('');
-								Ext.getCmp('tp').setValue('');
-								tabpanel.setActiveItem('addcar');
+							handler: function(button, event) {
+								gtp.showtabs=true;
+								var temp = gtp.tabpanel.getComponent('addcar').getValues();
+								temp.state = "";
+								temp.rg = "";
+								temp.tp = "";
+								temp.startDate = gtp.today;
+								temp.endDate = null;
+								gtp.tabpanel.setActiveItem('addcar');
 							}
 						}]
 					}],
@@ -943,32 +572,58 @@ gtp.controller=Ext.regController("load",{
 						scroll: 'vertical',
 						itemTpl: '<div class="contact"><strong>{reg}</strong>, {state}</div>',
 						setActiveItem: this,
-						onItemDisclosure: function(){
-							console.log('clicked an item in the list');
-							var record=Ext.getCmp('listid').getSelectedRecords();
-							
-							console.log(record);
-							
-							Ext.getCmp('DetailPanel.state').setValue(record[0].get('state'));
-							Ext.getCmp('DetailPanel.reg').setValue(record[0].get('reg'));
-							Ext.getCmp('DetailPanel.type').setValue(record[0].get('type'));
-							if(record[0].get('active'))
-							{
-								Ext.getCmp('DetailPanel.toggle').value=1;
-								Ext.getCmp('DetailPanel.toggle').label='Disable';
+						onItemDisclosure: true,
+						listeners: {
+							itemtap: function(co,index,item,e) {
+								console.log('clicked item '+index+' in the list');
+								gtp.showtabs=true;
+								var record=co.getRecord(co.getNode(index));
+								
+								gtp.tabpanel.getComponent('details').load(Ext.ModelMgr.create({
+									reg: record.get('reg'),
+									state: record.get('state'),
+									type: record.get('type'),
+									startDate: record.get('startDate'),
+									endDate: record.get('endDate')
+								},'Cars'));
+								
+								gtp.tabpanel.setActiveItem('details', 'fade');
+							},
+							itemswipe: function(co,index,item,e) {
+								var st=co.getStore();
+								var stmod=st.getAt(index);
+								console.log('item '+index+' is swiped');
+								Ext.Ajax.request({
+									url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
+									method: 'DELETE',
+									params: {
+										json: Ext.encode({
+											state: stmod.get('state'),
+											registration: stmod.get('reg'),
+											type: stmod.get('type'),
+											isActive: stmod.get('active'),
+											startDate: stmod.get('startDate').format('Y-m-d H:i:s'),
+										    endDate: stmod.get('endDate').format('Y-m-d H:i:s'),
+											ownerType: 'primary owner', 
+											vehicleId: 1
+										})
+									},
+									success: function(response){
+										var resobj=Ext.decode(response.responseText);
+										var obj=resobj.response;
+										if(obj.success == "Y") {
+											st.removeAt(index);
+											st.refresh();
+										}
+									},
+									failure: function(response){
+										Ext.Msg.alert('Error in deleting the car');
+									}
+								});
 							}
-							tabpanel.setActiveItem('details');
-							console.log('is selected '+this.isSelected(record[0]));	
 						}
 					}]
-				}],
-				listeners: {
-					body: {
-						onclick: function(){
-							console.log('my cars tab is active');
-						}
-					}
-				}
+				}]
 			},{
 				title: 'Paid tolls',
 				id: 'CashStack',
@@ -984,76 +639,115 @@ gtp.controller=Ext.regController("load",{
 				}]
 			},{
 				title: 'Settings',
-				xtype: 'form',
+				xtype: 'formpanel',
 				id: 'basicform',
 				scroll: 'vertical',
 				iconCls: 'AccountSettings',
 				cls: 'card4',
+				dockedItems: [{
+					xtype: 'toolbar',
+					title: 'Settings',
+					dock: 'top',
+					items: [{
+						xtype: 'button',
+						text: 'edit',
+						ui: 'edit',
+						handler: function(but, event) {
+							console.log('handler');
+							if(this.getText() == 'edit') {
+								gtp.tabpanel.getComponent(3).enable();
+								but.setText('save');
+							}
+							else {
+								gtp.tabpanel.getComponent(3).disable();
+								this.setText('edit');
+							}
+						}
+					},{
+						xtype: 'spacer'
+					},{
+						xtype: 'button',
+						text: 'save',
+						ui: 'confirm',
+						disabled: true,
+						id: 'savesettings',
+						handler: function(button, event) {
+							if(gtp.settingschanged) {
+								var pay_det = gtp.tabpanel.getComponent(3).getRecord();
+								Ext.Ajax.request({
+									url: webServices.getAt(webServices.findExact('service','paymentdetails')).get('url'),
+									method: 'POST',
+									params: {
+										json: Ext.encode({
+											ccName: pay_det.get('name'),
+											cardNumber: pay_det.get('ccnumber'),
+											expMonth: pay_det.get('expdate').MONTH,
+											expYear: pay_det.get('expdate').YEAR,
+											bankRouting: 123,
+											ccCVV: 123456,
+											bankAccount: pay_det.get('acnumber'),
+											address1: pay_det.get('address'),
+											city: pay_det.get('city'),
+											state: pay_det.get('state'),
+											country: 'US',
+											zip: pay_det.get('zipcode')
+										})
+									},
+									success: function(response) {
+										console.log('Posting payment details success');
+										var resobj = Ext.decode(response.responseText);
+										console.log('Payment details response '+response.responseText);
+									    button.setDisabled(true);
+									    gtp.settingschanged = false;
+									    if(resobj.status == 'success')
+									    Ext.Msg.alert('Payment Details changed');
+									},
+									failure: function(response) {
+										Ext.Msg.alert('Payment Details not changed');
+										console.log('Failed in posting payment details');
+									}
+								});
+							}
+						}
+					}]
+				}],
 				items: [{
 					xtype: 'fieldset',
-					title: 'Account info',
-					instructions: 'Please enter the information above.',
-					defaults: {
-						// labelAlign: 'right'
-						labelWidth: '35%'
-					},
-					items: [{
-						xtype: 'textfield',
-						name: 'userid',
-						id: 'userid',
-						value: options.loginDetails.username,
-						label: 'UserID',
-						cls: 'customField',
-						placeHolder: 'userID',
-						autoCapitalize : false
-					},{
-						xtype: 'passwordfield',
-						name: 'password',
-						id: 'setpwd',
-						value: options.loginDetails.password,
-						label: 'Password',
-						useClearIcon: true
-					}]
-				},{
-					xtype: 'fieldset',
 					title: 'Payment info',
-					instructions: 'Please enter the information above.',
 					defaults: {
-						// labelAlign: 'right'
-						labelWidth: '35%'
+						listeners: {
+							change: function(curobj,newValue,oldValue) {
+								if(newValue != oldValue) {
+									gtp.settingschanged=true;
+									var savebutton=Ext.getCmp('savesettings');
+									savebutton.setDisabled(false);	
+								}
+							}
+						}
 					},
 					items: [{
 						xtype: 'textfield',
+						name: 'ccnumber',
 						id: 'ccnumber',
-						label: 'Credit card#',
+						label: 'Cdt card#',
 						placeHolder: 'XXXX-XXXX-XXXX-XXXX',
 						useClearIcon: true
 					},{
 						xtype: 'selectfield',
+						name: 'cardtype',
 						id: 'cardtype',
-						label: 'Credit card type',
-						options: [{
-							text: 'Visa',
-							value: 'visa'
-						},{
-							text: 'Master',
-							value: 'master'
-						},{
-							text: 'American Express',
-							value: 'amex'
-						},{
-							text: 'Discover',
-							value: 'discover'
-						}]
+						label: 'Cc type'
 					},{
 						xtype: 'datepickerfield',
+						name: 'expdate',
 						id: 'expirydate',
-						label: 'Expiry date',
+						label: 'Exp date',
 						picker: {
 							yearFrom: 2011
 						}
 					},{
 						xtype: 'textfield',
+						name: 'acnumber',
 						id: 'bankaccount',
 						label: 'A/c No',
 						useClearIcon: true
@@ -1069,39 +763,87 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'fieldset',
 					title: 'Billing Details',
-					instructions: 'Please provide billing details',
 					items: [{
 						xtype: 'textfield',
+						name: 'name',
 						label: 'Name',
 						id: 'billname',
-						value: 'Harish',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
+						name: 'address',
 						label: 'Address',
-						value: '10009, Paseo Montril',
 						id: 'addr1',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
+						name: 'city',
 						label: 'City',
-						value: 'San Diego',
 						id: 'billcity',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
+						name: 'state',
 						label: 'State',
-						value: 'California',
 						id: 'billstate',
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
+						name: 'zipcode',
 						label: 'Zip',
-						value: '92129',
 						id: 'zip',
 						useClearIcon: true
 					}]
-				}]
+				},{
+					xtype: 'fieldset',
+					title: 'Account info',
+					items: [{
+						xtype: 'textfield',
+						name: 'userid',
+						id: 'userid',
+						label: 'UserID',
+						cls: 'customField',
+						placeHolder: 'userID',
+						autoCapitalize : false
+					}]
+				},{
+					xtype: 'button',
+					text: 'change Password',
+					ui: 'green',
+					handler: function(button, event) {
+						new Ext.Panel({
+							cardSwitchAnimation: 'fade',
+							items: [{
+								html: 'Current Password'
+							},{
+								xtype: 'textfield',
+								name: 'currentpwd'
+							},{
+								html: 'New Password'
+							},{
+								xtype: 'textfield',
+								name: 'newpassword'
+							},{
+								html: 'Confirm Password'
+							},{
+								xtype: 'textfield',
+								name: 'confirmpwd'
+							},{
+								xtype: 'button',
+								text: 'submit',
+								handler: function(button, event) {
+									gtp.tabpanel.setActiveItem('basicform','fade');
+								}
+							}]
+						});
+					}
+				}],
+				listeners: {
+					render: function(curobj) {
+						console.log('Settings card view is rendered');
+						curobj.disable();
+					}
+				}
 			},{
 				title: 'Map',
 				id: 'mappanel',
@@ -1117,148 +859,173 @@ gtp.controller=Ext.regController("load",{
 				iconCls: 'MapIcon',
 				listeners: {
 					maprender: function(comp, map) {
-						gtp.geo.updateLocation();
-						
 						console.log('map is rendered');
-						console.log('map centered at lat: '+map.getCenter().lat()+' long: '+map.getCenter().lng());
+						console.log('map centered at lat: '+ map.getCenter().lat() +' long: '+ map.getCenter().lng());
 						
-						if(google.maps) {
-							new google.maps.Marker({
-								position: new google.maps.LatLng(32.942888,-117.109406),
-								title: 'Paseo Montril',
-								//icon: 'resources/images/covered.png',
-								map: map
-							});
-							
-							new google.maps.Marker({
-								position: new google.maps.LatLng(32.95008700,-117.10962200),
-								title: '',
-								//icon: 'resources/images/covered.png',
-								map: map
-							});
-							
-							var staticmarker=new google.maps.Marker({
-								position: new google.maps.LatLng(32.942888,-117.109406),
-								icon: 'resources/images/covered.png',
-								map: map
-							});
-							
-							staticinfowindow=new google.maps.InfoWindow({
-								content: 'Entry Toll Gate <br/>Price: $1<br/>Avg Price: $2'
-							});
-							
-							google.maps.event.addListener(staticmarker,'click',function(){
-								staticinfowindow.open(map,staticmarker);
-							});
-							
-							var markertemp=new google.maps.Marker({
-								position: new google.maps.LatLng(28.345338,-81.44018),
-								icon: 'resources/images/covered.png',
-								map: map
-							});
-							
-							infowindowtemp=new google.maps.InfoWindow({
-								content: 'Shingle Creek'+'<br/>Price: $1<br/>Avg Price: $2'
-							});
-							
-							google.maps.event.addListener(markertemp,'click',function(){
-								infowindowtemp.open(map,markertemp);
-							});
-						}
+						// Fetch tolldetails list
+						gtp.getTolls();
+
 					},
-					centerchange: function(comp,map, center)
-					{
-						console.log('responseFetched: '+gtp.responseFetched);
-						console.log('geo.latitude: '+gtp.geo.latitude);
-						console.log('geo.longitude: '+gtp.geo.longitude);
+					centerchange: function(comp,map, center) {
 						// Update current location.
-						gtp.geo.updateLocation();
-						// responseFetched variable is used to prevent multiple ajax calls.
-						// since by scrolling the map this event is fired multiple times. 
-						if(gtp.responseFetched)
-						{
-							gtp.responseFetched=false;
-							var bounds = map.getBounds();
-							console.log(bounds);						
-							var northEast = bounds.getNorthEast();
-						  	var southWest = bounds.getSouthWest();
-					  	
-							Ext.Ajax.request({
-								url: webServices.getAt(webServices.findExact('service','tolldetails')).get('url'),
-								method: 'GET',
-								params: {
-									json: Ext.encode({
-										latitude1: northEast.lat(),
-										longitude1: northEast.lng(),
-										latitude2: southWest.lat(),
-										longitude2: southWest.lng()
-									})
-								},
-								success: function(response){
-									var obj=Ext.decode(response.responseText);
-									var lomobj=obj.response.tollDetailsList;
-									var iconpath,markertitle;
-									
-									for(var i=0; i<lomobj.length; i++)
-									{
-										gtp.infoWindows[i]=new google.maps.InfoWindow({
-											content: lomobj[i].tollOperator+'<br/>Price: $1<br/>Avg Price: $2'
-										});
-									}
-										
-									console.log('info windows created');	
-										
-									for(var i=0; i<lomobj.length; i++)
-									{
-										if(lomobj[i].isCovered=='Y')
-										{
-											iconpath='resources/images/covered.png';
-											markertitle=lomobj[i].tollOperator;
-										}
-										else
-										{
-											iconpath='resources/images/uncovered.png';
-											markertitle=lomobj[i].tollOperator;
-										}
-										
-										gtp.tollMarkers[i]=new google.maps.Marker({
-											position: new google.maps.LatLng(lomobj[i].latitude,lomobj[i].longitude),
-											title: markertitle,
-											icon: iconpath,
-											map: map
-										});
-									}
-									
-									for(var i=0; i<lomobj.length; i++)
-									{
-										google.maps.event.addListener(gtp.tollMarkers[i],'click',function(){
-											console.log('clicked toll marker '+i);
-											gtp.infoWindows[i].open(map,gtp.tollMarkers[i]);
-										});
-									}
-									
-									// Variable is released here.
-									gtp.responseFetched=true;
-								},
-								failure: function(response){
-									console.log('viewport request failed with status '+response.status);
-									// Variable is released here.
-									gtp.responseFetched=true;								
-								}
-							});
-						}
-						// --- 
-					}
+						//gtp.geo.updateLocation();
+					},
 				}
 			},{
 				id: 'addcar',
-				cls: 'carcls',
-				items: [EntryCar]
-			},{
-				id: 'details',
-				cls: 'card7',
-				items: [DetailPanel]
-			}]
+				xtype: 'formpanel',
+				scroll: 'vertical',
+				dockedItems: [{
+					xtype: 'toolbar',
+					title: 'New Car',
+					dock: 'top',
+					items: [{
+						text: 'My Cars',
+						ui: 'back',
+						handler: function(button, event) {
+							gtp.tabpanel.setActiveItem('mycars','fade');
+						}
+					},{
+						xtype: 'spacer'
+					},{
+						text: 'ok',
+						ui: 'confirm',
+						handler: function(button, event) {
+							var acfd = gtp.tabpanel.getComponent('addcar').getValues(true);
+							console.log('State is '+acfd.state);
+							if(acfd.state == "")
+								Ext.Msg.alert('enter state field');
+							else if(acfd.rg == "")
+								Ext.Msg.alert("Enter registration number");
+							else if(acfd.tp == "")
+								Ext.Msg.alert('Select car type');
+							else {
+								Ext.Ajax.request({
+									url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
+									method: 'POST',
+									params: {
+										json: Ext.encode({
+											state: acfd.state,
+											registration: acfd.rg,
+											type: acfd.tp,
+											isActive: "N",
+											//startDate: '',//gtp.today.format('Y-m-d H:i:s'),
+										    //endDate: '',
+											ownerType: 'primary owner', 
+											vehicleId: 1
+										})
+									},
+									success: function(response){
+										console.log('Add car webservice success');
+										carsList.insert(0,Ext.ModelMgr.create({
+											state: acfd.state,
+											reg: acfd.rg,
+											type: acfd.tp
+										},'Cars'));
+										Ext.getCmp('activecar').setOptions([{
+											text: acfd.rg,
+											value: acfd.rg
+										}],true);
+									},
+									failure: function(response){
+										Ext.Msg.alert('Error in adding the car');
+									}
+								});
+								gtp.tabpanel.setActiveItem('mycars','fade');
+							}
+						}
+					}]
+				}],
+				items:[{
+					xtype: 'fieldset',
+					title: 'CarInfo',
+					items:[{
+						xtype: 'selectfield',
+						id: 'st',
+						label: 'State',
+						required: true,
+						options: [{
+							text: ' ',
+							value: ''
+						},{
+							text: 'Alabama',
+							value: 'Alabama'
+						},{
+							text: 'Alaska',
+							value: 'AL'
+						},{
+							text: 'Arizona',
+							value: 'AZ'
+						}]
+					},{
+						xtype: 'textfield',
+						label: 'Reg',
+						required: true,
+						id: 'rg'
+					},{
+						xtype: 'selectfield',
+						label: 'Type',
+						id: 'tp',
+						required: true
+					},{
+						xtype: 'selectfield',
+						label: 'Make',
+						id: 'carmaker',
+						required: true,
+					},{
+						xtype: 'selectfield',
+						label: 'Model',
+						id: 'md',
+						required: true
+					}]
+				},{
+					xtype: 'fieldset',
+					title: 'Car Period',
+					defaults: {
+						xtype: 'datepickerfield'
+					},
+					items: [{
+						label: 'From',
+						id: 'startDate',
+						disabled: true,
+						value: gtp.today
+					},{
+						label: 'To',
+						id: 'endDate',
+						picker: {
+							yearFrom: gtp.today.getFullYear(),
+						}
+					}]
+				}]
+			},gtp.tabs.CarDetailView],
+			listeners: {
+				beforecardswitch: function(curobj, newCard, oldCard, index, animated) {
+					if(oldCard.getId()== 'basicform' && gtp.settingschanged) {
+						console.log('true');
+						return true;
+					}
+					else if(oldCard.getId() == 'addcar' && newCard.getId() == 'details' && gtp.showtabs) {
+						gtp.showtabs=false;
+						return false;
+					}
+					else if(oldCard.getId() == 'addcar' && newCard.getId() != 'details' && gtp.showtabs) {
+						gtp.showtabs=false;
+						return true;
+					}
+					else if(oldCard.getId() == 'details' && newCard.getId() == 'addcar' && gtp.showtabs) {
+						gtp.showtabs=false;
+						return false;
+					}
+					else if(oldCard.getId() == 'details' && newCard.getId() != 'addcar' && gtp.showtabs) {
+						gtp.showtabs=false;
+						return true;
+					}
+					else if(newCard.getId() == 'addcar' && !gtp.showtabs)
+						return false;
+					else if(newCard.getId() == 'details' && !gtp.showtabs)
+						return false;
+				}
+			}
 		});
 	}
 });

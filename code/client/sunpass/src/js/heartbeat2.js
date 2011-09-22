@@ -1,14 +1,13 @@
 var count=0,delay=10000;
 
 function requestHeartBeat(){
-	console.log('heart beat function invoked');
-	console.log('IsAppEnabled? '+gtp.isAppEnabled);
+	console.log('server heart beat function invoked');
 	if(gtp.isAppEnabled)//gtp.geo.latitude || gtp.geo.longitude)
 	{
 		var request_jsobject= {
-			deviceId: '123456789',//gtp.uuid,
+			deviceId: gtp.utils.dataStore.getValueOfKey('gtp-deviceID'),
 			deviceType: 'iphone',
-			timeStamp: 'Jul 12, 2011 10:40:25 PM',//new Date(),
+			timeStamp: 'Jul 12, 2011 10:40:25 PM',
 			latitude: getGeoLatitude(),
 			longitude: getGeoLongitude(),
 			angle: 0,
@@ -20,7 +19,7 @@ function requestHeartBeat(){
 		Ext.Ajax.request({
 			url: webServices.getAt(webServices.findExact('service','heartbeat')).get('url'),
 			params: {
-				user_name: 'harish@mobisols.com',
+				user_name: gtp.utils.dataStore.getValueOfKey('username'),
 				json: Ext.encode(request_jsobject)
 			},
 			success: function(response){
