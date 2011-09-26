@@ -18,9 +18,35 @@ gtp.tabs.CarDetailView = {
 				xtype: 'spacer'
 			},{
 				text: 'done',
+				id: 'changevd',
 				ui: 'action',
 				disabled: true,
 				handler: function(button, event) {
+					var updateCar = gtp.tabpanel.getComponent('details').getRecord();
+					Ext.Ajax.request({
+						url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
+						method: 'POST',
+						params: {
+							json: Ext.encode({
+								state: updateCar.get('state'),
+								registration: updateCar.get('reg'),
+								type: updateCar.get('type'),
+								isActive: 'N',//stmod.get('active'),
+								startDate: updateCar.get('startDate').format('Y-m-d H:i:s'),
+							    endDate: updateCar.get('endDate').format('Y-m-d H:i:s'),
+								ownerType: 'primary owner', 
+								vehicleId: 1
+							})
+						},
+						success: function(response){
+							var resobj=Ext.decode(response.responseText);
+							var obj=resobj.response;
+							console.log(response.responseText);
+						},
+						failure: function(response){
+							Ext.Msg.alert('Error in updating car details');
+						}
+					});
 					gtp.tabpanel.setActiveItem('mycars');
 				}
 			}]
@@ -65,7 +91,14 @@ gtp.tabs.CarDetailView = {
 				id: 'DetailPanel.to',
 				picker: {
 					yearFrom: gtp.today.getFullYear(),
-					yearTo: gtp.today.getFullYear()
+					yearTo: gtp.today.getFullYear()+10
+				},
+				listeners: {
+					change: function(curobj, newValue, oldValue) {
+						if(newValue != oldValue) {
+							Ext.getCmp('changevd').setDisabled(false);
+						}
+					}
 				}
 			}]
 		}]

@@ -395,20 +395,21 @@ gtp.controller=Ext.regController("load",{
 						name: 'enable',
 						label: 'Enable',
 						listeners: {
-							el: {
-								click: function(slider, thumb, newValue, oldValue) {
+							click: {
+								element: 'el',
+								fn: function(slider, thumb, newValue, oldValue) {
 									
-									console.log('toggle button is clicked');
-									if( this == Ext.getCmp('tfd') )
-										console.log('speculation is true');
+									console.log('Toggle button is clicked');
+									
 									var toggle=Ext.getCmp('tfd');
 									var cl=Ext.getCmp('curloc');
 									var to=Ext.getCmp('operator');
 									var at=Ext.getCmp('avgtoll');
 									var pt=Ext.getCmp('pdtoll');
+									var ac=Ext.getCmp('activecar');
+									
 									if(toggle.value==0) {
 										gtp.isAppEnabled=1;
-										console.log('toggled');
 										toggle.value=1;
 										var clat,clong;
 										if(gtp.geo.latitude || gtp.geo.longitude){
@@ -445,18 +446,25 @@ gtp.controller=Ext.regController("load",{
 											}
 										});*/
 										
-										if(Ext.getCmp('activecar').getValue())
+										if(ac.getValue())
 										{
-											cl.setValue('Tallahassee, Florida');
+											var htfp = gtp.tabpanel.getComponent(0);
+											htfp.load(Ext.ModelMgr.create({
+												currentlocation: 'Tallahassee, Florida',
+												tolloperator: TollsData.getAt(0).get('tolloperator'),
+												avgtoll: TollsData.getAt(0).get('avgtoll'),
+												tollperday: TollsData.getAt(0).get('tollperday')
+											},'TollOperators'));
+											/*cl.setValue('Tallahassee, Florida');
 											to.setValue(TollsData.getAt(0).get('tolloperator'));
 											at.setValue(TollsData.getAt(0).get('avgtoll'));
-											pt.setValue(TollsData.getAt(0).get('tollperday'));
+											pt.setValue(TollsData.getAt(0).get('tollperday'));*/
 											setTimeout("requestHeartBeat()",5000);
 											// This invokes client side heartbeat.
 											gtp.clientsidehb();
 	    									message='Settings are saved, Car '+Ext.getCmp('activecar').getValue()+' is active';
 											Ext.Msg.alert('Activated',message);
-											Ext.getCmp('activecar').disabled=true;
+											ac.disabled=true;
 										}
 										else
 										{
@@ -470,7 +478,7 @@ gtp.controller=Ext.regController("load",{
 										at.setValue("");
 										pt.setValue("");
 										toggle.value=0;
-										Ext.getCmp('activecar').disabled=false;
+										ac.disabled=false;
 									}
 								}
 							},
@@ -511,19 +519,19 @@ gtp.controller=Ext.regController("load",{
 						useClearIcon: true
 					},{
 						xtype: 'textfield',
-						name: 'operator',
+						name: 'tolloperator',
 						disabled: true,
 						id: 'operator',
 						label: 'Operator'
 					},{
 						xtype: 'textfield',
-						name: 'averagetoll',
+						name: 'avgtoll',
 						disabled: true,
 						id: 'avgtoll',
 						label: 'AvgToll'
 					},{
 						xtype: 'textfield',
-						name: 'perdaytoll',
+						name: 'tollperday',
 						disabled: true,
 						id: 'pdtoll',
 						label: 'Per Day'
@@ -587,7 +595,7 @@ gtp.controller=Ext.regController("load",{
 									endDate: record.get('endDate')
 								},'Cars'));
 								
-								gtp.tabpanel.setActiveItem('details', 'fade');
+								gtp.tabpanel.setActiveItem('details');
 							},
 							itemswipe: function(co,index,item,e) {
 								var st=co.getStore();
@@ -629,7 +637,27 @@ gtp.controller=Ext.regController("load",{
 				id: 'CashStack',
 				iconCls: 'CashStack',
 				cls: 'demo-list',
-				items: [{
+				dockedItems: [{
+					xtype: 'toolbar',
+					title: 'Paid Tolls',
+					dock: 'top',
+					items: [{
+						text: 'clear',
+						ui: 'confirm'
+					},{
+						xtype: 'spacer'
+					},{
+						xtype: 'selectfield',
+						defaultText: 'sort by',
+						options: [{
+							text: 'date',
+							value: 'date'
+						},{
+							text: 'toll',
+							value: 'toll'
+						}]
+					}]
+				},{
 					xtype: 'list',
 					grouped: true,
 					fullscreen: true,
@@ -811,8 +839,7 @@ gtp.controller=Ext.regController("load",{
 					text: 'change Password',
 					ui: 'green',
 					handler: function(button, event) {
-						new Ext.Panel({
-							cardSwitchAnimation: 'fade',
+						new Ext.form.FormPanel({
 							items: [{
 								html: 'Current Password'
 							},{
@@ -827,7 +854,7 @@ gtp.controller=Ext.regController("load",{
 								html: 'Confirm Password'
 							},{
 								xtype: 'textfield',
-								name: 'confirmpwd'
+								name: 'confirmnewpwd'
 							},{
 								xtype: 'button',
 								text: 'submit',
@@ -866,7 +893,7 @@ gtp.controller=Ext.regController("load",{
 						gtp.getTolls();
 
 					},
-					centerchange: function(comp,map, center) {
+					centerchange: function(comp, map, center) {
 						// Update current location.
 						//gtp.geo.updateLocation();
 					},
@@ -880,16 +907,19 @@ gtp.controller=Ext.regController("load",{
 					title: 'New Car',
 					dock: 'top',
 					items: [{
+						xtype: 'button',
 						text: 'My Cars',
 						ui: 'back',
 						handler: function(button, event) {
-							gtp.tabpanel.setActiveItem('mycars','fade');
+							gtp.tabpanel.setActiveItem('mycars');
 						}
 					},{
 						xtype: 'spacer'
 					},{
+						xtype: 'button',
 						text: 'ok',
 						ui: 'confirm',
+						disabled: true,
 						handler: function(button, event) {
 							var acfd = gtp.tabpanel.getComponent('addcar').getValues(true);
 							console.log('State is '+acfd.state);
@@ -920,7 +950,9 @@ gtp.controller=Ext.regController("load",{
 										carsList.insert(0,Ext.ModelMgr.create({
 											state: acfd.state,
 											reg: acfd.rg,
-											type: acfd.tp
+											type: acfd.tp,
+											startDate: acfd.startDate,
+											endDate: acfd.endDate
 										},'Cars'));
 										Ext.getCmp('activecar').setOptions([{
 											text: acfd.rg,
@@ -945,7 +977,7 @@ gtp.controller=Ext.regController("load",{
 						label: 'State',
 						required: true,
 						options: [{
-							text: ' ',
+							text: '',
 							value: ''
 						},{
 							text: 'Alabama',
@@ -994,12 +1026,18 @@ gtp.controller=Ext.regController("load",{
 						id: 'endDate',
 						picker: {
 							yearFrom: gtp.today.getFullYear(),
+							yearTo: gtp.today.getFullYear()+10
 						}
 					}]
 				}]
 			},gtp.tabs.CarDetailView],
 			listeners: {
 				beforecardswitch: function(curobj, newCard, oldCard, index, animated) {
+					if(newCard.getId() != 'mycars')
+						Ext.getCmp('mycarstb').hide();
+					else
+						Ext.getCmp('mycarstb').show();
+					
 					if(oldCard.getId()== 'basicform' && gtp.settingschanged) {
 						console.log('true');
 						return true;
