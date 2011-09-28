@@ -16,7 +16,6 @@ Ext.regApplication({
     tollMarkers: new Array(),
     infoWindow: null,
     launch: function(){
-    	console.log('application is launched');
     	Ext.Ajax.defaultHeaders = {};
     	var devret=this.getDeviceId();
     	if(devret!="FAILED")
@@ -28,7 +27,6 @@ Ext.regApplication({
     	}
     	else
     	{
-    		console.log('i am from else');
     		this.pan=new Ext.Panel({
     			fullscreen: true,
     			html: 'Could not connect to server'
@@ -79,7 +77,6 @@ Ext.regApplication({
     				})
     			},
     			success: function(response){
-    				console.log("response status"+response.status);
     				var obj=Ext.decode(response.responseText);
     				console.log('Device Registration response '+response.responseText);
     				console.log('Generated device ID is: '+obj.response.deviceId);

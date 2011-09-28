@@ -53,6 +53,9 @@ var webServices=new Ext.data.Store({
 		url: 'http://localhost:6001/newweb/services/VehicleDetails',
 		service: 'addcar'
 	},{
+		url: 'http://localhost:6001/newweb/services/VehicleDetails',
+		service: 'deletevehicle'
+	},{
 		url: 'http://localhost:6001/newweb/services/TollDetailsList',
 		service: 'tolldetails'
 	},{

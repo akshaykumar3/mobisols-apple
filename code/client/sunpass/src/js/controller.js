@@ -43,12 +43,14 @@ gtp.controller=Ext.regController("load",{
 							}
 							else
 							{
+								var un = Ext.getCmp('lpemailid').getValue();
+								var pwd = Ext.getCmp('lppassword').getValue();
 								Ext.Ajax.request({
 									url: webServices.getAt(webServices.findExact('service','logging')).get('url'),
 									params: {
 										json: Ext.encode({
-											userName: Ext.getCmp('lpemailid').getValue(),
-											password: Ext.getCmp('lppassword').getValue(),
+											userName: un,
+											password: pwd,
 											deviceDetails: {
 												deviceId: options.deviceDetails.deviceId,
 												deviceName: options.deviceDetails.type
@@ -59,21 +61,20 @@ gtp.controller=Ext.regController("load",{
 										console.log('Login succeded response: '+response.responseText);
 										var decres=Ext.decode(response.responseText);
 										var res=decres.response.response;
-										console.log(res.userExists);
 										
 										if(res.userExists=="Y" && res.passwordCorrect=="Y") {
 											// Store username and password locally.
-											gtp.utils.dataStore.setValueOfKey('username',Ext.getCmp('lpemailid').getValue());
-											gtp.utils.dataStore.setValueOfKey('password',Ext.getCmp('lppassword').getValue());
+											gtp.utils.dataStore.setValueOfKey('username', un);
+											gtp.utils.dataStore.setValueOfKey('password', pwd);
 											
-											var encodedString=base64_encode(Ext.getCmp('lpemailid').getValue()+':'+Ext.getCmp('lppassword').getValue());
+											var encodedString=base64_encode(un+':'+pwd);
 											Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
 											Ext.dispatch({
 												controller: 'load',
 												action: 'view',
 												loginDetails: {
-													username: Ext.getCmp('lpemailid').getValue(),
-													password: Ext.getCmp('lppassword').getValue()
+													username: un,
+													password: pwd
 												}
 											});
 										}
@@ -84,13 +85,13 @@ gtp.controller=Ext.regController("load",{
 										Ext.Msg.alert('username or password is incorrect');	
 									},
 									failure: function(response){
+										Ext.Msg.alert('failed to login');
 										console.log('Login Authentication failed with status: '+response.status);
 									}
 								});
 							}
 						}
 					},{
-						//html: '<a onclick="gtp.registerLaunch()"><u><font color="#2e4bc5"> Register</font></u></a>'
 						xtype: 'button',
 						text: 'Register',
 						ui: 'round',
@@ -248,11 +249,14 @@ gtp.controller=Ext.regController("load",{
 		      			Ext.getCmp('activecar').setValue(vehicle_details[i].registration);
 		      		}
 		      		carsList.insert(0,Ext.ModelMgr.create({
-						state: vehicle_details[i].State,
+						state: vehicle_details[i].state,
 						reg: vehicle_details[i].registration,
 						type: vehicle_details[i].type,
 						startDate: new Date(vehicle_details[i].startDate),
-						endDate: new Date(vehicle_details[i].endDate)
+						endDate: new Date(vehicle_details[i].endDate),
+						ownerType: vehicle_details[i].ownerType,
+						vehicleId: vehicle_details[i].vehicleId,
+						isActive: vehicle_details[i].isActive
 					},'Cars'));
 					Ext.getCmp('activecar').setOptions([{
 						text: vehicle_details[i].registration,
@@ -455,10 +459,6 @@ gtp.controller=Ext.regController("load",{
 												avgtoll: TollsData.getAt(0).get('avgtoll'),
 												tollperday: TollsData.getAt(0).get('tollperday')
 											},'TollOperators'));
-											/*cl.setValue('Tallahassee, Florida');
-											to.setValue(TollsData.getAt(0).get('tolloperator'));
-											at.setValue(TollsData.getAt(0).get('avgtoll'));
-											pt.setValue(TollsData.getAt(0).get('tollperday'));*/
 											setTimeout("requestHeartBeat()",5000);
 											// This invokes client side heartbeat.
 											gtp.clientsidehb();
@@ -578,12 +578,13 @@ gtp.controller=Ext.regController("load",{
 						store: carsList,
 						singleSelect: true,
 						scroll: 'vertical',
+						emptyText: 'Add Cars into ur Store',
+						html: 'Add Cars into ur Store',
 						itemTpl: '<div class="contact"><strong>{reg}</strong>, {state}</div>',
 						setActiveItem: this,
 						onItemDisclosure: true,
 						listeners: {
 							itemtap: function(co,index,item,e) {
-								console.log('clicked item '+index+' in the list');
 								gtp.showtabs=true;
 								var record=co.getRecord(co.getNode(index));
 								
@@ -592,42 +593,17 @@ gtp.controller=Ext.regController("load",{
 									state: record.get('state'),
 									type: record.get('type'),
 									startDate: record.get('startDate'),
-									endDate: record.get('endDate')
+									endDate: record.get('endDate'),
+									isActive: record.get('isActive'),
+									ownerType: record.get('ownerType'),
+									vehicleId: record.get('vehicleId')
 								},'Cars'));
 								
 								gtp.tabpanel.setActiveItem('details');
 							},
 							itemswipe: function(co,index,item,e) {
-								var st=co.getStore();
-								var stmod=st.getAt(index);
-								console.log('item '+index+' is swiped');
-								Ext.Ajax.request({
-									url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
-									method: 'DELETE',
-									params: {
-										json: Ext.encode({
-											state: stmod.get('state'),
-											registration: stmod.get('reg'),
-											type: stmod.get('type'),
-											isActive: stmod.get('active'),
-											startDate: stmod.get('startDate').format('Y-m-d H:i:s'),
-										    endDate: stmod.get('endDate').format('Y-m-d H:i:s'),
-											ownerType: 'primary owner', 
-											vehicleId: 1
-										})
-									},
-									success: function(response){
-										var resobj=Ext.decode(response.responseText);
-										var obj=resobj.response;
-										if(obj.success == "Y") {
-											st.removeAt(index);
-											st.refresh();
-										}
-									},
-									failure: function(response){
-										Ext.Msg.alert('Error in deleting the car');
-									}
-								});
+								// Try changing the disclosure icon to delete button.
+								// Implement the delete here.
 							}
 						}
 					}]
@@ -886,9 +862,7 @@ gtp.controller=Ext.regController("load",{
 				iconCls: 'MapIcon',
 				listeners: {
 					maprender: function(comp, map) {
-						console.log('map is rendered');
-						console.log('map centered at lat: '+ map.getCenter().lat() +' long: '+ map.getCenter().lng());
-						
+						console.log('map rendered and centered at lat: '+ map.getCenter().lat() +' long: '+ map.getCenter().lng());
 						// Fetch tolldetails list
 						gtp.getTolls();
 
@@ -919,10 +893,10 @@ gtp.controller=Ext.regController("load",{
 						xtype: 'button',
 						text: 'ok',
 						ui: 'confirm',
-						disabled: true,
+						disabled: false,
 						handler: function(button, event) {
 							var acfd = gtp.tabpanel.getComponent('addcar').getValues(true);
-							console.log('State is '+acfd.state);
+							console.log('State is '+acfd.st);
 							if(acfd.state == "")
 								Ext.Msg.alert('enter state field');
 							else if(acfd.rg == "")
@@ -934,13 +908,13 @@ gtp.controller=Ext.regController("load",{
 									url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
 									method: 'POST',
 									params: {
+										is_new_vehicle: 'Y',
 										json: Ext.encode({
-											state: acfd.state,
+											state: acfd.st,
 											registration: acfd.rg,
 											type: acfd.tp,
 											isActive: "N",
-											//startDate: '',//gtp.today.format('Y-m-d H:i:s'),
-										    //endDate: '',
+											startDate: gtp.today.format('M j, Y g:i:s A'), // Valid date format on server side.
 											ownerType: 'primary owner', 
 											vehicleId: 1
 										})
@@ -984,10 +958,10 @@ gtp.controller=Ext.regController("load",{
 							value: 'Alabama'
 						},{
 							text: 'Alaska',
-							value: 'AL'
+							value: 'Alaska'
 						},{
 							text: 'Arizona',
-							value: 'AZ'
+							value: 'Arizona'
 						}]
 					},{
 						xtype: 'textfield',
@@ -1033,9 +1007,12 @@ gtp.controller=Ext.regController("load",{
 			},gtp.tabs.CarDetailView],
 			listeners: {
 				beforecardswitch: function(curobj, newCard, oldCard, index, animated) {
-					if(newCard.getId() != 'mycars')
+					if(newCard.getId() == 'mycars')
+						gtp.carsvisited = true;
+					
+					if(newCard.getId() != 'mycars'  && !gtp.carsvisited)
 						Ext.getCmp('mycarstb').hide();
-					else
+					else if(!gtp.carsvisited)
 						Ext.getCmp('mycarstb').show();
 					
 					if(oldCard.getId()== 'basicform' && gtp.settingschanged) {
