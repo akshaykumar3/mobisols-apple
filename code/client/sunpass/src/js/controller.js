@@ -134,18 +134,20 @@ gtp.controller=Ext.regController("load",{
 						ui: 'round',
 						style: 'margin-left: 1px',
 						text: 'Register',
-						handler: function(){
-							if(Ext.getCmp('rppassword').getValue() == Ext.getCmp('conpwd').getValue())
+						handler: function(button, event){
+							var eid = Ext.getCmp('rpemailid').getValue();
+							var pwd = Ext.getCmp('rppassword').getValue();
+							var cpwd = Ext.getCmp('conpwd').getValue();
+							if(pwd == cpwd)
 							{
-								console.log('registration: passwords matched');
 								console.log(webServices.getAt(webServices.findExact('service','regnewuser')).get('url'));
 								Ext.Ajax.request({
 									url: webServices.getAt(webServices.findExact('service','regnewuser')).get('url'),
 									method: 'POST',
 									params: {
 										json: Ext.encode({
-											userName: Ext.getCmp('rpemailid').getValue(),
-											password: Ext.getCmp('rppassword').getValue(),
+											userName: eid,
+											password: pwd,
 											deviceDetails: {
 												deviceId: options.deviceDetails.deviceId,
 												deviceName: options.deviceDetails.type
@@ -154,16 +156,10 @@ gtp.controller=Ext.regController("load",{
 									},
 									success: function(response) {
 										console.log(Ext.decode(response.responseText));
-										var encodedString=base64_encode(Ext.getCmp('rpemailid').getValue()+':'+Ext.getCmp('rppassword').getValue());
-										Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
-										Ext.dispatch({
-											controller: 'load',
-											action: 'view',
-											loginDetails: {
-												username: Ext.getCmp('rpemailid').getValue(),
-												password: Ext.getCmp('rppassword').getValue()
-											}
-										});
+										gtp.views.loginPage.setActiveItem('loginpage', 'fade');
+										// Store username and password locally.
+										gtp.utils.dataStore.setValueOfKey('username', eid);
+										gtp.utils.dataStore.setValueOfKey('password', pwd);
 									},
 									failure: function(response) {
 										console.log('user registration failed with status code'+response.status);
@@ -208,20 +204,10 @@ gtp.controller=Ext.regController("load",{
 					mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					//Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 		        },
-		        locationerror: function (   geo,
-		                                    bTimeout, 
-		                                    bPermissionDenied, 
-		                                    bLocationUnavailable, 
-		                                    message) {
-		            if(bTimeout){
-		            	//console.log('timeout occurred');
-		                //Ext.Msg.alert('Timeout occurred.');
-		            }
-		            else{
-		            	//console.log('error finding gps location');
-		            	//console.log('error message: '+message);
-		                //Ext.Msg.alert('Error message: '+ message); 
-		            }
+		        locationerror: function ( geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
+		            if(bTimeout) {
+		            	// Show message to user --optional
+			        }
 		        }
 		    }
 		});
@@ -243,6 +229,7 @@ gtp.controller=Ext.regController("load",{
 			  	var vehicle_details=res.response.vehicleDetails;
 			  	var paidtoll_details=res.response.tollPayments;
 		      	
+			  	if(vehicle_details)
 		      	for(var i=0;i<vehicle_details.length;i++)
 		      	{
 		      		if(vehicle_details[i].isActive){
@@ -264,20 +251,23 @@ gtp.controller=Ext.regController("load",{
 					}],true);
 				}
 		      	
-		      	var userSettings = Ext.ModelMgr.create({
-		      		userid: options.loginDetails.username,
-		      		ccnumber: pay_details.cardNumber,
-		      		expdate: Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),
-		      		acnumber: pay_details.bankAccount,
-		      		name: pay_details.ccName,
-		      		address: pay_details.address1,
-		      		state: pay_details.state,
-		      		city: pay_details.city,
-		      		zipcode: pay_details.zip
-		      	},'Settings');
 		      	
-		      	gtp.tabpanel.getComponent(3).load(userSettings);
+		      	if(pay_details) {
+			      	var userSettings = Ext.ModelMgr.create({
+			      		userid: options.loginDetails.username,
+			      		ccnumber: pay_details.cardNumber,
+			      		expdate: Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),
+			      		acnumber: pay_details.bankAccount,
+			      		name: pay_details.ccName,
+			      		address: pay_details.address1,
+			      		state: pay_details.state,
+			      		city: pay_details.city,
+			      		zipcode: pay_details.zip
+			      	},'Settings');
+			      	gtp.tabpanel.getComponent(3).load(userSettings);
+		      	}
 		      	
+		      	if(paidtoll_details)
 		      	for(i=0;i<paidtoll_details.length;i++)
 		      	{
 		      		//12-6-2011 21:16:12
@@ -652,31 +642,25 @@ gtp.controller=Ext.regController("load",{
 					xtype: 'toolbar',
 					title: 'Settings',
 					dock: 'top',
+					layout: {
+						pack: 'right'
+					},
 					items: [{
 						xtype: 'button',
 						text: 'edit',
-						ui: 'edit',
-						handler: function(but, event) {
-							console.log('handler');
-							if(this.getText() == 'edit') {
-								gtp.tabpanel.getComponent(3).enable();
-								but.setText('save');
-							}
-							else {
-								gtp.tabpanel.getComponent(3).disable();
-								this.setText('edit');
-							}
-						}
-					},{
-						xtype: 'spacer'
-					},{
-						xtype: 'button',
-						text: 'save',
 						ui: 'confirm',
-						disabled: true,
 						id: 'savesettings',
 						handler: function(button, event) {
-							if(gtp.settingschanged) {
+							if(button.getText() == 'edit') {
+								gtp.tabpanel.getComponent(3).enable();
+								button.setText('save');
+								button.setDisabled(true);
+							}
+							else if(button.getText() == 'save' && gtp.settingschanged) {
+								gtp.tabpanel.getComponent(3).disable();
+								button.setText('edit');
+								button.setDisabled(false);
+								
 								var pay_det = gtp.tabpanel.getComponent(3).getRecord();
 								Ext.Ajax.request({
 									url: webServices.getAt(webServices.findExact('service','paymentdetails')).get('url'),
@@ -701,7 +685,6 @@ gtp.controller=Ext.regController("load",{
 										console.log('Posting payment details success');
 										var resobj = Ext.decode(response.responseText);
 										console.log('Payment details response '+response.responseText);
-									    button.setDisabled(true);
 									    gtp.settingschanged = false;
 									    if(resobj.status == 'success')
 									    Ext.Msg.alert('Payment Details changed');
@@ -722,6 +705,7 @@ gtp.controller=Ext.regController("load",{
 						listeners: {
 							change: function(curobj,newValue,oldValue) {
 								if(newValue != oldValue) {
+									gtp.tabpanel.getComponent(3).updateRecord(gtp.tabpanel.getComponent(3).getRecord());
 									gtp.settingschanged=true;
 									var savebutton=Ext.getCmp('savesettings');
 									savebutton.setDisabled(false);	
@@ -747,7 +731,8 @@ gtp.controller=Ext.regController("load",{
 						id: 'expirydate',
 						label: 'Exp date',
 						picker: {
-							yearFrom: 2011
+							yearFrom: gtp.today.getFullYear(),
+							yearTo: gtp.today.getFullYear()+10
 						}
 					},{
 						xtype: 'textfield',
@@ -767,6 +752,18 @@ gtp.controller=Ext.regController("load",{
 				},{
 					xtype: 'fieldset',
 					title: 'Billing Details',
+					defaults: {
+						listeners: {
+							change: function(curobj,newValue,oldValue) {
+								if(newValue != oldValue) {
+									gtp.tabpanel.getComponent(3).updateRecord(gtp.tabpanel.getComponent(3).getRecord());
+									gtp.settingschanged=true;
+									var savebutton=Ext.getCmp('savesettings');
+									savebutton.setDisabled(false);	
+								}
+							}
+						}
+					},
 					items: [{
 						xtype: 'textfield',
 						name: 'name',
@@ -800,15 +797,15 @@ gtp.controller=Ext.regController("load",{
 					}]
 				},{
 					xtype: 'fieldset',
-					title: 'Account info',
+					title: 'Your Account',
 					items: [{
 						xtype: 'textfield',
 						name: 'userid',
 						id: 'userid',
+						disabled: true,
 						label: 'UserID',
-						cls: 'customField',
-						placeHolder: 'userID',
-						autoCapitalize : false
+						value: options.loginDetails.username,
+						cls: 'customField'
 					}]
 				},{
 					xtype: 'button',
@@ -1007,8 +1004,10 @@ gtp.controller=Ext.regController("load",{
 			},gtp.tabs.CarDetailView],
 			listeners: {
 				beforecardswitch: function(curobj, newCard, oldCard, index, animated) {
-					if(newCard.getId() == 'mycars')
+					if(newCard.getId() == 'mycars') {
 						gtp.carsvisited = true;
+						Ext.getCmp('mycarstb').show();
+					}
 					
 					if(newCard.getId() != 'mycars'  && !gtp.carsvisited)
 						Ext.getCmp('mycarstb').hide();
