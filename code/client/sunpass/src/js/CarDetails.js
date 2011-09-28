@@ -24,7 +24,6 @@ gtp.tabs.CarDetailView = {
 				handler: function(button, event) {
 					
 					var updateCar = gtp.tabpanel.getComponent('details').getRecord();
-					console.log(updateCar.get('isActive'));
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
 						method: 'POST',
@@ -44,11 +43,10 @@ gtp.tabs.CarDetailView = {
 						success: function(response){
 							var resobj=Ext.decode(response.responseText);
 							var obj=resobj.response;
-							console.log(response.responseText);
-							if(obj.status == 'success') {
-								gtp.tabpanel.setActiveItem('mycars');
-								updateCar.set('endDate',Ext.getCmp('dpto').getValue());
-							}
+							gtp.tabpanel.setActiveItem('mycars');
+							Ext.Msg.alert(obj.description);
+							updateCar.set('endDate',Ext.getCmp('dpto').getValue());
+							Ext.getCmp('changevd').setDisabled(true);
 						},
 						failure: function(response){
 							Ext.Msg.alert('Error in updating car details');
@@ -145,10 +143,3 @@ gtp.tabs.CarDetailView = {
 			}
 		}]
 	};
-
-gtp.checkDateString = function(date) {
-	if(date)
-		return date.format('M j, Y g:i:s A');
-	else
-		return '';
-};
