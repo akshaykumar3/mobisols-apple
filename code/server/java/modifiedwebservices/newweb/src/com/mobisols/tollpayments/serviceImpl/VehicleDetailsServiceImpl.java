@@ -28,10 +28,12 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	public GeneralResponse postVehicleDetails(VehicleDetailsRequest vdr,String user,String isNewVehicle)
 	{
 		GeneralResponse response = new GeneralResponse();
-		if(isNewVehicle==IS_NEW_VEHICLE_FALSE)
+		if(isNewVehicle.equals(IS_NEW_VEHICLE_FALSE))
 		{
 			User u=userDao.getUser(user);
 			UserVehicle uv=userVehicleDao.getVehicle(vdr.getRegistration(), vdr.getState(),u.getUserId());
+			if(uv==null)
+				System.out.println("usser vehicle is null");
 			uv.setIsActive(vdr.getIsActive());
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));

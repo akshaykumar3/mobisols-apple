@@ -13,7 +13,16 @@ public class UserPaymentDetailDaoImpl implements UserPaymentDetailDao {
 	{
 		Session s=HibernateSessionFactory.getSession();
 		Transaction tx=s.beginTransaction();
-		s.saveOrUpdate(upd);
+		s.save(upd);
 		tx.commit();
 	}
+	
+	public void update(UserPaymentDetail upd)
+	{
+		Session s=HibernateSessionFactory.getSession();
+		Transaction tx=s.beginTransaction();
+		s.update(upd);
+		tx.commit();
+	}
+	
 }

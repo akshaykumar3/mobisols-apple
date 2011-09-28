@@ -2,7 +2,6 @@ package com.mobisols.tollpayments.response.post;
 
 import java.util.HashMap;
 
-import org.jruby.compiler.ir.operands.Hash;
 
 public class LoginResponse {
 

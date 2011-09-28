@@ -5,17 +5,17 @@ import java.util.List;
 
 public class CheckUserBalanceRequest {
 
-	private List<String> users;
+	private List<Integer> users;
 
 	public CheckUserBalanceRequest()
 	{
-		this.users=new LinkedList<String>();
+		this.users=new LinkedList<Integer>();
 	}
-	public List<String> getUsers() {
+	public List<Integer> getUsers() {
 		return users;
 	}
 
-	public void setUses(List<String> users) {
+	public void setUsers(List<Integer> users) {
 		this.users = users;
 	} 
 }

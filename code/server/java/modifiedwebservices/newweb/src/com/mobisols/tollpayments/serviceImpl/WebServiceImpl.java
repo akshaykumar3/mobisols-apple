@@ -109,13 +109,14 @@ public class WebServiceImpl {
 		String request = "RETRIEVE ACC_DETAILS";
 		String status =null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
+		System.out.println("This is read from headers username:  "+username);
 		return jsonConverter.getJSON(request, status, accountDetailsService.getAccountDetailsResponse(username));
 	}
 	
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/BalanceDetails")
+	@Path("/private/BalanceDetails")
 	@RolesAllowed("user")
 	public String getBalanceDetails(@QueryParam("json") String json){
 		String request = "RETRIEVE ACC_DETAILS";
@@ -127,7 +128,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/VehicleTypeList")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getVehicleTypesList()
 	{
 		String request="";
@@ -138,7 +139,7 @@ public class WebServiceImpl {
 
 	@POST
 	@Produces("text/plain")
-	@Path("/AddBalance")
+	@Path("/private/AddBalance")
 	@RolesAllowed("user")
 	public String postAddBalance(@FormParam("json")String json,@Context HttpHeaders httpHeader)
 	{
@@ -152,7 +153,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/CcTypeList")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getCcTypeList()
 	{
 		String request="get CCTypeList";
@@ -163,7 +164,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/OwnerTypeList")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getOwnerTypeList()
 	{
 		String request="get OwnerTypeList";
@@ -174,7 +175,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/VmlTypeList")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getVMLTypeList()
 	{
 		String request="get VMLTypeList";
@@ -184,7 +185,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/BalanceInfo")
+	@Path("/private/BalanceInfo")
 	@RolesAllowed("user")
 	public String getBalanceInfo(@Context HttpHeaders httpHeader)
 	{
@@ -197,7 +198,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/TollDetailsList")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getTollDetailsList(@QueryParam("json") String json)
 	{
 		String request="get BlanceInfo";
@@ -213,7 +214,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/ServicePlansList")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getServicePlans()
 	{
 		String request="get Service Plans List";
@@ -224,7 +225,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/PeriodicHeartBeat")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String postPeriodicHeartBeat(@FormParam("json") String json)
 	{
 		String request="post periodic heartbeat";
@@ -236,7 +237,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/HeartBeat")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String postHeartBeat(@FormParam("json") String json)
 	{
 		String request="post heartbeat";
@@ -248,7 +249,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/NearestToll")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getNearestToll(@QueryParam("json") String json)
 	{
 		String request="post heartbeat";
@@ -260,7 +261,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/PaymentDetails")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String postPaymentDetails(@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="update paymentDetails";
@@ -285,20 +286,23 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/VehicleDetails")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String postVehicleDetails(@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@Context HttpHeaders httpHeader)
 	{
+		System.out.println(isNewVehicle);
 		String request="post vehicleDetails";
 		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
+		if(r==null)
+			System.out.println("request is null");
 		return jsonConverter.getJSON(request, status,vehicleDetailsService.postVehicleDetails(r, username, isNewVehicle));
 	}
 	
 	@DELETE
 	@Produces("text/plain")
 	@Path("/VehicleDetails")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String deleteVehicleDetails(@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@Context HttpHeaders httpHeader)
 	{
 		String request="post vehicleDetails";
@@ -311,7 +315,6 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/UserRegistration")
-	@RolesAllowed("user")
 	public String registerUser(@FormParam("json") String json)
 	{
 		String request="register user";
@@ -323,7 +326,6 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/DeviceRegistration")
-	@RolesAllowed("user")
 	public String registerDevice(@FormParam("json") String json,@Context HttpServletRequest servletRequest)
 	{
 		String request="register device";
@@ -336,7 +338,6 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/Login")
-	@RolesAllowed("user")
 	public String loginUser(@FormParam("json") String json)
 	{
 		String request="post vehicleDetails";

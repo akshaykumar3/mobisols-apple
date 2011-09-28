@@ -13,5 +13,6 @@ public class MyUtilContextImpl implements MyUtilContext {
 		auth = auth.substring("Basic ".length());
 		String[] values = new String(Base64.base64Decode(auth)).split(":");
 		return values[0];
+		//return "harishmobisols.com";
 	}
 }

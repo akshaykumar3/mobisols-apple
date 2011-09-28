@@ -79,6 +79,8 @@
     <bean id="service.tollpayments.registrationService" class="com.mobisols.tollpayments.serviceImpl.RegistrationServiceImpl">
     	<property name="userDao" ref="dao.tollpayments.userDao"></property>
     	<property name="deviceDao" ref="dao.tollpayments.deviceDao"></property>
+    	<property name="userBalanceDao" ref="dao.tollpayments.userBalanceDao"></property>
+    	<property name="userPaymentDetailDao" ref="dao.tollpayments.userPaymentDetailDao"></property>
     	<property name="myUtilDate" ref="myutils.tollpayments.myUtilDate"></property>
     </bean>
      <bean id="service.tollpayments.deviceRegistrationService" class="com.mobisols.tollpayments.serviceImpl.DeviceRegistrationServiceImpl">
