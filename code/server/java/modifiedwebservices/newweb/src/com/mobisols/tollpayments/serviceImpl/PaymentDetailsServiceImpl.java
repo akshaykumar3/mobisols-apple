@@ -30,12 +30,14 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setCcCvv(pd.getCcCVV());
 		upd.setCity(pd.getCity());
 		upd.setCountry(pd.getCountry());
-		upd.setPayPrefer(pd.getPayPrefer());
+		//TODO set payprefer the form the request
+		upd.setPayPrefer("c");
 		upd.setState(pd.getState());
 		upd.setZip(pd.getZip());
 		upd.setCcTypeId(CcType.CCTYPE_ID);
 		upd.setLastModifiedBy(userDao.getUser(username).getUserId());
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
+		userPaymentDetailDao.update(upd);
 		GeneralResponse response=new GeneralResponse();
 		response.setDescription("Your details have been updated");
 		return response;

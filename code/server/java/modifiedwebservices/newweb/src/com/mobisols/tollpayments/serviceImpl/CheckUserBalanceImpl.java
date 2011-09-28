@@ -42,10 +42,6 @@ public class CheckUserBalanceImpl implements CheckUserBalance {
 					userBalanceDao.save(ub);
 					
 				}
-				else
-				{
-					//TODO what need to be done if it is not success
-				}
 			}
 		}
 		return response;

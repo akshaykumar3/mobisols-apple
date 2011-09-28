@@ -1,7 +1,9 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
+import com.mobisols.tollpayments.dao.UserBalanceDao;
 import com.mobisols.tollpayments.dao.UserDao;
+import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
 import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.model.Device;
@@ -15,6 +17,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	private UserDao userDao;
 	private DeviceDao deviceDao;
+	private UserBalanceDao userBalanceDao;
+	private UserPaymentDetailDao userPaymentDetailDao;
 	private MyUtilDate myUtilDate;
 	public static final String PASSWORD_CORRECT_FALSE="N";
 	public static final String PASSWORD_CORRECT_TRUE="Y";
@@ -67,6 +71,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 			u.setPassword(r.getPassword());
 			u.setUserName(r.getUserName());
 			u.setUtypeId(1);
+			userDao.save(u);
+			
+			u=userDao.getUser(r.getUserName());
 			
 			UserBalance ub= new UserBalance();
 			ub.setBalance(0.0);
@@ -74,7 +81,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 			ub.setCreatedOn(myUtilDate.getCurrentTimeStamp());
 			ub.setLastModifiedBy(-1);
 			ub.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-			u.setUserBalance(ub);
+			ub.setUserId(u.getUserId());
+			userBalanceDao.save(ub);
 			
 			UserPaymentDetail upd = new UserPaymentDetail();
 			upd.setCreatedOn(myUtilDate.getCurrentTimeStamp());
@@ -82,9 +90,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 			upd.setLastModifiedBy(-1);
 			upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 			upd.setPayPrefer("c");
-			u.setUserPaymentDetails(upd);
-			userDao.save(u);
-			u=userDao.getUser(r.getUserName());
+			upd.setUserId(u.getUserId());
+			userPaymentDetailDao.save(upd);
+			
 			d.setUserId(u.getUserId());
 			deviceDao.save(d);
 			return response;
@@ -108,5 +116,17 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 	public void setMyUtilDate(MyUtilDate myUtilDate) {
 		this.myUtilDate = myUtilDate;
+	}
+	public UserBalanceDao getUserBalanceDao() {
+		return userBalanceDao;
+	}
+	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
+		this.userBalanceDao = userBalanceDao;
+	}
+	public UserPaymentDetailDao getUserPaymentDetailDao() {
+		return userPaymentDetailDao;
+	}
+	public void setUserPaymentDetailDao(UserPaymentDetailDao userPaymentDetailDao) {
+		this.userPaymentDetailDao = userPaymentDetailDao;
 	}
 }
