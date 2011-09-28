@@ -16,8 +16,18 @@ Ext.regModel('Cars', {
 		name: 'endDate',
 		type: 'date'
 	},{
-		name: 'active',
-		type: 'boolean'
+		name: 'isActive',
+		type: 'string'
+	},{
+		name: 'ownerType',
+		type: 'string'
+	},{
+		name: 'vehicleId',
+		type: 'int'
+	}],
+	validations: [{
+		type: 'presence',
+		name: 'reg'
 	}]
 });
 
