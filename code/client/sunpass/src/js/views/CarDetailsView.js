@@ -1,5 +1,3 @@
-Ext.ns('gtp.tabs');
-
 gtp.tabs.CarDetailView = {
 		id: 'details',
 		xtype: 'formpanel',
@@ -94,6 +92,7 @@ gtp.tabs.CarDetailView = {
 				label: 'To',
 				name: 'endDate',
 				id: 'dpto',
+				placeHolder: 'end date',
 				picker: {
 					yearFrom: gtp.today.getFullYear(),
 					yearTo: gtp.today.getFullYear()+10
@@ -101,6 +100,7 @@ gtp.tabs.CarDetailView = {
 				listeners: {
 					change: function(curobj, newValue, oldValue) {
 						if(newValue != oldValue) {
+							gtp.tabpanel.getComponent('details').updateRecord(gtp.tabpanel.getComponent('details').getRecord());
 							Ext.getCmp('changevd').setDisabled(false);
 						}
 					}
@@ -116,6 +116,7 @@ gtp.tabs.CarDetailView = {
 					url: webServices.getAt(webServices.findExact('service','deletevehicle')).get('url'),
 					method: 'DELETE',
 					params: {
+						is_new_vehicle: 'N',
 						json: Ext.encode({
 							state: stmod.get('state'),
 							registration: stmod.get('reg'),
@@ -130,8 +131,9 @@ gtp.tabs.CarDetailView = {
 					success: function(response){
 						var resobj=Ext.decode(response.responseText);
 						var obj=resobj.response;
-						if(obj.success == "Y") {
-							carsList.removeAt(carsList.indexOf(stmod));
+						console.log('vehicle delete response description '+obj.description);
+						if(resobj.status == "success") {
+							carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
 							Ext.Msg.alert('Removed Car successfully');
 						}
 						gtp.tabpanel.setActiveItem('mycars');

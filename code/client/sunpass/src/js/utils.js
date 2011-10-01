@@ -10,7 +10,7 @@ gtp.utils.dataStore.getConfiguration = function() {
 			json: Ext.encode({				
 				componentName: 'iphone',
 				version: '1.0',
-				key: '1221'
+				key: 'tollpass'
 			})
 		},
 		success: function(response) {
