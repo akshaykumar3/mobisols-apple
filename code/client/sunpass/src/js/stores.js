@@ -28,6 +28,23 @@ var paidTolls = new Ext.data.Store({
 	}]
 });
 
+// Store for toll operators.
+var TollsData = new Ext.data.Store({
+	model : 'TollOperator',
+	storeId : 'tollops',
+	data : [{
+		tolloperator: 'FasTrak',
+		tollperday: '2$',
+		avgtoll: '4$',
+		id: 1
+	}]
+});
+
+//Stores for logging heartbeat.
+gtp.stores.LogHeartBeat= new Ext.data.Store({
+	model: 'HeartBeatLog'
+});
+
 // Store for newwebservice urls.
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
@@ -77,9 +94,4 @@ var webServices=new Ext.data.Store({
 		url: 'http://localhost:6001/newweb/services/PaymentDetails',
 		service: 'paymentdetails'
 	}] 
-});
-
-// Stores for logging heartbeat.
-gtp.stores.LogHeartBeat= new Ext.data.Store({
-	model: 'HeartBeatLog'
 });

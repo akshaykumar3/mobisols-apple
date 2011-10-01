@@ -6,10 +6,10 @@ function requestHeartBeat(){
 	{
 		var request_jsobject= {
 			deviceId: gtp.utils.dataStore.getValueOfKey('gtp-deviceID'),
-			deviceType: 'iphone',
-			timeStamp: 'Jul 12, 2011 10:40:25 PM',
-			latitude: getGeoLatitude(),
-			longitude: getGeoLongitude(),
+			deviceType: gtp.detectDeviceType(),
+			timeStamp: gtp.today.format('M j, Y g:i:s A'),
+			latitude: gtp.getGeoLatitude(),
+			longitude: gtp.getGeoLongitude(),
 			angle: 0,
 			vmlType: 'test',
 			tollSessionId: ''
@@ -47,7 +47,6 @@ function requestHeartBeat(){
 	}
 	else
 	{
-		console.log('i am from else loop');
 		/*.... request for heart beat after some interval of time ....
 		 * -- the timeout can be cleared using the variable returned --- 
 		 */
@@ -60,17 +59,16 @@ function requestHeartBeat(){
 	}	
 }
 
-
-function getGeoLatitude() {
+gtp.getGeoLatitude = function() {
 	if(gtp.geo.latitude)
 	return gtp.geo.latitude;
 	else
 	return Ext.getCmp('mappanel').map.getCenter().lat();
-}
+};
 
-function getGeoLongitude() {
+gtp.getGeoLongitude = function() {
 	if(gtp.geo.longitude)
 	return gtp.geo.longitude;
 	else
 	return Ext.getCmp('mappanel').map.getCenter().lng();
-}
+};

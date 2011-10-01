@@ -28,6 +28,14 @@ Ext.regModel('Cars', {
 	validations: [{
 		type: 'presence',
 		name: 'reg'
+	},{
+		type: 'inclusion',
+		name: 'isActive', 
+		list: ['Y', 'N', 'I']
+	},{
+		name: 'state',
+		type: 'format', 
+		matcher: /[0-9]/
 	}]
 });
 
@@ -99,6 +107,7 @@ Ext.regModel('HeartBeatLog',{
 	}]
 });
 
+// Model for toll payment and billing details.
 Ext.regModel('Settings',{
 	fields: [{
 		name: 'userid',
@@ -130,5 +139,22 @@ Ext.regModel('Settings',{
 	},{
 		name: 'zipcode',
 		text: 'string'
+	}]
+});
+
+// Model for toll operators.
+Ext.regModel('TollOperator', {
+	fields : [{
+		name : 'tolloperator',
+		type: 'string'
+	},{
+		name : 'tollperday',
+		type: 'string'
+	},{
+		name : 'avgtoll',
+		type: 'string'
+	},{
+		name: 'id',
+		type: 'int'
 	}]
 });

@@ -1,6 +1,6 @@
 /* 
  * Author: A. Pradeep
- * Last Modified: July 16,2011
+ * Last Modified: Oct 1st,2011
  */
 
 Ext.regApplication({
@@ -54,10 +54,6 @@ Ext.regApplication({
     	return 'ipad';
     	else if(Ext.is.Desktop)
     	return 'desktop';
-    },
-    registerLaunch: function(){
-    	console.log('device is registered');
-    	gtp.views.loginPage.setActiveItem('regpage');
     },
     getDeviceId: function(){
     	// open the database check if the device id is present.
