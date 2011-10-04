@@ -108,40 +108,53 @@ gtp.tabs.CarDetailView = {
 			}]
 		},{
 			xtype: 'button',
+			ui: 'decline',
 			text: 'Delete Car',
 			handler: function(but, event) {
-				
+
 				var stmod = gtp.tabpanel.getComponent('details').getRecord();
-				Ext.Ajax.request({
-					url: webServices.getAt(webServices.findExact('service','deletevehicle')).get('url'),
-					method: 'DELETE',
-					params: {
-						is_new_vehicle: 'N',
-						json: Ext.encode({
-							state: stmod.get('state'),
-							registration: stmod.get('reg'),
-							type: stmod.get('type'),
-							isActive: stmod.get('isActive'),
-							startDate: stmod.get('startDate').format('M j, Y g:i:s A'),
-						    //endDate: gtp.checkDateString(stmod.get('endDate')),
-							ownerType: stmod.get('ownerType'), 
-							vehicleId: stmod.get('vehicleId')
-						})
-					},
-					success: function(response){
-						var resobj=Ext.decode(response.responseText);
-						var obj=resobj.response;
-						console.log('vehicle delete response description '+obj.description);
-						if(resobj.status == "success") {
-							carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
-							Ext.Msg.alert('Removed Car successfully');
-						}
-						gtp.tabpanel.setActiveItem('mycars');
-					},
-					failure: function(response){
-						Ext.Msg.alert('Error in deleting the car');
+				//Ext.Msg.confirm("Confirmation", "", Ext.emptyFn);
+				Ext.Msg.confirm("Confirmation", "Are you sure to delete car?", function(button) {
+					if(button == 'yes') {
+						var ed;
+						if(stmod.get('endDate'))
+							ed = stmod.get('endDate').format('M j, Y g:i:s A');
+						else
+							ed = null;
+						Ext.Ajax.request({
+							url: webServices.getAt(webServices.findExact('service','deletevehicle')).get('url'),
+							method: 'DELETE',
+							params: {
+								is_new_vehicle: 'N',
+								json: Ext.encode({
+									state: stmod.get('state'),
+									registration: stmod.get('reg'),
+									type: stmod.get('type'),
+									isActive: stmod.get('isActive'),
+									startDate: stmod.get('startDate').format('M j, Y g:i:s A'),
+								    endDate: ed,
+									ownerType: stmod.get('ownerType'), 
+									vehicleId: stmod.get('vehicleId')
+								})
+							},
+							success: function(response){
+								var resobj=Ext.decode(response.responseText);
+								var obj=resobj.response;
+								console.log('vehicle delete response description '+obj.description);
+								if(resobj.status == "success") {
+									carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
+									Ext.Msg.alert('Removed Car successfully');
+								}
+								gtp.tabpanel.setActiveItem('mycars');
+							},
+							failure: function(response){
+								Ext.Msg.alert('Error in deleting the car');
+							}
+						});
 					}
-				});
+					else
+						console.log('clicked '+button);
+				}, this);
 			}
 		}]
 	};

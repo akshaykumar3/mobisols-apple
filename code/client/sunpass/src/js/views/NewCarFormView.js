@@ -2,6 +2,21 @@ gtp.tabs.NewCarFormView = {
 	id: 'addcar',
 	xtype: 'formpanel',
 	scroll: 'vertical',
+	listeners: {
+		beforeactivate: function(co) {
+			co.reset();
+			co.load(Ext.ModelMgr.create({
+				reg: '',
+				state: '',
+				type: '',
+				startDate: gtp.today,
+				endDate: null,
+				isActive: 'N',
+				ownerType: 'primary owner'
+			},'Cars'));
+			return true;
+		}
+	},
 	dockedItems: [{
 		xtype: 'toolbar',
 		title: 'New Car',
@@ -23,15 +38,19 @@ gtp.tabs.NewCarFormView = {
 			disabled: true,
 			handler: function(button, event) {
 				var acfd = gtp.tabpanel.getComponent('addcar').getValues(true);
-				console.log('State is '+acfd.st);
-				if(acfd.state == "")
+				if(acfd.endDate)
+				var validEndDate = gtp.dateValidity(gtp.today, acfd.endDate);
+				
+				if(acfd.st == "")
 					Ext.Msg.alert('enter state field');
 				else if(acfd.rg == "")
 					Ext.Msg.alert("Enter registration number");
 				else if(acfd.tp == "")
 					Ext.Msg.alert('Select car type');
-				else if(!gtp.validateCar(acfd.rg, acfd.state))
-					Ext.Msg.alert('Invalid Reg No');
+				else if(!gtp.validateCar(acfd.rg, acfd.st))
+					Ext.Msg.alert('Invalid','Registration Number');
+				else if(acfd.endDate && !validEndDate)
+					Ext.Msg.alert('End Date','Incorrect Value');
 				else {
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
@@ -44,6 +63,7 @@ gtp.tabs.NewCarFormView = {
 								type: acfd.tp,
 								isActive: "N",
 								startDate: gtp.today.format('M j, Y g:i:s A'), // Valid date format on server side.
+								endDate: (acfd.endDate == null) ? null : acfd.endDate.format('M j, Y g:i:s A'),
 								ownerType: 'primary owner', 
 								vehicleId: 1
 							})
@@ -54,13 +74,9 @@ gtp.tabs.NewCarFormView = {
 								state: acfd.st,
 								reg: acfd.rg,
 								type: acfd.tp,
-								startDate: acfd.startDate,
+								startDate: gtp.today,//acfd.startDate,
 								endDate: acfd.endDate
 							},'Cars'));
-							Ext.getCmp('activecar').setOptions([{
-								text: acfd.rg,
-								value: acfd.rg
-							}],true);
 						},
 						failure: function(response){
 							Ext.Msg.alert('Error in adding the car');
@@ -91,18 +107,10 @@ gtp.tabs.NewCarFormView = {
 			id: 'st',
 			name: 'st',
 			label: 'State',
-			placeHolder: 'select state',
 			required: true,
-			options: [{
-				text: 'Florida',
-				value: 'Florida'
-			},{
-				text: 'Illinois',
-				value: 'Illinois'
-			},{
-				text: 'Texas',
-				value: 'Texas'
-			}]
+			store: gtp.stores.stateStore,
+			displayField: 'StateName',
+			valueField: 'StateCode'
 		},{
 			xtype: 'textfield',
 			label: 'Reg',
@@ -115,21 +123,11 @@ gtp.tabs.NewCarFormView = {
 			name: 'tp',
 			label: 'Type',
 			required: true,
-			placeHolder: 'select type'
-		},{
-			xtype: 'selectfield',
-			label: 'Make',
-			name: 'make',
-			id: 'carmaker',
-			required: true,
-			placeHolder: 'Car Maker'
-		},{
-			xtype: 'selectfield',
-			label: 'Model',
-			name: 'model',
-			id: 'md',
-			required: true,
-			placeHolder: 'Car Model'
+			placeHolder: 'select type',
+			options: [{
+				text: '',
+				value: ''
+			}]
 		}]
 	},{
 		xtype: 'fieldset',
@@ -140,13 +138,13 @@ gtp.tabs.NewCarFormView = {
 		items: [{
 			label: 'From',
 			id: 'startDate',
+			name: 'startDate',
 			disabled: true,
 			value: gtp.today
 		},{
 			label: 'To',
 			id: 'endDate',
-			name: 'enddate',
-			placeHolder: '',
+			name: 'endDate',
 			picker: {
 				yearFrom: gtp.today.getFullYear(),
 				yearTo: gtp.today.getFullYear()+10

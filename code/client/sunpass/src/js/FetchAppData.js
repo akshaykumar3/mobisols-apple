@@ -60,10 +60,6 @@ gtp.FetchUserData = function(options) {
 					vehicleId: vehicle_details[i].vehicleId,
 					isActive: vehicle_details[i].isActive
 				},'Cars'));
-				Ext.getCmp('activecar').setOptions([{
-					text: vehicle_details[i].registration,
-					value: vehicle_details[i].registration
-				}],true);
 			}
 	      	
 	      	
@@ -76,6 +72,7 @@ gtp.FetchUserData = function(options) {
 		      		name: pay_details.ccName,
 		      		address: pay_details.address1,
 		      		state: pay_details.state,
+		      		country: pay_details.country,
 		      		city: pay_details.city,
 		      		zipcode: pay_details.zip
 		      	},'Settings');

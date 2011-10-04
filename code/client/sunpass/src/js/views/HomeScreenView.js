@@ -40,6 +40,7 @@ gtp.tabs.HomeScreenView = {
 					var at = Ext.getCmp('avgtoll');
 					var pt = Ext.getCmp('pdtoll');
 					var ac = Ext.getCmp('activecar');
+					var sp = Ext.getCmp('serviceplan');
 					if(newValue == 1 && oldValue == 0) {
 						// Things todo.
 						// Check whether atleast one car is valid.
@@ -91,6 +92,7 @@ gtp.tabs.HomeScreenView = {
 							message='Settings are saved, Car '+Ext.getCmp('activecar').getValue()+' is active';
 							Ext.Msg.alert('Activated',message);
 							ac.setDisabled(true);
+							sp.setDisabled(true);
 						}
 						else
 							Ext.Msg.alert('Car should be selected');
@@ -103,6 +105,7 @@ gtp.tabs.HomeScreenView = {
 						at.setValue("");
 						pt.setValue("");
 						ac.setDisabled(false);
+						sp.setDisabled(false);
 					}
 				}
 			}
@@ -114,7 +117,10 @@ gtp.tabs.HomeScreenView = {
 			xtype: 'selectfield',
 			name: 'activecar',
 			label: 'ActiveCar',
-			id: 'activecar'
+			id: 'activecar',
+			store: carsList,
+			displayField: 'reg',
+			valueField: 'reg'
 		},{
 			xtype: 'selectfield',
 			name: 'serviceplan',

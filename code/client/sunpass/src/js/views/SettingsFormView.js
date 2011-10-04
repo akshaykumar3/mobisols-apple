@@ -30,6 +30,19 @@ gtp.tabs.SettingsFormView = {
 					button.setDisabled(false);
 					
 					var pay_det = gtp.tabpanel.getComponent(3).getRecord();
+					var validZipCode = gtp.validateZipCode(pay_det.get('state'), pay_det.get('city'), pay_det.get('zipcode'));
+					
+					var validExpDate;
+					if(pay_det.get('expdate'))
+						validExpDate = gtp.expiryDateValidity(pay_det.get('expdate').getMonth(), pay_det.get('expdate').getFullYear());
+					
+					if(!pay_det.get('expdate'))
+						Ext.Msg.alert('Alert','Exp date cannot be empty');
+					else if(!validExpDate)
+						Ext.Msg.alert('Invalid','Expiry Date');
+					else if(!validZipCode)
+						Ext.Msg.alert('Invalid','Enter Valid zip code');
+					else 
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','paymentdetails')).get('url'),
 						method: 'POST',
@@ -37,8 +50,8 @@ gtp.tabs.SettingsFormView = {
 							json: Ext.encode({
 								ccName: pay_det.get('name'),
 								cardNumber: pay_det.get('ccnumber'),
-								expMonth: pay_det.get('expdate').MONTH,
-								expYear: pay_det.get('expdate').YEAR,
+								expMonth: pay_det.get('expmonth'),
+								expYear: pay_det.get('expdate').getFullYear(),
 								bankRouting: 123,
 								ccCVV: 123456,
 								bankAccount: pay_det.get('acnumber'),
@@ -54,11 +67,12 @@ gtp.tabs.SettingsFormView = {
 							var resobj = Ext.decode(response.responseText);
 							console.log('Payment details response '+response.responseText);
 						    gtp.settingschanged = false;
+						    gtp.arePaymentDetailsValid = true;
 						    if(resobj.status == 'success')
-						    Ext.Msg.alert('Payment Details changed');
+						    Ext.Msg.alert('Success','Payment Details changed');
 						},
 						failure: function(response) {
-							Ext.Msg.alert('Payment Details not changed');
+							Ext.Msg.alert('Error','Changing Payment Details');
 							console.log('Failed in posting payment details');
 						}
 					});
@@ -94,6 +108,14 @@ gtp.tabs.SettingsFormView = {
 			id: 'cardtype',
 			label: 'Cc type'
 		},{
+			xtype: 'selectfield',
+			name: 'expmonth',
+			id: 'expmonth',
+			label: 'ExpMonth',
+			store: gtp.stores.Months,
+			displayField: 'month',
+			valueField: 'monthid'
+		},{
 			xtype: 'datepickerfield',
 			name: 'expdate',
 			id: 'expirydate',
@@ -108,14 +130,6 @@ gtp.tabs.SettingsFormView = {
 			id: 'bankaccount',
 			label: 'A/c No',
 			useClearIcon: true
-		},{
-			xtype: 'checkboxfield',
-			id: 'autopay',
-			label: 'Auto-pay'
-		},{
-			xtype: 'hiddenfield',
-			name: 'secret',
-			value: false
 		}]
 	},{
 		xtype: 'fieldset',
@@ -151,17 +165,32 @@ gtp.tabs.SettingsFormView = {
 			id: 'billcity',
 			useClearIcon: true
 		},{
-			xtype: 'textfield',
+			xtype: 'selectfield',
 			name: 'state',
 			label: 'State',
 			id: 'billstate',
-			useClearIcon: true
+			store: gtp.stores.stateStore,
+			displayField: 'StateName',
+			valueField: 'StateCode'
+		},{
+			xtype: 'selectfield',
+			id: 'country',
+			name: 'country',
+			label: 'Country',
+			store: gtp.stores.Countries,
+			displayField: 'CountryName',
+			valueField: 'CountryCode'
 		},{
 			xtype: 'textfield',
 			name: 'zipcode',
 			label: 'Zip',
 			id: 'zip',
 			useClearIcon: true
+		},{
+			xtype: 'numberfield',
+			name: 'phoneno',
+			id: 'phoneno',
+			label: 'Number'
 		}]
 	},{
 		xtype: 'fieldset',
@@ -172,7 +201,7 @@ gtp.tabs.SettingsFormView = {
 			id: 'userid',
 			disabled: true,
 			label: 'UserID',
-			value: gtp.utils.dataStore.getValueOfKey('username'),//options.loginDetails.username,
+			value: gtp.utils.dataStore.getValueOfKey('username'),
 			cls: 'customField'
 		}]
 	},{
