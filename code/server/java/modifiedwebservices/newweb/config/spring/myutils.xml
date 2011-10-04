@@ -10,4 +10,6 @@
 	</bean>
 	<bean id="myutils.tollpayments.tollLocationUtil" class="com.mobisols.tollpayments.myutilsImpl.TollLocationUtilImpl">
 	</bean>
+	<bean id="myutils.tollpayments.myUtilVehicle" class="com.mobisols.tollpayments.myutilsImpl.MyUtilVehicleImpl">
+	</bean>
 </beans>

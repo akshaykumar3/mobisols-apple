@@ -1,11 +1,26 @@
 package com.mobisols.tollpayments.response.get;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class NearestTollResponse {
 	private String city;
 	private String state;
 	private String tollOperator;
 	private double tollPrice;
 	private double averagePrice;
+	private List<String> notifications;
+	
+	public NearestTollResponse()
+	{
+		this.notifications = new LinkedList<String>();
+	}
+	public List<String> getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(List<String> notifications) {
+		this.notifications = notifications;
+	}
 	public String getCity() {
 		return city;
 	}

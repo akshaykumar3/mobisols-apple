@@ -22,7 +22,6 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setCcExpMonth(pd.getExpMonth());
 		upd.setCcExpYear(pd.getExpYear());
 		upd.setCcNumber(pd.getCardNumber());
-		//TODO update clientId setter in post methods
 		upd.setClientId(Client.PRESENT_CLIENT);
 		upd.setAddress1(pd.getAddress1());
 		upd.setAddress2(pd.getAddress2());

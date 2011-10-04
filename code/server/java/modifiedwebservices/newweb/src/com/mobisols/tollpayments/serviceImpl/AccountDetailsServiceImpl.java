@@ -63,7 +63,10 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	private void loadPaymentDetails(AccountDetailsResponse acr, User u) {
 		acr.getPaymentDetails().setCardNumber(u.getUserPaymentDetails().getCcNumber());
 		acr.getPaymentDetails().setCcName(u.getUserPaymentDetails().getCcAcName());
-		acr.getPaymentDetails().setCardType(u.getUserPaymentDetails().getCcType().getDescription());
+		if(u.getUserPaymentDetails().getCcType()==null)
+			acr.getPaymentDetails().setCardType(null);
+		else
+			acr.getPaymentDetails().setCardType(u.getUserPaymentDetails().getCcType().getDescription());
 		acr.getPaymentDetails().setExpMonth(u.getUserPaymentDetails().getCcExpMonth());
 		acr.getPaymentDetails().setExpYear(u.getUserPaymentDetails().getCcExpYear());
 		acr.getPaymentDetails().setBankRouting(u.getUserPaymentDetails().getBankRouting());
@@ -71,7 +74,10 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		acr.getPaymentDetails().setPaymentId(u.getUserPaymentDetails().getUpdId());
 		acr.getPaymentDetails().setAddress1(u.getUserPaymentDetails().getAddress1());
 		acr.getPaymentDetails().setAddress2(u.getUserPaymentDetails().getAddress2());
-		acr.getPaymentDetails().setCcCVV(u.getUserPaymentDetails().getCcCvv());
+		if(u.getUserPaymentDetails().getCcCvv()==null)
+			acr.getPaymentDetails().setCcCVV(0);
+		else
+			acr.getPaymentDetails().setCcCVV(u.getUserPaymentDetails().getCcCvv());
 		acr.getPaymentDetails().setCity(u.getUserPaymentDetails().getCity());
 		acr.getPaymentDetails().setCountry(u.getUserPaymentDetails().getCountry());
 		acr.getPaymentDetails().setPayPrefer(u.getUserPaymentDetails().getPayPrefer());

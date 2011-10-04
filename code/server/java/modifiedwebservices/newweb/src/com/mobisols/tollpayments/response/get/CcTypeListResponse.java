@@ -6,10 +6,20 @@ import java.util.List;
 public class CcTypeListResponse {
 	
 	private List<CcType> ccTypeList;
+	private List<String> notifications;
 	
 	public CcTypeListResponse()
 	{
-		ccTypeList=new LinkedList();
+		this.ccTypeList=new LinkedList();
+		this.notifications = new LinkedList<String>();
+	}
+
+	public List<String> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<String> notifications) {
+		this.notifications = notifications;
 	}
 
 	public List<CcType> getCcTypeList() {

@@ -18,10 +18,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.myutils.MyUtilVehicle;
 import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl;
+import com.mobisols.tollpayments.myutilsImpl.MyUtilVehicleImpl;
 import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.request.get.TollRange;
+import com.mobisols.tollpayments.request.post.ActivateRequest;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
 import com.mobisols.tollpayments.request.post.DeviceRegistrationRequest;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
@@ -31,9 +34,11 @@ import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
 import com.mobisols.tollpayments.response.get.VehicleTypeListResponse;
 import com.mobisols.tollpayments.service.AccountDetailsService;
+import com.mobisols.tollpayments.service.ActivateService;
 import com.mobisols.tollpayments.service.AddBalanceService;
 import com.mobisols.tollpayments.service.BalanceInfoService;
 import com.mobisols.tollpayments.service.CcTypeListService;
+import com.mobisols.tollpayments.service.ChangePasswordService;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
 import com.mobisols.tollpayments.service.DeviceRegistrationService;
 import com.mobisols.tollpayments.service.HeartBeatService;
@@ -71,6 +76,8 @@ public class WebServiceImpl {
 	RegistrationService registrationService;
 	DeviceRegistrationService deviceRegistrationService;
 	LoginService loginService;
+	ChangePasswordService changePasswordService;
+	ActivateService activateService;
 	JsonConverter jsonConverter;
 	
 	
@@ -99,6 +106,9 @@ public class WebServiceImpl {
 	        registrationService = (RegistrationService) ctx.getBean("service.tollpayments.registrationService");
 	        deviceRegistrationService = (DeviceRegistrationService) ctx.getBean("service.tollpayments.deviceRegistrationService");
 	        loginService = (LoginService) ctx.getBean("service.tollpayments.loginService");
+	        changePasswordService = (ChangePasswordService) ctx.getBean("service.tollpayments.changePasswordService");
+	        activateService = (ActivateService) ctx.getBean("service.tollpayments.activateService");
+	        
 	}
 
 	@GET
@@ -294,8 +304,9 @@ public class WebServiceImpl {
 		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
-		if(r==null)
-			System.out.println("request is null");
+		MyUtilVehicle myUtilVehicle = new MyUtilVehicleImpl();
+		if(myUtilVehicle.isValidRegistrationNumber(r.getRegistration(), r.getState()))
+			status = "invalid";
 		return jsonConverter.getJSON(request, status,vehicleDetailsService.postVehicleDetails(r, username, isNewVehicle));
 	}
 	
@@ -303,13 +314,12 @@ public class WebServiceImpl {
 	@Produces("text/plain")
 	@Path("/VehicleDetails")
 	//@RolesAllowed("user")
-	public String deleteVehicleDetails(@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@Context HttpHeaders httpHeader)
+	public String deleteVehicleDetails(@FormParam("vehicleId") int vehicleId,@Context HttpHeaders httpHeader)
 	{
-		String request="post vehicleDetails";
+		String request="delete vehicleDetails";
 		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
-		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
-		return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(r, username));
+		return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(vehicleId, username));
 	}
 	
 	@POST
@@ -346,6 +356,31 @@ public class WebServiceImpl {
 		return jsonConverter.getJSON(request, status,loginService.login(request1));
 	}
 
+	@POST
+	@Produces("text/plain")
+	@Path("/ChangePassword")
+	//@RolesAllowed("user")
+	public String changePassword(@FormParam("password") String password,@Context HttpHeaders httpHeader)
+	{
+		String request="change password";
+		String status="success";
+		String userName=MyUtilContextImpl.getUserName(httpHeader);
+		return jsonConverter.getJSON(request, status,changePasswordService.changePassword(userName, password));
+	}
+	
+	@POST
+	@Produces("text/plain")
+	@Path("/Activate")
+	//@RolesAllowed("user")
+	public String activate(@FormParam("json") String json,@Context HttpHeaders httpHeader)
+	{
+		String request="activate/deactivate user";
+		String status="success";
+		String userName=MyUtilContextImpl.getUserName(httpHeader);
+		ActivateRequest ar = (ActivateRequest) jsonConverter.getObject(json,"com.mobisols.tollpayments.request.post.ActivateRequest");
+		return jsonConverter.getJSON(request, status,activateService.activate(ar, userName));
+	}
+	
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}
@@ -497,6 +532,22 @@ public class WebServiceImpl {
 
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
+	}
+
+	public ChangePasswordService getChangePasswordService() {
+		return changePasswordService;
+	}
+
+	public void setChangePasswordService(ChangePasswordService changePasswordService) {
+		this.changePasswordService = changePasswordService;
+	}
+
+	public ActivateService getActivateService() {
+		return activateService;
+	}
+
+	public void setActivateService(ActivateService activateService) {
+		this.activateService = activateService;
 	}
 
 }

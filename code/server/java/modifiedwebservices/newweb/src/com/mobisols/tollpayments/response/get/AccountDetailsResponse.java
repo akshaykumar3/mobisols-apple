@@ -11,12 +11,20 @@ public class AccountDetailsResponse {
 	private List<TollPayments> tollPayments;
 	private BalanceInfoResponse balanceInfo;
 	private int userId;
+	private List<String> notifications;
 	
 	public AccountDetailsResponse(){
 		this.paymentDetails = new PaymentDetailsResponse();
 		this.vehicleDetails=new LinkedList();
 		this.tollPayments=new LinkedList();
+		this.notifications=new LinkedList<String>();
 		this.balanceInfo = new BalanceInfoResponse();
+	}
+	public List<String> getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(List<String> notifications) {
+		this.notifications = notifications;
 	}
 	public String getContactNo() {
 		return contactNo;
