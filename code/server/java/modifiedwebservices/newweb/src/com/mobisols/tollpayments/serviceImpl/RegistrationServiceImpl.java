@@ -63,7 +63,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			u.setClientId(1);
 			u.setContactNo(null);
 			u.setCreatedOn(myUtilDate.getCurrentTimeStamp());
-			u.setIsActive("y");
+			u.setIsActive(userDao.USER_INCOMPLETE);
 			u.setLastLoginTime(myUtilDate.getCurrentTimeStamp());
 			u.setLastModifiedBy(-1);
 			u.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());

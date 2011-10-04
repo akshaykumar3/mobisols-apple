@@ -8,10 +8,18 @@ public class BalanceInfoResponse {
 	private double minBalance;
 	private List<BalanceLog> balancelog;
 	private int balanceId;
+	private List<String> notifications;
 	
 	public BalanceInfoResponse()
 	{
 		this.balancelog=new LinkedList();
+		this.notifications = new LinkedList<String>();
+	}
+	public List<String> getNotifications() {
+		return notifications;
+	}
+	public void setNotifications(List<String> notifications) {
+		this.notifications = notifications;
 	}
 	public double getCurrentBalance() {
 		return currentBalance;

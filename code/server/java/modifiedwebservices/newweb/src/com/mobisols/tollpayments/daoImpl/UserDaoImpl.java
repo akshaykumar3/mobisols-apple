@@ -49,4 +49,11 @@ public class UserDaoImpl implements UserDao {
 			u.add(((User)it.next()).getUserName());
 		return u;
 	}
+	
+	public void update(User u){
+		Session s = HibernateSessionFactory.getSession();
+		Transaction t= s.beginTransaction();
+		s.update(u);
+		t.commit();
+	}
 }

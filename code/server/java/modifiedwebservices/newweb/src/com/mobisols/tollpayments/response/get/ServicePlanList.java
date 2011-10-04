@@ -6,10 +6,20 @@ import java.util.List;
 public class ServicePlanList {
 
 	private List<ServicePlan> servicePlanList;
+	private List<String> notifications;
 	
 	public ServicePlanList()
 	{
 		servicePlanList = new LinkedList();
+		this.notifications = new LinkedList<String>();
+	}
+	
+	public List<String> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<String> notifications) {
+		this.notifications = notifications;
 	}
 
 	public List<ServicePlan> getServicePlanList() {

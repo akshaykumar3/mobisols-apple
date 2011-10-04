@@ -11,8 +11,10 @@ import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
 import com.mobisols.tollpayments.model.VehicleType;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
+import com.mobisols.tollpayments.myutils.MyUtilVehicle;
 import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
 import com.mobisols.tollpayments.response.GeneralResponse;
+import com.mobisols.tollpayments.response.post.VehicleDetailsResponse;
 import com.mobisols.tollpayments.service.VehicleDetailsService;
 
 public class VehicleDetailsServiceImpl implements VehicleDetailsService {
@@ -20,14 +22,18 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	private UserVehicleDao userVehicleDao;
 	private UserDao userDao;
 	private MyUtilDate myUtilDate;
+	private MyUtilVehicle myUtilVehicle;
 	private OwnerTypeDao ownerTypeDao;
 	private VehicleTypeDao vehicleTypeDao;
 	public static final String IS_NEW_VEHICLE_TRUE="Y";
 	public static final String IS_NEW_VEHICLE_FALSE="N";
 	
-	public GeneralResponse postVehicleDetails(VehicleDetailsRequest vdr,String user,String isNewVehicle)
+	public VehicleDetailsResponse postVehicleDetails(VehicleDetailsRequest vdr,String user,String isNewVehicle)
 	{
-		GeneralResponse response = new GeneralResponse();
+		VehicleDetailsResponse response = new VehicleDetailsResponse();
+		
+		if(myUtilVehicle.isValidRegistrationNumber(vdr.getRegistration(), vdr.getState()))
+		{
 		if(isNewVehicle.equals(IS_NEW_VEHICLE_FALSE))
 		{
 			User u=userDao.getUser(user);
@@ -42,7 +48,8 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 			userVehicleDao.update(uv);
-			response.setDescription("vehicle Details updated");
+			response.setVehicleId(uv.getUserVehicleId());
+			response.getNotifications().add("Vehicle Details Updated");
 		}
 		else
 		{
@@ -64,23 +71,33 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			VehicleType vt=vehicleTypeDao.getVehicleType(vdr.getType());
 			uv.setVehicleTypeId(vt.getVehicleTypeId());
-			response.setDescription("New car added");
 			userVehicleDao.save(uv);
+			uv = userVehicleDao.getVehicle(uv.getRegistrationNo(), uv.getRegisteredState(), u.getUserId());
+			response.setVehicleId(uv.getUserVehicleId());
+			response.getNotifications().add("New Vehicle Added");
+		}
+		}
+		else
+		{
+			response.getNotifications().add("InValid Registration number");
+			response.setVehicleId(-1);
 		}
 		return response;
 	}
 	
-	public GeneralResponse deleteVehicle(VehicleDetailsRequest vdr,String user)
+	public GeneralResponse deleteVehicle(int vehicleId,String user)
 	{
 		GeneralResponse response = new GeneralResponse();
 		User u=userDao.getUser(user);
-		UserVehicle uv=userVehicleDao.getVehicle(vdr.getRegistration(), vdr.getState(), u.getUserId());
-		if(uv==null)
-			response.setDescription("error in deleting the user vehicle");
-		else
+		UserVehicle uv= userVehicleDao.getVehicle(vehicleId);
+		if(uv.getUserId() == u.getUserId())
 		{
 			userVehicleDao.delete(uv);
 			response.setDescription("Vehicle is deleted");
+		}
+		else
+		{
+			response.setDescription("User does not have this vehicle");
 		}
 		return response;
 	}
@@ -115,5 +132,13 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	}
 	public void setVehicleTypeDao(VehicleTypeDao vehicleTypeDao) {
 		this.vehicleTypeDao = vehicleTypeDao;
+	}
+
+	public MyUtilVehicle getMyUtilVehicle() {
+		return myUtilVehicle;
+	}
+
+	public void setMyUtilVehicle(MyUtilVehicle myUtilVehicle) {
+		this.myUtilVehicle = myUtilVehicle;
 	}
 }
