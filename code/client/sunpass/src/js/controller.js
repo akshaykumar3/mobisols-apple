@@ -47,6 +47,8 @@ gtp.controllers = Ext.regController("load",{
 							else
 							{
 								button.setDisabled(true);
+								var rnu = Ext.getCmp('regnu');
+								rnu.setDisabled(true);
 								var un = Ext.getCmp('lpemailid').getValue();
 								var pwd = Ext.getCmp('lppassword').getValue();
 								Ext.Ajax.request({
@@ -82,10 +84,15 @@ gtp.controllers = Ext.regController("load",{
 											});
 										}
 										else if(res.userExists=="Y" && res.passwordCorrect=="N"){
-											Ext.Msg.alert('Password is incorrect');
+											button.setDisabled(false);
+											rnu.setDisabled(false);
+											Ext.Msg.alert('Incorrect','Password do not match');
 										}
-										else
-										Ext.Msg.alert('username or password is incorrect');	
+										else {
+											Ext.Msg.alert('Incorrect','Username or Password');
+											rnu.setDisabled(false);
+											button.setDisabled(false);
+										}
 									},
 									failure: function(response){
 										button.setDisabled(false);
@@ -97,6 +104,7 @@ gtp.controllers = Ext.regController("load",{
 						}
 					},{
 						xtype: 'button',
+						id: 'regnu',
 						text: 'Register',
 						ui: 'round',
 						handler: function(){

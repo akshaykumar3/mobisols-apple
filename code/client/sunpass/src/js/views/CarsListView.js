@@ -20,14 +20,9 @@ gtp.tabs.CarsListView = {
 				iconMask: true,
 				ui: 'plain',
 				iconCls: 'add',
+				title: 'add',
 				handler: function(button, event) {
 					gtp.showtabs=true;
-					var temp = gtp.tabpanel.getComponent('addcar').getValues();
-					temp.state = "";
-					temp.rg = "";
-					temp.tp = "";
-					temp.startDate = gtp.today;
-					temp.endDate = null;
 					gtp.tabpanel.setActiveItem('addcar');
 				}
 			}]

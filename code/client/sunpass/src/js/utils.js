@@ -28,7 +28,7 @@ gtp.utils.dataStore.getValueOfKey=function(key) {
 	if(localStorage.getItem(Encryption.encrypt(key)))
 		return Encryption.decrypt(localStorage.getItem(Encryption.encrypt(key)));
 	else
-		return 0;
+		return null;
 };
 
 gtp.utils.dataStore.setValueOfKey=function(key,value) {

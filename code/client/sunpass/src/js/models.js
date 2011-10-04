@@ -1,3 +1,56 @@
+//Defines model for Month
+Ext.regModel('Month', {
+	fields: [{
+		name: 'month',
+		type: 'string'
+	},{
+		name: 'monthid',
+		type: 'int'
+	}]
+});
+
+//Defines model for logging messages.
+Ext.regModel('Message',{
+	fields: [{
+		name: 'file',
+		type: 'string'
+	},{
+		name: 'message',
+		type: 'string'
+	}]
+});
+
+
+//Defines model for Country.
+Ext.regModel('Country',{
+	idProperty: 'CountryID',
+	fields: [{
+		name: 'CountryID',
+		type: 'int'
+	},{
+		name: 'CountryName',
+		type: 'string'
+	},{
+		name: 'CountryCode',
+		type: 'string'
+	}]
+});
+
+// Defining model for states.
+Ext.regModel('State',{
+	idProperty: 'StateID',
+	fields: [{
+		name: 'StateID',
+		type: 'int'
+	},{
+		name: 'StateName',
+		type: 'string'
+	},{
+		name: 'StateCode',
+		type: 'string'
+	}]
+});
+
 // Defining model for cars.
 Ext.regModel('Cars', {
 	fields: [{
@@ -135,6 +188,9 @@ Ext.regModel('Settings',{
 		text: 'string'
 	},{
 		name: 'state',
+		text: 'string'
+	},{
+		name: 'country',
 		text: 'string'
 	},{
 		name: 'zipcode',

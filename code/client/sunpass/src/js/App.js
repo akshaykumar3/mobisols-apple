@@ -82,6 +82,8 @@ Ext.regApplication({
     			failure: function(response){
     				// Check the status. if the response status is 404. 
     				// Prompt a message saying could not connect to internet.
+    				// Todo--- Failure could be of any. like 500 or some other error status.
+    				// Write code to show message accordingly.
     				if(response.status==404)
     				{
     					return "FAILED";
