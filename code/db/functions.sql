@@ -5,7 +5,7 @@ DROP FUNCTION IF EXISTS GetInfFuture $$
 CREATE FUNCTION GetInfFuture() #function to get infinite future date of the record
 	RETURNS DATETIME
 BEGIN
-	RETURN '3000-01-01 00:00:00';
+	RETURN '3000-01-01';
 END$$
 
 
