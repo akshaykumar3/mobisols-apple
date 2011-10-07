@@ -47,6 +47,8 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setOwnerTypeId(ot.getOwnerTypeId());
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
+			uv.setModelId(userVehicleDao.DEFAULT_MODEL);
+			uv.setVin(null);
 			userVehicleDao.update(uv);
 			response.setVehicleId(uv.getUserVehicleId());
 			response.getNotifications().add("Vehicle Details Updated");
@@ -90,7 +92,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		GeneralResponse response = new GeneralResponse();
 		User u=userDao.getUser(user);
 		UserVehicle uv= userVehicleDao.getVehicle(vehicleId);
-		if(uv.getUserId() == u.getUserId())
+		if(uv.getUserId().equals(u.getUserId()))
 		{
 			userVehicleDao.delete(uv);
 			response.setDescription("Vehicle is deleted");

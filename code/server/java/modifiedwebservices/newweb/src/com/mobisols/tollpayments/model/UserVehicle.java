@@ -33,11 +33,22 @@ public class UserVehicle implements java.io.Serializable {
 	private Timestamp lastModifiedOn;
 	private Timestamp createdOn;
 	private Integer clientId;
+	private Integer modelId;
+	private String vin;
 	private OwnerType ownerType;
 	private User user;
     private VehicleType vehicleType;	
+    private Model model;
     public static final int DEFAULT_VEHICLE=-1;
     
+	public Model getModel() {
+		return model;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
+	}
+
 	// Constructors
     public VehicleType getVehicleType() {
 		return vehicleType;
@@ -64,6 +75,22 @@ public class UserVehicle implements java.io.Serializable {
 		this.user = user;
 	}
 
+
+	public Integer getModelId() {
+		return modelId;
+	}
+
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
+	}
+
+	public String getVin() {
+		return vin;
+	}
+
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
 
 	/** default constructor */
 	public UserVehicle() {

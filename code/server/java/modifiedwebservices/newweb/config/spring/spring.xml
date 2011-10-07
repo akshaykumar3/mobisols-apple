@@ -98,6 +98,7 @@
     <bean id="service.tollpayments.activateService" class="com.mobisols.tollpayments.serviceImpl.ActivateServiceImpl">
     	<property name="userDao" ref="dao.tollpayments.userDao"></property>
     	<property name="userVehicleDao" ref="dao.tollpayments.userVehicleDao"></property>
+    	<property name="deviceDao" ref="dao.tollpayments.deviceDao"></property>
     </bean>
 </beans>
   

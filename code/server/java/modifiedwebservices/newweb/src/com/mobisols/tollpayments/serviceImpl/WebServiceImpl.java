@@ -304,6 +304,7 @@ public class WebServiceImpl {
 		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
+		System.out.println(r.getState());
 		MyUtilVehicle myUtilVehicle = new MyUtilVehicleImpl();
 		if(myUtilVehicle.isValidRegistrationNumber(r.getRegistration(), r.getState()))
 			status = "invalid";

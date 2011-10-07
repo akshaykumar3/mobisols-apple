@@ -35,5 +35,13 @@ public class DeviceDaoImpl implements DeviceDao {
 		crit.add(Restrictions.eq("userId",userId));
 		return (Device) crit.uniqueResult();
 	}
+
+	@Override
+	public void update(Device d) {
+		Session s= HibernateSessionFactory.getSession();
+		Transaction t = s.beginTransaction();
+		s.update(d);
+		t.commit();
+	}
 	
 }
