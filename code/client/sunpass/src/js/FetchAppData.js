@@ -22,7 +22,7 @@ gtp.FetchUserData = function(options) {
 	        },
 	        locationerror: function ( geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
 	            if(bTimeout) {
-	            	// Show message to user --optional
+	            	gtp.log('Timeout occured in fetching location');
 		        }
 	        }
 	    }
@@ -67,7 +67,8 @@ gtp.FetchUserData = function(options) {
 		      	var userSettings = Ext.ModelMgr.create({
 		      		userid: options.loginDetails.username,
 		      		ccnumber: pay_details.cardNumber,
-		      		expdate: Date.parseDate(pay_details.expYear,'M j, Y g:i:s A'),
+		      		expmonth: pay_details.expMonth,
+		      		expyear: pay_details.expYear,
 		      		acnumber: pay_details.bankAccount,
 		      		name: pay_details.ccName,
 		      		address: pay_details.address1,
@@ -94,7 +95,7 @@ gtp.FetchUserData = function(options) {
       	}
       },
       failure: function(result) {
-     	console.log('Account Details failure with status code'+result.status);
+     	gtp.log('Account Details failure with status code'+result.status);
       }
    	});
 	
@@ -112,7 +113,7 @@ gtp.FetchUserData = function(options) {
 			}
 		},
 		failure: function(response) {
-			console.log('Fetching CCtypelist failure with status '+response.status);
+			gtp.log('Fetching CCtypelist failure with status '+response.status);
 		}
 	});
 	
@@ -130,7 +131,7 @@ gtp.FetchUserData = function(options) {
 			}
 		},
 		failure: function(response) {
-			console.log('Fetching Sevices list failed');
+			gtp.log('Fetching SevicePlans list failed');
 		}
 	});
 	
@@ -148,8 +149,13 @@ gtp.FetchUserData = function(options) {
 			}
 		},
 		failure: function(response) {
-			console.log('Fetching Sevices list failed');
+			gtp.log('Fetching Sevices list failed');
 		}
 	});
 
+	for(var i=0; i<26; i++) {
+		gtp.stores.Years.insert(0,Ext.ModelMgr.create({
+			year: gtp.today.getFullYear()+i
+		},'Year'));
+	}
 };

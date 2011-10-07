@@ -36,16 +36,14 @@ gtp.controllers = Ext.regController("load",{
 						ui: 'round',
 						text: 'Sign in',
 						handler: function(button, event){
-							if(!Ext.getCmp('lpemailid').getValue())
-							{
-								Ext.Msg.alert('UserName Required');
+							if(!gtp.views.loginPage.down('#lpemailid').getValue()) {
+								Ext.Msg.alert(gtp.dict.loginform_username);
 							}
-							else if(!Ext.getCmp('lppassword').getValue())
-							{
-								Ext.Msg.alert('Password required');
+							else if(!gtp.views.loginPage.down('#lppassword').getValue()) {
+								Ext.Msg.alert(gtp.dict.loginform_password);
 							}
-							else
-							{
+							else {
+								gtp.views.loginPage.setLoading(true);
 								button.setDisabled(true);
 								var rnu = Ext.getCmp('regnu');
 								rnu.setDisabled(true);
@@ -64,6 +62,7 @@ gtp.controllers = Ext.regController("load",{
 										})
 									},
 									success: function(response){
+										gtp.views.loginPage.setLoading(false);
 										var decres=Ext.decode(response.responseText);
 										var res=decres.response.response;
 										
@@ -86,17 +85,20 @@ gtp.controllers = Ext.regController("load",{
 										else if(res.userExists=="Y" && res.passwordCorrect=="N"){
 											button.setDisabled(false);
 											rnu.setDisabled(false);
-											Ext.Msg.alert('Incorrect','Password do not match');
+											Ext.Msg.alert('Incorrect',gtp.dict.loginform_pwd_fail);
 										}
 										else {
-											Ext.Msg.alert('Incorrect','Username or Password');
+											Ext.Msg.alert(gtp.dict.login_failure);
 											rnu.setDisabled(false);
 											button.setDisabled(false);
 										}
 									},
 									failure: function(response){
+										gtp.views.loginPage.setLoading(false);
 										button.setDisabled(false);
-										Ext.Msg.alert('failed to login');
+										rnu.setDisabled(false);
+										Ext.Msg.alert(gtp.dict.login_failure);
+										gtp.log('Login Authentication failed with status: '+response.status);
 										console.log('Login Authentication failed with status: '+response.status);
 									}
 								});
@@ -152,13 +154,14 @@ gtp.controllers = Ext.regController("load",{
 							var pwd = Ext.getCmp('rppassword').getValue();
 							var cpwd = Ext.getCmp('conpwd').getValue();
 							if(!gtp.validateEmail(eid))
-								Ext.Msg.alert('Invalid Email!', 'Enter valid email ID');
+								Ext.Msg.alert(gtp.dict.regform_invalidemail);
 							else if(pwd.length < 8)
 								Ext.Msg.alert('Password','Minimum 8 characters');
 							else if(pwd != cpwd)
-								Ext.Msg.alert('Passwords do not match');
+								Ext.Msg.alert(gtp.dict.regform_pwds);
 							else
 							{
+								gtp.views.loginPage.setLoading(true);
 								button.setDisabled(true);
 								console.log(webServices.getAt(webServices.findExact('service','regnewuser')).get('url'));
 								Ext.Ajax.request({
@@ -175,6 +178,7 @@ gtp.controllers = Ext.regController("load",{
 										})
 									},
 									success: function(response) {
+										gtp.views.loginPage.setLoading(false);
 										console.log('user registration response '+response.responseText);
 										var resobj = Ext.decode(response.responseText);
 										if(resobj.status != 'success')
@@ -185,7 +189,9 @@ gtp.controllers = Ext.regController("load",{
 										gtp.views.loginPage.setActiveItem('loginpage', 'fade');
 									},
 									failure: function(response) {
+										gtp.views.loginPage.setLoading(false);
 										button.setDisabled(false);
+										gtp.log('user registration failed with status code'+response.status);
 										console.log('user registration failed with status code'+response.status);
 									}
 								});

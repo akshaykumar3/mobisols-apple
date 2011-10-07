@@ -29,7 +29,7 @@ Ext.regApplication({
     	{
     		this.pan=new Ext.Panel({
     			fullscreen: true,
-    			html: 'Could not connect to server'
+    			html: gtp.dict.dev_reg_errormsg
     		});
     	}
     },
@@ -59,10 +59,7 @@ Ext.regApplication({
     	// open the database check if the device id is present.
     	// create the database 
     	if(gtp.utils.dataStore.getValueOfKey('gtp-deviceID'))
-    	{
-    		console.log(gtp.utils.dataStore.getValueOfKey('gtp-deviceID'));
     		return gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
-    	}
     	else
     	{
     		Ext.Ajax.request({
@@ -74,8 +71,8 @@ Ext.regApplication({
     			},
     			success: function(response){
     				var obj=Ext.decode(response.responseText);
-    				console.log('Device Registration response '+response.responseText);
     				console.log('Generated device ID is: '+obj.response.deviceId);
+    				gtp.log('Device Registration success');
     				gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
     				return obj.response.deviceId;
     			},
@@ -85,10 +82,11 @@ Ext.regApplication({
     				// Todo--- Failure could be of any. like 500 or some other error status.
     				// Write code to show message accordingly.
     				if(response.status==404)
-    				{
     					return "FAILED";
-    	    		}
+    				else if(response.status == 500)
+    					return "FAILED";
     				console.log('error in device registration web service');
+    				gtp.log(response.status+' Error in registering device');
     			}
     		});
     	}

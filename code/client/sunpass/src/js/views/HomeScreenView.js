@@ -21,7 +21,34 @@ gtp.tabs.HomeScreenView = {
 		},{
 			xtype: 'spacer'
 		},{
-			text: 'help'
+			text: 'help',
+			handler: function(but, eve) {
+				if(!this.popup) {
+					this.popup = new Ext.Panel({
+						floating: true,
+						modal: true,
+						centered: true,
+						width: 300,
+						height: 400,
+						styleHtmlContent: true,
+						scroll: 'vertical',
+						html: '<h1><b>Home</b></h1>'+ 
+						'<p>This screen shows u the current location and '+
+						'gives u feature to enable the application.'+
+						' It gives the details of the nearest toll operator</p>'+
+						'<br/><h2><b> My cars </b></h2>'+
+						'<p> This contains the list of vehicles added by the user,'+
+						' it allowes user to add, edit and delete a vehicle</p>'+
+						'<br/><h3><b> Paid Tolls </b></h3>'+
+						'<p> This shows the list of the tolls user has paid using the tollpass services</p>'+
+						'<br/><h3><b> Settings </b></h3>'+
+						'<p>This contains users payment details and billing details</p>'
+					});
+					this.popup.show('pop');
+				}
+				else
+					this.popup.show('pop');
+			}
 		}]
 	}],
 	items: [{
@@ -35,12 +62,13 @@ gtp.tabs.HomeScreenView = {
 			listeners: {
 				change: function(slider, thumb, newValue, oldValue) {
 					
-					var cl = Ext.getCmp('curloc');
-					var to = Ext.getCmp('operator');
-					var at = Ext.getCmp('avgtoll');
-					var pt = Ext.getCmp('pdtoll');
-					var ac = Ext.getCmp('activecar');
-					var sp = Ext.getCmp('serviceplan');
+					var homeform = Ext.getCmp('home');
+					var cl = homeform.down('#curloc');
+					var to = homeform.down('#operator');
+					var at = homeform.down('#avgtoll');
+					var pt = homeform.down('#pdtoll');
+					var ac = homeform.down('#activecar');
+					var sp = homeform.down('#serviceplan');
 					if(newValue == 1 && oldValue == 0) {
 						// Things todo.
 						// Check whether atleast one car is valid.
@@ -98,7 +126,6 @@ gtp.tabs.HomeScreenView = {
 							Ext.Msg.alert('Car should be selected');
 					}
 					else if(newValue == 0 && oldValue ==1) {
-						console.log('off');
 						gtp.isAppEnabled=0;
 						cl.setValue("");
 						to.setValue("");
@@ -107,6 +134,28 @@ gtp.tabs.HomeScreenView = {
 						ac.setDisabled(false);
 						sp.setDisabled(false);
 					}
+				},
+				beforechange: function(slider, thumb, newValue, oldValue) {
+					var hc = Ext.getCmp('home');
+					if(newValue == 1 && oldValue ==0)
+					Ext.Ajax.request({
+						url: webServices.getAt(webServices.findExact('service','activate')).get('url'),
+						method: 'POST',
+						params: {
+							json: Ext.encode({
+								active: 'Y',
+								serviceId: '1',
+								activeVehicleId: carsList.data.getAt(carsList.findExact('reg',hc.down('#activecar').getValue())).get('vehicleId')
+							})
+						},
+						success: function(response) {
+							gtp.log('Application is active');
+							console.log(response.responseText);
+						},
+						failure: function(res) {
+							gtp.log(res.status+' Error, Activating the application');
+						}
+					});
 				}
 			}
 		}]
@@ -134,6 +183,7 @@ gtp.tabs.HomeScreenView = {
 		}]
 	},{
 		xtype: 'fieldset',
+		id: 'curlocservices',
 		title: 'Current Location Operator',
 		items: [{
 			xtype: 'textfield',

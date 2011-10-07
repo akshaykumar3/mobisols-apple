@@ -1,5 +1,13 @@
+//Defines model for Year
+gtp.models.Year = Ext.regModel('Year', {
+	fields: [{
+		name: 'year',
+		type: 'int'
+	}]
+});
+
 //Defines model for Month
-Ext.regModel('Month', {
+gtp.models.Month = Ext.regModel('Month', {
 	fields: [{
 		name: 'month',
 		type: 'string'
@@ -10,7 +18,7 @@ Ext.regModel('Month', {
 });
 
 //Defines model for logging messages.
-Ext.regModel('Message',{
+gtp.models.Message = Ext.regModel('Message',{
 	fields: [{
 		name: 'file',
 		type: 'string'
@@ -22,7 +30,7 @@ Ext.regModel('Message',{
 
 
 //Defines model for Country.
-Ext.regModel('Country',{
+gtp.models.Country = Ext.regModel('Country',{
 	idProperty: 'CountryID',
 	fields: [{
 		name: 'CountryID',
@@ -37,7 +45,7 @@ Ext.regModel('Country',{
 });
 
 // Defining model for states.
-Ext.regModel('State',{
+gtp.models.State = Ext.regModel('State',{
 	idProperty: 'StateID',
 	fields: [{
 		name: 'StateID',
@@ -52,7 +60,7 @@ Ext.regModel('State',{
 });
 
 // Defining model for cars.
-Ext.regModel('Cars', {
+gtp.models.Car = Ext.regModel('Cars', {
 	fields: [{
 		name: 'reg',
 		type: 'string'
@@ -93,7 +101,7 @@ Ext.regModel('Cars', {
 });
 
 // Model for toll details.
-Ext.regModel('Tolls',{
+gtp.models.Toll = Ext.regModel('Tolls',{
 	fields: [{
 		name: 'latitude',
 		type: 'float'
@@ -172,8 +180,11 @@ Ext.regModel('Settings',{
 		name: 'cardtype',
 		text: 'string'
 	},{
-		name: 'expdate',
-		text: 'date'
+		name: 'expmonth',
+		text: 'int'
+	},{
+		name: 'expyear',
+		text: 'int'
 	},{
 		name: 'acnumber',
 		text: 'int'
@@ -195,6 +206,10 @@ Ext.regModel('Settings',{
 	},{
 		name: 'zipcode',
 		text: 'string'
+	}],
+	validations: [{
+		type: 'presence',
+		name: 'ccnumber'
 	}]
 });
 

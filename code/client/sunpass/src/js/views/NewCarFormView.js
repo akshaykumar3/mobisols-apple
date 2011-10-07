@@ -69,7 +69,9 @@ gtp.tabs.NewCarFormView = {
 							})
 						},
 						success: function(response){
-							console.log('Add car webservice success');
+							gtp.log('User Added a car successfully');
+							var resobj = Ext.decode(response.responseText);
+							console.log(response.responseText);
 							carsList.insert(0,Ext.ModelMgr.create({
 								state: acfd.st,
 								reg: acfd.rg,
@@ -77,9 +79,10 @@ gtp.tabs.NewCarFormView = {
 								startDate: gtp.today,//acfd.startDate,
 								endDate: acfd.endDate
 							},'Cars'));
+							Ext.Msg.alert('Success',gtp.dict.newcar_success);
 						},
 						failure: function(response){
-							Ext.Msg.alert('Error in adding the car');
+							Ext.Msg.alert(gtp.dict.newcar_failure);
 						}
 					});
 					gtp.tabpanel.setActiveItem('mycars','fade');
@@ -108,7 +111,7 @@ gtp.tabs.NewCarFormView = {
 			name: 'st',
 			label: 'State',
 			required: true,
-			store: gtp.stores.stateStore,
+			store: gtp.stores.States,
 			displayField: 'StateName',
 			valueField: 'StateCode'
 		},{

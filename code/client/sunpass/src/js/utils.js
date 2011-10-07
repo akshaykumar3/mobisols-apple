@@ -8,9 +8,8 @@ gtp.utils.dataStore.getConfiguration = function() {
 		method: 'GET',
 		params: {
 			json: Ext.encode({				
-				componentName: 'iphone',
-				version: '1.0',
-				key: 'tollpass'
+				componentName: gtp.detectDeviceType,
+				version: '1.0'// This will be hard coded value on the client side.
 			})
 		},
 		success: function(response) {

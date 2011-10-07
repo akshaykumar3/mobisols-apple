@@ -1,160 +1,149 @@
 gtp.tabs.CarDetailView = {
-		id: 'details',
-		xtype: 'formpanel',
-		scroll: 'vertical',
-		dockedItems: [{
-			xtype: 'toolbar',
-			title: 'Edit Car',
-			dock: 'top',
-			items: [{
-				text: 'My Cars',
-				ui: 'back',
-				handler: function(button , event) {
-					gtp.tabpanel.setActiveItem('mycars');
+	id: 'details',
+	xtype: 'formpanel',
+	scroll: 'vertical',
+	dockedItems: [{
+		xtype: 'toolbar',
+		title: 'Edit Car',
+		dock: 'top',
+		items: [{
+			text: 'My Cars',
+			ui: 'back',
+			handler: function(button , event) {
+				gtp.tabpanel.setActiveItem('mycars');
+			}
+		},{
+			xtype: 'spacer'
+		},{
+			text: 'done',
+			id: 'changevd',
+			ui: 'action',
+			disabled: true,
+			handler: function(button, event) {
+				
+				var updateCar = gtp.tabpanel.getComponent('details').getRecord();
+				var curtab = gtp.tabpanel.getComponent('details');
+				if(!gtp.dateValidity(gtp.today, curtab.down('#dpto')))
+					Ext.Msg.alert(gtp.dict.datevalidity);
+				else
+				Ext.Ajax.request({
+					url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
+					method: 'POST',
+					params: {
+						is_new_vehicle: 'N',
+						json: Ext.encode({
+							state: updateCar.get('state'),
+							registration: updateCar.get('reg'),
+							type: updateCar.get('type'),
+							isActive: updateCar.get('isActive'),
+							startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
+						    endDate: Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
+							ownerType: updateCar.get('ownerType'), 
+							vehicleId: updateCar.get('vehicleId')
+						})
+					},
+					success: function(response){
+						var resobj=Ext.decode(response.responseText);
+						var obj=resobj.response;
+						gtp.tabpanel.setActiveItem('mycars');
+						Ext.Msg.alert(obj.description);
+						gtp.log(obj.description);
+						updateCar.set('endDate',Ext.getCmp('dpto').getValue());
+						Ext.getCmp('changevd').setDisabled(true);
+					},
+					failure: function(response){
+						gtp.log(response.status+' Error in updating car details');
+						Ext.Msg.alert(gtp.dict.updatecar_failure);
+						gtp.tabpanel.setActiveItem('mycars');
+					}
+				});
+			}
+		}]
+	}],
+	items:[{
+		xtype: 'fieldset',
+		title: 'CarInfo',
+		items:[{
+			xtype: 'textfield',
+			name: 'state',
+			label: 'State',
+			disabled: true,
+			id: 'dpstate'
+		},{
+			xtype: 'textfield',
+			name: 'reg',
+			label: 'Reg',
+			disabled: true,
+			id: 'dpreg'
+		},{
+			xtype: 'textfield',
+			name: 'type',
+			label: 'Type',
+			id: 'dptype',
+			disabled: true
+		}]
+	},{
+		xtype: 'fieldset',
+		title: 'Car Period',
+		defaults: {
+			xtype: 'datepickerfield'
+		},
+		items: [{
+			label: 'From',
+			name: 'startDate',
+			id: 'dpfrom',
+			disabled: true,
+			value: gtp.today
+		},{
+			label: 'To',
+			name: 'endDate',
+			id: 'dpto',
+			placeHolder: 'end date',
+			picker: {
+				yearFrom: gtp.today.getFullYear(),
+				yearTo: gtp.today.getFullYear()+10
+			},
+			listeners: {
+				change: function(curobj, newValue, oldValue) {
+					if(newValue != oldValue) {
+						gtp.tabpanel.getComponent('details').updateRecord(gtp.tabpanel.getComponent('details').getRecord());
+						Ext.getCmp('changevd').setDisabled(false);
+					}
 				}
-			},{
-				xtype: 'spacer'
-			},{
-				text: 'done',
-				id: 'changevd',
-				ui: 'action',
-				disabled: true,
-				handler: function(button, event) {
-					
-					var updateCar = gtp.tabpanel.getComponent('details').getRecord();
+			}
+		}]
+	},{
+		xtype: 'button',
+		ui: 'decline',
+		text: 'Delete Car',
+		handler: function(but, event) {
+
+			var stmod = gtp.tabpanel.getComponent('details').getRecord();
+			Ext.Msg.confirm("Confirmation", "Are you sure to delete car?", function(button) {
+				if(button == 'yes') {
 					Ext.Ajax.request({
-						url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
-						method: 'POST',
+						url: webServices.getAt(webServices.findExact('service','deletevehicle')).get('url'),
+						method: 'DELETE',
 						params: {
-							is_new_vehicle: 'N',
-							json: Ext.encode({
-								state: updateCar.get('state'),
-								registration: updateCar.get('reg'),
-								type: updateCar.get('type'),
-								isActive: updateCar.get('isActive'),
-								startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
-							    endDate: Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
-								ownerType: updateCar.get('ownerType'), 
-								vehicleId: updateCar.get('vehicleId')
-							})
+							vehicleId: stmod.get('vehicleId')
 						},
 						success: function(response){
 							var resobj=Ext.decode(response.responseText);
 							var obj=resobj.response;
+							gtp.log(obj.description);
+							if(resobj.status == "success") {
+								carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
+								Ext.Msg.alert(gtp.dict.deletecar_success);
+							}
 							gtp.tabpanel.setActiveItem('mycars');
-							Ext.Msg.alert(obj.description);
-							updateCar.set('endDate',Ext.getCmp('dpto').getValue());
-							Ext.getCmp('changevd').setDisabled(true);
 						},
 						failure: function(response){
-							Ext.Msg.alert('Error in updating car details');
-							gtp.tabpanel.setActiveItem('mycars');
+							gtp.log(response.status+' Error deleting the car');
+							Ext.Msg.alert(gtp.dict.deletecar_failure);
 						}
 					});
 				}
-			}]
-		}],
-		items:[{
-			xtype: 'fieldset',
-			title: 'CarInfo',
-			items:[{
-				xtype: 'textfield',
-				name: 'state',
-				label: 'State',
-				disabled: true,
-				id: 'dpstate'
-			},{
-				xtype: 'textfield',
-				name: 'reg',
-				label: 'Reg',
-				disabled: true,
-				id: 'dpreg'
-			},{
-				xtype: 'textfield',
-				name: 'type',
-				label: 'Type',
-				id: 'dptype',
-				disabled: true
-			}]
-		},{
-			xtype: 'fieldset',
-			title: 'Car Period',
-			defaults: {
-				xtype: 'datepickerfield'
-			},
-			items: [{
-				label: 'From',
-				name: 'startDate',
-				id: 'dpfrom',
-				disabled: true,
-				value: gtp.today
-			},{
-				label: 'To',
-				name: 'endDate',
-				id: 'dpto',
-				placeHolder: 'end date',
-				picker: {
-					yearFrom: gtp.today.getFullYear(),
-					yearTo: gtp.today.getFullYear()+10
-				},
-				listeners: {
-					change: function(curobj, newValue, oldValue) {
-						if(newValue != oldValue) {
-							gtp.tabpanel.getComponent('details').updateRecord(gtp.tabpanel.getComponent('details').getRecord());
-							Ext.getCmp('changevd').setDisabled(false);
-						}
-					}
-				}
-			}]
-		},{
-			xtype: 'button',
-			ui: 'decline',
-			text: 'Delete Car',
-			handler: function(but, event) {
-
-				var stmod = gtp.tabpanel.getComponent('details').getRecord();
-				//Ext.Msg.confirm("Confirmation", "", Ext.emptyFn);
-				Ext.Msg.confirm("Confirmation", "Are you sure to delete car?", function(button) {
-					if(button == 'yes') {
-						var ed;
-						if(stmod.get('endDate'))
-							ed = stmod.get('endDate').format('M j, Y g:i:s A');
-						else
-							ed = null;
-						Ext.Ajax.request({
-							url: webServices.getAt(webServices.findExact('service','deletevehicle')).get('url'),
-							method: 'DELETE',
-							params: {
-								is_new_vehicle: 'N',
-								json: Ext.encode({
-									state: stmod.get('state'),
-									registration: stmod.get('reg'),
-									type: stmod.get('type'),
-									isActive: stmod.get('isActive'),
-									startDate: stmod.get('startDate').format('M j, Y g:i:s A'),
-								    endDate: ed,
-									ownerType: stmod.get('ownerType'), 
-									vehicleId: stmod.get('vehicleId')
-								})
-							},
-							success: function(response){
-								var resobj=Ext.decode(response.responseText);
-								var obj=resobj.response;
-								console.log('vehicle delete response description '+obj.description);
-								if(resobj.status == "success") {
-									carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
-									Ext.Msg.alert('Removed Car successfully');
-								}
-								gtp.tabpanel.setActiveItem('mycars');
-							},
-							failure: function(response){
-								Ext.Msg.alert('Error in deleting the car');
-							}
-						});
-					}
-					else
-						console.log('clicked '+button);
-				}, this);
-			}
-		}]
-	};
+			}, this);
+		}
+	}]
+};

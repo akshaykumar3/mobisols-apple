@@ -1,3 +1,8 @@
+//Store for years.
+gtp.stores.Years = new Ext.data.Store({
+	model: 'Year'
+});
+
 //Store for list of Months.
 gtp.stores.Months = new Ext.data.Store({
 	model: 'Month',
@@ -56,7 +61,7 @@ gtp.stores.Countries = new Ext.data.Store({
 });
 
 // Store for list of states.
-gtp.stores.stateStore = new Ext.data.Store({
+gtp.stores.States = new Ext.data.Store({
 	model: 'State',
 	data: [{
 		StateID: 1,
@@ -370,5 +375,8 @@ var webServices=new Ext.data.Store({
 	},{
 		url: 'http://localhost:6001/newweb/services/PaymentDetails',
 		service: 'paymentdetails'
+	},{
+		url: 'http://localhost:6001/newweb/services/Activate',
+		service: 'activate'
 	}] 
 });
