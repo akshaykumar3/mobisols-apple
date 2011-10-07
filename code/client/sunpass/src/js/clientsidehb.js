@@ -209,4 +209,7 @@ gtp.loop= function() {
 		// Fetch Current Location
 		nextCoordinate(nearestTollLat, nearestTollLong);
 	}
+	else if(!gtp.curlat && !gtp.curlong) {
+		gtp.geo.updateLocation();
+	}
 };

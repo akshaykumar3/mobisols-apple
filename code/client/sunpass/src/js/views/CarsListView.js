@@ -55,6 +55,8 @@ gtp.tabs.CarsListView = {
 						vehicleId: record.get('vehicleId')
 					},'Cars'));
 					
+					var homeform = Ext.getCmp('home');
+					if(gtp.isAppEnabled && record.get('reg') == homeform.down('#activecar').getValue());
 					gtp.tabpanel.setActiveItem('details');
 				},
 				itemswipe: function(co,index,item,e) {

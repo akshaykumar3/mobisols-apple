@@ -21,6 +21,7 @@ gtp.tabs.SettingsFormView = {
 			handler: function(button, event) {
 				if(button.getText() == 'edit') {
 					gtp.tabpanel.getComponent(3).enable();
+					gtp.tabpanel.getComponent('basicform').down('#userid').setDisabled(true);
 					button.setText('save');
 					button.setDisabled(true);
 				}
@@ -30,14 +31,19 @@ gtp.tabs.SettingsFormView = {
 					button.setDisabled(false);
 					
 					var pay_det = gtp.tabpanel.getComponent(3).getRecord();
-					var validZipCode = gtp.validateZipCode(pay_det.get('state'), pay_det.get('city'), pay_det.get('zipcode'));
+					var statecode = gtp.tabpanel.getComponent('basicform').down('#billstate').getValue();
+					if(statecode.length > 2)
+						statecode = gtp.stores.States.getAt(gtp.stores.States.findExact('StateName',statecode)).get('StateCode');
+					var validZipCode = gtp.validateZipCode(statecode, pay_det.get('city'), pay_det.get('zipcode'));
 					
 					var validExpDate;
-					if(pay_det.get('expdate'))
-						validExpDate = gtp.expiryDateValidity(pay_det.get('expdate').getMonth(), pay_det.get('expdate').getFullYear());
+					if(pay_det.get('expmonth') && pay_det.get('expyear'))
+						validExpDate = gtp.expiryDateValidity(pay_det.get('expmonth'), pay_det.get('expyear'));
 					
-					if(!pay_det.get('expdate'))
-						Ext.Msg.alert('Alert','Exp date cannot be empty');
+					if(!pay_det.get('expmonth'))
+						Ext.Msg.alert('Alert','Exp month cannot be empty');
+					else if(!pay_det.get('expyear'))
+						Ext.Msg.alert('Alert', 'Exp year cannot be empty');
 					else if(!validExpDate)
 						Ext.Msg.alert('Invalid','Expiry Date');
 					else if(!validZipCode)
@@ -51,14 +57,14 @@ gtp.tabs.SettingsFormView = {
 								ccName: pay_det.get('name'),
 								cardNumber: pay_det.get('ccnumber'),
 								expMonth: pay_det.get('expmonth'),
-								expYear: pay_det.get('expdate').getFullYear(),
+								expYear: pay_det.get('expyear'),
 								bankRouting: 123,
 								ccCVV: 123456,
 								bankAccount: pay_det.get('acnumber'),
 								address1: pay_det.get('address'),
 								city: pay_det.get('city'),
 								state: pay_det.get('state'),
-								country: 'US',
+								country: pay_det.get('country'),
 								zip: pay_det.get('zipcode')
 							})
 						},
@@ -74,6 +80,7 @@ gtp.tabs.SettingsFormView = {
 						failure: function(response) {
 							Ext.Msg.alert('Error','Changing Payment Details');
 							console.log('Failed in posting payment details');
+							gtp.log('Failed in posting papyment details');
 						}
 					});
 				}
@@ -82,6 +89,7 @@ gtp.tabs.SettingsFormView = {
 	}],
 	items: [{
 		xtype: 'fieldset',
+		id: 'paymentdetails',
 		title: 'Payment info',
 		defaults: {
 			listeners: {
@@ -103,6 +111,9 @@ gtp.tabs.SettingsFormView = {
 			placeHolder: 'XXXX-XXXX-XXXX-XXXX',
 			useClearIcon: true
 		},{
+			xtype: 'gtp.views.ErrorField',
+			fieldname: 'ccnumber'
+		},{
 			xtype: 'selectfield',
 			name: 'cardtype',
 			id: 'cardtype',
@@ -116,14 +127,13 @@ gtp.tabs.SettingsFormView = {
 			displayField: 'month',
 			valueField: 'monthid'
 		},{
-			xtype: 'datepickerfield',
-			name: 'expdate',
-			id: 'expirydate',
-			label: 'Exp date',
-			picker: {
-				yearFrom: gtp.today.getFullYear(),
-				yearTo: gtp.today.getFullYear()+10
-			}
+			xtype: 'selectfield',
+			name: 'expyear',
+			id: 'expyear',
+			label: 'ExpYear',
+			store: gtp.stores.Years,
+			displayField: 'year',
+			valueField: 'year'
 		},{
 			xtype: 'textfield',
 			name: 'acnumber',
@@ -169,7 +179,7 @@ gtp.tabs.SettingsFormView = {
 			name: 'state',
 			label: 'State',
 			id: 'billstate',
-			store: gtp.stores.stateStore,
+			store: gtp.stores.States,
 			displayField: 'StateName',
 			valueField: 'StateCode'
 		},{
@@ -228,12 +238,10 @@ gtp.tabs.SettingsFormView = {
 					xtype: 'button',
 					text: 'submit',
 					handler: function(button, event) {
-						gtp.tabpanel.show();
+						// Todo.
 					}
 				}]
 			});
-			//gtp.tabpanel.hide();
-			//gtp.views.loginPage.hide();
 		}
 	}],
 	listeners: {
