@@ -70,6 +70,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			u.setLocale("");
 			u.setPassword(r.getPassword());
 			u.setUserName(r.getUserName());
+			//TODO change user type id based on the data in the database
 			u.setUtypeId(1);
 			userDao.save(u);
 			

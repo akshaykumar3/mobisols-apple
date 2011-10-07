@@ -76,6 +76,12 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
+            <property name="modelId" type="java.sql.Integer">
+                <column name="model_id" />
+            </property>
+            <property name="vin" type="java.lang.String">
+                <column name="vin" length="25" />
+            </property>
             
             <many-to-one name="ownerType"
 			class="com.mobisols.tollpayments.model.OwnerType"
@@ -88,7 +94,7 @@
 			<many-to-one name="user"
 			class="com.mobisols.tollpayments.model.User"
 			column="user_id"
-			cascade="all"
+			cascade="save-update"
 			insert="false"
 			update="false"
 			not-null="true"/>
@@ -101,7 +107,14 @@
 			update="false"
 			unique="true"/>
 			
-             
+            <many-to-one name="model"
+			class="com.mobisols.tollpayments.model.Model"
+            column="model_id"
+			cascade="save-update"
+			insert="false"
+			update="false"
+			unique="true"/>
+			 
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">
