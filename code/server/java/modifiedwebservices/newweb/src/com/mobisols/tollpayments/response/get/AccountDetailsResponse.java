@@ -12,6 +12,8 @@ public class AccountDetailsResponse {
 	private BalanceInfoResponse balanceInfo;
 	private int userId;
 	private List<String> notifications;
+	private List<String> commands;
+	
 	
 	public AccountDetailsResponse(){
 		this.paymentDetails = new PaymentDetailsResponse();
@@ -19,6 +21,14 @@ public class AccountDetailsResponse {
 		this.tollPayments=new LinkedList();
 		this.notifications=new LinkedList<String>();
 		this.balanceInfo = new BalanceInfoResponse();
+		this.commands = new LinkedList<String>();
+	}
+	public List<String> getCommands()	{
+		return commands;
+	}
+	
+	public void setCommands(List<String> commands)	{
+		this.commands = commands;
 	}
 	public List<String> getNotifications() {
 		return notifications;

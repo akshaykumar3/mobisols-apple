@@ -8,9 +8,11 @@ public class ClientConfigurationResponse {
 	private String key=null;
 	private String value=null;
 	private List<String> notifications;
+	private List<String> commands;
 	
 	public ClientConfigurationResponse(){
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
 	public List<String> getNotifications() {
 		return notifications;
@@ -35,6 +37,12 @@ public class ClientConfigurationResponse {
 	}
 	public void setValue(String value) {
 		this.value = value;
+	}
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+	public List<String> getCommands() {
+		return commands;
 	}
 	
 }

@@ -7,9 +7,12 @@ public class DeviceRegistrationResponse {
 	private String ipAddress;
 	private String deviceId;
 	private List<String> notifications;
+	private List<String> commands;
+	
 	public DeviceRegistrationResponse()
 	{
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
 	public List<String> getNotifications() {
 		return notifications;
@@ -28,5 +31,11 @@ public class DeviceRegistrationResponse {
 	}
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
+	}
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+	public List<String> getCommands() {
+		return commands;
 	}
 }

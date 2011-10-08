@@ -1,7 +1,9 @@
 package com.mobisols.tollpayments.myutilsImpl;
 
+import java.util.Date;
 import java.util.HashMap;
 
+import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.MyUtilVehicle;
 
 public class MyUtilVehicleImpl implements MyUtilVehicle {
@@ -20,5 +22,14 @@ public class MyUtilVehicleImpl implements MyUtilVehicle {
 	public boolean isValidRegistrationNumber(String regNo,String state)
 	{
 		return regNo.matches(regExpr.get(state));
+	}
+	
+	public boolean isValidEndDate(Date endDate)
+	{
+		MyUtilDate myUtilDate = new MyUtilDateImpl();
+		if(endDate.compareTo(myUtilDate.getCurrentDate()) > 0)
+			return true;
+		else
+			return false;
 	}
 }

@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.dao;
 
+import java.util.List;
+
 import com.mobisols.tollpayments.model.UserVehicle;
 
 public interface UserVehicleDao {
@@ -8,6 +10,7 @@ public interface UserVehicleDao {
 	public static final String VEHICLE_INCOMPLETE = "I";
 	public static final String VEHICLE_SUSPEND = "S";
 	public static final String VEHICLE_BLOCK = "B";
+	public static final String VEHICLE_STANDBY = "T";
 	public static final Integer DEFAULT_MODEL = -1;
 	
 	public UserVehicle getVehicle(String reg,String state,int userId);
@@ -15,5 +18,6 @@ public interface UserVehicleDao {
 	public void delete(UserVehicle uv);
 	public void save(UserVehicle uv);
 	public UserVehicle getVehicle(int vehicleId);
-	public void setActiveVehicle(Integer userId, int activeVehicleId);
+	public List<UserVehicle> getActiveVehicles();
+	public List getStandByVehicles();
 }

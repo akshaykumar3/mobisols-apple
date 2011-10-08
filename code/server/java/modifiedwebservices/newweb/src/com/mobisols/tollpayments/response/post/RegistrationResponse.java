@@ -8,11 +8,13 @@ public class RegistrationResponse {
 
 	private HashMap<String, String> response;
 	private List<String> notifications;
+	private List<String> commands;
 	
 	public RegistrationResponse()
 	{
 		this.notifications = new LinkedList<String>();
 		response=new HashMap<String, String>();
+		this.commands = new LinkedList<String>();
 	}
 	
 	public List<String> getNotifications() {
@@ -27,5 +29,13 @@ public class RegistrationResponse {
 
 	public void setResponse(HashMap<String, String> response) {
 		this.response = response;
+	}
+
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+
+	public List<String> getCommands() {
+		return commands;
 	}
 }

@@ -7,11 +7,13 @@ public class VmlTypeListResponse {
 	
 	private List<VmlType> vmlTypeList;
 	private List<String> notifications;
+	private List<String> commands;
 	
 	public VmlTypeListResponse()
 	{
 		vmlTypeList = new LinkedList();
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
 
 	public List<String> getNotifications() {
@@ -28,6 +30,14 @@ public class VmlTypeListResponse {
 
 	public void setVmlTypeList(List<VmlType> vmlTypeList) {
 		this.vmlTypeList = vmlTypeList;
+	}
+
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+
+	public List<String> getCommands() {
+		return commands;
 	}
 
 	

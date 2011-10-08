@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.daoImpl;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -57,26 +58,17 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 	}
 
 	@Override
-	public void setActiveVehicle(Integer userId, int activeVehicleId) {
+	public List getActiveVehicles() {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("isActive",this.VEHICLE_ACTIVE));
+		return crit.list();
+	}
+
+	public List getStandByVehicles(){
 		Session s =HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("isActive", UserVehicleDao.VEHICLE_ACTIVE));
-		Iterator<UserVehicle> it = crit.list().iterator();
-		for(;it.hasNext();)
-		{
-			UserVehicle uv = it.next();
-			uv.setIsActive(UserVehicleDao.VEHICLE_INACTIVE);
-			Transaction t = s.beginTransaction();
-			s.save(uv);
-			t.commit();
-		}
-		crit = s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("userVehicleId", activeVehicleId));
-		UserVehicle uv = (UserVehicle) crit.uniqueResult();
-		uv.setIsActive(VEHICLE_ACTIVE);
-		Transaction t = s.beginTransaction();
-		s.save(uv);
-		t.commit();
- 	}
-
+		crit.add(Restrictions.eq("isActive",this.VEHICLE_ACTIVE));
+		return crit.list();
+	}
 }

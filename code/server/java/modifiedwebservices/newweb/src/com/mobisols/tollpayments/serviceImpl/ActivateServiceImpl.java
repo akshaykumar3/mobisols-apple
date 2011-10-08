@@ -1,5 +1,8 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserVehicleDao;
@@ -19,71 +22,29 @@ public class ActivateServiceImpl implements ActivateService {
 	public ActivateResponse activate(ActivateRequest ar,String userName){
 		ActivateResponse response = new ActivateResponse();
 		User u = userDao.getUser(userName);
-		UserVehicle uv = userVehicleDao.getVehicle(ar.getActiveVehicleId());
-		boolean isValidVehicle=false;
+		boolean isVehicleActive=false;
+		
 		if(ar.getActive().equals("Y"))
 		{
-		if(uv.getIsActive().equals(userVehicleDao.VEHICLE_INACTIVE) || uv.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE))
-		{
-			if(uv.getUserId() == u.getUserId())
+			List standByVehicles = userVehicleDao.getStandByVehicles();
+			if(standByVehicles.isEmpty())
 			{
-				userVehicleDao.setActiveVehicle(u.getUserId(),ar.getActiveVehicleId());
-				isValidVehicle =true;
-				response.getNotifications().add("Vehicle is Active");
+				response.getNotifications().add("No Vehicle is Active");
 			}
-			else
+			else if(u.getIsActive().equals(userDao.USER_INACTIVE))
 			{
-				String notify = null;
-				if(uv.getIsActive().equals(userVehicleDao.VEHICLE_BLOCK))
-					notify = "Vehicle is Blocked";
-				if(uv.getIsActive().equals(userVehicleDao.VEHICLE_INCOMPLETE))
-					notify = "Vehicle details are incomplete";
-				if(uv.getIsActive().equals(userVehicleDao.VEHICLE_SUSPEND))
-					notify = "Vehicle is suspended";
-				response.getNotifications().add(notify);
-			}
-		}
-		if(u.getIsActive().equals(userDao.USER_INACTIVE) && isValidVehicle)
-		{
-			u.setIsActive(userDao.USER_ACTIVE);
-			userDao.update(u);
-			Device d = deviceDao.getDevice(u.getUserId());
-			//d.setIsActive(deviceDao.DEVICE_INACTIVE);
-			d.setVehicleId(uv.getUserVehicleId());
-			deviceDao.update(d);
-			response.setActive(userDao.USER_ACTIVE);
-		}
-		else
-		{
-			uv = userVehicleDao.getVehicle(ar.getActiveVehicleId());
-			if(uv!=null && uv.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE))
-			{
-				uv.setIsActive(userVehicleDao.VEHICLE_INACTIVE);
-				userVehicleDao.update(uv);
-			}
-			String notify = null;
-			if(u.getIsActive().equals(userDao.USER_BLOCK))
-				notify = "User is Blocked";
-			if(u.getIsActive().equals(userDao.USER_INCOMPLETE))
-				notify = "User details are incomplete";
-			if(u.getIsActive().equals(userDao.USER_SUSPEND))
-				notify = "User is suspended";
-			response.getNotifications().add(notify);
-			response.setActive(u.getIsActive());
-		}
-		}
-		else if(ar.getActive().equals("N"))
-		{
-			if(u.getIsActive().equals(userDao.USER_ACTIVE) || u.getIsActive().equals(userDao.USER_INACTIVE))
-			{
-				u.setIsActive(userDao.USER_INACTIVE);
+				for(Iterator<UserVehicle> it = standByVehicles.iterator();it.hasNext();)
+				{
+					UserVehicle uv = it.next();
+					uv.setIsActive(userVehicleDao.VEHICLE_ACTIVE);
+					userVehicleDao.update(uv);
+				}
+				u.setIsActive(userDao.USER_ACTIVE);
 				userDao.update(u);
 				Device d = deviceDao.getDevice(u.getUserId());
-				d.setVehicleId(-1);
-				//d.setIsActive(deviceDao.DEVICE_INACTIVE);
+				d.setIsActive(deviceDao.DEVICE_ACTIVE);
 				deviceDao.update(d);
-				response.setActive("N");
-				response.getNotifications().add("User is Deactivated");
+				response.setActive(userDao.USER_ACTIVE);
 			}
 			else
 			{
@@ -94,6 +55,35 @@ public class ActivateServiceImpl implements ActivateService {
 					notify = "User details are incomplete";
 				if(u.getIsActive().equals(userDao.USER_SUSPEND))
 					notify = "User is suspended";
+				else
+					notify = "User is already Inactive";
+				response.getNotifications().add(notify);
+				response.setActive(u.getIsActive());
+			}
+		}
+		else if(ar.getActive().equals("N"))
+		{
+			if(u.getIsActive().equals(userDao.USER_ACTIVE))
+			{
+				List activeVehicles = userVehicleDao.getStandByVehicles();
+				for(Iterator<UserVehicle> it = activeVehicles.iterator();it.hasNext();)
+				{
+					UserVehicle uv = it.next();
+					uv.setIsActive(userVehicleDao.VEHICLE_STANDBY);
+					userVehicleDao.update(uv);
+				}
+				u.setIsActive(userDao.USER_INACTIVE);
+				userDao.update(u);
+				Device d = deviceDao.getDevice(u.getUserId());
+				//d.setVehicleId(-1);
+				d.setIsActive(deviceDao.DEVICE_INACTIVE);
+				deviceDao.update(d);
+				response.setActive("N");
+				response.getNotifications().add("User is Deactivated");
+			}
+			else
+			{
+				String notify = "User is already Inactive";
 				response.getNotifications().add(notify);
 				response.setActive(u.getIsActive());
 			}

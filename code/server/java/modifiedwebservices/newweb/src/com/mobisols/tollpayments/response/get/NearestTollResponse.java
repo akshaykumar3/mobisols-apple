@@ -10,10 +10,12 @@ public class NearestTollResponse {
 	private double tollPrice;
 	private double averagePrice;
 	private List<String> notifications;
+	private List<String> commands;
 	
 	public NearestTollResponse()
 	{
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
 	public List<String> getNotifications() {
 		return notifications;
@@ -50,5 +52,11 @@ public class NearestTollResponse {
 	}
 	public void setAveragePrice(double averagePrice) {
 		this.averagePrice = averagePrice;
+	}
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+	public List<String> getCommands() {
+		return commands;
 	}
 }
