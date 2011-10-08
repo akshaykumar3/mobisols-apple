@@ -9,12 +9,23 @@ public class BalanceInfoResponse {
 	private List<BalanceLog> balancelog;
 	private int balanceId;
 	private List<String> notifications;
+	private List<String> commands;
 	
 	public BalanceInfoResponse()
 	{
 		this.balancelog=new LinkedList();
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
+	
+	public List<String> getCommands() {
+		return commands;
+	}
+
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+
 	public List<String> getNotifications() {
 		return notifications;
 	}

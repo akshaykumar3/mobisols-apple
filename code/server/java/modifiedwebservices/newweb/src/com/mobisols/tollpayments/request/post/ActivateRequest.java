@@ -4,7 +4,7 @@ public class ActivateRequest {
 
 	private String active;
 	private int serviceId;
-	private int activeVehicleId;
+	
 	public String getActive() {
 		return active;
 	}
@@ -16,12 +16,6 @@ public class ActivateRequest {
 	}
 	public void setServiceId(int serviceId) {
 		this.serviceId = serviceId;
-	}
-	public int getActiveVehicleId() {
-		return activeVehicleId;
-	}
-	public void setActiveVehicleId(int activeVehicleId) {
-		this.activeVehicleId = activeVehicleId;
 	}
 	
 }

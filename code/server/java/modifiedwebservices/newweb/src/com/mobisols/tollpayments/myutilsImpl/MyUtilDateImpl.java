@@ -11,7 +11,10 @@ public class MyUtilDateImpl implements MyUtilDate {
 		return new Timestamp(new Date().getTime());
 	}
 
-
+	public Date getCurrentDate() {
+		return new Date();
+	}
+	
 	public String toString(Timestamp timestamp) {
 		// TODO Auto-generated method stub
 		return null;
@@ -28,4 +31,5 @@ public class MyUtilDateImpl implements MyUtilDate {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

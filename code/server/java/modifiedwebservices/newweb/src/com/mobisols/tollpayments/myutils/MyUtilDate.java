@@ -7,7 +7,7 @@ public interface MyUtilDate {
 
 	public Timestamp getCurrentTimeStamp();
 
-
+	public Date getCurrentDate();
 	public String toString(Timestamp timestamp);
 
 

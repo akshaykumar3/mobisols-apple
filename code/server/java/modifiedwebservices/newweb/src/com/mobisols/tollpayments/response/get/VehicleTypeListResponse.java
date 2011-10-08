@@ -7,10 +7,13 @@ public class VehicleTypeListResponse {
 
 	private List<VehicleType> vehicleTypeList;
 	private List<String> notifications;
+	private List<String> commands;
+	
 	public VehicleTypeListResponse()
 	{
 		vehicleTypeList=new LinkedList();
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
 	
 	public List<String> getNotifications() {
@@ -27,5 +30,13 @@ public class VehicleTypeListResponse {
 
 	public List<VehicleType> getVehicleTypeList() {
 		return vehicleTypeList;
+	}
+
+	public void setCommands(List<String> commands) {
+		this.commands = commands;
+	}
+
+	public List<String> getCommands() {
+		return commands;
 	}
 }

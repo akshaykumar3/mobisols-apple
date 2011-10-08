@@ -7,11 +7,13 @@ public class ServicePlanList {
 
 	private List<ServicePlan> servicePlanList;
 	private List<String> notifications;
+	private List<String> commands;
 	
 	public ServicePlanList()
 	{
 		servicePlanList = new LinkedList();
 		this.notifications = new LinkedList<String>();
+		this.commands = new LinkedList<String>();
 	}
 	
 	public List<String> getNotifications() {
