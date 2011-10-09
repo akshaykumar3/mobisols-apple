@@ -12,4 +12,10 @@
 	</bean>
 	<bean id="myutils.tollpayments.myUtilVehicle" class="com.mobisols.tollpayments.myutilsImpl.MyUtilVehicleImpl">
 	</bean>
+	<bean id="myutils.tollpayments.myUtilContext" class="com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl">
+	</bean>
+	<bean id="myutils.tollpayments.myUtilCreditCard" class="com.mobisols.tollpayments.myutilsImpl.MyUtilCreditCardImpl">
+	</bean>
+	<bean id="myutils.tollpayments.securityCheckUtil" class="com.mobisols.tollpayments.myutilsImpl.securityCheckUtilImpl">
+	</bean>
 </beans>

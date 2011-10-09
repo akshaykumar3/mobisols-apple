@@ -17,6 +17,9 @@ import com.mobisols.tollpayments.model.Configuration;
 
 public class ServerConfiguration extends MySingleTon {
 
+	public static final String SEURITY_CHECK = "Y";
+	public static final String SEURITY_UNCHECK = "N";
+	
 	private static ServerConfiguration serverConfiguration=null;
 	private HashMap<String, String> hash;
 	private ConfigurationDao configurationDao;

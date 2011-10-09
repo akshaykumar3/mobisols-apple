@@ -19,9 +19,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilVehicle;
+import com.mobisols.tollpayments.myutils.SecurityCheckUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl;
 import com.mobisols.tollpayments.myutilsImpl.MyUtilVehicleImpl;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.request.get.TollRange;
 import com.mobisols.tollpayments.request.post.ActivateRequest;
@@ -78,8 +80,10 @@ public class WebServiceImpl {
 	LoginService loginService;
 	ChangePasswordService changePasswordService;
 	ActivateService activateService;
+	
 	JsonConverter jsonConverter;
 	
+	SecurityCheckUtil securityCheckUtil;
 	
 	public WebServiceImpl() {
 		 String[] paths = {
@@ -115,12 +119,15 @@ public class WebServiceImpl {
 	@Produces("text/plain")
 	@Path("/AccountDetails")
 	//@RolesAllowed("user")
-	public String getAccountDetailsResponse(@Context HttpHeaders httpHeader){
+	public String getAccountDetailsResponse(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader){
 		String request = "RETRIEVE ACC_DETAILS";
 		String status =null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
-		System.out.println("This is read from headers username:  "+username);
-		return jsonConverter.getJSON(request, status, accountDetailsService.getAccountDetailsResponse(username));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status, accountDetailsService.getAccountDetailsResponse(username));
+		else
+			return null;
 	}
 	
 	
@@ -128,176 +135,228 @@ public class WebServiceImpl {
 	@Produces("text/plain")
 	@Path("/private/BalanceDetails")
 	@RolesAllowed("user")
-	public String getBalanceDetails(@QueryParam("json") String json){
+	public String getBalanceDetails(@QueryParam("key") String securityKey,@QueryParam("json") String json){
 		String request = "RETRIEVE ACC_DETAILS";
 		String status =null;
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&&securityCheckUtil.isKeyCorrect(securityKey))
 			return null;
-
+		else
+			return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/VehicleTypeList")
 	//@RolesAllowed("user")
-	public String getVehicleTypesList()
+	public String getVehicleTypesList(@QueryParam("key") String securityKey)
 	{
 		String request="";
 		String status="";
 		VehicleTypeListResponse vr=vehicleTypeListService.getVehicleTypeList();
-		return jsonConverter.getJSON(request, status, vr);
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status, vr);
+		else
+			return null;
 	}
 
 	@POST
 	@Produces("text/plain")
 	@Path("/private/AddBalance")
 	@RolesAllowed("user")
-	public String postAddBalance(@FormParam("json")String json,@Context HttpHeaders httpHeader)
+	public String postAddBalance(@FormParam("key") String securityKey,@FormParam("json")String json,@Context HttpHeaders httpHeader)
 	{
 		String request = "RETRIEVE ACC_DETAILS";
 		String status =null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		AddBalanceRequest ar= (AddBalanceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.AddBalanceRequest");
-		return jsonConverter.getJSON(request, status, addBalanceService.postaddBalanceResponse(ar,username));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status, addBalanceService.postaddBalanceResponse(ar,username));
+		else
+			return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/CcTypeList")
 	//@RolesAllowed("user")
-	public String getCcTypeList()
+	public String getCcTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get CCTypeList";
 		String status=null;
-		return jsonConverter.getJSON(request,status,ccTypeListService.getCcTypeList());
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request,status,ccTypeListService.getCcTypeList());
+		return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/OwnerTypeList")
 	//@RolesAllowed("user")
-	public String getOwnerTypeList()
+	public String getOwnerTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get OwnerTypeList";
 		String status=null;
-		return jsonConverter.getJSON(request,status,ownerTypeListService.getOwnerTypeList());
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request,status,ownerTypeListService.getOwnerTypeList());
+		else
+			return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/VmlTypeList")
 	//@RolesAllowed("user")
-	public String getVMLTypeList()
+	public String getVMLTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get VMLTypeList";
 		String status=null;
-		return jsonConverter.getJSON(request,status,vmlTypeListService.getVmlTypeList());
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request,status,vmlTypeListService.getVmlTypeList());
+		return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/private/BalanceInfo")
 	@RolesAllowed("user")
-	public String getBalanceInfo(@Context HttpHeaders httpHeader)
+	public String getBalanceInfo(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader)
 	{
 		String request="get BlanceInfo";
 		String status=null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
-		return jsonConverter.getJSON(request,status,balanceInfoService.getBalanceInfo(username));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request,status,balanceInfoService.getBalanceInfo(username));
+		return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/TollDetailsList")
 	//@RolesAllowed("user")
-	public String getTollDetailsList(@QueryParam("json") String json)
+	public String getTollDetailsList(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="get BlanceInfo";
 		String status=null;
 		TollRange tr=(TollRange) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.TollRange");
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+		{
 		if(tr==null)
 			return jsonConverter.getJSON(request,status,tollDetailsService.getTollLocations());
 		else
 			return jsonConverter.getJSON(request, status, tollDetailsService.getTollLocations(tr.getLatitude1(),
-					tr.getLongitude1(), tr.getLatitude2(), tr.getLongitude2()));
+				tr.getLongitude1(), tr.getLatitude2(), tr.getLongitude2()));
+		}
+		else
+			return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/ServicePlansList")
 	//@RolesAllowed("user")
-	public String getServicePlans()
+	public String getServicePlans(@QueryParam("key") String securityKey)
 	{
 		String request="get Service Plans List";
 		String status="success";
-		return jsonConverter.getJSON(request, status,servicePlanService.getServiceList() );
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,servicePlanService.getServiceList() );
+		return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/PeriodicHeartBeat")
 	//@RolesAllowed("user")
-	public String postPeriodicHeartBeat(@FormParam("json") String json)
+	public String postPeriodicHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post periodic heartbeat";
 		String status="success";
 		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
-		return jsonConverter.getJSON(request, status,periodicHeartBeatService.saveHeartBeat(hbr) );
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,periodicHeartBeatService.saveHeartBeat(hbr) );
+		else
+			return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/HeartBeat")
 	//@RolesAllowed("user")
-	public String postHeartBeat(@FormParam("json") String json)
+	public String postHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post heartbeat";
 		String status="success";
 		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
-		return jsonConverter.getJSON(request, status,heartBeatService.saveHeartBeat(hbr) );
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,heartBeatService.saveHeartBeat(hbr) );
+		return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/NearestToll")
 	//@RolesAllowed("user")
-	public String getNearestToll(@QueryParam("json") String json)
+	public String getNearestToll(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="post heartbeat";
 		String status="success";
 		Location l=(Location) jsonConverter.getObject(json, "com.mobisols.tollpayments.myutilsImpl.Location");
-		return jsonConverter.getJSON(request, status,nearestTollService.getNearestToll(l.getLatitude(), l.getLongitude()) );
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,nearestTollService.getNearestToll(l.getLatitude(), l.getLongitude()) );
+		else
+			return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/PaymentDetails")
 	//@RolesAllowed("user")
-	public String postPaymentDetails(@FormParam("json") String json,@Context HttpHeaders httpHeader)
+	public String postPaymentDetails(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="update paymentDetails";
 		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		PaymentDetailRequest pd=(PaymentDetailRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.PaymentDetailRequest");
-		return jsonConverter.getJSON(request, status,paymentDetailsService.update(pd, username));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,paymentDetailsService.update(pd, username));
+		else
+			return null;
 	}
 	
 	@GET
 	@Produces("text/plain")
 	@Path("/ClientConfiguration")
 	//@RolesAllowed("user")
-	public String getClientConfiguration(@QueryParam("json") String json)
+	public String getClientConfiguration(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="get ClientConfiguration";
 		String status="success";
 		ClientConfigurationRequest r= (ClientConfigurationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.ClientConfigurationRequest");
-		return jsonConverter.getJSON(request, status,clientConfigurationService.getClientConfig(r));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,clientConfigurationService.getClientConfig(r));
+		else
+			return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/VehicleDetails")
 	//@RolesAllowed("user")
-	public String postVehicleDetails(@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@Context HttpHeaders httpHeader)
+	public String postVehicleDetails(@FormParam("key") String securityKey,@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@Context HttpHeaders httpHeader)
 	{
 		System.out.println(isNewVehicle);
 		String request="post vehicleDetails";
@@ -308,78 +367,105 @@ public class WebServiceImpl {
 		MyUtilVehicle myUtilVehicle = new MyUtilVehicleImpl();
 		if(myUtilVehicle.isValidRegistrationNumber(r.getRegistration(), r.getState()))
 			status = "invalid";
-		return jsonConverter.getJSON(request, status,vehicleDetailsService.postVehicleDetails(r, username, isNewVehicle));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,vehicleDetailsService.postVehicleDetails(r, username, isNewVehicle));
+		else
+			return null;
 	}
 	
 	@DELETE
 	@Produces("text/plain")
 	@Path("/VehicleDetails")
 	//@RolesAllowed("user")
-	public String deleteVehicleDetails(@FormParam("vehicleId") int vehicleId,@Context HttpHeaders httpHeader)
+	public String deleteVehicleDetails(@FormParam("key") String securityKey,@FormParam("vehicleId") int vehicleId,@Context HttpHeaders httpHeader)
 	{
 		String request="delete vehicleDetails";
 		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
-		return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(vehicleId, username));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(vehicleId, username));
+		return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/UserRegistration")
-	public String registerUser(@FormParam("json") String json)
+	public String registerUser(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="register user";
 		String status="success";
 		RegistrationServiceRequest request1= (RegistrationServiceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.RegistrationServiceRequest");
-		return jsonConverter.getJSON(request, status,registrationService.createUser(request1));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,registrationService.createUser(request1));
+		else
+			return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/DeviceRegistration")
-	public String registerDevice(@FormParam("json") String json,@Context HttpServletRequest servletRequest)
+	public String registerDevice(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpServletRequest servletRequest)
 	{
 		String request="register device";
 		String status="success";
 		//System.out.println(servletRequest.getRemoteAddr());
 		DeviceRegistrationRequest request1=  (DeviceRegistrationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.DeviceRegistrationRequest");
-		return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1,servletRequest.getRemoteAddr()));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1,servletRequest.getRemoteAddr()));
+		else
+			return null;
 	}
 
 	@POST
 	@Produces("text/plain")
 	@Path("/Login")
-	public String loginUser(@FormParam("json") String json)
+	public String loginUser(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post vehicleDetails";
 		String status="success";
 		LoginRequest request1=  (LoginRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.LoginRequest");
-		return jsonConverter.getJSON(request, status,loginService.login(request1));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,loginService.login(request1));
+		else
+			return null;
 	}
 
 	@POST
 	@Produces("text/plain")
 	@Path("/ChangePassword")
 	//@RolesAllowed("user")
-	public String changePassword(@FormParam("password") String password,@Context HttpHeaders httpHeader)
+	public String changePassword(@FormParam("key") String securityKey,@FormParam("password") String password,@Context HttpHeaders httpHeader)
 	{
 		String request="change password";
 		String status="success";
 		String userName=MyUtilContextImpl.getUserName(httpHeader);
-		return jsonConverter.getJSON(request, status,changePasswordService.changePassword(userName, password));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,changePasswordService.changePassword(userName, password));
+		else
+			return null;
 	}
 	
 	@POST
 	@Produces("text/plain")
 	@Path("/Activate")
 	//@RolesAllowed("user")
-	public String activate(@FormParam("json") String json,@Context HttpHeaders httpHeader)
+	public String activate(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="activate/deactivate user";
 		String status="success";
 		String userName=MyUtilContextImpl.getUserName(httpHeader);
 		ActivateRequest ar = (ActivateRequest) jsonConverter.getObject(json,"com.mobisols.tollpayments.request.post.ActivateRequest");
-		return jsonConverter.getJSON(request, status,activateService.activate(ar, userName));
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return jsonConverter.getJSON(request, status,activateService.activate(ar, userName));
+		else
+			return null;
 	}
 	
 	public VehicleTypeListService getVehicleTypeListService() {
@@ -549,6 +635,14 @@ public class WebServiceImpl {
 
 	public void setActivateService(ActivateService activateService) {
 		this.activateService = activateService;
+	}
+
+	public SecurityCheckUtil getSecurityCheckUtil() {
+		return securityCheckUtil;
+	}
+
+	public void setSecurityCheckUtil(SecurityCheckUtil securityCheckUtil) {
+		this.securityCheckUtil = securityCheckUtil;
 	}
 
 }

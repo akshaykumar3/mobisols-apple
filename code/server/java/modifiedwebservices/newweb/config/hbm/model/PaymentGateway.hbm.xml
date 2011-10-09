@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
  <class catalog="globaltoll"
-  name="com.mobisols.tollpayments.model.PaymentGateWay" table="cc_type">
+  name="com.mobisols.tollpayments.model.PaymentGateway" table="cc_type">
   <!--  <meta attribute="class-description">This class contains credit card type details.</meta>-->
   <id name="paymentGatewayId" type="java.lang.Integer">
    <column name="payment_gateway_id"/>

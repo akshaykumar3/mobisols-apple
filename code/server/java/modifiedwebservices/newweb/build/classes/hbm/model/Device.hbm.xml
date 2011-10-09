@@ -19,9 +19,6 @@
             <property name="deviceType" type="java.lang.String">
                 <column name="device_type" length="100" />
             </property>
-            <property name="vehicleId" type="java.lang.Integer">
-                <column name="vehicle_id" />
-            </property>
             <property name="isActive" type="java.lang.String">
                 <column name="is_active" length="1" />
             </property>

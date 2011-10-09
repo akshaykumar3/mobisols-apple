@@ -89,9 +89,6 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setVehicleTypeId(vt.getVehicleTypeId());
 			userVehicleDao.save(uv);
 			uv = userVehicleDao.getVehicle(uv.getRegistrationNo(), uv.getRegisteredState(), u.getUserId());
-			Device d = deviceDao.getDevice(u.getUserId());
-			d.setVehicleId(uv.getUserVehicleId());
-			deviceDao.update(d);
 			response.setVehicleId(uv.getUserVehicleId());
 			response.getNotifications().add("New Vehicle Added");
 		}
@@ -113,7 +110,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		{
 			userVehicleDao.delete(uv);
 			Device d = deviceDao.getDevice(u.getUserId());
-			if(d.getVehicleId() == uv.getUserVehicleId())
+			/*if(d.getVehicleId() == uv.getUserVehicleId())
 			{
 				List<UserVehicle> l = userVehicleDao.getActiveVehicles();
 				if(l.isEmpty())
@@ -128,7 +125,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 					d.setVehicleId(-1);
 					deviceDao.update(d);
 				}
-			}
+			}*/
 			response.setDescription("Vehicle is deleted");
 		}
 		else

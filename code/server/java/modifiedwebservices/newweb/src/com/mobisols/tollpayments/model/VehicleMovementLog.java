@@ -12,7 +12,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	private Integer vmlId;
 	private Integer vmlTypeId;
-	private Integer uvhId;
+	private Integer deviceHistoryId;
 	private Integer tollLocationId;
 	private String geometry;
 	private Timestamp timestamp;
@@ -35,7 +35,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 	private String status;
 	private TollLocation tollLocation;
 	private VmlType vmlType;
-	private UserVehicleHistory userVehicleHistory;
+	private DeviceHistory deviceHistory;
 	private String tollSessionId;
 	private Double distance;
 
@@ -58,12 +58,16 @@ public class VehicleMovementLog implements java.io.Serializable {
 		this.vmlType = vmlType;
 	}
 
-	public UserVehicleHistory getUserVehicleHistory() {
-		return userVehicleHistory;
+	public void setDeviceHistory(DeviceHistory deviceHistory) {
+		this.deviceHistory = deviceHistory;
 	}
 
-	public void setUserVehicleHistory(UserVehicleHistory userVehicleHistory) {
-		this.userVehicleHistory = userVehicleHistory;
+	public DeviceHistory getDeviceHistory() {
+		return deviceHistory;
+	}
+
+	public void setUserVehicleHistory(DeviceHistory deviceHistory) {
+		this.deviceHistory = deviceHistory;
 	}
 
 	/** default constructor */
@@ -72,12 +76,12 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	/** minimal constructor */
 	public VehicleMovementLog(Integer vmlId, Integer vmlTypeId,
-			Integer uvhId, String geometry, Timestamp timestamp,
+			Integer deviceHistoryId, String geometry, Timestamp timestamp,
 			Timestamp lastModifiedOn, Integer lastModifiedBy,
 			Timestamp createdOn) {
 		this.vmlId = vmlId;
 		this.vmlTypeId = vmlTypeId;
-		this.uvhId = uvhId;
+		this.deviceHistoryId = deviceHistoryId;
 		this.geometry = geometry;
 		this.timestamp = timestamp;
 		this.lastModifiedOn = lastModifiedOn;
@@ -87,7 +91,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 
 	/** full constructor */
 	public VehicleMovementLog(Integer vmlId, Integer vmlTypeId,
-			Integer uvhId, Integer tollLocationId, String geometry,
+			Integer deviceHistoryId, Integer tollLocationId, String geometry,
 			Timestamp timestamp, String udf1, String udf2, String udf3,
 			String udf4, String udf5, String flag1, String flag2, String flag3,
 			String flag4, String flag5, Timestamp lastModifiedOn,
@@ -95,7 +99,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 			Double latitude, Double longitude, String status) {
 		this.vmlId = vmlId;
 		this.vmlTypeId = vmlTypeId;
-		this.uvhId = uvhId;
+		this.deviceHistoryId = deviceHistoryId;
 		this.tollLocationId = tollLocationId;
 		this.geometry = geometry;
 		this.timestamp = timestamp;
@@ -136,12 +140,13 @@ public class VehicleMovementLog implements java.io.Serializable {
 		this.vmlTypeId = vmlTypeId;
 	}
 
-	public Integer getUvhId() {
-		return this.uvhId;
+	
+	public Integer getDeviceHistoryId() {
+		return deviceHistoryId;
 	}
 
-	public void setUvhId(Integer uvhId) {
-		this.uvhId = uvhId;
+	public void setDeviceHistoryId(Integer deviceHistoryId) {
+		this.deviceHistoryId = deviceHistoryId;
 	}
 
 	public Integer getTollLocationId() {
@@ -336,9 +341,9 @@ public class VehicleMovementLog implements java.io.Serializable {
 						.getVmlTypeId() != null
 						&& castOther.getVmlTypeId() != null && this
 						.getVmlTypeId().equals(castOther.getVmlTypeId())))
-				&& ((this.getUvhId() == castOther.getUvhId()) || (this
-						.getUvhId() != null && castOther.getUvhId() != null && this
-						.getUvhId().equals(castOther.getUvhId())))
+				&& ((this.getDeviceHistoryId() == castOther.getDeviceHistoryId()) || (this
+						.getDeviceHistoryId() != null && castOther.getDeviceHistoryId() != null && this
+						.getDeviceHistoryId().equals(castOther.getDeviceHistoryId())))
 				&& ((this.getTollLocationId() == castOther.getTollLocationId()) || (this
 						.getTollLocationId() != null
 						&& castOther.getTollLocationId() != null && this
@@ -421,7 +426,7 @@ public class VehicleMovementLog implements java.io.Serializable {
 		result = 37 * result
 				+ (getVmlTypeId() == null ? 0 : this.getVmlTypeId().hashCode());
 		result = 37 * result
-				+ (getUvhId() == null ? 0 : this.getUvhId().hashCode());
+				+ (getDeviceHistoryId() == null ? 0 : this.getDeviceHistoryId().hashCode());
 		result = 37
 				* result
 				+ (getTollLocationId() == null ? 0 : this.getTollLocationId()

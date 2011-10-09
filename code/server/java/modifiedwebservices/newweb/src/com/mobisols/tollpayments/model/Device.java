@@ -14,7 +14,6 @@ public class Device implements java.io.Serializable {
 	private Integer userId;
 	private String deviceUuid;
 	private String deviceType;
-	private Integer vehicleId;
 	private String isActive;
 	private Timestamp lastLoginTime;
 	private String udf1;
@@ -74,7 +73,6 @@ public class Device implements java.io.Serializable {
 		this.userId = userId;
 		this.deviceUuid = deviceUuid;
 		this.deviceType = deviceType;
-		this.vehicleId = vehicleId;
 		this.isActive = isActive;
 		this.lastLoginTime = lastLoginTime;
 		this.udf1 = udf1;
@@ -125,14 +123,6 @@ public class Device implements java.io.Serializable {
 
 	public void setDeviceType(String deviceType) {
 		this.deviceType = deviceType;
-	}
-
-	public Integer getVehicleId() {
-		return this.vehicleId;
-	}
-
-	public void setVehicleId(Integer vehicleId) {
-		this.vehicleId = vehicleId;
 	}
 
 	public String getIsActive() {
@@ -286,10 +276,6 @@ public class Device implements java.io.Serializable {
 						.getDeviceType() != null
 						&& castOther.getDeviceType() != null && this
 						.getDeviceType().equals(castOther.getDeviceType())))
-				&& ((this.getVehicleId() == castOther.getVehicleId()) || (this
-						.getVehicleId() != null
-						&& castOther.getVehicleId() != null && this
-						.getVehicleId().equals(castOther.getVehicleId())))
 				&& ((this.getIsActive() == castOther.getIsActive()) || (this
 						.getIsActive() != null
 						&& castOther.getIsActive() != null && this
@@ -364,8 +350,6 @@ public class Device implements java.io.Serializable {
 				* result
 				+ (getDeviceType() == null ? 0 : this.getDeviceType()
 						.hashCode());
-		result = 37 * result
-				+ (getVehicleId() == null ? 0 : this.getVehicleId().hashCode());
 		result = 37 * result
 				+ (getIsActive() == null ? 0 : this.getIsActive().hashCode());
 		result = 37
