@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
  <class catalog="globaltoll"
-  name="com.mobisols.tollpayments.model.Model" table="model">
+  name="com.mobisols.tollpayments.model.Make" table="make">
   <!--  <meta attribute="class-description">This class contains credit card type details.</meta>-->
   <id name="makeId" type="java.lang.Integer">
    <column name="make_id"/>

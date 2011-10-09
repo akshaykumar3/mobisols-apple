@@ -1,8 +1,8 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
+import com.mobisols.tollpayments.dao.DeviceHistoryDao;
 import com.mobisols.tollpayments.dao.TollLocationDao;
-import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
 import com.mobisols.tollpayments.dao.VmlDao;
 import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.model.TollLocation;
@@ -21,7 +21,7 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 	private DeviceDao deviceDao;
 	private TollLocationUtil tollLocationUtil;
 	private TollLocationDao tollLocationDao;
-	private UserVehicleHistoryDao userVehicleHistoryDao;
+	private DeviceHistoryDao deviceHistoryDao;
 	private VmlTypeDao vmlTypeDao;
 	public static final double DEFAULT_TIME=10*60;
 	public static final double DEFAULT_DISTANCE=200;
@@ -57,7 +57,7 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		TollLocation t=tollLocationDao.getTollLocation(hbr.getLatitude(), hbr.getLongitude());
 		if(t!=null)
 		vml.setTollLocationId(t.getTollLocationId());
-		vml.setUvhId(userVehicleHistoryDao.getLatestUvhId(d.getVehicleId()));
+		vml.setDeviceHistoryId(deviceHistoryDao.getLatestDeviceHistoryId(d.getDeviceId()));
 		
 		String tollSessionId;
 		int index=hbr.getTollSessionId().indexOf('#');
@@ -126,12 +126,12 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		this.tollLocationDao = tollLocationDao;
 	}
 
-	public UserVehicleHistoryDao getUserVehicleHistoryDao() {
-		return userVehicleHistoryDao;
+	public DeviceHistoryDao getDeviceHistoryDao() {
+		return deviceHistoryDao;
 	}
 
-	public void setUserVehicleHistoryDao(UserVehicleHistoryDao userVehicleHistoryDao) {
-		this.userVehicleHistoryDao = userVehicleHistoryDao;
+	public void setDeviceHistoryDao(DeviceHistoryDao deviceHistoryDao) {
+		this.deviceHistoryDao = deviceHistoryDao;
 	}
 
 	public VmlTypeDao getVmlTypeDao() {

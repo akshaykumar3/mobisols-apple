@@ -13,8 +13,8 @@
             <property name="vmlTypeId" type="java.lang.Integer">
                 <column name="vml_type_id" />
             </property>
-            <property name="uvhId" type="java.lang.Integer">
-                <column name="uvh_id" />
+            <property name="deviceHistoryId" type="java.lang.Integer">
+                <column name="device_history_id" />
             </property>
             <property name="tollLocationId" type="java.lang.Integer">
                 <column name="toll_location_id" />
@@ -99,8 +99,8 @@
 			update="false"
 				unique="true"/>
 				
-			<many-to-one name="userVehicleHistory"
-                class="com.mobisols.tollpayments.model.UserVehicleHistory"
+			<many-to-one name="deviceHistory"
+                class="com.mobisols.tollpayments.model.DeviceHistory"
 				column="uvh_id"
 				cascade="save-update"
 				insert="false"

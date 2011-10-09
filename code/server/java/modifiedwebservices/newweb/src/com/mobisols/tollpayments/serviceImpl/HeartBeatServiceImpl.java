@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
+import com.mobisols.tollpayments.dao.DeviceHistoryDao;
 import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
 import com.mobisols.tollpayments.dao.VmlDao;
@@ -20,6 +21,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	private VmlDao vmlDao;
 	private MyUtilDate myUtilDate;
 	private DeviceDao deviceDao;
+	private DeviceHistoryDao deviceHistoryDao;
 	private TollLocationUtil tollLocationUtil;
 	private TollLocationDao tollLocationDao;
 	private UserVehicleHistoryDao userVehicleHistoryDao;
@@ -58,7 +60,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		TollLocation t=tollLocationDao.getTollLocation(hbr.getLatitude(), hbr.getLongitude());
 		if(t!=null)
 		vml.setTollLocationId(t.getTollLocationId());
-		vml.setUvhId(userVehicleHistoryDao.getLatestUvhId(d.getVehicleId()));
+		vml.setDeviceHistoryId(deviceHistoryDao.getLatestDeviceHistoryId(d.getDeviceId()));
 		
 		String tollSessionId;
 		int index=hbr.getTollSessionId().indexOf('#');
@@ -142,5 +144,15 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 
 	public void setVmlTypeDao(VmlTypeDao vmlTypeDao) {
 		this.vmlTypeDao = vmlTypeDao;
+	}
+
+
+	public DeviceHistoryDao getDeviceHistoryDao() {
+		return deviceHistoryDao;
+	}
+
+
+	public void setDeviceHistoryDao(DeviceHistoryDao deviceHistoryDao) {
+		this.deviceHistoryDao = deviceHistoryDao;
 	}
 }

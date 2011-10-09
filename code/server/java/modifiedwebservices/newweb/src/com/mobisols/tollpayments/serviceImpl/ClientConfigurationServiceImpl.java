@@ -30,20 +30,30 @@ public class ClientConfigurationServiceImpl implements
 		}
 		if(cv==null)
 			return null;
+		response.setCompVersionId(cv.getCompVersionId());
 		Configuration config=null;
-		for(Iterator it=cv.getConfiguration().iterator();it.hasNext();)
+		if(r.getKey()!=null)
 		{
-			config=(Configuration) it.next();
-			if(config.getKey()==r.getKey())
+			for(Iterator it=cv.getConfiguration().iterator();it.hasNext();)
 			{
-				break;
+				config=(Configuration) it.next();
+				if(config.getKey()==r.getKey())
+				{
+					break;
+				}
 			}
-		}
 		if(config==null)
 			return null;
-		response.setCompVersionId(cv.getCompVersionId());
-		response.setKey(r.getKey());
-		response.setValue(config.getValue());
+		response.getKeyValues().put(config.getKey(), config.getValue());
+		}
+		else
+		{
+			for(Iterator it=cv.getConfiguration().iterator();it.hasNext();)
+			{
+				config=(Configuration) it.next();
+				response.getKeyValues().put(config.getKey(), config.getValue());
+			}
+		}
 		return response;
 	}
 	
@@ -54,6 +64,4 @@ public class ClientConfigurationServiceImpl implements
 	public void setComponentDao(ComponentDao componentDao) {
 		this.componentDao = componentDao;
 	}
-	
-	
 }

@@ -78,6 +78,14 @@
 			resource="/hbm/model/Device.hbm.xml" />
 		<mapping
 			resource="/hbm/model/DeviceHistory.hbm.xml" />
+		<mapping
+			resource="/hbm/model/Make.hbm.xml"/>
+		<mapping
+			resource="/hbm/model/Model.hbm.xml"/>	
+		<mapping
+			resource="/hbm/model/PaymentGateway.hbm.xml"/>
+		<mapping
+			resource="/hbm/model/PaymentToken.hbm.xml"/>		
 	</session-factory>
 
 </hibernate-configuration>

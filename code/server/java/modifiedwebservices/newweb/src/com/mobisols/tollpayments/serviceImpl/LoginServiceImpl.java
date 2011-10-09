@@ -52,7 +52,6 @@ public class LoginServiceImpl implements LoginService {
 					response.getResponse().put("anotherUserLoggedIn", ANOTHER_USER_LOGGED_IN_TRUE);
 				}
 				d.setUserId(u.getUserId());
-				d.setVehicleId(-1);
 				deviceDao.update(d);
 			}
 			else

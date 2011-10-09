@@ -26,7 +26,6 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 		d.setLastModifiedBy(User.DEFAULT_USER);
 		d.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		d.setUserId(User.DEFAULT_USER);
-		d.setVehicleId(UserVehicle.DEFAULT_VEHICLE);
 		deviceDao.save(d);
 		response.setDeviceId(deviceId);
 		response.setIpAddress(ipAddress);

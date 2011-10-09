@@ -76,7 +76,7 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            <property name="modelId" type="java.sql.Integer">
+            <property name="modelId" type="java.lang.Integer">
                 <column name="model_id" />
             </property>
             <property name="vin" type="java.lang.String">
