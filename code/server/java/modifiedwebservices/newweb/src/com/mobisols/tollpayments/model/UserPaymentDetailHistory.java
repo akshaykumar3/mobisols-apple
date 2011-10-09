@@ -18,7 +18,7 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 	private String ccAcName;
 	private String ccNumber;
 	private Integer ccExpMonth;
-	private Date ccExpYear;
+	private Integer ccExpYear;
 	private Integer ccCvv;
 	private Integer bankRouting;
 	private Long bankAccount;
@@ -74,7 +74,7 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 	/** full constructor */
 	public UserPaymentDetailHistory(Integer updhId, Integer updId,
 			Integer userId, Integer ccTypeId, String ccAcName, String ccNumber,
-			Integer ccExpMonth, Date ccExpYear, Integer ccCvv,
+			Integer ccExpMonth, Integer ccExpYear, Integer ccCvv,
 			Integer bankRouting, Long bankAccount, String address1,
 			String address2, String city, String state, String country,
 			String ziip, String payPrefer, String action, String udf1,
@@ -178,11 +178,11 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 		this.ccExpMonth = ccExpMonth;
 	}
 
-	public Date getCcExpYear() {
+	public Integer getCcExpYear() {
 		return this.ccExpYear;
 	}
 
-	public void setCcExpYear(Date ccExpYear) {
+	public void setCcExpYear(Integer ccExpYear) {
 		this.ccExpYear = ccExpYear;
 	}
 

@@ -7,7 +7,7 @@ public class PaymentDetailRequest {
 	private String cardNumber;
 	private Integer expMonth;
 	private int ccCVV;
-	private Date expYear;
+	private Integer expYear;
 	private String cardType;
 	private Integer bankRouting;
 	private Long bankAccount;
@@ -43,10 +43,10 @@ public class PaymentDetailRequest {
 	public void setCcCVV(int ccCVV) {
 		this.ccCVV = ccCVV;
 	}
-	public Date getExpYear() {
+	public Integer getExpYear() {
 		return expYear;
 	}
-	public void setExpYear(Date expYear) {
+	public void setExpYear(Integer expYear) {
 		this.expYear = expYear;
 	}
 	public String getCardType() {
