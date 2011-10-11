@@ -16,6 +16,6 @@
 	</bean>
 	<bean id="myutils.tollpayments.myUtilCreditCard" class="com.mobisols.tollpayments.myutilsImpl.MyUtilCreditCardImpl">
 	</bean>
-	<bean id="myutils.tollpayments.securityCheckUtil" class="com.mobisols.tollpayments.myutilsImpl.securityCheckUtilImpl">
+	<bean id="myutils.tollpayments.securityCheckUtil" class="com.mobisols.tollpayments.myutilsImpl.SecurityCheckUtilImpl">
 	</bean>
 </beans>

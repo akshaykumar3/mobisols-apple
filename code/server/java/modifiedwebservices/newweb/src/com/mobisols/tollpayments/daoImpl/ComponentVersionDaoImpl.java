@@ -11,8 +11,11 @@ import com.mobisols.tollpayments.model.HibernateSessionFactory;
 
 public class ComponentVersionDaoImpl implements ComponentVersionDao {
 
-	ComponentDao componentDao;
+	private ComponentDao componentDao;
 	
+	public ComponentVersionDaoImpl(){
+		//this.componentDao = new ComponentDaoImpl();
+	}
 	public ComponentVersion getVersion(int componentId,String version)
 	{
 		Session s= HibernateSessionFactory.getSession();
@@ -26,15 +29,15 @@ public class ComponentVersionDaoImpl implements ComponentVersionDao {
 	{
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit= s.createCriteria(ComponentVersion.class);
+		if(componentDao == null)
+			System.out.println("componentDao is null");
 		crit.add(Restrictions.eq("componentId", componentDao.getComponent(component).getComponentId()));
 		crit.add(Restrictions.eq("version", version));
 		return (ComponentVersion)crit.uniqueResult();
 	}
-
 	public ComponentDao getComponentDao() {
 		return componentDao;
 	}
-
 	public void setComponentDao(ComponentDao componentDao) {
 		this.componentDao = componentDao;
 	}
