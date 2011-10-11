@@ -12,6 +12,7 @@ import java.util.List;
 
 
 import com.mobisols.tollpayments.dao.ConfigurationDao;
+import com.mobisols.tollpayments.daoImpl.ConfigurationDaoImpl;
 import com.mobisols.tollpayments.model.Configuration;
 
 
@@ -26,11 +27,15 @@ public class ServerConfiguration extends MySingleTon {
 	
 	private ServerConfiguration(){
 		hash=new HashMap<String, String>();
+		this.configurationDao = new ConfigurationDaoImpl();
 	}
 	
 	public static ServerConfiguration getServerConfiguration() {
 		if(serverConfiguration==null)
-			serverConfiguration=new ServerConfiguration();
+			{
+				serverConfiguration=new ServerConfiguration();
+				serverConfiguration.setDirty(true);
+			}
 		if(serverConfiguration.isDirty())
 			{
 				serverConfiguration.refresh();
@@ -51,23 +56,15 @@ public class ServerConfiguration extends MySingleTon {
 	
 	@Override
 	public void refresh() {
-		try {
-			BufferedReader reader= new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream("ServerConfig.txt"))));
-			String server = reader.readLine();
-			String version = reader.readLine();
+			//BufferedReader reader= new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream("ServerConfig.txt"))));
+			String server = "server";//reader.readLine();
+			String version = "1.0";//reader.readLine();
 			List<Configuration> list = configurationDao.getKeyValues(server, version);
 			for(Iterator<Configuration> it= list.iterator();it.hasNext();)
 			{
 				Configuration c = it.next();
 				hash.put(c.getKey(), c.getValue());
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 	

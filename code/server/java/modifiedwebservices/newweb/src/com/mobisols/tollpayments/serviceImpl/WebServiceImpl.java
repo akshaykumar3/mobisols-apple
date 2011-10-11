@@ -413,6 +413,8 @@ public class WebServiceImpl {
 		String status="success";
 		//System.out.println(servletRequest.getRemoteAddr());
 		DeviceRegistrationRequest request1=  (DeviceRegistrationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.DeviceRegistrationRequest");
+		if(ServerConfiguration.getServerConfiguration()== null)
+			System.out.println("null");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
 			return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1,servletRequest.getRemoteAddr()));

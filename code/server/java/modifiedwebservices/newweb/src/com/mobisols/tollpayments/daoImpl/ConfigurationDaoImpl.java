@@ -15,6 +15,10 @@ import com.mobisols.tollpayments.model.HibernateSessionFactory;
 public class ConfigurationDaoImpl implements ConfigurationDao {
 	private ComponentVersionDao componentVersionDao;
 	
+	public ConfigurationDaoImpl()
+	{
+		componentVersionDao = new ComponentVersionDaoImpl();
+	}
 	public List<Configuration> getKeyValues(String component,String version)
 	{
 		Session s=HibernateSessionFactory.getSession();
