@@ -80,6 +80,7 @@ gtp.tabs.NewCarFormView = {
 								endDate: acfd.endDate
 							},'Cars'));
 							Ext.Msg.alert('Success',gtp.dict.newcar_success);
+					      	gtp.showNotifications(resobj.notifications);
 						},
 						failure: function(response){
 							Ext.Msg.alert(gtp.dict.newcar_failure);

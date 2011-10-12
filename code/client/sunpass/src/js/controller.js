@@ -1,5 +1,4 @@
-// Controllers are defined here.
-
+// controller for creating a new instance of application.
 gtp.controllers = Ext.regController("load",{
 	show: function(options) {
 		
@@ -186,6 +185,10 @@ gtp.controllers = Ext.regController("load",{
 										// Store username and password locally.
 										gtp.utils.dataStore.setValueOfKey('username', eid);
 										gtp.utils.dataStore.setValueOfKey('password', pwd);
+										gtp.views.loginPage.down('#lpemailid').setValue('');
+										gtp.views.loginPage.down('#lppassword').setValue('');
+										gtp.showNotifications(resobj.response.notifications);
+										gtp.parse(resobj.response.commands);
 										gtp.views.loginPage.setActiveItem('loginpage', 'fade');
 									},
 									failure: function(response) {

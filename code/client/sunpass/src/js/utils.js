@@ -16,6 +16,7 @@ gtp.utils.dataStore.getConfiguration = function() {
 			console.log('Client Configuration response '+response.responseText);
 			var obj=Ext.decode(response.responseText);
 			gtp.cfg=obj.response;
+	      	gtp.showNotifications(resobj.notifications);
 		},
 		failure: function(response) {
 			console.log("Client config failure with status "+response.status);

@@ -26,9 +26,6 @@ gtp.tabs.SettingsFormView = {
 					button.setDisabled(true);
 				}
 				else if(button.getText() == 'save' && gtp.settingschanged) {
-					gtp.tabpanel.getComponent(3).disable();
-					button.setText('edit');
-					button.setDisabled(false);
 					
 					var pay_det = gtp.tabpanel.getComponent(3).getRecord();
 					var statecode = gtp.tabpanel.getComponent('basicform').down('#billstate').getValue();
@@ -40,49 +37,112 @@ gtp.tabs.SettingsFormView = {
 					if(pay_det.get('expmonth') && pay_det.get('expyear'))
 						validExpDate = gtp.expiryDateValidity(pay_det.get('expmonth'), pay_det.get('expyear'));
 					
-					if(!pay_det.get('expmonth'))
-						Ext.Msg.alert('Alert','Exp month cannot be empty');
-					else if(!pay_det.get('expyear'))
-						Ext.Msg.alert('Alert', 'Exp year cannot be empty');
-					else if(!validExpDate)
-						Ext.Msg.alert('Invalid','Expiry Date');
-					else if(!validZipCode)
-						Ext.Msg.alert('Invalid','Enter Valid zip code');
-					else 
-					Ext.Ajax.request({
-						url: webServices.getAt(webServices.findExact('service','paymentdetails')).get('url'),
-						method: 'POST',
-						params: {
-							json: Ext.encode({
-								ccName: pay_det.get('name'),
-								cardNumber: pay_det.get('ccnumber'),
-								expMonth: pay_det.get('expmonth'),
-								expYear: pay_det.get('expyear'),
-								bankRouting: 123,
-								ccCVV: 123456,
-								bankAccount: pay_det.get('acnumber'),
-								address1: pay_det.get('address'),
-								city: pay_det.get('city'),
-								state: pay_det.get('state'),
-								country: pay_det.get('country'),
-								zip: pay_det.get('zipcode')
-							})
-						},
-						success: function(response) {
-							console.log('Posting payment details success');
-							var resobj = Ext.decode(response.responseText);
-							console.log('Payment details response '+response.responseText);
-						    gtp.settingschanged = false;
-						    gtp.arePaymentDetailsValid = true;
-						    if(resobj.status == 'success')
-						    Ext.Msg.alert('Success','Payment Details changed');
-						},
-						failure: function(response) {
-							Ext.Msg.alert('Error','Changing Payment Details');
-							console.log('Failed in posting payment details');
-							gtp.log('Failed in posting papyment details');
+					var errors = pay_det.validate();
+					console.log('errors '+errors);
+					
+					if(errors.isValid()) {
+						var fieldset = gtp.tabpanel.getComponent('basicform').down('#paymentdetails');
+						var billfs = gtp.tabpanel.getComponent('basicform').down('#billingdetails');
+						fieldset.items.each(function(item){
+							var errorField = fieldset.down('#'+item.name+'ErrorField');
+							if(errorField)
+								errorField.hide();
+							item.removeCls('invalid-field');
+						});
+						billfs.items.each(function(item){
+							var errorField = billfs.down('#'+item.name+'ErrorField');
+							if(errorField)
+								errorField.hide();
+							item.removeCls('invalid-field');
+						});
+						if(!pay_det.get('expmonth'))
+							Ext.Msg.alert('Alert','Exp month cannot be empty');
+						else if(!pay_det.get('expyear'))
+							Ext.Msg.alert('Alert', 'Exp year cannot be empty');
+						else if(!validExpDate)
+							Ext.Msg.alert('Invalid','Expiry Date');
+						else if(!validZipCode)
+							Ext.Msg.alert('Invalid','Enter Valid zip code');
+						else {
+							Ext.Ajax.request({
+								url: webServices.getAt(webServices.findExact('service','paymentdetails')).get('url'),
+								method: 'POST',
+								params: {
+									json: Ext.encode({
+										ccName: pay_det.get('name'),
+										cardNumber: pay_det.get('ccnumber'),
+										expMonth: pay_det.get('expmonth'),
+										expYear: pay_det.get('expyear'),
+										bankRouting: 0,
+										ccCVV: 0,
+										bankAccount: pay_det.get('acnumber'),
+										address1: pay_det.get('address'),
+										city: pay_det.get('city'),
+										state: pay_det.get('state'),
+										country: pay_det.get('country'),
+										zip: pay_det.get('zipcode')
+									})
+								},
+								success: function(response) {
+									console.log('Posting payment details success');
+									gtp.log('Posting payment details success');
+									var resobj = Ext.decode(response.responseText);
+								    gtp.settingschanged = false;
+								    gtp.arePaymentDetailsValid = true;
+								    if(resobj.status == 'success')
+								    Ext.Msg.alert('Success','Payment Details changed');
+									gtp.showNotifications(resobj.response.notifications);
+									gtp.parse(resobj.response.commands);
+								},
+								failure: function(response) {
+									Ext.Msg.alert('Error','Changing Payment Details');
+									console.log('Failed in posting payment details');
+									gtp.log('Failed in posting papyment details');
+								}
+							});
+							gtp.tabpanel.getComponent(3).disable();
+							button.setText('edit');
+							button.setDisabled(false);
 						}
-					});
+					}
+					else {
+						var dis = gtp.tabpanel.getComponent('basicform');
+						var fieldset = dis.down('#paymentdetails');
+						var bill_fs = dis.down('#billingdetails');
+						fieldset.items.each(function(item){
+							var fieldErrors = errors.getByField(item.name);
+							console.log(item.name);
+							if(fieldErrors.length > 0) {
+								var errorField = fieldset.down('#'+item.name+'ErrorField');
+								item.addCls('invalid-field');
+								errorField.update(fieldErrors);
+								errorField.show();
+							}
+							else if(item.name){
+								var errorField = fieldset.down('#'+item.name+'ErrorField');
+								if(errorField)
+									errorField.hide();
+								item.removeCls('invalid-field');
+							}
+						},this);
+						bill_fs.items.each(function(item){
+							var fieldErrors = errors.getByField(item.name);
+							console.log(item.name);
+							if(fieldErrors.length > 0) {
+								var errorField = bill_fs.down('#'+item.name+'ErrorField');
+								item.addCls('invalid-field');
+								errorField.update(fieldErrors);
+								errorField.show();
+							}
+							else if(item.name){
+								var errorField = bill_fs.down('#'+item.name+'ErrorField');
+								if(errorField)
+									errorField.hide();
+								item.removeCls('invalid-field');
+							}
+						},this);
+					}
+					
 				}
 			}
 		}]
@@ -108,8 +168,17 @@ gtp.tabs.SettingsFormView = {
 			name: 'ccnumber',
 			id: 'ccnumber',
 			label: 'Cdt card#',
-			placeHolder: 'XXXX-XXXX-XXXX-XXXX',
-			useClearIcon: true
+			placeHolder: 'XXXX XXXX XXXX XXXX',
+			useClearIcon: true,
+			listeners: {
+				keyup: function(dis, e) {
+					var len = dis.getValue().length;
+					if( ( (len == 4) || (len == 9) || (len == 14) ) && len<20 && len>0)
+						dis.setValue(dis.getValue()+' ');
+					else if(len > 19)
+						Ext.Msg.alert('Invalid','Cdt cd# cannot exceed 16 digits');
+				}
+			}
 		},{
 			xtype: 'gtp.views.ErrorField',
 			fieldname: 'ccnumber'
@@ -135,6 +204,7 @@ gtp.tabs.SettingsFormView = {
 			displayField: 'year',
 			valueField: 'year'
 		},{
+			//This field may be removed.
 			xtype: 'textfield',
 			name: 'acnumber',
 			id: 'bankaccount',
@@ -143,6 +213,7 @@ gtp.tabs.SettingsFormView = {
 		}]
 	},{
 		xtype: 'fieldset',
+		id: 'billingdetails',
 		title: 'Billing Details',
 		defaults: {
 			listeners: {
@@ -163,17 +234,26 @@ gtp.tabs.SettingsFormView = {
 			id: 'billname',
 			useClearIcon: true
 		},{
+			xtype: 'gtp.views.ErrorField',
+			fieldname: 'name'
+		},{
 			xtype: 'textfield',
 			name: 'address',
 			label: 'Address',
 			id: 'addr1',
 			useClearIcon: true
 		},{
+			xtype: 'gtp.views.ErrorField',
+			fieldname: 'address'
+		},{
 			xtype: 'textfield',
 			name: 'city',
 			label: 'City',
 			id: 'billcity',
 			useClearIcon: true
+		},{
+			xtype: 'gtp.views.ErrorField',
+			fieldname: 'city'
 		},{
 			xtype: 'selectfield',
 			name: 'state',
@@ -182,6 +262,9 @@ gtp.tabs.SettingsFormView = {
 			store: gtp.stores.States,
 			displayField: 'StateName',
 			valueField: 'StateCode'
+		},{
+			xtype: 'gtp.views.ErrorField',
+			fieldname: 'state'
 		},{
 			xtype: 'selectfield',
 			id: 'country',
@@ -200,8 +283,9 @@ gtp.tabs.SettingsFormView = {
 			xtype: 'numberfield',
 			name: 'phoneno',
 			id: 'phoneno',
-			label: 'Number'
-		}]
+			label: 'Number',
+			useClearIcon: true
+	}]
 	},{
 		xtype: 'fieldset',
 		title: 'Your Account',
@@ -218,30 +302,7 @@ gtp.tabs.SettingsFormView = {
 		xtype: 'button',
 		text: 'Change Password',
 		handler: function(button, event) {
-			new Ext.Panel({
-				items: [{
-					html: 'Current Password'
-				},{
-					xtype: 'textfield',
-					name: 'currentpwd'
-				},{
-					html: 'New Password'
-				},{
-					xtype: 'textfield',
-					name: 'newpassword'
-				},{
-					html: 'Confirm Password'
-				},{
-					xtype: 'textfield',
-					name: 'confirmnewpwd'
-				},{
-					xtype: 'button',
-					text: 'submit',
-					handler: function(button, event) {
-						// Todo.
-					}
-				}]
-			});
+			gtp.tabpanel.setActiveItem(7);
 		}
 	}],
 	listeners: {

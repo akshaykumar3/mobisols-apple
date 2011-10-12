@@ -1,3 +1,8 @@
+//Store for configuration.
+gtp.stores.Config = new Ext.data.Store({
+	model: 'Configure'
+});
+
 //Store for years.
 gtp.stores.Years = new Ext.data.Store({
 	model: 'Year'
@@ -297,17 +302,11 @@ var tolldetails=new Ext.data.Store({
 });
 
 // Store for paid Tolls.
-var paidTolls = new Ext.data.Store({
+gtp.stores.paidTolls = new Ext.data.Store({
 	model: 'PaidTolls',
 	getGroupString : function(record) {
 		return record.get('date');
-	},
-	data: [{
-		date:'2011-02-21',
-		amount:'$2.50',
-		location:'I-15N, Kentucky',
-		reg: '4GPB5'
-	}]
+	}
 });
 
 // Store for toll operators.

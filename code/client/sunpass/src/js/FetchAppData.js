@@ -1,4 +1,6 @@
 gtp.FetchUserData = function(options) {
+	if(gtp.tabpanel)
+		console.log('tabpanel is ready');
 	var mylocation_marker, markernotset=true;
 	
 	gtp.geo = new Ext.util.GeoLocation({
@@ -93,6 +95,7 @@ gtp.FetchUserData = function(options) {
 				},'PaidTolls'));
 			}
       	}
+      	gtp.showNotifications(res.notifications);
       },
       failure: function(result) {
      	gtp.log('Account Details failure with status code'+result.status);
@@ -111,8 +114,10 @@ gtp.FetchUserData = function(options) {
 					value: ccl[i].name
 				}],true);
 			}
+	      	gtp.showNotifications(resobj.notifications);
 		},
 		failure: function(response) {
+			console.log('Fetching CCtypelist failure with status '+response.status);
 			gtp.log('Fetching CCtypelist failure with status '+response.status);
 		}
 	});
@@ -129,9 +134,11 @@ gtp.FetchUserData = function(options) {
 					value: spl[i].name
 				}],true);
 			}
+	      	gtp.showNotifications(resobj.notifications);
 		},
 		failure: function(response) {
-			gtp.log('Fetching SevicePlans list failed');
+			console.log('Fetching SevicePlans list failed with status'+response.status);
+			gtp.log('Fetching SevicePlans list failed with status'+response.status);
 		}
 	});
 	
@@ -147,6 +154,7 @@ gtp.FetchUserData = function(options) {
 					value: vtl[i].name
 				}],true);
 			}
+	      	gtp.showNotifications(resobj.notifications);
 		},
 		failure: function(response) {
 			gtp.log('Fetching Sevices list failed');

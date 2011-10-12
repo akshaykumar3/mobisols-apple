@@ -6,8 +6,8 @@
 Ext.regApplication({
     name: "gtp",
     icon: 'resources/images/launchiconapple.png',
-    tabletStartupScreen: 'resources/images/launchimageipad.png',
     phoneStartupScreen: 'resources/images/launchimageiphone.png',
+    tabletStartupScreen: 'resources/images/launchimageipad.png',
     glossOnIcon: false,
     today: new Date(),
     isCarValid: false,
@@ -90,6 +90,27 @@ Ext.regApplication({
     			}
     		});
     	}
+    },
+    parse: function(command) {
+    	if(command && command.action)
+    	Ext.dispatch({
+    		controller: 'command',
+    		action: command.action,
+    		data: command.arguments
+    	});
+    },
+    showNotifications: function(notfs) {
+    	if(notfs && notfs.message)
+    		Ext.Msg.alert('Notification',notfs.message);
+    },
+    responseFailureHandler: function(res, message) {
+    	// log to the logger store.
+    	gtp.log(message + res.status);
+    	if(res.status == 404) {
+    		// Do logic for error handling.
+    	}
+    	else if(res.status == 500) {
+    		
+    	}
     }
 });
-
