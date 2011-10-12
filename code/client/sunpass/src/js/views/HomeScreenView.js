@@ -95,6 +95,7 @@ gtp.tabs.HomeScreenView = {
 								to.setValue(resobj.response.tolloperator);
 								at.setValue(resobj.response.avgtoll);
 								pt.setValue(resobj.response.price);*/
+						      	gtp.showNotifications(res.notifications);
 							},
 							failure: function(response){
 								console.log('failure with status'+response.status);
@@ -151,6 +152,7 @@ gtp.tabs.HomeScreenView = {
 						success: function(response) {
 							gtp.log('Application is active');
 							console.log(response.responseText);
+					      	gtp.showNotifications(Ext.decode(response).notifications);
 						},
 						failure: function(res) {
 							gtp.log(res.status+' Error, Activating the application');
@@ -175,11 +177,7 @@ gtp.tabs.HomeScreenView = {
 			name: 'serviceplan',
 			id: 'serviceplan',
 			label: 'Service',
-			required: true,
-			options: [{
-				text: 'daily',
-				value: 'daily'
-			}]
+			required: true
 		}]
 	},{
 		xtype: 'fieldset',

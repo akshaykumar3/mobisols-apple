@@ -20,7 +20,6 @@ gtp.tabs.CarDetailView = {
 			ui: 'action',
 			disabled: true,
 			handler: function(button, event) {
-				
 				var updateCar = gtp.tabpanel.getComponent('details').getRecord();
 				var curtab = gtp.tabpanel.getComponent('details');
 				if(!gtp.dateValidity(gtp.today, curtab.down('#dpto')))
@@ -50,6 +49,7 @@ gtp.tabs.CarDetailView = {
 						gtp.log(obj.description);
 						updateCar.set('endDate',Ext.getCmp('dpto').getValue());
 						Ext.getCmp('changevd').setDisabled(true);
+				      	gtp.showNotifications(resobj.notifications);
 					},
 					failure: function(response){
 						gtp.log(response.status+' Error in updating car details');

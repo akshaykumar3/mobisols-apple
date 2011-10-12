@@ -1,3 +1,14 @@
+// Define model for application configuration.
+gtp.models.Configuration = Ext.regModel('Configure',{
+	fields: [{
+		name: 'componentName',
+		type: 'string'
+	},{
+		name: 'version',
+		type: 'string'
+	}]
+});
+
 //Defines model for Year
 gtp.models.Year = Ext.regModel('Year', {
 	fields: [{
@@ -208,8 +219,22 @@ Ext.regModel('Settings',{
 		text: 'string'
 	}],
 	validations: [{
+		type: 'format',
+		field: 'ccnumber',
+		matcher: /[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}/
+	},{
 		type: 'presence',
-		name: 'ccnumber'
+		name: 'name'
+	},{
+		type: 'presence',
+		name: 'address'
+	},{
+		type: 'presence',
+		name: 'city'
+	},{
+		type: 'exclusion',
+		field: 'state',
+		list: ['']
 	}]
 });
 
