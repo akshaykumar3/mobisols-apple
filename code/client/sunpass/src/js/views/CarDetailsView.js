@@ -10,7 +10,10 @@ gtp.tabs.CarDetailView = {
 			text: 'My Cars',
 			ui: 'back',
 			handler: function(button , event) {
-				gtp.tabpanel.setActiveItem('mycars');
+				gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+					type: 'slide',
+					direction: 'right'
+				});
 			}
 		},{
 			xtype: 'spacer'
@@ -20,9 +23,9 @@ gtp.tabs.CarDetailView = {
 			ui: 'action',
 			disabled: true,
 			handler: function(button, event) {
-				var updateCar = gtp.tabpanel.getComponent('details').getRecord();
-				var curtab = gtp.tabpanel.getComponent('details');
-				if(!gtp.dateValidity(gtp.today, curtab.down('#dpto')))
+				var updateCar = gtp.tabpanel.getActiveItem().down('#details').getRecord();
+				var curtab = gtp.tabpanel.getActiveItem().down('#details');
+				if(!gtp.dateValidity(gtp.today, curtab.down('#dpto').getValue()))
 					Ext.Msg.alert(gtp.dict.datevalidity);
 				else
 				Ext.Ajax.request({
@@ -44,17 +47,23 @@ gtp.tabs.CarDetailView = {
 					success: function(response){
 						var resobj=Ext.decode(response.responseText);
 						var obj=resobj.response;
-						gtp.tabpanel.setActiveItem('mycars');
+						gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+							type: 'slide',
+							direction: 'right'
+						});
 						Ext.Msg.alert(obj.description);
 						gtp.log(obj.description);
-						updateCar.set('endDate',Ext.getCmp('dpto').getValue());
+						updateCar.set('endDate',curtab.down('#dpto').getValue());
 						Ext.getCmp('changevd').setDisabled(true);
 				      	gtp.showNotifications(resobj.notifications);
 					},
 					failure: function(response){
 						gtp.log(response.status+' Error in updating car details');
 						Ext.Msg.alert(gtp.dict.updatecar_failure);
-						gtp.tabpanel.setActiveItem('mycars');
+						gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+							type: 'slide',
+							direction: 'right'
+						});
 					}
 				});
 			}
@@ -106,7 +115,7 @@ gtp.tabs.CarDetailView = {
 			listeners: {
 				change: function(curobj, newValue, oldValue) {
 					if(newValue != oldValue) {
-						gtp.tabpanel.getComponent('details').updateRecord(gtp.tabpanel.getComponent('details').getRecord());
+						gtp.tabpanel.getActiveItem().down('#details').updateRecord(gtp.tabpanel.getActiveItem().down('#details').getRecord());
 						Ext.getCmp('changevd').setDisabled(false);
 					}
 				}
@@ -118,7 +127,7 @@ gtp.tabs.CarDetailView = {
 		text: 'Delete Car',
 		handler: function(but, event) {
 
-			var stmod = gtp.tabpanel.getComponent('details').getRecord();
+			var stmod = gtp.tabpanel.getActiveItem().down('#details').getRecord();
 			Ext.Msg.confirm("Confirmation", "Are you sure to delete car?", function(button) {
 				if(button == 'yes') {
 					Ext.Ajax.request({
@@ -135,7 +144,7 @@ gtp.tabs.CarDetailView = {
 								carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
 								Ext.Msg.alert(gtp.dict.deletecar_success);
 							}
-							gtp.tabpanel.setActiveItem('mycars');
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						},
 						failure: function(response){
 							gtp.log(response.status+' Error deleting the car');

@@ -330,9 +330,6 @@ gtp.stores.LogHeartBeat= new Ext.data.Store({
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://localhost:6001/newweb/services/ChangePassword',
-		service: 'changepassword'
-	},{
 		url: 'http://localhost:6001/newweb/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{

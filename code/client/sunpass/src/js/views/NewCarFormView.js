@@ -26,7 +26,7 @@ gtp.tabs.NewCarFormView = {
 			text: 'My Cars',
 			ui: 'back',
 			handler: function(button, event) {
-				gtp.tabpanel.setActiveItem('mycars');
+				gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 			}
 		},{
 			xtype: 'spacer'
@@ -37,7 +37,7 @@ gtp.tabs.NewCarFormView = {
 			ui: 'confirm',
 			disabled: true,
 			handler: function(button, event) {
-				var acfd = gtp.tabpanel.getComponent('addcar').getValues(true);
+				var acfd = gtp.tabpanel.getActiveItem().down('#addcar').getValues(true);
 				if(acfd.endDate)
 				var validEndDate = gtp.dateValidity(gtp.today, acfd.endDate);
 				
@@ -86,7 +86,7 @@ gtp.tabs.NewCarFormView = {
 							Ext.Msg.alert(gtp.dict.newcar_failure);
 						}
 					});
-					gtp.tabpanel.setActiveItem('mycars','fade');
+					gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 				}
 			}
 		}]

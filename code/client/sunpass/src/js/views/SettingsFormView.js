@@ -1,11 +1,7 @@
 gtp.tabs.SettingsFormView = {
-	title: 'Settings',
 	xtype: 'formpanel',
-	//layout: 'card',
-	id: 'basicform',
 	scroll: 'vertical',
-	iconCls: 'AccountSettings',
-	cls: 'card4',
+	id: 'settingsform',
 	dockedItems: [{
 		xtype: 'toolbar',
 		title: 'Settings',
@@ -20,15 +16,17 @@ gtp.tabs.SettingsFormView = {
 			id: 'savesettings',
 			handler: function(button, event) {
 				if(button.getText() == 'edit') {
-					gtp.tabpanel.getComponent(3).enable();
-					gtp.tabpanel.getComponent('basicform').down('#userid').setDisabled(true);
+					gtp.tabpanel.getComponent(3).down('#settingsform').enable();
+					gtp.tabpanel.getComponent(3).down('#settingsform').down('#userid').setDisabled(true);
 					button.setText('save');
 					button.setDisabled(true);
 				}
 				else if(button.getText() == 'save' && gtp.settingschanged) {
 					
-					var pay_det = gtp.tabpanel.getComponent(3).getRecord();
-					var statecode = gtp.tabpanel.getComponent('basicform').down('#billstate').getValue();
+					var setform = gtp.tabpanel.getComponent(3);
+					
+					var pay_det = setform.down('#settingsform').getRecord();
+					var statecode = setform.down('#settingsform').down('#billstate').getValue();
 					if(statecode.length > 2)
 						statecode = gtp.stores.States.getAt(gtp.stores.States.findExact('StateName',statecode)).get('StateCode');
 					var validZipCode = gtp.validateZipCode(statecode, pay_det.get('city'), pay_det.get('zipcode'));
@@ -38,11 +36,10 @@ gtp.tabs.SettingsFormView = {
 						validExpDate = gtp.expiryDateValidity(pay_det.get('expmonth'), pay_det.get('expyear'));
 					
 					var errors = pay_det.validate();
-					console.log('errors '+errors);
 					
 					if(errors.isValid()) {
-						var fieldset = gtp.tabpanel.getComponent('basicform').down('#paymentdetails');
-						var billfs = gtp.tabpanel.getComponent('basicform').down('#billingdetails');
+						var fieldset = setform.down('#settingsform').down('#paymentdetails');
+						var billfs = setform.down('#settingsform').down('#billingdetails');
 						fieldset.items.each(function(item){
 							var errorField = fieldset.down('#'+item.name+'ErrorField');
 							if(errorField)
@@ -100,13 +97,13 @@ gtp.tabs.SettingsFormView = {
 									gtp.log('Failed in posting papyment details');
 								}
 							});
-							gtp.tabpanel.getComponent(3).disable();
+							setform.down('#settingsform').disable();
 							button.setText('edit');
 							button.setDisabled(false);
 						}
 					}
 					else {
-						var dis = gtp.tabpanel.getComponent('basicform');
+						var dis = setform.down('#settingsform');
 						var fieldset = dis.down('#paymentdetails');
 						var bill_fs = dis.down('#billingdetails');
 						fieldset.items.each(function(item){
@@ -155,7 +152,8 @@ gtp.tabs.SettingsFormView = {
 			listeners: {
 				change: function(curobj,newValue,oldValue) {
 					if(newValue != oldValue) {
-						gtp.tabpanel.getComponent(3).updateRecord(gtp.tabpanel.getComponent(3).getRecord());
+						var setvp = Ext.getCmp('basicform');
+						setvp.down('#settingsform').updateRecord(setvp.down('#settingsform').getRecord());
 						gtp.settingschanged=true;
 						var savebutton=Ext.getCmp('savesettings');
 						savebutton.setDisabled(false);	
@@ -219,7 +217,8 @@ gtp.tabs.SettingsFormView = {
 			listeners: {
 				change: function(curobj,newValue,oldValue) {
 					if(newValue != oldValue) {
-						gtp.tabpanel.getComponent(3).updateRecord(gtp.tabpanel.getComponent(3).getRecord());
+						var setvp = Ext.getCmp('basicform');
+						setvp.down('#settingsform').updateRecord(setvp.down('#settingsform').getRecord());
 						gtp.settingschanged=true;
 						var savebutton=Ext.getCmp('savesettings');
 						savebutton.setDisabled(false);	
@@ -300,9 +299,9 @@ gtp.tabs.SettingsFormView = {
 		}]
 	},{
 		xtype: 'button',
-		text: 'Change Password',
+		text: 'Reset Password',
 		handler: function(button, event) {
-			gtp.tabpanel.setActiveItem('changepwd_view');
+			gtp.tabpanel.getComponent('basicform').setActiveItem('changepwd_view');
 		}
 	}],
 	listeners: {
