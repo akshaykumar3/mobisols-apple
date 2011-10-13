@@ -5,9 +5,9 @@ import java.util.Set;
 
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.model.User;
-import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserBalanceLog;
 import com.mobisols.tollpayments.model.UserVehicle;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.AccountDetailsResponse;
 import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.response.get.VehicleDetails;
@@ -16,9 +16,11 @@ import com.mobisols.tollpayments.service.AccountDetailsService;
 public class AccountDetailsServiceImpl implements AccountDetailsService {
 
 	private UserDao userDao;
+	private JsonConverter jsonConverter;
 	
-	public AccountDetailsResponse getAccountDetailsResponse(String username){
-		AccountDetailsResponse adr=new AccountDetailsResponse(); 
+	public String getAccountDetailsResponse(String request,String username){
+		AccountDetailsResponse adr=new AccountDetailsResponse();
+		String status = "";
 		User u=userDao.getUser(username);
 		if(u==null)
 			return null;
@@ -28,7 +30,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		loadPaymentDetails(adr, u);
 		
 		Set<UserVehicle> vehicleList =u.getUserVehicles();
-		for(Iterator it=  (Iterator) vehicleList.iterator();it.hasNext();)
+		for(Iterator it=  vehicleList.iterator();it.hasNext();)
 		{
 			UserVehicle uv=(UserVehicle) it.next();
 			VehicleDetails vd=new VehicleDetails();
@@ -57,7 +59,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			bl.setTimeStamp(ubl1.getTimestamp());
 			adr.getBalanceInfo().getBalancelog().add(bl);
 		}
-		return adr;
+		return jsonConverter.getJSON(request, status, adr);
 	}
 
 	private void loadPaymentDetails(AccountDetailsResponse acr, User u) {
@@ -91,5 +93,13 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

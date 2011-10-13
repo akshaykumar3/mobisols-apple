@@ -8,6 +8,7 @@ import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
 import com.mobisols.tollpayments.response.post.CheckUserBalanceResponse;
 import com.mobisols.tollpayments.service.CheckUserBalance;
@@ -16,6 +17,8 @@ public class CheckUserBalanceImpl implements CheckUserBalance {
 	public static final double MIN_BALANCE=2;
 	public static final double MIN_TRANS_AMOUNT=10;
 	public static final int SUCCESS=1;
+	String status="";
+	private JsonConverter jsonConverter;
 	
 	private UserDao userDao;
 	private UserBalanceDao userBalanceDao;
@@ -63,6 +66,12 @@ public class CheckUserBalanceImpl implements CheckUserBalance {
 	}
 	public void setPaymentGateway(PaymentGateway paymentGateway) {
 		this.paymentGateway = paymentGateway;
+	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 	
 }

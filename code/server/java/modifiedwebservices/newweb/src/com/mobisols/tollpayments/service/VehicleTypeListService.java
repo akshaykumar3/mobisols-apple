@@ -1,10 +1,9 @@
 package com.mobisols.tollpayments.service;
 
 import com.mobisols.tollpayments.dao.VehicleTypeDao;
-import com.mobisols.tollpayments.response.get.VehicleTypeListResponse;
 
-public interface VehicleTypeListService extends GeneralService {
+public interface VehicleTypeListService  {
 	VehicleTypeDao vehicleTypeDao=null;
 	
-	public VehicleTypeListResponse getVehicleTypeList();
+	public String getVehicleTypeList(String request);
 }

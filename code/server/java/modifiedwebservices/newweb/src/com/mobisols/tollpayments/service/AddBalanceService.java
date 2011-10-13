@@ -2,9 +2,8 @@ package com.mobisols.tollpayments.service;
 
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
-import com.mobisols.tollpayments.response.GeneralResponse;
 
-public interface AddBalanceService extends GeneralService{
+public interface AddBalanceService {
 	UserDao userDao=null;
-	public GeneralResponse postaddBalanceResponse(AddBalanceRequest ar,String username);
+	public String postaddBalanceResponse(String request,AddBalanceRequest ar,String username);
 }

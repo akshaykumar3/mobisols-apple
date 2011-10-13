@@ -29,8 +29,6 @@ public class ComponentVersionDaoImpl implements ComponentVersionDao {
 	{
 		Session s= HibernateSessionFactory.getSession();
 		Criteria crit= s.createCriteria(ComponentVersion.class);
-		if(componentDao == null)
-			System.out.println("componentDao is null");
 		crit.add(Restrictions.eq("componentId", componentDao.getComponent(component).getComponentId()));
 		crit.add(Restrictions.eq("version", version));
 		return (ComponentVersion)crit.uniqueResult();

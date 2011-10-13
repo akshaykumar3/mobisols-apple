@@ -10,6 +10,7 @@ import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.TollLocation;
 import com.mobisols.tollpayments.model.VehicleMovementLog;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
@@ -26,11 +27,14 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	private TollLocationDao tollLocationDao;
 	private UserVehicleHistoryDao userVehicleHistoryDao;
 	private VmlTypeDao vmlTypeDao;
+	private JsonConverter jsonConverter;
+	
 	public static final double DEFAULT_TIME=10*60;
 	public static final double DEFAULT_DISTANCE=200;
 	
-	public HeartBeatResponse saveHeartBeat(HeartBeatRequest hbr) {
+	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
 		HeartBeatResponse response = new HeartBeatResponse();
+		String status="";
 		VehicleMovementLog vml=new VehicleMovementLog();
 		Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());
 		vml.setClientId(Client.PRESENT_CLIENT);
@@ -87,7 +91,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
 		response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
 		response.getHash().put("tollSessionId", tollSessionId);
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	
 	
@@ -154,5 +158,15 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 
 	public void setDeviceHistoryDao(DeviceHistoryDao deviceHistoryDao) {
 		this.deviceHistoryDao = deviceHistoryDao;
+	}
+
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

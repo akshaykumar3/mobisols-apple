@@ -6,6 +6,7 @@ import com.mobisols.tollpayments.dao.ComponentDao;
 import com.mobisols.tollpayments.model.Component;
 import com.mobisols.tollpayments.model.ComponentVersion;
 import com.mobisols.tollpayments.model.Configuration;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.response.get.ClientConfigurationResponse;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
@@ -14,10 +15,12 @@ public class ClientConfigurationServiceImpl implements
 		ClientConfigurationService {
 	
 	private ComponentDao componentDao;
-
-	public ClientConfigurationResponse getClientConfig(ClientConfigurationRequest r )
+	private JsonConverter jsonConverter;
+	
+	public String getClientConfig(String request,ClientConfigurationRequest r )
 	{
 		ClientConfigurationResponse response=new ClientConfigurationResponse();
+		String status="";
 		Component c=componentDao.getComponent(r.getComponentName());
 		ComponentVersion cv=null;
 		for(Iterator it=c.getComponentVersion().iterator();it.hasNext();)
@@ -54,7 +57,7 @@ public class ClientConfigurationServiceImpl implements
 				response.getKeyValues().put(config.getKey(), config.getValue());
 			}
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	
 	public ComponentDao getComponentDao() {
@@ -63,5 +66,13 @@ public class ClientConfigurationServiceImpl implements
 
 	public void setComponentDao(ComponentDao componentDao) {
 		this.componentDao = componentDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

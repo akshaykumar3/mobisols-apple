@@ -9,6 +9,7 @@ import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.request.post.ActivateRequest;
 import com.mobisols.tollpayments.response.post.ActivateResponse;
 import com.mobisols.tollpayments.service.ActivateService;
@@ -18,11 +19,12 @@ public class ActivateServiceImpl implements ActivateService {
 	private UserDao userDao;
 	private UserVehicleDao userVehicleDao;
 	private DeviceDao deviceDao;
+	private JsonConverter jsonConverter;
 	
-	public ActivateResponse activate(ActivateRequest ar,String userName){
+	public String activate(String request,ActivateRequest ar,String userName){
 		ActivateResponse response = new ActivateResponse();
+		String status=""; 
 		User u = userDao.getUser(userName);
-		boolean isVehicleActive=false;
 		
 		if(ar.getActive().equals("Y"))
 		{
@@ -88,7 +90,7 @@ public class ActivateServiceImpl implements ActivateService {
 				response.setActive(u.getIsActive());
 			}
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 
 	public UserVehicleDao getUserVehicleDao() {
@@ -113,5 +115,13 @@ public class ActivateServiceImpl implements ActivateService {
 
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

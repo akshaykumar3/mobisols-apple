@@ -26,6 +26,7 @@
 		<property name="componentDao" ref = "dao.tollpayments.componentDao"/>
 	</bean>
 	<bean id="dao.tollpayments.configurationDao" class="com.mobisols.tollpayments.daoImpl.ConfigurationDaoImpl">
+		<property name="componentVersionDao" ref = "dao.tollpayments.componentVersionDao"/>
 	</bean>
 	<bean id="dao.tollpayments.userVehicleDao" class="com.mobisols.tollpayments.daoImpl.UserVehicleDaoImpl"/>
 	<bean id="dao.tollpayments.userBalanceDao" class="com.mobisols.tollpayments.daoImpl.UserBalanceDaoImpl"/>

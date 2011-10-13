@@ -1,12 +1,11 @@
 package com.mobisols.tollpayments.service;
 
 import com.mobisols.tollpayments.dao.OwnerTypeDao;
-import com.mobisols.tollpayments.response.get.OwnerTypeListResponse;
 
-public interface OwnerTypeListService extends GeneralService{
+public interface OwnerTypeListService {
 	OwnerTypeDao ownerTypeDao = null;
 	
-	public OwnerTypeListResponse getOwnerTypeList();
+	public String getOwnerTypeList(String request);
 	
 
 }
