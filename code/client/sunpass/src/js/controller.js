@@ -233,56 +233,26 @@ gtp.controllers = Ext.regController("load",{
 				type: 'fade',
 				cover: true
 			},
-			items: [gtp.tabs.HomeScreenView,
-			        gtp.tabs.CarsListView,
-			        gtp.tabs.PaidTollsListView,
-			        gtp.tabs.SettingsFormView,
-			        gtp.tabs.MapView,
-			        gtp.tabs.NewCarFormView,
-			        gtp.tabs.CarDetailView,
-			        gtp.tabs.changepwd],			
+			items: [
+		        gtp.tabs.HomeScreenView,
+		        gtp.tabs.CarsViewport,
+		        gtp.tabs.PaidTollsListView,
+		        gtp.tabs.SettingsViewport,
+		        gtp.tabs.MapView,
+			],			
 			listeners: {
 				beforecardswitch: function(curobj, newCard, oldCard, index, animated) {
-					if(newCard.getId() == 'mycars') {
-						gtp.carsvisited = true;
-						Ext.getCmp('mycarstb').show();
-					}
-					
-					if(newCard.getId() != 'mycars'  && !gtp.carsvisited)
-						Ext.getCmp('mycarstb').hide();
-					else if(!gtp.carsvisited)
-						Ext.getCmp('mycarstb').show();
 					
 					if(oldCard.getId()== 'basicform' && gtp.settingschanged) {
 						// Do ajax call to save the payment details. Same when clicked on the save button.
 						return true;
 					}
 					else if(oldCard.getId() == 'basicform' && !gtp.settingschanged) {
-						oldCard.disable();
+						oldCard.down('#settingsform').disable();
 						var savebutton = Ext.getCmp('savesettings');
 						savebutton.setDisabled(false);
 						savebutton.setText('edit');
 					}
-					else if(oldCard.getId() == 'addcar' && newCard.getId() == 'details' && gtp.showtabs) {
-						gtp.showtabs=false;
-						return false;
-					}
-					else if(oldCard.getId() == 'addcar' && newCard.getId() != 'details' && gtp.showtabs) {
-						gtp.showtabs=false;
-						return true;
-					}
-					else if(oldCard.getId() == 'details' && newCard.getId() == 'addcar' && gtp.showtabs) {
-						gtp.showtabs=false;
-						return false;
-					}
-					else if(oldCard.getId() == 'details' && newCard.getId() != 'addcar' && gtp.showtabs) {
-						gtp.showtabs=false;
-						return true;
-					}
-					else if(newCard.getId() == 'addcar' && !gtp.showtabs)
-						return false;
-					else if(newCard.getId() == 'details' && !gtp.showtabs)
-						return false;
 				}
 			}
 		});

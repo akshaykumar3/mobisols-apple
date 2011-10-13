@@ -79,7 +79,7 @@ gtp.FetchUserData = function(options) {
 		      		city: pay_details.city,
 		      		zipcode: pay_details.zip
 		      	},'Settings');
-		      	gtp.tabpanel.getComponent(3).load(userSettings);
+		      	gtp.tabpanel.getComponent('basicform').down('#settingsform').load(userSettings);
 	      	}
 	      	
 	      	if(paidtoll_details)
