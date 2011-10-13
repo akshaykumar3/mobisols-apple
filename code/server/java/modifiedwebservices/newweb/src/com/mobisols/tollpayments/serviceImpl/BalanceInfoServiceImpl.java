@@ -7,6 +7,7 @@ import java.util.Set;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserBalanceLog;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.BalanceInfoResponse;
 import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.service.BalanceInfoService;
@@ -14,10 +15,12 @@ import com.mobisols.tollpayments.service.BalanceInfoService;
 public class BalanceInfoServiceImpl implements BalanceInfoService {
 
 	private UserDao userDao;
+	private JsonConverter jsonConverter;
 	
 	
-	public BalanceInfoResponse getBalanceInfo(String user) {
+	public String getBalanceInfo(String request,String user) {
 		BalanceInfoResponse response=new BalanceInfoResponse();
+		String status="";
 		User u=userDao.getUser(user);
 		response.setCurrentBalance((u.getUserBalance().getBalance()));
 		response.setBalanceId(u.getUserBalance().getUbalId());
@@ -31,7 +34,7 @@ public class BalanceInfoServiceImpl implements BalanceInfoService {
 			bl.setTimeStamp(ubl1.getTimestamp());
 			response.getBalancelog().add(bl);
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 
 	public void setUserDao(UserDao user) {
@@ -40,6 +43,14 @@ public class BalanceInfoServiceImpl implements BalanceInfoService {
 
 	public UserDao getUserDao() {
 		return userDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 
 }

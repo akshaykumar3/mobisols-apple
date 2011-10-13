@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.mobisols.tollpayments.dao.ServicePlanDao;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.ServicePlan;
 import com.mobisols.tollpayments.response.get.ServicePlanList;
 import com.mobisols.tollpayments.service.ServicePlanService;
@@ -11,9 +12,11 @@ import com.mobisols.tollpayments.service.ServicePlanService;
 public class ServicePlanServiceImpl implements ServicePlanService {
 
 	private ServicePlanDao servicePlanDao;
+	private JsonConverter jsonConverter;
 	
 	@Override
-	public ServicePlanList getServiceList() {
+	public String getServiceList(String request) {
+		String status="";
 		ServicePlanList response= new ServicePlanList();
 		List l=servicePlanDao.getServiceList();
 		for(Iterator it = l.iterator();it.hasNext();)
@@ -25,12 +28,18 @@ public class ServicePlanServiceImpl implements ServicePlanService {
 	    	p.setTollOpName(s.getTollOperator().getName());
 	    	response.getServicePlanList().add(p);
 	    }
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	public ServicePlanDao getServicePlanDao() {
 		return servicePlanDao;
 	}
 	public void setServicePlanDao(ServicePlanDao userServiceDao) {
 		this.servicePlanDao = userServiceDao;
+	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

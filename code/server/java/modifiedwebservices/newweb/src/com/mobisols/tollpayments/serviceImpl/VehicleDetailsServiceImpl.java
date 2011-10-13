@@ -13,6 +13,7 @@ import com.mobisols.tollpayments.model.OwnerType;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
 import com.mobisols.tollpayments.model.VehicleType;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.MyUtilVehicle;
 import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
@@ -29,11 +30,16 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	private OwnerTypeDao ownerTypeDao;
 	private VehicleTypeDao vehicleTypeDao;
 	private DeviceDao deviceDao;
+	private JsonConverter jsonConverter;
+	
+	
+
 	public static final String IS_NEW_VEHICLE_TRUE="Y";
 	public static final String IS_NEW_VEHICLE_FALSE="N";
 	
-	public VehicleDetailsResponse postVehicleDetails(VehicleDetailsRequest vdr,String user,String isNewVehicle)
+	public String postVehicleDetails(String request,VehicleDetailsRequest vdr,String user,String isNewVehicle)
 	{
+		String status="";
 		VehicleDetailsResponse response = new VehicleDetailsResponse();
 		
 		if(myUtilVehicle.isValidRegistrationNumber(vdr.getRegistration(), vdr.getState()) && myUtilVehicle.isValidEndDate(vdr.getEndDate()))
@@ -98,11 +104,12 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			response.getNotifications().add("InValid Registration number");
 			response.setVehicleId(-1);
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	
-	public GeneralResponse deleteVehicle(int vehicleId,String user)
+	public String deleteVehicle(String request,int vehicleId,String user)
 	{
+		String status="";
 		GeneralResponse response = new GeneralResponse();
 		User u=userDao.getUser(user);
 		UserVehicle uv= userVehicleDao.getVehicle(vehicleId);
@@ -132,7 +139,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		{
 			response.setDescription("User does not have this vehicle");
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	
 	public UserVehicleDao getUserVehicleDao() {
@@ -181,5 +188,13 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
+	}
+	
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

@@ -8,7 +8,6 @@ import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
-import com.mobisols.tollpayments.response.post.HeartBeatResponse;
 
 public interface HeartBeatService {
 	VmlDao vmlDao=null;
@@ -19,7 +18,7 @@ public interface HeartBeatService {
 	UserVehicleHistoryDao userVehicleHistoryDao=null;
 	VmlTypeDao vmlTypeDao=null;
 	
-	public HeartBeatResponse saveHeartBeat(HeartBeatRequest hbr);
+	public String saveHeartBeat(String request,HeartBeatRequest hbr);
 	public MyUtilDate getMyUtilDate();
 
 	public void setMyUtilDate(MyUtilDate myUtilDate);

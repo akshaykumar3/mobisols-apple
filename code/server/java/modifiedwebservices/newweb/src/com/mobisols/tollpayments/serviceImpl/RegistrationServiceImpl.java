@@ -8,6 +8,7 @@ import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.User;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.response.post.RegistrationResponse;
@@ -20,15 +21,18 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private UserBalanceDao userBalanceDao;
 	private UserPaymentDetailDao userPaymentDetailDao;
 	private MyUtilDate myUtilDate;
+	private JsonConverter jsonConverter;
+	
 	public static final String PASSWORD_CORRECT_FALSE="N";
 	public static final String PASSWORD_CORRECT_TRUE="Y";
 	
 	public static final String ANOTHER_USER_LOGGED_IN_TRUE="Y";
 	public static final String ANOTHER_USER_LOGGED_IN_FALSE="N";
 	
-	public RegistrationResponse createUser(RegistrationServiceRequest r)
+	public String createUser(String request,RegistrationServiceRequest r)
 	{
 		RegistrationResponse response=new RegistrationResponse();
+		String status="";
 		User u=userDao.getUser(r.getUserName());
 		if(u!=null)
 		{
@@ -38,7 +42,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 				response.getResponse().put("deviceExists",Device.DEVICE_NOT_EXISTS);
 			else
 				response.getResponse().put("deviceExists",Device.DEVICE_EXISTS);
-			return response;
+			return jsonConverter.getJSON(request, status,response);
 		}
 		else
 		{
@@ -47,7 +51,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			if(d==null)
 				{
 					response.getResponse().put("deviceExists",Device.DEVICE_NOT_EXISTS); 
-					return response;
+					return jsonConverter.getJSON(request, status,response);
 				}
 			else
 				response.getResponse().put("deviceExists",Device.DEVICE_EXISTS);
@@ -96,7 +100,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			
 			d.setUserId(u.getUserId());
 			deviceDao.save(d);
-			return response;
+			return jsonConverter.getJSON(request, status,response);
 		}
 	}
 	public UserDao getUserDao() {
@@ -129,5 +133,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 	public void setUserPaymentDetailDao(UserPaymentDetailDao userPaymentDetailDao) {
 		this.userPaymentDetailDao = userPaymentDetailDao;
+	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

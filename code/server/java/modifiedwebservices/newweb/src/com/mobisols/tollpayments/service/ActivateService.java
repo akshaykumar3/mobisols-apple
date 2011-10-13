@@ -1,8 +1,10 @@
 package com.mobisols.tollpayments.service;
 
+
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.request.post.ActivateRequest;
-import com.mobisols.tollpayments.response.post.ActivateResponse;
 
 public interface ActivateService {
-	public ActivateResponse activate(ActivateRequest ar,String userName);
+	JsonConverter jsonConverter=null;
+	public String activate(String request,ActivateRequest ar,String userName);
 }

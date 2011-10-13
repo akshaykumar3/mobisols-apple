@@ -5,6 +5,7 @@ import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
 import com.mobisols.tollpayments.model.CcType;
 import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
 import com.mobisols.tollpayments.response.GeneralResponse;
@@ -14,8 +15,10 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	private UserPaymentDetailDao userPaymentDetailDao;
 	private UserDao userDao;
 	private MyUtilDate myUtilDate;
+	private JsonConverter jsonConverter;
 	
-	public GeneralResponse update(PaymentDetailRequest pd,String username) {
+	public String update(String request,PaymentDetailRequest pd,String username) {
+		String status="";
 		UserPaymentDetail upd=userDao.getUser(username).getUserPaymentDetails();
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
@@ -39,7 +42,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		userPaymentDetailDao.update(upd);
 		GeneralResponse response=new GeneralResponse();
 		response.setDescription("Your details have been updated");
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	public UserPaymentDetailDao getUserPaymentDetailDao() {
 		return userPaymentDetailDao;
@@ -59,6 +62,12 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	}
 	public void setMyUtilDate(MyUtilDate myUtilDate) {
 		this.myUtilDate = myUtilDate;
+	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 
 	

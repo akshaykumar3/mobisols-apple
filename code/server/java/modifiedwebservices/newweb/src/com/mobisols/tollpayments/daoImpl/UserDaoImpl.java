@@ -56,4 +56,19 @@ public class UserDaoImpl implements UserDao {
 		s.update(u);
 		t.commit();
 	}
+
+	@Override
+	public User getUser(int userId) {
+		Session s=HibernateSessionFactory.getSession();
+		Criteria c=s.createCriteria(User.class);
+		c.add(Restrictions.eq("userId", userId));
+		List userList=c.list();
+		if(userList.isEmpty())
+		{
+			System.out.println("user list is empty");
+			return null;
+		}
+		User u=(User) ((User) userList.get(0));
+		return u;
+	}
 }

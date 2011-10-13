@@ -8,6 +8,7 @@ import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.model.TollLocation;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.VehicleMovementLog;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
@@ -23,10 +24,13 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 	private TollLocationDao tollLocationDao;
 	private DeviceHistoryDao deviceHistoryDao;
 	private VmlTypeDao vmlTypeDao;
+	private JsonConverter jsonConverter;
+	
 	public static final double DEFAULT_TIME=10*60;
 	public static final double DEFAULT_DISTANCE=200;
 	
-	public HeartBeatResponse saveHeartBeat(HeartBeatRequest hbr) {
+	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
+		String status="";
 		HeartBeatResponse response = new HeartBeatResponse();
 		VehicleMovementLog vml=new VehicleMovementLog();
 		Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());
@@ -84,7 +88,7 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
 		response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
 		response.getHash().put("tollSessionId", tollSessionId);
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	
 	public MyUtilDate getMyUtilDate() {
@@ -140,5 +144,13 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 
 	public void setVmlTypeDao(VmlTypeDao vmlTypeDao) {
 		this.vmlTypeDao = vmlTypeDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

@@ -2,6 +2,7 @@ package com.mobisols.tollpayments.serviceImpl;
 
 import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.model.TollLocation;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.response.get.NearestTollResponse;
@@ -11,9 +12,11 @@ public class NearestTollServiceImpl implements NearestTollService {
 
 	private TollLocationUtil tollLocationUtil;
 	private TollLocationDao tollLocationDao;
+	private JsonConverter jsonConverter;
 	
-	public NearestTollResponse getNearestToll(double lat,double longt) {
+	public String getNearestToll(String request,double lat,double longt) {
 		NearestTollResponse response=new NearestTollResponse();
+		String status="";
 		Location x=new Location();
 		x.setLatitude(lat);
 		x.setLongitude(longt);
@@ -24,7 +27,7 @@ public class NearestTollServiceImpl implements NearestTollService {
 		response.setState(t.getState());
 		response.setTollOperator(t.getTollOperator().getName());
 		response.setTollPrice(2.3);
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	
 	public TollLocationUtil getTollLocationUtil() {
@@ -38,6 +41,14 @@ public class NearestTollServiceImpl implements NearestTollService {
 	}
 	public void setTollLocationDao(TollLocationDao tollLocationDao) {
 		this.tollLocationDao = tollLocationDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 
 }

@@ -1,9 +1,10 @@
 package com.mobisols.tollpayments.service;
 
 import com.mobisols.tollpayments.dao.UserDao;
-import com.mobisols.tollpayments.response.get.AccountDetailsResponse;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 
-public interface AccountDetailsService extends GeneralService {
+public interface AccountDetailsService {
 	UserDao userDao=null;
-	public AccountDetailsResponse getAccountDetailsResponse(String username);
+	JsonConverter jsonConverter=null;
+	public String getAccountDetailsResponse(String request,String username);
 }

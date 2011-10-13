@@ -18,4 +18,6 @@ public interface UserDao {
 	public List<String> getUserList();
 	
 	public void update(User u);
+
+	public User getUser(int parseInt);
 }

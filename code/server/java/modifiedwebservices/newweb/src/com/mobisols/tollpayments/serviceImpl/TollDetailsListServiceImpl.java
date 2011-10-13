@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.model.TollLocation;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.TollDetails;
 import com.mobisols.tollpayments.response.get.TollLocationListResponse;
 import com.mobisols.tollpayments.service.TollDetailsListService;
@@ -12,7 +13,8 @@ import com.mobisols.tollpayments.service.TollDetailsListService;
 public class TollDetailsListServiceImpl implements TollDetailsListService {
 
 	private TollLocationDao tollLocationDao;
-
+	private JsonConverter jsonConverter;
+	
 	public TollLocationDao getTollLocationDao() {
 		return tollLocationDao;
 	}
@@ -22,7 +24,8 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 	}
 
 	@Override
-	public TollLocationListResponse getTollLocations() {
+	public String getTollLocations(String request) {
+		String status="";
 		List<TollLocation> tollList = tollLocationDao.getTollLocations();
 		TollLocationListResponse response=new TollLocationListResponse();
 		for(Iterator<TollLocation> it= tollList.iterator();it.hasNext();)
@@ -38,13 +41,14 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 			td.setIsCovered(tl.getIsCovered());
 			response.getTollDetailsList().add(td);
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 
 	@Override
-	public TollLocationListResponse getTollLocations(double lat1, double long1,
+	public String getTollLocations(String request,double lat1, double long1,
 			double lat2, double long2) {
 		List<TollLocation> tollList = tollLocationDao.getTollLocations();
+		String status="";
 		TollLocationListResponse response=new TollLocationListResponse();
 		for(Iterator<TollLocation> it= tollList.iterator();it.hasNext();)
 		{
@@ -62,6 +66,14 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 				response.getTollDetailsList().add(td);
 			}
 		}
-		return response;
+		return jsonConverter.getJSON(request, status,response);
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 }

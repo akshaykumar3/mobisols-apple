@@ -6,8 +6,6 @@ import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.dao.VehicleTypeDao;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
-import com.mobisols.tollpayments.response.GeneralResponse;
-import com.mobisols.tollpayments.response.post.VehicleDetailsResponse;
 
 public interface VehicleDetailsService {
 	UserVehicleDao userVehicleDao=null;
@@ -16,6 +14,6 @@ public interface VehicleDetailsService {
 	OwnerTypeDao ownerTypeDao=null;
 	VehicleTypeDao vehicleTypeDao=null;
 	
-	public VehicleDetailsResponse postVehicleDetails(VehicleDetailsRequest vdr,String user,String isNewVehicle);
-	public GeneralResponse deleteVehicle(int vehicleId,String user);
+	public String postVehicleDetails(String request,VehicleDetailsRequest vdr,String user,String isNewVehicle);
+	public String deleteVehicle(String request,int vehicleId,String user);
 }

@@ -17,7 +17,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 	
 	public ConfigurationDaoImpl()
 	{
-		componentVersionDao = new ComponentVersionDaoImpl();
+		//componentVersionDao = new ComponentVersionDaoImpl();
 	}
 	public List<Configuration> getKeyValues(String component,String version)
 	{
@@ -26,5 +26,11 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 		Criteria crit=s.createCriteria(Configuration.class);
 		crit.add(Restrictions.eq("compVersionId", cv.getCompVersionId()));
 		return crit.list();
+	}
+	public ComponentVersionDao getComponentVersionDao() {
+		return componentVersionDao;
+	}
+	public void setComponentVersionDao(ComponentVersionDao componentVersionDao) {
+		this.componentVersionDao = componentVersionDao;
 	}
 }

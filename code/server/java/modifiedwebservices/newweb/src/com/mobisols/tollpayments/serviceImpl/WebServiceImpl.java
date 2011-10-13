@@ -80,7 +80,6 @@ public class WebServiceImpl {
 	LoginService loginService;
 	ChangePasswordService changePasswordService;
 	ActivateService activateService;
-	
 	JsonConverter jsonConverter;
 	
 	SecurityCheckUtil securityCheckUtil;
@@ -112,7 +111,8 @@ public class WebServiceImpl {
 	        loginService = (LoginService) ctx.getBean("service.tollpayments.loginService");
 	        changePasswordService = (ChangePasswordService) ctx.getBean("service.tollpayments.changePasswordService");
 	        activateService = (ActivateService) ctx.getBean("service.tollpayments.activateService");
-	        
+	        securityCheckUtil = (SecurityCheckUtil) ctx.getBean("myutils.tollpayments.securityCheckUtil");
+	
 	}
 
 	@GET
@@ -121,11 +121,10 @@ public class WebServiceImpl {
 	//@RolesAllowed("user")
 	public String getAccountDetailsResponse(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader){
 		String request = "RETRIEVE ACC_DETAILS";
-		String status =null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status, accountDetailsService.getAccountDetailsResponse(username));
+			return accountDetailsService.getAccountDetailsResponse(request,username);
 		else
 			return null;
 	}
@@ -137,7 +136,6 @@ public class WebServiceImpl {
 	@RolesAllowed("user")
 	public String getBalanceDetails(@QueryParam("key") String securityKey,@QueryParam("json") String json){
 		String request = "RETRIEVE ACC_DETAILS";
-		String status =null;
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&&securityCheckUtil.isKeyCorrect(securityKey))
 			return null;
@@ -152,11 +150,10 @@ public class WebServiceImpl {
 	public String getVehicleTypesList(@QueryParam("key") String securityKey)
 	{
 		String request="";
-		String status="";
-		VehicleTypeListResponse vr=vehicleTypeListService.getVehicleTypeList();
+		String vr=vehicleTypeListService.getVehicleTypeList(request);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status, vr);
+			return vr;
 		else
 			return null;
 	}
@@ -168,12 +165,11 @@ public class WebServiceImpl {
 	public String postAddBalance(@FormParam("key") String securityKey,@FormParam("json")String json,@Context HttpHeaders httpHeader)
 	{
 		String request = "RETRIEVE ACC_DETAILS";
-		String status =null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		AddBalanceRequest ar= (AddBalanceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.AddBalanceRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status, addBalanceService.postaddBalanceResponse(ar,username));
+			return addBalanceService.postaddBalanceResponse(request,ar,username);
 		else
 			return null;
 	}
@@ -185,10 +181,9 @@ public class WebServiceImpl {
 	public String getCcTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get CCTypeList";
-		String status=null;
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request,status,ccTypeListService.getCcTypeList());
+			return ccTypeListService.getCcTypeList(request);
 		return null;
 	}
 	
@@ -199,10 +194,9 @@ public class WebServiceImpl {
 	public String getOwnerTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get OwnerTypeList";
-		String status=null;
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request,status,ownerTypeListService.getOwnerTypeList());
+			return ownerTypeListService.getOwnerTypeList(request);
 		else
 			return null;
 	}
@@ -214,10 +208,9 @@ public class WebServiceImpl {
 	public String getVMLTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get VMLTypeList";
-		String status=null;
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request,status,vmlTypeListService.getVmlTypeList());
+			return vmlTypeListService.getVmlTypeList(request);
 		return null;
 	}
 	
@@ -228,11 +221,10 @@ public class WebServiceImpl {
 	public String getBalanceInfo(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader)
 	{
 		String request="get BlanceInfo";
-		String status=null;
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request,status,balanceInfoService.getBalanceInfo(username));
+			return balanceInfoService.getBalanceInfo(request,username);
 		return null;
 	}
 	
@@ -243,16 +235,15 @@ public class WebServiceImpl {
 	public String getTollDetailsList(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="get BlanceInfo";
-		String status=null;
 		TollRange tr=(TollRange) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.TollRange");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
 		{
 		if(tr==null)
-			return jsonConverter.getJSON(request,status,tollDetailsService.getTollLocations());
+			return tollDetailsService.getTollLocations(request);
 		else
-			return jsonConverter.getJSON(request, status, tollDetailsService.getTollLocations(tr.getLatitude1(),
-				tr.getLongitude1(), tr.getLatitude2(), tr.getLongitude2()));
+			return  tollDetailsService.getTollLocations(request,tr.getLatitude1(),
+				tr.getLongitude1(), tr.getLatitude2(), tr.getLongitude2());
 		}
 		else
 			return null;
@@ -265,10 +256,9 @@ public class WebServiceImpl {
 	public String getServicePlans(@QueryParam("key") String securityKey)
 	{
 		String request="get Service Plans List";
-		String status="success";
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,servicePlanService.getServiceList() );
+			return servicePlanService.getServiceList(request);
 		return null;
 	}
 	
@@ -279,11 +269,10 @@ public class WebServiceImpl {
 	public String postPeriodicHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post periodic heartbeat";
-		String status="success";
 		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,periodicHeartBeatService.saveHeartBeat(hbr) );
+			return periodicHeartBeatService.saveHeartBeat(request,hbr) ;
 		else
 			return null;
 	}
@@ -295,11 +284,10 @@ public class WebServiceImpl {
 	public String postHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post heartbeat";
-		String status="success";
 		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,heartBeatService.saveHeartBeat(hbr) );
+			return heartBeatService.saveHeartBeat(request,hbr);
 		return null;
 	}
 	
@@ -310,11 +298,10 @@ public class WebServiceImpl {
 	public String getNearestToll(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="post heartbeat";
-		String status="success";
 		Location l=(Location) jsonConverter.getObject(json, "com.mobisols.tollpayments.myutilsImpl.Location");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,nearestTollService.getNearestToll(l.getLatitude(), l.getLongitude()) );
+			return nearestTollService.getNearestToll(request,l.getLatitude(), l.getLongitude() );
 		else
 			return null;
 	}
@@ -326,12 +313,11 @@ public class WebServiceImpl {
 	public String postPaymentDetails(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="update paymentDetails";
-		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		PaymentDetailRequest pd=(PaymentDetailRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.PaymentDetailRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,paymentDetailsService.update(pd, username));
+			return paymentDetailsService.update(request,pd, username);
 		else
 			return null;
 	}
@@ -343,11 +329,10 @@ public class WebServiceImpl {
 	public String getClientConfiguration(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="get ClientConfiguration";
-		String status="success";
 		ClientConfigurationRequest r= (ClientConfigurationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.ClientConfigurationRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,clientConfigurationService.getClientConfig(r));
+			return clientConfigurationService.getClientConfig(request,r);
 		else
 			return null;
 	}
@@ -360,16 +345,12 @@ public class WebServiceImpl {
 	{
 		System.out.println(isNewVehicle);
 		String request="post vehicleDetails";
-		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		VehicleDetailsRequest r= (VehicleDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.VehicleDetailsRequest");
 		System.out.println(r.getState());
-		MyUtilVehicle myUtilVehicle = new MyUtilVehicleImpl();
-		if(myUtilVehicle.isValidRegistrationNumber(r.getRegistration(), r.getState()))
-			status = "invalid";
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,vehicleDetailsService.postVehicleDetails(r, username, isNewVehicle));
+			return vehicleDetailsService.postVehicleDetails(request,r, username, isNewVehicle);
 		else
 			return null;
 	}
@@ -381,11 +362,10 @@ public class WebServiceImpl {
 	public String deleteVehicleDetails(@FormParam("key") String securityKey,@FormParam("vehicleId") int vehicleId,@Context HttpHeaders httpHeader)
 	{
 		String request="delete vehicleDetails";
-		String status="success";
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,vehicleDetailsService.deleteVehicle(vehicleId, username));
+			return vehicleDetailsService.deleteVehicle(request,vehicleId, username);
 		return null;
 	}
 	
@@ -395,11 +375,10 @@ public class WebServiceImpl {
 	public String registerUser(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="register user";
-		String status="success";
 		RegistrationServiceRequest request1= (RegistrationServiceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.RegistrationServiceRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,registrationService.createUser(request1));
+			return registrationService.createUser(request,request1);
 		else
 			return null;
 	}
@@ -410,16 +389,18 @@ public class WebServiceImpl {
 	public String registerDevice(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpServletRequest servletRequest)
 	{
 		String request="register device";
-		String status="success";
 		//System.out.println(servletRequest.getRemoteAddr());
 		DeviceRegistrationRequest request1=  (DeviceRegistrationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.DeviceRegistrationRequest");
 		if(ServerConfiguration.getServerConfiguration()== null)
 			System.out.println("null");
+		System.out.println(ServerConfiguration.getServerConfiguration().getValue("checkSecurity"));
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,deviceRegistrationService.registerDevice(request1,servletRequest.getRemoteAddr()));
+			return deviceRegistrationService.registerDevice(request,request1,servletRequest.getRemoteAddr());
 		else
+		{
 			return null;
+		}
 	}
 
 	@POST
@@ -428,11 +409,10 @@ public class WebServiceImpl {
 	public String loginUser(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post vehicleDetails";
-		String status="success";
 		LoginRequest request1=  (LoginRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.LoginRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,loginService.login(request1));
+			return loginService.login(request,request1);
 		else
 			return null;
 	}
@@ -444,11 +424,10 @@ public class WebServiceImpl {
 	public String changePassword(@FormParam("key") String securityKey,@FormParam("password") String password,@Context HttpHeaders httpHeader)
 	{
 		String request="change password";
-		String status="success";
 		String userName=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,changePasswordService.changePassword(userName, password));
+			return changePasswordService.changePassword(request,userName, password);
 		else
 			return null;
 	}
@@ -460,12 +439,11 @@ public class WebServiceImpl {
 	public String activate(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="activate/deactivate user";
-		String status="success";
 		String userName=MyUtilContextImpl.getUserName(httpHeader);
 		ActivateRequest ar = (ActivateRequest) jsonConverter.getObject(json,"com.mobisols.tollpayments.request.post.ActivateRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return jsonConverter.getJSON(request, status,activateService.activate(ar, userName));
+			return activateService.activate(request,ar, userName);
 		else
 			return null;
 	}

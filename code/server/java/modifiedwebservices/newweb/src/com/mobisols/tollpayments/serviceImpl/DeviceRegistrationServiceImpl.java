@@ -4,6 +4,7 @@ import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.request.post.DeviceRegistrationRequest;
 import com.mobisols.tollpayments.response.post.DeviceRegistrationResponse;
@@ -12,10 +13,12 @@ import com.mobisols.tollpayments.service.DeviceRegistrationService;
 public class DeviceRegistrationServiceImpl implements DeviceRegistrationService {
 	private DeviceDao deviceDao;
 	private MyUtilDate myUtilDate;
+	private JsonConverter jsonConverter;
 	
-	public DeviceRegistrationResponse registerDevice(DeviceRegistrationRequest r,String ipAddress)
+	public String registerDevice(String request,DeviceRegistrationRequest r,String ipAddress)
 	{
 		DeviceRegistrationResponse response=new DeviceRegistrationResponse();
+		String status="";
 		String deviceId=ipAddress+myUtilDate.getCurrentTimeStamp();
 		Device d=new Device();
 		d.setClientId(1);
@@ -29,7 +32,7 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 		deviceDao.save(d);
 		response.setDeviceId(deviceId);
 		response.setIpAddress(ipAddress);
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
 	public DeviceDao getDeviceDao() {
 		return deviceDao;
@@ -43,6 +46,12 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 	}
 	public void setMyUtilDate(MyUtilDate myUtilDate) {
 		this.myUtilDate = myUtilDate;
+	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
 	}
 	
 }
