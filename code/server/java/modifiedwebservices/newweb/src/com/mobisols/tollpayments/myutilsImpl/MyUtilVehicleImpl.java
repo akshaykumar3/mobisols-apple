@@ -12,16 +12,19 @@ public class MyUtilVehicleImpl implements MyUtilVehicle {
 	public MyUtilVehicleImpl()
 	{
 		regExpr = new HashMap<String,String>();
-		regExpr.put("Florida", "([A-X][0-9][0-9][ ][0-9][0-9][A-Z])|" +
+		regExpr.put("FL", "([A-X][0-9][0-9][ ][0-9][0-9][A-Z])|" +
 				"([0-9][0-9][0-9][ ][H-Y][A-Z][A-Z])|" +
 				"([A-Y][A-Z][A-z][ ][A-Z][0-9][0-9])");
-		regExpr.put("Texas", "[A-Z][A-Z][0-9]-[A-Z][0-9][0-9][0-9]");
-		regExpr.put("California","[0-9][A-Z][A-Z][A-Z][0-9][0-9][0-9]");
+		regExpr.put("TX", "[A-Z][A-Z][0-9]-[A-Z][0-9][0-9][0-9]");
+		regExpr.put("CA","[0-9][A-Z][A-Z][A-Z][0-9][0-9][0-9]");
 	}
 	
 	public boolean isValidRegistrationNumber(String regNo,String state)
 	{
-		return regNo.matches(regExpr.get(state));
+		if(regExpr.get(state)!=null)
+			return regNo.matches(regExpr.get(state));
+		else
+			return true;
 	}
 	
 	public boolean isValidEndDate(Date endDate)
