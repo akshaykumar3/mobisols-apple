@@ -216,7 +216,7 @@ gtp.controllers = Ext.regController("load",{
 		// Destroy panels created for login page and registration page.
 		// Since there is no log out for a user. Those pages are no more useful.
 		// This adds fastness to the application.
-		gtp.views.loginPage.destroy();
+		gtp.views.loginPage.hide();
 		
 		gtp.tabpanel = new Ext.TabPanel({
 			tabBar: {
@@ -239,7 +239,8 @@ gtp.controllers = Ext.regController("load",{
 			        gtp.tabs.SettingsFormView,
 			        gtp.tabs.MapView,
 			        gtp.tabs.NewCarFormView,
-			        gtp.tabs.CarDetailView],			
+			        gtp.tabs.CarDetailView,
+			        gtp.tabs.changepwd],			
 			listeners: {
 				beforecardswitch: function(curobj, newCard, oldCard, index, animated) {
 					if(newCard.getId() == 'mycars') {
