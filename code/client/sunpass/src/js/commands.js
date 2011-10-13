@@ -49,8 +49,8 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 	},
 	killapp: function(options) {
 		Ext.Msg.alert('Mismatch', 'Re-enter ur password');
+		gtp.views.loginPage.show();
 		gtp.tabpanel.destroy();
-		gtp.views.loginPage.enable();
 	},
 	commandAck: function(options) {
 		Ext.Ajax.request({

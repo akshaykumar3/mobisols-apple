@@ -302,7 +302,7 @@ gtp.tabs.SettingsFormView = {
 		xtype: 'button',
 		text: 'Change Password',
 		handler: function(button, event) {
-			gtp.tabpanel.setActiveItem(7);
+			gtp.tabpanel.setActiveItem('changepwd_view');
 		}
 	}],
 	listeners: {
