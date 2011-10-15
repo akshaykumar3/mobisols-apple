@@ -181,7 +181,7 @@ insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,vehicle_type
 udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin) 
 values(null,old.user_vehicle_id,old.user_id,old.vehicle_type_id,old.is_active,old.vehicle_start_date,old.vehicle_end_date,old.registration_no,old.registered_state,old.owner_type_id,
 old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,
-GetStartDate(),GetStartDate(),'delete',old.client_id,old.model_id,model.vin);
+GetStartDate(),GetStartDate(),'delete',old.client_id,old.model_id,old.vin);
 end;
 
 drop trigger if exists trg_user_vehicle_aft_ins;
