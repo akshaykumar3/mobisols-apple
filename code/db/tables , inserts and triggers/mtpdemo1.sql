@@ -2119,7 +2119,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 ,`user_id` int(11)
 ,`cc_type_id` int(11)
 ,`cc_ac_name` varchar(45)
-,`cc_number` varchar(16)
+,`cc_number` varchar(20)
 ,`cc_exp_month` int(11)
 ,`cc_exp_year` year(4)
 ,`cc_cvv` int(11)
@@ -2159,7 +2159,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   `user_id` int(11) DEFAULT NULL,
   `cc_type_id` int(11) DEFAULT NULL,
   `cc_ac_name` varchar(45) DEFAULT NULL,
-  `cc_number` varchar(16) DEFAULT NULL,
+  `cc_number` varchar(20) DEFAULT NULL,
   `cc_exp_month` int(11) DEFAULT NULL,
   `cc_exp_year` year(4) DEFAULT NULL,
   `cc_cvv` int(11) DEFAULT NULL,
@@ -2266,7 +2266,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 ,`user_id` int(11)
 ,`cc_type_id` int(11)
 ,`cc_ac_name` varchar(45)
-,`cc_number` varchar(15)
+,`cc_number` varchar(20)
 ,`cc_exp_month` int(11)
 ,`cc_exp_year` year(4)
 ,`cc_cvv` int(11)
@@ -2310,7 +2310,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `user_id` int(11) DEFAULT NULL,
   `cc_type_id` int(11) DEFAULT NULL,
   `cc_ac_name` varchar(45) DEFAULT NULL,
-  `cc_number` varchar(15) DEFAULT NULL,
+  `cc_number` varchar(20) DEFAULT NULL,
   `cc_exp_month` int(11) DEFAULT NULL,
   `cc_exp_year` year(4) DEFAULT NULL,
   `cc_cvv` int(11) DEFAULT NULL,
