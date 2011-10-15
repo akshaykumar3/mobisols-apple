@@ -15,7 +15,7 @@ public class AddBalanceServiceImpl implements AddBalanceService {
 	public String postaddBalanceResponse(String request,AddBalanceRequest ar,String username)
 	{
 		GeneralResponse gr=new GeneralResponse();
-		String status="";
+		String status="success";
 		UserBalance ub=userBalanceDao.getUserBalance(username);
 		ub.setBalance(ar.getAmount());
 		ub.setLastModifiedBy(ub.getUserId());

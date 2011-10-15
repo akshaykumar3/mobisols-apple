@@ -18,7 +18,7 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 	public String registerDevice(String request,DeviceRegistrationRequest r,String ipAddress)
 	{
 		DeviceRegistrationResponse response=new DeviceRegistrationResponse();
-		String status="";
+		String status="success";
 		String deviceId=ipAddress+myUtilDate.getCurrentTimeStamp();
 		Device d=new Device();
 		d.setClientId(1);

@@ -22,7 +22,7 @@ public class VehicleTypeListServiceImpl implements VehicleTypeListService {
 	
 	public String getVehicleTypeList(String request)
 	{
-		String status="";
+		String status="success";
 		List<com.mobisols.tollpayments.model.VehicleType> vl=vehicleTypeDao.getVehicleTypeList();
 		VehicleTypeListResponse vehicleTypeListResponse= new VehicleTypeListResponse();
 		for(Iterator i=vl.iterator();i.hasNext();)

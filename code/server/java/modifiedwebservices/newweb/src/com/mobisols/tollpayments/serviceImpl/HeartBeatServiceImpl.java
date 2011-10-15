@@ -34,7 +34,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	
 	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
 		HeartBeatResponse response = new HeartBeatResponse();
-		String status="";
+		String status="success";
 		VehicleMovementLog vml=new VehicleMovementLog();
 		Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());
 		vml.setClientId(Client.PRESENT_CLIENT);

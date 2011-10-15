@@ -20,8 +20,14 @@ public class ClientConfigurationServiceImpl implements
 	public String getClientConfig(String request,ClientConfigurationRequest r )
 	{
 		ClientConfigurationResponse response=new ClientConfigurationResponse();
-		String status="";
+		String status="success";
 		Component c=componentDao.getComponent(r.getComponentName());
+		if(c==null)
+		{
+			status ="fail";
+			response.getNotifications().add("Component does not exist");
+			return jsonConverter.getJSON(request, status,null);
+		}
 		ComponentVersion cv=null;
 		for(Iterator it=c.getComponentVersion().iterator();it.hasNext();)
 		{
@@ -32,7 +38,11 @@ public class ClientConfigurationServiceImpl implements
 			}
 		}
 		if(cv==null)
-			return null;
+		{
+			status = "fail";
+			response.getNotifications().add("Component version does not exists");
+			return jsonConverter.getJSON(request, status,null);
+		}
 		response.setCompVersionId(cv.getCompVersionId());
 		Configuration config=null;
 		if(r.getKey()!=null)
@@ -46,7 +56,11 @@ public class ClientConfigurationServiceImpl implements
 				}
 			}
 		if(config==null)
-			return null;
+		{
+			status = "fail";
+			response.getNotifications().add("Does have this jey value");
+			return jsonConverter.getJSON(request, status,null);
+		}
 		response.getKeyValues().put(config.getKey(), config.getValue());
 		}
 		else

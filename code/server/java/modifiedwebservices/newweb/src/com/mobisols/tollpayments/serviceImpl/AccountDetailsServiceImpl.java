@@ -20,7 +20,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	
 	public String getAccountDetailsResponse(String request,String username){
 		AccountDetailsResponse adr=new AccountDetailsResponse();
-		String status = "";
+		String status = "success";
 		User u=userDao.getUser(username);
 		if(u==null)
 			return null;

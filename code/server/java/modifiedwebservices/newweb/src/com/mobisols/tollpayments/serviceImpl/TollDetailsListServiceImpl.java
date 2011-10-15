@@ -25,7 +25,7 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 
 	@Override
 	public String getTollLocations(String request) {
-		String status="";
+		String status="success";
 		List<TollLocation> tollList = tollLocationDao.getTollLocations();
 		TollLocationListResponse response=new TollLocationListResponse();
 		for(Iterator<TollLocation> it= tollList.iterator();it.hasNext();)
@@ -48,7 +48,7 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 	public String getTollLocations(String request,double lat1, double long1,
 			double lat2, double long2) {
 		List<TollLocation> tollList = tollLocationDao.getTollLocations();
-		String status="";
+		String status="success";
 		TollLocationListResponse response=new TollLocationListResponse();
 		for(Iterator<TollLocation> it= tollList.iterator();it.hasNext();)
 		{

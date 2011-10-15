@@ -20,7 +20,7 @@ public class BalanceInfoServiceImpl implements BalanceInfoService {
 	
 	public String getBalanceInfo(String request,String user) {
 		BalanceInfoResponse response=new BalanceInfoResponse();
-		String status="";
+		String status="success";
 		User u=userDao.getUser(user);
 		response.setCurrentBalance((u.getUserBalance().getBalance()));
 		response.setBalanceId(u.getUserBalance().getUbalId());

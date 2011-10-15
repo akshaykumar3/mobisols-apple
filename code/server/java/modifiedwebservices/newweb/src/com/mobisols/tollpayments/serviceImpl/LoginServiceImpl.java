@@ -24,7 +24,7 @@ public class LoginServiceImpl implements LoginService {
 	public String login(String request,LoginRequest r)
 	{
 		LoginResponse response =new LoginResponse();
-		String status="";
+		String status="success";
 		User u=userDao.getUser(r.getUserName());
 		if(u==null)
 		{
@@ -34,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
 		else
 		{
 			response.getResponse().put("userExists",User.USER_EXISTS);
-			
+			status = "fail";
 			if(u.getPassword().equals(r.getPassword()))
 			{
 				
