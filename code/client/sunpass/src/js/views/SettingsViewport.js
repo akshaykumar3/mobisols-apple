@@ -6,5 +6,5 @@ gtp.tabs.SettingsViewport = {
 	id: 'basicform',
 	iconCls: 'AccountSettings',
 	cls: 'card4',
-	items: [gtp.tabs.SettingsFormView, gtp.tabs.changepwd]
+	items: [gtp.tabs.SettingsFormView, gtp.tabs.ChangePwdView]
 };

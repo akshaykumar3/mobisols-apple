@@ -95,19 +95,17 @@ gtp.tabs.HomeScreenView = {
 								to.setValue(resobj.response.tolloperator);
 								at.setValue(resobj.response.avgtoll);
 								pt.setValue(resobj.response.price);*/
-						      	gtp.showNotifications(res.notifications);
+						      	gtp.showNotifications(resobj.response.notifications);
+						      	gtp.parse(resobj.response.commands);
 							},
 							failure: function(response){
-								console.log('failure with status'+response.status);
-								/*cl.setValue('Tallahassee, Florida');
-								to.setValue(TollsData.getAt(0).get('tolloperator'));
-								at.setValue(TollsData.getAt(0).get('avgtoll'));
-								pt.setValue(TollsData.getAt(0).get('tollperday'));*/
+								console.log('Nearest toll failure with status '+response.status);
+								gtp.log('Nearest toll failure with status '+response.status);
 							}
 						});
 						
 						if(ac.getValue()) {
-							var htfp = gtp.tabpanel.getComponent(0);
+							var htfp = Ext.getCmp('home');
 							htfp.load(Ext.ModelMgr.create({
 								currentlocation: 'Tallahassee, Florida',
 								tolloperator: TollsData.getAt(0).get('tolloperator'),

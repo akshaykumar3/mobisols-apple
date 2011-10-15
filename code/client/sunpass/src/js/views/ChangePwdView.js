@@ -1,8 +1,8 @@
-gtp.tabs.changepwd = {
+gtp.tabs.ChangePwdView = {
 	xtype: 'panel',
 	layout: 'vbox',
-	fullscreen: true,
 	id: 'changepwd_view',
+	scroll: 'vertical',
 	dockedItems: [{
 		xtype: 'toolbar',
 		title: 'Password Reset',
@@ -55,9 +55,8 @@ gtp.tabs.changepwd = {
 					success: function(res) {
 						var resobj = Ext.decode(res.responseText);
 						console.log(res.responseText);
-						Ext.Msg.alert('Password is changed');
-						gtp.showNotifications(resobj.notifications);
-						gtp.parse(resobj.commands);
+				      	gtp.showNotifications(resobj.response.notifications);
+				      	gtp.parse(resobj.response.commands);
 						gtp.tabpanel.getComponent(3).setActiveItem('settingsform');
 					},
 					failure: function(res) {

@@ -51,11 +51,10 @@ gtp.tabs.CarDetailView = {
 							type: 'slide',
 							direction: 'right'
 						});
-						Ext.Msg.alert(obj.description);
-						gtp.log(obj.description);
 						updateCar.set('endDate',curtab.down('#dpto').getValue());
 						Ext.getCmp('changevd').setDisabled(true);
-				      	gtp.showNotifications(resobj.notifications);
+				      	gtp.showNotifications(resobj.response.notifications);
+				      	gtp.parse(resobj.response.commands);
 					},
 					failure: function(response){
 						gtp.log(response.status+' Error in updating car details');
@@ -145,6 +144,8 @@ gtp.tabs.CarDetailView = {
 								Ext.Msg.alert(gtp.dict.deletecar_success);
 							}
 							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+					      	gtp.showNotifications(resobj.response.notifications);
+					      	gtp.parse(resobj.response.commands);
 						},
 						failure: function(response){
 							gtp.log(response.status+' Error deleting the car');

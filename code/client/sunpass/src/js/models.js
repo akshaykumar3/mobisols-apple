@@ -217,6 +217,9 @@ Ext.regModel('Settings',{
 	},{
 		name: 'zipcode',
 		text: 'string'
+	},{
+		name: 'phoneno',
+		text: 'int'
 	}],
 	validations: [{
 		type: 'format',

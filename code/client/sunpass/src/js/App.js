@@ -8,6 +8,7 @@ Ext.regApplication({
     icon: 'resources/images/launchiconapple.png',
     phoneStartupScreen: 'resources/images/launchimageiphone.png',
     tabletStartupScreen: 'resources/images/launchimageipad.png',
+    deviceRegistered: false,
     glossOnIcon: false,
     today: new Date(),
     isCarValid: false,
@@ -17,20 +18,13 @@ Ext.regApplication({
     infoWindow: null,
     launch: function(){
     	Ext.Ajax.defaultHeaders = {};
-    	var devret=this.getDeviceId();
-    	if(devret!="FAILED")
-    	{
-    		this.launchLoginPage({
-	    		deviceId: devret, 
-	    		type: this.detectDeviceType()
-	    	});
-    	}
-    	else
-    	{
-    		this.pan=new Ext.Panel({
-    			fullscreen: true,
-    			html: gtp.dict.dev_reg_errormsg
-    		});
+    	this.deviceRegistered = this.isDeviceRegistered();
+    	this.launchLoginPage({
+    		type: this.detectDeviceType()
+    	});
+    	if(!this.deviceRegistered) {
+    		this.registerDevice();
+			gtp.views.loginPage.setLoading(true);
     	}
     },
     launchLoginPage: function(options){
@@ -55,41 +49,52 @@ Ext.regApplication({
     	else if(Ext.is.Desktop)
     	return 'desktop';
     },
-    getDeviceId: function(){
+    isDeviceRegistered: function() {
+    	if( gtp.utils.dataStore.getValueOfKey('gtp-deviceID') )
+    		return true;
+    	else
+    		return false;
+    },
+    registerDevice: function(){
     	// open the database check if the device id is present.
     	// create the database 
-    	if(gtp.utils.dataStore.getValueOfKey('gtp-deviceID'))
-    		return gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
-    	else
-    	{
-    		Ext.Ajax.request({
-    			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
-    			params: {
-    				json: Ext.encode({
-    					deviceName: this.detectDeviceType()
-    				})
-    			},
-    			success: function(response){
-    				var obj=Ext.decode(response.responseText);
-    				console.log('Generated device ID is: '+obj.response.deviceId);
-    				gtp.log('Device Registration success');
-    				gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
-    				return obj.response.deviceId;
-    			},
-    			failure: function(response){
-    				// Check the status. if the response status is 404. 
-    				// Prompt a message saying could not connect to internet.
-    				// Todo--- Failure could be of any. like 500 or some other error status.
-    				// Write code to show message accordingly.
-    				if(response.status==404)
-    					return "FAILED";
-    				else if(response.status == 500)
-    					return "FAILED";
-    				console.log('error in device registration web service');
-    				gtp.log(response.status+' Error in registering device');
-    			}
-    		});
-    	}
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
+			params: {
+				json: Ext.encode({
+					deviceName: this.detectDeviceType()
+				})
+			},
+			success: function(response){
+				var obj=Ext.decode(response.responseText);
+				console.log('Generated device ID is: '+obj.response.deviceId);
+				gtp.log('Device Registration success');
+				gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
+				gtp.deviceId = obj.response.deviceId;
+				gtp.views.loginPage.setLoading(false);
+				gtp.showNotifications(obj.response.notifications);
+				gtp.parse(obj.response.commands);
+			},
+			failure: function(response){
+				// Check the status. if the response status is 404. 
+				// Prompt a message saying could not connect to internet.
+				// Todo--- Failure could be of any. like 500 or some other error status.
+				// Write code to show message accordingly.
+				gtp.log(response.status+' Error in registering device');
+				console.log(response.status+' Error in registering device');
+				gtp.views.loginPage.setLoading(false);
+				gtp.views.loginPage.destroy();
+				var message = "Error in connecting to server, Please check your internet connection";
+				if(response.status==404)
+					message = "There was an error contacting the server. Please try launching again";
+				else if(response.status == 500)
+					message = "There was an error contacting the server. Please try launching again";
+				gtp.views.Viewport = new Ext.Panel({
+	    			fullscreen: true,
+	    			html: message
+	    		});
+			}
+		});
     },
     parse: function(command) {
     	if(command && command.action)
@@ -100,8 +105,9 @@ Ext.regApplication({
     	});
     },
     showNotifications: function(notfs) {
-    	if(notfs && notfs.message)
-    		Ext.Msg.alert('Notification',notfs.message);
+    	//if(notfs && notfs.message)
+    	if(notfs && notfs[0])
+    		Ext.Msg.alert('Notification',notfs[0]);
     },
     responseFailureHandler: function(res, message) {
     	// log to the logger store.
@@ -110,7 +116,6 @@ Ext.regApplication({
     		// Do logic for error handling.
     	}
     	else if(res.status == 500) {
-    		
     	}
     }
 });

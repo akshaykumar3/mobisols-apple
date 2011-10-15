@@ -72,15 +72,20 @@ gtp.tabs.NewCarFormView = {
 							gtp.log('User Added a car successfully');
 							var resobj = Ext.decode(response.responseText);
 							console.log(response.responseText);
-							carsList.insert(0,Ext.ModelMgr.create({
-								state: acfd.st,
-								reg: acfd.rg,
-								type: acfd.tp,
-								startDate: gtp.today,//acfd.startDate,
-								endDate: acfd.endDate
-							},'Cars'));
-							Ext.Msg.alert('Success',gtp.dict.newcar_success);
-					      	gtp.showNotifications(resobj.notifications);
+							if(resobj.response.vehicleId > 0) {
+								carsList.insert(0,Ext.ModelMgr.create({
+									state: acfd.st,
+									reg: acfd.rg,
+									type: acfd.tp,
+									startDate: gtp.today,//acfd.startDate,
+									endDate: acfd.endDate,
+									vehicleId: resobj.response.vehicleId,
+									ownerType: 'primary owner'
+								},'Cars'));
+								Ext.Msg.alert('Success',gtp.dict.newcar_success);
+							}
+					      	gtp.showNotifications(resobj.response.notifications);
+					      	gtp.parse(resobj.response.commands);
 						},
 						failure: function(response){
 							Ext.Msg.alert(gtp.dict.newcar_failure);
