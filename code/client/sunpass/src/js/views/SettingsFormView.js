@@ -70,9 +70,9 @@ gtp.tabs.SettingsFormView = {
 										cardNumber: pay_det.get('ccnumber'),
 										expMonth: pay_det.get('expmonth'),
 										expYear: pay_det.get('expyear'),
-										bankRouting: 0,
-										ccCVV: 0,
-										bankAccount: pay_det.get('acnumber'),
+										bankRouting: null,
+										ccCVV: null,
+										bankAccount: null,
 										address1: pay_det.get('address'),
 										city: pay_det.get('city'),
 										state: pay_det.get('state'),
@@ -87,7 +87,6 @@ gtp.tabs.SettingsFormView = {
 								    gtp.settingschanged = false;
 								    gtp.arePaymentDetailsValid = true;
 								    if(resobj.status == 'success')
-								    Ext.Msg.alert('Success','Payment Details changed');
 									gtp.showNotifications(resobj.response.notifications);
 									gtp.parse(resobj.response.commands);
 								},
@@ -201,14 +200,13 @@ gtp.tabs.SettingsFormView = {
 			store: gtp.stores.Years,
 			displayField: 'year',
 			valueField: 'year'
-		},{
-			//This field may be removed.
+		}/*{
 			xtype: 'textfield',
 			name: 'acnumber',
 			id: 'bankaccount',
 			label: 'A/c No',
 			useClearIcon: true
-		}]
+		}*/]
 	},{
 		xtype: 'fieldset',
 		id: 'billingdetails',

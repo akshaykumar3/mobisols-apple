@@ -55,7 +55,7 @@ gtp.controllers = Ext.regController("load",{
 											userName: un,
 											password: pwd,
 											deviceDetails: {
-												deviceId: options.deviceDetails.deviceId,
+												deviceId: gtp.deviceId,
 												deviceName: options.deviceDetails.type
 											} 
 										})
@@ -91,6 +91,8 @@ gtp.controllers = Ext.regController("load",{
 											rnu.setDisabled(false);
 											button.setDisabled(false);
 										}
+										gtp.showNotifications(decres.response.notifications);
+										gtp.parse(decres.response.commands);
 									},
 									failure: function(response){
 										gtp.views.loginPage.setLoading(false);
@@ -171,7 +173,7 @@ gtp.controllers = Ext.regController("load",{
 											userName: eid,
 											password: pwd,
 											deviceDetails: {
-												deviceId: options.deviceDetails.deviceId,
+												deviceId: gtp.deviceId,
 												deviceName: options.deviceDetails.type
 											}
 										})
@@ -185,7 +187,7 @@ gtp.controllers = Ext.regController("load",{
 										// Store username and password locally.
 										gtp.utils.dataStore.setValueOfKey('username', eid);
 										gtp.utils.dataStore.setValueOfKey('password', pwd);
-										gtp.views.loginPage.down('#lpemailid').setValue('');
+										gtp.views.loginPage.down('#lpemailid').setValue(eid);
 										gtp.views.loginPage.down('#lppassword').setValue('');
 										gtp.showNotifications(resobj.response.notifications);
 										gtp.parse(resobj.response.commands);
