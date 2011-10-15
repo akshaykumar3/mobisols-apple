@@ -39,7 +39,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	
 	public String postVehicleDetails(String request,VehicleDetailsRequest vdr,String user,String isNewVehicle)
 	{
-		String status="";
+		String status="success";
 		VehicleDetailsResponse response = new VehicleDetailsResponse();
 		
 		if(myUtilVehicle.isValidRegistrationNumber(vdr.getRegistration(), vdr.getState()) && myUtilVehicle.isValidEndDate(vdr.getEndDate()))
@@ -49,7 +49,11 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			User u=userDao.getUser(user);
 			UserVehicle uv=userVehicleDao.getVehicle(vdr.getRegistration(), vdr.getState(),u.getUserId());
 			if(uv==null)
-				System.out.println("user vehicle is null");
+			{
+				status ="fail";
+				response.getNotifications().add("Invalid VehicleId");
+				return jsonConverter.getJSON(request, status,response);
+			}
 			if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_ACTIVE))
 				uv.setIsActive(userVehicleDao.VEHICLE_ACTIVE);
 			else if(vdr.equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
@@ -57,12 +61,14 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			else
 				uv.setIsActive(userVehicleDao.VEHICLE_INACTIVE);
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
-			uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));
+			if(vdr.getEndDate() !=null)
+				uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));
 			OwnerType ot=ownerTypeDao.getOwnerType(vdr.getOwnerType());			
 			uv.setOwnerTypeId(ot.getOwnerTypeId());
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-			uv.setModelId(userVehicleDao.DEFAULT_MODEL);
+			//uv.setModelId(userVehicleDao.DEFAULT_MODEL);
+			uv.setModelId(null);
 			uv.setVin(null);
 			userVehicleDao.update(uv);
 			response.setVehicleId(uv.getUserVehicleId());
@@ -101,6 +107,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		}
 		else
 		{
+			status = "fail";
 			response.getNotifications().add("InValid Registration number");
 			response.setVehicleId(-1);
 		}
@@ -109,10 +116,11 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	
 	public String deleteVehicle(String request,int vehicleId,String user)
 	{
-		String status="";
+		String status="success";
 		GeneralResponse response = new GeneralResponse();
 		User u=userDao.getUser(user);
 		UserVehicle uv= userVehicleDao.getVehicle(vehicleId);
+		System.out.println(vehicleId);
 		if(uv.getUserId().equals(u.getUserId()))
 		{
 			userVehicleDao.delete(uv);
@@ -137,7 +145,8 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		}
 		else
 		{
-			response.setDescription("User does not have this vehicle");
+			status = "fail";
+			response.setDescription("Invalid Vehicle");
 		}
 		return jsonConverter.getJSON(request, status,response);
 	}

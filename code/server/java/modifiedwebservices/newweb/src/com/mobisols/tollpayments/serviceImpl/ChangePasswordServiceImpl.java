@@ -13,7 +13,7 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 	
 	public String changePassword(String request,String userName,String password){
 		GeneralResponse response = new GeneralResponse();
-		String status="";
+		String status="success";
 		User u= userDao.getUser(userName);
 		u.setPassword(password);
 		userDao.update(u);

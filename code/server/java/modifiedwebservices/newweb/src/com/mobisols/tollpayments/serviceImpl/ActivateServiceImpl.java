@@ -23,7 +23,7 @@ public class ActivateServiceImpl implements ActivateService {
 	
 	public String activate(String request,ActivateRequest ar,String userName){
 		ActivateResponse response = new ActivateResponse();
-		String status=""; 
+		String status="success"; 
 		User u = userDao.getUser(userName);
 		
 		if(ar.getActive().equals("Y"))
@@ -59,6 +59,7 @@ public class ActivateServiceImpl implements ActivateService {
 					notify = "User is suspended";
 				else
 					notify = "User is already Inactive";
+				status = "fail";
 				response.getNotifications().add(notify);
 				response.setActive(u.getIsActive());
 			}
@@ -86,6 +87,7 @@ public class ActivateServiceImpl implements ActivateService {
 			else
 			{
 				String notify = "User is already Inactive";
+				status = "fail";
 				response.getNotifications().add(notify);
 				response.setActive(u.getIsActive());
 			}

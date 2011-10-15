@@ -21,7 +21,7 @@ public class VmlTypeListServiceImpl implements VmlTypeListService {
      }
 	@Override
 	public String getVmlTypeList(String request) {
-		String status="";
+		String status="success";
 		List<com.mobisols.tollpayments.model.VmlType> vl =vmlTypeDao.getVmlTypeList();
 		VmlTypeListResponse vmlTypeListResponse = new VmlTypeListResponse();
 		for(Iterator i=vl.iterator();i.hasNext();)

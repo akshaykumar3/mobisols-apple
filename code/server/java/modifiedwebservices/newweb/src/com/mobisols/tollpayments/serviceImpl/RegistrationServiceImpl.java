@@ -32,7 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public String createUser(String request,RegistrationServiceRequest r)
 	{
 		RegistrationResponse response=new RegistrationResponse();
-		String status="";
+		String status="success";
 		User u=userDao.getUser(r.getUserName());
 		if(u!=null)
 		{

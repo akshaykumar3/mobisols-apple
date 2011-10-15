@@ -30,7 +30,7 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 	public static final double DEFAULT_DISTANCE=200;
 	
 	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
-		String status="";
+		String status="success";
 		HeartBeatResponse response = new HeartBeatResponse();
 		VehicleMovementLog vml=new VehicleMovementLog();
 		Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());

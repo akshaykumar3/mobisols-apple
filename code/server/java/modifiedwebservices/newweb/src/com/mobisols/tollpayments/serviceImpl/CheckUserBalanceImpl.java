@@ -17,7 +17,7 @@ public class CheckUserBalanceImpl implements CheckUserBalance {
 	public static final double MIN_BALANCE=2;
 	public static final double MIN_TRANS_AMOUNT=10;
 	public static final int SUCCESS=1;
-	String status="";
+	String status="success";
 	private JsonConverter jsonConverter;
 	
 	private UserDao userDao;

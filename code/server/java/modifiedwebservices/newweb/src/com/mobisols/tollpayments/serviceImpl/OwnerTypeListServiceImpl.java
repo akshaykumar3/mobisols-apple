@@ -21,7 +21,7 @@ public class OwnerTypeListServiceImpl implements OwnerTypeListService {
 	 }
 	@Override
 	public String getOwnerTypeList(String request) {
-		String status="";
+		String status="success";
 		List<com.mobisols.tollpayments.model.OwnerType> ol=ownerTypeDao.getOwnerTypeList();
 		OwnerTypeListResponse ownerTypeListResponse = new OwnerTypeListResponse();
 		for(Iterator i=ol.iterator();i.hasNext();)

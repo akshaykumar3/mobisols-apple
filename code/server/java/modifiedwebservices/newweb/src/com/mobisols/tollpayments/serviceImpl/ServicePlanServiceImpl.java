@@ -16,7 +16,7 @@ public class ServicePlanServiceImpl implements ServicePlanService {
 	
 	@Override
 	public String getServiceList(String request) {
-		String status="";
+		String status="success";
 		ServicePlanList response= new ServicePlanList();
 		List l=servicePlanDao.getServiceList();
 		for(Iterator it = l.iterator();it.hasNext();)

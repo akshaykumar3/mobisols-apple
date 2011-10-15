@@ -30,7 +30,9 @@ public class MyUtilVehicleImpl implements MyUtilVehicle {
 	public boolean isValidEndDate(Date endDate)
 	{
 		MyUtilDate myUtilDate = new MyUtilDateImpl();
-		if(endDate.compareTo(myUtilDate.getCurrentDate()) > 0)
+		if(endDate!=null && endDate.compareTo(myUtilDate.getCurrentDate()) > 0)
+			return true;
+		else if(endDate==null)
 			return true;
 		else
 			return false;

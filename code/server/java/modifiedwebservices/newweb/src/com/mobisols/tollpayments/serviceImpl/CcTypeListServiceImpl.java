@@ -23,7 +23,7 @@ public class CcTypeListServiceImpl implements CcTypeListService{
 	@Override
 	public String getCcTypeList(String request) {
 		List<com.mobisols.tollpayments.model.CcType> cl=ccTypeDao.getCcTypeList();
-		String status="";
+		String status="success";
 		CcTypeListResponse ccTypeListResponse = new CcTypeListResponse();
 		for(Iterator i=cl.iterator();i.hasNext();)
 		{

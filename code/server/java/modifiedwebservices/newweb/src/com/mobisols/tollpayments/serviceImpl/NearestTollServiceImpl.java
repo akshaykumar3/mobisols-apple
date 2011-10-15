@@ -16,7 +16,7 @@ public class NearestTollServiceImpl implements NearestTollService {
 	
 	public String getNearestToll(String request,double lat,double longt) {
 		NearestTollResponse response=new NearestTollResponse();
-		String status="";
+		String status="success";
 		Location x=new Location();
 		x.setLatitude(lat);
 		x.setLongitude(longt);

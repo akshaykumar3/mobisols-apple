@@ -6,7 +6,9 @@ import com.mobisols.tollpayments.model.CcType;
 import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.myutils.MyUtilCreditCard;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
+import com.mobisols.tollpayments.myutilsImpl.MyUtilCreditCardImpl;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
 import com.mobisols.tollpayments.response.GeneralResponse;
 import com.mobisols.tollpayments.service.PaymentDetailsService;
@@ -18,13 +20,21 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	private JsonConverter jsonConverter;
 	
 	public String update(String request,PaymentDetailRequest pd,String username) {
-		String status="";
+		GeneralResponse response=new GeneralResponse();
+		String status="success";
 		UserPaymentDetail upd=userDao.getUser(username).getUserPaymentDetails();
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
 		upd.setCcExpMonth(pd.getExpMonth());
 		upd.setCcExpYear(pd.getExpYear());
-		upd.setCcNumber(pd.getCardNumber());
+		if(MyUtilCreditCardImpl.isValidCC(pd.getCardNumber()))
+			upd.setCcNumber(pd.getCardNumber());
+		else
+		{
+			status = "fail";
+			response.getNotifications().add("Invalid creditcard number");
+			return jsonConverter.getJSON(request, status, response);
+		}
 		upd.setClientId(Client.PRESENT_CLIENT);
 		upd.setAddress1(pd.getAddress1());
 		upd.setAddress2(pd.getAddress2());
@@ -40,8 +50,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setLastModifiedBy(userDao.getUser(username).getUserId());
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		userPaymentDetailDao.update(upd);
-		GeneralResponse response=new GeneralResponse();
-		response.setDescription("Your details have been updated");
+		response.getNotifications().add("Your details have been updated");
 		return jsonConverter.getJSON(request, status,response);
 	}
 	public UserPaymentDetailDao getUserPaymentDetailDao() {
