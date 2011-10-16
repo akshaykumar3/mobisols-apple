@@ -18,4 +18,9 @@
 	</bean>
 	<bean id="myutils.tollpayments.securityCheckUtil" class="com.mobisols.tollpayments.myutilsImpl.SecurityCheckUtilImpl">
 	</bean>
+	<bean id="myutils.tollpayments.myUtilErrorHandler" class="com.mobisols.tollpayments.myutilsImpl.MyUtilErrorHandlerImpl">
+		<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+	</bean>
+	<bean id="myutils.tollpayments.myUtilCleanUp" class="com.mobisols.tollpayments.myutilsImpl.MyUtilCleanUpImpl">
+	</bean>
 </beans>

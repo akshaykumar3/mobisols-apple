@@ -43,6 +43,7 @@ public class LoginServiceImpl implements LoginService {
 				if(d==null)
 				{
 					response.getResponse().put("deviceExists", Device.DEVICE_NOT_EXISTS);
+					response.getCommands().add("DoDeviceRegistration");
 					return jsonConverter.getJSON(request, status,response);
 				}
 				response.getResponse().put("deviceExists", Device.DEVICE_EXISTS);

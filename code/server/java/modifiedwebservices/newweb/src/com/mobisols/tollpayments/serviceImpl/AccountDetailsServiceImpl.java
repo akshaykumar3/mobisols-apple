@@ -43,6 +43,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			vd.setEndDate(uv.getVehicleEndDate());
 			vd.setVehicleId(uv.getUserVehicleId());
 			adr.getVehicleDetails().add(vd);
+			System.out.println(uv.getRegistrationNo()+uv.getRegisteredState());
 		}
 		
 		//Logic for tollpayments
@@ -68,7 +69,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		if(u.getUserPaymentDetails().getCcType()==null)
 			acr.getPaymentDetails().setCardType(null);
 		else
-			acr.getPaymentDetails().setCardType(u.getUserPaymentDetails().getCcType().getDescription());
+			acr.getPaymentDetails().setCardType(u.getUserPaymentDetails().getCcType().getName());
 		acr.getPaymentDetails().setExpMonth(u.getUserPaymentDetails().getCcExpMonth());
 		acr.getPaymentDetails().setExpYear(u.getUserPaymentDetails().getCcExpYear());
 		acr.getPaymentDetails().setBankRouting(u.getUserPaymentDetails().getBankRouting());

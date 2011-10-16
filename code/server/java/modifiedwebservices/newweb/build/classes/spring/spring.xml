@@ -76,6 +76,7 @@
     <bean id="service.tollpayments.paymentDetailsService" class="com.mobisols.tollpayments.serviceImpl.PaymentDetailsServiceImpl">
     	<property name="userPaymentDetailDao" ref="dao.tollpayments.userPaymentDetailDao"></property>
     	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="ccTypeDao" ref="dao.tollpayments.ccTypeDao"></property>
     	<property name="myUtilDate" ref="myutils.tollpayments.myUtilDate"></property>
     	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
     </bean>

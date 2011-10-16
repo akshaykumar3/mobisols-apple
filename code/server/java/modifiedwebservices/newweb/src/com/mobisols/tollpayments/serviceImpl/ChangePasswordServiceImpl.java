@@ -17,6 +17,7 @@ public class ChangePasswordServiceImpl implements ChangePasswordService {
 		User u= userDao.getUser(userName);
 		u.setPassword(password);
 		userDao.update(u);
+		response.getNotifications().add("Password Changed");
 		return jsonConverter.getJSON(request, status,response);
 		
 	}
