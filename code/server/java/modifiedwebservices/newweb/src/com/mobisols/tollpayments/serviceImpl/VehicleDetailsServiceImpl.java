@@ -1,14 +1,12 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.OwnerTypeDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.dao.VehicleTypeDao;
-import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.OwnerType;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
@@ -124,7 +122,6 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		if(uv.getUserId().equals(u.getUserId()))
 		{
 			userVehicleDao.delete(uv);
-			Device d = deviceDao.getDevice(u.getUserId());
 			/*if(d.getVehicleId() == uv.getUserVehicleId())
 			{
 				List<UserVehicle> l = userVehicleDao.getActiveVehicles();

@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import com.mobisols.tollpayments.dao.CcTypeDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
 import com.mobisols.tollpayments.model.CcType;
@@ -16,6 +17,7 @@ import com.mobisols.tollpayments.service.PaymentDetailsService;
 public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	private UserPaymentDetailDao userPaymentDetailDao;
 	private UserDao userDao;
+	private CcTypeDao ccTypeDao;
 	private MyUtilDate myUtilDate;
 	private JsonConverter jsonConverter;
 	
@@ -27,14 +29,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setBankRouting(pd.getBankRouting());
 		upd.setCcExpMonth(pd.getExpMonth());
 		upd.setCcExpYear(pd.getExpYear());
-		if(MyUtilCreditCardImpl.isValidCC(pd.getCardNumber()))
-			upd.setCcNumber(pd.getCardNumber());
-		else
-		{
-			status = "fail";
-			response.getNotifications().add("Invalid creditcard number");
-			return jsonConverter.getJSON(request, status, response);
-		}
+		upd.setCcNumber(pd.getCardNumber());
 		upd.setClientId(Client.PRESENT_CLIENT);
 		upd.setAddress1(pd.getAddress1());
 		upd.setAddress2(pd.getAddress2());
@@ -46,7 +41,10 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setPayPrefer("c");
 		upd.setState(pd.getState());
 		upd.setZip(pd.getZip());
-		upd.setCcTypeId(CcType.CCTYPE_ID);
+		if(ccTypeDao.getCcTypeId(pd.getCardType())!=null)
+			upd.setCcTypeId(ccTypeDao.getCcTypeId(pd.getCardType()));
+		else
+			upd.setCcTypeId(CcType.CCTYPE_ID);
 		upd.setLastModifiedBy(userDao.getUser(username).getUserId());
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		userPaymentDetailDao.update(upd);
@@ -77,6 +75,12 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	}
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
+	}
+	public CcTypeDao getCcTypeDao() {
+		return ccTypeDao;
+	}
+	public void setCcTypeDao(CcTypeDao ccTypeDao) {
+		this.ccTypeDao = ccTypeDao;
 	}
 
 	

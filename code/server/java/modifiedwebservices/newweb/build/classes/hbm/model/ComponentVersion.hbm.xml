@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
 <meta attribute="class-description">This has details of component version</meta>
-    <class name="com.mobisols.tollpayments.model.ComponentVersion" table="component_version" catalog="globaltoll">
+    <class name="com.mobisols.tollpayments.model.ComponentVersion" table="component_version" >
             <id name="compVersionId" type="java.lang.Integer">
                 <column name="comp_version_id" />
             </id>

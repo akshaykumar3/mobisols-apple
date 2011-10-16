@@ -1,7 +1,5 @@
 package com.mobisols.tollpayments.request.post;
 
-import java.util.Date;
-
 public class PaymentDetailRequest {
 	private String ccName;
 	private String cardNumber;

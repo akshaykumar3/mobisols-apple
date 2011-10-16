@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
 <meta attribute="class-description"> This class has configuration details</meta>
-    <class name="com.mobisols.tollpayments.model.Configuration" table="configuration" catalog="globaltoll">
+    <class name="com.mobisols.tollpayments.model.Configuration" table="configuration" >
             <id name="configId" type="java.lang.Integer">
                 <column name="config_id" />
             </id>
