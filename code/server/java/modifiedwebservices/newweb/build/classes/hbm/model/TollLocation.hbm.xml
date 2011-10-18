@@ -103,7 +103,15 @@
 			update="false"
 			/>
             
-            
+             <set
+                name="tollPrice" inverse="true">
+                <key update="false" >
+                    <column name="toll_location_id" not-null="true"/>
+                </key>
+                <one-to-many
+                    class="com.mobisols.tollpayments.model.TollPrice"
+                />
+            </set>
             
             
    <filter name="clientIdFilter" condition=":clientId = client_id"/>

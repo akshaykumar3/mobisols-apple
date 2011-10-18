@@ -96,6 +96,13 @@
             <property name="longitude" type="java.lang.Double">
                 <column name="longitude" precision="3" scale="3" />
             </property>
+            <property name="direction" type="java.lang.String">
+                <column name="direction" length="45" />
+            </property>
+            <property name="type" type="java.lang.String">
+                <column name="type" length="30" />
+            </property>
+            
             <many-to-one name="tollLocation"
                 class="com.mobisols.tollpayments.model.TollLocation"
 				column="toll_location_id"

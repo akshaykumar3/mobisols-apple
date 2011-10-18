@@ -1,7 +1,12 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import com.mobisols.tollpayments.dao.TollLocationDao;
+import com.mobisols.tollpayments.dao.VehicleTypeDao;
 import com.mobisols.tollpayments.model.TollLocation;
+import com.mobisols.tollpayments.model.TollPrice;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
@@ -22,11 +27,21 @@ public class NearestTollServiceImpl implements NearestTollService {
 		x.setLongitude(longt);
 		Location l=tollLocationUtil.getNearestToll(x);
 		TollLocation t= tollLocationDao.getTollLocation(l.getLatitude(), l.getLongitude());
-		response.setAveragePrice(2.3);
 		response.setCity(t.getCity());
 		response.setState(t.getState());
 		response.setTollOperator(t.getTollOperator().getName());
-		response.setTollPrice(2.3);
+		Set<TollPrice> tollPrice = t.getTollPrice();
+		TollPrice tp=null;
+		for(Iterator<TollPrice> it = tollPrice.iterator();it.hasNext(); )
+		{
+			tp= it.next();
+			if(tp.getVehicleTypeId().equals(VehicleTypeDao.DEFAULT_TYPE));
+			{
+				response.setCostPrice(tp.getCostPrice());
+				response.setSellingPrice(tp.getSellingPrice());
+				break;
+			}
+		}
 		return jsonConverter.getJSON(request, status,response);
 	}
 	

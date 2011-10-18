@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * TollLocationId entity. @author MyEclipse Persistence Tools
@@ -41,6 +42,7 @@ public class TollLocation implements java.io.Serializable {
 	private String type;
 	private TollOperator tollOperator;
 	
+	private Set<TollPrice> tollPrice;
 	
 	public TollOperator getTollOperator() {
 		return tollOperator;
@@ -534,6 +536,14 @@ public class TollLocation implements java.io.Serializable {
 		result = 37 * result
 				+ (getType() == null ? 0 : this.getType().hashCode());
 		return result;
+	}
+
+	public void setTollPrice(Set<TollPrice> tollPrice) {
+		this.tollPrice = tollPrice;
+	}
+
+	public Set<TollPrice> getTollPrice() {
+		return tollPrice;
 	}
 
 }
