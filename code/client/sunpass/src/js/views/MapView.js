@@ -20,6 +20,6 @@ gtp.tabs.MapView = {
 		centerchange: function(comp, map, center) {
 			// Update current location.
 			//gtp.geo.updateLocation();
-		},
+		}
 	}
 };

@@ -27,44 +27,50 @@ gtp.tabs.CarDetailView = {
 				var curtab = gtp.tabpanel.getActiveItem().down('#details');
 				if(!gtp.dateValidity(gtp.today, curtab.down('#dpto').getValue()))
 					Ext.Msg.alert(gtp.dict.datevalidity);
-				else
-				Ext.Ajax.request({
-					url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
-					method: 'POST',
-					params: {
-						is_new_vehicle: 'N',
-						json: Ext.encode({
-							state: updateCar.get('state'),
-							registration: updateCar.get('reg'),
-							type: updateCar.get('type'),
-							isActive: updateCar.get('isActive'),
-							startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
-						    endDate: Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
-							ownerType: updateCar.get('ownerType'), 
-							vehicleId: updateCar.get('vehicleId')
-						})
-					},
-					success: function(response){
-						var resobj=Ext.decode(response.responseText);
-						var obj=resobj.response;
-						gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
-							type: 'slide',
-							direction: 'right'
-						});
-						updateCar.set('endDate',curtab.down('#dpto').getValue());
-						Ext.getCmp('changevd').setDisabled(true);
-				      	gtp.showNotifications(resobj.response.notifications);
-				      	gtp.parse(resobj.response.commands);
-					},
-					failure: function(response){
-						gtp.log(response.status+' Error in updating car details');
-						Ext.Msg.alert(gtp.dict.updatecar_failure);
-						gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
-							type: 'slide',
-							direction: 'right'
-						});
-					}
-				});
+				else {
+					gtp.tabpanel.setLoading({
+						msg: 'Updating Vehicle...'
+					});
+					Ext.Ajax.request({
+						url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
+						method: 'POST',
+						params: {
+							is_new_vehicle: 'N',
+							json: Ext.encode({
+								state: updateCar.get('state'),
+								registration: updateCar.get('reg'),
+								type: updateCar.get('type'),
+								isActive: updateCar.get('isActive'),
+								startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
+							    endDate: Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
+								ownerType: updateCar.get('ownerType'), 
+								vehicleId: updateCar.get('vehicleId')
+							})
+						},
+						success: function(response){
+							gtp.tabpanel.setLoading(false);
+							var resobj=Ext.decode(response.responseText);
+							var obj=resobj.response;
+							updateCar.set('endDate',curtab.down('#dpto').getValue());
+							Ext.getCmp('changevd').setDisabled(true);
+					      	gtp.showNotifications(resobj.response.notifications);
+					      	gtp.parse(resobj.response.commands);
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+								type: 'slide',
+								direction: 'right'
+							});
+						},
+						failure: function(response){
+							gtp.tabpanel.setLoading(false);
+							gtp.log(response.status+' Error in updating car details');
+							Ext.Msg.alert(gtp.dict.updatecar_failure);
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+								type: 'slide',
+								direction: 'right'
+							});
+						}
+					});
+				}
 			}
 		}]
 	}],
@@ -129,6 +135,9 @@ gtp.tabs.CarDetailView = {
 			var stmod = gtp.tabpanel.getActiveItem().down('#details').getRecord();
 			Ext.Msg.confirm("Confirmation", "Are you sure to delete car?", function(button) {
 				if(button == 'yes') {
+					gtp.tabpanel.setLoading({
+						msg: 'Deleting Vehicle...'
+					});
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','deletevehicle')).get('url'),
 						method: 'DELETE',
@@ -136,6 +145,7 @@ gtp.tabs.CarDetailView = {
 							vehicleId: stmod.get('vehicleId')
 						},
 						success: function(response){
+							gtp.tabpanel.setLoading(false);
 							var resobj=Ext.decode(response.responseText);
 							var obj=resobj.response;
 							gtp.log(obj.description);
@@ -143,11 +153,12 @@ gtp.tabs.CarDetailView = {
 								carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
 								Ext.Msg.alert(gtp.dict.deletecar_success);
 							}
-							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						},
 						failure: function(response){
+							gtp.tabpanel.setLoading(false);
 							gtp.log(response.status+' Error deleting the car');
 							Ext.Msg.alert(gtp.dict.deletecar_failure);
 						}

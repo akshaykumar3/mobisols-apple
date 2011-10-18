@@ -61,6 +61,9 @@ gtp.tabs.SettingsFormView = {
 						else if(!validZipCode)
 							Ext.Msg.alert('Invalid','Enter Valid zip code');
 						else {
+							gtp.tabpanel.setLoading({
+								msg: 'Please wait..'
+							});
 							Ext.Ajax.request({
 								url: webServices.getAt(webServices.findExact('service','paymentdetails')).get('url'),
 								method: 'POST',
@@ -81,6 +84,7 @@ gtp.tabs.SettingsFormView = {
 									})
 								},
 								success: function(response) {
+									gtp.tabpanel.setLoading(false);
 									console.log('Posting payment details success');
 									gtp.log('Posting payment details success');
 									var resobj = Ext.decode(response.responseText);
@@ -91,6 +95,7 @@ gtp.tabs.SettingsFormView = {
 									gtp.parse(resobj.response.commands);
 								},
 								failure: function(response) {
+									gtp.tabpanel.setLoading(false);
 									Ext.Msg.alert('Error','Changing Payment Details');
 									console.log('Failed in posting payment details');
 									gtp.log('Failed in posting papyment details');
@@ -107,7 +112,6 @@ gtp.tabs.SettingsFormView = {
 						var bill_fs = dis.down('#billingdetails');
 						fieldset.items.each(function(item){
 							var fieldErrors = errors.getByField(item.name);
-							console.log(item.name);
 							if(fieldErrors.length > 0) {
 								var errorField = fieldset.down('#'+item.name+'ErrorField');
 								item.addCls('invalid-field');
@@ -123,7 +127,6 @@ gtp.tabs.SettingsFormView = {
 						},this);
 						bill_fs.items.each(function(item){
 							var fieldErrors = errors.getByField(item.name);
-							console.log(item.name);
 							if(fieldErrors.length > 0) {
 								var errorField = bill_fs.down('#'+item.name+'ErrorField');
 								item.addCls('invalid-field');

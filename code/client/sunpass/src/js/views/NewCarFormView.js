@@ -52,6 +52,9 @@ gtp.tabs.NewCarFormView = {
 				else if(acfd.endDate && !validEndDate)
 					Ext.Msg.alert('End Date','Incorrect Value');
 				else {
+					gtp.tabpanel.setLoading({
+						msg: 'Adding Vehicle..'
+					});
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','addcar')).get('url'),
 						method: 'POST',
@@ -69,6 +72,7 @@ gtp.tabs.NewCarFormView = {
 							})
 						},
 						success: function(response){
+							gtp.tabpanel.setLoading(false);
 							gtp.log('User Added a car successfully');
 							var resobj = Ext.decode(response.responseText);
 							console.log(response.responseText);
@@ -82,16 +86,17 @@ gtp.tabs.NewCarFormView = {
 									vehicleId: resobj.response.vehicleId,
 									ownerType: 'primary owner'
 								},'Cars'));
-								Ext.Msg.alert('Success',gtp.dict.newcar_success);
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						},
 						failure: function(response){
+							gtp.tabpanel.setLoading(false);
 							Ext.Msg.alert(gtp.dict.newcar_failure);
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						}
 					});
-					gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 				}
 			}
 		}]

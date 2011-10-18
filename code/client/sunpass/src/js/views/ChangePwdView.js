@@ -18,15 +18,15 @@ gtp.tabs.ChangePwdView = {
 		xtype: 'fieldset',
 		id: 'changepwd_fds',
 		items: [{
-			xtype: 'textfield',
+			xtype: 'passwordfield',
 			id: 'chpwd_curpwd',
 			placeHolder: 'Current Password'
 		},{
-			xtype: 'textfield',
+			xtype: 'passwordfield',
 			id: 'chpwd_newpwd',
 			placeHolder: 'New Password'
 		},{
-			xtype: 'textfield',
+			xtype: 'passwordfield',
 			id: 'chpwd_conpwd',
 			placeHolder: 'Re-enter New Password'
 		}]
@@ -57,7 +57,7 @@ gtp.tabs.ChangePwdView = {
 						console.log(res.responseText);
 				      	gtp.showNotifications(resobj.response.notifications);
 				      	gtp.parse(resobj.response.commands);
-						gtp.tabpanel.getComponent(3).setActiveItem('settingsform');
+						gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
 					},
 					failure: function(res) {
 						Ext.Msg.alert('Error changing password');
