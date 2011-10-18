@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 18, 2011 at 03:13 AM
+-- Generation Time: Oct 18, 2011 at 08:02 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -24,7 +24,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Stand-in structure for view `cc_type`
 --
-DROP VIEW IF EXISTS `cc_type`;
 CREATE TABLE IF NOT EXISTS `cc_type` (
 `cc_type_id` int(11)
 ,`name` varchar(45)
@@ -50,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `cc_type` (
 -- Table structure for table `cc_type_all`
 --
 
-DROP TABLE IF EXISTS `cc_type_all`;
 CREATE TABLE IF NOT EXISTS `cc_type_all` (
   `cc_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -89,7 +87,6 @@ INSERT INTO `cc_type_all` (`cc_type_id`, `name`, `description`, `udf1`, `udf2`, 
 --
 -- Stand-in structure for view `client`
 --
-DROP VIEW IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
 `client_id` int(11)
 ,`client_name` varchar(45)
@@ -113,7 +110,6 @@ CREATE TABLE IF NOT EXISTS `client` (
 -- Table structure for table `client_all`
 --
 
-DROP TABLE IF EXISTS `client_all`;
 CREATE TABLE IF NOT EXISTS `client_all` (
   `client_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_name` varchar(45) NOT NULL,
@@ -148,7 +144,6 @@ INSERT INTO `client_all` (`client_id`, `client_name`, `udf1`, `udf2`, `udf3`, `u
 --
 -- Stand-in structure for view `component`
 --
-DROP VIEW IF EXISTS `component`;
 CREATE TABLE IF NOT EXISTS `component` (
 `component_id` int(11)
 ,`name` varchar(45)
@@ -174,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `component` (
 -- Table structure for table `component_all`
 --
 
-DROP TABLE IF EXISTS `component_all`;
 CREATE TABLE IF NOT EXISTS `component_all` (
   `component_id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
@@ -210,7 +204,6 @@ INSERT INTO `component_all` (`component_id`, `name`, `description`, `client_id`,
 --
 -- Stand-in structure for view `component_version`
 --
-DROP VIEW IF EXISTS `component_version`;
 CREATE TABLE IF NOT EXISTS `component_version` (
 `comp_version_id` int(11)
 ,`component_id` int(11)
@@ -237,7 +230,6 @@ CREATE TABLE IF NOT EXISTS `component_version` (
 -- Table structure for table `component_version_all`
 --
 
-DROP TABLE IF EXISTS `component_version_all`;
 CREATE TABLE IF NOT EXISTS `component_version_all` (
   `comp_version_id` int(11) NOT NULL AUTO_INCREMENT,
   `component_id` int(11) DEFAULT NULL,
@@ -274,7 +266,6 @@ INSERT INTO `component_version_all` (`comp_version_id`, `component_id`, `descrip
 --
 -- Stand-in structure for view `configuration`
 --
-DROP VIEW IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
 `config_id` int(11)
 ,`comp_version_id` int(11)
@@ -300,7 +291,6 @@ CREATE TABLE IF NOT EXISTS `configuration` (
 -- Table structure for table `configuration_all`
 --
 
-DROP TABLE IF EXISTS `configuration_all`;
 CREATE TABLE IF NOT EXISTS `configuration_all` (
   `config_id` int(11) NOT NULL,
   `comp_version_id` int(11) DEFAULT NULL,
@@ -336,7 +326,6 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 --
 -- Stand-in structure for view `device`
 --
-DROP VIEW IF EXISTS `device`;
 CREATE TABLE IF NOT EXISTS `device` (
 `device_id` int(11)
 ,`user_id` int(11)
@@ -365,7 +354,6 @@ CREATE TABLE IF NOT EXISTS `device` (
 -- Table structure for table `device_all`
 --
 
-DROP TABLE IF EXISTS `device_all`;
 CREATE TABLE IF NOT EXISTS `device_all` (
   `device_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -460,7 +448,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `device_history`
 --
-DROP VIEW IF EXISTS `device_history`;
 CREATE TABLE IF NOT EXISTS `device_history` (
 `device_history_id` int(11)
 ,`device_id` int(11)
@@ -493,7 +480,6 @@ CREATE TABLE IF NOT EXISTS `device_history` (
 -- Table structure for table `device_history_all`
 --
 
-DROP TABLE IF EXISTS `device_history_all`;
 CREATE TABLE IF NOT EXISTS `device_history_all` (
   `device_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` int(11) DEFAULT NULL,
@@ -537,7 +523,6 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 --
 -- Stand-in structure for view `make`
 --
-DROP VIEW IF EXISTS `make`;
 CREATE TABLE IF NOT EXISTS `make` (
 `make_id` int(11)
 ,`name` varchar(45)
@@ -563,7 +548,6 @@ CREATE TABLE IF NOT EXISTS `make` (
 -- Table structure for table `make_all`
 --
 
-DROP TABLE IF EXISTS `make_all`;
 CREATE TABLE IF NOT EXISTS `make_all` (
   `make_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -598,7 +582,6 @@ CREATE TABLE IF NOT EXISTS `make_all` (
 --
 -- Stand-in structure for view `model`
 --
-DROP VIEW IF EXISTS `model`;
 CREATE TABLE IF NOT EXISTS `model` (
 `model_id` int(11)
 ,`name` varchar(45)
@@ -625,7 +608,6 @@ CREATE TABLE IF NOT EXISTS `model` (
 -- Table structure for table `model_all`
 --
 
-DROP TABLE IF EXISTS `model_all`;
 CREATE TABLE IF NOT EXISTS `model_all` (
   `model_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -661,7 +643,6 @@ CREATE TABLE IF NOT EXISTS `model_all` (
 --
 -- Stand-in structure for view `owner_type`
 --
-DROP VIEW IF EXISTS `owner_type`;
 CREATE TABLE IF NOT EXISTS `owner_type` (
 `owner_type_id` int(11)
 ,`name` varchar(45)
@@ -687,7 +668,6 @@ CREATE TABLE IF NOT EXISTS `owner_type` (
 -- Table structure for table `owner_type_all`
 --
 
-DROP TABLE IF EXISTS `owner_type_all`;
 CREATE TABLE IF NOT EXISTS `owner_type_all` (
   `owner_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -724,7 +704,6 @@ INSERT INTO `owner_type_all` (`owner_type_id`, `name`, `description`, `udf1`, `u
 --
 -- Stand-in structure for view `payment_gateway`
 --
-DROP VIEW IF EXISTS `payment_gateway`;
 CREATE TABLE IF NOT EXISTS `payment_gateway` (
 `payment_gateway_id` int(11)
 ,`name` varchar(1000)
@@ -750,7 +729,6 @@ CREATE TABLE IF NOT EXISTS `payment_gateway` (
 -- Table structure for table `payment_gateway_all`
 --
 
-DROP TABLE IF EXISTS `payment_gateway_all`;
 CREATE TABLE IF NOT EXISTS `payment_gateway_all` (
   `payment_gateway_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(1000) DEFAULT NULL,
@@ -784,7 +762,6 @@ CREATE TABLE IF NOT EXISTS `payment_gateway_all` (
 --
 -- Stand-in structure for view `payment_token`
 --
-DROP VIEW IF EXISTS `payment_token`;
 CREATE TABLE IF NOT EXISTS `payment_token` (
 `payment_token_id` int(11)
 ,`upd_id` int(11)
@@ -811,7 +788,6 @@ CREATE TABLE IF NOT EXISTS `payment_token` (
 -- Table structure for table `payment_token_all`
 --
 
-DROP TABLE IF EXISTS `payment_token_all`;
 CREATE TABLE IF NOT EXISTS `payment_token_all` (
   `payment_token_id` int(11) NOT NULL AUTO_INCREMENT,
   `upd_id` int(11) DEFAULT NULL,
@@ -849,7 +825,6 @@ CREATE TABLE IF NOT EXISTS `payment_token_all` (
 --
 -- Stand-in structure for view `payment_transaction`
 --
-DROP VIEW IF EXISTS `payment_transaction`;
 CREATE TABLE IF NOT EXISTS `payment_transaction` (
 `ptran_id` int(11)
 ,`user_bl_id` int(11)
@@ -879,7 +854,6 @@ CREATE TABLE IF NOT EXISTS `payment_transaction` (
 -- Table structure for table `payment_transaction_all`
 --
 
-DROP TABLE IF EXISTS `payment_transaction_all`;
 CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
   `ptran_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_bl_id` int(11) DEFAULT NULL COMMENT 'balance log for the user',
@@ -920,7 +894,6 @@ CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
 --
 -- Stand-in structure for view `road`
 --
-DROP VIEW IF EXISTS `road`;
 CREATE TABLE IF NOT EXISTS `road` (
 `road_id` int(11)
 ,`name` varchar(50)
@@ -948,7 +921,6 @@ CREATE TABLE IF NOT EXISTS `road` (
 -- Table structure for table `road_all`
 --
 
-DROP TABLE IF EXISTS `road_all`;
 CREATE TABLE IF NOT EXISTS `road_all` (
   `road_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -984,7 +956,6 @@ CREATE TABLE IF NOT EXISTS `road_all` (
 --
 -- Stand-in structure for view `service_plan`
 --
-DROP VIEW IF EXISTS `service_plan`;
 CREATE TABLE IF NOT EXISTS `service_plan` (
 `service_plan_id` int(11)
 ,`toll_operator_id` int(11)
@@ -1011,7 +982,6 @@ CREATE TABLE IF NOT EXISTS `service_plan` (
 -- Table structure for table `service_plan_all`
 --
 
-DROP TABLE IF EXISTS `service_plan_all`;
 CREATE TABLE IF NOT EXISTS `service_plan_all` (
   `service_plan_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_operator_id` int(11) DEFAULT NULL,
@@ -1051,7 +1021,6 @@ INSERT INTO `service_plan_all` (`service_plan_id`, `toll_operator_id`, `name`, `
 --
 -- Stand-in structure for view `toll_location`
 --
-DROP VIEW IF EXISTS `toll_location`;
 CREATE TABLE IF NOT EXISTS `toll_location` (
 `toll_location_id` int(11)
 ,`toll_operator_id` int(11)
@@ -1089,7 +1058,6 @@ CREATE TABLE IF NOT EXISTS `toll_location` (
 -- Table structure for table `toll_location_all`
 --
 
-DROP TABLE IF EXISTS `toll_location_all`;
 CREATE TABLE IF NOT EXISTS `toll_location_all` (
   `toll_location_id` int(11) NOT NULL,
   `toll_operator_id` int(11) NOT NULL COMMENT 'corresponding toll agency -- foreign key to toll_operators_all table',
@@ -1210,7 +1178,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `toll_location_history`
 --
-DROP VIEW IF EXISTS `toll_location_history`;
 CREATE TABLE IF NOT EXISTS `toll_location_history` (
 `tlh_id` int(11)
 ,`toll_location_id` int(11)
@@ -1250,7 +1217,6 @@ CREATE TABLE IF NOT EXISTS `toll_location_history` (
 -- Table structure for table `toll_location_history_all`
 --
 
-DROP TABLE IF EXISTS `toll_location_history_all`;
 CREATE TABLE IF NOT EXISTS `toll_location_history_all` (
   `tlh_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_location_id` int(11) DEFAULT NULL,
@@ -1322,7 +1288,6 @@ INSERT INTO `toll_location_history_all` (`tlh_id`, `toll_location_id`, `toll_ope
 --
 -- Stand-in structure for view `toll_operator`
 --
-DROP VIEW IF EXISTS `toll_operator`;
 CREATE TABLE IF NOT EXISTS `toll_operator` (
 `toll_operator_id` int(11)
 ,`user_id` int(11)
@@ -1350,7 +1315,6 @@ CREATE TABLE IF NOT EXISTS `toll_operator` (
 -- Table structure for table `toll_operator_all`
 --
 
-DROP TABLE IF EXISTS `toll_operator_all`;
 CREATE TABLE IF NOT EXISTS `toll_operator_all` (
   `toll_operator_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1392,7 +1356,6 @@ INSERT INTO `toll_operator_all` (`toll_operator_id`, `user_id`, `name`, `is_acti
 --
 -- Stand-in structure for view `toll_price`
 --
-DROP VIEW IF EXISTS `toll_price`;
 CREATE TABLE IF NOT EXISTS `toll_price` (
 `toll_price_id` int(11)
 ,`toll_location_id` int(11)
@@ -1420,7 +1383,6 @@ CREATE TABLE IF NOT EXISTS `toll_price` (
 -- Table structure for table `toll_price_all`
 --
 
-DROP TABLE IF EXISTS `toll_price_all`;
 CREATE TABLE IF NOT EXISTS `toll_price_all` (
   `toll_price_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_location_id` int(11) NOT NULL,
@@ -1506,7 +1468,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `toll_price_history`
 --
-DROP VIEW IF EXISTS `toll_price_history`;
 CREATE TABLE IF NOT EXISTS `toll_price_history` (
 `tph_id` int(11)
 ,`toll_price_id` int(11)
@@ -1539,7 +1500,6 @@ CREATE TABLE IF NOT EXISTS `toll_price_history` (
 -- Table structure for table `toll_price_history_all`
 --
 
-DROP TABLE IF EXISTS `toll_price_history_all`;
 CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
   `tph_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_price_id` int(11) NOT NULL,
@@ -1579,7 +1539,6 @@ CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
 -- Table structure for table `udf_data_all`
 --
 
-DROP TABLE IF EXISTS `udf_data_all`;
 CREATE TABLE IF NOT EXISTS `udf_data_all` (
   `udf_data_id` int(11) NOT NULL AUTO_INCREMENT,
   `udf_value` varchar(1000) DEFAULT NULL,
@@ -1599,7 +1558,6 @@ CREATE TABLE IF NOT EXISTS `udf_data_all` (
 -- Table structure for table `udf_definition_all`
 --
 
-DROP TABLE IF EXISTS `udf_definition_all`;
 CREATE TABLE IF NOT EXISTS `udf_definition_all` (
   `udf_def_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -1616,7 +1574,6 @@ CREATE TABLE IF NOT EXISTS `udf_definition_all` (
 --
 -- Stand-in structure for view `user`
 --
-DROP VIEW IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
 `user_id` int(11)
 ,`client_id` int(11)
@@ -1647,7 +1604,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Table structure for table `user_all`
 --
 
-DROP TABLE IF EXISTS `user_all`;
 CREATE TABLE IF NOT EXISTS `user_all` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_id` int(11) NOT NULL COMMENT 'users can register under any client where clients are third party organisations. ',
@@ -1737,7 +1693,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_balance`
 --
-DROP VIEW IF EXISTS `user_balance`;
 CREATE TABLE IF NOT EXISTS `user_balance` (
 `ubal_id` int(11)
 ,`user_id` int(11)
@@ -1763,7 +1718,6 @@ CREATE TABLE IF NOT EXISTS `user_balance` (
 -- Table structure for table `user_balance_all`
 --
 
-DROP TABLE IF EXISTS `user_balance_all`;
 CREATE TABLE IF NOT EXISTS `user_balance_all` (
   `ubal_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1834,7 +1788,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_balance_log`
 --
-DROP VIEW IF EXISTS `user_balance_log`;
 CREATE TABLE IF NOT EXISTS `user_balance_log` (
 `ublog_id` int(11)
 ,`ubal_id` int(11)
@@ -1862,7 +1815,6 @@ CREATE TABLE IF NOT EXISTS `user_balance_log` (
 -- Table structure for table `user_balance_log_all`
 --
 
-DROP TABLE IF EXISTS `user_balance_log_all`;
 CREATE TABLE IF NOT EXISTS `user_balance_log_all` (
   `ublog_id` int(11) NOT NULL AUTO_INCREMENT,
   `ubal_id` int(11) NOT NULL,
@@ -1901,7 +1853,6 @@ INSERT INTO `user_balance_log_all` (`ublog_id`, `ubal_id`, `delta`, `timestamp`,
 --
 -- Stand-in structure for view `user_history`
 --
-DROP VIEW IF EXISTS `user_history`;
 CREATE TABLE IF NOT EXISTS `user_history` (
 `user_his_id` int(11)
 ,`user_id` int(11)
@@ -1936,7 +1887,6 @@ CREATE TABLE IF NOT EXISTS `user_history` (
 -- Table structure for table `user_history_all`
 --
 
-DROP TABLE IF EXISTS `user_history_all`;
 CREATE TABLE IF NOT EXISTS `user_history_all` (
   `user_his_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1980,13 +1930,10 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 --
 -- Stand-in structure for view `user_notification`
 --
-DROP VIEW IF EXISTS `user_notification`;
 CREATE TABLE IF NOT EXISTS `user_notification` (
 `user_notification_id` int(11)
-,`user_id` int(11)
-,`user_notification_type_id` int(11)
-,`timestamp` datetime
-,`description` varchar(1000)
+,`device_id` int(11)
+,`notification_type` varchar(100)
 ,`udf1` varchar(500)
 ,`udf2` varchar(500)
 ,`udf3` varchar(500)
@@ -2001,6 +1948,14 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
 ,`last_modified_on` datetime
 ,`last_modified_by` int(11)
 ,`client_id` int(11)
+,`status` varchar(45)
+,`send_at` timestamp
+,`notification` varchar(1000)
+,`ack_mesage` varchar(4000)
+,`ack_result` varchar(100)
+,`add_timestamp` timestamp
+,`sent_timestamp` timestamp
+,`ack_timestamp` timestamp
 );
 -- --------------------------------------------------------
 
@@ -2008,13 +1963,10 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
 -- Table structure for table `user_notification_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_all` (
   `user_notification_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `user_notification_type_id` int(11) DEFAULT NULL,
-  `timestamp` datetime DEFAULT NULL,
-  `description` varchar(1000) DEFAULT NULL,
+  `device_id` int(11) DEFAULT NULL,
+  `notification_type` varchar(100) DEFAULT NULL,
   `udf1` varchar(500) DEFAULT NULL,
   `udf2` varchar(500) DEFAULT NULL,
   `udf3` varchar(500) DEFAULT NULL,
@@ -2029,9 +1981,16 @@ CREATE TABLE IF NOT EXISTS `user_notification_all` (
   `last_modified_on` datetime NOT NULL,
   `last_modified_by` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `send_at` timestamp NULL DEFAULT NULL,
+  `notification` varchar(1000) DEFAULT NULL,
+  `ack_mesage` varchar(4000) DEFAULT NULL,
+  `ack_result` varchar(100) DEFAULT NULL,
+  `add_timestamp` timestamp NULL DEFAULT NULL,
+  `sent_timestamp` timestamp NULL DEFAULT NULL,
+  `ack_timestamp` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`user_notification_id`),
-  KEY `fk_user_all` (`user_id`),
-  KEY `fk_user_notification_type_all` (`user_notification_type_id`),
+  KEY `fk_device` (`device_id`),
   KEY `fk_last_mod_by_notification` (`last_modified_by`),
   KEY `fk_unotify_client_all` (`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -2046,7 +2005,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_all` (
 --
 -- Stand-in structure for view `user_notification_settings`
 --
-DROP VIEW IF EXISTS `user_notification_settings`;
 CREATE TABLE IF NOT EXISTS `user_notification_settings` (
 `user_notification_settings_id` int(11)
 ,`user_id` int(11)
@@ -2072,7 +2030,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_settings` (
 -- Table structure for table `user_notification_settings_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_settings_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_settings_all` (
   `user_notification_settings_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2109,7 +2066,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_settings_all` (
 --
 -- Stand-in structure for view `user_notification_type`
 --
-DROP VIEW IF EXISTS `user_notification_type`;
 CREATE TABLE IF NOT EXISTS `user_notification_type` (
 `user_notification_type_id` int(11)
 ,`notification_type` varchar(100)
@@ -2135,7 +2091,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_type` (
 -- Table structure for table `user_notification_type_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_type_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_type_all` (
   `user_notification_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `notification_type` varchar(100) NOT NULL,
@@ -2169,7 +2124,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_type_all` (
 --
 -- Stand-in structure for view `user_payment_detail`
 --
-DROP VIEW IF EXISTS `user_payment_detail`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 `upd_id` int(11)
 ,`user_id` int(11)
@@ -2209,7 +2163,6 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 -- Table structure for table `user_payment_detail_all`
 --
 
-DROP TABLE IF EXISTS `user_payment_detail_all`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   `upd_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2315,7 +2268,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_payment_detail_history`
 --
-DROP VIEW IF EXISTS `user_payment_detail_history`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 `updh_id` int(11)
 ,`upd_id` int(11)
@@ -2359,7 +2311,6 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 -- Table structure for table `user_payment_detail_history_all`
 --
 
-DROP TABLE IF EXISTS `user_payment_detail_history_all`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `updh_id` int(11) NOT NULL AUTO_INCREMENT,
   `upd_id` int(11) DEFAULT NULL,
@@ -2413,7 +2364,6 @@ INSERT INTO `user_payment_detail_history_all` (`updh_id`, `upd_id`, `user_id`, `
 --
 -- Stand-in structure for view `user_service`
 --
-DROP VIEW IF EXISTS `user_service`;
 CREATE TABLE IF NOT EXISTS `user_service` (
 `user_service_id` int(11)
 ,`user_id` int(11)
@@ -2442,7 +2392,6 @@ CREATE TABLE IF NOT EXISTS `user_service` (
 -- Table structure for table `user_service_all`
 --
 
-DROP TABLE IF EXISTS `user_service_all`;
 CREATE TABLE IF NOT EXISTS `user_service_all` (
   `user_service_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2481,7 +2430,6 @@ CREATE TABLE IF NOT EXISTS `user_service_all` (
 --
 -- Stand-in structure for view `user_type`
 --
-DROP VIEW IF EXISTS `user_type`;
 CREATE TABLE IF NOT EXISTS `user_type` (
 `user_type_id` int(11)
 ,`name` varchar(45)
@@ -2509,7 +2457,6 @@ CREATE TABLE IF NOT EXISTS `user_type` (
 -- Table structure for table `user_type_all`
 --
 
-DROP TABLE IF EXISTS `user_type_all`;
 CREATE TABLE IF NOT EXISTS `user_type_all` (
   `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL COMMENT 'trial/prepaid/premium/postpaid users',
@@ -2548,7 +2495,6 @@ INSERT INTO `user_type_all` (`user_type_id`, `name`, `description`, `min_balance
 --
 -- Stand-in structure for view `user_vehicle`
 --
-DROP VIEW IF EXISTS `user_vehicle`;
 CREATE TABLE IF NOT EXISTS `user_vehicle` (
 `user_vehicle_id` int(11)
 ,`user_id` int(11)
@@ -2582,7 +2528,6 @@ CREATE TABLE IF NOT EXISTS `user_vehicle` (
 -- Table structure for table `user_vehicle_all`
 --
 
-DROP TABLE IF EXISTS `user_vehicle_all`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   `user_vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL COMMENT 'user id-- foreign key to users_all table',
@@ -2681,7 +2626,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_vehicle_history`
 --
-DROP VIEW IF EXISTS `user_vehicle_history`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 `uvh_id` int(11)
 ,`user_vehicle_id` int(11)
@@ -2719,7 +2663,6 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 -- Table structure for table `user_vehicle_history_all`
 --
 
-DROP TABLE IF EXISTS `user_vehicle_history_all`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `uvh_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_vehicle_id` int(11) DEFAULT NULL,
@@ -2786,7 +2729,6 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 --
 -- Stand-in structure for view `vehicle_movement_log`
 --
-DROP VIEW IF EXISTS `vehicle_movement_log`;
 CREATE TABLE IF NOT EXISTS `vehicle_movement_log` (
 `vml_id` int(11)
 ,`vml_type_id` int(11)
@@ -2820,7 +2762,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log` (
 -- Table structure for table `vehicle_movement_log_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_movement_log_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
   `vml_id` int(11) NOT NULL AUTO_INCREMENT,
   `vml_type_id` int(11) NOT NULL,
@@ -2865,7 +2806,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
 --
 -- Stand-in structure for view `vehicle_toll_usage`
 --
-DROP VIEW IF EXISTS `vehicle_toll_usage`;
 CREATE TABLE IF NOT EXISTS `vehicle_toll_usage` (
 `vtu_id` int(11)
 ,`uvh_id` int(11)
@@ -2895,7 +2835,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage` (
 -- Table structure for table `vehicle_toll_usage_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_toll_usage_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
   `vtu_id` int(11) NOT NULL AUTO_INCREMENT,
   `uvh_id` int(11) NOT NULL,
@@ -2938,7 +2877,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
 --
 -- Stand-in structure for view `vehicle_type`
 --
-DROP VIEW IF EXISTS `vehicle_type`;
 CREATE TABLE IF NOT EXISTS `vehicle_type` (
 `vehicle_type_id` int(11)
 ,`name` varchar(100)
@@ -2964,7 +2902,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_type` (
 -- Table structure for table `vehicle_type_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_type_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_type_all` (
   `vehicle_type_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key of the table',
   `name` varchar(100) NOT NULL COMMENT 'A: Auto/sport utility Vehicle/minivan\nP: Pickup truck \nP2: Pickup truck with dual rear tires \nv: Van\nm: motorcycle \nR4: RV with 4 tires\n R6: RV with dual rear tires  ',
@@ -3004,7 +2941,6 @@ INSERT INTO `vehicle_type_all` (`vehicle_type_id`, `name`, `description`, `udf1`
 --
 -- Stand-in structure for view `vml_type`
 --
-DROP VIEW IF EXISTS `vml_type`;
 CREATE TABLE IF NOT EXISTS `vml_type` (
 `vml_type_id` int(11)
 ,`name` varchar(45)
@@ -3030,7 +2966,6 @@ CREATE TABLE IF NOT EXISTS `vml_type` (
 -- Table structure for table `vml_type_all`
 --
 
-DROP TABLE IF EXISTS `vml_type_all`;
 CREATE TABLE IF NOT EXISTS `vml_type_all` (
   `vml_type_id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -3282,7 +3217,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `user_notification`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_notification` AS select `user_notification_all`.`user_notification_id` AS `user_notification_id`,`user_notification_all`.`user_id` AS `user_id`,`user_notification_all`.`user_notification_type_id` AS `user_notification_type_id`,`user_notification_all`.`timestamp` AS `timestamp`,`user_notification_all`.`description` AS `description`,`user_notification_all`.`udf1` AS `udf1`,`user_notification_all`.`udf2` AS `udf2`,`user_notification_all`.`udf3` AS `udf3`,`user_notification_all`.`udf4` AS `udf4`,`user_notification_all`.`udf5` AS `udf5`,`user_notification_all`.`flag1` AS `flag1`,`user_notification_all`.`flag2` AS `flag2`,`user_notification_all`.`flag3` AS `flag3`,`user_notification_all`.`flag4` AS `flag4`,`user_notification_all`.`flag5` AS `flag5`,`user_notification_all`.`created_on` AS `created_on`,`user_notification_all`.`last_modified_on` AS `last_modified_on`,`user_notification_all`.`last_modified_by` AS `last_modified_by`,`user_notification_all`.`client_id` AS `client_id` from `user_notification_all`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_notification` AS select `user_notification_all`.`user_notification_id` AS `user_notification_id`,`user_notification_all`.`device_id` AS `device_id`,`user_notification_all`.`notification_type` AS `notification_type`,`user_notification_all`.`udf1` AS `udf1`,`user_notification_all`.`udf2` AS `udf2`,`user_notification_all`.`udf3` AS `udf3`,`user_notification_all`.`udf4` AS `udf4`,`user_notification_all`.`udf5` AS `udf5`,`user_notification_all`.`flag1` AS `flag1`,`user_notification_all`.`flag2` AS `flag2`,`user_notification_all`.`flag3` AS `flag3`,`user_notification_all`.`flag4` AS `flag4`,`user_notification_all`.`flag5` AS `flag5`,`user_notification_all`.`created_on` AS `created_on`,`user_notification_all`.`last_modified_on` AS `last_modified_on`,`user_notification_all`.`last_modified_by` AS `last_modified_by`,`user_notification_all`.`client_id` AS `client_id`,`user_notification_all`.`status` AS `status`,`user_notification_all`.`send_at` AS `send_at`,`user_notification_all`.`notification` AS `notification`,`user_notification_all`.`ack_mesage` AS `ack_mesage`,`user_notification_all`.`ack_result` AS `ack_result`,`user_notification_all`.`add_timestamp` AS `add_timestamp`,`user_notification_all`.`sent_timestamp` AS `sent_timestamp`,`user_notification_all`.`ack_timestamp` AS `ack_timestamp` from `user_notification_all` where (`user_notification_all`.`user_notification_id` > 0);
 
 -- --------------------------------------------------------
 
@@ -3560,10 +3495,9 @@ ALTER TABLE `user_balance_log_all`
 -- Constraints for table `user_notification_all`
 --
 ALTER TABLE `user_notification_all`
+  ADD CONSTRAINT `fk_device` FOREIGN KEY (`device_id`) REFERENCES `device_all` (`device_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_notification` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_unotify_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_all` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_notification_type_all` FOREIGN KEY (`user_notification_type_id`) REFERENCES `user_notification_type_all` (`user_notification_type_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_unotify_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_notification_settings_all`
