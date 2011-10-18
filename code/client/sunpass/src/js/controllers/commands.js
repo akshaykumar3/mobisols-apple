@@ -20,6 +20,7 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 			}
 		});
 	},
+	
 	refreshConfiguration: function(options) {
 		Ext.Ajax.request({
 			url: webServices.getAt(webServices.findExact('service','clientconfig')).get('url'),
@@ -44,14 +45,17 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 			}
 		});
 	},
+	
 	hearbeat: function(options) {
 		setTimeout("requestHeartBeat()", options.time * 1000); 
 	},
+	
 	killapp: function(options) {
 		Ext.Msg.alert('Mismatch', 'Re-enter ur password');
-		gtp.views.loginPage.show();
+		gtp.views.Viewport.show();
 		gtp.tabpanel.destroy();
 	},
+	
 	commandAck: function(options) {
 		Ext.Ajax.request({
 			url: webServices.getAt(webServices.findExact('service','cmdacknow')).get('url'),

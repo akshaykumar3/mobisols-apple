@@ -21,7 +21,7 @@ gtp.tabs.HomeScreenView = {
 		},{
 			xtype: 'spacer'
 		},{
-			text: 'help',
+			text: 'About',
 			handler: function(but, eve) {
 				if(!this.popup) {
 					this.popup = new Ext.Panel({
@@ -67,8 +67,6 @@ gtp.tabs.HomeScreenView = {
 					var to = homeform.down('#operator');
 					var at = homeform.down('#avgtoll');
 					var pt = homeform.down('#pdtoll');
-					var ac = homeform.down('#activecar');
-					var sp = homeform.down('#serviceplan');
 					if(newValue == 1 && oldValue == 0) {
 						// Things todo.
 						// Check whether atleast one car is valid.
@@ -78,7 +76,7 @@ gtp.tabs.HomeScreenView = {
 						clat = gtp.getGeoLatitude();
 						clong = gtp.getGeoLongitude();
 						
-						Ext.Ajax.request({
+						/*Ext.Ajax.request({
 							url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
 							method: 'GET',
 							params: {
@@ -91,10 +89,10 @@ gtp.tabs.HomeScreenView = {
 								console.log('Nearest Toll Webservice request fetched');
 								console.log(response.responseText);
 								var resobj=Ext.decode(response.responseText);
-								/*cl.setValue(resobj.response.city + resobj.response.state);
+								cl.setValue(resobj.response.city + resobj.response.state);
 								to.setValue(resobj.response.tolloperator);
 								at.setValue(resobj.response.avgtoll);
-								pt.setValue(resobj.response.price);*/
+								pt.setValue(resobj.response.price);
 						      	gtp.showNotifications(resobj.response.notifications);
 						      	gtp.parse(resobj.response.commands);
 							},
@@ -102,27 +100,28 @@ gtp.tabs.HomeScreenView = {
 								console.log('Nearest toll failure with status '+response.status);
 								gtp.log('Nearest toll failure with status '+response.status);
 							}
-						});
-						
-						if(ac.getValue()) {
-							var htfp = Ext.getCmp('home');
-							htfp.load(Ext.ModelMgr.create({
-								currentlocation: 'Tallahassee, Florida',
-								tolloperator: TollsData.getAt(0).get('tolloperator'),
-								avgtoll: TollsData.getAt(0).get('avgtoll'),
-								tollperday: TollsData.getAt(0).get('tollperday')
-							},'TollOperator'));
-							
+						});*/
+
+						if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
 							setTimeout("requestHeartBeat()",5000);
 							// This invokes client side heartbeat.
 							gtp.clientsidehb();
-							message='Settings are saved, Car '+Ext.getCmp('activecar').getValue()+' is active';
+							message='Settings are saved';
 							Ext.Msg.alert('Activated',message);
-							ac.setDisabled(true);
-							sp.setDisabled(true);
+							gtp.tabpanel.getActiveItem().down('#tfd').disable();
 						}
-						else
-							Ext.Msg.alert('Car should be selected');
+						else {
+							if(!gtp.isCarValid) {
+								Ext.Msg.alert('Please add a vehicle');
+								gtp.tabpanel.setActiveItem('carsviewport');
+								gtp.tabpanel.getActiveItem().setActiveItem('addcar');
+							}
+							else if(!gtp.arePaymentDetailsValid) {
+								Ext.Msg.alert('Please fill payment details');
+								gtp.tabpanel.setActiveItem('basicform');
+								gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+							}
+						}
 					}
 					else if(newValue == 0 && oldValue ==1) {
 						gtp.isAppEnabled=0;
@@ -130,83 +129,72 @@ gtp.tabs.HomeScreenView = {
 						to.setValue("");
 						at.setValue("");
 						pt.setValue("");
-						ac.setDisabled(false);
-						sp.setDisabled(false);
 					}
 				},
 				beforechange: function(slider, thumb, newValue, oldValue) {
-					var hc = Ext.getCmp('home');
-					if(newValue == 1 && oldValue ==0)
-					Ext.Ajax.request({
-						url: webServices.getAt(webServices.findExact('service','activate')).get('url'),
-						method: 'POST',
-						params: {
-							json: Ext.encode({
-								active: 'Y',
-								serviceId: '1',
-								activeVehicleId: carsList.data.getAt(carsList.findExact('reg',hc.down('#activecar').getValue())).get('vehicleId')
-							})
-						},
-						success: function(response) {
-							gtp.log('Application is active');
-							console.log(response.responseText);
-					      	gtp.showNotifications(Ext.decode(response).notifications);
-						},
-						failure: function(res) {
-							gtp.log(res.status+' Error, Activating the application');
-						}
-					});
+					if(newValue == 1 && oldValue ==0) {
+						Ext.Ajax.request({
+							url: webServices.getAt(webServices.findExact('service','activate')).get('url'),
+							method: 'POST',
+							params: {
+								json: Ext.encode({
+									active: 'Y',
+									serviceId: '1'
+								})
+							},
+							success: function(response) {
+								gtp.log('Application is active');
+								console.log(response.responseText);
+								var resobj = Ext.decode(response.responseText);
+						      	//gtp.showNotifications(resobj.response.notifications);
+						      	gtp.parse(resobj.response.commands);
+							},
+							failure: function(res) {
+								gtp.log(res.status+' Error, Activating the application');
+							}
+						});
+						return true;
+					}
 				}
 			}
 		}]
 	},{
 		xtype: 'fieldset',
-		title: 'Configuration',
-		items: [{
-			xtype: 'selectfield',
-			name: 'activecar',
-			label: 'ActiveCar',
-			id: 'activecar',
-			store: carsList,
-			displayField: 'reg',
-			valueField: 'reg'
-		},{
-			xtype: 'selectfield',
-			name: 'serviceplan',
-			id: 'serviceplan',
-			label: 'Service',
-			required: true
-		}]
-	},{
-		xtype: 'fieldset',
 		id: 'curlocservices',
-		title: 'Current Location Operator',
+		title: 'Nearest Toll',
 		items: [{
 			xtype: 'textfield',
 			name: 'currentlocation',
 			id: 'curloc',
-			label: 'CurLoc',
-			disabled: true,
-			autoCapitalize : true,
-			useClearIcon: true
+			label: 'Location',
+			disabled: true
 		},{
 			xtype: 'textfield',
 			name: 'tolloperator',
 			disabled: true,
 			id: 'operator',
-			label: 'Operator'
+			label: 'toll operator'
 		},{
 			xtype: 'textfield',
 			name: 'avgtoll',
 			disabled: true,
 			id: 'avgtoll',
-			label: 'AvgToll'
+			label: 'toll price'
 		},{
 			xtype: 'textfield',
 			name: 'tollperday',
 			disabled: true,
 			id: 'pdtoll',
-			label: 'Per Day'
+			label: 'service fee'
 		}]
-	}]
+	}],
+	listeners: {
+		beforeactivate: function(dis) {
+			if(!gtp.isCarValid || !gtp.arePaymentDetailsValid) {
+				var td = dis.down('#tfd');
+				if(td.getValue() == 1) 
+					td.toggle();
+			}
+		}
+	}
 };

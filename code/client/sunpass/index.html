@@ -12,10 +12,10 @@
 	<script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
 	
 	<!-- Encryption algorithm -->
-	<script type="text/javascript" src="src/js/utf8_encode.js"></script>
-	<script type="text/javascript" src="src/js/base64_encode.js"></script>
-	<script type="text/javascript" src="src/js/tea.js"></script>
-	<script type="text/javascript" src="src/js/crypt.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/utf8_encode.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/base64_encode.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/tea.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/crypt.js"></script>
 	
 	<!--  Distance Algorithms -->
 	<script type="text/javascript" src="src/js/latlongdistance.js"></script>
@@ -28,12 +28,20 @@
 	<script type="text/javascript" src="src/js/dictionary.js"></script>
 	
 	<!-- Models are defined here -->
-	<script type="text/javascript" src="src/js/models.js"></script>
+	<script type="text/javascript" src="src/js/models/models.js"></script>
+	<script type="text/javascript" src="src/js/models/Toll.js"></script>
+	<script type="text/javascript" src="src/js/models/Car.js"></script>
+	<script type="text/javascript" src="src/js/models/Settings.js"></script>
 	
 	<!-- Stores are defined here -->
-	<script type="text/javascript" src="src/js/stores.js"></script>
+	<script type="text/javascript" src="src/js/stores/stores.js"></script>
+	<script type="text/javascript" src="src/js/stores/States.js"></script>
+	<script type="text/javascript" src="src/js/stores/Months.js"></script>
+	<script type="text/javascript" src="src/js/stores/WSLinks.js"></script>
 	
 	<!--  Views are defined here -->
+	<script type="text/javascript" src="src/js/views/LoginPage.js"></script>
+	<script type="text/javascript" src="src/js/views/RegPage.js"></script>
 	<script type="text/javascript" src="src/js/views/HomeScreenView.js"></script>
 	<script type="text/javascript" src="src/js/views/CarsListView.js"></script>
 	<script type="text/javascript" src="src/js/views/NewCarFormView.js"></script>
@@ -47,21 +55,24 @@
 	<script type ="text/javascript" src="src/js/views/MapView.js"></script>
 	
 	<!--  Validations are defined here -->
-	<script type="text/javascript" src="src/js/validations.js"></script>
+	<script type="text/javascript" src="src/js/validations/validations.js"></script>
+	<script type="text/javascript" src="src/js/validations/validateCc.js"></script>
+	<script type="text/javascript" src="src/js/validations/CustomValidations.js"></script>
 	
 	<!-- Database classes are defined here -->
 	<script type="text/javascript" src="src/js/dbclasses.js"></script>
 	
 	<!--  Application Data -->
-	<script type="text/javascript" src="src/js/FetchAppData.js"></script>
+	<script type="text/javascript" src="src/js/controllers/FetchAppData.js"></script>
 	
 	<!-- controllers are defined here -->
-	<script type="text/javascript" src="src/js/controller.js"></script>
-	<script type="text/javascript" src="src/js/commands.js"></script>
-	<script type="text/javascript" src="src/js/heartbeat.js"></script>
+	<script type="text/javascript" src="src/js/controllers/controller.js"></script>
+	<script type="text/javascript" src="src/js/controllers/commands.js"></script>
+	<script type="text/javascript" src="src/js/controllers/get.js"></script>
+	<script type="text/javascript" src="src/js/controllers/heartbeat.js"></script>
 	
 	<!--  Client side heartbeat -->
-	<script type="text/javascript" src="src/js/clientsidehb.js"></script>
+	<script type="text/javascript" src="src/js/controllers/clientsidehb.js"></script>
 	
 	<!--  Database Transactions are defined here -->
 	<script type="text/javascript" src="src/js/Transactions.js"></script>

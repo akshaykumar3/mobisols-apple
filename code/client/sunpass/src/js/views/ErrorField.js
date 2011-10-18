@@ -19,7 +19,6 @@ gtp.views.ErrorField = Ext.extend(Ext.Component, {
 
         Ext.apply(this, config);
         gtp.views.ErrorField.superclass.initComponent.call(this);
-    },
-
+    }
 });
 Ext.reg('gtp.views.ErrorField', gtp.views.ErrorField);

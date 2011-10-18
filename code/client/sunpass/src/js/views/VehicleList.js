@@ -11,7 +11,7 @@ gtp.views.Vehicle = Ext.extend(Ext.Panel, {
             ]
         });
         gtp.views.Viewport.superclass.initComponent.apply(this, arguments);
-    },
+    }
 });
 
 gtp.views.VehiclesList = Ext.extend(Ext.Panel, {

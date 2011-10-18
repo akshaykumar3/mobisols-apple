@@ -19,9 +19,11 @@ Ext.regApplication({
     launch: function(){
     	Ext.Ajax.defaultHeaders = {};
     	this.deviceRegistered = this.isDeviceRegistered();
-    	this.launchLoginPage({
-    		type: this.detectDeviceType()
+    	Ext.dispatch({
+    		controller: 'get',
+    		action: 'configuration'
     	});
+    	this.launchLoginPage();
     	if(!this.deviceRegistered) {
     		this.registerDevice();
 			gtp.views.loginPage.setLoading(true);
@@ -32,7 +34,6 @@ Ext.regApplication({
     	Ext.dispatch({
             controller: 'load',
             action    : 'show',
-            deviceDetails: options
 	    });
     },
     detectDeviceType: function(){
@@ -77,7 +78,7 @@ Ext.regApplication({
 			},
 			failure: function(response){
 				// Check the status. if the response status is 404. 
-				// Prompt a message saying could not connect to internet.
+				// Prompt a message saying could not connect to server.
 				// Todo--- Failure could be of any. like 500 or some other error status.
 				// Write code to show message accordingly.
 				gtp.log(response.status+' Error in registering device');
@@ -88,7 +89,7 @@ Ext.regApplication({
 				if(response.status==404)
 					message = "There was an error contacting the server. Please try launching again";
 				else if(response.status == 500)
-					message = "There was an error contacting the server. Please try launching again";
+					message = "Server down temporarily, Please try after some time";
 				gtp.views.Viewport = new Ext.Panel({
 	    			fullscreen: true,
 	    			html: message
@@ -112,10 +113,26 @@ Ext.regApplication({
     responseFailureHandler: function(res, message) {
     	// log to the logger store.
     	gtp.log(message + res.status);
+    	var msg;
     	if(res.status == 404) {
     		// Do logic for error handling.
+        	msg = "Error contacting the server. Please try again";
+    		if(gtp.tabpanel) 
+    			gtp.tabpanel.destroy();
+			new Ext.Panel({
+				fullscreen: true,
+				html: msg
+			});
+    			
     	}
     	else if(res.status == 500) {
+        	msg = "Server down temporarily, Please try after some time";
+    		if(gtp.tabpanel)
+    			gtp.tabpanel.destroy();
+			new Ext.Panel({
+				fullscreen: true,
+				html: msg
+			});
     	}
     }
 });
