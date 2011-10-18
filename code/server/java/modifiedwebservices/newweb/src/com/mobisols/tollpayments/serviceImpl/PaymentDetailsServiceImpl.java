@@ -5,6 +5,7 @@ import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
 import com.mobisols.tollpayments.model.CcType;
 import com.mobisols.tollpayments.model.Client;
+import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilCreditCard;
@@ -24,6 +25,13 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	public String update(String request,PaymentDetailRequest pd,String username) {
 		GeneralResponse response=new GeneralResponse();
 		String status="success";
+		if(!(pd.getExpYear() == myUtilDate.getCurrentDate().getYear() && pd.getExpMonth() >= myUtilDate.getCurrentDate().getMonth()) 
+				&& !(pd.getExpYear()>myUtilDate.getCurrentDate().getYear()))
+		{
+			response.getNotifications().add("Invalid Expiry Date");
+			status="fail";
+			jsonConverter.getJSON(request, status, response);
+		}
 		UserPaymentDetail upd=userDao.getUser(username).getUserPaymentDetails();
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
@@ -48,6 +56,9 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setLastModifiedBy(userDao.getUser(username).getUserId());
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		userPaymentDetailDao.update(upd);
+		User u =userDao.getUser(username);
+		u.setIsActive(userDao.USER_INACTIVE);
+		userDao.update(u);
 		response.getNotifications().add("Your details have been updated");
 		return jsonConverter.getJSON(request, status,response);
 	}

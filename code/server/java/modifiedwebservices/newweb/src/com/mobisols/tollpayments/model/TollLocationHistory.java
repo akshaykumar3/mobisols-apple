@@ -40,6 +40,8 @@ public class TollLocationHistory implements java.io.Serializable {
 	private Integer clientId;
 	private Double latitude;
 	private Double longitude;
+	private String direction;
+	private String type;
 	private TollLocation tollLocation;
 	private TollOperator tollOperator;
 
@@ -357,6 +359,22 @@ public class TollLocationHistory implements java.io.Serializable {
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public boolean equals(Object other) {

@@ -31,7 +31,7 @@ public class ActivateServiceImpl implements ActivateService {
 			List standByVehicles = userVehicleDao.getStandByVehicles();
 			if(standByVehicles.isEmpty())
 			{
-				response.getNotifications().add("No Vehicle is Active");
+				response.getNotifications().add("Add a Vehicle");
 			}
 			else if(u.getIsActive().equals(userDao.USER_INACTIVE))
 			{

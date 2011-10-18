@@ -7,8 +7,8 @@ public class NearestTollResponse {
 	private String city;
 	private String state;
 	private String tollOperator;
-	private double tollPrice;
-	private double averagePrice;
+	private double costPrice;
+	private double sellingPrice;
 	private List<String> notifications;
 	private List<String> commands;
 	
@@ -41,22 +41,22 @@ public class NearestTollResponse {
 	public void setTollOperator(String tollOperator) {
 		this.tollOperator = tollOperator;
 	}
-	public double getTollPrice() {
-		return tollPrice;
+	public double getCostPrice() {
+		return costPrice;
 	}
-	public void setTollPrice(double tollPrice) {
-		this.tollPrice = tollPrice;
-	}
-	public double getAveragePrice() {
-		return averagePrice;
-	}
-	public void setAveragePrice(double averagePrice) {
-		this.averagePrice = averagePrice;
+	public void setCostPrice(double costPrice) {
+		this.costPrice = costPrice;
 	}
 	public void setCommands(List<String> commands) {
 		this.commands = commands;
 	}
 	public List<String> getCommands() {
 		return commands;
+	}
+	public double getSellingPrice() {
+		return sellingPrice;
+	}
+	public void setSellingPrice(double sellingPrice) {
+		this.sellingPrice = sellingPrice;
 	}
 }

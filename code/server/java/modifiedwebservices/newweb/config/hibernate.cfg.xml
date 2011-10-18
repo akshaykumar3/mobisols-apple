@@ -101,7 +101,9 @@
 		<mapping
 			resource="/hbm/model/PaymentGateway.hbm.xml"/>
 		<mapping
-			resource="/hbm/model/PaymentToken.hbm.xml"/>		
+			resource="/hbm/model/PaymentToken.hbm.xml"/>	
+		<mapping
+			resource="/hbm/model/UserNotification.hbm.xml"/>	
 	</session-factory>
 
 </hibernate-configuration>

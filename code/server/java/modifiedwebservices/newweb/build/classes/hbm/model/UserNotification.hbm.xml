@@ -10,17 +10,11 @@
             <id name="userNotificationId" type="java.lang.Integer">
                 <column name="user_notification_id" />
             </id>
-            <property name="userId" type="java.lang.Integer">
-                <column name="user_id" />
+            <property name="deviceId" type="java.lang.Integer">
+                <column name="device_id" />
             </property>
-            <property name="userNotificationTypeId" type="java.lang.Integer">
-                <column name="user_notification_type_id" />
-            </property>
-            <property name="timestamp" type="java.sql.Timestamp">
-                <column name="timestamp" length="19" />
-            </property>
-            <property name="description" type="java.lang.String">
-                <column name="description" length="1000" />
+            <property name="userNotificationType" type="java.lang.String">
+                <column name="user_notification_type" />
             </property>
             <property name="udf1" type="java.lang.String">
                 <column name="udf1" length="500" />
@@ -64,22 +58,39 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
+            <property name="status" type="java.lang.String">
+                <column name="status" length = "45"/>
+            </property>
+            <property name="sendAt" type="java.sql.Timestamp">
+                <column name="send_at"  length = "19"/>
+            </property>
+            <property name="notification" type="java.lang.String">
+                <column name="notification" length="1000" />
+            </property>
+            <property name="ackMessage" type="java.lang.String">
+                <column name="ack_message" length="4000" />
+            </property>
+            <property name="ackResult" type="java.lang.String">
+                <column name="ack_result" length="100"/>
+            </property>
+            <property name="addTimestamp" type="java.sql.Timestamp">
+                <column name="addTimestamp" length="19"/>
+            </property>
+            <property name="sentTimestamp" type="java.sql.Timestamp">
+                <column name="sent_timestamp" length="19"/>
+            </property>
+            <property name="ackTimestamp" type="java.sql.Timestamp">
+                <column name="ack_timestamp" length="19"/>
+            </property>
             
-            <many-to-one name="user"
-			class="com.mobisols.tollpayments.model.User"
-			column="user_id"
+            <many-to-one name="device"
+			class="com.mobisols.tollpayments.model.Device"
+			column="device_id"
 			cascade="save-update"
 			insert="false"
 			update="false"
 			unique="true"/>
 			
-			<many-to-one name="userNotificationType"
-			class="com.mobisols.tollpayments.model.UserNotificationType"
-			column="user_notification_type_id"
-			cascade="save-update"
-			insert="false"
-			update="false"
-			unique="true"/>
 			
        
     <filter name="clientIdFilter" condition=":clientId = client_id"/>
