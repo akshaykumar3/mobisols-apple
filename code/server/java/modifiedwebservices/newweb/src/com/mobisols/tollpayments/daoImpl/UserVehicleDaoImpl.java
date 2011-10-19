@@ -68,7 +68,7 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 	public List getStandByVehicles(){
 		Session s =HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("isActive",this.VEHICLE_ACTIVE));
+		crit.add(Restrictions.eq("isActive",this.VEHICLE_STANDBY));
 		return crit.list();
 	}
 }

@@ -29,9 +29,11 @@ public class ActivateServiceImpl implements ActivateService {
 		if(ar.getActive().equals("Y"))
 		{
 			List standByVehicles = userVehicleDao.getStandByVehicles();
-			if(standByVehicles.isEmpty())
+			if(u.getIsActive().equals(userDao.USER_INACTIVE) && standByVehicles.isEmpty())
 			{
 				response.getNotifications().add("Add a Vehicle");
+				status = "fail";
+				return jsonConverter.getJSON(request, status, response);
 			}
 			else if(u.getIsActive().equals(userDao.USER_INACTIVE))
 			{
@@ -43,9 +45,13 @@ public class ActivateServiceImpl implements ActivateService {
 				}
 				u.setIsActive(userDao.USER_ACTIVE);
 				userDao.update(u);
-				Device d = deviceDao.getDevice(u.getUserId());
-				d.setIsActive(deviceDao.DEVICE_ACTIVE);
-				deviceDao.update(d);
+				//Device d = deviceDao.getDevice(u.getUserId());
+				//d.setIsActive(deviceDao.DEVICE_ACTIVE);
+				//deviceDao.update(d);
+				response.setActive(userDao.USER_ACTIVE);
+			}
+			else if(u.equals(userDao.USER_ACTIVE))
+			{
 				response.setActive(userDao.USER_ACTIVE);
 			}
 			else
@@ -58,7 +64,7 @@ public class ActivateServiceImpl implements ActivateService {
 				if(u.getIsActive().equals(userDao.USER_SUSPEND))
 					notify = "User is suspended";
 				else
-					notify = "User is already Inactive";
+					notify = "User is already Active";
 				status = "fail";
 				response.getNotifications().add(notify);
 				response.setActive(u.getIsActive());
@@ -77,11 +83,11 @@ public class ActivateServiceImpl implements ActivateService {
 				}
 				u.setIsActive(userDao.USER_INACTIVE);
 				userDao.update(u);
-				Device d = deviceDao.getDevice(u.getUserId());
+				//Device d = deviceDao.getDevice(u.getUserId());
 				//d.setVehicleId(-1);
-				d.setIsActive(deviceDao.DEVICE_INACTIVE);
-				deviceDao.update(d);
-				response.setActive("N");
+				//d.setIsActive(deviceDao.DEVICE_INACTIVE);
+				//deviceDao.update(d);
+				//response.setActive("N");
 				response.getNotifications().add("User is Deactivated");
 			}
 			else

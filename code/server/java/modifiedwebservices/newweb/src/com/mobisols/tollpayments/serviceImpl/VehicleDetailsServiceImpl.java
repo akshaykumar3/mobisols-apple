@@ -54,7 +54,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			}
 			if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_ACTIVE))
 				uv.setIsActive(userVehicleDao.VEHICLE_ACTIVE);
-			else if(vdr.equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
+			else if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
 				uv.setIsActive(userVehicleDao.VEHICLE_STANDBY);
 			else
 				uv.setIsActive(userVehicleDao.VEHICLE_INACTIVE);
@@ -81,7 +81,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setCreatedOn(myUtilDate.getCurrentTimeStamp());
 			if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_ACTIVE))
 				uv.setIsActive(userVehicleDao.VEHICLE_ACTIVE);
-			else if(vdr.equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
+			else if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
 				uv.setIsActive(userVehicleDao.VEHICLE_STANDBY);
 			else
 				uv.setIsActive(userVehicleDao.VEHICLE_INACTIVE);

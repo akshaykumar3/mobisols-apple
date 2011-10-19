@@ -10,6 +10,7 @@ public class MyUtilErrorHandlerImpl implements MyUtilErrorHandler {
 	
 	public String handleException(String request,Exception e)
 	{
+		e.printStackTrace();
 		GeneralResponse response = new GeneralResponse();
 		response.getNotifications().add("Server Error");
 		String status = "fail";
