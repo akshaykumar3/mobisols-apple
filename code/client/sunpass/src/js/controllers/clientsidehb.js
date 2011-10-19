@@ -2,8 +2,7 @@ gtp.clientsidehb= function() {
 	this.avgspeed=75;
 	this.timefactor=2;
 	this.sessionid=1;
-	gtp.loop();
-	this.utils.dataStore.getConfiguration();
+	//gtp.loop();
 	this.geo.updateLocation();
 };
 

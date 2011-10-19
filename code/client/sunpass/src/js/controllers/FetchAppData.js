@@ -71,6 +71,8 @@ gtp.FetchUserData = function(options) {
 	      	
 	      	
 	      	if(pay_details) {
+	      		if(pay_details.cardNumber && pay_details.expMonth) 
+	      			gtp.arePaymentDetailsValid = true;
 		      	var userSettings = Ext.ModelMgr.create({
 		      		userid: options.loginDetails.username,
 		      		ccnumber: pay_details.cardNumber,

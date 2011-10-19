@@ -7,7 +7,7 @@ gtp.tabs.MapView = {
 	// If u want to control centering the map donot set the useCurrentLocation set to true.
 	mapOptions: {
 		//center: google.maps ? new google.maps.LatLng(32.95008700,-117.10962200) : null,
-		zoom: 15
+		zoom: 8
 	},
 	cls: 'card5',
 	iconCls: 'MapIcon',

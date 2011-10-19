@@ -62,13 +62,18 @@ function requestHeartBeat(){
 gtp.getGeoLatitude = function() {
 	if(gtp.geo.latitude)
 	return gtp.geo.latitude;
+	else if(Ext.getCmp('mappanel').map)
+		return Ext.getCmp('mappanel').map.getCenter().lng();
 	else
-	return Ext.getCmp('mappanel').map.getCenter().lat();
+		return 0;
 };
 
 gtp.getGeoLongitude = function() {
 	if(gtp.geo.longitude)
 	return gtp.geo.longitude;
+	else if(Ext.getCmp('mappanel').map) {
+		return Ext.getCmp('mappanel').map.getCenter().lng();
+	}
 	else
-	return Ext.getCmp('mappanel').map.getCenter().lng();
+		return 0;
 };
