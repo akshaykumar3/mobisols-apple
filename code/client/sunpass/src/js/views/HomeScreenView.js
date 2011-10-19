@@ -76,7 +76,7 @@ gtp.tabs.HomeScreenView = {
 						clat = gtp.getGeoLatitude();
 						clong = gtp.getGeoLongitude();
 						
-						/*Ext.Ajax.request({
+						Ext.Ajax.request({
 							url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
 							method: 'GET',
 							params: {
@@ -89,10 +89,12 @@ gtp.tabs.HomeScreenView = {
 								console.log('Nearest Toll Webservice request fetched');
 								console.log(response.responseText);
 								var resobj=Ext.decode(response.responseText);
-								cl.setValue(resobj.response.city + resobj.response.state);
-								to.setValue(resobj.response.tolloperator);
-								at.setValue(resobj.response.avgtoll);
-								pt.setValue(resobj.response.price);
+								if( resobj.response ) {
+									//cl.setValue(resobj.response.city + resobj.response.state);
+									to.setValue(resobj.response.tollOperator);
+									at.setValue(resobj.response.averagePrice);
+									pt.setValue(resobj.response.tollPrice);
+								}
 						      	gtp.showNotifications(resobj.response.notifications);
 						      	gtp.parse(resobj.response.commands);
 							},
@@ -100,7 +102,7 @@ gtp.tabs.HomeScreenView = {
 								console.log('Nearest toll failure with status '+response.status);
 								gtp.log('Nearest toll failure with status '+response.status);
 							}
-						});*/
+						});
 
 						if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
 							setTimeout("requestHeartBeat()",5000);

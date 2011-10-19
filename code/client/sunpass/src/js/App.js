@@ -26,10 +26,10 @@ Ext.regApplication({
     	this.launchLoginPage();
     	if(!this.deviceRegistered) {
     		this.registerDevice();
-			gtp.views.loginPage.setLoading(true);
+			gtp.views.Viewport.setLoading(true);
     	}
     },
-    launchLoginPage: function(options){
+    launchLoginPage: function(){
     	// Login Page is launched here
     	Ext.dispatch({
             controller: 'load',
@@ -67,24 +67,34 @@ Ext.regApplication({
 				})
 			},
 			success: function(response){
+				gtp.views.Viewport.setLoading(false);
 				var obj=Ext.decode(response.responseText);
 				console.log('Generated device ID is: '+obj.response.deviceId);
 				gtp.log('Device Registration success');
-				gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
-				gtp.deviceId = obj.response.deviceId;
-				gtp.views.loginPage.setLoading(false);
 				gtp.showNotifications(obj.response.notifications);
 				gtp.parse(obj.response.commands);
+				if(obj.status == 'success') {
+					gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
+					gtp.deviceId = obj.response.deviceId;
+				}
+				else {
+					gtp.views.Viewport.destroy();
+					var message = "Server down temporarily, Please try after some time";
+					gtp.views.Viewport = new Ext.Panel({
+		    			fullscreen: true,
+		    			html: message
+		    		});
+				}
 			},
 			failure: function(response){
+				gtp.views.Viewport.setLoading(false);
 				// Check the status. if the response status is 404. 
 				// Prompt a message saying could not connect to server.
 				// Todo--- Failure could be of any. like 500 or some other error status.
 				// Write code to show message accordingly.
 				gtp.log(response.status+' Error in registering device');
 				console.log(response.status+' Error in registering device');
-				gtp.views.loginPage.setLoading(false);
-				gtp.views.loginPage.destroy();
+				gtp.views.Viewport.destroy();
 				var message = "Error in connecting to server, Please check your internet connection";
 				if(response.status==404)
 					message = "There was an error contacting the server. Please try launching again";
