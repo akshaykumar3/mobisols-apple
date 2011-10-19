@@ -9,9 +9,9 @@
             <id name="tollLocationId" type="java.lang.Integer">
                 <column name="toll_location_id" />
             </id>
-           <!--  <property name="tollOperatorId" type="java.lang.Integer">
+            <property name="tollOperatorId" type="java.lang.Integer">
                 <column name="toll_operator_id" />
-            </property>-->
+            </property>
             <property name="geometry" type="java.lang.String">
                 <column name="geometry" />
             </property>

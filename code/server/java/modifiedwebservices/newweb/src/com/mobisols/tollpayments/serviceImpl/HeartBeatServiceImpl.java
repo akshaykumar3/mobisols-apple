@@ -29,7 +29,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	private VmlTypeDao vmlTypeDao;
 	private JsonConverter jsonConverter;
 	
-	public static final double DEFAULT_TIME=10*60;
+	public static final double DEFAULT_TIME=10*60*1000;
 	public static final double DEFAULT_DISTANCE=200;
 	
 	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
@@ -63,14 +63,18 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		
 		TollLocation t=tollLocationDao.getTollLocation(hbr.getLatitude(), hbr.getLongitude());
 		if(t!=null)
-		vml.setTollLocationId(t.getTollLocationId());
+			vml.setTollLocationId(t.getTollLocationId());
+		
 		vml.setDeviceHistoryId(deviceHistoryDao.getLatestDeviceHistoryId(d.getDeviceId()));
 		
 		String tollSessionId;
 		int index=hbr.getTollSessionId().indexOf('#');
 		if(index==-1)
 		{
-			tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+			if(t!=null)
+				tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+			else
+				tollSessionId=Integer.toString(tollLocationDao.getTollLocation(np.getLatitude(), np.getLongitude()).getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
 		}
 		else
 		{
