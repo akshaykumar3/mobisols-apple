@@ -26,14 +26,15 @@ public class TollPassActivity extends DroidGap {
 	
 	private CarProximityReceiver carProximityReceiver;
 	private TollProximityReceiver tollProximityReceiver;
-   
+	private Intent intent;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setIntegerProperty("loadUrlTimeoutValue", 60000); 
         super.loadUrl("file:///android_asset/www/index.html");
         
-        myApplicationUtil.setApplicationContext(getApplicationContext());
+       /* myApplicationUtil.setApplicationContext(getApplicationContext());
         IntentFilter intentFilter1 = new IntentFilter(MyLocationUtil.INTENT_ACTION_CAR);
         carProximityReceiver = new CarProximityReceiver();
         registerReceiver(carProximityReceiver, intentFilter1);
@@ -55,22 +56,30 @@ public class TollPassActivity extends DroidGap {
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new MyLocationListener());
         
-        Log.d("LocationManager", "requested for location updates");
-       /* HttpGet request = new HttpGet(WebServiceLinks.getTollLocations());
-        String response =WebRequest.getMethod(request);
-        if(response!=null)
-        Log.d("TollDetsils List response",response);
-        ActualTollDetailsResponse tlr = (ActualTollDetailsResponse) JsonConverter.getObject(response,"com.mobisols.tollpayments.response.ActualTollDetailsResponse");
-        TollLocationList.getInstace().setList(tlr.getResponse().getTollDetailsList());
-        */
+        Log.d("LocationManager", "requested for location updates");*/
+        intent = new Intent(this, HeartbeatService.class);
+        Log.d("OnStart of activity", "Starting a service");
+		startService(intent);
+		Log.d("OnStart if activity","Started a service");
         
+	}
+	
+	protected void onStart(){
+		super.onStart();
+		
 	}
 
 	@Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(carProximityReceiver);
-        unregisterReceiver(tollProximityReceiver);
+        //stopService(intent);
+       /* unregisterReceiver(carProximityReceiver);
+        unregisterReceiver(tollProximityReceiver);*/
     }
-
+	 public void onDestroy() {
+	        super.onDestroy();
+	        stopService(intent);
+	       /* unregisterReceiver(carProximityReceiver);
+	        unregisterReceiver(tollProximityReceiver);*/
+	    }
 }

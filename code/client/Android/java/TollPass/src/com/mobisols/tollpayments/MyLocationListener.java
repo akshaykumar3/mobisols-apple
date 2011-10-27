@@ -18,8 +18,6 @@ public class MyLocationListener implements LocationListener {
 	}
 	public void onLocationChanged(Location location) {
 		Log.d("Location Listener", "location Listener is called");
-		//Log.d("Location is",""+location.getLatitude()+"  "+location.getLongitude());
-		//MyLocationUtil.getNearestTollLocation(location);
 		if(LocationData.getInstance().isEnabled())
 		{
 		LocationData locationData = LocationData.getInstance();

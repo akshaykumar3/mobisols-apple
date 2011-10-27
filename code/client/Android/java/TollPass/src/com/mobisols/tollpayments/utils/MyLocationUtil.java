@@ -2,8 +2,11 @@ package com.mobisols.tollpayments.utils;
 
 import java.util.Iterator;
 
+import org.apache.http.client.methods.HttpGet;
+
 import com.mobisols.tollpayments.data.TollLocation;
 import com.mobisols.tollpayments.data.TollLocationList;
+import com.mobisols.tollpayments.response.ActualTollDetailsResponse;
 
 import android.location.Location;
 import android.util.Log;
@@ -21,7 +24,15 @@ public class MyLocationUtil {
 		
 		Double minDist = Double.MAX_VALUE;
 		Location nearestToll = null;
-		
+		if(tollLocationList.getList().isEmpty())
+		{
+			HttpGet request = new HttpGet(WebServiceLinks.getTollLocations());
+	        String response =WebRequest.getMethod(request);
+	        if(response!=null)
+	        Log.d("TollDetsils List response",response);
+	        ActualTollDetailsResponse tlr = (ActualTollDetailsResponse) JsonConverter.getObject(response,"com.mobisols.tollpayments.response.ActualTollDetailsResponse");
+	        TollLocationList.getInstace().setList(tlr.getResponse().getTollDetailsList());
+		}
 		for(Iterator<TollLocation> it = tollLocationList.getList().iterator();it.hasNext();){
 			TollLocation tl=it.next();
 			Location l = new Location(currentLocation);

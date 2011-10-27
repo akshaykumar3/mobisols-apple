@@ -28,6 +28,9 @@ Ext.regApplication({
     		this.registerDevice();
 			gtp.views.Viewport.setLoading(true);
     	}
+    	else {
+    	    gtp.deviceId = gtp.utils.dataStore.getValueOfKey('gtp-deviceId');
+    	}
     },
     launchLoginPage: function(){
     	// Login Page is launched here
