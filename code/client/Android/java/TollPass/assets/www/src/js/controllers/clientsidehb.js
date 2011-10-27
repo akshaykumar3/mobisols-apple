@@ -15,6 +15,7 @@ gtp.getTolls= function() {
 			gtp.tolls=resobj.response.tollDetailsList;
 			var iconpath,markertitle;
 			
+			window.plugins.TollLocationPlugin.setValue(gtp.tolls,function(){},function(){});
 			// Inserts all the tolls into the datastore.
 			for(var i=0;i<gtp.tolls.length;i++) {
 				tolldetails.insert(0,Ext.ModelMgr.create({

@@ -61,6 +61,9 @@ gtp.views.LoginPage = {
 								gtp.utils.dataStore.setValueOfKey('username', un);
 								gtp.utils.dataStore.setValueOfKey('password', pwd);
 								
+								window.plugins.DeviceDetailsPlugin.setValue('username',gtp.utils.dataStore.getValueOfKey('username'),function(){},function(){});
+								window.plugins.DeviceDetailsPlugin.setValue('password',gtp.utils.dataStore.getValueOfKey('password'),function(){},function(){});
+								
 								var encodedString=base64_encode(un+':'+pwd);
 								Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
 								Ext.dispatch({

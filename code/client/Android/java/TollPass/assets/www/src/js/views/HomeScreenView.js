@@ -105,9 +105,9 @@ gtp.tabs.HomeScreenView = {
 						});
 
 						if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
-							setTimeout("requestHeartBeat()",5000);
+							//setTimeout("requestHeartBeat()",5000);
 							// This invokes client side heartbeat.
-							gtp.clientsidehb();
+							//gtp.clientsidehb();
 							message='Settings are saved';
 							Ext.Msg.alert('Activated',message);
 							gtp.tabpanel.getActiveItem().down('#tfd').disable();
@@ -127,6 +127,7 @@ gtp.tabs.HomeScreenView = {
 					}
 					else if(newValue == 0 && oldValue ==1) {
 						gtp.isAppEnabled=0;
+						window.plugins.ActivatePlugin.deactivate(function(){},function(){});
 						cl.setValue("");
 						to.setValue("");
 						at.setValue("");
@@ -147,6 +148,7 @@ gtp.tabs.HomeScreenView = {
 							success: function(response) {
 								gtp.log('Application is active');
 								console.log(response.responseText);
+								window.plugins.ActivatePlugin.activate(function(){},function(){});
 								var resobj = Ext.decode(response.responseText);
 						      	//gtp.showNotifications(resobj.response.notifications);
 						      	gtp.parse(resobj.response.commands);
