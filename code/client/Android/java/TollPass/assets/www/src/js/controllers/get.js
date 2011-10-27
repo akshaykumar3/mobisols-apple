@@ -11,7 +11,10 @@ gtp.controllers.fetch = Ext.regController("get",{
 			},
 			success: function(response) {
 				var obj = Ext.decode(response.responseText);
-				gtp.cfg = obj.response;
+				window.plugins.ClientConfigPlugin.setClientConfig(obj.response,function(result){},function(error){});
+				//window.plugins.plugin.callPlugin(function(){navigator.notification.alert('plugin is executed', function(){}, 'title', 'buttonName');},
+		          //      function(){navigator.notification.alert('plugin is not executed', function(){}, 'title', 'buttonName');});
+		        gtp.cfg = obj.response;
 		      	gtp.showNotifications(obj.response.notifications);
 		      	gtp.parse(obj.response.commands);
 			},

@@ -26,7 +26,7 @@ gtp.FetchUserData = function(options) {
 					markernotset=false;
 				}
 				else
-				mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+				    mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 	        },
 	        locationerror: function ( geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
 	            if(bTimeout) {

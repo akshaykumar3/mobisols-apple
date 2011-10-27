@@ -52,10 +52,13 @@ Ext.regApplication({
     },
     isDeviceRegistered: function() {
         
-        window.plugins.plugin.callPlugin(function(){navigator.notification.alert('plugin is executed', function(){}, 'title', 'buttonName');},
-                function(){navigator.notification.alert('plugin is not executed', function(){}, 'title', 'buttonName');});
-    	if( gtp.utils.dataStore.getValueOfKey('gtp-deviceID') )
-    		return true;
+        if( gtp.utils.dataStore.getValueOfKey('gtp-deviceID') )
+        {
+            window.plugins.DeviceDetailsPlugin.setValue('deviceid',gtp.utils.dataStore.getValueOfKey('gtp-deviceID'),function(){},function(){});
+            window.plugins.DeviceDetailsPlugin.setValue('devicetype',gtp.detectDeviceType(),function(){},function(){});
+            
+            return true;
+        }
     	else
     		return false;
     },
@@ -80,6 +83,9 @@ Ext.regApplication({
 				if(obj.status == 'success') {
 					gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
 					gtp.deviceId = obj.response.deviceId;
+					window.plugins.DeviceDetailsPlugin.setValue('deviceid',gtp.deviceId,function(){},function(){});
+					window.plugins.DeviceDetailsPlugin.setValue('devicetype',gtp.detectDeviceType(),function(){},function(){});
+		            
 				}
 				else {
 					gtp.views.Viewport.destroy();
