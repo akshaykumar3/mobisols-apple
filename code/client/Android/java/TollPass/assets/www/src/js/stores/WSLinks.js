@@ -2,55 +2,55 @@
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://42.106.156.30:8081/newweb/services/ChangePassword',
+		url: 'http://112.79.103.46:8081/newweb/services/ChangePassword',
 		service: 'changepassword'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/ClientConfiguration',
+		url: 'http://112.79.103.46:8081/newweb/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/UserRegistration',
+		url: 'http://112.79.103.46:8081/newweb/services/UserRegistration',
 		service: 'regnewuser'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/DeviceRegistration',
+		url: 'http://112.79.103.46:8081/newweb/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/Login',
+		url: 'http://112.79.103.46:8081/newweb/services/Login',
 		service: 'logging'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/AccountDetails',
+		url: 'http://112.79.103.46:8081/newweb/services/AccountDetails',
 		service: 'acdetails'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/HeartBeat',
+		url: 'http://112.79.103.46:8081/newweb/services/HeartBeat',
 		service: 'heartbeat'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/VehicleDetails',
+		url: 'http://112.79.103.46:8081/newweb/services/VehicleDetails',
 		service: 'addcar'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/VehicleDetails',
+		url: 'http://112.79.103.46:8081/newweb/services/VehicleDetails',
 		service: 'deletevehicle'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/TollDetailsList',
+		url: 'http://112.79.103.46:8081/newweb/services/TollDetailsList',
 		service: 'tolldetails'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/VehicleTypeList',
+		url: 'http://112.79.103.46:8081/newweb/services/VehicleTypeList',
 		service: 'vehicletypes'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/CcTypeList',
+		url: 'http://112.79.103.46:8081/newweb/services/CcTypeList',
 		service: 'cctypes'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/OwnerTypeList',
+		url: 'http://112.79.103.46:8081/newweb/services/OwnerTypeList',
 		service: 'ownertypes'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/ServicePlansList',
+		url: 'http://112.79.103.46:8081/newweb/services/ServicePlansList',
 		service: 'serviceplans'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/NearestToll',
+		url: 'http://112.79.103.46:8081/newweb/services/NearestToll',
 		service: 'nearesttoll'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/PaymentDetails',
+		url: 'http://112.79.103.46:8081/newweb/services/PaymentDetails',
 		service: 'paymentdetails'
 	},{
-		url: 'http://42.106.156.30:8081/newweb/services/Activate',
+		url: 'http://112.79.103.46:8081/newweb/services/Activate',
 		service: 'activate'
 	}] 
 });
