@@ -15,12 +15,22 @@ gtp.FetchUserData = function(options) {
 					});
 					
 					gtp.mylocation_accuracy = new google.maps.Circle({
-						
+						center: new google.maps.LatLng(geo.latitude, geo.longitude),
+						fillColor: '#999',
+						fillOpacity: 3.0,
+						map: Ext.getCmp('mappanel').map,
+						radius: geo.accuracy,
+						strokeColor: '#000',
+						strokeOpacity: 7.0,
+						strokeWeight: 4,
+						zIndex: 10
 					});
 					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 				}
 				else {
 					gtp.mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+					gtp.mylocation_accuracy.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
+					gtp.mylocation_accuracy.setRadius(geo.accuracy);
 				}
 	        },
 	        locationerror: function ( geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
