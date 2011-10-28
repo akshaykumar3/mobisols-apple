@@ -167,7 +167,7 @@ gtp.tabs.NewCarFormView = {
 			name: 'year',
 			label: 'year'	
 		},{
-			xtype: 'colour',
+			xtype: 'textfield',
 			id: 'color',
 			name: 'color',
 			label: 'Color'
