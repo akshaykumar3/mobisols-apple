@@ -8,9 +8,8 @@ import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.JsonConverter;
-import com.mobisols.tollpayments.myutils.MyUtilCreditCard;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
-import com.mobisols.tollpayments.myutilsImpl.MyUtilCreditCardImpl;
+import com.mobisols.tollpayments.myutilsImpl.MyValidationUtil;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
 import com.mobisols.tollpayments.response.GeneralResponse;
 import com.mobisols.tollpayments.service.PaymentDetailsService;
@@ -22,6 +21,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	private MyUtilDate myUtilDate;
 	private JsonConverter jsonConverter;
 	
+	@SuppressWarnings("deprecation")
 	public String update(String request,PaymentDetailRequest pd,String username) {
 		GeneralResponse response=new GeneralResponse();
 		String status="success";
@@ -30,8 +30,13 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		{
 			response.getNotifications().add("Invalid Expiry Date");
 			status="fail";
-			jsonConverter.getJSON(request, status, response);
 		}
+		if(!MyValidationUtil.isValidCC(pd.getCardNumber())){
+			response.getNotifications().add("Invalid Credit Card");
+			status = "fail";
+		}
+		if(status.equals("fail"))
+			return jsonConverter.getJSON(request, status, response);
 		UserPaymentDetail upd=userDao.getUser(username).getUserPaymentDetails();
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
@@ -57,7 +62,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		userPaymentDetailDao.update(upd);
 		User u =userDao.getUser(username);
-		u.setIsActive(userDao.USER_INACTIVE);
+		u.setIsActive(UserDao.USER_INACTIVE);
 		userDao.update(u);
 		response.getNotifications().add("Your details have been updated");
 		return jsonConverter.getJSON(request, status,response);

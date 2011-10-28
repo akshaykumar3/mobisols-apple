@@ -10,7 +10,7 @@ import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.MakeAndModelResponse;
 import com.mobisols.tollpayments.service.MakeAndModelService;
 
-public class MakeandModelServiceImpl implements MakeAndModelService {
+public class MakeAndModelServiceImpl implements MakeAndModelService {
 
 	private MakeDao makeDao;
 	private JsonConverter jsonConverter;

@@ -616,7 +616,7 @@ public class WebServiceImpl {
 	@Produces("text/plain")
 	@Path("/MakeAndModel")
 	//@RolesAllowed("user")
-	public String getMakeAndModel(@FormParam("key") String securityKey,@Context HttpHeaders httpHeader)
+	public String getMakeAndModel(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader)
 	{
 		String request="Get Make and Models";
 		try{
@@ -807,6 +807,30 @@ public class WebServiceImpl {
 
 	public void setSecurityCheckUtil(SecurityCheckUtil securityCheckUtil) {
 		this.securityCheckUtil = securityCheckUtil;
+	}
+
+	public MakeAndModelService getMakeAndModelService() {
+		return makeAndModelService;
+	}
+
+	public void setMakeAndModelService(MakeAndModelService makeAndModelService) {
+		this.makeAndModelService = makeAndModelService;
+	}
+
+	public MyUtilErrorHandler getMyUtilErrorHandler() {
+		return myUtilErrorHandler;
+	}
+
+	public void setMyUtilErrorHandler(MyUtilErrorHandler myUtilErrorHandler) {
+		this.myUtilErrorHandler = myUtilErrorHandler;
+	}
+
+	public MyUtilCleanUp getMyUtilCleanUp() {
+		return myUtilCleanUp;
+	}
+
+	public void setMyUtilCleanUp(MyUtilCleanUp myUtilCleanUp) {
+		this.myUtilCleanUp = myUtilCleanUp;
 	}
 
 }
