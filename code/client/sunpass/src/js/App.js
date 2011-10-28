@@ -10,7 +10,9 @@ Ext.regApplication({
     tabletStartupScreen: 'resources/images/launchimageipad.png',
     deviceRegistered: false,
     glossOnIcon: false,
-    today: new Date(),
+    today: function() {
+    	return new Date();
+    },
     isCarValid: false,
     arePaymentDetailsValid: false,
     isAppEnabled: 0,
@@ -18,6 +20,7 @@ Ext.regApplication({
     infoWindow: null,
     launch: function(){
     	Ext.Ajax.defaultHeaders = {};
+    	Ext.ns('gtp.vars');
     	this.deviceRegistered = this.isDeviceRegistered();
     	Ext.dispatch({
     		controller: 'get',
@@ -27,6 +30,10 @@ Ext.regApplication({
     	if(!this.deviceRegistered) {
     		this.registerDevice();
 			gtp.views.Viewport.setLoading(true);
+    	}
+    	else {
+    		gtp.deviceId = gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
+    		console.log('device is already registered: '+gtp.deviceId);
     	}
     },
     launchLoginPage: function(){
@@ -69,15 +76,15 @@ Ext.regApplication({
 			success: function(response){
 				gtp.views.Viewport.setLoading(false);
 				var obj=Ext.decode(response.responseText);
-				console.log('Generated device ID is: '+obj.response.deviceId);
 				gtp.log('Device Registration success');
 				gtp.showNotifications(obj.response.notifications);
 				gtp.parse(obj.response.commands);
 				if(obj.status == 'success') {
+					console.log('Generated device ID is: '+obj.response.deviceId);
 					gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
 					gtp.deviceId = obj.response.deviceId;
 				}
-				else {
+				else if(obj.status == 'fail'){
 					gtp.views.Viewport.destroy();
 					var message = "Server down temporarily, Please try after some time";
 					gtp.views.Viewport = new Ext.Panel({
@@ -107,13 +114,14 @@ Ext.regApplication({
 			}
 		});
     },
-    parse: function(command) {
-    	if(command && command.action)
-    	Ext.dispatch({
-    		controller: 'command',
-    		action: command.action,
-    		data: command.arguments
-    	});
+    parse: function(commands) {
+    	for(var i=0 ; i<commands.length; i++) {
+        	Ext.dispatch({
+        		controller: 'command',
+        		action: command[i]
+        		//data: command[0].arguments
+        	});
+    	}
     },
     showNotifications: function(notfs) {
     	//if(notfs && notfs.message)
@@ -146,3 +154,4 @@ Ext.regApplication({
     	}
     }
 });
+

@@ -45,7 +45,9 @@ gtp.views.RegPage = {
 					Ext.Msg.alert(gtp.dict.regform_pwds);
 				else
 				{
-					gtp.views.Viewport.setLoading(true);
+					gtp.views.Viewport.setLoading({
+						msg: 'please wait..'
+					});
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','regnewuser')).get('url'),
 						method: 'POST',
@@ -55,7 +57,7 @@ gtp.views.RegPage = {
 								password: pwd,
 								deviceDetails: {
 									deviceId: gtp.deviceId,
-									deviceName: options.deviceDetails.type
+									deviceName: gtp.detectDeviceType()
 								}
 							})
 						},
@@ -63,14 +65,16 @@ gtp.views.RegPage = {
 							gtp.views.Viewport.setLoading(false);
 							console.log('user registration response '+response.responseText);
 							var resobj = Ext.decode(response.responseText);
-							gtp.utils.dataStore.setValueOfKey('username', eid);
-							gtp.utils.dataStore.setValueOfKey('password', pwd);
-							if(resobj.response.response.deviceExists == 'Y')
-								gtp.views.Viewport.down('#lpemailid').setValue(eid);
-							gtp.views.Viewport.down('#lppassword').setValue('');
+							if(resobj.status == 'success') {
+								gtp.utils.dataStore.setValueOfKey('username', eid);
+								gtp.utils.dataStore.setValueOfKey('password', pwd);
+								if(resobj.response.response.deviceExists == 'Y')
+									gtp.views.Viewport.down('#lpemailid').setValue(eid);
+								gtp.views.Viewport.down('#lppassword').setValue('');
+								gtp.views.Viewport.setActiveItem('loginpage', 'fade');
+							}
 							gtp.showNotifications(resobj.response.notifications);
 							gtp.parse(resobj.response.commands);
-							gtp.views.Viewport.setActiveItem('loginpage', 'fade');
 						},
 						failure: function(response) {
 							gtp.views.Viewport.setLoading(false);

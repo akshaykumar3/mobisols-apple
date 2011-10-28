@@ -30,12 +30,12 @@ gtp.getTolls= function() {
 			{
 				if(gtp.tolls[i].isCovered=='Y')
 				{
-					iconpath='resources/images/covered.png';
+					iconpath='resources/images/Covered_toll.png';
 					markertitle=gtp.tolls[i].tollOperator;
 				}
 				else
 				{
-					iconpath='resources/images/uncovered.png';
+					iconpath='resources/images/Uncovered_toll.png';
 					markertitle=gtp.tolls[i].tollOperator;
 				}
 				

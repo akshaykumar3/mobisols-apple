@@ -1,32 +1,27 @@
 gtp.FetchUserData = function(options) {
 	if(gtp.tabpanel)
 		console.log('tabpanel is ready');
-	var mylocation_marker, markernotset=true;
 	
 	gtp.geo = new Ext.util.GeoLocation({
 	    autoUpdate: true,
 	    listeners: {
 	        locationupdate: function (geo) {
-	            console.log('Geo latitude '+geo.latitude);
-	            console.log('Geo longitude '+geo.longitude);
-	            console.log('Geo accuracy in metres '+geo.accuracy);
-	            console.log('Geo speed '+geo.speed);
-	            if(markernotset){
-					mylocation_marker=new google.maps.Marker({
+	            if(!gtp.mylocation_marker){
+					gtp.mylocation_marker = new google.maps.Marker({
 						position: new google.maps.LatLng(geo.latitude,geo.longitude),
 						title: 'U are here right now',
-						icon: 'resources/images/blue_dot.png',
+						icon: 'resources/images/TrackingDot.png',
 						map: Ext.getCmp('mappanel').map
 					});
 					
-					var cl = new google.maps.Circle({
+					gtp.mylocation_accuracy = new google.maps.Circle({
 						
 					});
 					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
-					markernotset=false;
 				}
-				else
-				mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+				else {
+					gtp.mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
+				}
 	        },
 	        locationerror: function ( geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
 	            if(bTimeout) {
@@ -64,7 +59,11 @@ gtp.FetchUserData = function(options) {
 						endDate: (vehicle_details[i].endDate == null) ? '':new Date(vehicle_details[i].endDate),
 						ownerType: vehicle_details[i].ownerType,
 						vehicleId: vehicle_details[i].vehicleId,
-						isActive: vehicle_details[i].isActive
+						isActive: vehicle_details[i].isActive,
+						make: vehicle_details[i].make,
+						model: vehicle_details[i].model,
+						color: vehicle_details[i].color,
+						year: vehicle_details[i].manufacturedYear,
 					},'Cars'));
 				}
 		  	}
@@ -112,7 +111,7 @@ gtp.FetchUserData = function(options) {
 	
 	for(var i=25; i>=0; i--) {
 		gtp.stores.Years.insert(0,Ext.ModelMgr.create({
-			year: gtp.today.getFullYear()+i
+			year: gtp.today().getFullYear()+i
 		},'Year'));
 	}
 };

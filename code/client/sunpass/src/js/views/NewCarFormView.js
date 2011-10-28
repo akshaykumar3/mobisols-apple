@@ -6,10 +6,7 @@ gtp.tabs.NewCarFormView = {
 		beforeactivate: function(co) {
 			co.reset();
 			co.load(Ext.ModelMgr.create({
-				reg: '',
-				state: '',
-				type: '',
-				startDate: gtp.today,
+				startDate: gtp.today(),
 				endDate: null,
 				isActive: 'N',
 				ownerType: 'primary owner'
@@ -39,7 +36,7 @@ gtp.tabs.NewCarFormView = {
 			handler: function(button, event) {
 				var acfd = gtp.tabpanel.getActiveItem().down('#addcar').getValues(true);
 				if(acfd.endDate)
-				var validEndDate = gtp.dateValidity(gtp.today, acfd.endDate);
+				var validEndDate = gtp.dateValidity(gtp.today(), acfd.endDate);
 				
 				if(acfd.st == "")
 					Ext.Msg.alert('enter state field');
@@ -65,10 +62,15 @@ gtp.tabs.NewCarFormView = {
 								registration: acfd.rg,
 								type: acfd.tp,
 								isActive: "N",
-								startDate: gtp.today.format('M j, Y g:i:s A'), // Valid date format on server side.
+								startDate: gtp.today().format('M j, Y g:i:s A'), // Valid date format on server side.
 								endDate: (acfd.endDate == null) ? null : acfd.endDate.format('M j, Y g:i:s A'),
-								ownerType: 'primary owner', 
-								vehicleId: 1
+								ownerType: acfd.ownerType, 
+								vehicleId: null,
+								vin: null,
+								make: acfd.make,
+								model: acfd.model,
+								color: acfd.color,
+								manufacturedYear: acfd.manufacture_year
 							})
 						},
 						success: function(response){
@@ -76,16 +78,23 @@ gtp.tabs.NewCarFormView = {
 							gtp.log('User Added a car successfully');
 							var resobj = Ext.decode(response.responseText);
 							console.log(response.responseText);
-							if(resobj.response.vehicleId > 0) {
-								carsList.insert(0,Ext.ModelMgr.create({
-									state: acfd.st,
-									reg: acfd.rg,
-									type: acfd.tp,
-									startDate: gtp.today,//acfd.startDate,
-									endDate: acfd.endDate,
-									vehicleId: resobj.response.vehicleId,
-									ownerType: 'primary owner'
-								},'Cars'));
+							if(resobj.status == 'success') {
+								if(resobj.response.vehicleId > 0) {
+									carsList.insert(0,Ext.ModelMgr.create({
+										state: acfd.st,
+										reg: acfd.rg,
+										type: acfd.tp,
+										startDate: acfd.startDate,
+										endDate: acfd.endDate,
+										vehicleId: resobj.response.vehicleId,
+										ownerType: acfd.ownerType,
+										vin: null,
+										make: acfd.make,
+										model: acfd.model,
+										year: acfd.manufacture_year,
+										color: acfd.color
+									},'Cars'));
+								}
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
@@ -142,6 +151,26 @@ gtp.tabs.NewCarFormView = {
 				text: '',
 				value: ''
 			}]
+		},{
+			xtype: 'textfield',
+			id: 'make',
+			name: 'make',
+			label: 'Make'
+		},{
+			xtype: 'textfield',
+			id: 'model',
+			name: 'model',
+			label: 'Model'
+		},{
+			xtype: 'textfield',
+			id: 'manufacture_year',
+			name: 'year',
+			label: 'year'	
+		},{
+			xtype: 'colour',
+			id: 'color',
+			name: 'color',
+			label: 'Color'
 		}]
 	},{
 		xtype: 'fieldset',
@@ -150,18 +179,26 @@ gtp.tabs.NewCarFormView = {
 			xtype: 'datepickerfield'
 		},
 		items: [{
+			xtype: 'selectfield',
+			id: 'ownerType',
+			name: 'ownerType',
+			options: [{
+				text: '',
+				value: ''
+			}]
+		},{
 			label: 'From',
 			id: 'startDate',
 			name: 'startDate',
 			disabled: true,
-			value: gtp.today
+			value: gtp.today()
 		},{
 			label: 'To',
 			id: 'endDate',
 			name: 'endDate',
 			picker: {
-				yearFrom: gtp.today.getFullYear(),
-				yearTo: gtp.today.getFullYear()+10
+				yearFrom: gtp.today().getFullYear(),
+				yearTo: gtp.today().getFullYear()+10
 			}
 		}]
 	}]
