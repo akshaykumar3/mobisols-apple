@@ -203,13 +203,7 @@ gtp.tabs.SettingsFormView = {
 			store: gtp.stores.Years,
 			displayField: 'year',
 			valueField: 'year'
-		}/*{
-			xtype: 'textfield',
-			name: 'acnumber',
-			id: 'bankaccount',
-			label: 'A/c No',
-			useClearIcon: true
-		}*/]
+		}]
 	},{
 		xtype: 'fieldset',
 		id: 'billingdetails',

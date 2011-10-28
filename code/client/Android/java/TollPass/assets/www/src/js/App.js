@@ -10,7 +10,9 @@ Ext.regApplication({
     tabletStartupScreen: 'resources/images/launchimageipad.png',
     deviceRegistered: false,
     glossOnIcon: false,
-    today: new Date(),
+    today: function() {
+    	return new Date();
+    },
     isCarValid: false,
     arePaymentDetailsValid: false,
     isAppEnabled: 0,
@@ -18,6 +20,7 @@ Ext.regApplication({
     infoWindow: null,
     launch: function(){
     	Ext.Ajax.defaultHeaders = {};
+    	Ext.ns('gtp.vars');
     	this.deviceRegistered = this.isDeviceRegistered();
     	Ext.dispatch({
     		controller: 'get',
@@ -29,7 +32,8 @@ Ext.regApplication({
 			gtp.views.Viewport.setLoading(true);
     	}
     	else {
-    	    gtp.deviceId = gtp.utils.dataStore.getValueOfKey('gtp-deviceId');
+    		gtp.deviceId = gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
+    		console.log('device is already registered: '+gtp.deviceId);
     	}
     },
     launchLoginPage: function(){
@@ -54,21 +58,14 @@ Ext.regApplication({
     	return 'desktop';
     },
     isDeviceRegistered: function() {
-        
-        if( gtp.utils.dataStore.getValueOfKey('gtp-deviceID') )
-        {
-            window.plugins.DeviceDetailsPlugin.setValue('deviceid',gtp.utils.dataStore.getValueOfKey('gtp-deviceID'),function(){},function(){});
-            window.plugins.DeviceDetailsPlugin.setValue('devicetype',gtp.detectDeviceType(),function(){},function(){});
-            
-            return true;
-        }
+    	if( gtp.utils.dataStore.getValueOfKey('gtp-deviceID') )
+    		return true;
     	else
     		return false;
     },
     registerDevice: function(){
     	// open the database check if the device id is present.
     	// create the database 
-        
 		Ext.Ajax.request({
 			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
 			params: {
@@ -79,18 +76,15 @@ Ext.regApplication({
 			success: function(response){
 				gtp.views.Viewport.setLoading(false);
 				var obj=Ext.decode(response.responseText);
-				console.log('Generated device ID is: '+obj.response.deviceId);
 				gtp.log('Device Registration success');
 				gtp.showNotifications(obj.response.notifications);
 				gtp.parse(obj.response.commands);
 				if(obj.status == 'success') {
+					console.log('Generated device ID is: '+obj.response.deviceId);
 					gtp.utils.dataStore.setValueOfKey('gtp-deviceID',obj.response.deviceId);
 					gtp.deviceId = obj.response.deviceId;
-					window.plugins.DeviceDetailsPlugin.setValue('deviceid',gtp.deviceId,function(){},function(){});
-					window.plugins.DeviceDetailsPlugin.setValue('devicetype',gtp.detectDeviceType(),function(){},function(){});
-		            
 				}
-				else {
+				else if(obj.status == 'fail'){
 					gtp.views.Viewport.destroy();
 					var message = "Server down temporarily, Please try after some time";
 					gtp.views.Viewport = new Ext.Panel({
@@ -120,13 +114,15 @@ Ext.regApplication({
 			}
 		});
     },
-    parse: function(command) {
-    	if(command && command.action)
-    	Ext.dispatch({
-    		controller: 'command',
-    		action: command.action,
-    		data: command.arguments
-    	});
+    parse: function(commands) {
+    	console.log('parser is invoked');
+    	for(var i=0 ; i<commands.length; i++) {
+        	Ext.dispatch({
+        		controller: 'command',
+        		action: commands[i]
+        		//data: command[0].arguments
+        	});
+    	}
     },
     showNotifications: function(notfs) {
     	//if(notfs && notfs.message)
@@ -159,3 +155,4 @@ Ext.regApplication({
     	}
     }
 });
+

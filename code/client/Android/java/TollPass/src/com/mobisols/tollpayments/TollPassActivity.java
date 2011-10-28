@@ -15,6 +15,7 @@ import android.content.IntentFilter;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 public class TollPassActivity extends DroidGap {
     /** Called when the activity is first created. */
@@ -74,4 +75,13 @@ public class TollPassActivity extends DroidGap {
 	        unregisterReceiver(carProximityReceiver);
 	        unregisterReceiver(tollProximityReceiver);
 	    }
+	 
+	/* @Override
+	 public boolean onKeyDown(int keyCode, KeyEvent event) {
+	     if (keyCode == KeyEvent.KEYCODE_BACK) {
+	         moveTaskToBack(true);
+	         return true;
+	     }
+	     return super.onKeyDown(keyCode, event);
+	 }*/
 }
