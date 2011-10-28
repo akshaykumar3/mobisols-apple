@@ -44,7 +44,12 @@ gtp.tabs.CarDetailView = {
 								startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
 							    endDate: Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
 								ownerType: updateCar.get('ownerType'), 
-								vehicleId: updateCar.get('vehicleId')
+								vehicleId: updateCar.get('vehicleId'),
+								make: updateCar.get('make'),
+								model: updateCar.get('model'),
+								manufacturedYear: updateCar.get('year'),
+								color: updateCar.get('color'),
+								vin: null
 							})
 						},
 						success: function(response){
@@ -111,7 +116,7 @@ gtp.tabs.CarDetailView = {
 			name: 'year',
 			label: 'year'	
 		},{
-			xtype: 'colour',
+			xtype: 'textfield',
 			id: 'color',
 			name: 'color',
 			label: 'Color'

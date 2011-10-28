@@ -14,6 +14,7 @@ gtp.tabs.MapView = {
 	listeners: {
 		maprender: function(comp, map) {
 			// map is rendered. Render toll locations markers now..
+			if(gtp.geo)
 			gtp.geo.updateLocation();
 		},
 		centerchange: function(comp, map, center) {
