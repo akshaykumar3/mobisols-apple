@@ -87,7 +87,12 @@
             <property name="clientId" type="java.lang.Integer">
                 <column name="client_id" />
             </property>
-            
+            <property name="color" type="java.lang.String">
+                <column name="color" length="45" />
+            </property>
+            <property name="manufacturedYear" type="java.lang.Integer">
+                <column name="manufactured_year"  />
+            </property>
             <many-to-one name="userVehicle"
 			class="com.mobisols.tollpayments.model.UserVehicle"
 			column="user_vehicle_id"

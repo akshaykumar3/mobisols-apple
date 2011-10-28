@@ -37,8 +37,8 @@ public class LoginServiceImpl implements LoginService {
 			status = "fail";
 			if(u.getPassword().equals(r.getPassword()))
 			{
-				
 				response.getResponse().put("passwordCorrect", PASSWORD_CORRECT_TRUE);
+				response.getResponse().put("isActive", u.getIsActive());
 				Device d=deviceDao.getDevice(r.getDeviceDetails().getDeviceId(),r.getDeviceDetails().getDeviceName());
 				if(d==null)
 				{
@@ -63,7 +63,9 @@ public class LoginServiceImpl implements LoginService {
 				response.getResponse().put("passwordCorrect", PASSWORD_CORRECT_FALSE);
 			}
 		}
-		return jsonConverter.getJSON(request, status,response);
+		String responseString = jsonConverter.getJSON(request, status,response);
+		System.out.println(responseString);
+		return responseString;
 	}
 
 	public UserDao getUserDao() {

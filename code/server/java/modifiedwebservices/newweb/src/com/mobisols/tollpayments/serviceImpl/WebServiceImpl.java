@@ -44,6 +44,7 @@ import com.mobisols.tollpayments.service.ClientConfigurationService;
 import com.mobisols.tollpayments.service.DeviceRegistrationService;
 import com.mobisols.tollpayments.service.HeartBeatService;
 import com.mobisols.tollpayments.service.LoginService;
+import com.mobisols.tollpayments.service.MakeAndModelService;
 import com.mobisols.tollpayments.service.NearestTollService;
 import com.mobisols.tollpayments.service.OwnerTypeListService;
 import com.mobisols.tollpayments.service.PaymentDetailsService;
@@ -78,6 +79,7 @@ public class WebServiceImpl {
 	DeviceRegistrationService deviceRegistrationService;
 	LoginService loginService;
 	ChangePasswordService changePasswordService;
+	MakeAndModelService makeAndModelService;
 	ActivateService activateService;
 	JsonConverter jsonConverter;
 	
@@ -112,6 +114,7 @@ public class WebServiceImpl {
 	        loginService = (LoginService) ctx.getBean("service.tollpayments.loginService");
 	        changePasswordService = (ChangePasswordService) ctx.getBean("service.tollpayments.changePasswordService");
 	        activateService = (ActivateService) ctx.getBean("service.tollpayments.activateService");
+	        makeAndModelService = (MakeAndModelService) ctx.getBean("service.tollpayments.makeAndModelService");
 	        securityCheckUtil = (SecurityCheckUtil) ctx.getBean("myutils.tollpayments.securityCheckUtil");
 	        myUtilErrorHandler = (MyUtilErrorHandler) ctx.getBean("myutils.tollpayments.myUtilErrorHandler");
 	        myUtilCleanUp = (MyUtilCleanUp) ctx.getBean("myutils.tollpayments.myUtilCleanUp");
@@ -295,7 +298,7 @@ public class WebServiceImpl {
 	//@RolesAllowed("user")
 	public String getTollDetailsList(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
-		String request="get BlanceInfo";
+		String request="TollDetailsList";
 		try{
 		TollRange tr=(TollRange) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.TollRange");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
@@ -368,6 +371,7 @@ public class WebServiceImpl {
 	public String postHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post heartbeat";
+		System.out.println(json);
 		try{
 		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
@@ -608,6 +612,26 @@ public class WebServiceImpl {
 		}
 	}
 	
+	@GET
+	@Produces("text/plain")
+	@Path("/MakeAndModel")
+	//@RolesAllowed("user")
+	public String getMakeAndModel(@FormParam("key") String securityKey,@Context HttpHeaders httpHeader)
+	{
+		String request="Get Make and Models";
+		try{
+		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
+				&& securityCheckUtil.isKeyCorrect(securityKey))
+			return makeAndModelService.getMakeAndModels(request);
+		else
+			return null;
+		}catch(Exception e){
+			return myUtilErrorHandler.handleException(request, e);
+		}
+		finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}

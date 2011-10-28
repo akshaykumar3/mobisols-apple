@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class NearestTollResponse {
+	private double latitude;
+	private double longitude;
 	private String city;
 	private String state;
 	private String tollOperator;
@@ -16,6 +18,18 @@ public class NearestTollResponse {
 	{
 		this.notifications = new LinkedList<String>();
 		this.commands = new LinkedList<String>();
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	public List<String> getNotifications() {
 		return notifications;

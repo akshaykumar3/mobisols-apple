@@ -82,7 +82,11 @@
             <property name="vin" type="java.lang.String">
                 <column name="vin" length="25" />
             </property>
-            
+            <property name="color" type="java.lang.String">
+                <column name="color" length="45" />
+            </property><property name="manufacturedYear" type="java.lang.Integer">
+                <column name="manufactured_year"  />
+            </property>
             <many-to-one name="ownerType"
 			class="com.mobisols.tollpayments.model.OwnerType"
             column="owner_type_id"

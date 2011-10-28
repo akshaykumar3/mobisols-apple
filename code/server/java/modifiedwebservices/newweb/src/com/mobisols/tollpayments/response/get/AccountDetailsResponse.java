@@ -11,14 +11,15 @@ public class AccountDetailsResponse {
 	private List<TollPayments> tollPayments;
 	private BalanceInfoResponse balanceInfo;
 	private int userId;
+	private String isActive;
 	private List<String> notifications;
 	private List<String> commands;
 	
 	
 	public AccountDetailsResponse(){
 		this.paymentDetails = new PaymentDetailsResponse();
-		this.vehicleDetails=new LinkedList();
-		this.tollPayments=new LinkedList();
+		this.vehicleDetails=new LinkedList<VehicleDetails>();
+		this.tollPayments=new LinkedList<TollPayments>();
 		this.notifications=new LinkedList<String>();
 		this.balanceInfo = new BalanceInfoResponse();
 		this.commands = new LinkedList<String>();
@@ -71,6 +72,12 @@ public class AccountDetailsResponse {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 	
 }
