@@ -32,7 +32,7 @@ function requestHeartBeat(){
 				
 				//Calculate the next timestamp to call this function.. 
 				// trigger this function
-				setTimeout("requestHeartBeat()",estimatedDelay*1000); 
+				//setTimeout("requestHeartBeat()",estimatedDelay*1000); 
 			},
 			failure: function(response){
 				console.log('heart beat request failed with status ='+response.status);

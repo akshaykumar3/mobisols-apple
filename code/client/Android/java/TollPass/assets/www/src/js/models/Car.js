@@ -24,6 +24,18 @@ gtp.models.Car = Ext.regModel('Cars', {
 	},{
 		name: 'vehicleId',
 		type: 'int'
+	},{
+		name: 'make',
+		type: 'string'
+	},{
+		name: 'model',
+		type: 'string'
+	},{
+		name: 'color',
+		type: 'string'
+	},{
+		name: 'year',
+		type: 'int'
 	}],
 	validations: [{
 		type: 'presence',

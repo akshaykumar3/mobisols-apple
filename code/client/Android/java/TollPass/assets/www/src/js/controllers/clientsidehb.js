@@ -14,8 +14,16 @@ gtp.getTolls= function() {
 			var resobj=Ext.decode(response.responseText);
 			gtp.tolls=resobj.response.tollDetailsList;
 			var iconpath,markertitle;
+
+            // invoke plugin to store toll details natively.
+			if(Ext.is.iPhone) {
+	            var tdp = window.plugins.TollDetailsPlugin;
+	            tdp.setDetails(Ext.encode(gtp.tolls));
+			}
+			else if(Ext.is.Android) {
+				window.plugins.TollDetailsPlugin.setValue(gtp.tolls,function(){},function(){});
+			}
 			
-			window.plugins.TollLocationPlugin.setValue(gtp.tolls,function(){},function(){});
 			// Inserts all the tolls into the datastore.
 			for(var i=0;i<gtp.tolls.length;i++) {
 				tolldetails.insert(0,Ext.ModelMgr.create({
@@ -31,12 +39,12 @@ gtp.getTolls= function() {
 			{
 				if(gtp.tolls[i].isCovered=='Y')
 				{
-					iconpath='resources/images/covered.png';
+					iconpath='resources/images/Covered_toll.png';
 					markertitle=gtp.tolls[i].tollOperator;
 				}
 				else
 				{
-					iconpath='resources/images/uncovered.png';
+					iconpath='resources/images/Uncovered_toll.png';
 					markertitle=gtp.tolls[i].tollOperator;
 				}
 				

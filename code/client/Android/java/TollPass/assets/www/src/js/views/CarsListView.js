@@ -42,8 +42,7 @@ gtp.tabs.CarsListView = {
 				gtp.showtabs=true;
 				var record=co.getRecord(co.getNode(index));
 				
-				gtp.tabpanel.getActiveItem().down('#details').load(record);
-				
+				gtp.tabpanel.getActiveItem().down('#details').load(record);				
 				var homeform = Ext.getCmp('home');
 				if(gtp.isAppEnabled && record.get('reg') == homeform.down('#activecar').getValue());
 				gtp.tabpanel.getActiveItem().setActiveItem('details');

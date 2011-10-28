@@ -68,9 +68,7 @@ gtp.tabs.HomeScreenView = {
 					var at = homeform.down('#avgtoll');
 					var pt = homeform.down('#pdtoll');
 					if(newValue == 1 && oldValue == 0) {
-						// Things todo.
-						// Check whether atleast one car is valid.
-						// Check whether payment details are valid.
+
 						gtp.isAppEnabled=1;
 						var clat, clong;
 						clat = gtp.getGeoLatitude();
@@ -89,7 +87,7 @@ gtp.tabs.HomeScreenView = {
 								console.log('Nearest Toll Webservice request fetched');
 								console.log(response.responseText);
 								var resobj=Ext.decode(response.responseText);
-								if( resobj.response ) {
+								if( resobj.status == 'success' ) {
 									//cl.setValue(resobj.response.city + resobj.response.state);
 									to.setValue(resobj.response.tollOperator);
 									at.setValue(resobj.response.averagePrice);
@@ -105,7 +103,7 @@ gtp.tabs.HomeScreenView = {
 						});
 
 						if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
-							//setTimeout("requestHeartBeat()",5000);
+							//setTimeout("requestHeartBeat()",1000);
 							// This invokes client side heartbeat.
 							//gtp.clientsidehb();
 							message='Settings are saved';
@@ -127,11 +125,17 @@ gtp.tabs.HomeScreenView = {
 					}
 					else if(newValue == 0 && oldValue ==1) {
 						gtp.isAppEnabled=0;
-						window.plugins.ActivatePlugin.deactivate(function(){},function(){});
 						cl.setValue("");
 						to.setValue("");
 						at.setValue("");
 						pt.setValue("");
+						if(Ext.is.iPhone) {
+	                        var actp = window.plugins.ActivatePlugin;
+	                        actp.deactivate();
+						}
+						else if(Ext.is.Android) {
+							window.plugins.ActivatePlugin.deactivate(function(){},function(){});
+						}
 					}
 				},
 				beforechange: function(slider, thumb, newValue, oldValue) {
@@ -148,9 +152,18 @@ gtp.tabs.HomeScreenView = {
 							success: function(response) {
 								gtp.log('Application is active');
 								console.log(response.responseText);
-								window.plugins.ActivatePlugin.activate(function(){},function(){});
 								var resobj = Ext.decode(response.responseText);
-						      	//gtp.showNotifications(resobj.response.notifications);
+								if(resobj.status == 'success' && resobj.response.active == 'Y'){
+									if(Ext.is.iPhone) {
+	                                    var actp = window.plugins.ActivatePlugin;
+	                                    actp.activate();
+	                                    console.log('activate plugin is called');
+									}
+									else if(Ext.is.Android) {
+										window.plugins.ActivatePlugin.activate(function(){},function(){});
+									}
+								}
+						      	gtp.showNotifications(resobj.response.notifications);
 						      	gtp.parse(resobj.response.commands);
 							},
 							failure: function(res) {
