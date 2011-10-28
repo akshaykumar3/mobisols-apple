@@ -42,8 +42,12 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			vd.setStartDate(uv.getVehicleStartDate());
 			vd.setEndDate(uv.getVehicleEndDate());
 			vd.setVehicleId(uv.getUserVehicleId());
-			vd.setMake(uv.getModel().getMake().getName());
+			if(uv.getModel()!=null)
+				if(uv.getModel().getMake()!=null)
+					vd.setMake(uv.getModel().getMake().getName());
+			if(uv.getModel()!=null)
 			vd.setModel(uv.getModel().getName());
+			if(uv.getManufacturedYear()!=null)
 			vd.setManufacturedYear(uv.getManufacturedYear());
 			vd.setVin(uv.getVin());
 			vd.setColor(uv.getColor());

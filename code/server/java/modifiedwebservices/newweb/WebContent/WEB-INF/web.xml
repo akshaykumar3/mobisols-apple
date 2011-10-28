@@ -37,7 +37,7 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-   	<!-- <security-constraint>
+   	 <security-constraint>
         <web-resource-collection>
                 <web-resource-name>Services</web-resource-name>
                 <description> accessible by authenticated users of the client role</description>
@@ -47,18 +47,15 @@
                 <http-method>PUT</http-method>
                 <http-method>DELETE</http-method>
         </web-resource-collection>
-        <auth-constraint>
+        <!-- <auth-constraint>
                 <description>These roles are allowed access</description>
                 <role-name>user</role-name>
-        </auth-constraint>
-         <user-data-constraint>
-                <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-	</security-constraint>
+        </auth-constraint>-->
+  	</security-constraint>
 	<login-config>
       	 <auth-method>BASIC</auth-method>
   		 <realm-name>Only users</realm-name>		 
-	</login-config>-->
+	</login-config>
 
 	<!-- <security-role>
         <role-name>client</role-name>
