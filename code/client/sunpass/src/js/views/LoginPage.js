@@ -74,26 +74,33 @@ gtp.views.LoginPage = {
 											password: pwd
 										}
 									});
-									
-	                                var ddp = window.plugins.DeviceDetailsPlugin;
-	                                if(ddp) {
-		                                ddp.setDetails(Ext.encode({
-		                                    deviceId: gtp.deviceId,
-		                                    username: un,
-		                                    password: pwd
-		                                }));
-	                                }
-	                                
+
 	                                if(!gtp.tolls) {
 		                                gtp.getTolls();
 	                                }
 	                                
-	                                // if user app is enabled. do heartbeat upon launch.
-	                                var actp = window.plugins.ActivatePlugin;
-	                                if(actp) {
-	                                    //actp.activate();
-	                                }
-																		
+									if(Ext.is.iPhone) {
+		                                var ddp = window.plugins.DeviceDetailsPlugin;
+		                                if(ddp) {
+			                                ddp.setDetails(Ext.encode({
+			                                    deviceId: gtp.deviceId,
+			                                    username: un,
+			                                    password: pwd
+			                                }));
+		                                }
+		                                // if user app is enabled. invoke heartbeat plugin upon launch.
+		                                var actp = window.plugins.ActivatePlugin;
+		                                if(actp && res.isActive == 'Y') {
+		                                    actp.activate();
+		                                }
+									}
+									else if(Ext.is.Android) {
+										window.plugins.DeviceDetailsPlugin.setValue('username',un,function(){},function(){});
+										window.plugins.DeviceDetailsPlugin.setValue('password',pwd,function(){},function(){});
+										
+		                                // if user app is enabled. invoke heartbeat plugin upon launch.
+									}
+	                                																		
 								}
 								else if(res.userExists=="Y" && res.passwordCorrect=="N"){
 									Ext.Msg.alert('Incorrect',gtp.dict.loginform_pwd_fail);
