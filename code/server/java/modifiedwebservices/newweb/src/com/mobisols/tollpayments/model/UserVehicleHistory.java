@@ -38,6 +38,10 @@ public class UserVehicleHistory implements java.io.Serializable {
 	private Timestamp endDate;
 	private String action;
 	private Integer clientId;
+	private Integer modelId;
+	private String vin;
+	private String color;
+	private Integer manufacturedYear;
     private UserVehicle userVehicle;
     private Set<VehicleTollUsage> tollDetails;
  
@@ -334,6 +338,38 @@ public class UserVehicleHistory implements java.io.Serializable {
 
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
+	}
+
+	public Integer getModelId() {
+		return modelId;
+	}
+
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
+	}
+
+	public String getVin() {
+		return vin;
+	}
+
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public Integer getManufacturedYear() {
+		return manufacturedYear;
+	}
+
+	public void setManufacturedYear(Integer manufacturedYear) {
+		this.manufacturedYear = manufacturedYear;
 	}
 
 	public boolean equals(Object other) {

@@ -35,6 +35,8 @@ public class UserVehicle implements java.io.Serializable {
 	private Integer clientId;
 	private Integer modelId;
 	private String vin;
+	private String color;
+	private Integer manufacturedYear;
 	private OwnerType ownerType;
 	private User user;
     private VehicleType vehicleType;	
@@ -331,7 +333,21 @@ public class UserVehicle implements java.io.Serializable {
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
+	public String getColor() {
+		return color;
+	}
 
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public Integer getManufacturedYear() {
+		return manufacturedYear;
+	}
+
+	public void setManufacturedYear(Integer manufacturedYear) {
+		this.manufacturedYear = manufacturedYear;
+	}
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -500,5 +516,7 @@ public class UserVehicle implements java.io.Serializable {
 				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
 		return result;
 	}
+
+	
 
 }

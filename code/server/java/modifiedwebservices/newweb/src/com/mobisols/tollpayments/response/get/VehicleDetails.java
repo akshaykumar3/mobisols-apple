@@ -10,6 +10,11 @@ public class VehicleDetails {
 	private Date startDate;
 	private Date endDate;
 	private String ownerType;
+	private String model;
+	private String make;
+	private String vin;
+	private String color;
+	private int manufacturedYear;
 	private int vehicleId;
 	public String getRegistration() {
 		return registration;
@@ -59,4 +64,36 @@ public class VehicleDetails {
 	public void setVehicleId(int vehicleId) {
 		this.vehicleId = vehicleId;
 	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getMake() {
+		return make;
+	}
+	public void setMake(String make) {
+		this.make = make;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public int getManufacturedYear() {
+		return manufacturedYear;
+	}
+	public void setManufacturedYear(int manufacturedYear) {
+		this.manufacturedYear = manufacturedYear;
+	}
+	public String getVin() {
+		return vin;
+	}
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
+	
 }

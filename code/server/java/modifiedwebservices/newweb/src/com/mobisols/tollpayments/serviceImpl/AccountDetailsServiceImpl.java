@@ -26,11 +26,11 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			return null;
 		adr.setUserId(u.getUserId());
 		adr.setContactNo(u.getContactNo());
-		
+		adr.setIsActive(u.getIsActive());
 		loadPaymentDetails(adr, u);
 		
 		Set<UserVehicle> vehicleList =u.getUserVehicles();
-		for(Iterator it=  vehicleList.iterator();it.hasNext();)
+		for(Iterator<UserVehicle> it=  vehicleList.iterator();it.hasNext();)
 		{
 			UserVehicle uv=(UserVehicle) it.next();
 			VehicleDetails vd=new VehicleDetails();
@@ -42,6 +42,12 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			vd.setStartDate(uv.getVehicleStartDate());
 			vd.setEndDate(uv.getVehicleEndDate());
 			vd.setVehicleId(uv.getUserVehicleId());
+			vd.setMake(uv.getModel().getMake().getName());
+			vd.setModel(uv.getModel().getName());
+			vd.setManufacturedYear(uv.getManufacturedYear());
+			vd.setVin(uv.getVin());
+			vd.setColor(uv.getColor());
+			
 			adr.getVehicleDetails().add(vd);
 			System.out.println(uv.getRegistrationNo()+uv.getRegisteredState());
 		}
@@ -52,7 +58,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		adr.getBalanceInfo().setBalanceId(u.getUserBalance().getUbalId());
 		adr.getBalanceInfo().setMinBalance(u.getUserType().getMinBalance());
 		Set<com.mobisols.tollpayments.model.UserBalanceLog> ubl=u.getUserBalance().getUserBalanceLog();
-		for(Iterator it=(Iterator) ubl.iterator();it.hasNext();){
+		for(Iterator<UserBalanceLog> it= ubl.iterator();it.hasNext();){
 			UserBalanceLog ubl1=(UserBalanceLog) it.next();
 			BalanceLog bl=new BalanceLog();
 			bl.setDelta(ubl1.getDelta());

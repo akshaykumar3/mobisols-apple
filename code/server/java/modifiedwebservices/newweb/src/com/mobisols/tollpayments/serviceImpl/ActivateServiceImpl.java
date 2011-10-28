@@ -29,13 +29,13 @@ public class ActivateServiceImpl implements ActivateService {
 		if(ar.getActive().equals("Y"))
 		{
 			List standByVehicles = userVehicleDao.getStandByVehicles();
-			if(u.getIsActive().equals(userDao.USER_INACTIVE) && standByVehicles.isEmpty())
+			if(u.getIsActive().equals(UserDao.USER_INACTIVE) && standByVehicles.isEmpty())
 			{
 				response.getNotifications().add("Add a Vehicle");
 				status = "fail";
 				return jsonConverter.getJSON(request, status, response);
 			}
-			else if(u.getIsActive().equals(userDao.USER_INACTIVE))
+			else if(u.getIsActive().equals(UserDao.USER_INACTIVE))
 			{
 				for(Iterator<UserVehicle> it = standByVehicles.iterator();it.hasNext();)
 				{
@@ -57,6 +57,7 @@ public class ActivateServiceImpl implements ActivateService {
 			else
 			{
 				String notify = null;
+				status = "fail";
 				if(u.getIsActive().equals(userDao.USER_BLOCK))
 					notify = "User is Blocked";
 				if(u.getIsActive().equals(userDao.USER_INCOMPLETE))
@@ -64,8 +65,11 @@ public class ActivateServiceImpl implements ActivateService {
 				if(u.getIsActive().equals(userDao.USER_SUSPEND))
 					notify = "User is suspended";
 				else
+					{
 					notify = "User is already Active";
-				status = "fail";
+					status="success";
+					}
+				
 				response.getNotifications().add(notify);
 				response.setActive(u.getIsActive());
 			}

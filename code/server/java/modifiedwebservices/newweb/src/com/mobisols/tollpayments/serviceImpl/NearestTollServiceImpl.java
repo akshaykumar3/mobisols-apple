@@ -27,6 +27,8 @@ public class NearestTollServiceImpl implements NearestTollService {
 		x.setLongitude(longt);
 		Location l=tollLocationUtil.getNearestToll(x);
 		TollLocation t= tollLocationDao.getTollLocation(l.getLatitude(), l.getLongitude());
+		response.setLatitude(t.getLatitude());
+		response.setLongitude(t.getLongitude());
 		response.setCity(t.getCity());
 		response.setState(t.getState());
 		response.setTollOperator(t.getTollOperator().getName());

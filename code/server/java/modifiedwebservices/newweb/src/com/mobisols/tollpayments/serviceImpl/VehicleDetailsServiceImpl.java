@@ -3,10 +3,12 @@ package com.mobisols.tollpayments.serviceImpl;
 import java.sql.Timestamp;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
+import com.mobisols.tollpayments.dao.ModelDao;
 import com.mobisols.tollpayments.dao.OwnerTypeDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.dao.VehicleTypeDao;
+import com.mobisols.tollpayments.model.Model;
 import com.mobisols.tollpayments.model.OwnerType;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
@@ -28,6 +30,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	private OwnerTypeDao ownerTypeDao;
 	private VehicleTypeDao vehicleTypeDao;
 	private DeviceDao deviceDao;
+	private ModelDao modelDao;
 	private JsonConverter jsonConverter;
 	
 	
@@ -52,12 +55,12 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 				response.getNotifications().add("Invalid VehicleId");
 				return jsonConverter.getJSON(request, status,response);
 			}
-			if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_ACTIVE))
-				uv.setIsActive(userVehicleDao.VEHICLE_ACTIVE);
-			else if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
-				uv.setIsActive(userVehicleDao.VEHICLE_STANDBY);
+			if(vdr.getIsActive().equals(UserVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(UserDao.USER_ACTIVE))
+				uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
+			else if(vdr.getIsActive().equals(UserVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(UserDao.USER_INACTIVE))
+				uv.setIsActive(UserVehicleDao.VEHICLE_STANDBY);
 			else
-				uv.setIsActive(userVehicleDao.VEHICLE_INACTIVE);
+				uv.setIsActive(UserVehicleDao.VEHICLE_INACTIVE);
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			if(vdr.getEndDate() !=null)
 				uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));
@@ -65,9 +68,14 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setOwnerTypeId(ot.getOwnerTypeId());
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-			//uv.setModelId(userVehicleDao.DEFAULT_MODEL);
-			uv.setModelId(null);
-			uv.setVin(null);
+			
+			Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());
+			if(m!=null)
+				uv.setModelId(m.getModelId());
+			
+			uv.setVin(vdr.getVin());
+			uv.setColor(vdr.getColor());
+			uv.setManufacturedYear(vdr.getManufacturedYear());
 			userVehicleDao.update(uv);
 			response.setVehicleId(uv.getUserVehicleId());
 			response.getNotifications().add("Vehicle Details Updated");
@@ -79,12 +87,12 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setClientId(1);
 			uv.setUserId(u.getUserId());
 			uv.setCreatedOn(myUtilDate.getCurrentTimeStamp());
-			if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_ACTIVE))
-				uv.setIsActive(userVehicleDao.VEHICLE_ACTIVE);
-			else if(vdr.getIsActive().equals(userVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(userDao.USER_INACTIVE))
-				uv.setIsActive(userVehicleDao.VEHICLE_STANDBY);
+			if(vdr.getIsActive().equals(UserVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(UserDao.USER_ACTIVE))
+				uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
+			else if(vdr.getIsActive().equals(UserVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(UserDao.USER_INACTIVE))
+				uv.setIsActive(UserVehicleDao.VEHICLE_STANDBY);
 			else
-				uv.setIsActive(userVehicleDao.VEHICLE_INACTIVE);
+				uv.setIsActive(UserVehicleDao.VEHICLE_INACTIVE);
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 			OwnerType ot=ownerTypeDao.getOwnerType(vdr.getOwnerType());			
@@ -97,6 +105,13 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			VehicleType vt=vehicleTypeDao.getVehicleType(vdr.getType());
 			uv.setVehicleTypeId(vt.getVehicleTypeId());
+			Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());
+			if(m!=null)
+				uv.setModelId(m.getModelId());
+			
+			uv.setVin(vdr.getVin());
+			uv.setColor(vdr.getColor());
+			uv.setManufacturedYear(vdr.getManufacturedYear());
 			userVehicleDao.save(uv);
 			uv = userVehicleDao.getVehicle(uv.getRegistrationNo(), uv.getRegisteredState(), u.getUserId());
 			response.setVehicleId(uv.getUserVehicleId());
@@ -122,22 +137,6 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		if(uv.getUserId().equals(u.getUserId()))
 		{
 			userVehicleDao.delete(uv);
-			/*if(d.getVehicleId() == uv.getUserVehicleId())
-			{
-				List<UserVehicle> l = userVehicleDao.getActiveVehicles();
-				if(l.isEmpty())
-					l = userVehicleDao.getStandByVehicles();
-				if(!l.isEmpty())
-				{
-					d.setVehicleId(l.iterator().next().getUserVehicleId());
-					deviceDao.update(d);
-				}
-				else
-				{
-					d.setVehicleId(-1);
-					deviceDao.update(d);
-				}
-			}*/
 			response.setDescription("Vehicle is deleted");
 		}
 		else
@@ -203,4 +202,13 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
+
+	public ModelDao getModelDao() {
+		return modelDao;
+	}
+
+	public void setModelDao(ModelDao modelDao) {
+		this.modelDao = modelDao;
+	}
+
 }
