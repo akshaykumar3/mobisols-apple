@@ -123,7 +123,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/AccountDetails")
-	//@RolesAllowed("user")
+	//@RolesAllowed({"user"})
 	public String getAccountDetailsResponse(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader){
 		String request = "RETRIEVE ACC_DETAILS";
 		try{
@@ -147,7 +147,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/private/BalanceDetails")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getBalanceDetails(@QueryParam("key") String securityKey,@QueryParam("json") String json){
 		String request = "RETRIEVE ACC_DETAILS";
 		try{
@@ -190,7 +190,7 @@ public class WebServiceImpl {
 	@POST
 	@Produces("text/plain")
 	@Path("/private/AddBalance")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String postAddBalance(@FormParam("key") String securityKey,@FormParam("json")String json,@Context HttpHeaders httpHeader)
 	{
 		String request = "RETRIEVE ACC_DETAILS";
@@ -274,7 +274,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/private/BalanceInfo")
-	@RolesAllowed("user")
+	//@RolesAllowed("user")
 	public String getBalanceInfo(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader)
 	{
 		String request="get BlanceInfo";
