@@ -11,7 +11,9 @@ gtp.controllers.fetch = Ext.regController("get",{
 			},
 			success: function(response) {
 				var obj = Ext.decode(response.responseText);
-				gtp.cfg = obj.response;
+				if(obj.status == 'success') {
+					gtp.cfg = obj.response;
+				}
 		      	gtp.showNotifications(obj.response.notifications);
 		      	gtp.parse(obj.response.commands);
 			},
@@ -26,18 +28,22 @@ gtp.controllers.fetch = Ext.regController("get",{
 			url: webServices.getAt(webServices.findExact('service','cctypes')).get('url'),
 			success: function(response) {
 				var resobj=Ext.decode(response.responseText);
-				var ccl=resobj.response.ccTypeList;
-				var ctsfid=Ext.getCmp('cardtype');
-				for(var i=0; i<ccl.length; i++) {
-					ctsfid.setOptions([{
-						text: ccl[i].name,
-						value: ccl[i].name
-					}],true);
+				if(resobj.status == 'success') {
+					gtp.vars.fetchedCcTypesList = false;
+					var ccl=resobj.response.ccTypeList;
+					var ctsfid = Ext.getCmp('cardtype');
+					for(var i=0; i<ccl.length; i++) {
+						ctsfid.setOptions([{
+							text: ccl[i].name,
+							value: ccl[i].name
+						}],true);
+					}
 				}
 		      	gtp.showNotifications(resobj.response.notifications);
 		      	gtp.parse(resobj.response.commands);
 			},
 			failure: function(response) {
+				gtp.vars.fetchedCcTypesList = false;
 				console.log('Fetching CCtypelist failure with status '+response.status);
 				gtp.log('Fetching CCtypelist failure with status '+response.status);
 			}
@@ -49,18 +55,23 @@ gtp.controllers.fetch = Ext.regController("get",{
 			url: webServices.getAt(webServices.findExact('service','vehicletypes')).get('url'),
 			success: function(response) {
 				var resobj = Ext.decode(response.responseText);
-				var vtl = resobj.response.vehicleTypeList;
-				var vtsfid = Ext.getCmp('tp'); 
-				for(var i=0; i<vtl.length; i++) {
-					vtsfid.setOptions([{
-						text: vtl[i].name,
-						value: vtl[i].name
-					}],true);
+				if(resobj.status == 'success') {
+					gtp.vars.fetchedVehicleTypeList = true;
+					var vtl = resobj.response.vehicleTypeList;
+					var vtsfid = Ext.getCmp('tp');
+					if(vtsfid)
+					for(var i=0; i<vtl.length; i++) {
+						vtsfid.setOptions([{
+							text: vtl[i].name,
+							value: vtl[i].name
+						}],true);
+					}
 				}
 		      	gtp.showNotifications(resobj.response.notifications);
 		      	gtp.parse(resobj.response.commands);
 			},
 			failure: function(response) {
+				gtp.vars.fetchedVehicleTypeList = false;
 				gtp.log('Fetching Sevices list failed');
 			}
 		});
@@ -71,21 +82,54 @@ gtp.controllers.fetch = Ext.regController("get",{
 			url: webServices.getAt(webServices.findExact('service','serviceplans')).get('url'),
 			success: function(response) {
 				var resobj = Ext.decode(response.responseText);
-				var spl = resobj.response.servicePlanList;
-				var spsfid = Ext.getCmp('serviceplan'); 
-				for(var i=0; i<spl.length; i++) {
-					spsfid.setOptions([{
-						text: spl[i].name,
-						value: spl[i].name
-					}],true);
+				if(resobj.status == 'success') {
+					gtp.vars.fetchedServicePlansList = true;
+					var spl = resobj.response.servicePlanList;
+					var spsfid = Ext.getCmp('serviceplan');
+					if(spsfid)
+					for(var i=0; i<spl.length; i++) {
+						spsfid.setOptions([{
+							text: spl[i].name,
+							value: spl[i].name
+						}],true);
+					}
 				}
 		      	gtp.showNotifications(resobj.response.notifications);
 		      	gtp.parse(resobj.response.commands);
 			},
 			failure: function(response) {
+				gtp.vars.fetchedServicePlansList = false;
 				console.log('Fetching SevicePlans list failed with status'+response.status);
 				gtp.log('Fetching SevicePlans list failed with status'+response.status);
 			}
 		});		
+	},
+	
+	ownertypeslist: function() {
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','ownertypes')).get('url'),
+			success: function(response) {
+				var resobj = Ext.decode(response.responseText);
+				if(resobj.status == 'success') {
+					gtp.vars.fetchedOwnerTypesList = true;
+					var otl = resobj.response.ownerTypeList;
+					var otlfid = Ext.getCmp('ownerType');
+					if(otlfid)
+					for(var i=0; i<otl.length; i++) {
+						otlfid.setOptions([{
+							text: otl[i].name,
+							value: otl[i].name
+						}],true);
+					}
+				}
+		      	gtp.showNotifications(resobj.response.notifications);
+		      	gtp.parse(resobj.response.commands);
+			},
+			failure: function(response) {
+				gtp.vars.fetchedOwnerTypesList = false;
+				console.log('Fetching Owner Type List failed with status'+response.status);
+				gtp.log('Fetching Owner Type list failed with status'+response.status);
+			}
+		});
 	}
 });

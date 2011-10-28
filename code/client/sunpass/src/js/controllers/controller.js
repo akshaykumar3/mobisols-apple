@@ -66,5 +66,10 @@ gtp.controllers = Ext.regController("load",{
 			controller: 'get',
 			action: 'vehicletypeslist'
 		});
+		
+		Ext.dispatch({
+			controller: 'get',
+			action: 'ownertypeslist'
+		});
 	}
 });

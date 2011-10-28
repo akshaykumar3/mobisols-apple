@@ -36,7 +36,9 @@ gtp.views.LoginPage = {
 					Ext.Msg.alert(gtp.dict.loginform_password);
 				}
 				else {
-					gtp.views.Viewport.setLoading(true);
+					gtp.views.Viewport.setLoading({
+						msg: 'Signing in..'
+					});
 					var un = Ext.getCmp('lpemailid').getValue();
 					var pwd = Ext.getCmp('lppassword').getValue();
 					Ext.Ajax.request({
@@ -56,27 +58,49 @@ gtp.views.LoginPage = {
 							var decres=Ext.decode(response.responseText);
 							var res=decres.response.response;
 							
-							if(res.userExists=="Y" && res.passwordCorrect=="Y") {
-								// Store username and password locally.
-								gtp.utils.dataStore.setValueOfKey('username', un);
-								gtp.utils.dataStore.setValueOfKey('password', pwd);
-								
-								var encodedString=base64_encode(un+':'+pwd);
-								Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
-								Ext.dispatch({
-									controller: 'load',
-									action: 'view',
-									loginDetails: {
-										username: un,
-										password: pwd
-									}
-								});
-							}
-							else if(res.userExists=="Y" && res.passwordCorrect=="N"){
-								Ext.Msg.alert('Incorrect',gtp.dict.loginform_pwd_fail);
-							}
-							else {
-								Ext.Msg.alert(gtp.dict.login_failure);
+							if(decres.status == 'success') {
+								if(res.userExists=="Y" && res.passwordCorrect=="Y") {
+									// Store username and password locally.
+									gtp.utils.dataStore.setValueOfKey('username', un);
+									gtp.utils.dataStore.setValueOfKey('password', pwd);
+									
+									var encodedString=base64_encode(un+':'+pwd);
+									Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
+									Ext.dispatch({
+										controller: 'load',
+										action: 'view',
+										loginDetails: {
+											username: un,
+											password: pwd
+										}
+									});
+									
+	                                var ddp = window.plugins.DeviceDetailsPlugin;
+	                                if(ddp) {
+		                                ddp.setDetails(Ext.encode({
+		                                    deviceId: gtp.deviceId,
+		                                    username: un,
+		                                    password: pwd
+		                                }));
+	                                }
+	                                
+	                                if(!gtp.tolls) {
+		                                gtp.getTolls();
+	                                }
+	                                
+	                                // if user app is enabled. do heartbeat upon launch.
+	                                var actp = window.plugins.ActivatePlugin;
+	                                if(actp) {
+	                                    //actp.activate();
+	                                }
+																		
+								}
+								else if(res.userExists=="Y" && res.passwordCorrect=="N"){
+									Ext.Msg.alert('Incorrect',gtp.dict.loginform_pwd_fail);
+								}
+								else {
+									Ext.Msg.alert('Incorrect', gtp.dict.login_failure);
+								}
 							}
 							gtp.showNotifications(decres.response.notifications);
 							gtp.parse(decres.response.commands);

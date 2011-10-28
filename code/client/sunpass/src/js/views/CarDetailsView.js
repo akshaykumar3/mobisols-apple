@@ -25,7 +25,7 @@ gtp.tabs.CarDetailView = {
 			handler: function(button, event) {
 				var updateCar = gtp.tabpanel.getActiveItem().down('#details').getRecord();
 				var curtab = gtp.tabpanel.getActiveItem().down('#details');
-				if(!gtp.dateValidity(gtp.today, curtab.down('#dpto').getValue()))
+				if(!gtp.dateValidity(gtp.today(), curtab.down('#dpto').getValue()))
 					Ext.Msg.alert(gtp.dict.datevalidity);
 				else {
 					gtp.tabpanel.setLoading({
@@ -95,6 +95,26 @@ gtp.tabs.CarDetailView = {
 			label: 'Type',
 			id: 'dptype',
 			disabled: true
+		},{
+			xtype: 'textfield',
+			id: 'make',
+			name: 'make',
+			label: 'Make'
+		},{
+			xtype: 'textfield',
+			id: 'model',
+			name: 'model',
+			label: 'Model'
+		},{
+			xtype: 'textfield',
+			id: 'manufacture_year',
+			name: 'year',
+			label: 'year'	
+		},{
+			xtype: 'colour',
+			id: 'color',
+			name: 'color',
+			label: 'Color'
 		}]
 	},{
 		xtype: 'fieldset',
@@ -103,19 +123,26 @@ gtp.tabs.CarDetailView = {
 			xtype: 'datepickerfield'
 		},
 		items: [{
+			xtype: 'selectfield',
+			id: 'ownerType',
+			name: 'ownerType',
+			options: [{
+				text: '',
+				value: ''
+			}]
+		},{
 			label: 'From',
 			name: 'startDate',
 			id: 'dpfrom',
-			disabled: true,
-			value: gtp.today
+			disabled: true
 		},{
 			label: 'To',
 			name: 'endDate',
 			id: 'dpto',
 			placeHolder: 'end date',
 			picker: {
-				yearFrom: gtp.today.getFullYear(),
-				yearTo: gtp.today.getFullYear()+10
+				yearFrom: gtp.today().getFullYear(),
+				yearTo: gtp.today().getFullYear()+10
 			},
 			listeners: {
 				change: function(curobj, newValue, oldValue) {
