@@ -13,6 +13,13 @@ gtp.controllers.fetch = Ext.regController("get",{
 				var obj = Ext.decode(response.responseText);
 				if(obj.status == 'success') {
 					gtp.cfg = obj.response;
+					if(Ext.is.iPhone) {
+	                    var ccp = window.plugins.ClientConfig;
+	                    ccp.setClientConfig(Ext.encode(gtp.cfg));
+					}
+					else if(Ext.is.Android) {
+						window.plugins.ClientConfigPlugin.setClientConfig(obj.response,function(result){},function(error){});
+					}
 				}
 		      	gtp.showNotifications(obj.response.notifications);
 		      	gtp.parse(obj.response.commands);
