@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2011 at 01:19 PM
+-- Generation Time: Oct 28, 2011 at 04:15 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -24,7 +24,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Stand-in structure for view `cc_type`
 --
-DROP VIEW IF EXISTS `cc_type`;
 CREATE TABLE IF NOT EXISTS `cc_type` (
 `cc_type_id` int(11)
 ,`name` varchar(45)
@@ -50,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `cc_type` (
 -- Table structure for table `cc_type_all`
 --
 
-DROP TABLE IF EXISTS `cc_type_all`;
 CREATE TABLE IF NOT EXISTS `cc_type_all` (
   `cc_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -88,7 +86,6 @@ INSERT INTO `cc_type_all` (`cc_type_id`, `name`, `description`, `udf1`, `udf2`, 
 --
 -- Stand-in structure for view `client`
 --
-DROP VIEW IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
 `client_id` int(11)
 ,`client_name` varchar(45)
@@ -112,7 +109,6 @@ CREATE TABLE IF NOT EXISTS `client` (
 -- Table structure for table `client_all`
 --
 
-DROP TABLE IF EXISTS `client_all`;
 CREATE TABLE IF NOT EXISTS `client_all` (
   `client_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_name` varchar(45) NOT NULL,
@@ -146,7 +142,6 @@ INSERT INTO `client_all` (`client_id`, `client_name`, `udf1`, `udf2`, `udf3`, `u
 --
 -- Stand-in structure for view `component`
 --
-DROP VIEW IF EXISTS `component`;
 CREATE TABLE IF NOT EXISTS `component` (
 `component_id` int(11)
 ,`name` varchar(45)
@@ -172,7 +167,6 @@ CREATE TABLE IF NOT EXISTS `component` (
 -- Table structure for table `component_all`
 --
 
-DROP TABLE IF EXISTS `component_all`;
 CREATE TABLE IF NOT EXISTS `component_all` (
   `component_id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
@@ -207,7 +201,6 @@ INSERT INTO `component_all` (`component_id`, `name`, `description`, `client_id`,
 --
 -- Stand-in structure for view `component_version`
 --
-DROP VIEW IF EXISTS `component_version`;
 CREATE TABLE IF NOT EXISTS `component_version` (
 `comp_version_id` int(11)
 ,`component_id` int(11)
@@ -234,7 +227,6 @@ CREATE TABLE IF NOT EXISTS `component_version` (
 -- Table structure for table `component_version_all`
 --
 
-DROP TABLE IF EXISTS `component_version_all`;
 CREATE TABLE IF NOT EXISTS `component_version_all` (
   `comp_version_id` int(11) NOT NULL AUTO_INCREMENT,
   `component_id` int(11) DEFAULT NULL,
@@ -270,7 +262,6 @@ INSERT INTO `component_version_all` (`comp_version_id`, `component_id`, `descrip
 --
 -- Stand-in structure for view `configuration`
 --
-DROP VIEW IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
 `config_id` int(11)
 ,`comp_version_id` int(11)
@@ -296,7 +287,6 @@ CREATE TABLE IF NOT EXISTS `configuration` (
 -- Table structure for table `configuration_all`
 --
 
-DROP TABLE IF EXISTS `configuration_all`;
 CREATE TABLE IF NOT EXISTS `configuration_all` (
   `config_id` int(11) NOT NULL,
   `comp_version_id` int(11) DEFAULT NULL,
@@ -331,7 +321,6 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 --
 -- Stand-in structure for view `device`
 --
-DROP VIEW IF EXISTS `device`;
 CREATE TABLE IF NOT EXISTS `device` (
 `device_id` int(11)
 ,`user_id` int(11)
@@ -360,7 +349,6 @@ CREATE TABLE IF NOT EXISTS `device` (
 -- Table structure for table `device_all`
 --
 
-DROP TABLE IF EXISTS `device_all`;
 CREATE TABLE IF NOT EXISTS `device_all` (
   `device_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -415,12 +403,64 @@ INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, 
 INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, `is_active`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `client_id`) VALUES(24, 1, '1.38.179.1052011-10-27 14:24:27.606', 'android', 'N', '2011-10-27 14:24:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 14:24:27', '2011-10-27 14:24:27', -1, 1);
 INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, `is_active`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `client_id`) VALUES(25, 1, '1.38.179.1052011-10-27 15:04:48.782', 'android', 'N', '2011-10-27 15:04:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 15:04:48', '2011-10-27 15:04:48', -1, 1);
 
+--
+-- Triggers `device_all`
+--
+DROP TRIGGER IF EXISTS `trg_dev_his_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_dev_his_aft_ins` AFTER INSERT ON `device_all`
+ FOR EACH ROW begin
+insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,is_active,
+last_login_time,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+created_on,start_date,end_date,action)
+values(null,new.device_id,new.user_id,new.device_uuid,new.device_type,new.is_active,
+new.last_login_time,new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,
+new.flag4,new.flag5,new.client_id,new.last_modified_by,new.last_modified_on,new.created_on,GetStartDate(),GetInfFuture(),'insert');
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_dev_his_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_dev_his_aft_upd` AFTER UPDATE ON `device_all`
+ FOR EACH ROW begin
+update device_history_all
+set end_date = GetEndDate()
+where 
+device_id = new.device_id
+and end_date = GetInfFuture();
+insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,is_active,
+last_login_time,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+created_on,start_date,end_date,action)
+values(null,new.device_id,new.user_id,new.device_uuid,new.device_type,new.is_active,
+new.last_login_time,new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,
+new.flag4,new.flag5,new.client_id,new.last_modified_by,new.last_modified_on,new.created_on,GetStartDate(),GetInfFuture(),'update');
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_dev_his_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_dev_his_bfr_del` BEFORE DELETE ON `device_all`
+ FOR EACH ROW begin
+update device_history_all
+set end_date = GetEndDate()
+where 
+device_id = old.device_id
+and end_date = GetInfFuture();
+insert into device_history_all(device_history_id,device_id,user_id,device_uuid,device_type,is_active,
+last_login_time,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,client_id,last_modified_by,last_modified_on,
+created_on,start_date,end_date,action)
+values(null,old.device_id,old.user_id,old.device_uuid,old.device_type,old.is_active,
+old.last_login_time,old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,
+old.flag4,old.flag5,old.client_id,old.last_modified_by,old.last_modified_on,old.created_on,GetStartDate(),GetStartDate(),'delete');
+end
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `device_history`
 --
-DROP VIEW IF EXISTS `device_history`;
 CREATE TABLE IF NOT EXISTS `device_history` (
 `device_history_id` int(11)
 ,`device_id` int(11)
@@ -453,7 +493,6 @@ CREATE TABLE IF NOT EXISTS `device_history` (
 -- Table structure for table `device_history_all`
 --
 
-DROP TABLE IF EXISTS `device_history_all`;
 CREATE TABLE IF NOT EXISTS `device_history_all` (
   `device_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` int(11) DEFAULT NULL,
@@ -528,7 +567,6 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 --
 -- Stand-in structure for view `make`
 --
-DROP VIEW IF EXISTS `make`;
 CREATE TABLE IF NOT EXISTS `make` (
 `make_id` int(11)
 ,`name` varchar(45)
@@ -554,7 +592,6 @@ CREATE TABLE IF NOT EXISTS `make` (
 -- Table structure for table `make_all`
 --
 
-DROP TABLE IF EXISTS `make_all`;
 CREATE TABLE IF NOT EXISTS `make_all` (
   `make_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -589,7 +626,6 @@ CREATE TABLE IF NOT EXISTS `make_all` (
 --
 -- Stand-in structure for view `model`
 --
-DROP VIEW IF EXISTS `model`;
 CREATE TABLE IF NOT EXISTS `model` (
 `model_id` int(11)
 ,`name` varchar(45)
@@ -616,7 +652,6 @@ CREATE TABLE IF NOT EXISTS `model` (
 -- Table structure for table `model_all`
 --
 
-DROP TABLE IF EXISTS `model_all`;
 CREATE TABLE IF NOT EXISTS `model_all` (
   `model_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -652,7 +687,6 @@ CREATE TABLE IF NOT EXISTS `model_all` (
 --
 -- Stand-in structure for view `owner_type`
 --
-DROP VIEW IF EXISTS `owner_type`;
 CREATE TABLE IF NOT EXISTS `owner_type` (
 `owner_type_id` int(11)
 ,`name` varchar(45)
@@ -678,7 +712,6 @@ CREATE TABLE IF NOT EXISTS `owner_type` (
 -- Table structure for table `owner_type_all`
 --
 
-DROP TABLE IF EXISTS `owner_type_all`;
 CREATE TABLE IF NOT EXISTS `owner_type_all` (
   `owner_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -714,7 +747,6 @@ INSERT INTO `owner_type_all` (`owner_type_id`, `name`, `description`, `udf1`, `u
 --
 -- Stand-in structure for view `payment_gateway`
 --
-DROP VIEW IF EXISTS `payment_gateway`;
 CREATE TABLE IF NOT EXISTS `payment_gateway` (
 `payment_gateway_id` int(11)
 ,`name` varchar(1000)
@@ -740,7 +772,6 @@ CREATE TABLE IF NOT EXISTS `payment_gateway` (
 -- Table structure for table `payment_gateway_all`
 --
 
-DROP TABLE IF EXISTS `payment_gateway_all`;
 CREATE TABLE IF NOT EXISTS `payment_gateway_all` (
   `payment_gateway_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(1000) DEFAULT NULL,
@@ -774,7 +805,6 @@ CREATE TABLE IF NOT EXISTS `payment_gateway_all` (
 --
 -- Stand-in structure for view `payment_token`
 --
-DROP VIEW IF EXISTS `payment_token`;
 CREATE TABLE IF NOT EXISTS `payment_token` (
 `payment_token_id` int(11)
 ,`upd_id` int(11)
@@ -801,7 +831,6 @@ CREATE TABLE IF NOT EXISTS `payment_token` (
 -- Table structure for table `payment_token_all`
 --
 
-DROP TABLE IF EXISTS `payment_token_all`;
 CREATE TABLE IF NOT EXISTS `payment_token_all` (
   `payment_token_id` int(11) NOT NULL AUTO_INCREMENT,
   `upd_id` int(11) DEFAULT NULL,
@@ -839,7 +868,6 @@ CREATE TABLE IF NOT EXISTS `payment_token_all` (
 --
 -- Stand-in structure for view `payment_transaction`
 --
-DROP VIEW IF EXISTS `payment_transaction`;
 CREATE TABLE IF NOT EXISTS `payment_transaction` (
 `ptran_id` int(11)
 ,`user_bl_id` int(11)
@@ -869,7 +897,6 @@ CREATE TABLE IF NOT EXISTS `payment_transaction` (
 -- Table structure for table `payment_transaction_all`
 --
 
-DROP TABLE IF EXISTS `payment_transaction_all`;
 CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
   `ptran_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_bl_id` int(11) DEFAULT NULL COMMENT 'balance log for the user',
@@ -910,7 +937,6 @@ CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
 --
 -- Stand-in structure for view `road`
 --
-DROP VIEW IF EXISTS `road`;
 CREATE TABLE IF NOT EXISTS `road` (
 `road_id` int(11)
 ,`name` varchar(50)
@@ -938,7 +964,6 @@ CREATE TABLE IF NOT EXISTS `road` (
 -- Table structure for table `road_all`
 --
 
-DROP TABLE IF EXISTS `road_all`;
 CREATE TABLE IF NOT EXISTS `road_all` (
   `road_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -974,7 +999,6 @@ CREATE TABLE IF NOT EXISTS `road_all` (
 --
 -- Stand-in structure for view `service_plan`
 --
-DROP VIEW IF EXISTS `service_plan`;
 CREATE TABLE IF NOT EXISTS `service_plan` (
 `service_plan_id` int(11)
 ,`toll_operator_id` int(11)
@@ -1001,7 +1025,6 @@ CREATE TABLE IF NOT EXISTS `service_plan` (
 -- Table structure for table `service_plan_all`
 --
 
-DROP TABLE IF EXISTS `service_plan_all`;
 CREATE TABLE IF NOT EXISTS `service_plan_all` (
   `service_plan_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_operator_id` int(11) DEFAULT NULL,
@@ -1040,7 +1063,6 @@ INSERT INTO `service_plan_all` (`service_plan_id`, `toll_operator_id`, `name`, `
 --
 -- Stand-in structure for view `toll_location`
 --
-DROP VIEW IF EXISTS `toll_location`;
 CREATE TABLE IF NOT EXISTS `toll_location` (
 `toll_location_id` int(11)
 ,`toll_operator_id` int(11)
@@ -1078,7 +1100,6 @@ CREATE TABLE IF NOT EXISTS `toll_location` (
 -- Table structure for table `toll_location_all`
 --
 
-DROP TABLE IF EXISTS `toll_location_all`;
 CREATE TABLE IF NOT EXISTS `toll_location_all` (
   `toll_location_id` int(11) NOT NULL,
   `toll_operator_id` int(11) NOT NULL COMMENT 'corresponding toll agency -- foreign key to toll_operators_all table',
@@ -1144,12 +1165,61 @@ INSERT INTO `toll_location_all` (`toll_location_id`, `toll_operator_id`, `geomet
 INSERT INTO `toll_location_all` (`toll_location_id`, `toll_operator_id`, `geometry`, `is_covered`, `is_cash_only`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `latitude`, `longitude`, `direction`, `type`) VALUES(23, 1, NULL, 'N', 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-06-25 00:06:09', '2011-06-25 00:06:04', 1, '33.939427', '-118.095533', NULL, NULL);
 INSERT INTO `toll_location_all` (`toll_location_id`, `toll_operator_id`, `geometry`, `is_covered`, `is_cash_only`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `latitude`, `longitude`, `direction`, `type`) VALUES(24, 1, NULL, 'Y', 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-27 10:40:49', '2011-10-27 10:40:52', 1, '31.072660', '-104.127441', NULL, NULL);
 
+--
+-- Triggers `toll_location_all`
+--
+DROP TRIGGER IF EXISTS `trg_tol_loc_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_tol_loc_aft_ins` AFTER INSERT ON `toll_location_all`
+ FOR EACH ROW begin
+insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,latitude,longitude,direction,type) 
+values(null,new.toll_location_id,new.toll_operator_id,new.geometry,new.is_covered,new.is_cash_only,new.address1,new.address2,new.city,new.state,new.country,zip,
+new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
+GetStartDate(),GetInfFuture(),'insert',new.client_id,new.latitude,new.longitude,new.direction,new.type);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_tol_loc_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_tol_loc_aft_upd` AFTER UPDATE ON `toll_location_all`
+ FOR EACH ROW begin
+update toll_location_history_all
+set end_date = GetEndDate()
+where 
+toll_location_id = new.toll_location_id
+and end_date = GetInfFuture();
+insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,latitude,longitude,direction,type) 
+values(null,new.toll_location_id,new.toll_operator_id,new.geometry,new.is_covered,new.is_cash_only,new.address1,new.address2,new.city,new.state,new.country,new.zip,
+new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
+GetStartDate(),GetInfFuture(),'update',new.client_id,new.latitude,new.longitude,new.direction,new.type);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_tol_loc_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_tol_loc_bfr_del` BEFORE DELETE ON `toll_location_all`
+ FOR EACH ROW begin
+update toll_location_history_all
+set end_date = GetEndDate()
+where 
+toll_location_id = old.toll_location_id
+and end_date = GetInfFuture(); 
+insert into toll_location_history_all(tlh_id,toll_location_id,toll_operator_id,geometry,is_covered,is_cash_only,address1,address2,city,state,country,zip,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,latitude,longitude,direction,type) 
+values(null,old.toll_location_id,old.toll_operator_id,old.geometry,old.is_covered,old.is_cash_only,old.address1,old.address2,old.city,old.state,old.country,old.zip,
+old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,
+GetStartDate(),GetStartDate(),'delete',old.client_id,old.latitude,old.longitude,old.direction,old.type);
+end
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `toll_location_history`
 --
-DROP VIEW IF EXISTS `toll_location_history`;
 CREATE TABLE IF NOT EXISTS `toll_location_history` (
 `tlh_id` int(11)
 ,`toll_location_id` int(11)
@@ -1191,7 +1261,6 @@ CREATE TABLE IF NOT EXISTS `toll_location_history` (
 -- Table structure for table `toll_location_history_all`
 --
 
-DROP TABLE IF EXISTS `toll_location_history_all`;
 CREATE TABLE IF NOT EXISTS `toll_location_history_all` (
   `tlh_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_location_id` int(11) DEFAULT NULL,
@@ -1264,7 +1333,6 @@ INSERT INTO `toll_location_history_all` (`tlh_id`, `toll_location_id`, `toll_ope
 --
 -- Stand-in structure for view `toll_operator`
 --
-DROP VIEW IF EXISTS `toll_operator`;
 CREATE TABLE IF NOT EXISTS `toll_operator` (
 `toll_operator_id` int(11)
 ,`user_id` int(11)
@@ -1292,7 +1360,6 @@ CREATE TABLE IF NOT EXISTS `toll_operator` (
 -- Table structure for table `toll_operator_all`
 --
 
-DROP TABLE IF EXISTS `toll_operator_all`;
 CREATE TABLE IF NOT EXISTS `toll_operator_all` (
   `toll_operator_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1333,7 +1400,6 @@ INSERT INTO `toll_operator_all` (`toll_operator_id`, `user_id`, `name`, `is_acti
 --
 -- Stand-in structure for view `toll_price`
 --
-DROP VIEW IF EXISTS `toll_price`;
 CREATE TABLE IF NOT EXISTS `toll_price` (
 `toll_price_id` int(11)
 ,`toll_location_id` int(11)
@@ -1361,7 +1427,6 @@ CREATE TABLE IF NOT EXISTS `toll_price` (
 -- Table structure for table `toll_price_all`
 --
 
-DROP TABLE IF EXISTS `toll_price_all`;
 CREATE TABLE IF NOT EXISTS `toll_price_all` (
   `toll_price_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_location_id` int(11) NOT NULL,
@@ -1395,12 +1460,58 @@ CREATE TABLE IF NOT EXISTS `toll_price_all` (
 --
 
 
+--
+-- Triggers `toll_price_all`
+--
+DROP TRIGGER IF EXISTS `trg_toll_price_all_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_toll_price_all_aft_ins` AFTER INSERT ON `toll_price_all`
+ FOR EACH ROW begin
+insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
+flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id)
+values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.cost_price,new.selling_price,'insert',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,
+new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_toll_price_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_toll_price_aft_upd` AFTER UPDATE ON `toll_price_all`
+ FOR EACH ROW begin
+update toll_price_history_all
+set end_date = GetEndDate()
+where 
+toll_price_id = new.toll_price_id
+and end_date = GetInfFuture();
+insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
+flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id)
+values(null,new.toll_price_id,new.toll_location_id,new.vehicle_type_id,new.cost_price,new.selling_price,'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,
+new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_tol_price_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_tol_price_bfr_del` BEFORE DELETE ON `toll_price_all`
+ FOR EACH ROW begin
+update toll_price_history_all
+set end_date = GetEndDate()
+where 
+toll_price_id = old.toll_price_id
+and end_date = GetInfFuture(); 
+insert into toll_price_history_all(tph_id,toll_price_id,toll_location_id,vehicle_type_id,cost_price,selling_price,action,udf1,udf2,udf3,udf4,udf5,
+flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id)
+values(null,old.toll_price_id,old.toll_location_id,old.vehicle_type_id,old.cost_price,old.selling_price,'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,
+old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate(),old.client_id);
+end
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `toll_price_history`
 --
-DROP VIEW IF EXISTS `toll_price_history`;
 CREATE TABLE IF NOT EXISTS `toll_price_history` (
 `tph_id` int(11)
 ,`toll_price_id` int(11)
@@ -1433,7 +1544,6 @@ CREATE TABLE IF NOT EXISTS `toll_price_history` (
 -- Table structure for table `toll_price_history_all`
 --
 
-DROP TABLE IF EXISTS `toll_price_history_all`;
 CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
   `tph_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_price_id` int(11) NOT NULL,
@@ -1473,7 +1583,6 @@ CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
 -- Table structure for table `udf_data_all`
 --
 
-DROP TABLE IF EXISTS `udf_data_all`;
 CREATE TABLE IF NOT EXISTS `udf_data_all` (
   `udf_data_id` int(11) NOT NULL AUTO_INCREMENT,
   `udf_value` varchar(1000) DEFAULT NULL,
@@ -1493,7 +1602,6 @@ CREATE TABLE IF NOT EXISTS `udf_data_all` (
 -- Table structure for table `udf_definition_all`
 --
 
-DROP TABLE IF EXISTS `udf_definition_all`;
 CREATE TABLE IF NOT EXISTS `udf_definition_all` (
   `udf_def_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -1510,7 +1618,6 @@ CREATE TABLE IF NOT EXISTS `udf_definition_all` (
 --
 -- Stand-in structure for view `user`
 --
-DROP VIEW IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
 `user_id` int(11)
 ,`client_id` int(11)
@@ -1541,7 +1648,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Table structure for table `user_all`
 --
 
-DROP TABLE IF EXISTS `user_all`;
 CREATE TABLE IF NOT EXISTS `user_all` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_id` int(11) NOT NULL COMMENT 'users can register under any client where clients are third party organisations. ',
@@ -1578,12 +1684,58 @@ CREATE TABLE IF NOT EXISTS `user_all` (
 INSERT INTO `user_all` (`user_id`, `client_id`, `utype_id`, `user_name`, `password`, `locale`, `is_active`, `contact_no`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES(-1, 1, 1, 'test', 'test', NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 21:20:18', '2011-10-12 21:20:21', -1);
 INSERT INTO `user_all` (`user_id`, `client_id`, `utype_id`, `user_name`, `password`, `locale`, `is_active`, `contact_no`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES(1, 1, 1, 'harish@mobisols.com', 'mobisols', '', 'Y', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1);
 
+--
+-- Triggers `user_all`
+--
+DROP TRIGGER IF EXISTS `trg_user_all_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_user_all_aft_ins` AFTER INSERT ON `user_all`
+ FOR EACH ROW begin
+insert into user_history_all(user_his_id,user_id,user_name,password,locale,utype_id,last_login_time,is_active,contact_no,client_id,action,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date) 
+values(null,new.user_id,new.user_name,new.password,new.locale,new.utype_id,new.last_login_time,new.is_active,new.contact_no,new.client_id,'insert',
+new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture());
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_user_all_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_user_all_aft_upd` AFTER UPDATE ON `user_all`
+ FOR EACH ROW begin
+update user_history_all
+set end_date = GetEndDate()
+where 
+user_id = new.user_id
+and end_date =GetInfFuture();
+insert into user_history_all(user_his_id,user_id,user_name,password,locale,utype_id,last_login_time,is_active,contact_no,client_id,action,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date) 
+values(null,new.user_id,new.user_name,new.password,new.locale,new.utype_id,new.last_login_time,new.is_active,new.contact_no,new.client_id,'update',
+new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture());
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_user_all_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_user_all_bfr_del` BEFORE DELETE ON `user_all`
+ FOR EACH ROW begin
+update user_history_all
+set end_date = GetEndDate()
+where 
+user_id = old.user_id
+and end_date = GetInfFuture(); 
+insert into user_history_all(user_his_id,user_id,user_name,password,locale,utype_id,last_login_time,is_active,contact_no,client_id,action,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date) 
+values(null,old.user_id,old.user_name,old.password,old.locale,old.utype_id,old.last_login_time,old.is_active,old.contact_no,old.client_id,'delete',
+old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate());
+end
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_balance`
 --
-DROP VIEW IF EXISTS `user_balance`;
 CREATE TABLE IF NOT EXISTS `user_balance` (
 `ubal_id` int(11)
 ,`user_id` int(11)
@@ -1609,7 +1761,6 @@ CREATE TABLE IF NOT EXISTS `user_balance` (
 -- Table structure for table `user_balance_all`
 --
 
-DROP TABLE IF EXISTS `user_balance_all`;
 CREATE TABLE IF NOT EXISTS `user_balance_all` (
   `ubal_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1640,12 +1791,45 @@ CREATE TABLE IF NOT EXISTS `user_balance_all` (
 
 INSERT INTO `user_balance_all` (`ubal_id`, `user_id`, `balance`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES(1, 1, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1);
 
+--
+-- Triggers `user_balance_all`
+--
+DROP TRIGGER IF EXISTS `trg_bal_log_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_bal_log_aft_ins` AFTER INSERT ON `user_balance_all`
+ FOR EACH ROW begin
+insert into user_balance_log_all(ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
+values(null,new.ubal_id,0,sysdate(),'new account created',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,
+new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_bal_log_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_bal_log_aft_upd` AFTER UPDATE ON `user_balance_all`
+ FOR EACH ROW begin
+insert into user_balance_log_all (ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
+values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,
+new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_bal_log_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_bal_log_bfr_del` BEFORE DELETE ON `user_balance_all`
+ FOR EACH ROW begin
+insert into user_balance_log_all (ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
+values(null,old.ubal_id,old.balanceold.balance,sysdate(),'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,
+old.last_modified_by,old.last_modified_on,old.created_on,old.client_id);
+end
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_balance_log`
 --
-DROP VIEW IF EXISTS `user_balance_log`;
 CREATE TABLE IF NOT EXISTS `user_balance_log` (
 `ublog_id` int(11)
 ,`ubal_id` int(11)
@@ -1673,7 +1857,6 @@ CREATE TABLE IF NOT EXISTS `user_balance_log` (
 -- Table structure for table `user_balance_log_all`
 --
 
-DROP TABLE IF EXISTS `user_balance_log_all`;
 CREATE TABLE IF NOT EXISTS `user_balance_log_all` (
   `ublog_id` int(11) NOT NULL AUTO_INCREMENT,
   `ubal_id` int(11) NOT NULL,
@@ -1711,7 +1894,6 @@ INSERT INTO `user_balance_log_all` (`ublog_id`, `ubal_id`, `delta`, `timestamp`,
 --
 -- Stand-in structure for view `user_history`
 --
-DROP VIEW IF EXISTS `user_history`;
 CREATE TABLE IF NOT EXISTS `user_history` (
 `user_his_id` int(11)
 ,`user_id` int(11)
@@ -1746,7 +1928,6 @@ CREATE TABLE IF NOT EXISTS `user_history` (
 -- Table structure for table `user_history_all`
 --
 
-DROP TABLE IF EXISTS `user_history_all`;
 CREATE TABLE IF NOT EXISTS `user_history_all` (
   `user_his_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1792,7 +1973,6 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 --
 -- Stand-in structure for view `user_notification`
 --
-DROP VIEW IF EXISTS `user_notification`;
 CREATE TABLE IF NOT EXISTS `user_notification` (
 `user_notification_id` int(11)
 ,`device_id` int(11)
@@ -1826,7 +2006,6 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
 -- Table structure for table `user_notification_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_all` (
   `user_notification_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` int(11) DEFAULT NULL,
@@ -1869,7 +2048,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_all` (
 --
 -- Stand-in structure for view `user_notification_settings`
 --
-DROP VIEW IF EXISTS `user_notification_settings`;
 CREATE TABLE IF NOT EXISTS `user_notification_settings` (
 `user_notification_settings_id` int(11)
 ,`user_id` int(11)
@@ -1895,7 +2073,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_settings` (
 -- Table structure for table `user_notification_settings_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_settings_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_settings_all` (
   `user_notification_settings_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1932,7 +2109,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_settings_all` (
 --
 -- Stand-in structure for view `user_notification_type`
 --
-DROP VIEW IF EXISTS `user_notification_type`;
 CREATE TABLE IF NOT EXISTS `user_notification_type` (
 `user_notification_type_id` int(11)
 ,`notification_type` varchar(100)
@@ -1958,7 +2134,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_type` (
 -- Table structure for table `user_notification_type_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_type_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_type_all` (
   `user_notification_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `notification_type` varchar(100) NOT NULL,
@@ -1992,7 +2167,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_type_all` (
 --
 -- Stand-in structure for view `user_payment_detail`
 --
-DROP VIEW IF EXISTS `user_payment_detail`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 `upd_id` int(11)
 ,`user_id` int(11)
@@ -2032,7 +2206,6 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 -- Table structure for table `user_payment_detail_all`
 --
 
-DROP TABLE IF EXISTS `user_payment_detail_all`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   `upd_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2082,12 +2255,61 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
 
 INSERT INTO `user_payment_detail_all` (`upd_id`, `user_id`, `cc_type_id`, `cc_ac_name`, `cc_number`, `cc_exp_month`, `cc_exp_year`, `cc_cvv`, `bank_routing`, `bank_account`, `pay_prefer`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES(1, 1, 1, 'harish', '4477 4669 0240 ', 1, 2036, 0, NULL, NULL, 'c', 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-17 13:09:58', '2011-10-12 22:22:34', 1);
 
+--
+-- Triggers `user_payment_detail_all`
+--
+DROP TRIGGER IF EXISTS `trg_user_payment_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_user_payment_aft_ins` AFTER INSERT ON `user_payment_detail_all`
+ FOR EACH ROW begin
+insert into user_payment_detail_history_all(updh_id,upd_id,user_id,cc_type_id,cc_ac_name,cc_number,cc_exp_month,cc_exp_year,cc_cvv,bank_routing,bank_account,address1,address2,city,
+state,country,zip,pay_prefer,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id) 
+values(null,new.upd_id,new.user_id,new.cc_type_id,new.cc_ac_name,new.cc_number,new.cc_exp_month,new.cc_exp_year,new.cc_cvv,new.bank_routing,new.bank_account,new.address1,new.address2,
+new.city,new.state,new.country,new.zip,new.pay_prefer,'insert',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,
+new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_user_payment_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_user_payment_aft_upd` AFTER UPDATE ON `user_payment_detail_all`
+ FOR EACH ROW begin
+update user_payment_detail_history_all
+set end_date = GetEndDate() 
+where 
+upd_id = new.upd_id
+and end_date = GetInfFuture();
+insert into user_payment_detail_history_all(updh_id,upd_id,user_id,cc_type_id,cc_ac_name,cc_number,cc_exp_month,cc_exp_year,cc_cvv,bank_routing,bank_account,address1,address2,city,
+state,country,zip,pay_prefer,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id) 
+values(null,new.upd_id,new.user_id,new.cc_type_id,new.cc_ac_name,new.cc_number,new.cc_exp_month,new.cc_exp_year,new.cc_cvv,new.bank_routing,new.bank_account,new.address1,new.address2,
+new.city,new.state,new.country,new.zip,new.pay_prefer,'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,
+new.last_modified_on,new.last_modified_by,GetStartDate(),GetInfFuture(),new.client_id);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_user_payment_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_user_payment_bfr_del` BEFORE DELETE ON `user_payment_detail_all`
+ FOR EACH ROW begin
+update user_payment_detail_history_all
+set end_date = GetEndDate()
+where 
+upd_id = old.upd_id
+and end_date = GetInfFuture(); 
+insert into user_payment_detail_history_all(updh_id,upd_id,user_id,cc_type_id,cc_ac_name,cc_number,cc_exp_month,cc_exp_year,cc_cvv,bank_routing,bank_account,address1,address2,city,
+state,country,zip,pay_prefer,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,client_id) 
+values(null,old.upd_id,old.user_id,old.cc_type_id,old.cc_ac_name,old.cc_number,old.cc_exp_month,old.cc_exp_year,old.cc_cvv,old.bank_routing,old.bank_account,old.address1,old.address2,
+old.city,old.state,old.country,old.zip,old.pay_prefer,'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,
+old.last_modified_on,old.last_modified_by,GetStartDate(),GetStartDate(),old.client_id);
+end
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_payment_detail_history`
 --
-DROP VIEW IF EXISTS `user_payment_detail_history`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 `updh_id` int(11)
 ,`upd_id` int(11)
@@ -2131,7 +2353,6 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 -- Table structure for table `user_payment_detail_history_all`
 --
 
-DROP TABLE IF EXISTS `user_payment_detail_history_all`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `updh_id` int(11) NOT NULL AUTO_INCREMENT,
   `upd_id` int(11) DEFAULT NULL,
@@ -2184,7 +2405,6 @@ INSERT INTO `user_payment_detail_history_all` (`updh_id`, `upd_id`, `user_id`, `
 --
 -- Stand-in structure for view `user_service`
 --
-DROP VIEW IF EXISTS `user_service`;
 CREATE TABLE IF NOT EXISTS `user_service` (
 `user_service_id` int(11)
 ,`user_id` int(11)
@@ -2213,7 +2433,6 @@ CREATE TABLE IF NOT EXISTS `user_service` (
 -- Table structure for table `user_service_all`
 --
 
-DROP TABLE IF EXISTS `user_service_all`;
 CREATE TABLE IF NOT EXISTS `user_service_all` (
   `user_service_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2252,7 +2471,6 @@ CREATE TABLE IF NOT EXISTS `user_service_all` (
 --
 -- Stand-in structure for view `user_type`
 --
-DROP VIEW IF EXISTS `user_type`;
 CREATE TABLE IF NOT EXISTS `user_type` (
 `user_type_id` int(11)
 ,`name` varchar(45)
@@ -2280,7 +2498,6 @@ CREATE TABLE IF NOT EXISTS `user_type` (
 -- Table structure for table `user_type_all`
 --
 
-DROP TABLE IF EXISTS `user_type_all`;
 CREATE TABLE IF NOT EXISTS `user_type_all` (
   `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL COMMENT 'trial/prepaid/premium/postpaid users',
@@ -2318,7 +2535,6 @@ INSERT INTO `user_type_all` (`user_type_id`, `name`, `description`, `min_balance
 --
 -- Stand-in structure for view `user_vehicle`
 --
-DROP VIEW IF EXISTS `user_vehicle`;
 CREATE TABLE IF NOT EXISTS `user_vehicle` (
 `user_vehicle_id` int(11)
 ,`user_id` int(11)
@@ -2345,6 +2561,8 @@ CREATE TABLE IF NOT EXISTS `user_vehicle` (
 ,`client_id` int(11)
 ,`model_id` int(11)
 ,`vin` varchar(25)
+,`color` varchar(45)
+,`manufactured_year` int(11)
 );
 -- --------------------------------------------------------
 
@@ -2352,7 +2570,6 @@ CREATE TABLE IF NOT EXISTS `user_vehicle` (
 -- Table structure for table `user_vehicle_all`
 --
 
-DROP TABLE IF EXISTS `user_vehicle_all`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   `user_vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL COMMENT 'user id-- foreign key to users_all table',
@@ -2379,6 +2596,8 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   `client_id` int(11) DEFAULT NULL,
   `model_id` int(11) DEFAULT NULL,
   `vin` varchar(25) DEFAULT NULL,
+  `color` varchar(45) DEFAULT NULL,
+  `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_vehicle_id`),
   UNIQUE KEY `uk_user_reg_vehicle` (`user_id`,`registration_no`),
   KEY `fk_vt_user_vehicle` (`vehicle_type_id`),
@@ -2387,20 +2606,69 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   KEY `fk_uv_co` (`owner_type_id`),
   KEY `fk_client_uv` (`client_id`),
   KEY `fk_vehicle_model` (`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user_vehicle_all`
 --
 
-INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_type_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`) VALUES(1, 1, 3, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, NULL, NULL);
+INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_type_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(1, 1, 3, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, NULL, NULL, NULL, NULL);
+
+--
+-- Triggers `user_vehicle_all`
+--
+DROP TRIGGER IF EXISTS `trg_user_vehicle_aft_ins`;
+DELIMITER //
+CREATE TRIGGER `trg_user_vehicle_aft_ins` AFTER INSERT ON `user_vehicle_all`
+ FOR EACH ROW begin
+insert into user_vehicle_history_all (uvh_id,user_vehicle_id,user_id,vehicle_type_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin,color,manufactured_year) 
+values(null,new.user_vehicle_id,new.user_id,new.vehicle_type_id,new.is_active,new.vehicle_start_date,new.vehicle_end_date,new.registration_no,new.registered_state,new.owner_type_id,
+new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
+GetStartDate(),GetInfFuture(),'insert',new.client_id,new.model_id,new.vin,new.color,new.manufactured_year);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_user_vehicle_aft_upd`;
+DELIMITER //
+CREATE TRIGGER `trg_user_vehicle_aft_upd` AFTER UPDATE ON `user_vehicle_all`
+ FOR EACH ROW begin
+update user_vehicle_history_all
+set end_date = GetEndDate()
+where 
+user_vehicle_id = new.user_vehicle_id
+and end_date = GetInfFuture();
+insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,vehicle_type_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin,color,manufactured_year) 
+values(null,new.user_vehicle_id,new.user_id,new.vehicle_type_id,new.is_active,new.vehicle_start_date,new.vehicle_end_date,new.registration_no,new.registered_state,new.owner_type_id,
+new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
+GetStartDate(),GetInfFuture(),'update',new.client_id,new.model_id,new.vin,new.color,new.manufactured_year);
+end
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS `trg_user_vehicle_bfr_del`;
+DELIMITER //
+CREATE TRIGGER `trg_user_vehicle_bfr_del` BEFORE DELETE ON `user_vehicle_all`
+ FOR EACH ROW begin
+update user_vehicle_history_all
+set end_date = GetEndDate()
+where 
+user_vehicle_id = old.user_vehicle_id
+and end_date = GetInfFuture(); 
+insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,vehicle_type_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
+udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin,color,manufactured_year) 
+values(null,old.user_vehicle_id,old.user_id,old.vehicle_type_id,old.is_active,old.vehicle_start_date,old.vehicle_end_date,old.registration_no,old.registered_state,old.owner_type_id,
+old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,
+GetStartDate(),GetStartDate(),'delete',old.client_id,old.model_id,old.vin,old.color,manufactured_year);
+end
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_vehicle_history`
 --
-DROP VIEW IF EXISTS `user_vehicle_history`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 `uvh_id` int(11)
 ,`user_vehicle_id` int(11)
@@ -2431,6 +2699,8 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 ,`client_id` int(11)
 ,`model_id` int(11)
 ,`vin` varchar(25)
+,`color` varchar(45)
+,`manufactured_year` int(11)
 );
 -- --------------------------------------------------------
 
@@ -2438,7 +2708,6 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 -- Table structure for table `user_vehicle_history_all`
 --
 
-DROP TABLE IF EXISTS `user_vehicle_history_all`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `uvh_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_vehicle_id` int(11) DEFAULT NULL,
@@ -2469,45 +2738,46 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `client_id` int(11) DEFAULT NULL,
   `model_id` int(11) DEFAULT NULL,
   `vin` varchar(25) DEFAULT NULL,
+  `color` varchar(45) DEFAULT NULL,
+  `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`uvh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `user_vehicle_history_all`
 --
 
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(1, 1, 1, 3, 'N', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-14 01:02:24', '2011-10-19 21:32:15', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(2, 2, 1, 3, 'N', '2011-10-14 08:23:24', '2013-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 08:23:56', '2011-10-14 08:23:56', 1, '2011-10-14 08:23:56', '2011-10-14 22:14:01', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(3, 2, 1, 3, 'N', '2011-10-14 08:23:24', '2013-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 08:23:56', '2011-10-14 08:23:56', 1, '2011-10-14 22:14:02', '2011-10-14 22:14:02', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(4, 3, 1, 3, 'N', '2011-10-14 22:15:18', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 22:15:42', '2011-10-14 22:15:42', 1, '2011-10-14 22:15:42', '2011-10-14 22:17:05', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(5, 3, 1, 3, 'N', '2011-10-14 22:15:18', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 22:15:42', '2011-10-14 22:15:42', 1, '2011-10-14 22:17:06', '2011-10-14 22:17:06', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(6, 4, 1, 3, 'N', '2011-10-15 09:10:25', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 09:11:39', '2011-10-15 09:11:39', 1, '2011-10-15 09:11:39', '2011-10-15 09:16:21', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(7, 4, 1, 3, 'N', '2011-10-15 09:10:25', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 09:11:39', '2011-10-15 09:11:39', 1, '2011-10-15 09:16:22', '2011-10-15 09:16:22', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(8, 2, 1, 3, 'N', '2011-10-15 23:35:56', '2014-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 23:48:04', '2011-10-15 23:48:04', 1, '2011-10-15 23:48:04', '2011-10-15 23:48:09', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(9, 2, 1, 3, 'N', '2011-10-15 23:35:56', '2014-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 23:48:04', '2011-10-15 23:48:04', 1, '2011-10-15 23:48:10', '2011-10-15 23:48:10', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(10, 3, 1, 3, 'N', '2011-10-16 00:23:39', '2012-01-01 00:00:00', 'asdfg', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 00:24:18', '2011-10-16 00:24:18', 1, '2011-10-16 00:24:18', '2011-10-16 00:24:23', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(11, 3, 1, 3, 'N', '2011-10-16 00:23:39', '2012-01-01 00:00:00', 'asdfg', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 00:24:18', '2011-10-16 00:24:18', 1, '2011-10-16 00:24:24', '2011-10-16 00:24:24', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(12, 4, 1, 3, 'N', '2011-10-16 08:42:42', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:44:23', '2011-10-16 08:44:23', 1, '2011-10-16 08:44:23', '2011-10-16 08:55:20', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(13, 4, 1, 3, 'N', '2011-10-16 08:42:42', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:44:23', '2011-10-16 08:44:23', 1, '2011-10-16 08:55:21', '2011-10-16 08:55:21', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(14, 5, 1, 3, 'N', '2011-10-16 08:56:57', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:57:52', '2011-10-16 08:57:52', 1, '2011-10-16 08:57:52', '2011-10-16 09:18:25', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(15, 5, 1, 3, 'N', '2011-10-16 08:56:57', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:57:52', '2011-10-16 08:57:52', 1, '2011-10-16 09:18:27', '2011-10-16 09:18:27', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(16, 2, 1, 3, 'N', '2011-10-16 22:07:28', NULL, '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 22:07:47', '2011-10-16 22:07:47', 1, '2011-10-16 22:07:47', '2011-10-16 23:20:09', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(17, 2, 1, 3, 'N', '2011-10-16 22:07:28', NULL, '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 22:07:47', '2011-10-16 22:07:47', 1, '2011-10-16 23:20:10', '2011-10-16 23:20:10', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(18, 2, 1, 3, 'N', '2011-10-17 13:07:09', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:08:17', '2011-10-17 13:08:17', 1, '2011-10-17 13:08:17', '2011-10-17 13:08:49', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(19, 2, 1, 3, 'N', '2011-10-17 13:07:09', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:08:17', '2011-10-17 13:08:17', 1, '2011-10-17 13:08:50', '2011-10-17 13:08:50', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(20, 3, 1, 3, 'N', '2011-10-17 13:14:59', '2011-10-18 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:28', 1, '2011-10-17 13:16:28', '2011-10-17 13:16:43', 'insert', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(21, 3, 1, 3, 'N', '2011-10-17 13:14:59', '2011-10-24 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:44', 1, '2011-10-17 13:16:44', '2011-10-17 13:16:54', 'update', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(22, 3, 1, 3, 'N', '2011-10-17 13:14:59', '2011-10-24 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:44', 1, '2011-10-17 13:16:55', '2011-10-17 13:16:55', 'delete', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(23, 1, 1, 3, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:32:16', '2011-10-19 21:39:31', 'update', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(24, 1, 1, 3, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:39:32', '2011-10-19 21:40:41', 'update', 1, NULL, NULL);
-INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`) VALUES(25, 1, 1, 3, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:40:42', '3000-01-01 00:00:00', 'update', 1, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(1, 1, 1, 3, 'N', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-14 01:02:24', '2011-10-19 21:32:15', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(2, 2, 1, 3, 'N', '2011-10-14 08:23:24', '2013-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 08:23:56', '2011-10-14 08:23:56', 1, '2011-10-14 08:23:56', '2011-10-14 22:14:01', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(3, 2, 1, 3, 'N', '2011-10-14 08:23:24', '2013-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 08:23:56', '2011-10-14 08:23:56', 1, '2011-10-14 22:14:02', '2011-10-14 22:14:02', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(4, 3, 1, 3, 'N', '2011-10-14 22:15:18', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 22:15:42', '2011-10-14 22:15:42', 1, '2011-10-14 22:15:42', '2011-10-14 22:17:05', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(5, 3, 1, 3, 'N', '2011-10-14 22:15:18', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 22:15:42', '2011-10-14 22:15:42', 1, '2011-10-14 22:17:06', '2011-10-14 22:17:06', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(6, 4, 1, 3, 'N', '2011-10-15 09:10:25', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 09:11:39', '2011-10-15 09:11:39', 1, '2011-10-15 09:11:39', '2011-10-15 09:16:21', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(7, 4, 1, 3, 'N', '2011-10-15 09:10:25', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 09:11:39', '2011-10-15 09:11:39', 1, '2011-10-15 09:16:22', '2011-10-15 09:16:22', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(8, 2, 1, 3, 'N', '2011-10-15 23:35:56', '2014-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 23:48:04', '2011-10-15 23:48:04', 1, '2011-10-15 23:48:04', '2011-10-15 23:48:09', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(9, 2, 1, 3, 'N', '2011-10-15 23:35:56', '2014-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 23:48:04', '2011-10-15 23:48:04', 1, '2011-10-15 23:48:10', '2011-10-15 23:48:10', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(10, 3, 1, 3, 'N', '2011-10-16 00:23:39', '2012-01-01 00:00:00', 'asdfg', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 00:24:18', '2011-10-16 00:24:18', 1, '2011-10-16 00:24:18', '2011-10-16 00:24:23', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(11, 3, 1, 3, 'N', '2011-10-16 00:23:39', '2012-01-01 00:00:00', 'asdfg', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 00:24:18', '2011-10-16 00:24:18', 1, '2011-10-16 00:24:24', '2011-10-16 00:24:24', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(12, 4, 1, 3, 'N', '2011-10-16 08:42:42', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:44:23', '2011-10-16 08:44:23', 1, '2011-10-16 08:44:23', '2011-10-16 08:55:20', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(13, 4, 1, 3, 'N', '2011-10-16 08:42:42', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:44:23', '2011-10-16 08:44:23', 1, '2011-10-16 08:55:21', '2011-10-16 08:55:21', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(14, 5, 1, 3, 'N', '2011-10-16 08:56:57', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:57:52', '2011-10-16 08:57:52', 1, '2011-10-16 08:57:52', '2011-10-16 09:18:25', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(15, 5, 1, 3, 'N', '2011-10-16 08:56:57', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:57:52', '2011-10-16 08:57:52', 1, '2011-10-16 09:18:27', '2011-10-16 09:18:27', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(16, 2, 1, 3, 'N', '2011-10-16 22:07:28', NULL, '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 22:07:47', '2011-10-16 22:07:47', 1, '2011-10-16 22:07:47', '2011-10-16 23:20:09', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(17, 2, 1, 3, 'N', '2011-10-16 22:07:28', NULL, '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 22:07:47', '2011-10-16 22:07:47', 1, '2011-10-16 23:20:10', '2011-10-16 23:20:10', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(18, 2, 1, 3, 'N', '2011-10-17 13:07:09', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:08:17', '2011-10-17 13:08:17', 1, '2011-10-17 13:08:17', '2011-10-17 13:08:49', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(19, 2, 1, 3, 'N', '2011-10-17 13:07:09', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:08:17', '2011-10-17 13:08:17', 1, '2011-10-17 13:08:50', '2011-10-17 13:08:50', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(20, 3, 1, 3, 'N', '2011-10-17 13:14:59', '2011-10-18 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:28', 1, '2011-10-17 13:16:28', '2011-10-17 13:16:43', 'insert', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(21, 3, 1, 3, 'N', '2011-10-17 13:14:59', '2011-10-24 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:44', 1, '2011-10-17 13:16:44', '2011-10-17 13:16:54', 'update', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(22, 3, 1, 3, 'N', '2011-10-17 13:14:59', '2011-10-24 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:44', 1, '2011-10-17 13:16:55', '2011-10-17 13:16:55', 'delete', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(23, 1, 1, 3, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:32:16', '2011-10-19 21:39:31', 'update', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(24, 1, 1, 3, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:39:32', '2011-10-19 21:40:41', 'update', 1, NULL, NULL, NULL, NULL);
+INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `vehicle_type_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES(26, 2, 1, 3, 'Y', '2011-10-28 09:42:09', '2011-10-28 09:42:12', 'asfsafag', 'sfsafa', -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 09:42:42', '2011-10-28 09:42:38', -1, '2011-10-28 09:43:09', '2011-10-28 09:43:35', 'insert', -1, NULL, NULL, 'safas', 2011);
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `vehicle_movement_log`
 --
-DROP VIEW IF EXISTS `vehicle_movement_log`;
 CREATE TABLE IF NOT EXISTS `vehicle_movement_log` (
 `vml_id` int(11)
 ,`vml_type_id` int(11)
@@ -2541,7 +2811,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log` (
 -- Table structure for table `vehicle_movement_log_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_movement_log_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
   `vml_id` int(11) NOT NULL AUTO_INCREMENT,
   `vml_type_id` int(11) NOT NULL,
@@ -2574,7 +2843,7 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
   KEY `fk_last_mod_by_vmla` (`last_modified_by`),
   KEY `fk_client_vml` (`client_id`),
   KEY `fk_vml_toll_location` (`toll_location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Trackiing the vehicle movement ' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Trackiing the vehicle movement ' AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `vehicle_movement_log_all`
@@ -2582,13 +2851,20 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
 
 INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(1, 1, 36, NULL, NULL, '2011-10-27 18:43:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 18:43:27', 1, '2011-10-27 18:43:27', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 18:43:27.055', 104.127);
 INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(2, 1, 36, NULL, NULL, '2011-10-27 18:43:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 18:43:50', 1, '2011-10-27 18:43:50', 1, '31.061340', '-104.153717', NULL, '24#2011-10-27 18:43:50.275', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(3, 1, 36, NULL, NULL, '2011-10-27 20:04:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 20:04:23', 1, '2011-10-27 20:04:23', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 20:04:23.81', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(4, 1, 36, NULL, NULL, '2011-10-27 20:04:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 20:04:45', 1, '2011-10-27 20:04:45', 1, '31.061340', '-104.153717', NULL, '24#2011-10-27 20:04:45.842', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(5, 1, 36, NULL, NULL, '2011-10-27 20:08:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 20:08:34', 1, '2011-10-27 20:08:34', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 20:08:34.135', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(6, 1, 36, NULL, NULL, '2011-10-27 20:08:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 20:08:57', 1, '2011-10-27 20:08:57', 1, '31.061340', '-104.153717', NULL, '24#2011-10-27 20:08:57.943', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(7, 1, 36, NULL, NULL, '2011-10-27 22:43:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 22:43:10', 1, '2011-10-27 22:43:10', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 22:43:10.333', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(8, 1, 36, NULL, NULL, '2011-10-27 22:49:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 22:49:45', 1, '2011-10-27 22:49:45', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 22:49:45.897', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(9, 1, 36, NULL, NULL, '2011-10-28 02:29:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 02:29:36', 1, '2011-10-28 02:29:36', 1, '31.064520', '-104.263282', NULL, '24#2011-10-28 02:29:36.761', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES(10, 1, 36, NULL, NULL, '2011-10-28 02:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 02:29:58', 1, '2011-10-28 02:29:58', 1, '31.061340', '-104.153717', NULL, '24#2011-10-28 02:29:58.614', 104.127);
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `vehicle_toll_usage`
 --
-DROP VIEW IF EXISTS `vehicle_toll_usage`;
 CREATE TABLE IF NOT EXISTS `vehicle_toll_usage` (
 `vtu_id` int(11)
 ,`uvh_id` int(11)
@@ -2618,7 +2894,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage` (
 -- Table structure for table `vehicle_toll_usage_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_toll_usage_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
   `vtu_id` int(11) NOT NULL AUTO_INCREMENT,
   `uvh_id` int(11) NOT NULL,
@@ -2661,7 +2936,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
 --
 -- Stand-in structure for view `vehicle_type`
 --
-DROP VIEW IF EXISTS `vehicle_type`;
 CREATE TABLE IF NOT EXISTS `vehicle_type` (
 `vehicle_type_id` int(11)
 ,`name` varchar(100)
@@ -2687,7 +2961,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_type` (
 -- Table structure for table `vehicle_type_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_type_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_type_all` (
   `vehicle_type_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key of the table',
   `name` varchar(100) NOT NULL COMMENT 'A: Auto/sport utility Vehicle/minivan\nP: Pickup truck \nP2: Pickup truck with dual rear tires \nv: Van\nm: motorcycle \nR4: RV with 4 tires\n R6: RV with dual rear tires  ',
@@ -2726,7 +2999,6 @@ INSERT INTO `vehicle_type_all` (`vehicle_type_id`, `name`, `description`, `udf1`
 --
 -- Stand-in structure for view `vml_type`
 --
-DROP VIEW IF EXISTS `vml_type`;
 CREATE TABLE IF NOT EXISTS `vml_type` (
 `vml_type_id` int(11)
 ,`name` varchar(45)
@@ -2752,7 +3024,6 @@ CREATE TABLE IF NOT EXISTS `vml_type` (
 -- Table structure for table `vml_type_all`
 --
 
-DROP TABLE IF EXISTS `vml_type_all`;
 CREATE TABLE IF NOT EXISTS `vml_type_all` (
   `vml_type_id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -3068,7 +3339,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `user_vehicle`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_vehicle` AS select `user_vehicle_all`.`user_vehicle_id` AS `user_vehicle_id`,`user_vehicle_all`.`user_id` AS `user_id`,`user_vehicle_all`.`vehicle_type_id` AS `vehicle_type_id`,`user_vehicle_all`.`vehicle_start_date` AS `vehicle_start_date`,`user_vehicle_all`.`vehicle_end_date` AS `vehicle_end_date`,`user_vehicle_all`.`is_active` AS `is_active`,`user_vehicle_all`.`registration_no` AS `registration_no`,`user_vehicle_all`.`registered_state` AS `registered_state`,`user_vehicle_all`.`owner_type_id` AS `owner_type_id`,`user_vehicle_all`.`udf1` AS `udf1`,`user_vehicle_all`.`udf2` AS `udf2`,`user_vehicle_all`.`udf3` AS `udf3`,`user_vehicle_all`.`udf4` AS `udf4`,`user_vehicle_all`.`udf5` AS `udf5`,`user_vehicle_all`.`flag1` AS `flag1`,`user_vehicle_all`.`flag2` AS `flag2`,`user_vehicle_all`.`flag3` AS `flag3`,`user_vehicle_all`.`flag4` AS `flag4`,`user_vehicle_all`.`flag5` AS `flag5`,`user_vehicle_all`.`last_modified_by` AS `last_modified_by`,`user_vehicle_all`.`last_modified_on` AS `last_modified_on`,`user_vehicle_all`.`created_on` AS `created_on`,`user_vehicle_all`.`client_id` AS `client_id`,`user_vehicle_all`.`model_id` AS `model_id`,`user_vehicle_all`.`vin` AS `vin` from `user_vehicle_all` where (`user_vehicle_all`.`user_vehicle_id` > 0);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_vehicle` AS select `user_vehicle_all`.`user_vehicle_id` AS `user_vehicle_id`,`user_vehicle_all`.`user_id` AS `user_id`,`user_vehicle_all`.`vehicle_type_id` AS `vehicle_type_id`,`user_vehicle_all`.`vehicle_start_date` AS `vehicle_start_date`,`user_vehicle_all`.`vehicle_end_date` AS `vehicle_end_date`,`user_vehicle_all`.`is_active` AS `is_active`,`user_vehicle_all`.`registration_no` AS `registration_no`,`user_vehicle_all`.`registered_state` AS `registered_state`,`user_vehicle_all`.`owner_type_id` AS `owner_type_id`,`user_vehicle_all`.`udf1` AS `udf1`,`user_vehicle_all`.`udf2` AS `udf2`,`user_vehicle_all`.`udf3` AS `udf3`,`user_vehicle_all`.`udf4` AS `udf4`,`user_vehicle_all`.`udf5` AS `udf5`,`user_vehicle_all`.`flag1` AS `flag1`,`user_vehicle_all`.`flag2` AS `flag2`,`user_vehicle_all`.`flag3` AS `flag3`,`user_vehicle_all`.`flag4` AS `flag4`,`user_vehicle_all`.`flag5` AS `flag5`,`user_vehicle_all`.`last_modified_by` AS `last_modified_by`,`user_vehicle_all`.`last_modified_on` AS `last_modified_on`,`user_vehicle_all`.`created_on` AS `created_on`,`user_vehicle_all`.`client_id` AS `client_id`,`user_vehicle_all`.`model_id` AS `model_id`,`user_vehicle_all`.`vin` AS `vin`,`user_vehicle_all`.`color` AS `color`,`user_vehicle_all`.`manufactured_year` AS `manufactured_year` from `user_vehicle_all` where (`user_vehicle_all`.`user_vehicle_id` > 0);
 
 -- --------------------------------------------------------
 
@@ -3077,7 +3348,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `user_vehicle_history`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_vehicle_history` AS select `user_vehicle_history_all`.`uvh_id` AS `uvh_id`,`user_vehicle_history_all`.`user_vehicle_id` AS `user_vehicle_id`,`user_vehicle_history_all`.`user_id` AS `user_id`,`user_vehicle_history_all`.`vehicle_type_id` AS `vehicle_type_id`,`user_vehicle_history_all`.`is_active` AS `is_active`,`user_vehicle_history_all`.`vehicle_start_date` AS `vehicle_start_date`,`user_vehicle_history_all`.`vehicle_end_date` AS `vehicle_end_date`,`user_vehicle_history_all`.`registration_no` AS `registration_no`,`user_vehicle_history_all`.`registered_state` AS `registered_state`,`user_vehicle_history_all`.`owner_type_id` AS `owner_type_id`,`user_vehicle_history_all`.`udf1` AS `udf1`,`user_vehicle_history_all`.`udf2` AS `udf2`,`user_vehicle_history_all`.`udf3` AS `udf3`,`user_vehicle_history_all`.`udf4` AS `udf4`,`user_vehicle_history_all`.`udf5` AS `udf5`,`user_vehicle_history_all`.`flag1` AS `flag1`,`user_vehicle_history_all`.`flag2` AS `flag2`,`user_vehicle_history_all`.`flag3` AS `flag3`,`user_vehicle_history_all`.`flag4` AS `flag4`,`user_vehicle_history_all`.`flag5` AS `flag5`,`user_vehicle_history_all`.`created_on` AS `created_on`,`user_vehicle_history_all`.`last_modified_on` AS `last_modified_on`,`user_vehicle_history_all`.`last_modified_by` AS `last_modified_by`,`user_vehicle_history_all`.`start_date` AS `start_date`,`user_vehicle_history_all`.`end_date` AS `end_date`,`user_vehicle_history_all`.`action` AS `action`,`user_vehicle_history_all`.`client_id` AS `client_id`,`user_vehicle_history_all`.`model_id` AS `model_id`,`user_vehicle_history_all`.`vin` AS `vin` from `user_vehicle_history_all` where (`user_vehicle_history_all`.`uvh_id` > 0);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_vehicle_history` AS select `user_vehicle_history_all`.`uvh_id` AS `uvh_id`,`user_vehicle_history_all`.`user_vehicle_id` AS `user_vehicle_id`,`user_vehicle_history_all`.`user_id` AS `user_id`,`user_vehicle_history_all`.`vehicle_type_id` AS `vehicle_type_id`,`user_vehicle_history_all`.`is_active` AS `is_active`,`user_vehicle_history_all`.`vehicle_start_date` AS `vehicle_start_date`,`user_vehicle_history_all`.`vehicle_end_date` AS `vehicle_end_date`,`user_vehicle_history_all`.`registration_no` AS `registration_no`,`user_vehicle_history_all`.`registered_state` AS `registered_state`,`user_vehicle_history_all`.`owner_type_id` AS `owner_type_id`,`user_vehicle_history_all`.`udf1` AS `udf1`,`user_vehicle_history_all`.`udf2` AS `udf2`,`user_vehicle_history_all`.`udf3` AS `udf3`,`user_vehicle_history_all`.`udf4` AS `udf4`,`user_vehicle_history_all`.`udf5` AS `udf5`,`user_vehicle_history_all`.`flag1` AS `flag1`,`user_vehicle_history_all`.`flag2` AS `flag2`,`user_vehicle_history_all`.`flag3` AS `flag3`,`user_vehicle_history_all`.`flag4` AS `flag4`,`user_vehicle_history_all`.`flag5` AS `flag5`,`user_vehicle_history_all`.`created_on` AS `created_on`,`user_vehicle_history_all`.`last_modified_on` AS `last_modified_on`,`user_vehicle_history_all`.`last_modified_by` AS `last_modified_by`,`user_vehicle_history_all`.`start_date` AS `start_date`,`user_vehicle_history_all`.`end_date` AS `end_date`,`user_vehicle_history_all`.`action` AS `action`,`user_vehicle_history_all`.`client_id` AS `client_id`,`user_vehicle_history_all`.`model_id` AS `model_id`,`user_vehicle_history_all`.`vin` AS `vin`,`user_vehicle_history_all`.`color` AS `color`,`user_vehicle_history_all`.`manufactured_year` AS `manufactured_year` from `user_vehicle_history_all` where (`user_vehicle_history_all`.`uvh_id` > 0);
 
 -- --------------------------------------------------------
 
@@ -3374,35 +3645,3 @@ ALTER TABLE `vehicle_type_all`
 ALTER TABLE `vml_type_all`
   ADD CONSTRAINT `fk_last_mod_by_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_vmlt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
-DELIMITER $$
-
-DROP FUNCTION IF EXISTS GetInfFuture $$
-
-CREATE FUNCTION GetInfFuture() #function to get infinite future date of the record
-	RETURNS DATETIME
-BEGIN
-	RETURN '3000-01-01';
-END$$
-
-
-
-DROP FUNCTION IF EXISTS GetStartDate $$
-
-CREATE FUNCTION GetStartDate() #function to get start date of the record
-	RETURNS DATETIME
-BEGIN
-	RETURN sysdate();
-END$$
-
-
-DROP FUNCTION IF EXISTS GetEndDate$$
-
-CREATE FUNCTION GetEndDate() #function to get End date of the record
-	RETURNS DATETIME
-BEGIN
-	Return sysdate()- Interval 1 second ;
-END$$
-
-
-DELIMITER ;
-
