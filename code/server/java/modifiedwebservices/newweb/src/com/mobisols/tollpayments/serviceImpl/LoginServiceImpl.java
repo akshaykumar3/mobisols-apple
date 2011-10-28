@@ -28,13 +28,13 @@ public class LoginServiceImpl implements LoginService {
 		User u=userDao.getUser(r.getUserName());
 		if(u==null)
 		{
+			status = "fail";
 			response.getResponse().put("userExists", User.USER_NOT_EXISTS);
 			return jsonConverter.getJSON(request, status,response);
 		}
 		else
 		{
 			response.getResponse().put("userExists",User.USER_EXISTS);
-			status = "fail";
 			if(u.getPassword().equals(r.getPassword()))
 			{
 				response.getResponse().put("passwordCorrect", PASSWORD_CORRECT_TRUE);
