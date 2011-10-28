@@ -4,12 +4,14 @@ import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.UserBalanceDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
+import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
+import com.mobisols.tollpayments.myutilsImpl.MyValidationUtil;
 import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.response.post.RegistrationResponse;
 import com.mobisols.tollpayments.service.RegistrationService;
@@ -33,6 +35,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 	{
 		RegistrationResponse response=new RegistrationResponse();
 		String status="success";
+		if(!MyValidationUtil.isValidEmail(r.getUserName()))
+		{
+			response.getNotifications().add("Inavlid email");
+			status = "fail";
+			return jsonConverter.getJSON(request, status, response);
+		}
 		User u=userDao.getUser(r.getUserName());
 		if(u!=null)
 		{
@@ -64,10 +72,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 			}
 			
 			u=new User();
-			u.setClientId(1);
+			u.setClientId(Client.PRESENT_CLIENT);
 			u.setContactNo(null);
 			u.setCreatedOn(myUtilDate.getCurrentTimeStamp());
-			u.setIsActive(userDao.USER_INCOMPLETE);
+			u.setIsActive(UserDao.USER_INCOMPLETE);
 			u.setLastLoginTime(myUtilDate.getCurrentTimeStamp());
 			u.setLastModifiedBy(-1);
 			u.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());

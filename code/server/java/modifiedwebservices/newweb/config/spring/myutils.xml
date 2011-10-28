@@ -14,8 +14,6 @@
 	</bean>
 	<bean id="myutils.tollpayments.myUtilContext" class="com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl">
 	</bean>
-	<bean id="myutils.tollpayments.myUtilCreditCard" class="com.mobisols.tollpayments.myutilsImpl.MyUtilCreditCardImpl">
-	</bean>
 	<bean id="myutils.tollpayments.securityCheckUtil" class="com.mobisols.tollpayments.myutilsImpl.SecurityCheckUtilImpl">
 	</bean>
 	<bean id="myutils.tollpayments.myUtilErrorHandler" class="com.mobisols.tollpayments.myutilsImpl.MyUtilErrorHandlerImpl">
