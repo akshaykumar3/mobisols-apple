@@ -90,8 +90,8 @@ gtp.tabs.HomeScreenView = {
 								if( resobj.status == 'success' ) {
 									//cl.setValue(resobj.response.city + resobj.response.state);
 									to.setValue(resobj.response.tollOperator);
-									at.setValue(resobj.response.averagePrice);
-									pt.setValue(resobj.response.tollPrice);
+									at.setValue(resobj.response.costPrice);
+									pt.setValue(resobj.response.sellingPrice - resobj.response.costPrice);
 								}
 						      	gtp.showNotifications(resobj.response.notifications);
 						      	gtp.parse(resobj.response.commands);
@@ -172,6 +172,7 @@ gtp.tabs.HomeScreenView = {
 						});
 						return true;
 					}
+					return true;
 				}
 			}
 		}]

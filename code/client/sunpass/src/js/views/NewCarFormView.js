@@ -94,14 +94,17 @@ gtp.tabs.NewCarFormView = {
 										color: acfd.color
 									},'Cars'));
 								}
+								gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
-							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						},
 						failure: function(response){
 							gtp.tabpanel.setLoading(false);
-							Ext.Msg.alert(gtp.dict.newcar_failure);
+							if(response.status == 500)
+							Ext.Msg.alert('Server Error',gtp.dict.newcar_failure);
+							else
+								Ext.Msg.alert('Server Error',gtp.dict.newcar_failure);
 							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						}
 					});
