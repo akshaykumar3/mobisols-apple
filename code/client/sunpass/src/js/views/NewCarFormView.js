@@ -180,6 +180,7 @@ gtp.tabs.NewCarFormView = {
 		},
 		items: [{
 			xtype: 'selectfield',
+			label: 'Ownership',
 			id: 'ownerType',
 			name: 'ownerType',
 			options: [{

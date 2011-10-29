@@ -115,7 +115,6 @@ Ext.regApplication({
 		});
     },
     parse: function(commands) {
-    	console.log('parser is invoked');
     	for(var i=0 ; i<commands.length; i++) {
         	Ext.dispatch({
         		controller: 'command',

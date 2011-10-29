@@ -129,6 +129,7 @@ gtp.tabs.CarDetailView = {
 		},
 		items: [{
 			xtype: 'selectfield',
+			label: 'Ownership',
 			id: 'ownerType',
 			name: 'ownerType',
 			options: [{
