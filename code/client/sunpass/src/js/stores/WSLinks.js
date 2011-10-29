@@ -2,55 +2,55 @@
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/ChangePassword',
+		url: 'http://localhost:6001/newweb/services/ChangePassword',
 		service: 'changepassword'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/ClientConfiguration',
+		url: 'http://localhost:6001/newweb/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/UserRegistration',
+		url: 'http://localhost:6001/newweb/services/UserRegistration',
 		service: 'regnewuser'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/DeviceRegistration',
+		url: 'http://localhost:6001/newweb/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/Login',
+		url: 'http://localhost:6001/newweb/services/Login',
 		service: 'logging'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/AccountDetails',
+		url: 'http://localhost:6001/newweb/services/AccountDetails',
 		service: 'acdetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/HeartBeat',
+		url: 'http://localhost:6001/newweb/services/HeartBeat',
 		service: 'heartbeat'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/VehicleDetails',
+		url: 'http://localhost:6001/newweb/services/VehicleDetails',
 		service: 'addcar'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/VehicleDetails',
+		url: 'http://localhost:6001/newweb/services/VehicleDetails',
 		service: 'deletevehicle'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/TollDetailsList',
+		url: 'http://localhost:6001/newweb/services/TollDetailsList',
 		service: 'tolldetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/VehicleTypeList',
+		url: 'http://localhost:6001/newweb/services/VehicleTypeList',
 		service: 'vehicletypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/CcTypeList',
+		url: 'http://localhost:6001/newweb/services/CcTypeList',
 		service: 'cctypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/OwnerTypeList',
+		url: 'http://localhost:6001/newweb/services/OwnerTypeList',
 		service: 'ownertypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/ServicePlansList',
+		url: 'http://localhost:6001/newweb/services/ServicePlansList',
 		service: 'serviceplans'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/NearestToll',
+		url: 'http://localhost:6001/newweb/services/NearestToll',
 		service: 'nearesttoll'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/PaymentDetails',
+		url: 'http://localhost:6001/newweb/services/PaymentDetails',
 		service: 'paymentdetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/Activate',
+		url: 'http://localhost:6001/newweb/services/Activate',
 		service: 'activate'
 	}] 
 });

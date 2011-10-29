@@ -70,7 +70,7 @@ gtp.tabs.NewCarFormView = {
 								make: acfd.make,
 								model: acfd.model,
 								color: acfd.color,
-								manufacturedYear: acfd.manufacture_year
+								manufacturedYear: acfd.year
 							})
 						},
 						success: function(response){
@@ -88,10 +88,9 @@ gtp.tabs.NewCarFormView = {
 										endDate: acfd.endDate,
 										vehicleId: resobj.response.vehicleId,
 										ownerType: acfd.ownerType,
-										vin: null,
 										make: acfd.make,
 										model: acfd.model,
-										year: acfd.manufacture_year,
+										year: acfd.year,
 										color: acfd.color
 									},'Cars'));
 								}
@@ -138,6 +137,7 @@ gtp.tabs.NewCarFormView = {
 			xtype: 'textfield',
 			label: 'Reg',
 			required: true,
+			useClearIcon: true,
 			id: 'rg',
 			name: 'rg'
 		},{
@@ -155,21 +155,25 @@ gtp.tabs.NewCarFormView = {
 			xtype: 'textfield',
 			id: 'make',
 			name: 'make',
+			useClearIcon: true,
 			label: 'Make'
 		},{
 			xtype: 'textfield',
 			id: 'model',
 			name: 'model',
+			useClearIcon: true,
 			label: 'Model'
 		},{
 			xtype: 'textfield',
-			id: 'manufacture_year',
+			id: 'year',
 			name: 'year',
+			useClearIcon: true,
 			label: 'year'	
 		},{
 			xtype: 'textfield',
 			id: 'color',
 			name: 'color',
+			useClearIcon: true,
 			label: 'Color'
 		}]
 	},{
