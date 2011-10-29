@@ -112,7 +112,7 @@ gtp.tabs.CarDetailView = {
 			label: 'Model'
 		},{
 			xtype: 'textfield',
-			id: 'manufacture_year',
+			id: 'year',
 			name: 'year',
 			label: 'year'	
 		},{
