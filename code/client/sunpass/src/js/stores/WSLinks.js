@@ -5,6 +5,9 @@ var webServices=new Ext.data.Store({
 		url: 'http://localhost:6001/newweb/services/ChangePassword',
 		service: 'changepassword'
 	},{
+		url: 'http://localhost:6001/newweb/services/MakeAndModel',
+		service: 'makeandmodel'
+	},{
 		url: 'http://localhost:6001/newweb/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{

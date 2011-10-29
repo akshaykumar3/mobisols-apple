@@ -138,5 +138,33 @@ gtp.controllers.fetch = Ext.regController("get",{
 				gtp.log('Fetching Owner Type list failed with status'+response.status);
 			}
 		});
+	},
+	
+	makeandmodels: function() {
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','makeandmodel')).get('url'),
+			success: function(response) {
+				var resobj = Ext.decode(response.responseText);
+				if(resobj.status == 'success') {
+					gtp.vars.fetchedMakeAndModels = true;
+					var mkl = resobj.response.make;
+					var mklfid = Ext.getCmp('addcar').down('#make');
+					if(mklfid)
+					for(var i=0; i<mkl.length; i++) {
+						mklfid.setOptions([{
+							text: mkl[i].name,
+							value: mkl[i].name
+						}],true);
+					}
+				}
+		      	gtp.showNotifications(resobj.response.notifications);
+		      	gtp.parse(resobj.response.commands);
+			},
+			failure: function(response) {
+				gtp.vars.fetchedMakeAndModels = false;
+				console.log('Fetching Owner Type List failed with status'+response.status);
+				gtp.log('Fetching Owner Type list failed with status'+response.status);
+			}
+		});
 	}
 });

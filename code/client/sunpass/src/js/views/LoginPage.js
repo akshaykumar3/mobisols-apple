@@ -38,7 +38,7 @@ gtp.views.LoginPage = {
 				else {
 					gtp.views.Viewport.setLoading({
 						msg: 'Signing in..'
-					});
+					},true);
 					var un = Ext.getCmp('lpemailid').getValue();
 					var pwd = Ext.getCmp('lppassword').getValue();
 					Ext.Ajax.request({
