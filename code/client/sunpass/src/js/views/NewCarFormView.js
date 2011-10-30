@@ -67,10 +67,10 @@ gtp.tabs.NewCarFormView = {
 								ownerType: acfd.ownerType, 
 								vehicleId: null,
 								vin: null,
-								make: acfd.make,
-								model: acfd.model,
-								color: acfd.color,
-								manufacturedYear: acfd.year
+								make: (acfd.make == '' || acfd.make == null) ? null : acfd.make,
+								model: (acfd.model == '' || acfd.model == null) ? null : acfd.model,
+								color: (acfd.color == '' || acfd.color == null) ? null : acfd.color,
+								manufacturedYear: (acfd.year == '' || acfd.year == null) ? null : acfd.year
 							})
 						},
 						success: function(response){

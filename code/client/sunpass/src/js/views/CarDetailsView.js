@@ -42,13 +42,13 @@ gtp.tabs.CarDetailView = {
 								type: updateCar.get('type'),
 								isActive: updateCar.get('isActive'),
 								startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
-							    endDate: Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
+							    endDate: (Ext.getCmp('dpto').getValue() == null) ? null : Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
 								ownerType: updateCar.get('ownerType'), 
 								vehicleId: updateCar.get('vehicleId'),
-								make: updateCar.get('make'),
-								model: updateCar.get('model'),
-								manufacturedYear: updateCar.get('year'),
-								color: updateCar.get('color'),
+								make: (updateCar.get('make') == '' || updateCar.get('make') == null) ? null : updateCar.get('make'),
+								model: (updateCar.get('model') == '' || updateCar.get('model') == null) ? null : updateCar.get('model'),
+								manufacturedYear: (updateCar.get('year') == '' || updateCar.get('year') == null) ? null : updateCar.get('year'),
+								color: (updateCar.get('color') == '' || updateCar.get('color') == null) ? null : updateCar.get('color'),
 								vin: null
 							})
 						},

@@ -247,5 +247,14 @@ gtp.tabs.HomeScreenView = {
 			id: 'pdtoll',
 			label: 'service fee'
 		}]
-	}]
+	}],
+	listeners: {
+		beforeactivate: function(dis) {
+			/*if(!gtp.isCarValid || !gtp.arePaymentDetailsValid) {
+				var td = dis.down('#tfd');
+				if(td.getValue() == 1) 
+					td.toggle();
+			}*/
+		}
+	}
 };

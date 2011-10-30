@@ -1,59 +1,59 @@
-// Store for demoserver1service urls.
+// Store for tstserverservice urls.
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/ChangePassword',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/ChangePassword',
 		service: 'changepassword'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/MakeAndModel',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/MakeAndModel',
 		service: 'makeandmodel'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/ClientConfiguration',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/ClientConfiguration',
 		service: 'clientconfig'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/UserRegistration',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/UserRegistration',
 		service: 'regnewuser'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/DeviceRegistration',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/DeviceRegistration',
 		service: 'registerdevice'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/Login',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/Login',
 		service: 'logging'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/AccountDetails',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/AccountDetails',
 		service: 'acdetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/HeartBeat',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/HeartBeat',
 		service: 'heartbeat'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/VehicleDetails',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/VehicleDetails',
 		service: 'addcar'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/VehicleDetails',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/VehicleDetails',
 		service: 'deletevehicle'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/TollDetailsList',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/TollDetailsList',
 		service: 'tolldetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/VehicleTypeList',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/VehicleTypeList',
 		service: 'vehicletypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/CcTypeList',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/CcTypeList',
 		service: 'cctypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/OwnerTypeList',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/OwnerTypeList',
 		service: 'ownertypes'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/ServicePlansList',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/ServicePlansList',
 		service: 'serviceplans'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/NearestToll',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/NearestToll',
 		service: 'nearesttoll'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/PaymentDetails',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/PaymentDetails',
 		service: 'paymentdetails'
 	},{
-		url: 'http://mbtest.dyndns.dk:6004/mtpdev/services/Activate',
+		url: 'http://mbtest.dyndns.dk:6004/tstserver/services/Activate',
 		service: 'activate'
 	}] 
 });
