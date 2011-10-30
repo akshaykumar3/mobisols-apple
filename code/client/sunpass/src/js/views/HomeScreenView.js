@@ -54,125 +54,167 @@ gtp.tabs.HomeScreenView = {
 	items: [{
 		xtype: 'fieldset',
 		items: [{
-			xtype: 'togglefield',
+			xtype: 'button',
 			id: 'tfd',
-			animationDuration: 200,
-			name: 'enable',
-			label: 'Enable',
-			listeners: {
-				change: function(slider, thumb, newValue, oldValue) {
+			text: 'Activate',
+			ui: 'confirm',
+			handler: function(dis, ev) {
+
+				var homeform = Ext.getCmp('home');
+				var cl = homeform.down('#curloc');
+				var to = homeform.down('#operator');
+				var at = homeform.down('#avgtoll');
+				var pt = homeform.down('#pdtoll');
+				if(dis.getText() == 'Activate') {
+					dis.setText('Deactivate');
+					dis.getEl().removeCls('x-button-confirm');
+					dis.getEl().addCls('x-button-decline');
+					gtp.tabpanel.setLoading({
+						msg: 'Activating..'
+					},true);
+					gtp.isAppEnabled=1;
+					var clat, clong;
+					clat = gtp.getGeoLatitude();
+					clong = gtp.getGeoLongitude();
 					
-					var homeform = Ext.getCmp('home');
-					var cl = homeform.down('#curloc');
-					var to = homeform.down('#operator');
-					var at = homeform.down('#avgtoll');
-					var pt = homeform.down('#pdtoll');
-					if(newValue == 1 && oldValue == 0) {
+					Ext.Ajax.request({
+						url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
+						method: 'GET',
+						params: {
+							json: Ext.encode({
+								latitude: clat,
+								longitude: clong
+							})
+						},
+						success: function(response){
+							console.log('Nearest Toll Webservice request fetched');
+							console.log(response.responseText);
+							var resobj=Ext.decode(response.responseText);
+							if( resobj.status == 'success' ) {
+								//cl.setValue(resobj.response.city + resobj.response.state);
+								to.setValue(resobj.response.tollOperator);
+								at.setValue(resobj.response.costPrice);
+								pt.setValue(resobj.response.sellingPrice - resobj.response.costPrice);
+							}
+					      	gtp.showNotifications(resobj.response.notifications);
+					      	gtp.parse(resobj.response.commands);
+						},
+						failure: function(response){
+							console.log('Nearest toll failure with status '+response.status);
+							gtp.log('Nearest toll failure with status '+response.status);
+						}
+					});
 
-						gtp.isAppEnabled=1;
-						var clat, clong;
-						clat = gtp.getGeoLatitude();
-						clong = gtp.getGeoLongitude();
-						
-						Ext.Ajax.request({
-							url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
-							method: 'GET',
-							params: {
-								json: Ext.encode({
-									latitude: clat,
-									longitude: clong
-								})
-							},
-							success: function(response){
-								console.log('Nearest Toll Webservice request fetched');
-								console.log(response.responseText);
-								var resobj=Ext.decode(response.responseText);
-								if( resobj.status == 'success' ) {
-									//cl.setValue(resobj.response.city + resobj.response.state);
-									to.setValue(resobj.response.tollOperator);
-									at.setValue(resobj.response.costPrice);
-									pt.setValue(resobj.response.sellingPrice - resobj.response.costPrice);
+					if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
+						//setTimeout("requestHeartBeat()",1000);
+						// This invokes client side heartbeat.
+						//gtp.clientsidehb();
+						message='Settings are saved';
+						Ext.Msg.alert('Activated',message);
+					}
+					else {
+						if(!gtp.isCarValid) {
+							Ext.Msg.alert('Please add a vehicle');
+							gtp.tabpanel.setActiveItem('carsviewport');
+							gtp.tabpanel.getActiveItem().setActiveItem('addcar');
+						}
+						else if(!gtp.arePaymentDetailsValid) {
+							Ext.Msg.alert('Please fill payment details');
+							gtp.tabpanel.setActiveItem('basicform');
+							gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+						}
+					}
+					Ext.Ajax.request({
+						url: webServices.getAt(webServices.findExact('service','activate')).get('url'),
+						method: 'POST',
+						params: {
+							json: Ext.encode({
+								active: 'Y',
+								serviceId: '1'
+							})
+						},
+						success: function(response) {
+							gtp.tabpanel.setLoading(false);
+							gtp.log('Application is active');
+							console.log(response.responseText);
+							var resobj = Ext.decode(response.responseText);
+							if(resobj.status == 'success' && resobj.response.active == 'Y'){
+								if(Ext.is.iPhone) {
+                                    var actp = window.plugins.ActivatePlugin;
+                                    actp.activate();
+                                    console.log('activate plugin is called');
 								}
-						      	gtp.showNotifications(resobj.response.notifications);
-						      	gtp.parse(resobj.response.commands);
-							},
-							failure: function(response){
-								console.log('Nearest toll failure with status '+response.status);
-								gtp.log('Nearest toll failure with status '+response.status);
-							}
-						});
-
-						if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
-							//setTimeout("requestHeartBeat()",1000);
-							// This invokes client side heartbeat.
-							//gtp.clientsidehb();
-							message='Settings are saved';
-							Ext.Msg.alert('Activated',message);
-							gtp.tabpanel.getActiveItem().down('#tfd').disable();
-						}
-						else {
-							if(!gtp.isCarValid) {
-								Ext.Msg.alert('Please add a vehicle');
-								gtp.tabpanel.setActiveItem('carsviewport');
-								gtp.tabpanel.getActiveItem().setActiveItem('addcar');
-							}
-							else if(!gtp.arePaymentDetailsValid) {
-								Ext.Msg.alert('Please fill payment details');
-								gtp.tabpanel.setActiveItem('basicform');
-								gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
-							}
-						}
-					}
-					else if(newValue == 0 && oldValue ==1) {
-						gtp.isAppEnabled=0;
-						cl.setValue("");
-						to.setValue("");
-						at.setValue("");
-						pt.setValue("");
-						if(Ext.is.iPhone) {
-	                        var actp = window.plugins.ActivatePlugin;
-	                        actp.deactivate();
-						}
-						else if(Ext.is.Android) {
-							window.plugins.ActivatePlugin.deactivate(function(){},function(){});
-						}
-					}
-				},
-				beforechange: function(slider, thumb, newValue, oldValue) {
-					if(newValue == 1 && oldValue ==0) {
-						Ext.Ajax.request({
-							url: webServices.getAt(webServices.findExact('service','activate')).get('url'),
-							method: 'POST',
-							params: {
-								json: Ext.encode({
-									active: 'Y',
-									serviceId: '1'
-								})
-							},
-							success: function(response) {
-								gtp.log('Application is active');
-								console.log(response.responseText);
-								var resobj = Ext.decode(response.responseText);
-								if(resobj.status == 'success' && resobj.response.active == 'Y'){
-									if(Ext.is.iPhone) {
-	                                    var actp = window.plugins.ActivatePlugin;
-	                                    actp.activate();
-	                                    console.log('activate plugin is called');
-									}
-									else if(Ext.is.Android) {
-										window.plugins.ActivatePlugin.activate(function(){},function(){});
-									}
+								else if(Ext.is.Android) {
+									window.plugins.ActivatePlugin.activate(function(){},function(){});
 								}
-						      	gtp.showNotifications(resobj.response.notifications);
-						      	gtp.parse(resobj.response.commands);
-							},
-							failure: function(res) {
-								gtp.log(res.status+' Error, Activating the application');
 							}
-						});
-						return true;
+							else if(resobj.status == 'fail') {
+								dis.setText('Activate');
+								dis.getEl().removeCls('x-button-decline');
+								dis.getEl().addCls('x-button-confirm');
+							}
+					      	gtp.showNotifications(resobj.response.notifications);
+					      	gtp.parse(resobj.response.commands);
+						},
+						failure: function(res) {
+							gtp.tabpanel.setLoading(false);
+							gtp.log(res.status+' Error, Activating the application');
+							Ext.Msg.alert('Server Error', 'Try activating later');
+							dis.setText('Activate');
+							dis.getEl().removeCls('x-button-decline');
+							dis.getEl().addCls('x-button-confirm');
+						}
+					});
+				}
+				else if(dis.getText() == 'Deactivate') {
+					dis.setText('Activate');
+					dis.getEl().removeCls('x-button-decline');
+					dis.getEl().addCls('x-button-confirm');
+					gtp.isAppEnabled=0;
+					cl.setValue("");
+					to.setValue("");
+					at.setValue("");
+					pt.setValue("");
+					if(Ext.is.iPhone) {
+                        var actp = window.plugins.ActivatePlugin;
+                        actp.deactivate();
 					}
-					return true;
+					else if(Ext.is.Android) {
+						window.plugins.ActivatePlugin.deactivate(function(){},function(){});
+					}
+					Ext.Ajax.request({
+						url: webServices.getAt(webServices.findExact('service','activate')).get('url'),
+						method: 'POST',
+						params: {
+							json: Ext.encode({
+								active: 'N',
+								serviceId: '1'
+							})
+						},
+						success: function(response) {
+							gtp.log('Application is inactive');
+							console.log(response.responseText);
+							var resobj = Ext.decode(response.responseText);
+							if(resobj.status == 'success' && resobj.response.active == 'N'){
+								if(Ext.is.iPhone) {
+                                    var actp = window.plugins.ActivatePlugin;
+                                    actp.deactivate();
+                                    console.log('activate plugin is called');
+								}
+								else if(Ext.is.Android) {
+									window.plugins.ActivatePlugin.deactivate(function(){},function(){});
+								}
+							}
+							else if(resobj.status == 'fail') {
+								// deal later.
+							}
+					      	gtp.showNotifications(resobj.response.notifications);
+					      	gtp.parse(resobj.response.commands);
+						},
+						failure: function(res) {
+							gtp.log(res.status+' Error, Activating the application');
+						}
+					});
 				}
 			}
 		}]
@@ -205,14 +247,5 @@ gtp.tabs.HomeScreenView = {
 			id: 'pdtoll',
 			label: 'service fee'
 		}]
-	}],
-	listeners: {
-		beforeactivate: function(dis) {
-			if(!gtp.isCarValid || !gtp.arePaymentDetailsValid) {
-				var td = dis.down('#tfd');
-				if(td.getValue() == 1) 
-					td.toggle();
-			}
-		}
-	}
+	}]
 };

@@ -29,7 +29,7 @@ gtp.controllers = Ext.regController("load",{
 			fullscreen: true,
 			ui: 'light',
 			cardSwitchAnimation: {
-				type: 'fade',
+				type: 'slide',
 				cover: true
 			},
 			items: [

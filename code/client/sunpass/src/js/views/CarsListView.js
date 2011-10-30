@@ -26,7 +26,7 @@ gtp.tabs.CarsListView = {
 	items: [{
 		xtype: 'list',
 		id: 'listid',
-		fullscreen: true,
+		fullscreen: true,	
 		store: carsList,
 		singleSelect: true,
 		scroll: 'vertical',
@@ -43,8 +43,6 @@ gtp.tabs.CarsListView = {
 				var record=co.getRecord(co.getNode(index));
 				
 				gtp.tabpanel.getActiveItem().down('#details').load(record);				
-				var homeform = Ext.getCmp('home');
-				if(gtp.isAppEnabled && record.get('reg') == homeform.down('#activecar').getValue());
 				gtp.tabpanel.getActiveItem().setActiveItem('details');
 			},
 			itemswipe: function(co,index,item,e) {
