@@ -97,8 +97,17 @@ gtp.views.LoginPage = {
 									else if(Ext.is.Android) {
 										window.plugins.DeviceDetailsPlugin.setValue('username',un,function(){},function(){});
 										window.plugins.DeviceDetailsPlugin.setValue('password',pwd,function(){},function(){});
-										
-		                                // if user app is enabled. invoke heartbeat plugin upon launch.
+
+										if(res.isActive == 'Y') {
+											window.plugins.ActivatePlugin.activate();
+										}
+									}
+									
+									if(res.isActive == 'Y') {
+	                                    var but = Ext.getCmp('home').down('#tfd');
+	                                    but.setText('Deactivate');
+	                                    but.getEl().removeCls('x-button-confirm');
+	                                    but.getEl().addCls('x-button-decline');
 									}
 	                                																		
 								}

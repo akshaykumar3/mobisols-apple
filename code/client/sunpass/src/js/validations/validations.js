@@ -49,10 +49,10 @@ gtp.dateValidity = function(start, end) {
 };
 
 gtp.expiryDateValidity = function(expMonth, expYear) {
-	if(expYear > gtp.today.getFullYear())
+	if(expYear > gtp.today().getFullYear())
 		return true;
-	else if(expYear == gtp.today.getFullYear()) {
-		if(expMonth > gtp.today.getMonth()) 
+	else if(expYear == gtp.today().getFullYear()) {
+		if(expMonth > gtp.today().getMonth()) 
 			return true;
 		else
 			return false;
