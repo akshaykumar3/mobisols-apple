@@ -1,4 +1,4 @@
-gtp.tabs.ChangePwdView = {
+gtp.views.ChangePwdView = {
 	xtype: 'panel',
 	layout: 'vbox',
 	id: 'changepwd_view',

@@ -1,4 +1,4 @@
-gtp.tabs.CarsListView = {
+gtp.views.CarsListView = {
 	xtype: 'panel',
 	id: 'mycars',
 	cls: 'card2',
@@ -8,6 +8,12 @@ gtp.tabs.CarsListView = {
 		dock: 'top',
 		title: 'My Cars',
 		items: [{
+			text: 'home',
+			ui: 'back',
+			handler: function(dis) {
+				gtp.tabpanel.getActiveItem().setActiveItem('home');
+			}
+		},{
 			xtype: 'spacer'
 		},{
 			iconMask: true,

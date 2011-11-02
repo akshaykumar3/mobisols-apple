@@ -54,11 +54,17 @@ gtp.FetchUserData = function(options) {
 		  	var pay_details=res.response.paymentDetails;
 		  	var vehicle_details=res.response.vehicleDetails;
 		  	var paidtoll_details=res.response.tollPayments;
+		  	var add_vehicle_text = '';
+		  	var pay_details_text = '';
 	      	
-		  	if(vehicle_details) {
+		  	if(vehicle_details && vehicle_details.length) {
 		  		gtp.isCarValid = true;
 		      	for(var i=0;i<vehicle_details.length;i++)
 		      	{
+		      		add_vehicle_text += vehicle_details[i].registration;
+		      		if((i+1)!=vehicle_details.length) {
+			      		add_vehicle_text += ", ";
+		      		}
 		      		carsList.insert(0,Ext.ModelMgr.create({
 						state: vehicle_details[i].state,
 						reg: vehicle_details[i].registration,
@@ -74,12 +80,15 @@ gtp.FetchUserData = function(options) {
 						year: vehicle_details[i].manufacturedYear,
 					},'Cars'));
 				}
+		      	console.log('av button text '+add_vehicle_text);
+		      	gtp.tabpanel.getComponent('mviewport').down('#home').down('#addvehicle').setText(add_vehicle_text);
 		  	}
 	      	
-	      	
 	      	if(pay_details) {
-	      		if(pay_details.cardNumber && pay_details.expMonth) 
+	      		if(pay_details.cardNumber && pay_details.expMonth) {
 	      			gtp.arePaymentDetailsValid = true;
+	      			pay_details_text += pay_details.cardNumber+"..";
+	      		} 
 		      	var userSettings = Ext.ModelMgr.create({
 		      		userid: options.loginDetails.username,
 		      		ccnumber: pay_details.cardNumber,
@@ -93,21 +102,23 @@ gtp.FetchUserData = function(options) {
 		      		city: pay_details.city,
 		      		zipcode: pay_details.zip
 		      	},'Settings');
-		      	gtp.tabpanel.getComponent('basicform').down('#settingsform').load(userSettings);
+		      	gtp.tabpanel.getComponent('mviewport').down('#settingsform').load(userSettings);
+		      	gtp.tabpanel.getComponent('mviewport').down('#home').down('#m_paydetails').setText(pay_details_text);
 	      	}
 	      	
-	      	if(paidtoll_details)
-	      	for(i=0;i<paidtoll_details.length;i++)
-	      	{
-	      		//12-6-2011 21:16:12
-	      		console.log(Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'));
-		      	paidTolls.insert(0,Ext.ModelMgr.create({
-					date: Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'),
-					amount: paidtoll_details[i].price,
-					location: paidtoll_details[i].tollDetails.tollOperator +' '+ paidtoll_details[i].tollDetails.city,
-					reg: paidtoll_details[i].registration
-				},'PaidTolls'));
-			}
+	      	if(paidtoll_details) {
+		      	for(i=0;i<paidtoll_details.length;i++)
+		      	{
+		      		//12-6-2011 21:16:12
+		      		console.log(Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'));
+			      	paidTolls.insert(0,Ext.ModelMgr.create({
+						date: Date.parseDate(paidtoll_details[i].timeStamp,'j-n-Y G:i:s').format('Y-m-d'),
+						amount: paidtoll_details[i].price,
+						location: paidtoll_details[i].tollDetails.tollOperator +' '+ paidtoll_details[i].tollDetails.city,
+						reg: paidtoll_details[i].registration
+					},'PaidTolls'));
+				}
+	      	}
       	}
       	gtp.showNotifications(res.response.notifications);
       	gtp.parse(res.response.commands);

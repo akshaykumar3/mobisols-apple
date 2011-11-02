@@ -1,4 +1,4 @@
-gtp.views.HomeScreenView = {
+gtp.views.MainView = {
 	title: 'Home',
 	xtype: 'formpanel',
 	id: 'home',
@@ -51,32 +51,35 @@ gtp.views.HomeScreenView = {
 	}],
 	items: [{
 		xtype: 'fieldset',
-		id: 'curlocservices',
-		title: 'Nearest Toll',
+		title: 'Pay Tolls For',
 		items: [{
-			xtype: 'textfield',
-			name: 'currentlocation',
-			id: 'curloc',
-			label: 'Location',
-			disabled: true
-		},{
-			xtype: 'textfield',
-			name: 'tolloperator',
-			disabled: true,
-			id: 'operator',
-			label: 'toll operator'
-		},{
-			xtype: 'textfield',
-			name: 'avgtoll',
-			disabled: true,
-			id: 'avgtoll',
-			label: 'toll price'
-		},{
-			xtype: 'textfield',
-			name: 'tollperday',
-			disabled: true,
-			id: 'pdtoll',
-			label: 'service fee'
+			xtype: 'button',
+			text: 'Add Vehicle',
+			id: 'addvehicle',
+			handler: function(dis, ev) {
+				if(dis.getText() == 'Add Vehicle') {
+					gtp.tabpanel.getActiveItem().setActiveItem('addcar');
+				}
+				else {
+					gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+				}
+			}
+		}]
+	},{
+		xtype: 'fieldset',
+		title: 'Using',
+		items: [{
+			xtype: 'button',
+			text: 'Payment Details',
+			id: 'm_paydetails',
+			handler: function(dis, eve) {
+				if(dis.getText() == 'Payment Details') {
+					gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+				} 
+				else {
+					gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+				}
+			}
 		}]
 	},{
 		xtype: 'fieldset',
@@ -88,10 +91,10 @@ gtp.views.HomeScreenView = {
 			handler: function(dis, ev) {
 
 				var homeform = Ext.getCmp('home');
-				var cl = homeform.down('#curloc');
+				/*var cl = homeform.down('#curloc');
 				var to = homeform.down('#operator');
 				var at = homeform.down('#avgtoll');
-				var pt = homeform.down('#pdtoll');
+				var pt = homeform.down('#pdtoll');*/
 				if(dis.getText() == 'Activate') {
 					dis.setText('Deactivate');
 					dis.getEl().removeCls('x-button-confirm');
@@ -104,7 +107,7 @@ gtp.views.HomeScreenView = {
 					clat = gtp.getGeoLatitude();
 					clong = gtp.getGeoLongitude();
 					
-					Ext.Ajax.request({
+					/*Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
 						method: 'GET',
 						params: {
@@ -130,7 +133,7 @@ gtp.views.HomeScreenView = {
 							console.log('Nearest toll failure with status '+response.status);
 							gtp.log('Nearest toll failure with status '+response.status);
 						}
-					});
+					});*/
 
 					if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
 						//setTimeout("requestHeartBeat()",1000);
@@ -142,12 +145,10 @@ gtp.views.HomeScreenView = {
 					else {
 						if(!gtp.isCarValid) {
 							Ext.Msg.alert('Please add a vehicle');
-							gtp.tabpanel.setActiveItem('carsviewport');
 							gtp.tabpanel.getActiveItem().setActiveItem('addcar');
 						}
 						else if(!gtp.arePaymentDetailsValid) {
 							Ext.Msg.alert('Please fill payment details');
-							gtp.tabpanel.setActiveItem('basicform');
 							gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
 						}
 					}
@@ -198,10 +199,10 @@ gtp.views.HomeScreenView = {
 					dis.getEl().removeCls('x-button-decline');
 					dis.getEl().addCls('x-button-confirm');
 					gtp.isAppEnabled=0;
-					cl.setValue("");
+					/*cl.setValue("");
 					to.setValue("");
 					at.setValue("");
-					pt.setValue("");
+					pt.setValue("");*/
 					if(Ext.is.iPhone) {
                         var actp = window.plugins.ActivatePlugin;
                         actp.deactivate();

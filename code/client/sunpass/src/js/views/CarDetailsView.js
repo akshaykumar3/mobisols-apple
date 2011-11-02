@@ -1,4 +1,4 @@
-gtp.tabs.CarDetailView = {
+gtp.views.CarDetailView = {
 	id: 'details',
 	xtype: 'formpanel',
 	scroll: 'vertical',

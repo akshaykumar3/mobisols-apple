@@ -1,4 +1,4 @@
-gtp.tabs.MapView = {
+gtp.views.MapView = {
 	title: 'Map',
 	id: 'mappanel',
 	xtype: 'map',
