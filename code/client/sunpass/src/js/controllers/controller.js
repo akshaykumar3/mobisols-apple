@@ -33,16 +33,13 @@ gtp.controllers = Ext.regController("load",{
 				cover: true
 			},
 			items: [
-		        gtp.tabs.HomeScreenView,
-		        gtp.tabs.CarsViewport,
-		        gtp.tabs.PaidTollsListView,
-		        gtp.tabs.SettingsViewport,
-		        gtp.tabs.MapView,
+		        gtp.views.HomeViewport,
+		        gtp.views.PaidTollsListView,
+		        gtp.views.MapView,
 			],			
 			listeners: {
-				cardswitch: function(curobj, newCard, oldCard, index, animated) {
-					
-					if(oldCard.getId() == 'basicform' && gtp.settingschanged) {
+				cardswitch: function(curobj, newCard, oldCard, index, animated) {					
+					/*if(oldCard.getId() == 'basicform' && gtp.settingschanged) {
 						// Do ajax call to save the payment details. Same when clicked on the save button.
 					}
 					else if(oldCard.getId() == 'basicform' && !gtp.settingschanged) {
@@ -50,7 +47,7 @@ gtp.controllers = Ext.regController("load",{
 						var savebutton = oldCard.down('#savesettings');
 						savebutton.setDisabled(false);
 						savebutton.setText('edit');
-					}
+					}*/
 				}
 			}
 		});

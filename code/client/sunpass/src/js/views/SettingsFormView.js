@@ -1,4 +1,4 @@
-gtp.tabs.SettingsFormView = {
+gtp.views.SettingsFormView = {
 	xtype: 'formpanel',
 	scroll: 'vertical',
 	id: 'settingsform',
@@ -6,24 +6,29 @@ gtp.tabs.SettingsFormView = {
 		xtype: 'toolbar',
 		title: 'Settings',
 		dock: 'top',
-		layout: {
-			pack: 'right'
-		},
 		items: [{
+			text: 'home',
+			ui: 'back',
+			handler: function(dis) {
+				gtp.tabpanel.getActiveItem().setActiveItem('home');
+			}
+		},{
+			xtype: 'spacer'
+		},{
 			xtype: 'button',
 			text: 'edit',
 			ui: 'confirm',
 			id: 'savesettings',
 			handler: function(button, event) {
 				if(button.getText() == 'edit') {
-					gtp.tabpanel.getComponent(3).down('#settingsform').enable();
-					gtp.tabpanel.getComponent(3).down('#settingsform').down('#userid').setDisabled(true);
+					gtp.tabpanel.getActiveItem().down('#settingsform').enable();
+					gtp.tabpanel.getActiveItem().down('#settingsform').down('#userid').setDisabled(true);
 					button.setText('save');
 					button.setDisabled(true);
 				}
 				else if(button.getText() == 'save' && gtp.settingschanged) {
 					
-					var setform = gtp.tabpanel.getComponent(3);
+					var setform = gtp.tabpanel.getActiveItem();
 					
 					var pay_det = setform.down('#settingsform').getRecord();
 					var statecode = setform.down('#settingsform').down('#billstate').getValue();

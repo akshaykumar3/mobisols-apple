@@ -1,4 +1,4 @@
-gtp.tabs.PaidTollsListView = {
+gtp.views.PaidTollsListView = {
 	xtype: 'panel',
 	layout: 'fit',
 	title: 'Paid tolls',

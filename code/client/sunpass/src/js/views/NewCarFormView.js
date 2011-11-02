@@ -1,4 +1,4 @@
-gtp.tabs.NewCarFormView = {
+gtp.views.NewCarFormView = {
 	id: 'addcar',
 	xtype: 'formpanel',
 	scroll: 'vertical',
