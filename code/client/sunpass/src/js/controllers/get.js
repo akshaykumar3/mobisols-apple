@@ -149,12 +149,13 @@ gtp.controllers.fetch = Ext.regController("get",{
 					gtp.vars.fetchedMakeAndModels = true;
 					var mkl = resobj.response.make;
 					var mklfid = Ext.getCmp('addcar').down('#make');
-					if(mklfid)
-					for(var i=0; i<mkl.length; i++) {
-						mklfid.setOptions([{
-							text: mkl[i].name,
-							value: mkl[i].name
-						}],true);
+					if(mklfid) {
+						for(var i=0; i<mkl.length; i++) {
+							mklfid.setOptions([{
+								text: mkl[i].name,
+								value: mkl[i].name
+							}],true);
+						}
 					}
 				}
 		      	gtp.showNotifications(resobj.response.notifications);

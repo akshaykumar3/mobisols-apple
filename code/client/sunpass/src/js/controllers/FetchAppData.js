@@ -80,15 +80,11 @@ gtp.FetchUserData = function(options) {
 						year: vehicle_details[i].manufacturedYear,
 					},'Cars'));
 				}
-		      	console.log('av button text '+add_vehicle_text);
 		      	gtp.tabpanel.getComponent('mviewport').down('#home').down('#addvehicle').setText(add_vehicle_text);
 		  	}
 	      	
 	      	if(pay_details) {
-	      		if(pay_details.cardNumber && pay_details.expMonth) {
-	      			gtp.arePaymentDetailsValid = true;
-	      			pay_details_text += pay_details.cardNumber+"..";
-	      		} 
+	      		var settings_form = gtp.tabpanel.getComponent('mviewport').down('#settingsform');
 		      	var userSettings = Ext.ModelMgr.create({
 		      		userid: options.loginDetails.username,
 		      		ccnumber: pay_details.cardNumber,
@@ -102,8 +98,13 @@ gtp.FetchUserData = function(options) {
 		      		city: pay_details.city,
 		      		zipcode: pay_details.zip
 		      	},'Settings');
-		      	gtp.tabpanel.getComponent('mviewport').down('#settingsform').load(userSettings);
-		      	gtp.tabpanel.getComponent('mviewport').down('#home').down('#m_paydetails').setText(pay_details_text);
+		      	settings_form.load(userSettings);
+	      		if(userSettings.validate().isValid()) {
+	      			gtp.arePaymentDetailsValid = true;
+	      			pay_details_text += pay_details.cardNumber+"..";
+	      			var hme = gtp.tabpanel.getComponent('mviewport').down('#home'); 
+			      	hme.down('#m_paydetails').setText(pay_details_text);
+	      		} 
 	      	}
 	      	
 	      	if(paidtoll_details) {

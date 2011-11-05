@@ -93,6 +93,14 @@ gtp.views.NewCarFormView = {
 										year: acfd.year,
 										color: acfd.color
 									},'Cars'));
+									
+									var avbt=gtp.tabpanel.getActiveItem().down('#home').down('#addvehicle');
+									if(avbt.getText() == 'Add Vehicle') {
+										avbt.setText(acfd.rg);
+									}
+									else {
+										avbt.setText(avbt.getText()+", "+acfd.rg);
+									}
 								}
 								gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 							}

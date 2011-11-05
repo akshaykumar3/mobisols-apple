@@ -37,7 +37,7 @@ gtp.views.ChangePwdView = {
 			ui: 'confirm',
 			text: 'change',
 			handler: function(dis, eve) {
-				var disform = gtp.tabpanel.getComponent(3).down('#changepwd_view');
+				var disform = gtp.tabpanel.getActiveItem().down('#changepwd_view');
 				var curpwd = disform.down('#chpwd_curpwd').getValue();
 				var newpwd = disform.down('#chpwd_newpwd').getValue();
 				var conpwd = disform.down('#chpwd_conpwd').getValue();

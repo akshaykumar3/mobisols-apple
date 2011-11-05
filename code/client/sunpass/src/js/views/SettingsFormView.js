@@ -90,12 +90,16 @@ gtp.views.SettingsFormView = {
 								},
 								success: function(response) {
 									gtp.tabpanel.setLoading(false);
-									console.log('Posting payment details success');
 									gtp.log('Posting payment details success');
 									var resobj = Ext.decode(response.responseText);
-								    gtp.settingschanged = false;
-								    gtp.arePaymentDetailsValid = true;
-								    if(resobj.status == 'success')
+								    if(resobj.status == 'success') {
+									    gtp.settingschanged = false; 
+									    if(!gtp.arePaymentDetailsValid) {
+										    var hme = gtp.tabpanel.getActiveItem().down('#home'); 
+									      	hme.down('#m_paydetails').setText(pay_det.get('ccnumber')+' ..');
+									    }
+									    gtp.arePaymentDetailsValid = true;
+								    }
 									gtp.showNotifications(resobj.response.notifications);
 									gtp.parse(resobj.response.commands);
 								},

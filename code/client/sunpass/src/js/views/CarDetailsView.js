@@ -195,6 +195,21 @@ gtp.views.CarDetailView = {
 							if(resobj.status == "success") {
 								carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
 								gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+								var avbt=gtp.tabpanel.getActiveItem().down('#home').down('#addvehicle');
+								var text = avbt.getText();
+								if(text != 'Add Vehicle') {
+									if(text.search(stmod.get('reg')+', ') !=-1) {
+										avbt.setText( text.replace(stmod.get('reg')+', ', '') );
+									} 
+									else if(text.search(stmod.get('reg')) !=-1) {
+										if( text.search(', '+stmod.get('reg')) !=-1) {
+											avbt.setText( text.replace(', '+stmod.get('reg'), '') );
+										}
+										else {
+											avbt.setText('Add Vehicle');
+										}
+									}
+								}
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
