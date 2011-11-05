@@ -82,6 +82,16 @@ gtp.views.CarDetailView = {
 	items:[{
 		xtype: 'fieldset',
 		title: 'CarInfo',
+		defaults: {
+			listeners: {
+				change: function(curobj, newValue, oldValue) {
+					if(newValue != oldValue) {
+						gtp.tabpanel.getActiveItem().down('#details').updateRecord(gtp.tabpanel.getActiveItem().down('#details').getRecord());
+						Ext.getCmp('changevd').setDisabled(false);
+					}
+				}
+			}
+		},
 		items:[{
 			xtype: 'textfield',
 			name: 'state',
