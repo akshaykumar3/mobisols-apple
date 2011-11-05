@@ -1,4 +1,4 @@
-// Store for devserverservice urls.
+// Store for tstserverservice urls.
 var webServices=new Ext.data.Store({
 	model: 'WebServices',
 	data: [{

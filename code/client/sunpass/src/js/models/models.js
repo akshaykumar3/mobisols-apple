@@ -70,6 +70,32 @@ gtp.models.State = Ext.regModel('State',{
 	}]
 });
 
+// Defining model for Vehicle Makers.
+gtp.models.Maker = Ext.regModel('Maker', {
+	idProperty: 'MakerID',
+	fields: [{
+		name: 'MakerID',
+		type: 'int'
+	},{
+		name: 'MakerName',
+		type: 'string'
+	}]
+});
+
+gtp.models.VehicleModel = Ext.regModel('VehicleModel', {
+	idProperty: 'ModelID',
+	fields: [{
+		name: 'ModelID',
+		type: 'int'
+	},{
+		name: 'MakerID',
+		type: 'int'
+	},{
+		name: 'ModelName',
+		type: 'string'
+	}]
+});
+
 // Model for paid toll details.
 Ext.regModel('PaidTolls', {
 	fields: [{

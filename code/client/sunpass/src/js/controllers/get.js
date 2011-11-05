@@ -148,15 +148,22 @@ gtp.controllers.fetch = Ext.regController("get",{
 				if(resobj.status == 'success') {
 					gtp.vars.fetchedMakeAndModels = true;
 					var mkl = resobj.response.make;
-					var mklfid = Ext.getCmp('addcar').down('#make');
-					if(mklfid) {
-						for(var i=0; i<mkl.length; i++) {
-							mklfid.setOptions([{
-								text: mkl[i].name,
-								value: mkl[i].name
-							}],true);
+					for(var i=0; i<mkl.length; i++) {
+						gtp.stores.Makers.insert(0, Ext.ModelMgr.create({
+							MakerID: i+1,
+							MakerName: mkl[i].name
+						},'Maker'));
+						
+						var mdl = mkl[i].model;
+						for(var j=0; j<mdl.length; j++) {
+							gtp.stores.VehicleModels.insert(0, Ext.ModelMgr.create({
+								ModelID: j+1,
+								MakerID: i+1,
+								ModelName: mdl[j].name
+							},'VehicleModel'));
 						}
 					}
+					//gtp.tabpanel.getComponent('mviewport').down('#addcar').down('#model').store.clearFilter();
 				}
 		      	gtp.showNotifications(resobj.response.notifications);
 		      	gtp.parse(resobj.response.commands);

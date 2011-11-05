@@ -23,6 +23,25 @@ gtp.stores.Countries = new Ext.data.Store({
 	}]
 });
 
+//Store for Vehicle Makers.
+gtp.stores.Makers = new Ext.data.Store({
+	model: 'Maker',
+	data: [{
+		MakerID: 0,
+		MakerName: ''
+	}]
+});
+
+//Store for Vehicle Models.
+gtp.stores.VehicleModels = new Ext.data.Store({
+	model: 'VehicleModel',
+	data: [{
+		ModelID: 0,
+		MakerID: 0,
+		ModelName: ''
+	}]
+});
+
 // Store for Cars Model
 var carsList = new Ext.data.Store({
 	model: 'Cars',
