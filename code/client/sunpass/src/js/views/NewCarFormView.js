@@ -176,11 +176,16 @@ gtp.views.NewCarFormView = {
 					 var modelSelectField  = disform.down('#model'); 
 					 
 					 modelSelectField.store.clearFilter();
-					 modelSelectField.store.filter('MakerID', value);
+					 var makeStore = gtp.stores.Makers;
+					 modelSelectField.store.filter({
+						property: 'MakerID',
+						value: makeStore.getAt(makeStore.findExact('MakerName', value)).get('MakerID'),
+						exactMatch: true
+					 });
 					 
 					 var firstModel = modelSelectField.store.getAt(0);
 					 if(firstModel) {
-						 modelSelectField.setValue(firstModel.data.ModelID);
+						 //modelSelectField.setValue(firstModel.data.ModelID);
 					 } else {
 						 modelSelectField.setValue('');
 					 }
