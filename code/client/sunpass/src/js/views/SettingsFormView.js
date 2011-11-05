@@ -24,9 +24,9 @@ gtp.views.SettingsFormView = {
 					gtp.tabpanel.getActiveItem().down('#settingsform').enable();
 					gtp.tabpanel.getActiveItem().down('#settingsform').down('#userid').setDisabled(true);
 					button.setText('save');
-					button.setDisabled(true);
+					//button.setDisabled(true);
 				}
-				else if(button.getText() == 'save' && gtp.settingschanged) {
+				else if(button.getText() == 'save') { 
 					
 					var setform = gtp.tabpanel.getActiveItem();
 					
@@ -159,10 +159,10 @@ gtp.views.SettingsFormView = {
 			listeners: {
 				change: function(curobj,newValue,oldValue) {
 					if(newValue != oldValue) {
-						var setvp = Ext.getCmp('basicform');
+						var setvp = gtp.tabpanel.getActiveItem();
 						setvp.down('#settingsform').updateRecord(setvp.down('#settingsform').getRecord());
 						gtp.settingschanged=true;
-						var savebutton=Ext.getCmp('savesettings');
+						var savebutton = setvp.down('#settingsform').down('#savesettings');
 						savebutton.setDisabled(false);	
 					}
 				}
@@ -217,10 +217,10 @@ gtp.views.SettingsFormView = {
 			listeners: {
 				change: function(curobj,newValue,oldValue) {
 					if(newValue != oldValue) {
-						var setvp = Ext.getCmp('basicform');
+						var setvp = gtp.tabpanel.getActiveItem();
 						setvp.down('#settingsform').updateRecord(setvp.down('#settingsform').getRecord());
 						gtp.settingschanged=true;
-						var savebutton=Ext.getCmp('savesettings');
+						var savebutton = setvp.down('#settingsform').down('#savesettings');
 						savebutton.setDisabled(false);	
 					}
 				}
@@ -301,7 +301,7 @@ gtp.views.SettingsFormView = {
 		xtype: 'button',
 		text: 'Reset Password',
 		handler: function(button, event) {
-			gtp.tabpanel.getComponent('basicform').setActiveItem('changepwd_view');
+			gtp.tabpanel.getActiveItem().setActiveItem('changepwd_view');
 		}
 	}],
 	listeners: {

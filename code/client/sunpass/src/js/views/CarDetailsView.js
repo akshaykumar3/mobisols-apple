@@ -184,11 +184,10 @@ gtp.views.CarDetailView = {
 							gtp.log(obj.description);
 							if(resobj.status == "success") {
 								carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
-								Ext.Msg.alert(gtp.dict.deletecar_success);
+								gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
-							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
 						},
 						failure: function(response){
 							gtp.tabpanel.setLoading(false);

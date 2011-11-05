@@ -1,6 +1,6 @@
 /* 
  * Author: A. Pradeep
- * Last Modified: Oct 1st,2011
+ * Last Modified: Nov 5th,2011
  */
 
 Ext.regApplication({
@@ -21,11 +21,8 @@ Ext.regApplication({
     launch: function(){
     	Ext.Ajax.defaultHeaders = {};
     	Ext.ns('gtp.vars');
+    	gtp.vars.PasswordLength = 8;
     	this.deviceRegistered = this.isDeviceRegistered();
-    	Ext.dispatch({
-    		controller: 'get',
-    		action: 'configuration'
-    	});
     	this.launchLoginPage();
     	if(!this.deviceRegistered) {
     		this.registerDevice();
