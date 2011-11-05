@@ -41,7 +41,6 @@ Ext.regModel('Settings',{
 		text: 'int'
 	}],
 	validations: [{
-		type: 'format',
 		type: 'custom',
 		field: 'ccnumber',
 		message: 'Invalid Credit Card Number',
