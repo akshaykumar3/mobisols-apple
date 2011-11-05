@@ -60,6 +60,12 @@ gtp.views.LoginPage = {
 							
 							if(decres.status == 'success') {
 								if(res.userExists=="Y" && res.passwordCorrect=="Y") {
+									// Get client Configuration.
+							    	Ext.dispatch({
+							    		controller: 'get',
+							    		action: 'configuration'
+							    	});
+									
 									// Store username and password locally.
 									gtp.utils.dataStore.setValueOfKey('username', un);
 									gtp.utils.dataStore.setValueOfKey('password', pwd);

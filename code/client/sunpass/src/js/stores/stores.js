@@ -29,14 +29,6 @@ var carsList = new Ext.data.Store({
 	sorters: 'reg',
 	getGroupString : function(record) {
 		return record.get('reg')[0];
-	},
-	listeners: {
-		remove: function(store, record, index) {
-			var ac = Ext.getCmp('activecar');
-			if(ac.getValue() == record.get('reg'))
-				ac.setValue(store.getAt(0).get('reg'));
-			console.log('record is removed from store');
-		}
 	}
 });
 

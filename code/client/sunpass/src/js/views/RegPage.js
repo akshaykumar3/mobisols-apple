@@ -37,12 +37,15 @@ gtp.views.RegPage = {
 				var eid = Ext.getCmp('rpemailid').getValue();
 				var pwd = Ext.getCmp('rppassword').getValue();
 				var cpwd = Ext.getCmp('conpwd').getValue();
-				if(!gtp.validateEmail(eid))
+				if(!gtp.validateEmail(eid)) {
 					Ext.Msg.alert(gtp.dict.regform_invalidemail);
-				else if(pwd.length < gtp.cfg.keyValues.password)
-					Ext.Msg.alert('Password','Minimum '+gtp.cfg.keyValues.password+' characters');
-				else if(pwd != cpwd)
+				}
+				else if(pwd.length < gtp.vars.PasswordLength) {
+					Ext.Msg.alert('Password','Minimum '+gtp.vars.PasswordLength+' characters');
+				}
+				else if(pwd != cpwd) {
 					Ext.Msg.alert(gtp.dict.regform_pwds);
+				}
 				else
 				{
 					gtp.views.Viewport.setLoading({

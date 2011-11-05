@@ -86,9 +86,9 @@ gtp.views.ChangePwdView = {
 	}],
 	listeners: {
 		beforeactivate: function(dis) {
-			dis.down('chpwd_curpwd').setValue('');
-			dis.down('chpwd_newpwd').setValue('');
-			dis.down('chpwd_conpwd').setValue('');
+			dis.down('#chpwd_curpwd').setValue('');
+			dis.down('#chpwd_newpwd').setValue('');
+			dis.down('#chpwd_conpwd').setValue('');
 		}
 	}
 };
