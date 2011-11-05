@@ -163,17 +163,38 @@ gtp.views.NewCarFormView = {
 				value: ''
 			}]
 		},{
-			xtype: 'textfield',
+			xtype: 'selectfield',
 			id: 'make',
 			name: 'make',
-			useClearIcon: true,
-			label: 'Make'
+			label: 'Make',
+			store: gtp.stores.Makers,
+			displayField: 'MakerName',
+			valueField: 'MakerName',
+			listeners: {
+				change: function(dis, value) {
+					 var disform = gtp.tabpanel.getActiveItem().down('#addcar');
+					 var modelSelectField  = disform.down('#model'); 
+					 
+					 modelSelectField.store.clearFilter();
+					 modelSelectField.store.filter('MakerID', value);
+					 
+					 var firstModel = modelSelectField.store.getAt(0);
+					 if(firstModel) {
+						 modelSelectField.setValue(firstModel.data.ModelID);
+					 } else {
+						 modelSelectField.setValue('');
+					 }
+					 
+				}
+			}
 		},{
-			xtype: 'textfield',
+			xtype: 'selectfield',
 			id: 'model',
 			name: 'model',
-			useClearIcon: true,
-			label: 'Model'
+			label: 'Model',
+			store: gtp.stores.VehicleModels,
+			displayField: 'ModelName',
+			valueField: 'ModelName'
 		},{
 			xtype: 'textfield',
 			id: 'year',
