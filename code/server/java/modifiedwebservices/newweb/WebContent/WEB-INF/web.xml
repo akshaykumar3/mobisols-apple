@@ -41,26 +41,26 @@
         <web-resource-collection>
                 <web-resource-name>Services</web-resource-name>
                 <description> accessible by authenticated users of the client role</description>
-                <url-pattern>/*</url-pattern>
+                <url-pattern>/services/secure/*</url-pattern>
                 <http-method>GET</http-method>
                 <http-method>POST</http-method>
                 <http-method>PUT</http-method>
                 <http-method>DELETE</http-method>
         </web-resource-collection>
-        <!-- <auth-constraint>
+        <auth-constraint>
                 <description>These roles are allowed access</description>
                 <role-name>user</role-name>
-        </auth-constraint>-->
+        </auth-constraint>
   	</security-constraint>
 	<login-config>
       	 <auth-method>BASIC</auth-method>
   		 <realm-name>Only users</realm-name>		 
 	</login-config>
 
-	<!-- <security-role>
+	<security-role>
         <role-name>client</role-name>
 	</security-role>
 	<security-role>
         <role-name>user</role-name>
-	</security-role>-->
+	</security-role>
 </web-app>

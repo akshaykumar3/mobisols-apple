@@ -31,6 +31,9 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 			response.getNotifications().add("Invalid Expiry Date");
 			status="fail";
 		}
+		pd.setCardNumber(pd.getCardNumber().trim());
+		pd.setCardNumber(pd.getCardNumber().replaceAll(" ", ""));
+		System.out.println(pd.getCardNumber());
 		if(!MyValidationUtil.isValidCC(pd.getCardNumber())){
 			response.getNotifications().add("Invalid Credit Card");
 			status = "fail";

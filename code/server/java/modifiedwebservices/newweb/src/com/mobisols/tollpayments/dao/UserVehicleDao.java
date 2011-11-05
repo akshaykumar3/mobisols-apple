@@ -20,4 +20,5 @@ public interface UserVehicleDao {
 	public UserVehicle getVehicle(int vehicleId);
 	public List<UserVehicle> getActiveVehicles();
 	public List getStandByVehicles();
+	
 }

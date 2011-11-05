@@ -28,6 +28,8 @@ public class ModelDaoImpl implements ModelDao {
 	    MakeDao makeDao  =  (MakeDao ) factory.getBean("dao.tollpayments.makeDao");
 	    Criteria crit = s.createCriteria(Model.class);
 	    crit.add(Restrictions.eq("name", model));
+	    if(makeDao.getMake(model) == null)
+	    	return null;
 	    crit.add(Restrictions.eq("makeId", makeDao.getMake(model).getMakeId()));
 	    return (Model) crit.uniqueResult();
 	}
