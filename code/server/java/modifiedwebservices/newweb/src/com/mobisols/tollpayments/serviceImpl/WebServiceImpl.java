@@ -1,8 +1,6 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 
-
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -122,8 +120,7 @@ public class WebServiceImpl {
 
 	@GET
 	@Produces("text/plain")
-	@Path("/AccountDetails")
-	//@RolesAllowed({"user"})
+	@Path("/secure/AccountDetails")
 	public String getAccountDetailsResponse(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader){
 		String request = "RETRIEVE ACC_DETAILS";
 		try{
@@ -146,8 +143,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/private/BalanceDetails")
-	//@RolesAllowed("user")
+	@Path("/secure/BalanceDetails")
 	public String getBalanceDetails(@QueryParam("key") String securityKey,@QueryParam("json") String json){
 		String request = "RETRIEVE ACC_DETAILS";
 		try{
@@ -166,8 +162,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/VehicleTypeList")
-	//@RolesAllowed("user")
+	@Path("/secure/VehicleTypeList")
 	public String getVehicleTypesList(@QueryParam("key") String securityKey)
 	{
 		String request="";
@@ -189,8 +184,7 @@ public class WebServiceImpl {
 
 	@POST
 	@Produces("text/plain")
-	@Path("/private/AddBalance")
-	//@RolesAllowed("user")
+	@Path("/secure/AddBalance")
 	public String postAddBalance(@FormParam("key") String securityKey,@FormParam("json")String json,@Context HttpHeaders httpHeader)
 	{
 		String request = "RETRIEVE ACC_DETAILS";
@@ -212,8 +206,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/CcTypeList")
-	//@RolesAllowed("user")
+	@Path("/secure/CcTypeList")
 	public String getCcTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get CCTypeList";
@@ -232,8 +225,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/OwnerTypeList")
-	//@RolesAllowed("user")
+	@Path("/secure/OwnerTypeList")
 	public String getOwnerTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get OwnerTypeList";
@@ -253,8 +245,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/VmlTypeList")
-	//@RolesAllowed("user")
+	@Path("/secure/VmlTypeList")
 	public String getVMLTypeList(@QueryParam("key") String securityKey)
 	{
 		String request="get VMLTypeList";
@@ -273,8 +264,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/private/BalanceInfo")
-	//@RolesAllowed("user")
+	@Path("/secure/BalanceInfo")
 	public String getBalanceInfo(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader)
 	{
 		String request="get BlanceInfo";
@@ -294,8 +284,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/TollDetailsList")
-	//@RolesAllowed("user")
+	@Path("/secure/TollDetailsList")
 	public String getTollDetailsList(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="TollDetailsList";
@@ -322,8 +311,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/ServicePlansList")
-	//@RolesAllowed("user")
+	@Path("/secure/ServicePlansList")
 	public String getServicePlans(@QueryParam("key") String securityKey)
 	{
 		String request="get Service Plans List";
@@ -343,8 +331,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/PeriodicHeartBeat")
-	//@RolesAllowed("user")
+	@Path("/secure/PeriodicHeartBeat")
 	public String postPeriodicHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post periodic heartbeat";
@@ -366,8 +353,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/HeartBeat")
-	//@RolesAllowed("user")
+	@Path("/secure/HeartBeat")
 	public String postHeartBeat(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="post heartbeat";
@@ -388,8 +374,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/NearestToll")
-	//@RolesAllowed("user")
+	@Path("/secure/NearestToll")
 	public String getNearestToll(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="post heartbeat";
@@ -410,8 +395,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/PaymentDetails")
-	//@RolesAllowed("user")
+	@Path("/secure/PaymentDetails")
 	public String postPaymentDetails(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="update paymentDetails";
@@ -434,8 +418,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/ClientConfiguration")
-	//@RolesAllowed("user")
+	@Path("/public/ClientConfiguration")
 	public String getClientConfiguration(@QueryParam("key") String securityKey,@QueryParam("json") String json)
 	{
 		String request="get ClientConfiguration";
@@ -456,8 +439,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/VehicleDetails")
-	//@RolesAllowed("user")
+	@Path("/secure/VehicleDetails")
 	public String postVehicleDetails(@FormParam("key") String securityKey,@FormParam("json") String json,@FormParam("is_new_vehicle") String isNewVehicle,@Context HttpHeaders httpHeader)
 	{
 		String request="post vehicleDetails";
@@ -480,8 +462,7 @@ public class WebServiceImpl {
 	
 	@DELETE
 	@Produces("text/plain")
-	@Path("/VehicleDetails")
-	//@RolesAllowed("user")
+	@Path("/secure/VehicleDetails")
 	public String deleteVehicleDetails(@FormParam("key") String securityKey,@FormParam("vehicleId") int vehicleId,@Context HttpHeaders httpHeader)
 	{
 		String request="delete vehicleDetails";
@@ -501,7 +482,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/UserRegistration")
+	@Path("/public/UserRegistration")
 	public String registerUser(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
 		String request="register user";
@@ -522,7 +503,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/DeviceRegistration")
+	@Path("/public/DeviceRegistration")
 	public String registerDevice(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpServletRequest servletRequest)
 	{
 		String request="register device";
@@ -548,10 +529,11 @@ public class WebServiceImpl {
 
 	@POST
 	@Produces("text/plain")
-	@Path("/Login")
+	@Path("/public/Login")
 	public String loginUser(@FormParam("key") String securityKey,@FormParam("json") String json)
 	{
-		String request="post vehicleDetails";
+		String request="login";
+		System.out.println(json);
 		try{
 		LoginRequest request1=  (LoginRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.LoginRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
@@ -569,8 +551,7 @@ public class WebServiceImpl {
 
 	@POST
 	@Produces("text/plain")
-	@Path("/ChangePassword")
-	//@RolesAllowed("user")
+	@Path("/secure/ChangePassword")
 	public String changePassword(@FormParam("key") String securityKey,@FormParam("password") String password,@Context HttpHeaders httpHeader)
 	{
 		String request="change password";
@@ -591,8 +572,7 @@ public class WebServiceImpl {
 	
 	@POST
 	@Produces("text/plain")
-	@Path("/Activate")
-	//@RolesAllowed("user")
+	@Path("/secure/Activate")
 	public String activate(@FormParam("key") String securityKey,@FormParam("json") String json,@Context HttpHeaders httpHeader)
 	{
 		String request="activate/deactivate user";
@@ -614,8 +594,7 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/MakeAndModel")
-	//@RolesAllowed("user")
+	@Path("/secure/MakeAndModel")
 	public String getMakeAndModel(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader)
 	{
 		String request="Get Make and Models";

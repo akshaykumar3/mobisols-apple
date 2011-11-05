@@ -35,6 +35,8 @@ public class LoginServiceImpl implements LoginService {
 		else
 		{
 			response.getResponse().put("userExists",User.USER_EXISTS);
+			System.out.println(r.getPassword());
+			System.out.println(u.getPassword());
 			if(u.getPassword().equals(r.getPassword()))
 			{
 				response.getResponse().put("passwordCorrect", PASSWORD_CORRECT_TRUE);

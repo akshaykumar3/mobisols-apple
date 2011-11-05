@@ -1,6 +1,5 @@
 package com.mobisols.tollpayments.daoImpl;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -61,14 +60,16 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 	public List getActiveVehicles() {
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("isActive",this.VEHICLE_ACTIVE));
+		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_ACTIVE));
 		return crit.list();
 	}
 
 	public List getStandByVehicles(){
 		Session s =HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("isActive",this.VEHICLE_STANDBY));
+		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_STANDBY));
 		return crit.list();
 	}
+	
+	
 }

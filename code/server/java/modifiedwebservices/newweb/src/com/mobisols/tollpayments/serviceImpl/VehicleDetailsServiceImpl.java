@@ -68,11 +68,12 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setOwnerTypeId(ot.getOwnerTypeId());
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-			
-			Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());
+			if(vdr.getModel()!=null && vdr.getMake()!=null)
+			{
+				Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());
 			if(m!=null)
 				uv.setModelId(m.getModelId());
-			
+			}
 			uv.setVin(vdr.getVin());
 			uv.setColor(vdr.getColor());
 			uv.setManufacturedYear(vdr.getManufacturedYear());
@@ -105,10 +106,12 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			VehicleType vt=vehicleTypeDao.getVehicleType(vdr.getType());
 			uv.setVehicleTypeId(vt.getVehicleTypeId());
-			Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());
+			if(vdr.getModel()!=null && vdr.getMake()!=null)
+			{
+				Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());
 			if(m!=null)
 				uv.setModelId(m.getModelId());
-			
+			}
 			uv.setVin(vdr.getVin());
 			uv.setColor(vdr.getColor());
 			uv.setManufacturedYear(vdr.getManufacturedYear());
