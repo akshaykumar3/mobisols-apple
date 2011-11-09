@@ -36,28 +36,11 @@ gtp.controllers = Ext.regController("load",{
 		        gtp.views.HomeViewport,
 		        gtp.views.PaidTollsListView,
 		        gtp.views.MapView,
-			],			
-			listeners: {
-				cardswitch: function(curobj, newCard, oldCard, index, animated) {					
-					/*if(oldCard.getId() == 'basicform' && gtp.settingschanged) {
-						// Do ajax call to save the payment details. Same when clicked on the save button.
-					}
-					else if(oldCard.getId() == 'basicform' && !gtp.settingschanged) {
-						oldCard.down('#settingsform').disable();
-						var savebutton = oldCard.down('#savesettings');
-						savebutton.setDisabled(false);
-						savebutton.setText('edit');
-					}*/
-				}
-			}
+			]
 		});
 		
 		// Fetches User Data and adds them to stores.
 		gtp.FetchUserData(options);
-		Ext.dispatch({
-			controller: 'get',
-			action: 'cctypeslist'
-		});
 		
 		Ext.dispatch({
 			controller: 'get',

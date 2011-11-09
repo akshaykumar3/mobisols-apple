@@ -58,10 +58,16 @@ gtp.views.MainView = {
 			id: 'addvehicle',
 			handler: function(dis, ev) {
 				if(dis.getText() == 'Add Vehicle') {
-					gtp.tabpanel.getActiveItem().setActiveItem('addcar');
+					gtp.tabpanel.getActiveItem().setActiveItem('addcar',{
+						type: 'slide',
+						direction: 'left'
+					});
 				}
 				else {
-					gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+					gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+						type: 'slide',
+						direction: 'left'
+					});
 				}
 			}
 		}]
@@ -74,10 +80,16 @@ gtp.views.MainView = {
 			id: 'm_paydetails',
 			handler: function(dis, eve) {
 				if(dis.getText() == 'Payment Details') {
-					gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+					gtp.tabpanel.getActiveItem().setActiveItem('settingsform',{
+						type: 'slide',
+						direction: 'left'
+					});
 				} 
 				else {
-					gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+					gtp.tabpanel.getActiveItem().setActiveItem('settingsform',{
+						type: 'slide',
+						direction: 'left'
+					});
 				}
 			}
 		}]
@@ -144,12 +156,16 @@ gtp.views.MainView = {
 					}
 					else {
 						if(!gtp.isCarValid) {
-							Ext.Msg.alert('Please add a vehicle');
-							gtp.tabpanel.getActiveItem().setActiveItem('addcar');
+							gtp.tabpanel.getActiveItem().setActiveItem('addcar',{
+								type: 'slide',
+								direction: 'left'
+							});
 						}
 						else if(!gtp.arePaymentDetailsValid) {
-							Ext.Msg.alert('Please fill payment details');
-							gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+							gtp.tabpanel.getActiveItem().setActiveItem('settingsform',{
+								type: 'slide',
+								direction: 'left'
+							});
 						}
 					}
 					Ext.Ajax.request({

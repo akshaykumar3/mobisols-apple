@@ -23,7 +23,10 @@ gtp.views.NewCarFormView = {
 			text: 'My Cars',
 			ui: 'back',
 			handler: function(button, event) {
-				gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+				gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+					type: 'slide',
+					direction: 'right'
+				});
 			}
 		},{
 			xtype: 'spacer'
@@ -64,7 +67,7 @@ gtp.views.NewCarFormView = {
 								isActive: "N",
 								startDate: gtp.today().format('M j, Y g:i:s A'), // Valid date format on server side.
 								endDate: (acfd.endDate == null) ? null : acfd.endDate.format('M j, Y g:i:s A'),
-								ownerType: acfd.ownerType, 
+								ownerType: (acfd.ownerType == '' || acfd.ownerType == null) ? null:acfd.ownerType, 
 								vehicleId: null,
 								vin: null,
 								make: (acfd.make == '' || acfd.make == null) ? null : acfd.make,
@@ -84,7 +87,7 @@ gtp.views.NewCarFormView = {
 										state: acfd.st,
 										reg: acfd.rg,
 										type: acfd.tp,
-										startDate: acfd.startDate,
+										startDate: gtp.today(),
 										endDate: acfd.endDate,
 										vehicleId: resobj.response.vehicleId,
 										ownerType: acfd.ownerType,
@@ -102,7 +105,10 @@ gtp.views.NewCarFormView = {
 										avbt.setText(avbt.getText()+", "+acfd.rg);
 									}
 								}
-								gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+								gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+									type: 'slide',
+									direction: 'right'
+								});
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
@@ -112,8 +118,11 @@ gtp.views.NewCarFormView = {
 							if(response.status == 500)
 							Ext.Msg.alert('Server Error',gtp.dict.newcar_failure);
 							else
-								Ext.Msg.alert('Server Error',gtp.dict.newcar_failure);
-							gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+								Ext.Msg.alert('Error',gtp.dict.newcar_failure);
+							gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+								type: 'slide',
+								direction: 'right'
+							});
 						}
 					});
 				}
@@ -185,11 +194,10 @@ gtp.views.NewCarFormView = {
 					 
 					 var firstModel = modelSelectField.store.getAt(0);
 					 if(firstModel) {
-						 //modelSelectField.setValue(firstModel.data.ModelID);
+						 modelSelectField.setValue(firstModel.data.ModelName);
 					 } else {
 						 modelSelectField.setValue('');
 					 }
-					 
 				}
 			}
 		},{
@@ -201,7 +209,7 @@ gtp.views.NewCarFormView = {
 			displayField: 'ModelName',
 			valueField: 'ModelName'
 		},{
-			xtype: 'textfield',
+			xtype: 'numberfield',
 			id: 'year',
 			name: 'year',
 			useClearIcon: true,

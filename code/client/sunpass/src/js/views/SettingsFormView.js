@@ -10,7 +10,10 @@ gtp.views.SettingsFormView = {
 			text: 'home',
 			ui: 'back',
 			handler: function(dis) {
-				gtp.tabpanel.getActiveItem().setActiveItem('home');
+				gtp.tabpanel.getActiveItem().setActiveItem('home',{
+					type: 'slide',
+					direction: 'right'
+				});
 			}
 		},{
 			xtype: 'spacer'
@@ -193,11 +196,6 @@ gtp.views.SettingsFormView = {
 			fieldname: 'ccnumber'
 		},{
 			xtype: 'selectfield',
-			name: 'cardtype',
-			id: 'cardtype',
-			label: 'Cc type'
-		},{
-			xtype: 'selectfield',
 			name: 'expmonth',
 			id: 'expmonth',
 			label: 'ExpMonth',
@@ -277,7 +275,7 @@ gtp.views.SettingsFormView = {
 			displayField: 'CountryName',
 			valueField: 'CountryCode'
 		},{
-			xtype: 'textfield',
+			xtype: 'numberfield',
 			name: 'zipcode',
 			label: 'Zip',
 			id: 'zip',
@@ -288,7 +286,7 @@ gtp.views.SettingsFormView = {
 			id: 'phoneno',
 			label: 'Number',
 			useClearIcon: true
-	}]
+		}]
 	},{
 		xtype: 'fieldset',
 		title: 'Your Account',
@@ -305,7 +303,10 @@ gtp.views.SettingsFormView = {
 		xtype: 'button',
 		text: 'Reset Password',
 		handler: function(button, event) {
-			gtp.tabpanel.getActiveItem().setActiveItem('changepwd_view');
+			gtp.tabpanel.getActiveItem().setActiveItem('changepwd_view',{
+				type: 'slide',
+				direction: 'left'
+			});
 		}
 	}],
 	listeners: {

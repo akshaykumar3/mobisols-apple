@@ -114,22 +114,26 @@ gtp.views.CarDetailView = {
 			xtype: 'textfield',
 			id: 'make',
 			name: 'make',
-			label: 'Make'
+			label: 'Make',
+			disabled: true
 		},{
 			xtype: 'textfield',
 			id: 'model',
 			name: 'model',
-			label: 'Model'
+			label: 'Model',
+			disabled: true
 		},{
 			xtype: 'textfield',
 			id: 'year',
 			name: 'year',
-			label: 'year'	
+			label: 'year',
+			disabled: true
 		},{
 			xtype: 'textfield',
 			id: 'color',
 			name: 'color',
-			label: 'Color'
+			label: 'Color',
+			disabled: true
 		}]
 	},{
 		xtype: 'fieldset',
@@ -138,14 +142,11 @@ gtp.views.CarDetailView = {
 			xtype: 'datepickerfield'
 		},
 		items: [{
-			xtype: 'selectfield',
+			xtype: 'textfield',
 			label: 'Ownership',
 			id: 'ownerType',
 			name: 'ownerType',
-			options: [{
-				text: '',
-				value: ''
-			}]
+			disabled: true	
 		},{
 			label: 'From',
 			name: 'startDate',
@@ -194,7 +195,10 @@ gtp.views.CarDetailView = {
 							gtp.log(obj.description);
 							if(resobj.status == "success") {
 								carsList.removeAt(carsList.findExact('reg', stmod.get('reg')));
-								gtp.tabpanel.getActiveItem().setActiveItem('mycars');
+								gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
+									type: 'slide',
+									direction: 'right'
+								});
 								var avbt=gtp.tabpanel.getActiveItem().down('#home').down('#addvehicle');
 								var text = avbt.getText();
 								if(text != 'Add Vehicle') {

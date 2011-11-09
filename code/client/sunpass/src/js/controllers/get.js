@@ -120,13 +120,14 @@ gtp.controllers.fetch = Ext.regController("get",{
 				if(resobj.status == 'success') {
 					gtp.vars.fetchedOwnerTypesList = true;
 					var otl = resobj.response.ownerTypeList;
-					var otlfid = Ext.getCmp('ownerType');
-					if(otlfid)
-					for(var i=0; i<otl.length; i++) {
-						otlfid.setOptions([{
-							text: otl[i].name,
-							value: otl[i].name
-						}],true);
+					var otlfid = gtp.tabpanel.getComponent('mviewport').down('#addcar').down('#ownerType');
+					if(otlfid) {
+						for(var i=0; i<otl.length; i++) {
+							otlfid.setOptions([{
+								text: otl[i].name,
+								value: otl[i].name
+							}],true);
+						}
 					}
 				}
 		      	gtp.showNotifications(resobj.response.notifications);
