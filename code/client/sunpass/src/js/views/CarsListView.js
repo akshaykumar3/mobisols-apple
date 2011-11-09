@@ -11,7 +11,10 @@ gtp.views.CarsListView = {
 			text: 'home',
 			ui: 'back',
 			handler: function(dis) {
-				gtp.tabpanel.getActiveItem().setActiveItem('home');
+				gtp.tabpanel.getActiveItem().setActiveItem('home',{
+					type: 'slide',
+					direction: 'right'
+				});
 			}
 		},{
 			xtype: 'spacer'
@@ -49,7 +52,10 @@ gtp.views.CarsListView = {
 				var record=co.getRecord(co.getNode(index));
 				
 				gtp.tabpanel.getActiveItem().down('#details').load(record);				
-				gtp.tabpanel.getActiveItem().setActiveItem('details');
+				gtp.tabpanel.getActiveItem().setActiveItem('details', {
+					type: 'slide',
+					direction: 'left'
+				});
 			},
 			itemswipe: function(co,index,item,e) {
 				// Try changing the disclosure icon to delete button.

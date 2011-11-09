@@ -35,7 +35,7 @@ gtp.dateValidity = function(start, end) {
 		if(end.getMonth() > start.getMonth())
 			return true;
 		else if(end.getMonth() == start.getMonth()) {
-			if(end.getDate() > start.getDate())
+			if(end.getDate() >= start.getDate())
 				return true;
 			else
 				return false;

@@ -10,7 +10,10 @@ gtp.views.ChangePwdView = {
 			text: 'Settings',
 			ui: 'back',
 			handler: function(but, eve) {
-				gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+				gtp.tabpanel.getActiveItem().setActiveItem('settingsform',{
+					type: 'slide',
+					direction: 'right'
+				});
 			}
 		}]
 	}],
@@ -57,7 +60,10 @@ gtp.views.ChangePwdView = {
 							console.log(res.responseText);
 							if(resobj.status == 'success') {
 								gtp.utils.dataStore.setValueOfKey('password', newpwd);
-								gtp.tabpanel.getActiveItem().setActiveItem('settingsform');
+								gtp.tabpanel.getActiveItem().setActiveItem('settingsform',{
+									type: 'slide',
+									direction: 'right'
+								});
 								if(Ext.is.iPhone) {
 	                                var ddp = window.plugins.DeviceDetailsPlugin;
 	                                if(ddp) {

@@ -29,6 +29,7 @@ gtp.FetchUserData = function(options) {
 					gtp.mylocation_marker.setPosition(new google.maps.LatLng(geo.latitude,geo.longitude));
 					gtp.mylocation_accuracy.setCenter(new google.maps.LatLng(geo.latitude,geo.longitude));
 					gtp.mylocation_accuracy.setRadius(geo.accuracy);
+					Ext.getCmp('mappanel').map.setCenter(new google.maps.LatLng(geo.latitude, geo.longitude));
 				}
 	        },
 	        locationerror: function ( geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
