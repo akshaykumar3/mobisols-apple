@@ -1,11 +1,8 @@
 package com.mobisols.tollpayments.request.post;
 
-import java.sql.Timestamp;
-
 public class HeartBeatRequest {
 	private String deviceId;
 	private String deviceType;
-	private Timestamp timeStamp;
 	private Double latitude;
 	private Double longitude;
 	private Double angle;
@@ -24,12 +21,7 @@ public class HeartBeatRequest {
 	public void setDeviceType(String deviceType) {
 		this.deviceType = deviceType;
 	}
-	public Timestamp getTimeStamp() {
-		return timeStamp;
-	}
-	public void setTimeStamp(Timestamp timeStamp) {
-		this.timeStamp = timeStamp;
-	}
+	
 	public Double getLatitude() {
 		return latitude;
 	}

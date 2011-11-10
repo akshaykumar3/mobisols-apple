@@ -69,7 +69,7 @@
 				cascade="save-update"
 				insert="false"
 				update="false"
-				unique="true"/>
+				/>
 			
  <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>

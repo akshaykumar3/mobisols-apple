@@ -23,6 +23,7 @@ public class MakeAndModelServiceImpl implements MakeAndModelService {
 		{
 			Make make = it.next();
 			com.mobisols.tollpayments.response.get.Make makeResponse = new com.mobisols.tollpayments.response.get.Make();
+			System.out.println(make.getModel().size());
 			for(Iterator<Model> it1 = make.getModel().iterator();it1.hasNext();)
 			{
 				Model model = it1.next();
