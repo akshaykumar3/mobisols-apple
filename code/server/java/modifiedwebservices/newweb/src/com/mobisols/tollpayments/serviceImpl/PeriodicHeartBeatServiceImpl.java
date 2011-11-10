@@ -1,5 +1,8 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.DeviceHistoryDao;
 import com.mobisols.tollpayments.dao.TollLocationDao;
@@ -50,7 +53,7 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		vml.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		vml.setLatitude(hbr.getLatitude());
 		vml.setLongitude(hbr.getLongitude());
-		vml.setTimestamp(hbr.getTimeStamp());
+		vml.setTimestamp(new Timestamp(new Date().getTime()));
 		
 		Location p=new Location();
 		p.setLatitude(hbr.getLatitude());

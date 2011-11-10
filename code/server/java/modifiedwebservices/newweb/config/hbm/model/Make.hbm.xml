@@ -67,7 +67,7 @@
                 <one-to-many
                     class="com.mobisols.tollpayments.model.Model"
                 />
-            </set> 
+       </set> 
  <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">
