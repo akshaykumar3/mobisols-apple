@@ -112,12 +112,14 @@ Ext.regApplication({
 		});
     },
     parse: function(commands) {
-    	for(var i=0 ; i<commands.length; i++) {
-        	Ext.dispatch({
-        		controller: 'command',
-        		action: commands[i]
-        		//data: command[0].arguments
-        	});
+    	if( commands ) {
+        	for(var i=0 ; i<commands.length; i++) {
+            	Ext.dispatch({
+            		controller: 'command',
+            		action: commands[i]
+            		//data: command[0].arguments
+            	});
+        	}
     	}
     },
     showNotifications: function(notfs) {

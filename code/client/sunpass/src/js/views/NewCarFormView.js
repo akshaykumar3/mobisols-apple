@@ -8,8 +8,7 @@ gtp.views.NewCarFormView = {
 			co.load(Ext.ModelMgr.create({
 				startDate: gtp.today(),
 				endDate: null,
-				isActive: 'N',
-				ownerType: 'primary owner'
+				isActive: 'N'
 			},'Cars'));
 			return true;
 		}
@@ -246,6 +245,7 @@ gtp.views.NewCarFormView = {
 			label: 'To',
 			id: 'endDate',
 			name: 'endDate',
+			placeHolder: 'No end date',
 			picker: {
 				yearFrom: gtp.today().getFullYear(),
 				yearTo: gtp.today().getFullYear()+10
