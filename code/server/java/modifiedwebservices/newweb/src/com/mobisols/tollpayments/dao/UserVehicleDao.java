@@ -18,7 +18,7 @@ public interface UserVehicleDao {
 	public void delete(UserVehicle uv);
 	public void save(UserVehicle uv);
 	public UserVehicle getVehicle(int vehicleId);
-	public List<UserVehicle> getActiveVehicles();
-	public List getStandByVehicles();
+	public List<UserVehicle> getActiveVehicles(String username);
+	public List getStandByVehicles(String username);
 	
 }

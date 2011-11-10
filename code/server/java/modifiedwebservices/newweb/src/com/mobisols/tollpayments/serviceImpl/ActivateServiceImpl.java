@@ -27,7 +27,7 @@ public class ActivateServiceImpl implements ActivateService {
 		
 		if(ar.getActive().equals("Y"))
 		{
-			List<UserVehicle> standByVehicles = userVehicleDao.getStandByVehicles();
+			List<UserVehicle> standByVehicles = userVehicleDao.getStandByVehicles(userName);
 			if(u.getIsActive().equals(UserDao.USER_INACTIVE) && standByVehicles.isEmpty())
 			{
 				response.getNotifications().add("Add a Vehicle");
@@ -77,7 +77,7 @@ public class ActivateServiceImpl implements ActivateService {
 		{
 			if(u.getIsActive().equals(UserDao.USER_ACTIVE))
 			{
-				List activeVehicles = userVehicleDao.getActiveVehicles();
+				List activeVehicles = userVehicleDao.getActiveVehicles(userName);
 				for(Iterator<UserVehicle> it = activeVehicles.iterator();it.hasNext();)
 				{
 					UserVehicle uv = it.next();

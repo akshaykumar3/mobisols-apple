@@ -6,7 +6,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserVehicle;
@@ -57,16 +60,24 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 	}
 
 	@Override
-	public List getActiveVehicles() {
+	public List getActiveVehicles(String username) {
 		Session s = HibernateSessionFactory.getSession();
+		String[] configFiles = new String[] { "/spring/dao.xml" };  
+        BeanFactory factory =  new ClassPathXmlApplicationContext(configFiles);  
+        UserDao userDao  =  (UserDao ) factory.getBean("dao.tollpayments.userDao");
 		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("userId", userDao.getUser(username).getUserId()));
 		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_ACTIVE));
 		return crit.list();
 	}
 
-	public List getStandByVehicles(){
+	public List getStandByVehicles(String username){
 		Session s =HibernateSessionFactory.getSession();
+		String[] configFiles = new String[] { "/spring/dao.xml" };  
+        BeanFactory factory =  new ClassPathXmlApplicationContext(configFiles);  
+        UserDao userDao  =  (UserDao ) factory.getBean("dao.tollpayments.userDao");
 		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("userId", userDao.getUser(username).getUserId()));
 		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_STANDBY));
 		return crit.list();
 	}
