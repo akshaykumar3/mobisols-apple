@@ -156,7 +156,7 @@ gtp.views.CarDetailView = {
 			label: 'To',
 			name: 'endDate',
 			id: 'dpto',
-			placeHolder: 'end date',
+			placeHolder: 'No end date',
 			picker: {
 				yearFrom: gtp.today().getFullYear(),
 				yearTo: gtp.today().getFullYear()+10
@@ -165,7 +165,7 @@ gtp.views.CarDetailView = {
 				change: function(curobj, newValue, oldValue) {
 					if(newValue != oldValue) {
 						gtp.tabpanel.getActiveItem().down('#details').updateRecord(gtp.tabpanel.getActiveItem().down('#details').getRecord());
-						Ext.getCmp('changevd').setDisabled(false);
+						gtp.tabpanel.getActiveItem().down('#details').down('#changevd').setDisabled(false);
 					}
 				}
 			}

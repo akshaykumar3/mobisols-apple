@@ -281,7 +281,7 @@ gtp.views.SettingsFormView = {
 			id: 'zip',
 			useClearIcon: true
 		},{
-			xtype: 'numberfield',
+			xtype: 'zipfield',
 			name: 'phoneno',
 			id: 'phoneno',
 			label: 'Number',
