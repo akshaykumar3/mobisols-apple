@@ -101,6 +101,14 @@
 			update="false"
 			unique="true"/>
             
+            <many-to-one name="model"
+			class="com.mobisols.tollpayments.model.Model"
+			column="model_id"
+			cascade="save-update"
+			insert="false"
+			update="false"
+			/>
+			
             <set name="tollDetails" inverse="true">
              <key update="false">
              <column name="uvh_id" not-null="true"/>

@@ -1,12 +1,7 @@
 package com.mobisols.tollpayments.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
-import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserVehicle;
 
 public interface UserVehicleDao {
@@ -26,4 +21,7 @@ public interface UserVehicleDao {
 	public List<UserVehicle> getActiveVehicles();
 	public List getStandByVehicles();
 	public List<UserVehicle> getAllActiveVehicles();
+	public List<UserVehicle> getActiveVehicles(String reg,String state);
+	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp expiry);
+	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp start,Timestamp expiry);
 }

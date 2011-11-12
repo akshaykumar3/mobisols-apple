@@ -102,6 +102,12 @@
             <property name="type" type="java.lang.String">
                 <column name="type" length="30" />
             </property>
+            <property name="name" type="java.lang.String">
+                <column name="name" length="45" />
+            </property>
+            <property name="description" type="java.lang.String">
+                <column name="description" length="100" />
+            </property>
             
             <many-to-one name="tollLocation"
                 class="com.mobisols.tollpayments.model.TollLocation"

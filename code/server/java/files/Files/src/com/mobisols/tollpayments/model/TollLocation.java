@@ -40,6 +40,8 @@ public class TollLocation implements java.io.Serializable {
 	private Double longitude;
 	private String direction;
 	private String type;
+	private String name;
+	private String description;
 	private TollOperator tollOperator;
 	
 	private Set<TollPrice> tollPrice;
@@ -544,6 +546,22 @@ public class TollLocation implements java.io.Serializable {
 
 	public Set<TollPrice> getTollPrice() {
 		return tollPrice;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 }
