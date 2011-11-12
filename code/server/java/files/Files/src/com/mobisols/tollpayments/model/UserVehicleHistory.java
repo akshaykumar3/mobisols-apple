@@ -43,12 +43,21 @@ public class UserVehicleHistory implements java.io.Serializable {
 	private String color;
 	private Integer manufacturedYear;
     private UserVehicle userVehicle;
+    private Model model;
     private Set<VehicleTollUsage> tollDetails;
  
 	// Constructors
 
 	public UserVehicle getUserVehicle() {
 		return userVehicle;
+	}
+
+	public Model getModel() {
+		return model;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
 	}
 
 	public void setUserVehicle(UserVehicle userVehicle) {
@@ -559,5 +568,7 @@ public class UserVehicleHistory implements java.io.Serializable {
 				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
 		return result;
 	}
+
+	
 
 }

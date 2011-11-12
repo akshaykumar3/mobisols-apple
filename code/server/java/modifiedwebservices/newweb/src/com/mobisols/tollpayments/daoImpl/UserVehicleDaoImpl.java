@@ -1,10 +1,12 @@
 package com.mobisols.tollpayments.daoImpl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -81,6 +83,47 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_STANDBY));
 		return crit.list();
 	}
+	public List<UserVehicle> getAllActiveVehicles(){
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_ACTIVE));
+		return crit.list();
+	}
+
+	@Override
+	public List<UserVehicle> getActiveVehicles(String reg, String state) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("registrationNo", reg));
+		crit.add(Restrictions.eq("registeredState", state));
+		crit.add(Restrictions.disjunction().add(Restrictions.eq("isActive", "Y")).add(Restrictions.eq("isActive", "T")));
+		crit.addOrder(Order.desc("vehicleEndDate"));
+		return crit.list();
+	}
+
+	@Override
+	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp expiry) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("registrationNo", reg));
+		crit.add(Restrictions.eq("registeredState", state));
+		crit.add(Restrictions.disjunction().add(Restrictions.eq("isActive", "Y")).add(Restrictions.eq("isActive", "T")));
+		crit.add(Restrictions.eq("vehicleEndDate", expiry));
+		crit.addOrder(Order.desc("vehicleStartDate"));
+		return crit.list();
+	}
 	
+	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp start,Timestamp expiry) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicle.class);
+		crit.add(Restrictions.eq("registrationNo", reg));
+		crit.add(Restrictions.eq("registeredState", state));
+		crit.add(Restrictions.disjunction().add(Restrictions.eq("isActive", "Y")).add(Restrictions.eq("isActive", "T")));
+		crit.add(Restrictions.eq("vehicleEndDate", expiry));
+		crit.add(Restrictions.eq("vehicleStartDate", start));
+		crit.addOrder(Order.desc("userVehicleId"));
+		return crit.list();
+	}
+
 	
 }

@@ -34,4 +34,13 @@ public class TollLocationDaoImpl implements TollLocationDao {
 		TollLocation t = (TollLocation) crit.uniqueResult();
 		return t;
 	}
+
+
+	@Override
+	public TollLocation getTollLocation(String name) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(TollLocation.class);
+		crit.add(Restrictions.eq("name", name));
+		return (TollLocation) crit.uniqueResult();
+	}
 }

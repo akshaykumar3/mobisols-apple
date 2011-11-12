@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.mobisols.tollpayments.model.UserVehicle;
@@ -20,5 +21,8 @@ public interface UserVehicleDao {
 	public UserVehicle getVehicle(int vehicleId);
 	public List<UserVehicle> getActiveVehicles(String username);
 	public List getStandByVehicles(String username);
-	
+	public List<UserVehicle> getAllActiveVehicles();
+	public List<UserVehicle> getActiveVehicles(String reg,String state);
+	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp expiry);
+	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp start,Timestamp expiry);
 }
