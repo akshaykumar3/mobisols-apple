@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.aspectj.util.FileUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -75,7 +77,7 @@ public class Main {
 	    }
 	}
 	
-	public static void generateIncrementalPLT(int from,int to){
+	/*public static void generateIncrementalPLT(int from,int to){
 		SimpleDateFormat format  = new SimpleDateFormat("MMddyy'_'HHmmss");
 		String date  = format.format(new Date());
 		String pltFile = SENDER_CODE+"_"+RECIEVER_CODE+"_"+date+"_"+ACCOUNT_NUMBER+
@@ -165,6 +167,67 @@ public class Main {
 	        }
 	        writer.close();
 	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	}*/
+	
+	public static void generateIncrementalPLT(int from,int to){
+		SimpleDateFormat format  = new SimpleDateFormat("MMddyy'_'HHmmss");
+		String date  = format.format(new Date());
+		String pltFile = SENDER_CODE+"_"+RECIEVER_CODE+"_"+date+"_"+ACCOUNT_NUMBER+
+				"_"+".PLT";
+		try {
+	        File file = new File(pltFile);
+	        file.createNewFile();
+	        FileWriter fstream = new FileWriter(file);
+	        BufferedWriter writer = new BufferedWriter(fstream);
+	        
+	        //TODO change the temperory file to read from database
+	        File tempFile = new File("temp.txt");
+	        BufferedReader reader = null;
+	        FileReader stream = new FileReader(tempFile);
+			reader = new BufferedReader(stream);
+			String row = reader.readLine();
+			while(row!=null){
+				//String col[] = row.split(",");
+				row.replaceFirst("[,][A][,]", ",D,");
+				writer.write(row);
+				row = reader.readLine();
+			}
+			reader.close();
+			stream.close();
+	        String[] paths = {
+	                 "/spring/dao.xml"
+	            };
+	        tempFile.delete();
+	        tempFile.createNewFile();
+	        FileWriter tempFileWriter = new FileWriter(tempFile);
+	        BufferedWriter tempWriter = new BufferedWriter(tempFileWriter);
+	        ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
+	        UserVehicleDao userVehicleDao =  (UserVehicleDao) ctx.getBean("dao.tollpayments.userVehicleDao");
+	        List<UserVehicle> vehicleList=userVehicleDao.getAllActiveVehicles();
+	        for(Iterator<UserVehicle> it = vehicleList.iterator();it.hasNext();)
+	        {
+	        	UserVehicle u = it.next();
+	        	tempWriter.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
+	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
+	        			new SimpleDateFormat("MMddyy").format(u.getVehicleStartDate())+
+	        			","+","+u.getVin()+"\n");
+	        }
+	       
+	        tempWriter.close();
+	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
+	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
+	        		new SimpleDateFormat("MMddyy").format(new Date())+","+FileUtils.checksumCRC32(tempFile)+"\n");
+	        stream = new FileReader(tempFile);
+			reader = new BufferedReader(stream);
+			String record = reader.readLine();
+			while(record!=null){
+				writer.write(record);
+				record = reader.readLine();
+			}
+			 writer.close();
+		} catch (IOException e) {
 	    	e.printStackTrace();
 	    }
 	}
