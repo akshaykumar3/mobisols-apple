@@ -40,16 +40,24 @@ gtp.views.NewCarFormView = {
 				if(acfd.endDate)
 				var validEndDate = gtp.dateValidity(gtp.today(), acfd.endDate);
 				
-				if(acfd.st == "")
-					Ext.Msg.alert('enter state field');
-				else if(acfd.rg == "")
+				if(acfd.st == "") {
+					Ext.Msg.alert('Enter state field');
+				} 
+				else if(acfd.rg == "") {
 					Ext.Msg.alert("Enter registration number");
-				else if(acfd.tp == "")
+				}
+				else if(acfd.tp == "") {
 					Ext.Msg.alert('Select car type');
-				else if(!gtp.validateCar(acfd.rg, acfd.st))
+				}
+				else if(!gtp.validateCar(acfd.rg, acfd.st)) {
 					Ext.Msg.alert('Invalid','Registration Number');
-				else if(acfd.endDate && !validEndDate)
+				}
+				else if(acfd.endDate && !validEndDate) {
 					Ext.Msg.alert('End Date','Incorrect Value');
+				}
+				else if(acfd.ownerType == 'Rental' && (acfd.endDate == null || acfd.endDate == '')) {
+					Ext.Msg.alert('Rental Car', 'Specify End Date');
+				}
 				else {
 					gtp.tabpanel.setLoading({
 						msg: 'Adding Vehicle..'
@@ -62,10 +70,10 @@ gtp.views.NewCarFormView = {
 							json: Ext.encode({
 								state: acfd.st,
 								registration: acfd.rg,
-								type: acfd.tp,
+								type: (acfd.tp == '') ? null : acfd.tp,
 								isActive: "N",
 								startDate: gtp.today().format('M j, Y g:i:s A'), // Valid date format on server side.
-								endDate: (acfd.endDate == null) ? null : acfd.endDate.format('M j, Y g:i:s A'),
+								endDate: (acfd.endDate == null || acfd.endDate == '') ? null : acfd.endDate.format('M j, Y g:i:s A'),
 								ownerType: (acfd.ownerType == '' || acfd.ownerType == null) ? null:acfd.ownerType, 
 								vehicleId: null,
 								vin: null,

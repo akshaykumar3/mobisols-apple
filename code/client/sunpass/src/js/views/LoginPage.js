@@ -8,7 +8,7 @@ gtp.views.LoginPage = {
 	items: [{
 		html: 'Username:'
 	},{
-		xtype: 'emailfield',
+		xtype: 'zipfield',
 		id: 'lpemailid',
 		placeHolder: 'Email',
 		border: '10 5 3 10',
@@ -36,103 +36,9 @@ gtp.views.LoginPage = {
 					Ext.Msg.alert(gtp.dict.loginform_password);
 				}
 				else {
-					gtp.views.Viewport.setLoading({
-						msg: 'Signing in..'
-					},true);
-					var un = Ext.getCmp('lpemailid').getValue();
-					var pwd = Ext.getCmp('lppassword').getValue();
-					Ext.Ajax.request({
-						url: webServices.getAt(webServices.findExact('service','logging')).get('url'),
-						params: {
-							json: Ext.encode({
-								userName: un,
-								password: pwd,
-								deviceDetails: {
-									deviceId: gtp.deviceId,
-									deviceName: gtp.detectDeviceType()
-								} 
-							})
-						},
-						success: function(response){
-							gtp.views.Viewport.setLoading(false);
-							var decres=Ext.decode(response.responseText);
-							var res=decres.response.response;
-							
-							if(decres.status == 'success') {
-								if(res.userExists=="Y" && res.passwordCorrect=="Y") {
-									// Get client Configuration.
-							    	Ext.dispatch({
-							    		controller: 'get',
-							    		action: 'configuration'
-							    	});
-									
-									// Store username and password locally.
-									gtp.utils.dataStore.setValueOfKey('username', un);
-									gtp.utils.dataStore.setValueOfKey('password', pwd);
-									
-									var encodedString=base64_encode(un+':'+pwd);
-									Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
-									Ext.dispatch({
-										controller: 'load',
-										action: 'view',
-										loginDetails: {
-											username: un,
-											password: pwd
-										}
-									});
-
-	                                if(!gtp.tolls) {
-		                                gtp.getTolls();
-	                                }
-	                                
-									if(Ext.is.iPhone) {
-		                                var ddp = window.plugins.DeviceDetailsPlugin;
-		                                if(ddp) {
-			                                ddp.setDetails(Ext.encode({
-			                                    deviceId: gtp.deviceId,
-			                                    username: un,
-			                                    password: pwd
-			                                }));
-		                                }
-		                                // if user app is enabled. invoke heartbeat plugin upon launch.
-		                                var actp = window.plugins.ActivatePlugin;
-		                                if(actp && res.isActive == 'Y') {
-		                                    actp.activate();
-		                                }
-									}
-									else if(Ext.is.Android) {
-										window.plugins.DeviceDetailsPlugin.setValue('username',un,function(){},function(){});
-										window.plugins.DeviceDetailsPlugin.setValue('password',pwd,function(){},function(){});
-
-										if(res.isActive == 'Y') {
-											window.plugins.ActivatePlugin.activate();
-										}
-									}
-									
-									if(res.isActive == 'Y') {
-	                                    var but = Ext.getCmp('home').down('#tfd');
-	                                    but.setText('Deactivate');
-	                                    but.getEl().removeCls('x-button-confirm');
-	                                    but.getEl().addCls('x-button-decline');
-									}
-	                                																		
-								}
-								else if(res.userExists=="Y" && res.passwordCorrect=="N"){
-									Ext.Msg.alert('Incorrect',gtp.dict.loginform_pwd_fail);
-								}
-								else {
-									Ext.Msg.alert('Incorrect', gtp.dict.login_failure);
-								}
-							}
-							gtp.showNotifications(decres.response.notifications);
-							gtp.parse(decres.response.commands);
-						},
-						failure: function(response){
-							gtp.views.Viewport.setLoading(false);
-							Ext.Msg.alert(gtp.dict.login_failure);
-							gtp.log('Login Authentication failed with status: '+response.status);
-							console.log('Login Authentication failed with status: '+response.status);
-						}
+					Ext.dispatch({
+						controller: 'command',
+						action: 'loginuser'
 					});
 				}
 			}

@@ -39,6 +39,17 @@ Ext.regApplication({
             controller: 'load',
             action    : 'show',
 	    });
+    	
+    	var devid = gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
+    	var un = gtp.utils.dataStore.getValueOfKey('username');
+    	var pwd = gtp.utils.dataStore.getValueOfKey('password');
+    	if( gtp.views.Viewport && devid && un && pwd ) {
+    		// do auto login of user.
+			Ext.dispatch({
+				controller: 'command',
+				action: 'loginuser'
+			});    		
+    	}
     },
     detectDeviceType: function(){
     	if(Ext.is.iPhone)
@@ -117,15 +128,14 @@ Ext.regApplication({
             	Ext.dispatch({
             		controller: 'command',
             		action: commands[i]
-            		//data: command[0].arguments
             	});
         	}
     	}
     },
     showNotifications: function(notfs) {
-    	//if(notfs && notfs.message)
-    	if(notfs && notfs[0])
+    	if(notfs && notfs[0]) {
     		Ext.Msg.alert('Notification',notfs[0]);
+    	}
     },
     responseFailureHandler: function(res, message) {
     	// log to the logger store.
@@ -144,8 +154,9 @@ Ext.regApplication({
     	}
     	else if(res.status == 500) {
         	msg = "Server down temporarily, Please try after some time";
-    		if(gtp.tabpanel)
+    		if(gtp.tabpanel) {
     			gtp.tabpanel.destroy();
+    		}
 			new Ext.Panel({
 				fullscreen: true,
 				html: msg
