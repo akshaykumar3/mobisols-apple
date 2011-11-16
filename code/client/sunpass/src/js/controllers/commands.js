@@ -27,21 +27,27 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 			method: 'GET',
 			params: {
 				json: Ext.encode({				
-					componentName: gtp.detectDeviceType,
+					componentName: 'server',
 					version: '1.0'// This will be hard coded value on the client side.
 				})
 			},
 			success: function(response) {
-				console.log('Client Configuration response '+response.responseText);
-				var obj=Ext.decode(response.responseText);
-				gtp.cfg=obj.response;
-				gtp.showNotifications(obj.response.notifications);
-				gtp.parse(obj.response.commands);
+				var obj = Ext.decode(response.responseText);
+				if(obj.status == 'success') {
+					gtp.cfg = obj.response;
+					if(Ext.is.iPhone) {
+	                    var ccp = window.plugins.ClientConfig;
+	                    ccp.setClientConfig(Ext.encode(gtp.cfg));
+					}
+					else if(Ext.is.Android) {
+						window.plugins.ClientConfigPlugin.setClientConfig(obj.response,function(result){},function(error){});
+					}
+				}
+		      	gtp.showNotifications(obj.response.notifications);
+		      	gtp.parse(obj.response.commands);
 			},
 			failure: function(response) {
 				console.log("Client config failure with status "+response.status);
-				gtp.responseFailureHandler(response);
-				gtp.log("Client config failure with status "+response.status);
 			}
 		});
 	},
@@ -51,9 +57,8 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 	},
 	
 	killapp: function(options) {
-		Ext.Msg.alert('Mismatch', 'Re-enter ur password');
-		gtp.views.Viewport.show();
 		gtp.tabpanel.destroy();
+		gtp.views.Viewport.show();
 	},
 	
 	commandAck: function(options) {
@@ -62,11 +67,14 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 			method: 'GET',
 			success: function(response) {
 				var obj = Ext.decode(response.responseText);
+				if(obj.status == 'success') {
+					// perform logic here.
+				}
 				gtp.showNotifications(obj.response.notifications);
 				gtp.parse(obj.response.commands);
 			},
 			failure: function(response) {
-				
+				gtp.log(response.error+'command acknowledge service');
 			}
 		});
 	}, 
@@ -112,5 +120,123 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 	    		});
 			}
 		});
+	}, 
+	
+	activateApplication: function(options) {
+		if(window.plugins.ActivatePlugin) {
+			window.plugins.ActivatePlugin.activate();
+		}
+	},
+	
+	deactivateApplication: function(options) {
+		if(window.plugins.ActivatePlugin) {
+			window.plugins.ActivatePlugin.deactivate();
+		}
+	},
+	
+	showTab: function(options) {
+		
+	},
+	
+	loginuser: function(options) {
+		gtp.views.Viewport.setLoading({
+			msg: 'Signing in..'
+		},true);
+		var un = Ext.getCmp('lpemailid').getValue();
+		var pwd = Ext.getCmp('lppassword').getValue();
+		Ext.Ajax.request({
+			url: webServices.getAt(webServices.findExact('service','logging')).get('url'),
+			params: {
+				json: Ext.encode({
+					userName: un,
+					password: pwd,
+					deviceDetails: {
+						deviceId: gtp.deviceId,
+						deviceName: gtp.detectDeviceType()
+					} 
+				})
+			},
+			success: function(response){
+				gtp.views.Viewport.setLoading(false);
+				var decres=Ext.decode(response.responseText);
+				var res=decres.response.response;
+				
+				if(decres.status == 'success') {
+					if(res.userExists=="Y" && res.passwordCorrect=="Y") {
+						// Get client Configuration.
+				    	Ext.dispatch({
+				    		controller: 'get',
+				    		action: 'configuration'
+				    	});
+						
+						// Store username and password locally.
+						gtp.utils.dataStore.setValueOfKey('username', un);
+						gtp.utils.dataStore.setValueOfKey('password', pwd);
+						
+						var encodedString=base64_encode(un+':'+pwd);
+						Ext.Ajax.defaultHeaders.Authorization= "Basic "+encodedString;
+						Ext.dispatch({
+							controller: 'load',
+							action: 'view',
+							loginDetails: {
+								username: un,
+								password: pwd
+							}
+						});
+
+                        if(!gtp.tolls) {
+                            gtp.getTolls();
+                        }
+                        
+						if(Ext.is.iPhone) {
+                            var ddp = window.plugins.DeviceDetailsPlugin;
+                            if(ddp) {
+                                ddp.setDetails(Ext.encode({
+                                    deviceId: gtp.deviceId,
+                                    username: un,
+                                    password: pwd
+                                }));
+                            }
+                            // if user app is enabled. invoke heartbeat plugin upon launch.
+                            var actp = window.plugins.ActivatePlugin;
+                            if(actp && res.isActive == 'Y') {
+                                actp.activate();
+                            }
+						}
+						else if(Ext.is.Android) {
+							window.plugins.DeviceDetailsPlugin.setValue('username',un,function(){},function(){});
+							window.plugins.DeviceDetailsPlugin.setValue('password',pwd,function(){},function(){});
+
+							if(res.isActive == 'Y') {
+								window.plugins.ActivatePlugin.activate();
+							}
+						}
+						
+						if(res.isActive == 'Y') {
+                            var but = Ext.getCmp('home').down('#tfd');
+                            but.setText('Deactivate');
+                            but.getEl().removeCls('x-button-confirm');
+                            but.getEl().addCls('x-button-decline');
+						}
+                        																		
+					}
+					else if(res.userExists=="Y" && res.passwordCorrect=="N"){
+						Ext.Msg.alert('Incorrect',gtp.dict.loginform_pwd_fail);
+					}
+					else {
+						Ext.Msg.alert('Incorrect', gtp.dict.login_failure);
+					}
+				}
+				gtp.showNotifications(decres.response.notifications);
+				gtp.parse(decres.response.commands);
+			},
+			failure: function(response){
+				gtp.views.Viewport.setLoading(false);
+				Ext.Msg.alert(gtp.dict.login_failure);
+				gtp.log('Login Authentication failed with status: '+response.status);
+				console.log('Login Authentication failed with status: '+response.status);
+			}
+		});
+		
 	}
 });
