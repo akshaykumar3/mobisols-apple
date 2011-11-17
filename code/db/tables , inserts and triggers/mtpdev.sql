@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2011 at 03:20 PM
+-- Generation Time: Nov 17, 2011 at 04:42 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -1216,7 +1216,7 @@ CREATE TABLE IF NOT EXISTS `toll_location_all` (
   KEY `fk_toll_op_id` (`toll_operator_id`),
   KEY `fk_last_mod_by_tla` (`last_modified_by`),
   KEY `fk_client_tl` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table maps the location with corresponding toll operato' AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table maps the location with corresponding toll operato' AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `toll_location_all`
