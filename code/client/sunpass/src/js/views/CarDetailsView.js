@@ -156,7 +156,9 @@ gtp.views.CarDetailView = {
 			label: 'To',
 			name: 'endDate',
 			id: 'dpto',
-			placeHolder: 'No end date',
+			renderData: {
+				placeHolder: 'No end date',
+			},
 			picker: {
 				yearFrom: gtp.today().getFullYear(),
 				yearTo: gtp.today().getFullYear()+10
