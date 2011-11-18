@@ -7,7 +7,7 @@ gtp.views.NewCarFormView = {
 			co.reset();
 			co.load(Ext.ModelMgr.create({
 				startDate: gtp.today(),
-				endDate: null,
+				endDate: '',
 				isActive: 'N'
 			},'Cars'));
 			return true;
@@ -33,7 +33,7 @@ gtp.views.NewCarFormView = {
 			xtype: 'button',
 			id: 'addcarconfirm',
 			text: 'add',
-			ui: 'confirm',
+			ui: 'action',
 			disabled: true,
 			handler: function(button, event) {
 				var acfd = gtp.tabpanel.getActiveItem().down('#addcar').getValues(true);
@@ -253,7 +253,9 @@ gtp.views.NewCarFormView = {
 			label: 'To',
 			id: 'endDate',
 			name: 'endDate',
-			placeHolder: 'No end date',
+			renderData: {
+				placeHolder: 'No End Date'
+			},
 			picker: {
 				yearFrom: gtp.today().getFullYear(),
 				yearTo: gtp.today().getFullYear()+10

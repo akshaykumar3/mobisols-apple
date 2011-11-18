@@ -31,6 +31,16 @@ Ext.regApplication({
     	else {
     		gtp.deviceId = gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
     		console.log('device is already registered: '+gtp.deviceId);
+    		
+        	var un = gtp.utils.dataStore.getValueOfKey('username');
+        	var pwd = gtp.utils.dataStore.getValueOfKey('password');
+        	if( gtp.views.Viewport && this.deviceId && un && pwd ) {
+        		// do auto login of user.
+    			Ext.dispatch({
+    				controller: 'command',
+    				action: 'loginuser'
+    			});    		
+        	}
     	}
     },
     launchLoginPage: function(){
@@ -40,16 +50,6 @@ Ext.regApplication({
             action    : 'show',
 	    });
     	
-    	var devid = gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
-    	var un = gtp.utils.dataStore.getValueOfKey('username');
-    	var pwd = gtp.utils.dataStore.getValueOfKey('password');
-    	if( gtp.views.Viewport && devid && un && pwd ) {
-    		// do auto login of user.
-			Ext.dispatch({
-				controller: 'command',
-				action: 'loginuser'
-			});    		
-    	}
     },
     detectDeviceType: function(){
     	if(Ext.is.iPhone)
