@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.aspectj.util.FileUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -26,7 +26,6 @@ import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
 import com.mobisols.tollpayments.dao.VehicleTollUsageDao;
 import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.TollLocation;
-import com.mobisols.tollpayments.model.TollLocationHistory;
 import com.mobisols.tollpayments.model.TollPriceHistory;
 import com.mobisols.tollpayments.model.UserVehicle;
 import com.mobisols.tollpayments.model.UserVehicleHistory;
@@ -188,10 +187,19 @@ public class Main {
 	        FileReader stream = new FileReader(tempFile);
 			reader = new BufferedReader(stream);
 			String row = reader.readLine();
+			Calendar expDate = Calendar.getInstance();
+			File tempFile1 = new File("temp1.txt");
+	        BufferedWriter temp1Writer = new BufferedWriter(new FileWriter(tempFile1));
 			while(row!=null){
-				//String col[] = row.split(",");
-				row.replaceFirst("[,][A][,]", ",D,");
-				writer.write(row);
+				String col[] = row.split(",");
+				col[1]="D";
+				col[7]=new SimpleDateFormat("MMddyyyy").format(expDate.getTime());
+				String record = "";
+				for(int i=0;i<8;i++){
+					record = record+col[i]+",";
+				}
+				record = record+ col[8]+"\n";
+				temp1Writer.write(record);
 				row = reader.readLine();
 			}
 			reader.close();
@@ -205,28 +213,35 @@ public class Main {
 	        BufferedWriter tempWriter = new BufferedWriter(tempFileWriter);
 	        ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
 	        UserVehicleDao userVehicleDao =  (UserVehicleDao) ctx.getBean("dao.tollpayments.userVehicleDao");
+	        Date today = new Date(); 
 	        List<UserVehicle> vehicleList=userVehicleDao.getAllActiveVehicles();
 	        for(Iterator<UserVehicle> it = vehicleList.iterator();it.hasNext();)
 	        {
 	        	UserVehicle u = it.next();
-	        	tempWriter.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
+	        	temp1Writer.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
 	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
-	        			new SimpleDateFormat("MMddyy").format(u.getVehicleStartDate())+
+	        			new SimpleDateFormat("MMddyyyy").format(today)+
+	        			","+","+u.getVin()+"\n");
+	        	tempFileWriter.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
+	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
+	        			new SimpleDateFormat("MMddyy").format(today)+
 	        			","+","+u.getVin()+"\n");
 	        }
-	       
-	        tempWriter.close();
+	        temp1Writer.close();
 	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
 	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
-	        		new SimpleDateFormat("MMddyy").format(new Date())+","+FileUtils.checksumCRC32(tempFile)+"\n");
-	        stream = new FileReader(tempFile);
+	        		new SimpleDateFormat("MMddyy").format(today)+","+Long.toHexString(FileUtils.checksumCRC32(tempFile1))+"\n");
+	        stream = new FileReader(tempFile1);
 			reader = new BufferedReader(stream);
 			String record = reader.readLine();
 			while(record!=null){
-				writer.write(record);
+				writer.write(record+"\n");
 				record = reader.readLine();
 			}
 			 writer.close();
+			 reader.close();
+			 tempWriter.close();
+			 tempFile1.delete();
 		} catch (IOException e) {
 	    	e.printStackTrace();
 	    }

@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.daoImpl;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -76,7 +77,12 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 	public List<UserVehicle> getAllActiveVehicles(){
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);
-		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_ACTIVE));
+		crit.add(Restrictions.disjunction().add(Restrictions.eq("isActive", UserVehicleDao.VEHICLE_ACTIVE)).add(Restrictions.eq("isActive", UserVehicleDao.VEHICLE_STANDBY)));
+		Calendar c= Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		crit.add(Restrictions.ge("vehicleEndDate",new Timestamp(c.getTime().getTime() )));
 		return crit.list();
 	}
 
@@ -86,7 +92,7 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		Criteria crit = s.createCriteria(UserVehicle.class);
 		crit.add(Restrictions.eq("registrationNo", reg));
 		crit.add(Restrictions.eq("registeredState", state));
-		crit.add(Restrictions.disjunction().add(Restrictions.eq("isActive", "Y")).add(Restrictions.eq("isActive", "T")));
+		crit.add(Restrictions.disjunction().add(Restrictions.eq("isActive", UserVehicleDao.VEHICLE_ACTIVE)).add(Restrictions.eq("isActive", UserVehicleDao.VEHICLE_STANDBY)));
 		crit.addOrder(Order.desc("vehicleEndDate"));
 		return crit.list();
 	}
