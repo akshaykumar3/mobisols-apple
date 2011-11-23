@@ -41,6 +41,7 @@ public class Main {
 	public static void main(String args[]){
 		//generateFullTransferPLT();
 		generateIncrementalPLT(0, 1000);
+		generateFullTransferPLT();
 	}
 	
 	public static void generateFullTransferPLT(){
@@ -53,9 +54,10 @@ public class Main {
 	        file.createNewFile();
 	        FileWriter fstream = new FileWriter(file);
 	        BufferedWriter writer = new BufferedWriter(fstream);
-	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
-	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
-	        		new SimpleDateFormat("MMddyy").format(new Date())+","+"CRC32"+"\n");
+	        File tempFile = new File("fullTemp");
+	        tempFile.createNewFile();
+	        BufferedWriter tempwriter = new BufferedWriter(new FileWriter(tempFile));
+	        long recordCount=0;
 	        String[] paths = {
 	                 "/spring/dao.xml"
 	            };
@@ -65,12 +67,26 @@ public class Main {
 	        for(Iterator<UserVehicle> it = vehicleList.iterator();it.hasNext();)
 	        {
 	        	UserVehicle u = it.next();
-	        	writer.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
+	        	recordCount++;
+	        	tempwriter.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
 	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
 	        			new SimpleDateFormat("MMddyy").format(u.getVehicleStartDate())+
 	        			","+","+u.getVin()+"\n");
 	        }
+	        tempwriter.close();
+	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
+	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
+	        		new SimpleDateFormat("MMddyy").format(new Date())+","+recordCount+","+Long.toHexString(FileUtils.checksumCRC32(tempFile))+"\n");
+	        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
+	        String s = reader.readLine();
+	        while(s!=null)
+	        {
+	        	writer.write(s+"\n");
+	        	s= reader.readLine();
+	        }
+	        reader.close();
 	        writer.close();
+	        tempFile.delete();
 	    } catch (IOException e) {
 	    	e.printStackTrace();
 	    }
@@ -189,6 +205,7 @@ public class Main {
 			String row = reader.readLine();
 			Calendar expDate = Calendar.getInstance();
 			File tempFile1 = new File("temp1.txt");
+			long recordCount=0;
 	        BufferedWriter temp1Writer = new BufferedWriter(new FileWriter(tempFile1));
 			while(row!=null){
 				String col[] = row.split(",");
@@ -200,6 +217,7 @@ public class Main {
 				}
 				record = record+ col[8]+"\n";
 				temp1Writer.write(record);
+				recordCount++;
 				row = reader.readLine();
 			}
 			reader.close();
@@ -218,6 +236,7 @@ public class Main {
 	        for(Iterator<UserVehicle> it = vehicleList.iterator();it.hasNext();)
 	        {
 	        	UserVehicle u = it.next();
+	        	recordCount++;
 	        	temp1Writer.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo()+","+
 	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
 	        			new SimpleDateFormat("MMddyyyy").format(today)+
@@ -230,7 +249,7 @@ public class Main {
 	        temp1Writer.close();
 	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
 	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
-	        		new SimpleDateFormat("MMddyy").format(today)+","+Long.toHexString(FileUtils.checksumCRC32(tempFile1))+"\n");
+	        		new SimpleDateFormat("MMddyy").format(today)+","+recordCount+","+Long.toHexString(FileUtils.checksumCRC32(tempFile1))+"\n");
 	        stream = new FileReader(tempFile1);
 			reader = new BufferedReader(stream);
 			String record = reader.readLine();
