@@ -177,9 +177,9 @@ set end_date = GetEndDate()
 where 
 user_vehicle_id = old.user_vehicle_id
 and end_date = GetInfFuture(); 
-insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,vehicle_type_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
+insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
 udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin,color,manufactured_year) 
-values(null,old.user_vehicle_id,old.user_id,old.vehicle_type_id,old.is_active,old.vehicle_start_date,old.vehicle_end_date,old.registration_no,old.registered_state,old.owner_type_id,
+values(null,old.user_vehicle_id,old.user_id,old.is_active,old.vehicle_start_date,old.vehicle_end_date,old.registration_no,old.registered_state,old.owner_type_id,
 old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,old.created_on,old.last_modified_on,old.last_modified_by,
 GetStartDate(),GetStartDate(),'delete',old.client_id,old.model_id,old.vin,old.color,manufactured_year);
 end;
@@ -188,9 +188,9 @@ drop trigger if exists trg_user_vehicle_aft_ins;
 create trigger trg_user_vehicle_aft_ins 
 after insert on user_vehicle_all 
 for each row begin
-insert into user_vehicle_history_all (uvh_id,user_vehicle_id,user_id,vehicle_type_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
+insert into user_vehicle_history_all (uvh_id,user_vehicle_id,user_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
 udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin,color,manufactured_year) 
-values(null,new.user_vehicle_id,new.user_id,new.vehicle_type_id,new.is_active,new.vehicle_start_date,new.vehicle_end_date,new.registration_no,new.registered_state,new.owner_type_id,
+values(null,new.user_vehicle_id,new.user_id,new.is_active,new.vehicle_start_date,new.vehicle_end_date,new.registration_no,new.registered_state,new.owner_type_id,
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
 GetStartDate(),GetInfFuture(),'insert',new.client_id,new.model_id,new.vin,new.color,new.manufactured_year);
 end;
@@ -204,9 +204,9 @@ set end_date = GetEndDate()
 where 
 user_vehicle_id = new.user_vehicle_id
 and end_date = GetInfFuture();
-insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,vehicle_type_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
+insert into user_vehicle_history_all(uvh_id,user_vehicle_id,user_id,is_active,vehicle_start_date,vehicle_end_date,registration_no,registered_state,owner_type_id,
 udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,created_on,last_modified_on,last_modified_by,start_date,end_date,action,client_id,model_id,vin,color,manufactured_year) 
-values(null,new.user_vehicle_id,new.user_id,new.vehicle_type_id,new.is_active,new.vehicle_start_date,new.vehicle_end_date,new.registration_no,new.registered_state,new.owner_type_id,
+values(null,new.user_vehicle_id,new.user_id,new.is_active,new.vehicle_start_date,new.vehicle_end_date,new.registration_no,new.registered_state,new.owner_type_id,
 new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,new.created_on,new.last_modified_on,new.last_modified_by,
 GetStartDate(),GetInfFuture(),'update',new.client_id,new.model_id,new.vin,new.color,new.manufactured_year);
 end;
