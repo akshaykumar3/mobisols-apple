@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 03, 2012 at 07:14 AM
+-- Generation Time: Jan 03, 2012 at 01:31 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -726,8 +726,8 @@ CREATE TABLE IF NOT EXISTS `model_all` (
 --
 
 INSERT INTO `model_all` (`model_id`, `name`, `description`, `make_id`, `vehicle_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `client_id`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
-(1, 'mymodel', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:54', '2011-10-29 23:31:56', -1),
-(2, 'mymodel2', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:32:30', '2011-11-08 16:32:33', -1);
+(1, 'mymodel', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:54', '2011-10-29 23:31:56', -1),
+(2, 'mymodel2', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:32:30', '2011-11-08 16:32:33', -1);
 
 -- --------------------------------------------------------
 
@@ -3685,7 +3685,7 @@ ALTER TABLE `model_all`
   ADD CONSTRAINT `fk_model_make` FOREIGN KEY (`make_id`) REFERENCES `make_all` (`make_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_model_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lmb_model` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_model_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_model_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `owner_type_all`
