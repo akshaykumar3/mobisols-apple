@@ -5,6 +5,7 @@ gtp.dict = {
 	"loginform_pwd_fail": "Password do not match",
 	"login_failure": "Incorrect Username or Password",
 	"regform_invalidemail": "Enter valid email ID",
+	"regform_invalidphoneno": "Enter valid phone number",
 	"regform_pwds": "Passwords do not match",
 	"newcar_success": "Added Vehicle Successfully",
 	"newcar_failure": "Error, Failed adding a car",
@@ -15,5 +16,6 @@ gtp.dict = {
 	"datevalidity": "Invalid end date",
 	"Activated": "Settings are saved, Active car is",
 	"vd-updated": "Updated vehicle details",
-	"deletevehicle": "Removed car successfully"
+	"deletevehicle": "Removed car successfully",
+    "defaultnotification": "Error Occured Try Later"
 };

@@ -10,16 +10,16 @@ gtp.views.LoginPage = {
 	},{
 		xtype: 'zipfield',
 		id: 'lpemailid',
-		placeHolder: 'Email',
+		placeHolder: 'Phone Number',
 		border: '10 5 3 10',
 		value: gtp.utils.dataStore.getValueOfKey('username')
 	},{
 		html: 'password:',
 		align: 'left'
 	},{
-		xtype: 'passwordfield',
+		xtype: 'zipfield',
 		id: 'lppassword',
-		placeHolder: 'Password',
+		placeHolder: 'Pin',
 		border: '10 5 3 10',
 		value: gtp.utils.dataStore.getValueOfKey('password')
 	},{

@@ -7,9 +7,6 @@ gtp.models.Car = Ext.regModel('Cars', {
 		name: 'state',
 		type: 'string'
 	},{
-		name: 'type',
-		type: 'string'
-	},{
 		name: 'startDate',
 		type: 'date'
 	},{

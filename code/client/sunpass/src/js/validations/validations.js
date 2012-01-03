@@ -7,6 +7,12 @@ gtp.validateEmail = function(emailID) {
    return true;
 };
 
+gtp.validatePhoneNumber = function(phonenum) {
+	// todo
+	// logic to check whether phonenum format is correct.
+	return true;
+};
+
 gtp.validateCar = function(car_reg, car_state) {
 	if(car_state == 'Florida') {
 		var reg1 = /[A-X]{1}\d{2}\s\d{1}[A-Z]{2}/;

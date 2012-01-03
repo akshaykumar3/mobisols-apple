@@ -46,9 +46,6 @@ gtp.views.NewCarFormView = {
 				else if(acfd.rg == "") {
 					Ext.Msg.alert("Enter registration number");
 				}
-				else if(acfd.tp == "") {
-					Ext.Msg.alert('Select car type');
-				}
 				else if(!gtp.validateCar(acfd.rg, acfd.st)) {
 					Ext.Msg.alert('Invalid','Registration Number');
 				}
@@ -70,7 +67,6 @@ gtp.views.NewCarFormView = {
 							json: Ext.encode({
 								state: acfd.st,
 								registration: acfd.rg,
-								type: (acfd.tp == '') ? null : acfd.tp,
 								isActive: "N",
 								startDate: gtp.today().format('M j, Y g:i:s A'), // Valid date format on server side.
 								endDate: (acfd.endDate == null || acfd.endDate == '') ? null : acfd.endDate.format('M j, Y g:i:s A'),
@@ -167,17 +163,6 @@ gtp.views.NewCarFormView = {
 			useClearIcon: true,
 			id: 'rg',
 			name: 'rg'
-		},{
-			xtype: 'selectfield',
-			id: 'tp',
-			name: 'tp',
-			label: 'Type',
-			required: true,
-			placeHolder: 'select type',
-			options: [{
-				text: '',
-				value: ''
-			}]
 		},{
 			xtype: 'selectfield',
 			id: 'make',

@@ -39,7 +39,6 @@ gtp.views.CarDetailView = {
 							json: Ext.encode({
 								state: updateCar.get('state'),
 								registration: updateCar.get('reg'),
-								type: updateCar.get('type'),
 								isActive: updateCar.get('isActive'),
 								startDate: updateCar.get('startDate').format('M j, Y g:i:s A'),
 							    endDate: (Ext.getCmp('dpto').getValue() == null) ? null : Ext.getCmp('dpto').getValue().format('M j, Y g:i:s A'),
@@ -104,12 +103,6 @@ gtp.views.CarDetailView = {
 			label: 'Reg',
 			disabled: true,
 			id: 'dpreg'
-		},{
-			xtype: 'textfield',
-			name: 'type',
-			label: 'Type',
-			id: 'dptype',
-			disabled: true
 		},{
 			xtype: 'textfield',
 			id: 'make',

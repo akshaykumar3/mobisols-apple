@@ -69,7 +69,6 @@ gtp.FetchUserData = function(options) {
 		      		carsList.insert(0,Ext.ModelMgr.create({
 						state: vehicle_details[i].state,
 						reg: vehicle_details[i].registration,
-						type: vehicle_details[i].type,
 						startDate: new Date(vehicle_details[i].startDate),
 						endDate: (vehicle_details[i].endDate == null) ? '':new Date(vehicle_details[i].endDate),
 						ownerType: vehicle_details[i].ownerType,
