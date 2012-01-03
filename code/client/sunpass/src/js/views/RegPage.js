@@ -8,22 +8,10 @@ gtp.views.RegPage = {
 	items: [{
 		xytpe: 'fieldset',
 		items: [{
-			xtype: 'emailfield',
+			xtype: 'zipfield',
 			id: 'rpemailid',
 			name: 'emailid',
-			placeHolder: 'Email',
-			border: '10 5 3 10'
-		},{
-			xtype: 'passwordfield',
-			id: 'rppassword',
-			name: 'password',
-			placeHolder: 'Password',
-			border: '10 5 3 10'
-		},{
-			xtype: 'passwordfield',
-			id: 'conpwd',
-			name: 'confirmpassword',
-			placeHolder: 'Confirm Password',
+			placeHolder: 'Enter Phone No',
 			border: '10 5 3 10'
 		}]
 	},{
@@ -34,17 +22,11 @@ gtp.views.RegPage = {
 			style: 'margin-left: 1px',
 			text: 'Register',
 			handler: function(button, event){
+				
 				var eid = Ext.getCmp('rpemailid').getValue();
-				var pwd = Ext.getCmp('rppassword').getValue();
-				var cpwd = Ext.getCmp('conpwd').getValue();
-				if(!gtp.validateEmail(eid)) {
-					Ext.Msg.alert(gtp.dict.regform_invalidemail);
-				}
-				else if(pwd.length < gtp.vars.PasswordLength) {
-					Ext.Msg.alert('Password','Minimum '+gtp.vars.PasswordLength+' characters');
-				}
-				else if(pwd != cpwd) {
-					Ext.Msg.alert(gtp.dict.regform_pwds);
+				// Validate Phone Number.
+				if(!gtp.validatePhoneNumber(eid)) {
+					Ext.Msg.alert(gtp.dict.regform_invalidphoneno);
 				}
 				else
 				{
