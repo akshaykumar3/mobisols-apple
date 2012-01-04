@@ -39,7 +39,6 @@ gtp.views.RegPage = {
 						params: {
 							json: Ext.encode({
 								userName: eid,
-								password: pwd,
 								deviceDetails: {
 									deviceId: gtp.deviceId,
 									deviceName: gtp.detectDeviceType()
