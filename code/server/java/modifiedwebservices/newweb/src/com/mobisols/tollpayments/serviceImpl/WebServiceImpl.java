@@ -40,6 +40,7 @@ import com.mobisols.tollpayments.service.CcTypeListService;
 import com.mobisols.tollpayments.service.ChangePasswordService;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
 import com.mobisols.tollpayments.service.DeviceRegistrationService;
+import com.mobisols.tollpayments.service.ForgotPassword;
 import com.mobisols.tollpayments.service.HeartBeatService;
 import com.mobisols.tollpayments.service.LoginService;
 import com.mobisols.tollpayments.service.MakeAndModelService;
@@ -79,6 +80,7 @@ public class WebServiceImpl {
 	ChangePasswordService changePasswordService;
 	MakeAndModelService makeAndModelService;
 	ActivateService activateService;
+	ForgotPassword forgotPassword;
 	JsonConverter jsonConverter;
 	
 	SecurityCheckUtil securityCheckUtil;
@@ -113,6 +115,7 @@ public class WebServiceImpl {
 	        changePasswordService = (ChangePasswordService) ctx.getBean("service.tollpayments.changePasswordService");
 	        activateService = (ActivateService) ctx.getBean("service.tollpayments.activateService");
 	        makeAndModelService = (MakeAndModelService) ctx.getBean("service.tollpayments.makeAndModelService");
+	        forgotPassword = (ForgotPassword) ctx.getBean("service.tollpayments.forgotPassword");
 	        securityCheckUtil = (SecurityCheckUtil) ctx.getBean("myutils.tollpayments.securityCheckUtil");
 	        myUtilErrorHandler = (MyUtilErrorHandler) ctx.getBean("myutils.tollpayments.myUtilErrorHandler");
 	        myUtilCleanUp = (MyUtilCleanUp) ctx.getBean("myutils.tollpayments.myUtilCleanUp");
@@ -611,6 +614,22 @@ public class WebServiceImpl {
 			myUtilCleanUp.cleanUp();
 		}
 	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/public/Password")
+	public String forgotPassword(@QueryParam("username") String username){
+		String request = "forgot password";
+		try{
+			return forgotPassword(username);
+		}catch(Exception e){
+			return myUtilErrorHandler.handleException(request, e);
+		}
+		finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
+	
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}
@@ -810,6 +829,14 @@ public class WebServiceImpl {
 
 	public void setMyUtilCleanUp(MyUtilCleanUp myUtilCleanUp) {
 		this.myUtilCleanUp = myUtilCleanUp;
+	}
+
+	public ForgotPassword getForgotPassword() {
+		return forgotPassword;
+	}
+
+	public void setForgotPassword(ForgotPassword forgotPassword) {
+		this.forgotPassword = forgotPassword;
 	}
 
 }

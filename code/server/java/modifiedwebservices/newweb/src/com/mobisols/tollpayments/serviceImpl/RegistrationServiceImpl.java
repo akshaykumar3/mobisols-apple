@@ -13,6 +13,7 @@ import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutilsImpl.MyValidationUtil;
 import com.mobisols.tollpayments.myutilsImpl.PasswordGeneratorUtil;
+import com.mobisols.tollpayments.myutilsImpl.SMSUtil;
 import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.response.post.RegistrationResponse;
 import com.mobisols.tollpayments.service.RegistrationService;
@@ -85,7 +86,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			System.out.println(":::::PASSWORD::::: "+s);
 			u.setPassword(s);
 			u.setUserName(r.getUserName());
-			//code to send the password through sms.
+			//SMSUtil.sendSMS(u.getUserName(), s);
 			//TODO change user type id based on the data in the database
 			u.setUtypeId(1);
 			userDao.save(u);
