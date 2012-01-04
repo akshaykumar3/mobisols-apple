@@ -12,7 +12,6 @@ public class UserVehicle implements java.io.Serializable {
 
 	private Integer userVehicleId;
 	private Integer userId;
-	private Integer vehicleTypeId;
 	private Timestamp vehicleStartDate;
 	private Timestamp vehicleEndDate;
 	private String isActive;
@@ -39,7 +38,6 @@ public class UserVehicle implements java.io.Serializable {
 	private Integer manufacturedYear;
 	private OwnerType ownerType;
 	private User user;
-    private VehicleType vehicleType;	
     private Model model;
     public static final int DEFAULT_VEHICLE=-1;
     
@@ -50,16 +48,6 @@ public class UserVehicle implements java.io.Serializable {
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
-	// Constructors
-    public VehicleType getVehicleType() {
-		return vehicleType;
-	}
-
-	public void setVehicleType(VehicleType vehicleType) {
-		this.vehicleType = vehicleType;
-	}
-
 
 	public OwnerType getOwnerType() {
 		return ownerType;
@@ -100,12 +88,11 @@ public class UserVehicle implements java.io.Serializable {
 
 	/** minimal constructor */
 	public UserVehicle(Integer userVehicleId, Integer userId,
-			Integer vehicleTypeId, String isActive, String registrationNo,
+			 String isActive, String registrationNo,
 			String registeredState, Integer lastModifiedBy,
 			Timestamp lastModifiedOn, Timestamp createdOn) {
 		this.userVehicleId = userVehicleId;
 		this.userId = userId;
-		this.vehicleTypeId = vehicleTypeId;
 		this.isActive = isActive;
 		this.registrationNo = registrationNo;
 		this.registeredState = registeredState;
@@ -116,7 +103,7 @@ public class UserVehicle implements java.io.Serializable {
 
 	/** full constructor */
 	public UserVehicle(Integer userVehicleId, Integer userId,
-			Integer vehicleTypeId, Timestamp vehicleStartDate,
+			Timestamp vehicleStartDate,
 			Timestamp vehicleEndDate, String isActive, String registrationNo,
 			String registeredState, Integer ownerTypeId, String udf1,
 			String udf2, String udf3, String udf4, String udf5, String flag1,
@@ -125,7 +112,6 @@ public class UserVehicle implements java.io.Serializable {
 			Timestamp createdOn, Integer clientId) {
 		this.userVehicleId = userVehicleId;
 		this.userId = userId;
-		this.vehicleTypeId = vehicleTypeId;
 		this.vehicleStartDate = vehicleStartDate;
 		this.vehicleEndDate = vehicleEndDate;
 		this.isActive = isActive;
@@ -164,14 +150,6 @@ public class UserVehicle implements java.io.Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
-	}
-
-	public Integer getVehicleTypeId() {
-		return this.vehicleTypeId;
-	}
-
-	public void setVehicleTypeId(Integer vehicleTypeId) {
-		this.vehicleTypeId = vehicleTypeId;
 	}
 
 	public Timestamp getVehicleStartDate() {
@@ -347,176 +325,6 @@ public class UserVehicle implements java.io.Serializable {
 
 	public void setManufacturedYear(Integer manufacturedYear) {
 		this.manufacturedYear = manufacturedYear;
-	}
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof UserVehicle))
-			return false;
-		UserVehicle castOther = (UserVehicle) other;
-
-		return ((this.getUserVehicleId() == castOther.getUserVehicleId()) || (this
-				.getUserVehicleId() != null
-				&& castOther.getUserVehicleId() != null && this
-				.getUserVehicleId().equals(castOther.getUserVehicleId())))
-				&& ((this.getUserId() == castOther.getUserId()) || (this
-						.getUserId() != null && castOther.getUserId() != null && this
-						.getUserId().equals(castOther.getUserId())))
-				&& ((this.getVehicleTypeId() == castOther.getVehicleTypeId()) || (this
-						.getVehicleTypeId() != null
-						&& castOther.getVehicleTypeId() != null && this
-						.getVehicleTypeId()
-						.equals(castOther.getVehicleTypeId())))
-				&& ((this.getVehicleStartDate() == castOther
-						.getVehicleStartDate()) || (this.getVehicleStartDate() != null
-						&& castOther.getVehicleStartDate() != null && this
-						.getVehicleStartDate().equals(
-								castOther.getVehicleStartDate())))
-				&& ((this.getVehicleEndDate() == castOther.getVehicleEndDate()) || (this
-						.getVehicleEndDate() != null
-						&& castOther.getVehicleEndDate() != null && this
-						.getVehicleEndDate().equals(
-								castOther.getVehicleEndDate())))
-				&& ((this.getIsActive() == castOther.getIsActive()) || (this
-						.getIsActive() != null
-						&& castOther.getIsActive() != null && this
-						.getIsActive().equals(castOther.getIsActive())))
-				&& ((this.getRegistrationNo() == castOther.getRegistrationNo()) || (this
-						.getRegistrationNo() != null
-						&& castOther.getRegistrationNo() != null && this
-						.getRegistrationNo().equals(
-								castOther.getRegistrationNo())))
-				&& ((this.getRegisteredState() == castOther
-						.getRegisteredState()) || (this.getRegisteredState() != null
-						&& castOther.getRegisteredState() != null && this
-						.getRegisteredState().equals(
-								castOther.getRegisteredState())))
-				&& ((this.getOwnerTypeId() == castOther.getOwnerTypeId()) || (this
-						.getOwnerTypeId() != null
-						&& castOther.getOwnerTypeId() != null && this
-						.getOwnerTypeId().equals(castOther.getOwnerTypeId())))
-				&& ((this.getUdf1() == castOther.getUdf1()) || (this.getUdf1() != null
-						&& castOther.getUdf1() != null && this.getUdf1()
-						.equals(castOther.getUdf1())))
-				&& ((this.getUdf2() == castOther.getUdf2()) || (this.getUdf2() != null
-						&& castOther.getUdf2() != null && this.getUdf2()
-						.equals(castOther.getUdf2())))
-				&& ((this.getUdf3() == castOther.getUdf3()) || (this.getUdf3() != null
-						&& castOther.getUdf3() != null && this.getUdf3()
-						.equals(castOther.getUdf3())))
-				&& ((this.getUdf4() == castOther.getUdf4()) || (this.getUdf4() != null
-						&& castOther.getUdf4() != null && this.getUdf4()
-						.equals(castOther.getUdf4())))
-				&& ((this.getUdf5() == castOther.getUdf5()) || (this.getUdf5() != null
-						&& castOther.getUdf5() != null && this.getUdf5()
-						.equals(castOther.getUdf5())))
-				&& ((this.getFlag1() == castOther.getFlag1()) || (this
-						.getFlag1() != null && castOther.getFlag1() != null && this
-						.getFlag1().equals(castOther.getFlag1())))
-				&& ((this.getFlag2() == castOther.getFlag2()) || (this
-						.getFlag2() != null && castOther.getFlag2() != null && this
-						.getFlag2().equals(castOther.getFlag2())))
-				&& ((this.getFlag3() == castOther.getFlag3()) || (this
-						.getFlag3() != null && castOther.getFlag3() != null && this
-						.getFlag3().equals(castOther.getFlag3())))
-				&& ((this.getFlag4() == castOther.getFlag4()) || (this
-						.getFlag4() != null && castOther.getFlag4() != null && this
-						.getFlag4().equals(castOther.getFlag4())))
-				&& ((this.getFlag5() == castOther.getFlag5()) || (this
-						.getFlag5() != null && castOther.getFlag5() != null && this
-						.getFlag5().equals(castOther.getFlag5())))
-				&& ((this.getLastModifiedBy() == castOther.getLastModifiedBy()) || (this
-						.getLastModifiedBy() != null
-						&& castOther.getLastModifiedBy() != null && this
-						.getLastModifiedBy().equals(
-								castOther.getLastModifiedBy())))
-				&& ((this.getLastModifiedOn() == castOther.getLastModifiedOn()) || (this
-						.getLastModifiedOn() != null
-						&& castOther.getLastModifiedOn() != null && this
-						.getLastModifiedOn().equals(
-								castOther.getLastModifiedOn())))
-				&& ((this.getCreatedOn() == castOther.getCreatedOn()) || (this
-						.getCreatedOn() != null
-						&& castOther.getCreatedOn() != null && this
-						.getCreatedOn().equals(castOther.getCreatedOn())))
-				&& ((this.getClientId() == castOther.getClientId()) || (this
-						.getClientId() != null
-						&& castOther.getClientId() != null && this
-						.getClientId().equals(castOther.getClientId())));
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37
-				* result
-				+ (getUserVehicleId() == null ? 0 : this.getUserVehicleId()
-						.hashCode());
-		result = 37 * result
-				+ (getUserId() == null ? 0 : this.getUserId().hashCode());
-		result = 37
-				* result
-				+ (getVehicleTypeId() == null ? 0 : this.getVehicleTypeId()
-						.hashCode());
-		result = 37
-				* result
-				+ (getVehicleStartDate() == null ? 0 : this
-						.getVehicleStartDate().hashCode());
-		result = 37
-				* result
-				+ (getVehicleEndDate() == null ? 0 : this.getVehicleEndDate()
-						.hashCode());
-		result = 37 * result
-				+ (getIsActive() == null ? 0 : this.getIsActive().hashCode());
-		result = 37
-				* result
-				+ (getRegistrationNo() == null ? 0 : this.getRegistrationNo()
-						.hashCode());
-		result = 37
-				* result
-				+ (getRegisteredState() == null ? 0 : this.getRegisteredState()
-						.hashCode());
-		result = 37
-				* result
-				+ (getOwnerTypeId() == null ? 0 : this.getOwnerTypeId()
-						.hashCode());
-		result = 37 * result
-				+ (getUdf1() == null ? 0 : this.getUdf1().hashCode());
-		result = 37 * result
-				+ (getUdf2() == null ? 0 : this.getUdf2().hashCode());
-		result = 37 * result
-				+ (getUdf3() == null ? 0 : this.getUdf3().hashCode());
-		result = 37 * result
-				+ (getUdf4() == null ? 0 : this.getUdf4().hashCode());
-		result = 37 * result
-				+ (getUdf5() == null ? 0 : this.getUdf5().hashCode());
-		result = 37 * result
-				+ (getFlag1() == null ? 0 : this.getFlag1().hashCode());
-		result = 37 * result
-				+ (getFlag2() == null ? 0 : this.getFlag2().hashCode());
-		result = 37 * result
-				+ (getFlag3() == null ? 0 : this.getFlag3().hashCode());
-		result = 37 * result
-				+ (getFlag4() == null ? 0 : this.getFlag4().hashCode());
-		result = 37 * result
-				+ (getFlag5() == null ? 0 : this.getFlag5().hashCode());
-		result = 37
-				* result
-				+ (getLastModifiedBy() == null ? 0 : this.getLastModifiedBy()
-						.hashCode());
-		result = 37
-				* result
-				+ (getLastModifiedOn() == null ? 0 : this.getLastModifiedOn()
-						.hashCode());
-		result = 37 * result
-				+ (getCreatedOn() == null ? 0 : this.getCreatedOn().hashCode());
-		result = 37 * result
-				+ (getClientId() == null ? 0 : this.getClientId().hashCode());
-		return result;
-	}
-
-	
+	}	
 
 }

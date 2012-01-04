@@ -5,7 +5,6 @@ import java.util.Date;
 public class VehicleDetails {
 	private String registration;
 	private String state;
-	private String type;
 	private String isActive;
 	private Date startDate;
 	private Date endDate;
@@ -27,12 +26,6 @@ public class VehicleDetails {
 	}
 	public void setState(String state) {
 		this.state = state;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
 	}
 	public String getIsActive() {
 		return isActive;

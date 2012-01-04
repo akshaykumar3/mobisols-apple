@@ -38,7 +38,6 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			vd.setRegistration(uv.getRegistrationNo());
 			vd.setState(uv.getRegisteredState());
 			vd.setOwnerType(uv.getOwnerType().getName());
-			vd.setType(uv.getVehicleType().getName());
 			vd.setStartDate(uv.getVehicleStartDate());
 			vd.setEndDate(uv.getVehicleEndDate());
 			vd.setVehicleId(uv.getUserVehicleId());

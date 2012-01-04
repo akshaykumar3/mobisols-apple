@@ -13,9 +13,6 @@
             <property name="userId" type="java.lang.Integer">
                 <column name="user_id" />
             </property>
-            <property name="vehicleTypeId" type="java.lang.Integer">
-                <column name="vehicle_type_id" />
-            </property>
             <property name="vehicleStartDate" type="java.sql.Timestamp">
                 <column name="vehicle_start_date" length="19" />
             </property>
@@ -103,13 +100,6 @@
 			update="false"
 			not-null="true"/>
 			
-			<many-to-one name="vehicleType"
-			class="com.mobisols.tollpayments.model.VehicleType"
-            column="vehicle_type_id"
-			cascade="save-update"
-			insert="false"
-			update="false"
-			unique="true"/>
 			
             <many-to-one name="model"
 			class="com.mobisols.tollpayments.model.Model"

@@ -20,6 +20,9 @@
   <property generated="never" lazy="false" name="makeId" type="java.lang.Integer">
    <column name="make_id"/>
   </property>
+   <property generated="never" lazy="false" name="vehicleTypeId" type="java.lang.Integer">
+   <column name="vehicle_type_id"/>
+  </property>
    <property generated="never" lazy="false" name="udf1" type="java.lang.String">
    <column length="1000" name="udf1"/>
   </property>
@@ -70,7 +73,14 @@
 				insert="false"
 				update="false"
 				/>
-			
+ <many-to-one name="vehicleType"
+			class="com.mobisols.tollpayments.model.VehicleType"
+            column="vehicle_type_id"
+			cascade="save-update"
+			insert="false"
+			update="false"
+			unique="true"/>
+					
  <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">
