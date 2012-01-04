@@ -81,8 +81,6 @@ gtp.views.RegPage = {
 	listeners: {
 		beforeactivate: function(dis) {
 			dis.down('#rpemailid').setValue('');
-			dis.down('#rppassword').setValue('');
-			dis.down('#conpwd').setValue('');
 		}
 	}
 };
