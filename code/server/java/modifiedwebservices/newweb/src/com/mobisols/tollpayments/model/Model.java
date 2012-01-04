@@ -7,6 +7,7 @@ public class Model {
 	private String name;
 	private String description;
 	private Integer makeId;
+	private Integer vehicleTypeId;
 	private String udf1;
 	private String udf2;
 	private String udf3;
@@ -22,6 +23,7 @@ public class Model {
 	private Integer lastModifiedBy;
 	private Integer clientId;
 	private Make make;
+	private VehicleType vehicleType;
 	
 	public Make getMake() {
 		return make;
@@ -139,6 +141,18 @@ public class Model {
 	}
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
+	}
+	public Integer getVehicleTypeId() {
+		return vehicleTypeId;
+	}
+	public void setVehicleTypeId(Integer vehicleTypeId) {
+		this.vehicleTypeId = vehicleTypeId;
+	}
+	public VehicleType getVehicleType() {
+		return vehicleType;
+	}
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
 	}
 
 }

@@ -104,8 +104,6 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 			uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));
 			if(vdr.getStartDate()!=null)
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
-			VehicleType vt=vehicleTypeDao.getVehicleType(vdr.getType());
-			uv.setVehicleTypeId(vt.getVehicleTypeId());
 			if(vdr.getModel()!=null && vdr.getMake()!=null)
 			{
 				Model m = modelDao.getModel(vdr.getMake(), vdr.getModel());

@@ -15,9 +15,6 @@
             <property name="userId" type="java.lang.Integer">
                 <column name="user_id" />
             </property>
-            <property name="vehicleTypeId" type="java.lang.Integer">
-                <column name="vehicle_type_id" />
-            </property>
             <property name="isActive" type="java.lang.String">
                 <column name="is_active" length="1" />
             </property>
