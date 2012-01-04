@@ -216,7 +216,7 @@ create trigger trg_bal_log_bfr_del
 before delete on user_balance_all
 for each row begin
 insert into user_balance_log_all (ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
-values(null,old.ubal_id,old.balanceold.balance,sysdate(),'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,
+values(null,old.ubal_id,old.balance,sysdate(),'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,
 old.last_modified_by,old.last_modified_on,old.created_on,old.client_id);
 end;
 

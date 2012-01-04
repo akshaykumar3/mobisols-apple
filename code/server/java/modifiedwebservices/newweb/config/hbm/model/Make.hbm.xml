@@ -59,15 +59,13 @@
   <property generated="never" lazy="false" name="clientId" type="java.lang.Integer" >
    <column name="client_id"/>
   </property>
-      <set
-                name="model" inverse="true">
-                <key update="false" >
-                    <column name="model_id" not-null="true"/>
-                </key>
-                <one-to-many
-                    class="com.mobisols.tollpayments.model.Model"
-                />
-       </set> 
+      <set name="model" table="model" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="make_id" not-null="true" />
+            </key>
+            <one-to-many class="com.mobisols.tollpayments.model.Model" /> 
+        </set>
  <filter name="clientIdFilter" condition=":clientId = client_id"/>
     </class>
     <filter-def name="clientIdFilter">
