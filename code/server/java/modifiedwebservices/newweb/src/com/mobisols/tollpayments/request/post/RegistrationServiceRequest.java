@@ -3,7 +3,6 @@ package com.mobisols.tollpayments.request.post;
 public class RegistrationServiceRequest {
 
 	private String userName;
-	private String password;
 	private DeviceDetails deviceDetails;
 	
 	public DeviceDetails getDeviceDetails() {
@@ -17,11 +16,5 @@ public class RegistrationServiceRequest {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 }

@@ -25,4 +25,9 @@ public class MyValidationUtil {
 
         return sum%10 == 0;
 	  }
+
+	public static boolean isValidNumber(String userName) {
+		//TODO check whether it is valid number or not.
+		return true;
+	}
 }
