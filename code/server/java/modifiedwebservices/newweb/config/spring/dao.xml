@@ -33,5 +33,5 @@
 	<bean id="dao.tollpayments.makeDao" class="com.mobisols.tollpayments.daoImpl.MakeDaoImpl"/>
 	<bean id="dao.tollpayments.modelDao" class="com.mobisols.tollpayments.daoImpl.ModelDaoImpl"/>
 	<bean id="dao.tollpayments.deviceHistoryDao" class="com.mobisols.tollpayments.daoImpl.DeviceHistoryDaoImpl" />
-	<bean id="dao.tollpayments.tollPriceHistoryDao" class="com.mobisols.tollpayments.daoImpl.tollPriceHistoryDaoImpl" />
+	<bean id="dao.tollpayments.tollPriceHistoryDao" class="com.mobisols.tollpayments.daoImpl.TollPriceHistoryDaoImpl" />
 </beans>
