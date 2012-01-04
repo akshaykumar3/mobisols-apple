@@ -304,11 +304,12 @@ public class WebServiceImpl {
 		}
 		else
 			return null;
+		
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
 		}
 		finally{
-			myUtilCleanUp.cleanUp();
+			//myUtilCleanUp.cleanUp();
 		}
 	}
 	

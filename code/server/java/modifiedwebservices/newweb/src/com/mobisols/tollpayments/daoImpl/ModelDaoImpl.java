@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.daoImpl;
 
+import java.util.Iterator;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -28,9 +30,18 @@ public class ModelDaoImpl implements ModelDao {
 	    MakeDao makeDao  =  (MakeDao ) factory.getBean("dao.tollpayments.makeDao");
 	    Criteria crit = s.createCriteria(Model.class);
 	    crit.add(Restrictions.eq("name", model));
-	    if(makeDao.getMake(model) == null)
+	    if(makeDao.getMake(make) == null)
+	    {
 	    	return null;
-	    crit.add(Restrictions.eq("makeId", makeDao.getMake(model).getMakeId()));
+	    }
+	    for(Iterator<Model> it  = makeDao.getMake(make).getModel().iterator();it.hasNext();)
+	    {
+	    	Model m = it.next();
+	    	System.out.println(m.getName());
+	    	System.out.println(m.getMakeId());
+	    }
+	    System.out.println(makeDao.getMake(make).getMakeId());
+	    crit.add(Restrictions.eq("makeId", makeDao.getMake(make).getMakeId()));
 	    return (Model) crit.uniqueResult();
 	}
 }

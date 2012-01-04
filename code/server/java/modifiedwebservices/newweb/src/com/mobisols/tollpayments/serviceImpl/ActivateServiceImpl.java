@@ -59,9 +59,9 @@ public class ActivateServiceImpl implements ActivateService {
 				status = "fail";
 				if(u.getIsActive().equals(UserDao.USER_BLOCK))
 					notify = "User is Blocked";
-				if(u.getIsActive().equals(UserDao.USER_INCOMPLETE))
+				else if(u.getIsActive().equals(UserDao.USER_INCOMPLETE))
 					notify = "User details are incomplete";
-				if(u.getIsActive().equals(UserDao.USER_SUSPEND))
+				else if(u.getIsActive().equals(UserDao.USER_SUSPEND))
 					notify = "User is suspended";
 				else
 					{
