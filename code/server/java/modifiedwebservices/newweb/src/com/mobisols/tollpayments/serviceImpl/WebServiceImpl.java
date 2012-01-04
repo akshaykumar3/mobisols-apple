@@ -617,11 +617,11 @@ public class WebServiceImpl {
 	
 	@GET
 	@Produces("text/plain")
-	@Path("/public/Password")
+	@Path("/public/ForgotPassword")
 	public String forgotPassword(@QueryParam("username") String username){
 		String request = "forgot password";
 		try{
-			return forgotPassword(username);
+			return forgotPassword.forgotPassword(request, username);
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
 		}
