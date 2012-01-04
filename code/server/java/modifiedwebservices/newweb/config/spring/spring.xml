@@ -127,5 +127,9 @@
     	<property name="makeDao" ref="dao.tollpayments.makeDao"></property>
     	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
     </bean>
+    <bean id="service.tollpayments.forgotPassword" class="com.mobisols.tollpayments.serviceImpl.ForgotPasswordImpl">
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+    </bean>
 </beans>
   
