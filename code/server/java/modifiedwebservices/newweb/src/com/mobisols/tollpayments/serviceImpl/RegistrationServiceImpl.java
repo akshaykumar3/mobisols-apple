@@ -12,6 +12,7 @@ import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutilsImpl.MyValidationUtil;
+import com.mobisols.tollpayments.myutilsImpl.PasswordGeneratorUtil;
 import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.response.post.RegistrationResponse;
 import com.mobisols.tollpayments.service.RegistrationService;
@@ -35,9 +36,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 	{
 		RegistrationResponse response=new RegistrationResponse();
 		String status="success";
-		if(!MyValidationUtil.isValidEmail(r.getUserName()))
+		if(!MyValidationUtil.isValidNumber(r.getUserName()))
 		{
-			response.getNotifications().add("Inavlid email");
+			response.getNotifications().add("Inavlid Phone number");
 			status = "fail";
 			return jsonConverter.getJSON(request, status, response);
 		}
@@ -80,8 +81,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 			u.setLastModifiedBy(-1);
 			u.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 			u.setLocale("");
-			u.setPassword(r.getPassword());
+			String s = PasswordGeneratorUtil.generatePassword();
+			System.out.println(":::::PASSWORD::::: "+s);
+			u.setPassword(s);
 			u.setUserName(r.getUserName());
+			//code to send the password through sms.
 			//TODO change user type id based on the data in the database
 			u.setUtypeId(1);
 			userDao.save(u);
