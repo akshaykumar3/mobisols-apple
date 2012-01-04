@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 03, 2012 at 01:31 PM
+-- Generation Time: Jan 04, 2012 at 03:04 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -24,7 +24,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Stand-in structure for view `cc_type`
 --
-DROP VIEW IF EXISTS `cc_type`;
 CREATE TABLE IF NOT EXISTS `cc_type` (
 `cc_type_id` int(11)
 ,`name` varchar(45)
@@ -50,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `cc_type` (
 -- Table structure for table `cc_type_all`
 --
 
-DROP TABLE IF EXISTS `cc_type_all`;
 CREATE TABLE IF NOT EXISTS `cc_type_all` (
   `cc_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -89,7 +87,6 @@ INSERT INTO `cc_type_all` (`cc_type_id`, `name`, `description`, `udf1`, `udf2`, 
 --
 -- Stand-in structure for view `client`
 --
-DROP VIEW IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
 `client_id` int(11)
 ,`client_name` varchar(45)
@@ -113,7 +110,6 @@ CREATE TABLE IF NOT EXISTS `client` (
 -- Table structure for table `client_all`
 --
 
-DROP TABLE IF EXISTS `client_all`;
 CREATE TABLE IF NOT EXISTS `client_all` (
   `client_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_name` varchar(45) NOT NULL,
@@ -148,7 +144,6 @@ INSERT INTO `client_all` (`client_id`, `client_name`, `udf1`, `udf2`, `udf3`, `u
 --
 -- Stand-in structure for view `component`
 --
-DROP VIEW IF EXISTS `component`;
 CREATE TABLE IF NOT EXISTS `component` (
 `component_id` int(11)
 ,`name` varchar(45)
@@ -174,7 +169,6 @@ CREATE TABLE IF NOT EXISTS `component` (
 -- Table structure for table `component_all`
 --
 
-DROP TABLE IF EXISTS `component_all`;
 CREATE TABLE IF NOT EXISTS `component_all` (
   `component_id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
@@ -210,7 +204,6 @@ INSERT INTO `component_all` (`component_id`, `name`, `description`, `client_id`,
 --
 -- Stand-in structure for view `component_version`
 --
-DROP VIEW IF EXISTS `component_version`;
 CREATE TABLE IF NOT EXISTS `component_version` (
 `comp_version_id` int(11)
 ,`component_id` int(11)
@@ -237,7 +230,6 @@ CREATE TABLE IF NOT EXISTS `component_version` (
 -- Table structure for table `component_version_all`
 --
 
-DROP TABLE IF EXISTS `component_version_all`;
 CREATE TABLE IF NOT EXISTS `component_version_all` (
   `comp_version_id` int(11) NOT NULL AUTO_INCREMENT,
   `component_id` int(11) DEFAULT NULL,
@@ -274,7 +266,6 @@ INSERT INTO `component_version_all` (`comp_version_id`, `component_id`, `descrip
 --
 -- Stand-in structure for view `configuration`
 --
-DROP VIEW IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
 `config_id` int(11)
 ,`comp_version_id` int(11)
@@ -300,7 +291,6 @@ CREATE TABLE IF NOT EXISTS `configuration` (
 -- Table structure for table `configuration_all`
 --
 
-DROP TABLE IF EXISTS `configuration_all`;
 CREATE TABLE IF NOT EXISTS `configuration_all` (
   `config_id` int(11) NOT NULL,
   `comp_version_id` int(11) DEFAULT NULL,
@@ -336,7 +326,6 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 --
 -- Stand-in structure for view `device`
 --
-DROP VIEW IF EXISTS `device`;
 CREATE TABLE IF NOT EXISTS `device` (
 `device_id` int(11)
 ,`user_id` int(11)
@@ -365,7 +354,6 @@ CREATE TABLE IF NOT EXISTS `device` (
 -- Table structure for table `device_all`
 --
 
-DROP TABLE IF EXISTS `device_all`;
 CREATE TABLE IF NOT EXISTS `device_all` (
   `device_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -392,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `device_all` (
   KEY `fk_device_user` (`user_id`),
   KEY `fk_device_client` (`client_id`),
   KEY `fk_lastmod_device` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `device_all`
@@ -423,7 +411,9 @@ INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, 
 (26, 1, '1.38.244.362011-10-28 22:14:15.217', 'android', 'N', '2011-10-28 22:14:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 22:14:15', '2011-10-28 22:14:15', -1, 1),
 (27, 1, '172.30.130.1782011-11-04 12:05:08.488', 'android', 'N', '2011-11-04 12:05:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-04 12:05:08', '2011-11-04 12:05:08', -1, 1),
 (28, 1, '0:0:0:0:0:0:0:12011-11-05 10:38:18.591', 'desktop', 'N', '2011-11-05 10:38:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 10:38:18', '2011-11-05 10:38:18', -1, 1),
-(29, 1, '0:0:0:0:0:0:0:12011-11-05 11:23:33.764', 'desktop', 'N', '2011-11-05 11:23:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 11:23:33', '2011-11-05 11:23:33', -1, 1);
+(29, 1, '0:0:0:0:0:0:0:12011-11-05 11:23:33.764', 'desktop', 'N', '2011-11-05 11:23:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 11:23:33', '2011-11-05 11:23:33', -1, 1),
+(30, 2, '127.0.0.12012-01-04 17:35:43.032', 'desktop', 'N', '2012-01-04 17:35:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:43', '2012-01-04 17:35:43', -1, 1),
+(31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:54:55', '2012-01-04 19:54:55', -1, 1);
 
 --
 -- Triggers `device_all`
@@ -483,7 +473,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `device_history`
 --
-DROP VIEW IF EXISTS `device_history`;
 CREATE TABLE IF NOT EXISTS `device_history` (
 `device_history_id` int(11)
 ,`device_id` int(11)
@@ -516,7 +505,6 @@ CREATE TABLE IF NOT EXISTS `device_history` (
 -- Table structure for table `device_history_all`
 --
 
-DROP TABLE IF EXISTS `device_history_all`;
 CREATE TABLE IF NOT EXISTS `device_history_all` (
   `device_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` int(11) DEFAULT NULL,
@@ -543,7 +531,7 @@ CREATE TABLE IF NOT EXISTS `device_history_all` (
   `end_date` datetime DEFAULT NULL,
   `action` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`device_history_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `device_history_all`
@@ -594,14 +582,17 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 (42, 28, -1, '0:0:0:0:0:0:0:12011-11-05 10:38:18.591', 'desktop', 'N', '2011-11-05 10:38:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2011-11-05 10:38:18', '2011-11-05 10:38:18', '2011-11-05 10:38:18', '2011-11-05 10:38:39', 'insert'),
 (43, 28, 1, '0:0:0:0:0:0:0:12011-11-05 10:38:18.591', 'desktop', 'N', '2011-11-05 10:38:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2011-11-05 10:38:18', '2011-11-05 10:38:18', '2011-11-05 10:38:40', '3000-01-01 00:00:00', 'update'),
 (44, 29, -1, '0:0:0:0:0:0:0:12011-11-05 11:23:33.764', 'desktop', 'N', '2011-11-05 11:23:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2011-11-05 11:23:33', '2011-11-05 11:23:33', '2011-11-05 11:23:33', '2011-11-05 11:24:25', 'insert'),
-(45, 29, 1, '0:0:0:0:0:0:0:12011-11-05 11:23:33.764', 'desktop', 'N', '2011-11-05 11:23:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2011-11-05 11:23:33', '2011-11-05 11:23:33', '2011-11-05 11:24:26', '3000-01-01 00:00:00', 'update');
+(45, 29, 1, '0:0:0:0:0:0:0:12011-11-05 11:23:33.764', 'desktop', 'N', '2011-11-05 11:23:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2011-11-05 11:23:33', '2011-11-05 11:23:33', '2011-11-05 11:24:26', '3000-01-01 00:00:00', 'update'),
+(46, 30, -1, '127.0.0.12012-01-04 17:35:43.032', 'desktop', 'N', '2012-01-04 17:35:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 17:35:43', '2012-01-04 17:35:43', '2012-01-04 17:35:43', '2012-01-04 17:35:49', 'insert'),
+(47, 30, 2, '127.0.0.12012-01-04 17:35:43.032', 'desktop', 'N', '2012-01-04 17:35:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 17:35:43', '2012-01-04 17:35:43', '2012-01-04 17:35:50', '3000-01-01 00:00:00', 'update'),
+(48, 31, -1, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:55:02', 'insert'),
+(49, 31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:55:03', '3000-01-01 00:00:00', 'update');
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `make`
 --
-DROP VIEW IF EXISTS `make`;
 CREATE TABLE IF NOT EXISTS `make` (
 `make_id` int(11)
 ,`name` varchar(45)
@@ -627,7 +618,6 @@ CREATE TABLE IF NOT EXISTS `make` (
 -- Table structure for table `make_all`
 --
 
-DROP TABLE IF EXISTS `make_all`;
 CREATE TABLE IF NOT EXISTS `make_all` (
   `make_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -658,14 +648,13 @@ CREATE TABLE IF NOT EXISTS `make_all` (
 
 INSERT INTO `make_all` (`make_id`, `name`, `description`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `client_id`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
 (1, 'mymake', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:06', '2011-10-29 23:31:09', -1),
-(2, 'mymake2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:56:01', '2011-11-08 16:56:04', -1);
+(2, 'honda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:40:46', '2012-01-04 18:40:48', -1);
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `model`
 --
-DROP VIEW IF EXISTS `model`;
 CREATE TABLE IF NOT EXISTS `model` (
 `model_id` int(11)
 ,`name` varchar(45)
@@ -693,7 +682,6 @@ CREATE TABLE IF NOT EXISTS `model` (
 -- Table structure for table `model_all`
 --
 
-DROP TABLE IF EXISTS `model_all`;
 CREATE TABLE IF NOT EXISTS `model_all` (
   `model_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
@@ -719,7 +707,7 @@ CREATE TABLE IF NOT EXISTS `model_all` (
   KEY `fk_model_client` (`client_id`),
   KEY `fk_lmb_model` (`last_modified_by`),
   KEY `fk_model_vt` (`vehicle_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `model_all`
@@ -727,14 +715,15 @@ CREATE TABLE IF NOT EXISTS `model_all` (
 
 INSERT INTO `model_all` (`model_id`, `name`, `description`, `make_id`, `vehicle_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `client_id`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
 (1, 'mymodel', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:54', '2011-10-29 23:31:56', -1),
-(2, 'mymodel2', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:32:30', '2011-11-08 16:32:33', -1);
+(2, 'mymodel2', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:32:30', '2011-11-08 16:32:33', -1),
+(3, '123', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:41:28', '2012-01-04 18:41:30', -1),
+(4, '1234', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:41:55', '2012-01-04 18:41:58', -1);
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `owner_type`
 --
-DROP VIEW IF EXISTS `owner_type`;
 CREATE TABLE IF NOT EXISTS `owner_type` (
 `owner_type_id` int(11)
 ,`name` varchar(45)
@@ -760,7 +749,6 @@ CREATE TABLE IF NOT EXISTS `owner_type` (
 -- Table structure for table `owner_type_all`
 --
 
-DROP TABLE IF EXISTS `owner_type_all`;
 CREATE TABLE IF NOT EXISTS `owner_type_all` (
   `owner_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -797,7 +785,6 @@ INSERT INTO `owner_type_all` (`owner_type_id`, `name`, `description`, `udf1`, `u
 --
 -- Stand-in structure for view `payment_gateway`
 --
-DROP VIEW IF EXISTS `payment_gateway`;
 CREATE TABLE IF NOT EXISTS `payment_gateway` (
 `payment_gateway_id` int(11)
 ,`name` varchar(1000)
@@ -823,7 +810,6 @@ CREATE TABLE IF NOT EXISTS `payment_gateway` (
 -- Table structure for table `payment_gateway_all`
 --
 
-DROP TABLE IF EXISTS `payment_gateway_all`;
 CREATE TABLE IF NOT EXISTS `payment_gateway_all` (
   `payment_gateway_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(1000) DEFAULT NULL,
@@ -857,7 +843,6 @@ CREATE TABLE IF NOT EXISTS `payment_gateway_all` (
 --
 -- Stand-in structure for view `payment_token`
 --
-DROP VIEW IF EXISTS `payment_token`;
 CREATE TABLE IF NOT EXISTS `payment_token` (
 `payment_token_id` int(11)
 ,`upd_id` int(11)
@@ -884,7 +869,6 @@ CREATE TABLE IF NOT EXISTS `payment_token` (
 -- Table structure for table `payment_token_all`
 --
 
-DROP TABLE IF EXISTS `payment_token_all`;
 CREATE TABLE IF NOT EXISTS `payment_token_all` (
   `payment_token_id` int(11) NOT NULL AUTO_INCREMENT,
   `upd_id` int(11) DEFAULT NULL,
@@ -922,7 +906,6 @@ CREATE TABLE IF NOT EXISTS `payment_token_all` (
 --
 -- Stand-in structure for view `payment_transaction`
 --
-DROP VIEW IF EXISTS `payment_transaction`;
 CREATE TABLE IF NOT EXISTS `payment_transaction` (
 `ptran_id` int(11)
 ,`user_bl_id` int(11)
@@ -952,7 +935,6 @@ CREATE TABLE IF NOT EXISTS `payment_transaction` (
 -- Table structure for table `payment_transaction_all`
 --
 
-DROP TABLE IF EXISTS `payment_transaction_all`;
 CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
   `ptran_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_bl_id` int(11) DEFAULT NULL COMMENT 'balance log for the user',
@@ -993,7 +975,6 @@ CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
 --
 -- Stand-in structure for view `road`
 --
-DROP VIEW IF EXISTS `road`;
 CREATE TABLE IF NOT EXISTS `road` (
 `road_id` int(11)
 ,`name` varchar(50)
@@ -1021,7 +1002,6 @@ CREATE TABLE IF NOT EXISTS `road` (
 -- Table structure for table `road_all`
 --
 
-DROP TABLE IF EXISTS `road_all`;
 CREATE TABLE IF NOT EXISTS `road_all` (
   `road_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -1057,7 +1037,6 @@ CREATE TABLE IF NOT EXISTS `road_all` (
 --
 -- Stand-in structure for view `service_plan`
 --
-DROP VIEW IF EXISTS `service_plan`;
 CREATE TABLE IF NOT EXISTS `service_plan` (
 `service_plan_id` int(11)
 ,`toll_operator_id` int(11)
@@ -1084,7 +1063,6 @@ CREATE TABLE IF NOT EXISTS `service_plan` (
 -- Table structure for table `service_plan_all`
 --
 
-DROP TABLE IF EXISTS `service_plan_all`;
 CREATE TABLE IF NOT EXISTS `service_plan_all` (
   `service_plan_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_operator_id` int(11) DEFAULT NULL,
@@ -1124,7 +1102,6 @@ INSERT INTO `service_plan_all` (`service_plan_id`, `toll_operator_id`, `name`, `
 --
 -- Stand-in structure for view `tc_realm_groups`
 --
-DROP VIEW IF EXISTS `tc_realm_groups`;
 CREATE TABLE IF NOT EXISTS `tc_realm_groups` (
 `username` varchar(320)
 ,`groupname` varchar(45)
@@ -1134,7 +1111,6 @@ CREATE TABLE IF NOT EXISTS `tc_realm_groups` (
 --
 -- Stand-in structure for view `tc_realm_users`
 --
-DROP VIEW IF EXISTS `tc_realm_users`;
 CREATE TABLE IF NOT EXISTS `tc_realm_users` (
 `username` varchar(320)
 ,`password` varchar(40)
@@ -1144,7 +1120,6 @@ CREATE TABLE IF NOT EXISTS `tc_realm_users` (
 --
 -- Stand-in structure for view `toll_location`
 --
-DROP VIEW IF EXISTS `toll_location`;
 CREATE TABLE IF NOT EXISTS `toll_location` (
 `toll_location_id` int(11)
 ,`toll_operator_id` int(11)
@@ -1184,7 +1159,6 @@ CREATE TABLE IF NOT EXISTS `toll_location` (
 -- Table structure for table `toll_location_all`
 --
 
-DROP TABLE IF EXISTS `toll_location_all`;
 CREATE TABLE IF NOT EXISTS `toll_location_all` (
   `toll_location_id` int(11) NOT NULL,
   `toll_operator_id` int(11) NOT NULL COMMENT 'corresponding toll agency -- foreign key to toll_operators_all table',
@@ -1315,7 +1289,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `toll_location_history`
 --
-DROP VIEW IF EXISTS `toll_location_history`;
 CREATE TABLE IF NOT EXISTS `toll_location_history` (
 `tlh_id` int(11)
 ,`toll_location_id` int(11)
@@ -1359,7 +1332,6 @@ CREATE TABLE IF NOT EXISTS `toll_location_history` (
 -- Table structure for table `toll_location_history_all`
 --
 
-DROP TABLE IF EXISTS `toll_location_history_all`;
 CREATE TABLE IF NOT EXISTS `toll_location_history_all` (
   `tlh_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_location_id` int(11) DEFAULT NULL,
@@ -1443,7 +1415,6 @@ INSERT INTO `toll_location_history_all` (`tlh_id`, `toll_location_id`, `toll_ope
 --
 -- Stand-in structure for view `toll_operator`
 --
-DROP VIEW IF EXISTS `toll_operator`;
 CREATE TABLE IF NOT EXISTS `toll_operator` (
 `toll_operator_id` int(11)
 ,`user_id` int(11)
@@ -1471,7 +1442,6 @@ CREATE TABLE IF NOT EXISTS `toll_operator` (
 -- Table structure for table `toll_operator_all`
 --
 
-DROP TABLE IF EXISTS `toll_operator_all`;
 CREATE TABLE IF NOT EXISTS `toll_operator_all` (
   `toll_operator_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1513,7 +1483,6 @@ INSERT INTO `toll_operator_all` (`toll_operator_id`, `user_id`, `name`, `is_acti
 --
 -- Stand-in structure for view `toll_price`
 --
-DROP VIEW IF EXISTS `toll_price`;
 CREATE TABLE IF NOT EXISTS `toll_price` (
 `toll_price_id` int(11)
 ,`toll_location_id` int(11)
@@ -1541,7 +1510,6 @@ CREATE TABLE IF NOT EXISTS `toll_price` (
 -- Table structure for table `toll_price_all`
 --
 
-DROP TABLE IF EXISTS `toll_price_all`;
 CREATE TABLE IF NOT EXISTS `toll_price_all` (
   `toll_price_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_location_id` int(11) NOT NULL,
@@ -1627,7 +1595,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `toll_price_history`
 --
-DROP VIEW IF EXISTS `toll_price_history`;
 CREATE TABLE IF NOT EXISTS `toll_price_history` (
 `tph_id` int(11)
 ,`toll_price_id` int(11)
@@ -1660,7 +1627,6 @@ CREATE TABLE IF NOT EXISTS `toll_price_history` (
 -- Table structure for table `toll_price_history_all`
 --
 
-DROP TABLE IF EXISTS `toll_price_history_all`;
 CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
   `tph_id` int(11) NOT NULL AUTO_INCREMENT,
   `toll_price_id` int(11) NOT NULL,
@@ -1700,7 +1666,6 @@ CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
 -- Table structure for table `udf_data_all`
 --
 
-DROP TABLE IF EXISTS `udf_data_all`;
 CREATE TABLE IF NOT EXISTS `udf_data_all` (
   `udf_data_id` int(11) NOT NULL AUTO_INCREMENT,
   `udf_value` varchar(1000) DEFAULT NULL,
@@ -1720,7 +1685,6 @@ CREATE TABLE IF NOT EXISTS `udf_data_all` (
 -- Table structure for table `udf_definition_all`
 --
 
-DROP TABLE IF EXISTS `udf_definition_all`;
 CREATE TABLE IF NOT EXISTS `udf_definition_all` (
   `udf_def_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -1737,7 +1701,6 @@ CREATE TABLE IF NOT EXISTS `udf_definition_all` (
 --
 -- Stand-in structure for view `user`
 --
-DROP VIEW IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
 `user_id` int(11)
 ,`client_id` int(11)
@@ -1768,7 +1731,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Table structure for table `user_all`
 --
 
-DROP TABLE IF EXISTS `user_all`;
 CREATE TABLE IF NOT EXISTS `user_all` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `client_id` int(11) NOT NULL COMMENT 'users can register under any client where clients are third party organisations. ',
@@ -1796,7 +1758,7 @@ CREATE TABLE IF NOT EXISTS `user_all` (
   UNIQUE KEY `uk_user_name` (`user_name`,`client_id`),
   KEY `fk_utype_user` (`utype_id`),
   KEY `fk_client_id_user` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user_all`
@@ -1804,7 +1766,9 @@ CREATE TABLE IF NOT EXISTS `user_all` (
 
 INSERT INTO `user_all` (`user_id`, `client_id`, `utype_id`, `user_name`, `password`, `locale`, `is_active`, `contact_no`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
 (-1, 1, 1, 'test', 'test', NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 21:20:18', '2011-10-12 21:20:21', -1),
-(1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'Y', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1);
+(1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'Y', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1),
+(2, 1, 1, '1234567890', '1840', '', 'I', NULL, '2012-01-04 17:35:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1),
+(3, 1, 1, '9491617227', '2167', '', 'I', NULL, '2012-01-04 19:55:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1);
 
 --
 -- Triggers `user_all`
@@ -1858,7 +1822,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_balance`
 --
-DROP VIEW IF EXISTS `user_balance`;
 CREATE TABLE IF NOT EXISTS `user_balance` (
 `ubal_id` int(11)
 ,`user_id` int(11)
@@ -1884,7 +1847,6 @@ CREATE TABLE IF NOT EXISTS `user_balance` (
 -- Table structure for table `user_balance_all`
 --
 
-DROP TABLE IF EXISTS `user_balance_all`;
 CREATE TABLE IF NOT EXISTS `user_balance_all` (
   `ubal_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -1907,14 +1869,16 @@ CREATE TABLE IF NOT EXISTS `user_balance_all` (
   KEY `fk_ubal_users` (`user_id`),
   KEY `fk_last_mod_by_uba` (`last_modified_by`),
   KEY `fk_client_ub` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user_balance_all`
 --
 
 INSERT INTO `user_balance_all` (`ubal_id`, `user_id`, `balance`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
-(1, 1, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1);
+(1, 1, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(2, 2, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
+(3, 3, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1);
 
 --
 -- Triggers `user_balance_all`
@@ -1944,7 +1908,7 @@ DELIMITER //
 CREATE TRIGGER `trg_bal_log_bfr_del` BEFORE DELETE ON `user_balance_all`
  FOR EACH ROW begin
 insert into user_balance_log_all (ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
-values(null,old.ubal_id,old.balanceold.balance,sysdate(),'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,
+values(null,old.ubal_id,old.balance,sysdate(),'delete',old.udf1,old.udf2,old.udf3,old.udf4,old.udf5,old.flag1,old.flag2,old.flag3,old.flag4,old.flag5,
 old.last_modified_by,old.last_modified_on,old.created_on,old.client_id);
 end
 //
@@ -1955,7 +1919,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_balance_log`
 --
-DROP VIEW IF EXISTS `user_balance_log`;
 CREATE TABLE IF NOT EXISTS `user_balance_log` (
 `ublog_id` int(11)
 ,`ubal_id` int(11)
@@ -1983,7 +1946,6 @@ CREATE TABLE IF NOT EXISTS `user_balance_log` (
 -- Table structure for table `user_balance_log_all`
 --
 
-DROP TABLE IF EXISTS `user_balance_log_all`;
 CREATE TABLE IF NOT EXISTS `user_balance_log_all` (
   `ublog_id` int(11) NOT NULL AUTO_INCREMENT,
   `ubal_id` int(11) NOT NULL,
@@ -2008,21 +1970,22 @@ CREATE TABLE IF NOT EXISTS `user_balance_log_all` (
   KEY `fk_ublog_ubal` (`ubal_id`),
   KEY `fk_last_mod_by_ubla` (`last_modified_by`),
   KEY `fk_client_ubl` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user_balance_log_all`
 --
 
 INSERT INTO `user_balance_log_all` (`ublog_id`, `ubal_id`, `delta`, `timestamp`, `action`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
-(1, 1, '0.0000', '2011-10-12 22:22:34', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1);
+(1, 1, '0.0000', '2011-10-12 22:22:34', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(2, 2, '0.0000', '2012-01-04 17:35:50', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
+(3, 3, '0.0000', '2012-01-04 19:55:03', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1);
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_history`
 --
-DROP VIEW IF EXISTS `user_history`;
 CREATE TABLE IF NOT EXISTS `user_history` (
 `user_his_id` int(11)
 ,`user_id` int(11)
@@ -2057,7 +2020,6 @@ CREATE TABLE IF NOT EXISTS `user_history` (
 -- Table structure for table `user_history_all`
 --
 
-DROP TABLE IF EXISTS `user_history_all`;
 CREATE TABLE IF NOT EXISTS `user_history_all` (
   `user_his_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2086,7 +2048,7 @@ CREATE TABLE IF NOT EXISTS `user_history_all` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`user_his_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `user_history_all`
@@ -2120,14 +2082,15 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 (25, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-10-30 23:29:13', '2011-11-10 20:03:01'),
 (26, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:02', '2011-11-10 20:03:08'),
 (27, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:09', '2011-11-10 20:03:11'),
-(28, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:12', '3000-01-01 00:00:00');
+(28, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:12', '3000-01-01 00:00:00'),
+(29, 2, '1234567890', '1840', '', 1, '2012-01-04 17:35:50', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1, '2012-01-04 17:35:50', '3000-01-01 00:00:00'),
+(30, 3, '9491617227', '2167', '', 1, '2012-01-04 19:55:02', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1, '2012-01-04 19:55:02', '3000-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_notification`
 --
-DROP VIEW IF EXISTS `user_notification`;
 CREATE TABLE IF NOT EXISTS `user_notification` (
 `user_notification_id` int(11)
 ,`device_id` int(11)
@@ -2161,7 +2124,6 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
 -- Table structure for table `user_notification_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_all` (
   `user_notification_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` int(11) DEFAULT NULL,
@@ -2204,7 +2166,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_all` (
 --
 -- Stand-in structure for view `user_notification_settings`
 --
-DROP VIEW IF EXISTS `user_notification_settings`;
 CREATE TABLE IF NOT EXISTS `user_notification_settings` (
 `user_notification_settings_id` int(11)
 ,`user_id` int(11)
@@ -2230,7 +2191,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_settings` (
 -- Table structure for table `user_notification_settings_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_settings_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_settings_all` (
   `user_notification_settings_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2267,7 +2227,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_settings_all` (
 --
 -- Stand-in structure for view `user_notification_type`
 --
-DROP VIEW IF EXISTS `user_notification_type`;
 CREATE TABLE IF NOT EXISTS `user_notification_type` (
 `user_notification_type_id` int(11)
 ,`notification_type` varchar(100)
@@ -2293,7 +2252,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_type` (
 -- Table structure for table `user_notification_type_all`
 --
 
-DROP TABLE IF EXISTS `user_notification_type_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_type_all` (
   `user_notification_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `notification_type` varchar(100) NOT NULL,
@@ -2327,7 +2285,6 @@ CREATE TABLE IF NOT EXISTS `user_notification_type_all` (
 --
 -- Stand-in structure for view `user_payment_detail`
 --
-DROP VIEW IF EXISTS `user_payment_detail`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 `upd_id` int(11)
 ,`user_id` int(11)
@@ -2367,7 +2324,6 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 -- Table structure for table `user_payment_detail_all`
 --
 
-DROP TABLE IF EXISTS `user_payment_detail_all`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   `upd_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2396,27 +2352,26 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   `flag3` varchar(1) DEFAULT NULL,
   `flag4` varchar(1) DEFAULT NULL,
   `flag5` varchar(1) DEFAULT NULL,
-  `last_modified_by` int(11) DEFAULT NULL,
-  `last_modified_on` datetime DEFAULT NULL,
-  `created_on` datetime DEFAULT NULL,
+  `last_modified_by` int(11) NOT NULL,
+  `last_modified_on` datetime NOT NULL,
+  `created_on` datetime NOT NULL,
   `client_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`upd_id`),
-  UNIQUE KEY `last_modified_on_UNIQUE` (`last_modified_on`),
-  UNIQUE KEY `created_on_UNIQUE` (`created_on`),
-  UNIQUE KEY `last_modified_by_UNIQUE` (`last_modified_by`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   KEY `fk_upd_user` (`user_id`),
   KEY `fk_last_mod_by_upda` (`last_modified_by`),
   KEY `fk_cctype_upd` (`cc_type_id`),
   KEY `fk_client_upd` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the billing details of the user' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the billing details of the user' AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user_payment_detail_all`
 --
 
 INSERT INTO `user_payment_detail_all` (`upd_id`, `user_id`, `cc_type_id`, `cc_ac_name`, `cc_number`, `cc_exp_month`, `cc_exp_year`, `cc_cvv`, `bank_routing`, `bank_account`, `pay_prefer`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
-(1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'c', 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 13:37:06', '2011-10-12 22:22:34', 1);
+(1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'c', 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 13:37:06', '2011-10-12 22:22:34', 1),
+(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
+(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1);
 
 --
 -- Triggers `user_payment_detail_all`
@@ -2473,7 +2428,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_payment_detail_history`
 --
-DROP VIEW IF EXISTS `user_payment_detail_history`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 `updh_id` int(11)
 ,`upd_id` int(11)
@@ -2517,7 +2471,6 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 -- Table structure for table `user_payment_detail_history_all`
 --
 
-DROP TABLE IF EXISTS `user_payment_detail_history_all`;
 CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `updh_id` int(11) NOT NULL AUTO_INCREMENT,
   `upd_id` int(11) DEFAULT NULL,
@@ -2555,7 +2508,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `end_date` datetime NOT NULL,
   `client_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`updh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `user_payment_detail_history_all`
@@ -2566,14 +2519,15 @@ INSERT INTO `user_payment_detail_history_all` (`updh_id`, `upd_id`, `user_id`, `
 (2, 1, 1, 1, 'harish', '4477 4669 0240 ', 1, 2036, 0, NULL, NULL, 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-15 23:45:57', 1, '2011-10-15 23:45:58', '2011-10-17 13:09:57', 1),
 (3, 1, 1, 1, 'harish', '4477 4669 0240 ', 1, 2036, 0, NULL, NULL, 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-17 13:09:58', 1, '2011-10-17 13:09:58', '2011-10-30 18:40:20', 1),
 (4, 1, 1, 1, 'harish', '447746690240', 1, 2035, 0, NULL, NULL, 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-30 18:40:21', 1, '2011-10-30 18:40:21', '2011-11-05 13:37:05', 1),
-(5, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-11-05 13:37:06', 1, '2011-11-05 13:37:06', '3000-01-01 00:00:00', 1);
+(5, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-11-05 13:37:06', 1, '2011-11-05 13:37:06', '3000-01-01 00:00:00', 1),
+(6, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1, '2012-01-04 17:35:50', '3000-01-01 00:00:00', 1),
+(7, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:03', '2012-01-04 19:55:03', -1, '2012-01-04 19:55:03', '3000-01-01 00:00:00', 1);
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `user_service`
 --
-DROP VIEW IF EXISTS `user_service`;
 CREATE TABLE IF NOT EXISTS `user_service` (
 `user_service_id` int(11)
 ,`user_id` int(11)
@@ -2602,7 +2556,6 @@ CREATE TABLE IF NOT EXISTS `user_service` (
 -- Table structure for table `user_service_all`
 --
 
-DROP TABLE IF EXISTS `user_service_all`;
 CREATE TABLE IF NOT EXISTS `user_service_all` (
   `user_service_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -2641,7 +2594,6 @@ CREATE TABLE IF NOT EXISTS `user_service_all` (
 --
 -- Stand-in structure for view `user_type`
 --
-DROP VIEW IF EXISTS `user_type`;
 CREATE TABLE IF NOT EXISTS `user_type` (
 `user_type_id` int(11)
 ,`name` varchar(45)
@@ -2669,7 +2621,6 @@ CREATE TABLE IF NOT EXISTS `user_type` (
 -- Table structure for table `user_type_all`
 --
 
-DROP TABLE IF EXISTS `user_type_all`;
 CREATE TABLE IF NOT EXISTS `user_type_all` (
   `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL COMMENT 'trial/prepaid/premium/postpaid users',
@@ -2708,7 +2659,6 @@ INSERT INTO `user_type_all` (`user_type_id`, `name`, `description`, `min_balance
 --
 -- Stand-in structure for view `user_vehicle`
 --
-DROP VIEW IF EXISTS `user_vehicle`;
 CREATE TABLE IF NOT EXISTS `user_vehicle` (
 `user_vehicle_id` int(11)
 ,`user_id` int(11)
@@ -2743,7 +2693,6 @@ CREATE TABLE IF NOT EXISTS `user_vehicle` (
 -- Table structure for table `user_vehicle_all`
 --
 
-DROP TABLE IF EXISTS `user_vehicle_all`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   `user_vehicle_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL COMMENT 'user id-- foreign key to users_all table',
@@ -2778,7 +2727,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   KEY `fk_uv_co` (`owner_type_id`),
   KEY `fk_client_uv` (`client_id`),
   KEY `fk_model_uv` (`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `user_vehicle_all`
@@ -2786,7 +2735,9 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
 
 INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES
 (1, 1, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 11:33:24', '2011-10-14 01:02:24', 1, 1, NULL, '', 0),
-(2, 1, '2011-10-30 22:53:30', '2012-01-01 00:00:00', 'T', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, 1, NULL, 'blue', 2010);
+(2, 1, '2011-10-30 22:53:30', '2012-01-01 00:00:00', 'T', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, 1, NULL, 'blue', 2010),
+(3, 2, '2012-01-04 18:35:36', '2013-01-01 00:00:00', 'N', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 1, 1, NULL, '1234', 2010),
+(4, 3, '2012-01-04 19:55:40', '2013-01-01 00:00:00', 'N', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 1, 1, NULL, 'red', 2010);
 
 --
 -- Triggers `user_vehicle_all`
@@ -2843,7 +2794,6 @@ DELIMITER ;
 --
 -- Stand-in structure for view `user_vehicle_history`
 --
-DROP VIEW IF EXISTS `user_vehicle_history`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 `uvh_id` int(11)
 ,`user_vehicle_id` int(11)
@@ -2882,7 +2832,6 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history` (
 -- Table structure for table `user_vehicle_history_all`
 --
 
-DROP TABLE IF EXISTS `user_vehicle_history_all`;
 CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `uvh_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_vehicle_id` int(11) DEFAULT NULL,
@@ -2915,7 +2864,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `color` varchar(45) DEFAULT NULL,
   `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`uvh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=65 ;
 
 --
 -- Dumping data for table `user_vehicle_history_all`
@@ -2980,14 +2929,81 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (59, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:02', '2011-11-10 20:03:08', 'update', 1, 1, NULL, '', 0),
 (60, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-11-10 20:03:09', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'blue', 2010),
 (61, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:09', '2011-11-10 20:03:11', 'update', 1, 1, NULL, '', 0),
-(62, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:12', '3000-01-01 00:00:00', 'update', 1, 1, NULL, '', 0);
+(62, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:12', '3000-01-01 00:00:00', 'update', 1, 1, NULL, '', 0),
+(63, 3, 2, 'N', '2012-01-04 18:35:36', '2013-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 2, '2012-01-04 18:35:36', '3000-01-01 00:00:00', 'insert', 1, 1, NULL, '1234', 2010),
+(64, 4, 3, 'N', '2012-01-04 19:55:40', '2013-01-01 00:00:00', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 3, '2012-01-04 19:55:40', '3000-01-01 00:00:00', 'insert', 1, 1, NULL, 'red', 2010);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `user_vehicle_tolloperator`
+--
+CREATE TABLE IF NOT EXISTS `user_vehicle_tolloperator` (
+`uvt_id` int(11)
+,`user_vehicle_id` int(11)
+,`toll_operator_id` int(11)
+,`status` varchar(100)
+,`start_date` datetime
+,`end_date` datetime
+,`udf1` varchar(1000)
+,`udf2` varchar(1000)
+,`udf3` varchar(1000)
+,`udf4` varchar(1000)
+,`udf5` varchar(1000)
+,`flag1` varchar(1)
+,`flag2` varchar(1)
+,`flag3` varchar(1)
+,`flag4` varchar(1)
+,`flag5` varchar(1)
+,`last_modified_by` int(11)
+,`last_modified_on` datetime
+,`created_on` datetime
+,`client_id` int(11)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_vehicle_tolloperator_all`
+--
+
+CREATE TABLE IF NOT EXISTS `user_vehicle_tolloperator_all` (
+  `uvt_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_vehicle_id` int(11) NOT NULL,
+  `toll_operator_id` int(11) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `udf1` varchar(1000) DEFAULT NULL,
+  `udf2` varchar(1000) DEFAULT NULL,
+  `udf3` varchar(1000) DEFAULT NULL,
+  `udf4` varchar(1000) DEFAULT NULL,
+  `udf5` varchar(1000) DEFAULT NULL,
+  `flag1` varchar(1) DEFAULT NULL,
+  `flag2` varchar(1) DEFAULT NULL,
+  `flag3` varchar(1) DEFAULT NULL,
+  `flag4` varchar(1) DEFAULT NULL,
+  `flag5` varchar(1) DEFAULT NULL,
+  `last_modified_by` int(11) NOT NULL,
+  `last_modified_on` datetime NOT NULL,
+  `created_on` datetime NOT NULL,
+  `client_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`uvt_id`),
+  KEY `fk_uvt_uv` (`user_vehicle_id`),
+  KEY `fk_uvt_to` (`toll_operator_id`),
+  KEY `fk_uvt_lmb` (`last_modified_by`),
+  KEY `fk_uvt_client` (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `user_vehicle_tolloperator_all`
+--
+
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `vehicle_movement_log`
 --
-DROP VIEW IF EXISTS `vehicle_movement_log`;
 CREATE TABLE IF NOT EXISTS `vehicle_movement_log` (
 `vml_id` int(11)
 ,`vml_type_id` int(11)
@@ -3021,7 +3037,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log` (
 -- Table structure for table `vehicle_movement_log_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_movement_log_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
   `vml_id` int(11) NOT NULL AUTO_INCREMENT,
   `vml_type_id` int(11) NOT NULL,
@@ -3077,7 +3092,6 @@ INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history
 --
 -- Stand-in structure for view `vehicle_toll_usage`
 --
-DROP VIEW IF EXISTS `vehicle_toll_usage`;
 CREATE TABLE IF NOT EXISTS `vehicle_toll_usage` (
 `vtu_id` int(11)
 ,`uvh_id` int(11)
@@ -3107,7 +3121,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage` (
 -- Table structure for table `vehicle_toll_usage_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_toll_usage_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
   `vtu_id` int(11) NOT NULL AUTO_INCREMENT,
   `uvh_id` int(11) NOT NULL,
@@ -3150,7 +3163,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
 --
 -- Stand-in structure for view `vehicle_type`
 --
-DROP VIEW IF EXISTS `vehicle_type`;
 CREATE TABLE IF NOT EXISTS `vehicle_type` (
 `vehicle_type_id` int(11)
 ,`name` varchar(100)
@@ -3176,7 +3188,6 @@ CREATE TABLE IF NOT EXISTS `vehicle_type` (
 -- Table structure for table `vehicle_type_all`
 --
 
-DROP TABLE IF EXISTS `vehicle_type_all`;
 CREATE TABLE IF NOT EXISTS `vehicle_type_all` (
   `vehicle_type_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary key of the table',
   `name` varchar(100) NOT NULL COMMENT 'A: Auto/sport utility Vehicle/minivan\nP: Pickup truck \nP2: Pickup truck with dual rear tires \nv: Van\nm: motorcycle \nR4: RV with 4 tires\n R6: RV with dual rear tires  ',
@@ -3216,7 +3227,6 @@ INSERT INTO `vehicle_type_all` (`vehicle_type_id`, `name`, `description`, `udf1`
 --
 -- Stand-in structure for view `vml_type`
 --
-DROP VIEW IF EXISTS `vml_type`;
 CREATE TABLE IF NOT EXISTS `vml_type` (
 `vml_type_id` int(11)
 ,`name` varchar(45)
@@ -3242,7 +3252,6 @@ CREATE TABLE IF NOT EXISTS `vml_type` (
 -- Table structure for table `vml_type_all`
 --
 
-DROP TABLE IF EXISTS `vml_type_all`;
 CREATE TABLE IF NOT EXISTS `vml_type_all` (
   `vml_type_id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -3591,6 +3600,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `user_vehicle_tolloperator`
+--
+DROP TABLE IF EXISTS `user_vehicle_tolloperator`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_vehicle_tolloperator` AS select `user_vehicle_tolloperator_all`.`uvt_id` AS `uvt_id`,`user_vehicle_tolloperator_all`.`user_vehicle_id` AS `user_vehicle_id`,`user_vehicle_tolloperator_all`.`toll_operator_id` AS `toll_operator_id`,`user_vehicle_tolloperator_all`.`status` AS `status`,`user_vehicle_tolloperator_all`.`start_date` AS `start_date`,`user_vehicle_tolloperator_all`.`end_date` AS `end_date`,`user_vehicle_tolloperator_all`.`udf1` AS `udf1`,`user_vehicle_tolloperator_all`.`udf2` AS `udf2`,`user_vehicle_tolloperator_all`.`udf3` AS `udf3`,`user_vehicle_tolloperator_all`.`udf4` AS `udf4`,`user_vehicle_tolloperator_all`.`udf5` AS `udf5`,`user_vehicle_tolloperator_all`.`flag1` AS `flag1`,`user_vehicle_tolloperator_all`.`flag2` AS `flag2`,`user_vehicle_tolloperator_all`.`flag3` AS `flag3`,`user_vehicle_tolloperator_all`.`flag4` AS `flag4`,`user_vehicle_tolloperator_all`.`flag5` AS `flag5`,`user_vehicle_tolloperator_all`.`last_modified_by` AS `last_modified_by`,`user_vehicle_tolloperator_all`.`last_modified_on` AS `last_modified_on`,`user_vehicle_tolloperator_all`.`created_on` AS `created_on`,`user_vehicle_tolloperator_all`.`client_id` AS `client_id` from `user_vehicle_tolloperator_all` where (`user_vehicle_tolloperator_all`.`client_id` > -(1));
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vehicle_movement_log`
 --
 DROP TABLE IF EXISTS `vehicle_movement_log`;
@@ -3632,36 +3650,36 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Constraints for table `cc_type_all`
 --
 ALTER TABLE `cc_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_cta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_cta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_cct` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `client_all`
 --
 ALTER TABLE `client_all`
-  ADD CONSTRAINT `fk_cl_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_ca` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_cl_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_ca` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `component_all`
 --
 ALTER TABLE `component_all`
   ADD CONSTRAINT `fk_comp_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_comp` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_last_mod_comp` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `component_version_all`
 --
 ALTER TABLE `component_version_all`
   ADD CONSTRAINT `fk_cv_c` FOREIGN KEY (`component_id`) REFERENCES `component_all` (`component_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_cv` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_last_mod_cv` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `configuration_all`
 --
 ALTER TABLE `configuration_all`
   ADD CONSTRAINT `fk_c_cv` FOREIGN KEY (`comp_version_id`) REFERENCES `component_version_all` (`comp_version_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_mod_by_config_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_mod_by_config_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `device_all`
@@ -3669,69 +3687,69 @@ ALTER TABLE `configuration_all`
 ALTER TABLE `device_all`
   ADD CONSTRAINT `fk_device_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_device_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_lastmod_device` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_lastmod_device` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `make_all`
 --
 ALTER TABLE `make_all`
-  ADD CONSTRAINT `fk_make_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_lmb_make` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_make_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_lmb_make` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `model_all`
 --
 ALTER TABLE `model_all`
-  ADD CONSTRAINT `fk_model_make` FOREIGN KEY (`make_id`) REFERENCES `make_all` (`make_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_model_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_lmb_model` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_model_make` FOREIGN KEY (`make_id`) REFERENCES `make_all` (`make_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_model_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_lmb_model` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_model_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `owner_type_all`
 --
 ALTER TABLE `owner_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_ota` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_ota` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_ot` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_gateway_all`
 --
 ALTER TABLE `payment_gateway_all`
-  ADD CONSTRAINT `fk_pg_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pg_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pg_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pg_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_token_all`
 --
 ALTER TABLE `payment_token_all`
-  ADD CONSTRAINT `fk_pt_pg` FOREIGN KEY (`payment_gateway_id`) REFERENCES `payment_gateway_all` (`payment_gateway_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_upd` FOREIGN KEY (`upd_id`) REFERENCES `user_payment_detail_all` (`upd_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pt_pg` FOREIGN KEY (`payment_gateway_id`) REFERENCES `payment_gateway_all` (`payment_gateway_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pt_upd` FOREIGN KEY (`upd_id`) REFERENCES `user_payment_detail_all` (`upd_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pt_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_transaction_all`
 --
 ALTER TABLE `payment_transaction_all`
-  ADD CONSTRAINT `fk_lat_mod_by_pta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_lat_mod_by_pta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_pt_ublog` FOREIGN KEY (`user_bl_id`) REFERENCES `user_balance_log_all` (`ublog_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_pt_tlog` FOREIGN KEY (`to_bl_id`) REFERENCES `user_balance_log_all` (`ublog_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_updh` FOREIGN KEY (`updh_id`) REFERENCES `user_payment_detail_history_all` (`updh_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_pt_updh` FOREIGN KEY (`updh_id`) REFERENCES `user_payment_detail_history_all` (`updh_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_pt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `road_all`
 --
 ALTER TABLE `road_all`
-  ADD CONSTRAINT `fk_last_mod_by_road` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_road_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_last_mod_by_road` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_road_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `service_plan_all`
 --
 ALTER TABLE `service_plan_all`
-  ADD CONSTRAINT `fk_last_mod_by_spa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_spa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_sp_to` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_sp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
@@ -3740,16 +3758,16 @@ ALTER TABLE `service_plan_all`
 --
 ALTER TABLE `toll_location_all`
   ADD CONSTRAINT `fk_toll_op_id` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_tla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_tla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_tl` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `toll_operator_all`
 --
 ALTER TABLE `toll_operator_all`
-  ADD CONSTRAINT `fk_last_mod_by_toa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_toa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_toll_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_to` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_client_to` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `toll_price_all`
@@ -3757,7 +3775,7 @@ ALTER TABLE `toll_operator_all`
 ALTER TABLE `toll_price_all`
   ADD CONSTRAINT `fk_tp_tl` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tp_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_tpa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_tpa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_tp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
@@ -3778,24 +3796,24 @@ ALTER TABLE `user_all`
 --
 ALTER TABLE `user_balance_all`
   ADD CONSTRAINT `fk_ubal_users` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_uba` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_uba` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_ub` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_balance_log_all`
 --
 ALTER TABLE `user_balance_log_all`
-  ADD CONSTRAINT `fk_ublog_ubal` FOREIGN KEY (`ubal_id`) REFERENCES `user_balance_all` (`ubal_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_ubla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_ublog_ubal` FOREIGN KEY (`ubal_id`) REFERENCES `user_balance_all` (`ubal_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_ubla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_ubl` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_notification_all`
 --
 ALTER TABLE `user_notification_all`
-  ADD CONSTRAINT `fk_device` FOREIGN KEY (`device_id`) REFERENCES `device_all` (`device_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_notification` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_unotify_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_device` FOREIGN KEY (`device_id`) REFERENCES `device_all` (`device_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_notification` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_unotify_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_notification_settings_all`
@@ -3803,14 +3821,14 @@ ALTER TABLE `user_notification_all`
 ALTER TABLE `user_notification_settings_all`
   ADD CONSTRAINT `fk_not_settings_user_all` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_settings_user_notification_type_all` FOREIGN KEY (`user_notification_type_id`) REFERENCES `user_notification_type_all` (`user_notification_type_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_notify_settings` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_notify_settings` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_not_settings_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_notification_type_all`
 --
 ALTER TABLE `user_notification_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_not_type` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_not_type` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_noti_type_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
@@ -3818,7 +3836,7 @@ ALTER TABLE `user_notification_type_all`
 --
 ALTER TABLE `user_payment_detail_all`
   ADD CONSTRAINT `fk_upd_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_upda` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_upda` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_cctype_upd` FOREIGN KEY (`cc_type_id`) REFERENCES `cc_type_all` (`cc_type_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_upd` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
@@ -3827,15 +3845,15 @@ ALTER TABLE `user_payment_detail_all`
 --
 ALTER TABLE `user_service_all`
   ADD CONSTRAINT `fk_us_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_us_ser` FOREIGN KEY (`service_id`) REFERENCES `service_plan_all` (`service_plan_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_las_mod_by` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_us_ser` FOREIGN KEY (`service_id`) REFERENCES `service_plan_all` (`service_plan_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_las_mod_by` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_us` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_type_all`
 --
 ALTER TABLE `user_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_uta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_uta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_ut` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
@@ -3843,31 +3861,40 @@ ALTER TABLE `user_type_all`
 --
 ALTER TABLE `user_vehicle_all`
   ADD CONSTRAINT `fk_user_user_vehicle` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_uva` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_uva` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_uv_co` FOREIGN KEY (`owner_type_id`) REFERENCES `owner_type_all` (`owner_type_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_uv` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_model_uv` FOREIGN KEY (`model_id`) REFERENCES `model_all` (`model_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_model_uv` FOREIGN KEY (`model_id`) REFERENCES `model_all` (`model_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_vehicle_tolloperator_all`
+--
+ALTER TABLE `user_vehicle_tolloperator_all`
+  ADD CONSTRAINT `fk_uvt_uv` FOREIGN KEY (`user_vehicle_id`) REFERENCES `user_vehicle_all` (`user_vehicle_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_uvt_to` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_uvt_lmb` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_uvt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `vehicle_movement_log_all`
 --
 ALTER TABLE `vehicle_movement_log_all`
-  ADD CONSTRAINT `fk_vml_dh` FOREIGN KEY (`device_history_id`) REFERENCES `device_history_all` (`device_history_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vml_dh` FOREIGN KEY (`device_history_id`) REFERENCES `device_history_all` (`device_history_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_vml_vmlt` FOREIGN KEY (`vml_type_id`) REFERENCES `vml_type_all` (`vml_type_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_vmla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_vmla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_vml` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vml_toll_location` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_vml_toll_location` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `vehicle_toll_usage_all`
 --
 ALTER TABLE `vehicle_toll_usage_all`
-  ADD CONSTRAINT `fk_vtu_uv` FOREIGN KEY (`uvh_id`) REFERENCES `user_vehicle_history_all` (`uvh_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_tl` FOREIGN KEY (`toll_loc_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_vml` FOREIGN KEY (`vml_id`) REFERENCES `vehicle_movement_log_all` (`vml_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_tp` FOREIGN KEY (`tph_id`) REFERENCES `toll_price_history_all` (`tph_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_vtu_pt` FOREIGN KEY (`ptran_id`) REFERENCES `payment_transaction_all` (`ptran_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_uv` FOREIGN KEY (`uvh_id`) REFERENCES `user_vehicle_history_all` (`uvh_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_tl` FOREIGN KEY (`toll_loc_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_vml` FOREIGN KEY (`vml_id`) REFERENCES `vehicle_movement_log_all` (`vml_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_tp` FOREIGN KEY (`tph_id`) REFERENCES `toll_price_history_all` (`tph_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_pt` FOREIGN KEY (`ptran_id`) REFERENCES `payment_transaction_all` (`ptran_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_vtu` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
@@ -3881,5 +3908,5 @@ ALTER TABLE `vehicle_type_all`
 -- Constraints for table `vml_type_all`
 --
 ALTER TABLE `vml_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_vmlt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
