@@ -6,7 +6,7 @@ gtp.views.LoginPage = {
 		pack: 'center'
 	},
 	items: [{
-		html: 'Username:'
+		html: 'PhoneNumber:'
 	},{
 		xtype: 'zipfield',
 		id: 'lpemailid',
