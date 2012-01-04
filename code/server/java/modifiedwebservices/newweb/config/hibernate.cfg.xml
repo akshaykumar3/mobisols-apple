@@ -103,7 +103,9 @@
 		<mapping
 			resource="/hbm/model/PaymentToken.hbm.xml"/>	
 		<mapping
-			resource="/hbm/model/UserNotification.hbm.xml"/>	
+			resource="/hbm/model/UserNotification.hbm.xml"/>
+		<mapping
+			resource="/hbm/model/UserVehicleTolloperator.hbm.xml"/>	
 	</session-factory>
 
 </hibernate-configuration>
