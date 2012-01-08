@@ -1,5 +1,6 @@
 // Controllers are defined here.
 // Controller for processing commands.
+
 gtp.controllers.invokeCommand = Ext.regController("command",{
 	punch: function(options) {
 		Ext.Ajax.request({
@@ -59,6 +60,19 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 	killapp: function(options) {
 		gtp.tabpanel.destroy();
 		gtp.views.Viewport.show();
+	},
+	
+	errorHandler: function(options) {
+		if(gtp.tabpanel) {
+			gtp.tabpanel.hide();
+			if(!gtp.views.Viewport.isHidden()) {
+				gtp.views.Viewport.hide();
+			}
+			gtp.views.Viewport = new Ext.Panel({
+    			fullscreen: true,
+    			html: options.message
+    		});
+		}
 	},
 	
 	commandAck: function(options) {
@@ -125,12 +139,20 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 	activateApplication: function(options) {
 		if(window.plugins.ActivatePlugin) {
 			window.plugins.ActivatePlugin.activate();
+            var but = Ext.getCmp('home').down('#tfd');
+            but.setText('Deactivate');
+            but.getEl().removeCls('x-button-confirm');
+            but.getEl().addCls('x-button-decline');
 		}
 	},
 	
 	deactivateApplication: function(options) {
 		if(window.plugins.ActivatePlugin) {
 			window.plugins.ActivatePlugin.deactivate();
+            var but = Ext.getCmp('home').down('#tfd');
+            but.setText('Activate');
+            but.getEl().removeCls('x-button-decline');
+            but.getEl().addCls('x-button-confirm');
 		}
 	},
 	

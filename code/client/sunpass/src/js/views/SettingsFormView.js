@@ -238,7 +238,7 @@ gtp.views.SettingsFormView = {
 			xtype: 'gtp.views.ErrorField',
 			fieldname: 'name'
 		},{
-			xtype: 'textfield',
+			xtype: 'textareafield',
 			name: 'address',
 			label: 'Address',
 			id: 'addr1',
@@ -275,16 +275,16 @@ gtp.views.SettingsFormView = {
 			displayField: 'CountryName',
 			valueField: 'CountryCode'
 		},{
-			xtype: 'numberfield',
+			xtype: 'zipfield',
 			name: 'zipcode',
 			label: 'Zip',
 			id: 'zip',
 			useClearIcon: true
 		},{
-			xtype: 'zipfield',
-			name: 'phoneno',
-			id: 'phoneno',
-			label: 'Number',
+			xtype: 'emailfield',
+			name: 'emailid',
+			id: 'emailid',
+			label: 'EmailID',
 			useClearIcon: true
 		}]
 	},{

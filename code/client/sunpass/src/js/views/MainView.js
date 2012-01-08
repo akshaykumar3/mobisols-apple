@@ -103,10 +103,6 @@ gtp.views.MainView = {
 			handler: function(dis, ev) {
 
 				var homeform = Ext.getCmp('home');
-				/*var cl = homeform.down('#curloc');
-				var to = homeform.down('#operator');
-				var at = homeform.down('#avgtoll');
-				var pt = homeform.down('#pdtoll');*/
 				if(dis.getText() == 'Activate') {
 					dis.setText('Deactivate');
 					dis.getEl().removeCls('x-button-confirm');
@@ -119,38 +115,7 @@ gtp.views.MainView = {
 					clat = gtp.getGeoLatitude();
 					clong = gtp.getGeoLongitude();
 					
-					/*Ext.Ajax.request({
-						url: webServices.getAt(webServices.findExact('service','nearesttoll')).get('url'),
-						method: 'GET',
-						params: {
-							json: Ext.encode({
-								latitude: clat,
-								longitude: clong
-							})
-						},
-						success: function(response){
-							console.log('Nearest Toll Webservice request fetched');
-							console.log(response.responseText);
-							var resobj=Ext.decode(response.responseText);
-							if( resobj.status == 'success' ) {
-								//cl.setValue(resobj.response.city + resobj.response.state);
-								to.setValue(resobj.response.tollOperator);
-								at.setValue(resobj.response.costPrice);
-								pt.setValue(resobj.response.sellingPrice - resobj.response.costPrice);
-							}
-					      	gtp.showNotifications(resobj.response.notifications);
-					      	gtp.parse(resobj.response.commands);
-						},
-						failure: function(response){
-							console.log('Nearest toll failure with status '+response.status);
-							gtp.log('Nearest toll failure with status '+response.status);
-						}
-					});*/
-
 					if(gtp.isCarValid && gtp.arePaymentDetailsValid) {
-						//setTimeout("requestHeartBeat()",1000);
-						// This invokes client side heartbeat.
-						//gtp.clientsidehb();
 						message='Settings are saved';
 						Ext.Msg.alert('Activated',message);
 					}
@@ -215,10 +180,7 @@ gtp.views.MainView = {
 					dis.getEl().removeCls('x-button-decline');
 					dis.getEl().addCls('x-button-confirm');
 					gtp.isAppEnabled=0;
-					/*cl.setValue("");
-					to.setValue("");
-					at.setValue("");
-					pt.setValue("");*/
+					
 					if(Ext.is.iPhone) {
                         var actp = window.plugins.ActivatePlugin;
                         actp.deactivate();

@@ -162,7 +162,13 @@ gtp.views.NewCarFormView = {
 			required: true,
 			useClearIcon: true,
 			id: 'rg',
-			name: 'rg'
+			name: 'rg',
+			listeners: {
+				change: function(dis, newValue, oldValue) {
+					console.log('hello');
+					dis.setValue(newValue.toUpperCase());
+				}
+			}
 		},{
 			xtype: 'selectfield',
 			id: 'make',
@@ -201,11 +207,13 @@ gtp.views.NewCarFormView = {
 			displayField: 'ModelName',
 			valueField: 'ModelName'
 		},{
-			xtype: 'numberfield',
-			id: 'year',
+			xtype: 'selectfield',
 			name: 'year',
-			useClearIcon: true,
-			label: 'year'	
+			id: 'year',
+			label: 'year',
+			store: gtp.stores.Years,
+			displayField: 'year',
+			valueField: 'year'
 		},{
 			xtype: 'textfield',
 			id: 'color',

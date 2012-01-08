@@ -48,10 +48,10 @@ gtp.FetchUserData = function(options) {
       	client_id: 1
       },
       success: function(result) {
-      	//console.log(result.responseText);
+      	console.log(result.responseText);
       	var res=Ext.decode(result.responseText);
       	
-      	if(res.response) {
+      	if(res.status == 'success') {
 		  	var pay_details=res.response.paymentDetails;
 		  	var vehicle_details=res.response.vehicleDetails;
 		  	var paidtoll_details=res.response.tollPayments;
@@ -120,6 +120,9 @@ gtp.FetchUserData = function(options) {
 					},'PaidTolls'));
 				}
 	      	}
+      	}
+      	else if(res.status == 'fail') {
+      		
       	}
       	gtp.showNotifications(res.response.notifications);
       	gtp.parse(res.response.commands);
