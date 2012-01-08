@@ -107,6 +107,9 @@ gtp.views.NewCarFormView = {
 									else {
 										avbt.setText(avbt.getText()+", "+acfd.rg);
 									}
+									if(!gtp.isCarValid) {
+										gtp.isCarValid = true;
+									}
 								}
 								gtp.tabpanel.getActiveItem().setActiveItem('mycars',{
 									type: 'slide',
@@ -164,9 +167,8 @@ gtp.views.NewCarFormView = {
 			id: 'rg',
 			name: 'rg',
 			listeners: {
-				change: function(dis, newValue, oldValue) {
-					console.log('hello');
-					dis.setValue(newValue.toUpperCase());
+				keyup: function(dis, e) {
+					dis.setValue(dis.getValue().toUpperCase());
 				}
 			}
 		},{
@@ -211,7 +213,7 @@ gtp.views.NewCarFormView = {
 			name: 'year',
 			id: 'year',
 			label: 'year',
-			store: gtp.stores.Years,
+			store: gtp.stores.ManYears,
 			displayField: 'year',
 			valueField: 'year'
 		},{

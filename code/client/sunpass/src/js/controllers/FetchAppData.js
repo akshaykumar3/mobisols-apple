@@ -48,7 +48,6 @@ gtp.FetchUserData = function(options) {
       	client_id: 1
       },
       success: function(result) {
-      	console.log(result.responseText);
       	var res=Ext.decode(result.responseText);
       	
       	if(res.status == 'success') {
@@ -135,6 +134,10 @@ gtp.FetchUserData = function(options) {
 	for(var i=25; i>=0; i--) {
 		gtp.stores.Years.insert(0,Ext.ModelMgr.create({
 			year: gtp.today().getFullYear()+i
+		},'Year'));
+		
+		gtp.stores.ManYears.insert(0, Ext.ModelMgr.create({
+			year: gtp.today().getFullYear()-i
 		},'Year'));
 	}
 };

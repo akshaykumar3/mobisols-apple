@@ -1,5 +1,5 @@
-// For masking of form fields at the end of the field.
-
+// For masking of form fields at the end of the textfields.
+// Cause: created by clearicons.
 Ext.form.Field.override({
     onEnable: function() {
         if (this.clearIconContainerEl) {
