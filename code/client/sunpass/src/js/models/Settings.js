@@ -37,8 +37,8 @@ Ext.regModel('Settings',{
 		name: 'zipcode',
 		text: 'string'
 	},{
-		name: 'phoneno',
-		text: 'int'
+		name: 'emailid',
+		text: 'string'
 	}],
 	validations: [{
 		type: 'custom',

@@ -51,7 +51,6 @@ gtp.views.RegPage = {
 							var resobj = Ext.decode(response.responseText);
 							if(resobj.status == 'success') {
 								gtp.utils.dataStore.setValueOfKey('username', eid);
-								gtp.utils.dataStore.setValueOfKey('password', pwd);
 								if(resobj.response.response.deviceExists == 'Y')
 									gtp.views.Viewport.down('#lpemailid').setValue(eid);
 								gtp.views.Viewport.down('#lppassword').setValue('');

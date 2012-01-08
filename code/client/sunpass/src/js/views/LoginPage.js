@@ -41,6 +41,14 @@ gtp.views.LoginPage = {
 						action: 'loginuser'
 					});
 				}
+			},
+			listeners: {
+			    keyup: function(fld, e){
+			        if (e.browserEvent.keyCode == 13) {
+			            e.stopEvent();
+			            fld.fieldEl.dom.blur()
+			        }
+			    }
 			}
 		},{
 			xtype: 'button',

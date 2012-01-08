@@ -1,6 +1,6 @@
 gtp.views.PaidTollsListView = {
 	xtype: 'panel',
-	layout: 'fit',
+	//layout: 'fit',
 	title: 'Paid tolls',
 	id: 'CashStack',
 	iconCls: 'CashStack',
@@ -15,7 +15,8 @@ gtp.views.PaidTollsListView = {
 				// clear items in the list.
 			}
 		}]
-	},{
+	}],
+	items: [{
 		xtype: 'list',
 		grouped: true,
 		fullscreen: true,
