@@ -3,8 +3,13 @@ gtp.stores.Config = new Ext.data.Store({
 	model: 'Configure'
 });
 
-//Store for years.
+//Store for expiry years of credit card.
 gtp.stores.Years = new Ext.data.Store({
+	model: 'Year'
+});
+
+//Store for manufactured Year.
+gtp.stores.ManYears = new Ext.data.Store({
 	model: 'Year'
 });
 

@@ -136,7 +136,7 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 		});
 	}, 
 	
-	activateApplication: function(options) {
+	activate: function(options) {
 		if(window.plugins.ActivatePlugin) {
 			window.plugins.ActivatePlugin.activate();
             var but = Ext.getCmp('home').down('#tfd');
@@ -146,7 +146,7 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 		}
 	},
 	
-	deactivateApplication: function(options) {
+	deactivate: function(options) {
 		if(window.plugins.ActivatePlugin) {
 			window.plugins.ActivatePlugin.deactivate();
             var but = Ext.getCmp('home').down('#tfd');

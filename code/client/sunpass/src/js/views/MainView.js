@@ -26,8 +26,8 @@ gtp.views.MainView = {
 						floating: true,
 						modal: true,
 						centered: true,
-						width: 300,
-						height: 400,
+						width: '80%',
+						height: '80%',
 						styleHtmlContent: true,
 						scroll: 'vertical',
 						html: '<h1><b>Home</b></h1>'+ 

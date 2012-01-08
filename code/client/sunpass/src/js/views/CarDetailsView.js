@@ -209,6 +209,15 @@ gtp.views.CarDetailView = {
 										}
 									}
 								}
+								if(!carsList.data.length && gtp.isAppEnabled) {
+									Ext.dispatch({
+										controller: 'command',
+										action: 'deactivate'
+									});
+								}
+								if(carsList.data.length == 0) {
+									gtp.isCarValid = false;
+								}
 							}
 					      	gtp.showNotifications(resobj.response.notifications);
 					      	gtp.parse(resobj.response.commands);
