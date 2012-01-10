@@ -18,6 +18,7 @@ import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserBalanceLog;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.model.VehicleTollUsage;
+import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
@@ -35,15 +36,17 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 	private MyUtilDate myUtilDate;
 	private PaymentTransactionDao paymentTransactionDao;
 	private UserPaymentDetailHistoryDao userPaymentDetailHistoryDao;
+	private JsonConverter jsonConverter;
 	
 	private static final int USER_ID=0;
 	private static final int TOLL_OPERATOR_ID=1;
 	private static final int PRICE=2;
 	private static final int SUCCESS = 1;
 	
-	public MakeTollPaymentsResponse payForTolls(MakeTollPaymentsRequest r)
+	public String payForTolls(MakeTollPaymentsRequest r,String request)
 	{
 		MakeTollPaymentsResponse response=new MakeTollPaymentsResponse();
+		String status = "success";
 		List<String> users;
 		if(r!=null)
 		{
@@ -133,6 +136,80 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 			}
 		}
 		
-		return response;
+		return jsonConverter.getJSON(request, status,response);
 	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	public VehicleTollUsageDao getVehicleTollUsageDao() {
+		return vehicleTollUsageDao;
+	}
+
+	public void setVehicleTollUsageDao(VehicleTollUsageDao vehicleTollUsageDao) {
+		this.vehicleTollUsageDao = vehicleTollUsageDao;
+	}
+
+	public TollOperatorDao getTollOperatorDao() {
+		return tollOperatorDao;
+	}
+
+	public void setTollOperatorDao(TollOperatorDao tollOperatorDao) {
+		this.tollOperatorDao = tollOperatorDao;
+	}
+
+	public UserBalanceDao getUserBalanceDao() {
+		return userBalanceDao;
+	}
+
+	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
+		this.userBalanceDao = userBalanceDao;
+	}
+
+	public UserBalanceLogDao getUserBalanceLogDao() {
+		return userBalanceLogDao;
+	}
+
+	public void setUserBalanceLogDao(UserBalanceLogDao userBalanceLogDao) {
+		this.userBalanceLogDao = userBalanceLogDao;
+	}
+
+	public MyUtilDate getMyUtilDate() {
+		return myUtilDate;
+	}
+
+	public void setMyUtilDate(MyUtilDate myUtilDate) {
+		this.myUtilDate = myUtilDate;
+	}
+
+	public PaymentTransactionDao getPaymentTransactionDao() {
+		return paymentTransactionDao;
+	}
+
+	public void setPaymentTransactionDao(PaymentTransactionDao paymentTransactionDao) {
+		this.paymentTransactionDao = paymentTransactionDao;
+	}
+
+	public UserPaymentDetailHistoryDao getUserPaymentDetailHistoryDao() {
+		return userPaymentDetailHistoryDao;
+	}
+
+	public void setUserPaymentDetailHistoryDao(
+			UserPaymentDetailHistoryDao userPaymentDetailHistoryDao) {
+		this.userPaymentDetailHistoryDao = userPaymentDetailHistoryDao;
+	}
+
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+	
 }

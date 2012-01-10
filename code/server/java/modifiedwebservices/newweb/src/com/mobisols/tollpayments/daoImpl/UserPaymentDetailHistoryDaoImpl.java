@@ -7,10 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.mobisols.tollpayments.dao.UserPaymentDetailHistoryDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserPaymentDetailHistory;
 
-public class UserPaymentDetailHistoryDaoImpl {
+public class UserPaymentDetailHistoryDaoImpl implements UserPaymentDetailHistoryDao{
 
 	public int getLatestUserPaymentDetailHistoryId(int paymentDetailId)
 	{

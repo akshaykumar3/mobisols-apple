@@ -1,42 +1,42 @@
 package com.mobisols.tollpayments.myutilsImpl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.PostMethod;
 
-import org.apache.http.HttpHost;
-import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.twilio.sdk.TwilioRestClient;
-import com.twilio.sdk.TwilioRestException;
-import com.twilio.sdk.resource.factory.SmsFactory;
-import com.twilio.sdk.resource.instance.Account;
 
 public class SMSUtil {
-	public static String ACCOUNT_SID="AC75e5b6f3af084effa94c7bb3f6a32d02";
-	public static String AUTH_TOKEN="f7c160f27613e29c8668ebe0d7c1a206";
-	public static String fromPhoneNumber = "(415) 599 2671";
 	
+	private static String smsURL = "https://api.smsified.com/v1/smsmessaging/outbound/5056335349/requests";
 	public static void sendSMS(String phone,String body) {
-		// TODO Auto-generated method stub
-		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
-		DefaultHttpClient cl  = new DefaultHttpClient();
-		//HttpHost proxy = new HttpHost("172.30.0.10", 3128);
-		//cl.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
-		client.setHttpclient(cl);
-		Account mainAccount = client.getAccount();
-		SmsFactory smsFactory = mainAccount.getSmsFactory();
-				Map<String, String> smsParams = new HashMap<String, String>();
-				smsParams.put("To", phone); // Replace with a valid phone number
-				smsParams.put("From", fromPhoneNumber); // Replace with a valid phone
-															// number in your account
-				smsParams.put("Body", body);
-				try {
-					smsFactory.create(smsParams);
-				} catch (TwilioRestException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		
+		 HttpClient httpclient = new HttpClient();
+		 //HttpHost proxy = new HttpHost("172.30.0.16", 3128);
+		 //httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+         httpclient.getState().setCredentials(AuthScope.ANY, 
+         new UsernamePasswordCredentials("harishmobisols", "9060"));
+                 
+         PostMethod pm = new PostMethod(smsURL);
+	     pm.addParameter("address", phone);
+	     pm.addParameter("message", body);
+	
+         pm.setDoAuthentication(true);
+         try {
+             int status = httpclient.executeMethod( pm );
+	
+	         System.out.println(status + "\n" + pm.getResponseBodyAsString());
+	
+	        } catch (HttpException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+	            // release any connection resources used by the method
+	            pm.releaseConnection();
+	        } 
 	}
 }

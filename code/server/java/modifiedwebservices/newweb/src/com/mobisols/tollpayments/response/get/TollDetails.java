@@ -8,6 +8,9 @@ public class TollDetails {
 	private double latitude;
 	private double longitude;
 	private String isCovered;
+	private double costPrice;
+	private double sellingPrice;
+	
 	public String getTollOperator() {
 		return tollOperator;
 	}
@@ -50,4 +53,17 @@ public class TollDetails {
 	public void setIsCovered(String isCovered) {
 		this.isCovered = isCovered;
 	}
+	public double getCostPrice() {
+		return costPrice;
+	}
+	public void setCostPrice(double costPrice) {
+		this.costPrice = costPrice;
+	}
+	public double getSellingPrice() {
+		return sellingPrice;
+	}
+	public void setSellingPrice(double sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+	
 }

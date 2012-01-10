@@ -2,9 +2,12 @@ package com.mobisols.tollpayments.serviceImpl;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.mobisols.tollpayments.dao.TollLocationDao;
+import com.mobisols.tollpayments.dao.VehicleTypeDao;
 import com.mobisols.tollpayments.model.TollLocation;
+import com.mobisols.tollpayments.model.TollPrice;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.TollDetails;
 import com.mobisols.tollpayments.response.get.TollLocationListResponse;
@@ -39,6 +42,18 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 			td.setLongitude(tl.getLongitude());
 			td.setZip(tl.getZip());
 			td.setIsCovered(tl.getIsCovered());
+			Set<TollPrice> tollPrice = tl.getTollPrice();
+			TollPrice tp=null;
+			for(Iterator<TollPrice> it1 = tollPrice.iterator();it1.hasNext(); )
+			{
+				tp= it1.next();
+				if(tp.getVehicleTypeId().equals(VehicleTypeDao.DEFAULT_TYPE));
+				{
+					td.setCostPrice(tp.getCostPrice());
+					td.setSellingPrice(tp.getSellingPrice());
+					break;
+				}
+			}
 			response.getTollDetailsList().add(td);
 		}
 		return jsonConverter.getJSON(request, status,response);
@@ -63,6 +78,18 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 				td.setLongitude(tl.getLongitude());
 				td.setZip(tl.getZip());
 				td.setIsCovered(tl.getIsCovered());
+				Set<TollPrice> tollPrice = tl.getTollPrice();
+				TollPrice tp=null;
+				for(Iterator<TollPrice> it1 = tollPrice.iterator();it1.hasNext(); )
+				{
+					tp= it1.next();
+					if(tp.getVehicleTypeId().equals(VehicleTypeDao.DEFAULT_TYPE));
+					{
+						td.setCostPrice(tp.getCostPrice());
+						td.setSellingPrice(tp.getSellingPrice());
+						break;
+					}
+				}
 				response.getTollDetailsList().add(td);
 			}
 		}
