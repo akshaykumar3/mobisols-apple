@@ -44,6 +44,7 @@ import com.mobisols.tollpayments.service.ForgotPassword;
 import com.mobisols.tollpayments.service.HeartBeatService;
 import com.mobisols.tollpayments.service.LoginService;
 import com.mobisols.tollpayments.service.MakeAndModelService;
+import com.mobisols.tollpayments.service.MakeTollPayments;
 import com.mobisols.tollpayments.service.NearestTollService;
 import com.mobisols.tollpayments.service.OwnerTypeListService;
 import com.mobisols.tollpayments.service.PaymentDetailsService;
@@ -82,6 +83,7 @@ public class WebServiceImpl {
 	ActivateService activateService;
 	ForgotPassword forgotPassword;
 	JsonConverter jsonConverter;
+	MakeTollPayments makeTollPayments;
 	
 	SecurityCheckUtil securityCheckUtil;
 	MyUtilErrorHandler myUtilErrorHandler;
@@ -119,6 +121,7 @@ public class WebServiceImpl {
 	        securityCheckUtil = (SecurityCheckUtil) ctx.getBean("myutils.tollpayments.securityCheckUtil");
 	        myUtilErrorHandler = (MyUtilErrorHandler) ctx.getBean("myutils.tollpayments.myUtilErrorHandler");
 	        myUtilCleanUp = (MyUtilCleanUp) ctx.getBean("myutils.tollpayments.myUtilCleanUp");
+	        makeTollPayments = (MakeTollPayments) ctx.getBean("service.tollpayments.makeTollPayments");
 	}
 
 	@GET
@@ -631,6 +634,20 @@ public class WebServiceImpl {
 		}
 	}
 	
+	@GET
+	@Produces("text/plain")
+	@Path("/public/MakeTollPayments")
+	public String makeTollPayments(){
+		String request = "Make Tollpayments";
+		try{
+			return makeTollPayments.payForTolls(null, request);
+		}catch(Exception e){
+			return myUtilErrorHandler.handleException(request, e);
+		}
+		finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}
@@ -838,6 +855,14 @@ public class WebServiceImpl {
 
 	public void setForgotPassword(ForgotPassword forgotPassword) {
 		this.forgotPassword = forgotPassword;
+	}
+
+	public MakeTollPayments getMakeTollPayments() {
+		return makeTollPayments;
+	}
+
+	public void setMakeTollPayments(MakeTollPayments makeTollPayments) {
+		this.makeTollPayments = makeTollPayments;
 	}
 
 }

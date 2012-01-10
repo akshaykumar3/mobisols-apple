@@ -4,11 +4,16 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
+import com.mobisols.tollpayments.dao.UserBalanceDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.model.User;
+import com.mobisols.tollpayments.model.UserBalance;
+import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.model.UserVehicle;
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.paymentprocess.CreditCardProcessing;
+import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
 import com.mobisols.tollpayments.request.post.ActivateRequest;
 import com.mobisols.tollpayments.response.post.ActivateResponse;
 import com.mobisols.tollpayments.service.ActivateService;
@@ -16,6 +21,7 @@ import com.mobisols.tollpayments.service.ActivateService;
 public class ActivateServiceImpl implements ActivateService {
 
 	private UserDao userDao;
+	private UserBalanceDao userBalanceDao;
 	private UserVehicleDao userVehicleDao;
 	private DeviceDao deviceDao;
 	private JsonConverter jsonConverter;
@@ -36,18 +42,62 @@ public class ActivateServiceImpl implements ActivateService {
 			}
 			else if(u.getIsActive().equals(UserDao.USER_INACTIVE))
 			{
-				for(Iterator<UserVehicle> it = standByVehicles.iterator();it.hasNext();)
+				UserBalance ub = u.getUserBalance();
+				if(ub.getBalance()<= u.getUserType().getMinBalance())
 				{
-					UserVehicle uv = it.next();
-					uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
-					userVehicleDao.update(uv);
+					UserPaymentDetail upd = u.getUserPaymentDetails();
+					PaymentGateway pg = new PaymentGateway();
+					String expDate = "";
+					if(upd.getCcExpMonth()<10)
+						expDate = expDate+"0"+upd.getCcExpMonth();
+					else
+						expDate = expDate+upd.getCcExpMonth();
+					expDate = expDate + upd.getCcExpYear();
+					Double amount = u.getUserType().getMinBalance() - ub.getBalance();
+					String ack  = pg.getCreditCardProcessing().doPaymentProcess(
+							CreditCardProcessing.PAYMENT_ACTION_ADDBALANCE, amount.toString(), 
+							upd.getCcType().getName(), upd.getCcNumber(),expDate , upd.getCcCvv().toString(), 
+							upd.getCcAcName(), "", upd.getAddress1()+upd.getAddress2(), 
+							upd.getCity(), upd.getState(), upd.getZip(), upd.getCountry());
+					if(ack.equals("Success") || ack.equals("SuccessWithWarning"))
+					{
+						ub.setBalance(amount+ub.getBalance());
+						userBalanceDao.save(ub);
+						for(Iterator<UserVehicle> it = standByVehicles.iterator();it.hasNext();)
+						{
+							UserVehicle uv = it.next();
+							uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
+							userVehicleDao.update(uv);
+						}
+						u.setIsActive(UserDao.USER_ACTIVE);
+						userDao.update(u);
+						//Device d = deviceDao.getDevice(u.getUserId());
+						//d.setIsActive(deviceDao.DEVICE_ACTIVE);
+						//deviceDao.update(d);
+						response.setActive(UserDao.USER_ACTIVE);
+					}
+					else if(ack.equals("Failure") || ack.equals("FailureWithWarning"))
+					{
+						response.getNotifications().add("Low Balance : Failed Payment Transfer");
+						status = "fail";
+						response.setActive(UserDao.USER_INACTIVE);
+					}
 				}
-				u.setIsActive(UserDao.USER_ACTIVE);
-				userDao.update(u);
-				//Device d = deviceDao.getDevice(u.getUserId());
-				//d.setIsActive(deviceDao.DEVICE_ACTIVE);
-				//deviceDao.update(d);
-				response.setActive(UserDao.USER_ACTIVE);
+				else {
+					for(Iterator<UserVehicle> it = standByVehicles.iterator();it.hasNext();)
+					{
+						UserVehicle uv = it.next();
+						uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
+						userVehicleDao.update(uv);
+					}
+					u.setIsActive(UserDao.USER_ACTIVE);
+					userDao.update(u);
+					//Device d = deviceDao.getDevice(u.getUserId());
+					//d.setIsActive(deviceDao.DEVICE_ACTIVE);
+					//deviceDao.update(d);
+					response.setActive(UserDao.USER_ACTIVE);
+				}
+				
 			}
 			else if(u.equals(UserDao.USER_ACTIVE))
 			{
@@ -134,5 +184,13 @@ public class ActivateServiceImpl implements ActivateService {
 
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
+	}
+
+	public UserBalanceDao getUserBalanceDao() {
+		return userBalanceDao;
+	}
+
+	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
+		this.userBalanceDao = userBalanceDao;
 	}
 }

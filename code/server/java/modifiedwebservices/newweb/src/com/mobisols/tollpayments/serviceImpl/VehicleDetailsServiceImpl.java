@@ -12,7 +12,6 @@ import com.mobisols.tollpayments.model.Model;
 import com.mobisols.tollpayments.model.OwnerType;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
-import com.mobisols.tollpayments.model.VehicleType;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.MyUtilVehicle;

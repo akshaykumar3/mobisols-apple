@@ -9,14 +9,15 @@ import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.paymentprocess.CreditCardProcessing;
 import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
 import com.mobisols.tollpayments.response.post.CheckUserBalanceResponse;
 import com.mobisols.tollpayments.service.CheckUserBalance;
 
 public class CheckUserBalanceImpl implements CheckUserBalance {
 	public static final double MIN_BALANCE=2;
-	public static final double MIN_TRANS_AMOUNT=10;
-	public static final int SUCCESS=1;
+	public static final Double MIN_TRANS_AMOUNT=10.0;
+	
 	String status="success";
 	private JsonConverter jsonConverter;
 	
@@ -36,9 +37,18 @@ public class CheckUserBalanceImpl implements CheckUserBalance {
 			if(u.getUserBalance().getBalance()<MIN_BALANCE)
 			{
 				UserPaymentDetail upd=u.getUserPaymentDetails();
-				int x=paymentGateway.getCreditCardProcessing().process(upd.getCcNumber(), 
-						upd.getCcAcName(), upd.getCcExpYear(),MIN_TRANS_AMOUNT);
-				if(x == SUCCESS)
+				String expDate = "";
+				if(upd.getCcExpMonth()<10)
+					expDate = expDate+"0"+upd.getCcExpMonth();
+				else
+					expDate = expDate+upd.getCcExpMonth();
+				expDate = expDate + upd.getCcExpYear();
+				String x=paymentGateway.getCreditCardProcessing().doPaymentProcess(
+						CreditCardProcessing.PAYMENT_ACTION_ADDBALANCE, MIN_TRANS_AMOUNT.toString(), 
+						upd.getCcType().getName(), upd.getCcNumber(),expDate , upd.getCcCvv().toString(), 
+						upd.getCcAcName(), "", upd.getAddress1()+upd.getAddress2(), 
+						upd.getCity(), upd.getState(), upd.getZip(), upd.getCountry());
+				if(x.equals("Success") || x.equals("SuccessWithWarning"))
 				{
 					UserBalance ub=u.getUserBalance();
 					ub.setBalance(ub.getBalance()+MIN_TRANS_AMOUNT);
