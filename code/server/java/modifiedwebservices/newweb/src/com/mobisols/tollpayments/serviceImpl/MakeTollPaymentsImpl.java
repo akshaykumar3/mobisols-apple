@@ -21,6 +21,7 @@ import com.mobisols.tollpayments.model.VehicleTollUsage;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
+import com.mobisols.tollpayments.paymentprocess.CreditCardProcessing;
 import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
 import com.mobisols.tollpayments.request.post.MakeTollPaymentsRequest;
 import com.mobisols.tollpayments.response.post.MakeTollPaymentsResponse;
@@ -41,7 +42,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 	private static final int USER_ID=0;
 	private static final int TOLL_OPERATOR_ID=1;
 	private static final int PRICE=2;
-	private static final int SUCCESS = 1;
+	private static final String SUCCESS = "";
 	
 	public String payForTolls(MakeTollPaymentsRequest r,String request)
 	{
@@ -63,12 +64,14 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 		for(Iterator it = nonPaidTolls.iterator();it.hasNext();)
 		{
 			Object[] row = (Object[]) it.next();
-			User u=userDao.getUser(Integer.parseInt((String)row[USER_ID]));
-			TollOperator tollOperator = tollOperatorDao.getTollOperator(Integer.parseInt((String)row[TOLL_OPERATOR_ID]));
+			User u=userDao.getUser((Integer)row[USER_ID]);
+			System.out.println(u.getUserId());
+			TollOperator tollOperator = tollOperatorDao.getTollOperator((Integer)row[TOLL_OPERATOR_ID]);
+			System.out.println(tollOperator.getTollOperatorId());
 			User tollOperatorUser = tollOperator.getUser();
-			double price=Double.parseDouble((String)row[PRICE]);
+			double price=(Double)row[PRICE];
 			UserBalance userBalance = u.getUserBalance();
-			double amount;
+			Double amount;
 			if(userBalance.getBalance()- (price+0.2*price) < u.getUserType().getMinBalance())
 			{
 				amount = 1.2*price + u.getUserType().getMinBalance() - userBalance.getBalance();
@@ -76,8 +79,18 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 			else
 				amount = 1.2*price;
 			UserPaymentDetail upd= u.getUserPaymentDetails();
-			int x=pg.getCreditCardProcessing().process(upd.getCcNumber(),upd.getCcType().getName(), upd.getCcExpYear(), amount);
-			if(x==SUCCESS)
+			String expDate = "";
+			if(upd.getCcExpMonth()<10)
+				expDate = expDate+"0"+upd.getCcExpMonth();
+			else
+				expDate = expDate+upd.getCcExpMonth();
+			expDate = expDate + upd.getCcExpYear();
+			String x=pg.getCreditCardProcessing().doPaymentProcess(
+					CreditCardProcessing.PAYMENT_ACTION_ADDBALANCE, amount.toString(), 
+					upd.getCcType().getName(), upd.getCcNumber(),expDate , upd.getCcCvv().toString(), 
+					upd.getCcAcName(), "", upd.getAddress1()+upd.getAddress2(), 
+					upd.getCity(), upd.getState(), upd.getZip(), upd.getCountry());
+			if(x.equals("Success")||(x.equals("SuccessWithWarning")))
 			{
 				userBalance.setBalance(userBalance.getBalance()+amount);
 				userBalanceDao.save(userBalance);
@@ -94,7 +107,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 				pt.setCreatedOn(myUtilDate.getCurrentTimeStamp());
 				pt.setLastModifiedBy(User.DEFAULT_USER);
 				pt.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-				pt.setStatus("paid the amount = "+price+"to the Toll Operator "+tollOperator.getName());
+				pt.setStatus("paid ");
 				pt.setTimestamp(myUtilDate.getCurrentTimeStamp());
 				pt.setToBlId(tollOperatorLog.getUblogId());
 				pt.setUpdhId(userPaymentDetailHistoryDao.getLatestUserPaymentDetailHistoryId(userBalance.getUser().getUserPaymentDetails().getUpdId()));

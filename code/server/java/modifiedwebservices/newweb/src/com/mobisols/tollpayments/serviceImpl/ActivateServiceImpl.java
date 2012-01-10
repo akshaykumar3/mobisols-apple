@@ -78,7 +78,7 @@ public class ActivateServiceImpl implements ActivateService {
 					}
 					else if(ack.equals("Failure") || ack.equals("FailureWithWarning"))
 					{
-						response.getNotifications().add("Low Balance : Failed Payment Transfer");
+						response.getNotifications().add("Low Balance : CreditCard transaction Failed");
 						status = "fail";
 						response.setActive(UserDao.USER_INACTIVE);
 					}

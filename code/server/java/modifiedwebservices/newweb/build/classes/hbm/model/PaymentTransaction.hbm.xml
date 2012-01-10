@@ -8,6 +8,7 @@
     <class name="com.mobisols.tollpayments.model.PaymentTransaction" table="payment_transaction" >
             <id name="ptranId" type="java.lang.Integer">
                 <column name="ptran_id" />
+                <generator class="native"/>
             </id>
             <property name="userBlId" type="java.lang.Integer">
                 <column name="user_bl_id" />

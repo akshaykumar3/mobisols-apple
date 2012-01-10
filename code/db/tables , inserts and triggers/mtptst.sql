@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 04, 2012 at 03:04 PM
+-- Generation Time: Jan 10, 2012 at 04:17 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `globaltoll`
+-- Database: `mtpdev`
 --
 
 -- --------------------------------------------------------
@@ -380,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `device_all` (
   KEY `fk_device_user` (`user_id`),
   KEY `fk_device_client` (`client_id`),
   KEY `fk_lastmod_device` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `device_all`
@@ -413,7 +413,10 @@ INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, 
 (28, 1, '0:0:0:0:0:0:0:12011-11-05 10:38:18.591', 'desktop', 'N', '2011-11-05 10:38:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 10:38:18', '2011-11-05 10:38:18', -1, 1),
 (29, 1, '0:0:0:0:0:0:0:12011-11-05 11:23:33.764', 'desktop', 'N', '2011-11-05 11:23:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 11:23:33', '2011-11-05 11:23:33', -1, 1),
 (30, 2, '127.0.0.12012-01-04 17:35:43.032', 'desktop', 'N', '2012-01-04 17:35:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:43', '2012-01-04 17:35:43', -1, 1),
-(31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:54:55', '2012-01-04 19:54:55', -1, 1);
+(31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:54:55', '2012-01-04 19:54:55', -1, 1),
+(32, 1, '127.0.0.12012-01-07 20:02:03.894', 'desktop', 'N', '2012-01-07 20:02:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-07 20:02:03', '2012-01-07 20:02:03', -1, 1),
+(33, 1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-07 20:29:34', '2012-01-07 20:29:34', -1, 1),
+(34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 23:28:13', '2012-01-09 23:28:13', -1, 1);
 
 --
 -- Triggers `device_all`
@@ -531,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `device_history_all` (
   `end_date` datetime DEFAULT NULL,
   `action` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`device_history_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
 
 --
 -- Dumping data for table `device_history_all`
@@ -586,7 +589,13 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 (46, 30, -1, '127.0.0.12012-01-04 17:35:43.032', 'desktop', 'N', '2012-01-04 17:35:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 17:35:43', '2012-01-04 17:35:43', '2012-01-04 17:35:43', '2012-01-04 17:35:49', 'insert'),
 (47, 30, 2, '127.0.0.12012-01-04 17:35:43.032', 'desktop', 'N', '2012-01-04 17:35:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 17:35:43', '2012-01-04 17:35:43', '2012-01-04 17:35:50', '3000-01-01 00:00:00', 'update'),
 (48, 31, -1, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:55:02', 'insert'),
-(49, 31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:55:03', '3000-01-01 00:00:00', 'update');
+(49, 31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-04 19:54:55', '2012-01-04 19:54:55', '2012-01-04 19:55:03', '3000-01-01 00:00:00', 'update'),
+(50, 32, -1, '127.0.0.12012-01-07 20:02:03.894', 'desktop', 'N', '2012-01-07 20:02:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:02:03', '2012-01-07 20:02:03', '2012-01-07 20:02:04', '2012-01-07 20:02:26', 'insert'),
+(51, 32, 1, '127.0.0.12012-01-07 20:02:03.894', 'desktop', 'N', '2012-01-07 20:02:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:02:03', '2012-01-07 20:02:03', '2012-01-07 20:02:27', '3000-01-01 00:00:00', 'update'),
+(52, 33, -1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:30:29', 'insert'),
+(53, 33, 1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:30:30', '3000-01-01 00:00:00', 'update'),
+(54, 34, -1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:24', 'insert'),
+(55, 34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:25', '3000-01-01 00:00:00', 'update');
 
 -- --------------------------------------------------------
 
@@ -963,12 +972,17 @@ CREATE TABLE IF NOT EXISTS `payment_transaction_all` (
   KEY `fk_pt_tlog` (`to_bl_id`),
   KEY `fk_pt_updh` (`updh_id`),
   KEY `fk_client_pt` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='All the payment transactions up to the date' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the payment transactions up to the date' AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `payment_transaction_all`
 --
 
+INSERT INTO `payment_transaction_all` (`ptran_id`, `user_bl_id`, `to_bl_id`, `updh_id`, `timestamp`, `status`, `amount`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
+(-1, -1, -1, -1, '2012-01-09 22:28:20', 'ok', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:28:45', '2012-01-09 22:28:47', 1),
+(10, 51, 53, 15, '2012-01-10 21:02:37', 'paid ', '3.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 21:02:37', '2012-01-10 21:02:37', 1),
+(11, 54, 56, 15, '2012-01-10 21:20:16', 'paid ', '3.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 21:20:16', '2012-01-10 21:20:16', 1),
+(12, 57, 59, 15, '2012-01-10 21:29:23', 'paid ', '3.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 21:29:23', '2012-01-10 21:29:23', 1);
 
 -- --------------------------------------------------------
 
@@ -1476,7 +1490,7 @@ CREATE TABLE IF NOT EXISTS `toll_operator_all` (
 
 INSERT INTO `toll_operator_all` (`toll_operator_id`, `user_id`, `name`, `is_active`, `website`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `client_id`) VALUES
 (-1, -1, 'test data', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-18 07:59:56', '2011-10-18 07:59:59', -1, -1),
-(1, NULL, 'LA TollOperator', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-18 08:05:25', '2011-10-18 08:05:29', -1, 1);
+(1, 4, 'LA TollOperator', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-18 08:05:25', '2011-10-18 08:05:29', -1, 1);
 
 -- --------------------------------------------------------
 
@@ -1536,12 +1550,14 @@ CREATE TABLE IF NOT EXISTS `toll_price_all` (
   KEY `fk_tp_vt` (`vehicle_type_id`),
   KEY `fk_last_mod_by_tpa` (`last_modified_by`),
   KEY `fk_client_tp` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='toll price for each transaction' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='toll price for each transaction' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `toll_price_all`
 --
 
+INSERT INTO `toll_price_all` (`toll_price_id`, `toll_location_id`, `vehicle_type_id`, `cost_price`, `selling_price`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
+(1, 22, 3, '2.0000', '3.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:21:40', '2012-01-09 22:21:42', 1);
 
 --
 -- Triggers `toll_price_all`
@@ -1653,12 +1669,14 @@ CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
   `end_date` datetime NOT NULL,
   `client_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`tph_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='toll price for each transaction' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='toll price for each transaction' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `toll_price_history_all`
 --
 
+INSERT INTO `toll_price_history_all` (`tph_id`, `toll_price_id`, `toll_location_id`, `vehicle_type_id`, `direction`, `cost_price`, `selling_price`, `action`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `client_id`) VALUES
+(1, 1, 22, 3, NULL, '2.0000', '3.0000', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 22:21:42', '2012-01-09 22:21:40', -1, '2012-01-09 22:21:48', '3000-01-01 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -1758,7 +1776,7 @@ CREATE TABLE IF NOT EXISTS `user_all` (
   UNIQUE KEY `uk_user_name` (`user_name`,`client_id`),
   KEY `fk_utype_user` (`utype_id`),
   KEY `fk_client_id_user` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `user_all`
@@ -1768,7 +1786,8 @@ INSERT INTO `user_all` (`user_id`, `client_id`, `utype_id`, `user_name`, `passwo
 (-1, 1, 1, 'test', 'test', NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 21:20:18', '2011-10-12 21:20:21', -1),
 (1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'Y', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1),
 (2, 1, 1, '1234567890', '1840', '', 'I', NULL, '2012-01-04 17:35:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1),
-(3, 1, 1, '9491617227', '2167', '', 'I', NULL, '2012-01-04 19:55:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1);
+(3, 1, 1, '9491617227', '2167', '', 'I', NULL, '2012-01-04 19:55:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1),
+(4, 1, 2, 'LA TollOperator', 'tolloperator', NULL, 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1);
 
 --
 -- Triggers `user_all`
@@ -1869,16 +1888,18 @@ CREATE TABLE IF NOT EXISTS `user_balance_all` (
   KEY `fk_ubal_users` (`user_id`),
   KEY `fk_last_mod_by_uba` (`last_modified_by`),
   KEY `fk_client_ub` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `user_balance_all`
 --
 
 INSERT INTO `user_balance_all` (`ubal_id`, `user_id`, `balance`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
-(1, 1, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(-1, -1, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:23:40', '2012-01-09 22:23:43', 1),
+(1, 1, '10.6000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
 (2, 2, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
-(3, 3, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1);
+(3, 3, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1),
+(4, 4, '48.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1);
 
 --
 -- Triggers `user_balance_all`
@@ -1898,7 +1919,7 @@ DELIMITER //
 CREATE TRIGGER `trg_bal_log_aft_upd` AFTER UPDATE ON `user_balance_all`
  FOR EACH ROW begin
 insert into user_balance_log_all (ublog_id,ubal_id,delta,timestamp,action,udf1,udf2,udf3,udf4,udf5,flag1,flag2,flag3,flag4,flag5,last_modified_by,last_modified_on,created_on,client_id)
-values(null,new.ubal_id,(new.balanceold.balance),sysdate(),'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,
+values(null,new.ubal_id,(new.balance-old.balance),sysdate(),'update',new.udf1,new.udf2,new.udf3,new.udf4,new.udf5,new.flag1,new.flag2,new.flag3,new.flag4,new.flag5,
 new.last_modified_by,new.last_modified_on,new.created_on,new.client_id);
 end
 //
@@ -1970,16 +1991,73 @@ CREATE TABLE IF NOT EXISTS `user_balance_log_all` (
   KEY `fk_ublog_ubal` (`ubal_id`),
   KEY `fk_last_mod_by_ubla` (`last_modified_by`),
   KEY `fk_client_ubl` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 --
 -- Dumping data for table `user_balance_log_all`
 --
 
 INSERT INTO `user_balance_log_all` (`ublog_id`, `ubal_id`, `delta`, `timestamp`, `action`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
+(-1, -1, '0.0000', '2012-01-09 22:25:41', 'none', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:26:02', '2012-01-09 22:26:06', 1),
 (1, 1, '0.0000', '2011-10-12 22:22:34', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
 (2, 2, '0.0000', '2012-01-04 17:35:50', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
-(3, 3, '0.0000', '2012-01-04 19:55:03', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1);
+(3, 3, '0.0000', '2012-01-04 19:55:03', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1),
+(4, -1, '0.0000', '2012-01-09 22:23:48', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:23:40', '2012-01-09 22:23:43', 1),
+(5, 1, '0.0000', '2012-01-09 22:37:00', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(6, 1, '10.0000', '2012-01-10 20:00:22', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(7, 1, '3.6000', '2012-01-10 20:03:26', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(8, 1, '-3.0000', '2012-01-10 20:03:26', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(9, 4, '0.0000', '2012-01-10 20:06:26', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(10, 1, '3.0000', '2012-01-10 20:08:16', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(11, 1, '-3.0000', '2012-01-10 20:08:16', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(12, 1, '3.0000', '2012-01-10 20:08:40', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(13, 1, '-3.0000', '2012-01-10 20:08:40', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(14, 4, '3.0000', '2012-01-10 20:08:40', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(15, 1, '3.0000', '2012-01-10 20:13:36', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(16, 1, '-3.0000', '2012-01-10 20:13:36', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(17, 4, '3.0000', '2012-01-10 20:13:36', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(18, 1, '3.0000', '2012-01-10 20:18:54', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(19, 1, '-3.0000', '2012-01-10 20:18:54', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(20, 4, '3.0000', '2012-01-10 20:18:54', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(21, 1, '3.0000', '2012-01-10 20:22:39', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(22, 1, '-3.0000', '2012-01-10 20:22:39', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(23, 4, '3.0000', '2012-01-10 20:22:39', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(24, 1, '3.0000', '2012-01-10 20:24:36', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(25, 1, '-3.0000', '2012-01-10 20:24:36', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(26, 4, '3.0000', '2012-01-10 20:24:36', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(27, 1, '3.0000', '2012-01-10 20:26:25', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(28, 1, '-3.0000', '2012-01-10 20:26:26', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(29, 4, '3.0000', '2012-01-10 20:26:26', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(30, 1, '3.0000', '2012-01-10 20:28:05', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(31, 1, '-3.0000', '2012-01-10 20:28:05', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(32, 4, '3.0000', '2012-01-10 20:28:05', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(33, 1, '3.0000', '2012-01-10 20:28:41', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(34, 1, '-3.0000', '2012-01-10 20:28:41', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(35, 4, '3.0000', '2012-01-10 20:28:41', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(36, 1, '3.0000', '2012-01-10 20:29:18', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(37, 1, '-3.0000', '2012-01-10 20:29:18', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(38, 4, '3.0000', '2012-01-10 20:29:18', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(39, 1, '3.0000', '2012-01-10 20:30:49', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(40, 1, '-3.0000', '2012-01-10 20:30:49', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(41, 4, '3.0000', '2012-01-10 20:30:49', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(42, 1, '3.0000', '2012-01-10 20:43:33', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(43, 1, '-3.0000', '2012-01-10 20:43:33', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(44, 4, '3.0000', '2012-01-10 20:43:33', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(45, 1, '3.0000', '2012-01-10 20:55:10', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(46, 1, '-3.0000', '2012-01-10 20:55:10', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(47, 4, '3.0000', '2012-01-10 20:55:10', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(48, 1, '3.0000', '2012-01-10 20:57:11', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(49, 1, '-3.0000', '2012-01-10 20:57:11', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(50, 4, '3.0000', '2012-01-10 20:57:11', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(51, 1, '3.0000', '2012-01-10 21:02:37', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(52, 1, '-3.0000', '2012-01-10 21:02:37', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(53, 4, '3.0000', '2012-01-10 21:02:37', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(54, 1, '3.0000', '2012-01-10 21:20:16', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(55, 1, '-3.0000', '2012-01-10 21:20:16', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(56, 4, '3.0000', '2012-01-10 21:20:16', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(57, 1, '3.0000', '2012-01-10 21:29:23', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(58, 1, '-3.0000', '2012-01-10 21:29:23', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
+(59, 4, '3.0000', '2012-01-10 21:29:23', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1);
 
 -- --------------------------------------------------------
 
@@ -2048,7 +2126,7 @@ CREATE TABLE IF NOT EXISTS `user_history_all` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`user_his_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `user_history_all`
@@ -2082,9 +2160,27 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 (25, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-10-30 23:29:13', '2011-11-10 20:03:01'),
 (26, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:02', '2011-11-10 20:03:08'),
 (27, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:09', '2011-11-10 20:03:11'),
-(28, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:12', '3000-01-01 00:00:00'),
+(28, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-11-10 20:03:12', '2012-01-07 20:02:29'),
 (29, 2, '1234567890', '1840', '', 1, '2012-01-04 17:35:50', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1, '2012-01-04 17:35:50', '3000-01-01 00:00:00'),
-(30, 3, '9491617227', '2167', '', 1, '2012-01-04 19:55:02', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1, '2012-01-04 19:55:02', '3000-01-01 00:00:00');
+(30, 3, '9491617227', '2167', '', 1, '2012-01-04 19:55:02', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1, '2012-01-04 19:55:02', '3000-01-01 00:00:00'),
+(31, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:02:30', '2012-01-07 20:02:32'),
+(32, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:02:33', '2012-01-07 20:02:35'),
+(33, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:02:36', '2012-01-07 20:22:46'),
+(34, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:22:47', '2012-01-07 20:23:52'),
+(35, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:23:53', '2012-01-07 20:24:31'),
+(36, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:24:32', '2012-01-07 20:24:38'),
+(37, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:24:39', '2012-01-07 20:30:44'),
+(38, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:30:45', '2012-01-07 20:31:01'),
+(39, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:31:02', '2012-01-07 20:35:25'),
+(40, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:35:26', '2012-01-07 20:35:43'),
+(41, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:35:44', '2012-01-07 20:36:10'),
+(42, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:36:11', '2012-01-07 20:37:48'),
+(43, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:37:49', '2012-01-07 20:37:59'),
+(44, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:38:00', '2012-01-07 20:38:17'),
+(45, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:38:18', '2012-01-09 22:39:05'),
+(46, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-09 22:39:06', '2012-01-10 20:00:21'),
+(47, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-10 20:00:22', '3000-01-01 00:00:00'),
+(48, 4, 'LA TollOperator', 'tolloperator', NULL, 2, NULL, 'Y', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1, '2012-01-10 20:05:26', '3000-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -2290,7 +2386,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail` (
 ,`user_id` int(11)
 ,`cc_type_id` int(11)
 ,`cc_ac_name` varchar(45)
-,`cc_number` varchar(15)
+,`cc_number` varchar(16)
 ,`cc_exp_month` int(11)
 ,`cc_exp_year` int(11)
 ,`cc_cvv` int(11)
@@ -2329,7 +2425,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   `user_id` int(11) DEFAULT NULL,
   `cc_type_id` int(11) DEFAULT NULL,
   `cc_ac_name` varchar(45) DEFAULT NULL,
-  `cc_number` varchar(15) DEFAULT NULL,
+  `cc_number` varchar(16) DEFAULT NULL,
   `cc_exp_month` int(11) DEFAULT NULL,
   `cc_exp_year` int(11) DEFAULT NULL,
   `cc_cvv` int(11) DEFAULT NULL,
@@ -2362,16 +2458,18 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   KEY `fk_last_mod_by_upda` (`last_modified_by`),
   KEY `fk_cctype_upd` (`cc_type_id`),
   KEY `fk_client_upd` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the billing details of the user' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the billing details of the user' AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `user_payment_detail_all`
 --
 
 INSERT INTO `user_payment_detail_all` (`upd_id`, `user_id`, `cc_type_id`, `cc_ac_name`, `cc_number`, `cc_exp_month`, `cc_exp_year`, `cc_cvv`, `bank_routing`, `bank_account`, `pay_prefer`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
-(1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'c', 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 13:37:06', '2011-10-12 22:22:34', 1),
+(-1, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:07:03', '2012-01-10 20:07:06', 1),
+(1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'c', 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-10 19:52:39', '2011-10-12 22:22:34', 1),
 (2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
-(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1);
+(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1),
+(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:07:46', '2012-01-10 20:07:48', 1);
 
 --
 -- Triggers `user_payment_detail_all`
@@ -2434,7 +2532,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history` (
 ,`user_id` int(11)
 ,`cc_type_id` int(11)
 ,`cc_ac_name` varchar(45)
-,`cc_number` varchar(15)
+,`cc_number` varchar(16)
 ,`cc_exp_month` int(11)
 ,`cc_exp_year` int(11)
 ,`cc_cvv` int(11)
@@ -2477,7 +2575,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `user_id` int(11) DEFAULT NULL,
   `cc_type_id` int(11) DEFAULT NULL,
   `cc_ac_name` varchar(45) DEFAULT NULL,
-  `cc_number` varchar(15) DEFAULT NULL,
+  `cc_number` varchar(16) DEFAULT NULL,
   `cc_exp_month` int(11) DEFAULT NULL,
   `cc_exp_year` int(11) DEFAULT NULL,
   `cc_cvv` int(11) DEFAULT NULL,
@@ -2508,20 +2606,32 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `end_date` datetime NOT NULL,
   `client_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`updh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `user_payment_detail_history_all`
 --
 
 INSERT INTO `user_payment_detail_history_all` (`updh_id`, `upd_id`, `user_id`, `cc_type_id`, `cc_ac_name`, `cc_number`, `cc_exp_month`, `cc_exp_year`, `cc_cvv`, `bank_routing`, `bank_account`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `pay_prefer`, `action`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `client_id`) VALUES
+(-1, -1, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'null', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:27:28', '2012-01-09 22:27:30', 1),
 (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2011-10-12 22:22:34', '2011-10-15 23:45:57', 1),
 (2, 1, 1, 1, 'harish', '4477 4669 0240 ', 1, 2036, 0, NULL, NULL, 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-15 23:45:57', 1, '2011-10-15 23:45:58', '2011-10-17 13:09:57', 1),
 (3, 1, 1, 1, 'harish', '4477 4669 0240 ', 1, 2036, 0, NULL, NULL, 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-17 13:09:58', 1, '2011-10-17 13:09:58', '2011-10-30 18:40:20', 1),
 (4, 1, 1, 1, 'harish', '447746690240', 1, 2035, 0, NULL, NULL, 'asdfgh', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-30 18:40:21', 1, '2011-10-30 18:40:21', '2011-11-05 13:37:05', 1),
-(5, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-11-05 13:37:06', 1, '2011-11-05 13:37:06', '3000-01-01 00:00:00', 1),
+(5, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-11-05 13:37:06', 1, '2011-11-05 13:37:06', '2012-01-09 23:22:42', 1),
 (6, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1, '2012-01-04 17:35:50', '3000-01-01 00:00:00', 1),
-(7, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:03', '2012-01-04 19:55:03', -1, '2012-01-04 19:55:03', '3000-01-01 00:00:00', 1);
+(7, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:03', '2012-01-04 19:55:03', -1, '2012-01-04 19:55:03', '3000-01-01 00:00:00', 1),
+(8, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:22:43', 1, '2012-01-09 23:22:43', '2012-01-09 23:23:58', 1),
+(9, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:23:59', 1, '2012-01-09 23:23:59', '2012-01-09 23:24:49', 1),
+(10, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:24:50', 1, '2012-01-09 23:24:50', '2012-01-09 23:26:04', 1),
+(11, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:26:05', 1, '2012-01-09 23:26:05', '2012-01-09 23:28:48', 1),
+(12, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:28:49', 1, '2012-01-09 23:28:49', '2012-01-09 23:29:13', 1),
+(13, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:29:14', 1, '2012-01-09 23:29:14', '2012-01-10 19:52:38', 1),
+(14, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-10 19:52:39', 1, '2012-01-10 19:52:39', '2012-01-10 19:59:10', 1),
+(15, 1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-10 19:52:39', 1, '2012-01-10 19:59:11', '3000-01-01 00:00:00', 1),
+(16, -1, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:06', '2012-01-10 20:07:03', -1, '2012-01-10 20:07:17', '3000-01-01 00:00:00', 1),
+(17, 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:48', '2012-01-10 20:07:46', -1, '2012-01-10 20:07:52', '2012-01-10 20:08:02', -1),
+(18, 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:48', '2012-01-10 20:07:46', -1, '2012-01-10 20:08:03', '3000-01-01 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -2735,7 +2845,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
 
 INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES
 (1, 1, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 11:33:24', '2011-10-14 01:02:24', 1, 1, NULL, '', 0),
-(2, 1, '2011-10-30 22:53:30', '2012-01-01 00:00:00', 'T', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, 1, NULL, 'blue', 2010),
+(2, 1, '2011-10-30 22:53:30', '2012-01-01 00:00:00', 'Y', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, 1, NULL, 'blue', 2010),
 (3, 2, '2012-01-04 18:35:36', '2013-01-01 00:00:00', 'N', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 1, 1, NULL, '1234', 2010),
 (4, 3, '2012-01-04 19:55:40', '2013-01-01 00:00:00', 'N', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 1, 1, NULL, 'red', 2010);
 
@@ -2864,7 +2974,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `color` varchar(45) DEFAULT NULL,
   `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`uvh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=98 ;
 
 --
 -- Dumping data for table `user_vehicle_history_all`
@@ -2927,11 +3037,44 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (57, 4, 1, 'N', '2011-11-05 13:35:52', '2012-01-01 00:00:00', 'asdfasf', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 13:35:53', '2011-11-05 13:35:53', 1, '2011-11-05 13:35:53', '2011-11-05 13:36:36', 'insert', 1, 0, NULL, '', 0),
 (58, 4, 1, 'N', '2011-11-05 13:35:52', '2012-01-01 00:00:00', 'asdfasf', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 13:35:53', '2011-11-05 13:35:53', 1, '2011-11-05 13:36:37', '2011-11-05 13:36:37', 'delete', 1, 0, NULL, '', NULL),
 (59, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:02', '2011-11-10 20:03:08', 'update', 1, 1, NULL, '', 0),
-(60, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-11-10 20:03:09', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'blue', 2010),
+(60, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-11-10 20:03:09', '2012-01-07 20:02:32', 'update', 1, 1, NULL, 'blue', 2010),
 (61, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:09', '2011-11-10 20:03:11', 'update', 1, 1, NULL, '', 0),
-(62, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:12', '3000-01-01 00:00:00', 'update', 1, 1, NULL, '', 0),
+(62, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:12', '2012-01-07 20:02:29', 'update', 1, 1, NULL, '', 0),
 (63, 3, 2, 'N', '2012-01-04 18:35:36', '2013-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 2, '2012-01-04 18:35:36', '3000-01-01 00:00:00', 'insert', 1, 1, NULL, '1234', 2010),
-(64, 4, 3, 'N', '2012-01-04 19:55:40', '2013-01-01 00:00:00', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 3, '2012-01-04 19:55:40', '3000-01-01 00:00:00', 'insert', 1, 1, NULL, 'red', 2010);
+(64, 4, 3, 'N', '2012-01-04 19:55:40', '2013-01-01 00:00:00', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 3, '2012-01-04 19:55:40', '3000-01-01 00:00:00', 'insert', 1, 1, NULL, 'red', 2010),
+(65, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:02:30', '2012-01-07 20:02:32', 'update', 1, 1, NULL, '', 0),
+(66, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:02:33', '2012-01-07 20:02:35', 'update', 1, 1, NULL, 'blue', 2010),
+(67, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:02:33', '2012-01-07 20:02:35', 'update', 1, 1, NULL, '', 0),
+(68, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:02:36', '2012-01-07 20:22:46', 'update', 1, 1, NULL, 'blue', 2010),
+(69, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:02:36', '2012-01-07 20:22:46', 'update', 1, 1, NULL, '', 0),
+(70, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:22:47', '2012-01-07 20:23:52', 'update', 1, 1, NULL, 'blue', 2010),
+(71, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:22:47', '2012-01-07 20:23:52', 'update', 1, 1, NULL, '', 0),
+(72, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:23:53', '2012-01-07 20:24:30', 'update', 1, 1, NULL, 'blue', 2010),
+(73, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:23:53', '2012-01-07 20:24:30', 'update', 1, 1, NULL, '', 0),
+(74, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:24:31', '2012-01-07 20:24:38', 'update', 1, 1, NULL, 'blue', 2010),
+(75, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:24:31', '2012-01-07 20:24:38', 'update', 1, 1, NULL, '', 0),
+(76, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:24:39', '2012-01-07 20:30:44', 'update', 1, 1, NULL, 'blue', 2010),
+(77, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:24:39', '2012-01-07 20:30:44', 'update', 1, 1, NULL, '', 0),
+(78, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:30:45', '2012-01-07 20:31:01', 'update', 1, 1, NULL, 'blue', 2010),
+(79, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:30:45', '2012-01-07 20:31:01', 'update', 1, 1, NULL, '', 0),
+(80, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:31:02', '2012-01-07 20:35:25', 'update', 1, 1, NULL, 'blue', 2010),
+(81, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:31:02', '2012-01-07 20:35:25', 'update', 1, 1, NULL, '', 0),
+(82, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:35:26', '2012-01-07 20:35:42', 'update', 1, 1, NULL, 'blue', 2010),
+(83, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:35:26', '2012-01-07 20:35:43', 'update', 1, 1, NULL, '', 0),
+(84, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:35:43', '2012-01-07 20:36:10', 'update', 1, 1, NULL, 'blue', 2010),
+(85, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:35:44', '2012-01-07 20:36:10', 'update', 1, 1, NULL, '', 0),
+(86, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:36:11', '2012-01-07 20:37:47', 'update', 1, 1, NULL, 'blue', 2010),
+(87, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:36:11', '2012-01-07 20:37:47', 'update', 1, 1, NULL, '', 0),
+(88, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:37:48', '2012-01-07 20:37:59', 'update', 1, 1, NULL, 'blue', 2010),
+(89, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:37:48', '2012-01-07 20:37:59', 'update', 1, 1, NULL, '', 0),
+(90, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:38:00', '2012-01-07 20:38:17', 'update', 1, 1, NULL, 'blue', 2010),
+(91, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:38:00', '2012-01-07 20:38:17', 'update', 1, 1, NULL, '', 0),
+(92, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-07 20:38:18', '2012-01-09 22:39:04', 'update', 1, 1, NULL, 'blue', 2010),
+(93, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:38:18', '2012-01-09 22:39:05', 'update', 1, 1, NULL, '', 0),
+(94, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-09 22:39:05', '2012-01-10 20:00:21', 'update', 1, 1, NULL, 'blue', 2010),
+(95, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-09 22:39:06', '2012-01-10 20:00:21', 'update', 1, 1, NULL, '', 0),
+(96, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-10 20:00:22', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'blue', 2010),
+(97, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-10 20:00:22', '3000-01-01 00:00:00', 'update', 1, 1, NULL, '', 0);
 
 -- --------------------------------------------------------
 
@@ -3151,12 +3294,14 @@ CREATE TABLE IF NOT EXISTS `vehicle_toll_usage_all` (
   KEY `fk_vtu_pt` (`ptran_id`),
   KEY `fk_last_mod_by` (`last_modified_by`),
   KEY `fk_client_vtu` (`client_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Payment to be done by each vehicle and other details' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Payment to be done by each vehicle and other details' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `vehicle_toll_usage_all`
 --
 
+INSERT INTO `vehicle_toll_usage_all` (`vtu_id`, `uvh_id`, `toll_loc_id`, `tph_id`, `timestamp`, `vml_id`, `ptran_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
+(1, 62, 22, 1, '2012-01-09 22:29:11', 7, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-09 22:29:29', '2012-01-09 22:29:31', 1);
 
 -- --------------------------------------------------------
 
@@ -3650,8 +3795,8 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Constraints for table `cc_type_all`
 --
 ALTER TABLE `cc_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_cta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_cct` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_cct` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_cta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `client_all`
@@ -3685,58 +3830,58 @@ ALTER TABLE `configuration_all`
 -- Constraints for table `device_all`
 --
 ALTER TABLE `device_all`
-  ADD CONSTRAINT `fk_device_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_device_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_device_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lastmod_device` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `make_all`
 --
 ALTER TABLE `make_all`
-  ADD CONSTRAINT `fk_make_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_lmb_make` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_lmb_make` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_make_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `model_all`
 --
 ALTER TABLE `model_all`
-  ADD CONSTRAINT `fk_model_make` FOREIGN KEY (`make_id`) REFERENCES `make_all` (`make_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_model_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lmb_model` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_model_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_model_make` FOREIGN KEY (`make_id`) REFERENCES `make_all` (`make_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_model_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `owner_type_all`
 --
 ALTER TABLE `owner_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_ota` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_ot` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_ot` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_ota` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_gateway_all`
 --
 ALTER TABLE `payment_gateway_all`
-  ADD CONSTRAINT `fk_pg_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pg_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pg_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pg_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_token_all`
 --
 ALTER TABLE `payment_token_all`
+  ADD CONSTRAINT `fk_pt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_pt_pg` FOREIGN KEY (`payment_gateway_id`) REFERENCES `payment_gateway_all` (`payment_gateway_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_pt_upd` FOREIGN KEY (`upd_id`) REFERENCES `user_payment_detail_all` (`upd_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pt_user` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_transaction_all`
 --
 ALTER TABLE `payment_transaction_all`
+  ADD CONSTRAINT `fk_client_pt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lat_mod_by_pta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_ublog` FOREIGN KEY (`user_bl_id`) REFERENCES `user_balance_log_all` (`ublog_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_pt_tlog` FOREIGN KEY (`to_bl_id`) REFERENCES `user_balance_log_all` (`ublog_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_pt_updh` FOREIGN KEY (`updh_id`) REFERENCES `user_payment_detail_history_all` (`updh_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_pt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_pt_ublog` FOREIGN KEY (`user_bl_id`) REFERENCES `user_balance_log_all` (`ublog_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pt_updh` FOREIGN KEY (`updh_id`) REFERENCES `user_payment_detail_history_all` (`updh_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `road_all`
@@ -3749,34 +3894,34 @@ ALTER TABLE `road_all`
 -- Constraints for table `service_plan_all`
 --
 ALTER TABLE `service_plan_all`
+  ADD CONSTRAINT `fk_client_sp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_spa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_sp_to` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_sp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_sp_to` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `toll_location_all`
 --
 ALTER TABLE `toll_location_all`
-  ADD CONSTRAINT `fk_toll_op_id` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_client_tl` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_tla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_tl` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_toll_op_id` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `toll_operator_all`
 --
 ALTER TABLE `toll_operator_all`
+  ADD CONSTRAINT `fk_client_to` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_toa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_toll_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_to` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_toll_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `toll_price_all`
 --
 ALTER TABLE `toll_price_all`
-  ADD CONSTRAINT `fk_tp_tl` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tp_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_client_tp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_tpa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_tp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tp_tl` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tp_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `udf_data_all`
@@ -3788,24 +3933,24 @@ ALTER TABLE `udf_data_all`
 -- Constraints for table `user_all`
 --
 ALTER TABLE `user_all`
-  ADD CONSTRAINT `fk_utype_user` FOREIGN KEY (`utype_id`) REFERENCES `user_type_all` (`user_type_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_id_user` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_id_user` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_utype_user` FOREIGN KEY (`utype_id`) REFERENCES `user_type_all` (`user_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_balance_all`
 --
 ALTER TABLE `user_balance_all`
-  ADD CONSTRAINT `fk_ubal_users` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_client_ub` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_uba` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_ub` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_ubal_users` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_balance_log_all`
 --
 ALTER TABLE `user_balance_log_all`
-  ADD CONSTRAINT `fk_ublog_ubal` FOREIGN KEY (`ubal_id`) REFERENCES `user_balance_all` (`ubal_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_client_ubl` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_ubla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_ubl` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_ublog_ubal` FOREIGN KEY (`ubal_id`) REFERENCES `user_balance_all` (`ubal_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_notification_all`
@@ -3819,10 +3964,10 @@ ALTER TABLE `user_notification_all`
 -- Constraints for table `user_notification_settings_all`
 --
 ALTER TABLE `user_notification_settings_all`
-  ADD CONSTRAINT `fk_not_settings_user_all` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_settings_user_notification_type_all` FOREIGN KEY (`user_notification_type_id`) REFERENCES `user_notification_type_all` (`user_notification_type_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by_notify_settings` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_not_settings_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_not_settings_client_all` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_not_settings_user_all` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_settings_user_notification_type_all` FOREIGN KEY (`user_notification_type_id`) REFERENCES `user_notification_type_all` (`user_notification_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_notification_type_all`
@@ -3835,78 +3980,78 @@ ALTER TABLE `user_notification_type_all`
 -- Constraints for table `user_payment_detail_all`
 --
 ALTER TABLE `user_payment_detail_all`
-  ADD CONSTRAINT `fk_upd_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_upda` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_cctype_upd` FOREIGN KEY (`cc_type_id`) REFERENCES `cc_type_all` (`cc_type_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_upd` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_upd` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_upda` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_upd_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_service_all`
 --
 ALTER TABLE `user_service_all`
-  ADD CONSTRAINT `fk_us_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_us_ser` FOREIGN KEY (`service_id`) REFERENCES `service_plan_all` (`service_plan_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_client_us` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_las_mod_by` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_us` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_us_ser` FOREIGN KEY (`service_id`) REFERENCES `service_plan_all` (`service_plan_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_us_user` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_type_all`
 --
 ALTER TABLE `user_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_uta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_ut` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_ut` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_uta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_vehicle_all`
 --
 ALTER TABLE `user_vehicle_all`
-  ADD CONSTRAINT `fk_user_user_vehicle` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_uva` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_uv_co` FOREIGN KEY (`owner_type_id`) REFERENCES `owner_type_all` (`owner_type_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_uv` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_model_uv` FOREIGN KEY (`model_id`) REFERENCES `model_all` (`model_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_last_mod_by_uva` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_model_uv` FOREIGN KEY (`model_id`) REFERENCES `model_all` (`model_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_user_vehicle` FOREIGN KEY (`user_id`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_uv_co` FOREIGN KEY (`owner_type_id`) REFERENCES `owner_type_all` (`owner_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_vehicle_tolloperator_all`
 --
 ALTER TABLE `user_vehicle_tolloperator_all`
-  ADD CONSTRAINT `fk_uvt_uv` FOREIGN KEY (`user_vehicle_id`) REFERENCES `user_vehicle_all` (`user_vehicle_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_uvt_to` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_uvt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_uvt_lmb` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_uvt_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_uvt_to` FOREIGN KEY (`toll_operator_id`) REFERENCES `toll_operator_all` (`toll_operator_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_uvt_uv` FOREIGN KEY (`user_vehicle_id`) REFERENCES `user_vehicle_all` (`user_vehicle_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `vehicle_movement_log_all`
 --
 ALTER TABLE `vehicle_movement_log_all`
-  ADD CONSTRAINT `fk_vml_dh` FOREIGN KEY (`device_history_id`) REFERENCES `device_history_all` (`device_history_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vml_vmlt` FOREIGN KEY (`vml_type_id`) REFERENCES `vml_type_all` (`vml_type_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_last_mod_by_vmla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_client_vml` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vml_toll_location` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_last_mod_by_vmla` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vml_dh` FOREIGN KEY (`device_history_id`) REFERENCES `device_history_all` (`device_history_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vml_toll_location` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vml_vmlt` FOREIGN KEY (`vml_type_id`) REFERENCES `vml_type_all` (`vml_type_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `vehicle_toll_usage_all`
 --
 ALTER TABLE `vehicle_toll_usage_all`
-  ADD CONSTRAINT `fk_vtu_uv` FOREIGN KEY (`uvh_id`) REFERENCES `user_vehicle_history_all` (`uvh_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_tl` FOREIGN KEY (`toll_loc_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_vml` FOREIGN KEY (`vml_id`) REFERENCES `vehicle_movement_log_all` (`vml_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_tp` FOREIGN KEY (`tph_id`) REFERENCES `toll_price_history_all` (`tph_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_vtu_pt` FOREIGN KEY (`ptran_id`) REFERENCES `payment_transaction_all` (`ptran_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_client_vtu` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_last_mod_by` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_vtu` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_vtu_pt` FOREIGN KEY (`ptran_id`) REFERENCES `payment_transaction_all` (`ptran_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_tl` FOREIGN KEY (`toll_loc_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_tp` FOREIGN KEY (`tph_id`) REFERENCES `toll_price_history_all` (`tph_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_uv` FOREIGN KEY (`uvh_id`) REFERENCES `user_vehicle_history_all` (`uvh_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_vtu_vml` FOREIGN KEY (`vml_id`) REFERENCES `vehicle_movement_log_all` (`vml_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `vehicle_type_all`
 --
 ALTER TABLE `vehicle_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_vta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_vtp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_vtp` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_vta` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `vml_type_all`
 --
 ALTER TABLE `vml_type_all`
-  ADD CONSTRAINT `fk_last_mod_by_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_client_vmlt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_client_vmlt` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_last_mod_by_all` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE;
