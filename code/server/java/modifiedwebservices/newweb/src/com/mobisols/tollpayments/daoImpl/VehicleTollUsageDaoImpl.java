@@ -44,11 +44,11 @@ public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 	{
 		Session s=HibernateSessionFactory.getSession();
 		String q="Select tollUsage.vtuId,tollUsage.uvhId,vehicle.userId,tollOperator.tollOperatorId,tollPriceHistory.sellingPrice"
-			+" from VehicleTollUsage tollUsage,UserVehicleHistory vehicle,TollLocation tollLocation,TollOperator tollOperator,TollPriceHistory tollPriceHistory"
+			+" from VehicleTollUsage tollUsage,UserVehicleHistory vehicle,com.mobisols.tollpayments.model.TollLocation tollLocation,com.mobisols.tollpayments.model.TollOperator tollOperator,TollPriceHistory tollPriceHistory"
 			+" where tollUsage.ptranId='-1' AND vehicle.uvhId=tollUsage.uvhId AND tollUsage.tollLocId=tollLocation.tollLocationId"+
-			" AND tollLocation.tollOperatorId=tollOperator.TollOPeratorId AND tollUsage.tphId=tollPriceHistory.tphId"+
-			" AND tollOperator.tollOperatorId="+tollOperatorId+"AND vehicle.userId="+userId+
-			" order by tollUsage.timestamp";
+			" AND tollLocation.tollOperatorId=tollOperator.tollOperatorId AND tollUsage.tphId=tollPriceHistory.tphId"+
+			" AND tollOperator.tollOperatorId= '"+tollOperatorId+"' AND vehicle.userId='"+userId+
+			"' order by tollUsage.timestamp";
 		Query query=s.createQuery(q);
 		return query.list();
 	}
