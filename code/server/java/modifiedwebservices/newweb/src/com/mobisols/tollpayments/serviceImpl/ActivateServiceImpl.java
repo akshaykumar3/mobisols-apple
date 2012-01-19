@@ -34,9 +34,10 @@ public class ActivateServiceImpl implements ActivateService {
 		if(ar.getActive().equals("Y"))
 		{
 			List<UserVehicle> standByVehicles = userVehicleDao.getStandByVehicles(userName);
+			
 			if(u.getIsActive().equals(UserDao.USER_INACTIVE) && standByVehicles.isEmpty())
 			{
-				response.getNotifications().add("Add a Vehicle");
+				response.getNotifications().add("Add a Vehicle that is active");
 				status = "fail";
 				return jsonConverter.getJSON(request, status, response);
 			}

@@ -86,7 +86,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			System.out.println(":::::PASSWORD::::: "+s);
 			u.setPassword(s);
 			u.setUserName(r.getUserName());
-			//SMSUtil.sendSMS(u.getUserName(), s);
+			SMSUtil.sendSMS(u.getUserName(), "Your Password for logging on to Mobile TollPass is "+s);
 			//TODO change user type id based on the data in the database
 			u.setUtypeId(1);
 			userDao.save(u);

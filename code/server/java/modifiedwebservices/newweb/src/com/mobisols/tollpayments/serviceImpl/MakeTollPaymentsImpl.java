@@ -17,6 +17,7 @@ import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserBalanceLog;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
+import com.mobisols.tollpayments.model.UserVehicleHistory;
 import com.mobisols.tollpayments.model.VehicleTollUsage;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
@@ -39,12 +40,84 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 	private UserPaymentDetailHistoryDao userPaymentDetailHistoryDao;
 	private JsonConverter jsonConverter;
 	
-	private static final int USER_ID=0;
+	/*private static final int USER_ID=0;
 	private static final int TOLL_OPERATOR_ID=1;
 	private static final int PRICE=2;
-	private static final String SUCCESS = "";
+	private static final String SUCCESS = "";*/
 	
-	public String payForTolls(MakeTollPaymentsRequest r,String request)
+	public String payForTolls(MakeTollPaymentsRequest r,String request){
+		MakeTollPaymentsResponse response=new MakeTollPaymentsResponse();
+		String status = "success";
+		List<String> users;
+		if(r!=null)
+		{
+			users=r.getUsers();
+		}
+		else
+		{
+			users=userDao.getUserList();
+		}
+		ServerConfiguration serverConfiguration = ServerConfiguration.getServerConfiguration();
+		List<VehicleTollUsage> nonPaidTolls=vehicleTollUsageDao.getNonPaidTollUsage();
+		PaymentGateway pg=new PaymentGateway();
+		
+		for(Iterator<VehicleTollUsage> it = nonPaidTolls.iterator();it.hasNext();){
+			VehicleTollUsage vtu = it.next();
+			UserVehicleHistory uvh = vtu.getUserVehicleHistory();
+			User u = userDao.getUser(uvh.getUserId());
+			UserBalance ub = u.getUserBalance();
+			double price = vtu.getTollPriceHistory().getSellingPrice();
+			if(ub.getBalance()- price < u.getUserType().getMinBalance()){
+				UserPaymentDetail upd = u.getUserPaymentDetails();
+				Double amount = 10.0;
+				String expDate = "";
+				if(upd.getCcExpMonth()<10)
+					expDate = expDate+"0"+upd.getCcExpMonth();
+				else
+					expDate = expDate+upd.getCcExpMonth();
+				expDate = expDate + upd.getCcExpYear();
+				String x=pg.getCreditCardProcessing().doPaymentProcess(
+						CreditCardProcessing.PAYMENT_ACTION_ADDBALANCE, amount.toString(), 
+						upd.getCcType().getName(), upd.getCcNumber(),expDate , upd.getCcCvv().toString(), 
+						upd.getCcAcName(), "", upd.getAddress1()+upd.getAddress2(), 
+						upd.getCity(), upd.getState(), upd.getZip(), upd.getCountry());
+				if(x.equals("Success")||(x.equals("SuccessWithWarning")))
+				{
+					ub.setBalance(ub.getBalance()+amount);
+					userBalanceDao.save(ub);
+				}
+			}
+			if(ub.getBalance()-price > u.getUserType().getMinBalance()){
+				ub.setBalance(ub.getBalance() - price);
+				userBalanceDao.save(ub);
+				UserBalanceLog ubl = userBalanceLogDao.getRecentBalanceLogId(ub.getUbalId());
+				TollOperator to = vtu.getTollLocation().getTollOperator();
+				UserBalance tob = to.getUser().getUserBalance();
+				tob.setBalance(tob.getBalance()+vtu.getTollPriceHistory().getCostPrice());
+				
+				UserBalanceLog tollOperatorLog = userBalanceLogDao.getRecentBalanceLogId(tob.getUbalId());
+				
+				PaymentTransaction pt=new PaymentTransaction();
+				pt.setAmount(price);
+				pt.setClientId(Client.PRESENT_CLIENT);
+				pt.setCreatedOn(myUtilDate.getCurrentTimeStamp());
+				pt.setLastModifiedBy(User.DEFAULT_USER);
+				pt.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
+				pt.setStatus("paid");
+				pt.setTimestamp(myUtilDate.getCurrentTimeStamp());
+				pt.setToBlId(tollOperatorLog.getUblogId());
+				pt.setUpdhId(userPaymentDetailHistoryDao.getLatestUserPaymentDetailHistoryId(ub.getUser().getUserPaymentDetails().getUpdId()));
+				pt.setUserBlId(ubl.getUblogId());
+				paymentTransactionDao.save(pt);
+				
+				vtu.setPtranId(pt.getPtranId());
+				vehicleTollUsageDao.save(vtu);
+			}
+		}
+		return jsonConverter.getJSON(request, status,response);
+	}
+	
+	/*public String payForTolls(MakeTollPaymentsRequest r,String request)
 	{
 		MakeTollPaymentsResponse response=new MakeTollPaymentsResponse();
 		String status = "success";
@@ -150,7 +223,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 		}
 		
 		return jsonConverter.getJSON(request, status,response);
-	}
+	}*/
 
 	public UserDao getUserDao() {
 		return userDao;

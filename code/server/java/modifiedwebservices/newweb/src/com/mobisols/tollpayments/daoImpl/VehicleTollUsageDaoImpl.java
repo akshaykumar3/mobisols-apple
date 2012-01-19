@@ -17,6 +17,12 @@ import com.mobisols.tollpayments.model.TollOperator;
 
 public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 	
+	public List<VehicleTollUsage> getNonPaidTollUsage(){
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(VehicleTollUsage.class);
+		crit.add(Restrictions.eq("ptranId",-1));
+		return crit.list();
+	}
 	public List getNonPaidTollUsageByVehicle()
 	{
 		Session s=HibernateSessionFactory.getSession();

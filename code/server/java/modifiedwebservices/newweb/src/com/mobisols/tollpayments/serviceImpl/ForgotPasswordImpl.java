@@ -19,7 +19,7 @@ public class ForgotPasswordImpl implements ForgotPassword {
 		User u  =userDao.getUser(username);
 		u.setPassword(password);
 		System.out.println("::::::CHANGED PASSWORD:::::: "+password);
-		//SMSUtil.sendSMS(username, password);
+		SMSUtil.sendSMS(username, "Your new password to logon to Mobile TollPass is"+password);
 		GeneralResponse response = new GeneralResponse();
 		response.setDescription("password sent to your phone number");
 		response.getNotifications().add("password is sent to your phone number");
