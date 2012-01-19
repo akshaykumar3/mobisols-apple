@@ -10,4 +10,5 @@ public interface VehicleTollUsageDao {
 	public List getNonPaidTolls(int userId,int tollOperatorId);
 	public VehicleTollUsage getVehicleTollUsage(int vehicleTollUsageId);
 	public void save(VehicleTollUsage vt);
+	public List<VehicleTollUsage> getNonPaidTollUsage();
 }

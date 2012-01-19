@@ -39,7 +39,7 @@ public class CarProximityReceiver extends BroadcastReceiver{
 		LocationManager locationManager = (LocationManager) applicationContext.getSystemService(Context.LOCATION_SERVICE);
 		
 		Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		/*HeartBeatRequest hbRequest = new HeartBeatRequest();
+		HeartBeatRequest hbRequest = new HeartBeatRequest();
 		
 		hbRequest.setAngle(0.0);
 		hbRequest.setDeviceId(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICEID));
@@ -67,8 +67,8 @@ public class CarProximityReceiver extends BroadcastReceiver{
 		ActualHeartBeatResponse response = (ActualHeartBeatResponse) JsonConverter.getObject(WebRequest.postMethod(request),"com.mobisols.tollpayments.response.ActualHeartBeatResponse");
 		
 		LocationData.getInstance().setTollSessionId(response.getResponse().getHash().get("tollSessionId"));
-		*/
-		Toast.makeText(context, "Exiting car Proximity", Toast.LENGTH_SHORT).show();
+		
+		//Toast.makeText(context, "Exiting car Proximity", Toast.LENGTH_SHORT).show();
         Location nearestToll = MyLocationUtil.getNearestTollLocation(lastKnownLocation);
         
         LocationData locationData = LocationData.getInstance();
@@ -84,7 +84,7 @@ public class CarProximityReceiver extends BroadcastReceiver{
 		}
 		else
 		{
-			Toast.makeText(context, "Entering car proximity", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "Entering car proximity", Toast.LENGTH_SHORT).show();
 			Log.d("Car Proximity Receiver", "Entering the car proximity");
 		}
 	}

@@ -1,5 +1,9 @@
 package com.mobisols.tollpayments;
 
+import com.mobisols.tollpayments.data.LocationData;
+import com.mobisols.tollpayments.data.TollLocation;
+import com.mobisols.tollpayments.data.TollLocationList;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +17,9 @@ public class TollProximityReceiver extends BroadcastReceiver{
 	public void onReceive(Context context, Intent intent) {
 		if(intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false))
 		{
-			Toast.makeText(context, "Entering  toll", Toast.LENGTH_SHORT).show();
+			TollLocation nearest = TollLocationList.getInstace().getTollLocation(LocationData.getInstance().getNearestLocation().getLatitude(), 
+					LocationData.getInstance().getNearestLocation().getLongitude());
+			Toast.makeText(context, "Entering Toll with price : "+nearest.getSellingPrice(), Toast.LENGTH_SHORT).show();
 			Log.d("TollLocation proximity Receiver", "Entering TollLocation");
 		}
 		else
