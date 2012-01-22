@@ -29,12 +29,12 @@ public class LoginServiceImpl implements LoginService {
 		if(u==null)
 		{
 			status = "fail";
-			response.getResponse().put("userExists", User.USER_NOT_EXISTS);
+			response.getResponse().put("userExists", UserDao.USER_NOT_EXISTS);
 			return jsonConverter.getJSON(request, status,response);
 		}
 		else
 		{
-			response.getResponse().put("userExists",User.USER_EXISTS);
+			response.getResponse().put("userExists",UserDao.USER_EXISTS);
 			System.out.println(r.getPassword());
 			System.out.println(u.getPassword());
 			if(u.getPassword().equals(r.getPassword()))
@@ -44,11 +44,11 @@ public class LoginServiceImpl implements LoginService {
 				Device d=deviceDao.getDevice(r.getDeviceDetails().getDeviceId(),r.getDeviceDetails().getDeviceName());
 				if(d==null)
 				{
-					response.getResponse().put("deviceExists", Device.DEVICE_NOT_EXISTS);
+					response.getResponse().put("deviceExists", DeviceDao.DEVICE_NOT_EXISTS);
 					response.getCommands().add("DoDeviceRegistration");
 					return jsonConverter.getJSON(request, status,response);
 				}
-				response.getResponse().put("deviceExists", Device.DEVICE_EXISTS);
+				response.getResponse().put("deviceExists", DeviceDao.DEVICE_EXISTS);
 				if(d.getUserId()==-1)
 				{
 					response.getResponse().put("anotherUserLoggedIn", ANOTHER_USER_LOGGED_IN_FALSE);

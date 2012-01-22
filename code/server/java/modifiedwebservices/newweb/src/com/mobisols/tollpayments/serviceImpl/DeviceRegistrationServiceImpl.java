@@ -1,6 +1,7 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
+import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserVehicle;
@@ -25,10 +26,10 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 		d.setCreatedOn(myUtilDate.getCurrentTimeStamp());
 		d.setDeviceUuid(deviceId);
 		d.setDeviceType(r.getDeviceName());
-		d.setIsActive(Device.IN_ACTIVE);
-		d.setLastModifiedBy(User.DEFAULT_USER);
+		d.setIsActive(DeviceDao.DEVICE_INACTIVE);
+		d.setLastModifiedBy(UserDao.DEFAULT_USER);
 		d.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-		d.setUserId(User.DEFAULT_USER);
+		d.setUserId(UserDao.DEFAULT_USER);
 		deviceDao.save(d);
 		response.setDeviceId(deviceId);
 		response.setIpAddress(ipAddress);

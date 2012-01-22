@@ -101,7 +101,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 				pt.setAmount(price);
 				pt.setClientId(Client.PRESENT_CLIENT);
 				pt.setCreatedOn(myUtilDate.getCurrentTimeStamp());
-				pt.setLastModifiedBy(User.DEFAULT_USER);
+				pt.setLastModifiedBy(UserDao.DEFAULT_USER);
 				pt.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 				pt.setStatus("paid");
 				pt.setTimestamp(myUtilDate.getCurrentTimeStamp());

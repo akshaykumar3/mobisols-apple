@@ -60,7 +60,7 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		if(ccTypeDao.getCcTypeId(pd.getCardType())!=null)
 			upd.setCcTypeId(ccTypeDao.getCcTypeId(pd.getCardType()));
 		else
-			upd.setCcTypeId(CcType.CCTYPE_ID);
+			upd.setCcTypeId(CcTypeDao.DEFAULT_CC_TYPE_ID);
 		upd.setLastModifiedBy(userDao.getUser(username).getUserId());
 		upd.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		userPaymentDetailDao.update(upd);

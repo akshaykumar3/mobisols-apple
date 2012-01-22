@@ -39,10 +39,7 @@ public class User implements java.io.Serializable {
 	private UserType userType;
 	private Set<UserVehicle> userVehicles;
 	private UserPaymentDetail userPaymentDetails;
-	public static final int DEFAULT_USER=-1;
-	public static final String USER_EXISTS="Y";
-	public static final String USER_NOT_EXISTS="N";
-
+	
 	// Constructors
 
 	

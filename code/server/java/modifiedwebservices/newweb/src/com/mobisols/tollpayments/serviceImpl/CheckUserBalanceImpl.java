@@ -9,14 +9,15 @@ import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserBalance;
 import com.mobisols.tollpayments.model.UserPaymentDetail;
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.paymentprocess.CreditCardProcessing;
 import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
 import com.mobisols.tollpayments.response.post.CheckUserBalanceResponse;
 import com.mobisols.tollpayments.service.CheckUserBalance;
 
 public class CheckUserBalanceImpl implements CheckUserBalance {
-	public static final double MIN_BALANCE=2;
-	public static final Double MIN_TRANS_AMOUNT=10.0;
+	public static final double MIN_BALANCE=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("min_balance"));
+	public static final Double MIN_TRANS_AMOUNT=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("min_trans_amount"));
 	
 	String status="success";
 	private JsonConverter jsonConverter;
