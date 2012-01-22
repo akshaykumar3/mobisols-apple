@@ -4,12 +4,17 @@ gtp.views.NewCarFormView = {
 	scroll: 'vertical',
 	listeners: {
 		beforeactivate: function(co) {
-			co.reset();
-			co.load(Ext.ModelMgr.create({
-				startDate: gtp.today(),
-				endDate: '',
-				isActive: 'N'
-			},'Cars'));
+			if(co.getRecord()) {
+				console.log('after record creation');
+				co.reset();
+			} else {
+				console.log('before record created');
+				co.load(Ext.ModelMgr.create({
+					startDate: gtp.today(),
+					endDate: '',
+					isActive: 'N'
+				},'Cars'));
+			}
 			return true;
 		}
 	},
@@ -52,6 +57,9 @@ gtp.views.NewCarFormView = {
 				else if(acfd.endDate && !validEndDate) {
 					Ext.Msg.alert('End Date','Incorrect Value');
 				}
+				else if(!acfd.ownerType) {
+					Ext.Msg.alert('Specify Ownership');
+				}
 				else if(acfd.ownerType == 'Rental' && (acfd.endDate == null || acfd.endDate == '')) {
 					Ext.Msg.alert('Rental Car', 'Specify End Date');
 				}
@@ -67,7 +75,7 @@ gtp.views.NewCarFormView = {
 							json: Ext.encode({
 								state: acfd.st,
 								registration: acfd.rg,
-								isActive: "N",
+								isActive: "Y",
 								startDate: gtp.today().format('M j, Y g:i:s A'), // Valid date format on server side.
 								endDate: (acfd.endDate == null || acfd.endDate == '') ? null : acfd.endDate.format('M j, Y g:i:s A'),
 								ownerType: (acfd.ownerType == '' || acfd.ownerType == null) ? null:acfd.ownerType, 

@@ -29,6 +29,9 @@ gtp.views.LoginPage = {
 			ui: 'round',
 			text: 'Sign in',
 			handler: function(button, event){
+				// Suppress keyboard from view.
+				Ext.get('rmKeyboard').dom.focus();
+				
 				if(!gtp.views.Viewport.down('#lpemailid').getValue()) {
 					Ext.Msg.alert(gtp.dict.loginform_username);
 				}

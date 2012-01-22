@@ -45,6 +45,7 @@ Ext.regModel('Settings',{
 		field: 'ccnumber',
 		message: 'Invalid Credit Card Number',
 		fn: function(ccn) {
+			//console.log(ccn);
 				return ccn.luhnCheck();
 		}
 	},{
