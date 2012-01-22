@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2012 at 05:02 PM
+-- Generation Time: Jan 22, 2012 at 05:48 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `configuration_all` (
   PRIMARY KEY (`config_id`),
   KEY `fk_c_cv` (`comp_version_id`),
   KEY `fk_mod_by_config_all` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `configuration_all`
@@ -352,7 +352,11 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 (21, 1, 'user_not_exists', 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 21:55:52', '2012-01-22 21:55:56', -1),
 (22, 1, 'sms_url', 'https://api.smsified.com/v1/smsmessaging/outbound/5056335349/requests', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 22:01:54', '2012-01-22 22:01:57', -1),
 (23, 1, 'sms_user_name', 'harishmobisols', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 22:01:54', '2012-01-22 22:01:57', -1),
-(24, 1, 'sms_password', '9060', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 22:01:54', '2012-01-22 22:01:57', -1);
+(24, 1, 'sms_password', '9060', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 22:01:54', '2012-01-22 22:01:57', -1),
+(25, 1, 'min_trans_amount', '10.0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
+(26, 1, 'min_balance', '10.0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
+(27, 1, 'default_heart_beat_time', '600000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
+(28, 1, 'default_heart_beat_distance', '200', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1);
 
 -- --------------------------------------------------------
 
