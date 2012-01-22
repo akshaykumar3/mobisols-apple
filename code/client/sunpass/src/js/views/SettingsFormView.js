@@ -32,6 +32,8 @@ gtp.views.SettingsFormView = {
 				else if(button.getText() == 'save') { 
 					
 					var setform = gtp.tabpanel.getActiveItem();
+					var setrecord = setform.down('#settingsform').getRecord();
+					setform.down('#settingsform').updateRecord(setform.down('#settingsform').getRecord());
 					
 					var pay_det = setform.down('#settingsform').getRecord();
 					var statecode = setform.down('#settingsform').down('#billstate').getValue();
@@ -60,7 +62,9 @@ gtp.views.SettingsFormView = {
 								errorField.hide();
 							item.removeCls('invalid-field');
 						});
-						if(!pay_det.get('expmonth'))
+						if(!pay_det.get('ccnumber'))
+							Ext.Msg.alert('Provide Credit Card number');
+						else if(!pay_det.get('expmonth'))
 							Ext.Msg.alert('Alert','Exp month cannot be empty');
 						else if(!pay_det.get('expyear'))
 							Ext.Msg.alert('Alert', 'Exp year cannot be empty');
@@ -68,6 +72,9 @@ gtp.views.SettingsFormView = {
 							Ext.Msg.alert('Invalid','Expiry Date');
 						else if(!validZipCode)
 							Ext.Msg.alert('Invalid','Enter Valid zip code');
+						else if(pay_det.get('emailid') && !gtp.validateEmail(pay_det.get('emailid'))) {
+							Ext.Msg.alert('Enter valid email ID');
+						}
 						else {
 							gtp.tabpanel.setLoading({
 								msg: 'Please wait..'
@@ -88,7 +95,8 @@ gtp.views.SettingsFormView = {
 										city: pay_det.get('city'),
 										state: pay_det.get('state'),
 										country: pay_det.get('country'),
-										zip: pay_det.get('zipcode')
+										zip: pay_det.get('zipcode'),
+										emailId: pay_det.get('emailid')
 									})
 								},
 								success: function(response) {
@@ -162,35 +170,13 @@ gtp.views.SettingsFormView = {
 		xtype: 'fieldset',
 		id: 'paymentdetails',
 		title: 'Payment info',
-		defaults: {
-			listeners: {
-				change: function(curobj,newValue,oldValue) {
-					if(newValue != oldValue) {
-						var setvp = gtp.tabpanel.getActiveItem();
-						setvp.down('#settingsform').updateRecord(setvp.down('#settingsform').getRecord());
-						gtp.settingschanged=true;
-						var savebutton = setvp.down('#settingsform').down('#savesettings');
-						savebutton.setDisabled(false);	
-					}
-				}
-			}
-		},
 		items: [{
 			xtype: 'textfield',
 			name: 'ccnumber',
 			id: 'ccnumber',
 			label: 'Cdt card#',
 			placeHolder: 'XXXX XXXX XXXX XXXX',
-			useClearIcon: true,
-			listeners: {
-				keyup: function(dis, e) {
-					var len = dis.getValue().length;
-					if( ( (len == 4) || (len == 9) || (len == 14) ) && len<20 && len>0)
-						dis.setValue(dis.getValue()+' ');
-					else if(len > 19)
-						Ext.Msg.alert('Invalid','Cdt cd# cannot exceed 16 digits');
-				}
-			}
+			useClearIcon: true
 		},{
 			xtype: 'gtp.views.ErrorField',
 			fieldname: 'ccnumber'
@@ -215,19 +201,6 @@ gtp.views.SettingsFormView = {
 		xtype: 'fieldset',
 		id: 'billingdetails',
 		title: 'Billing Details',
-		defaults: {
-			listeners: {
-				change: function(curobj,newValue,oldValue) {
-					if(newValue != oldValue) {
-						var setvp = gtp.tabpanel.getActiveItem();
-						setvp.down('#settingsform').updateRecord(setvp.down('#settingsform').getRecord());
-						gtp.settingschanged=true;
-						var savebutton = setvp.down('#settingsform').down('#savesettings');
-						savebutton.setDisabled(false);	
-					}
-				}
-			}
-		},
 		items: [{
 			xtype: 'textfield',
 			name: 'name',
@@ -310,6 +283,11 @@ gtp.views.SettingsFormView = {
 		}
 	}],
 	listeners: {
+		beforeactivate: function(co) {
+			if(co.getRecord()) {
+				co.load(co.getRecord());
+			}
+		},
 		render: function(curobj) {
 			curobj.disable();
 		}

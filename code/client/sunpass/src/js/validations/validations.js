@@ -68,9 +68,6 @@ gtp.expiryDateValidity = function(expMonth, expYear) {
 };
 
 gtp.validateZipCode = function(state, city, zipcode) {
-	console.log('state '+state);
-	console.log('city '+city);
-	console.log('zipcode '+zipcode);
 	if(state == 'AK'){
 		if(zipcode > 99499 && zicode < 100000)
 			return true;
