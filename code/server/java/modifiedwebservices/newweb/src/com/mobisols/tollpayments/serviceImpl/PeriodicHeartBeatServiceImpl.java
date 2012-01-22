@@ -15,6 +15,7 @@ import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.response.post.HeartBeatResponse;
 import com.mobisols.tollpayments.service.PeriodicHeartBeatService;
@@ -28,9 +29,9 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 	private DeviceHistoryDao deviceHistoryDao;
 	private VmlTypeDao vmlTypeDao;
 	private JsonConverter jsonConverter;
-	
-	public static final double DEFAULT_TIME=10*60;
-	public static final double DEFAULT_DISTANCE=200;
+
+	public static final double DEFAULT_TIME=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("default_heart_beat_time"));
+	public static final double DEFAULT_DISTANCE=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("default_heart_beat_distance"));
 	
 	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
 		String status="success";

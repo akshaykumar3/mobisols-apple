@@ -44,7 +44,7 @@ public class ActivateServiceImpl implements ActivateService {
 			else if(u.getIsActive().equals(UserDao.USER_INACTIVE))
 			{
 				UserBalance ub = u.getUserBalance();
-				if(ub.getBalance()<= u.getUserType().getMinBalance())
+				if(ub.getBalance()< u.getUserType().getMinBalance())
 				{
 					UserPaymentDetail upd = u.getUserPaymentDetails();
 					PaymentGateway pg = new PaymentGateway();

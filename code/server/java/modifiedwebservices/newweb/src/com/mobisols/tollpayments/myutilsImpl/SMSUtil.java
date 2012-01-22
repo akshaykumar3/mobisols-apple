@@ -10,13 +10,15 @@ import org.apache.commons.httpclient.methods.PostMethod;
 
 public class SMSUtil {
 	
-	private static String smsURL = "https://api.smsified.com/v1/smsmessaging/outbound/5056335349/requests";
+	private static String smsURL = ServerConfiguration.getServerConfiguration().getValue("sms_url");
+	private static String smsUserName = ServerConfiguration.getServerConfiguration().getValue("sms_user_name");
+	private static String smsPassword = ServerConfiguration.getServerConfiguration().getValue("sms_password");
 	public static void sendSMS(String phone,String body) {
 		 HttpClient httpclient = new HttpClient();
 		 //HttpHost proxy = new HttpHost("172.30.0.16", 3128);
 		 //httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
          httpclient.getState().setCredentials(AuthScope.ANY, 
-         new UsernamePasswordCredentials("harishmobisols", "9060"));
+         new UsernamePasswordCredentials(smsUserName, smsPassword));
                  
          PostMethod pm = new PostMethod(smsURL);
 	     pm.addParameter("address", phone);

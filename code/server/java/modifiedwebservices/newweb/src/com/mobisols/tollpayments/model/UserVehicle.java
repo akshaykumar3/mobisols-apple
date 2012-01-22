@@ -39,7 +39,6 @@ public class UserVehicle implements java.io.Serializable {
 	private OwnerType ownerType;
 	private User user;
     private Model model;
-    public static final int DEFAULT_VEHICLE=-1;
     
 	public Model getModel() {
 		return model;

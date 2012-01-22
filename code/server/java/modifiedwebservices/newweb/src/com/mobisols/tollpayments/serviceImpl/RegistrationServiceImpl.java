@@ -46,25 +46,25 @@ public class RegistrationServiceImpl implements RegistrationService {
 		User u=userDao.getUser(r.getUserName());
 		if(u!=null)
 		{
-			response.getResponse().put("userNameExists", User.USER_EXISTS);
+			response.getResponse().put("userNameExists", UserDao.USER_EXISTS);
 			Device d= deviceDao.getDevice(r.getDeviceDetails().getDeviceId(), r.getDeviceDetails().getDeviceName());
 			if(d==null)
-				response.getResponse().put("deviceExists",Device.DEVICE_NOT_EXISTS);
+				response.getResponse().put("deviceExists",DeviceDao.DEVICE_NOT_EXISTS);
 			else
-				response.getResponse().put("deviceExists",Device.DEVICE_EXISTS);
+				response.getResponse().put("deviceExists",DeviceDao.DEVICE_EXISTS);
 			return jsonConverter.getJSON(request, status,response);
 		}
 		else
 		{
-			response.getResponse().put("userNameExists", User.USER_NOT_EXISTS);
+			response.getResponse().put("userNameExists", UserDao.USER_NOT_EXISTS);
 			Device d= deviceDao.getDevice(r.getDeviceDetails().getDeviceId(), r.getDeviceDetails().getDeviceName());
 			if(d==null)
 				{
-					response.getResponse().put("deviceExists",Device.DEVICE_NOT_EXISTS); 
+					response.getResponse().put("deviceExists",DeviceDao.DEVICE_NOT_EXISTS); 
 					return jsonConverter.getJSON(request, status,response);
 				}
 			else
-				response.getResponse().put("deviceExists",Device.DEVICE_EXISTS);
+				response.getResponse().put("deviceExists",DeviceDao.DEVICE_EXISTS);
 			if(d.getUserId()==-1)
 				response.getResponse().put("anotherUserLoggedIn", ANOTHER_USER_LOGGED_IN_FALSE);
 			else
