@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans
+    PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd"
+>
+
+<beans>
+
+ 	<bean id="onlineDataSource"
+        class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="jdbc/bbonline" />
+        <!-- Specify Correct JNDI Details -->
+    </bean>
+    
+    <bean id="onlineSessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+    >
+<!--         <property name="dataSource" ref="onlineDataSource" />
+			# connection URL    jdbc:oracle:thin:@10.194.200.31:1521:BBSILO1
+ -->
+		<property name="lobHandler" ref="oracleLobHandler"/>
+ 		<property name="dataSource" ref="onlineDataSource" />
+        <property name="configLocation" value="config/hbm/hibernate.cfg.xml" />
+        <property name="hibernateProperties">
+            <props>
+               	<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost/globaltoll</prop>
+				<prop key="hibernate.connection.username">root</prop>
+				<prop key="hibernate.connection.password">raghu</prop><prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+                <prop key="hibernate.query.substitutions">true 1, false 0</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!--<bean class="com.blockbuster.util.config.EnvironmentPropertyPlaceholderConfigurer">
+        <property name="prefix" value="hibernate" />
+        <property name="propertyFile" value="hibernate.logging.properties" />
+    </bean>    -->
+    <bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" lazy-init="true"/>
+	<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler">
+	       <property name="nativeJdbcExtractor"><ref local="nativeJdbcExtractor"/></property>    
+	</bean>
+</beans>
