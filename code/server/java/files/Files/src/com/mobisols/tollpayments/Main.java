@@ -33,11 +33,11 @@ import com.mobisols.tollpayments.model.VehicleTollUsage;
 
 public class Main {
 
-	public static final String SENDER_CODE = "SSS";
-	public static final String RECIEVER_CODE = "RRR";
-	public static final String ACCOUNT_NUMBER = "XXXXXXXXXX";
-	public static final String SENDER_COMPANY_NAME = "MOBISOLS LTD";
-	public static final String RECIEVER_COMPANY_NAME = "TEXAS TOLL AUTHORITY LTD";
+	public static final String SENDER_CODE = "TPC";
+	public static final String RECIEVER_CODE = "TTA";
+	public static final String ACCOUNT_NUMBER = "1000";
+	public static final String SENDER_COMPANY_NAME = "TOLLPAYMENTS.COM";
+	public static final String RECIEVER_COMPANY_NAME = "Texas Toll Authority";
 	public static void main(String args[]){
 		//generateFullTransferPLT();
 		generateIncrementalPLT(0, 1000);
@@ -48,7 +48,7 @@ public class Main {
 		SimpleDateFormat format  = new SimpleDateFormat("MMddyyyy'_'HHmmss");
 		String date  = format.format(new Date());
 		String pltFile = SENDER_CODE+"_"+RECIEVER_CODE+"_"+date+"_"+ACCOUNT_NUMBER+
-				"_"+".PLT";
+				".plt";
 		try {
 	        File file = new File(pltFile);
 	        file.createNewFile();
@@ -67,16 +67,19 @@ public class Main {
 	        for(Iterator<UserVehicle> it = vehicleList.iterator();it.hasNext();)
 	        {
 	        	UserVehicle u = it.next();
+	        	String vin = u.getVin();
+	        	if(vin==null)
+	        		vin="";
 	        	recordCount++;
 	        	tempwriter.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo().replaceAll("[ ]", "")+","+
 	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
 	        			new SimpleDateFormat("MMddyyyy").format(u.getVehicleStartDate())+
-	        			","+","+u.getVin()+"\n");
+	        			","+","+vin+"\n");
 	        }
 	        tempwriter.close();
 	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
 	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
-	        		new SimpleDateFormat("MMddyyyy").format(new Date())+","+recordCount+","+Long.toHexString(FileUtils.checksumCRC32(tempFile))+"\n");
+	        		new SimpleDateFormat("MMddyyyy").format(new Date())+","+recordCount+","+Long.toHexString(FileUtils.checksumCRC32(tempFile)).toUpperCase()+"\n");
 	        BufferedReader reader = new BufferedReader(new FileReader(tempFile));
 	        String s = reader.readLine();
 	        while(s!=null)
@@ -190,7 +193,7 @@ public class Main {
 		SimpleDateFormat format  = new SimpleDateFormat("MMddyyyy'_'HHmmss");
 		String date  = format.format(new Date());
 		String pltFile = SENDER_CODE+"_"+RECIEVER_CODE+"_"+date+"_"+ACCOUNT_NUMBER+
-				"_"+".PLT";
+				".plt";
 		try {
 	        File file = new File(pltFile);
 	        file.createNewFile();
@@ -210,12 +213,18 @@ public class Main {
 			while(row!=null){
 				String col[] = row.split(",");
 				col[1]="D";
-				col[7]=new SimpleDateFormat("MMddyyyy").format(expDate.getTime());
+				for(int i=0;i<col.length;i++){
+					System.out.println(i+" : "+col[i]);
+				}
 				String record = "";
-				for(int i=0;i<8;i++){
+				for(int i=0;i<7;i++){
 					record = record+col[i]+",";
 				}
-				record = record+ col[8]+"\n";
+				record = record+new SimpleDateFormat("MMddyyyy").format(expDate.getTime())+",";
+				if(col.length==9)
+					record = record+col[8]+"\n";
+				else
+					record = record+"\n";
 				temp1Writer.write(record);
 				recordCount++;
 				row = reader.readLine();
@@ -237,19 +246,22 @@ public class Main {
 	        {
 	        	UserVehicle u = it.next();
 	        	recordCount++;
+	        	String vin = u.getVin();
+	        	if(vin==null)
+	        		vin = "";
 	        	temp1Writer.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo().replaceAll("[ ]", "")+","+
 	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
 	        			new SimpleDateFormat("MMddyyyy").format(today)+
-	        			","+","+u.getVin()+"\n");
+	        			","+","+vin+"\n");
 	        	tempFileWriter.write("D1,"+"A,"+u.getRegisteredState()+","+u.getRegistrationNo().replaceAll("[ ]", "")+","+
 	        			u.getModel().getMake().getName()+","+u.getModel().getName()+","+
 	        			new SimpleDateFormat("MMddyyyy").format(today)+
-	        			","+","+u.getVin()+"\n");
+	        			","+","+vin+"\n");
 	        }
 	        temp1Writer.close();
 	        writer.write("H1,FULL,"+SENDER_CODE+","+SENDER_COMPANY_NAME+","+ACCOUNT_NUMBER+","+
 	        		RECIEVER_CODE+","+RECIEVER_COMPANY_NAME+","+pltFile+","+
-	        		new SimpleDateFormat("MMddyyyy").format(today)+","+recordCount+","+Long.toHexString(FileUtils.checksumCRC32(tempFile1))+"\n");
+	        		new SimpleDateFormat("MMddyyyy").format(today)+","+recordCount+","+Long.toHexString(FileUtils.checksumCRC32(tempFile1)).toUpperCase()+"\n");
 	        stream = new FileReader(tempFile1);
 			reader = new BufferedReader(stream);
 			String record = reader.readLine();
