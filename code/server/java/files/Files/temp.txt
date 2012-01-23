@@ -1,2 +1,3 @@
-D1,A,AL,abcdef,mymake,mymodel,01222012,,null
-D1,A,AL,1234,mymake,mymodel,01222012,,null
+D1,A,CA,4GPB522,Toyota,Corolla,01232012,,
+D1,A,CA,5PVA105,Nissan,PathFinde,01232012,,
+D1,A,CA,6KSX300,Honda,Odyssey,01232012,,
