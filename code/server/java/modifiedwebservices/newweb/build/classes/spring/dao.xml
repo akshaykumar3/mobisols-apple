@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans
+    PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd"
+>
+<beans>
+    <!-- <bean id="online.daoTemplate" abstract="true" dependency-check="all">
+        <property name="sessionFactory" ref="onlineSessionFactory" />
+    </bean>
+	-->
+    <!-- <bean id="dao.tolls.accountDeatailsDao" class="com.mobisol.tolls.daoImpl.HibernateAccountDetailsDao" parent="online.daoTemplate"/>-->
+	
+	<bean id="dao.tollpayments.vehicleTypeDao" class="com.mobisols.tollpayments.daoImpl.VehicleTypeDaoImpl" />
+	<bean id="dao.tollpayments.userDao" class="com.mobisols.tollpayments.daoImpl.UserDaoImpl"/>
+	<bean id="dao.tollpayments.ccTypeDao" class="com.mobisols.tollpayments.daoImpl.CcTypeDaoImpl"/>
+	<bean id="dao.tollpayments.ownerTypeDao" class="com.mobisols.tollpayments.daoImpl.OwnerTypeDaoImpl"/>
+	<bean id="dao.tollpayments.vmlTypeDao" class="com.mobisols.tollpayments.daoImpl.VmlTypeDaoImpl"/>
+	<bean id="dao.tollpayments.tollLocationDao" class="com.mobisols.tollpayments.daoImpl.TollLocationDaoImpl"/>
+	<bean id="dao.tollpayments.servicePlanDao" class="com.mobisols.tollpayments.daoImpl.ServicePlanDaoImpl"/>
+	<bean id="dao.tollpayments.vmlDao" class="com.mobisols.tollpayments.daoImpl.VmlDaoImpl"/>
+	<bean id="dao.tollpayments.deviceDao" class="com.mobisols.tollpayments.daoImpl.DeviceDaoImpl"/>
+	<bean id="dao.tollpayments.userVehicleHistoryDao" class="com.mobisols.tollpayments.daoImpl.UserVehicleHistoryDaoImpl"/>
+	<bean id="dao.tollpayments.userPaymentDetailDao" class="com.mobisols.tollpayments.daoImpl.UserPaymentDetailDaoImpl"/>
+	<bean id="dao.tollpayments.componentDao" class="com.mobisols.tollpayments.daoImpl.ComponentDaoImpl"/>
+	<bean id="dao.tollpayments.componentVersionDao" class="com.mobisols.tollpayments.daoImpl.ComponentVersionDaoImpl">
+		<property name="componentDao" ref = "dao.tollpayments.componentDao"/>
+	</bean>
+	<bean id="dao.tollpayments.configurationDao" class="com.mobisols.tollpayments.daoImpl.ConfigurationDaoImpl">
+		<property name="componentVersionDao" ref = "dao.tollpayments.componentVersionDao"/>
+	</bean>
+	<bean id="dao.tollpayments.userVehicleDao" class="com.mobisols.tollpayments.daoImpl.UserVehicleDaoImpl"/>
+	<bean id="dao.tollpayments.userBalanceDao" class="com.mobisols.tollpayments.daoImpl.UserBalanceDaoImpl"/>
+	<bean id="dao.tollpayments.makeDao" class="com.mobisols.tollpayments.daoImpl.MakeDaoImpl"/>
+	<bean id="dao.tollpayments.modelDao" class="com.mobisols.tollpayments.daoImpl.ModelDaoImpl"/>
+	<bean id="dao.tollpayments.deviceHistoryDao" class="com.mobisols.tollpayments.daoImpl.DeviceHistoryDaoImpl" />
+	<bean id="dao.tollpayments.tollPriceHistoryDao" class="com.mobisols.tollpayments.daoImpl.TollPriceHistoryDaoImpl" />
+	<bean id="dao.tollpayments.tollOperatorDao" class="com.mobisols.tollpayments.daoImpl.TollOperatorDaoImpl" />
+	<bean id="dao.tollpayments.userBalanceLogDao" class="com.mobisols.tollpayments.daoImpl.UserBalanceLogDaoImpl" />
+	<bean id="dao.tollpayments.vehicleTollUsageDao" class="com.mobisols.tollpayments.daoImpl.VehicleTollUsageDaoImpl" />
+	<bean id="dao.tollpayments.paymentTransactionDao" class="com.mobisols.tollpayments.daoImpl.PaymentTransactionDaoImpl" />
+	<bean id="dao.tollpayments.userPaymentDetailHistoryDao" class="com.mobisols.tollpayments.daoImpl.UserPaymentDetailHistoryDaoImpl" />
+</beans>
