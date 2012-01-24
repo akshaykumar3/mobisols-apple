@@ -15,8 +15,15 @@ import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserVehicleHistory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserVehicleHistoryDaoImpl.
+ */
 public class UserVehicleHistoryDaoImpl implements UserVehicleHistoryDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getLatestUvhId(int)
+	 */
 	public int getLatestUvhId(int userVehicleId) {
 		Session s=HibernateSessionFactory.getSession();
 		Criteria crit=s.createCriteria(UserVehicleHistory.class);
@@ -25,12 +32,20 @@ public class UserVehicleHistoryDaoImpl implements UserVehicleHistoryDao {
 		List<UserVehicleHistory> uvh=crit.list();
 		return uvh.get(0).getUvhId();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getAllActiveVehicles()
+	 */
 	@Override
 	public List<UserVehicleHistory> getAllActiveVehicles() {
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicleHistory.class);
 		return crit.list();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getAllDistinctVehicles(int, int)
+	 */
 	public List getAllDistinctVehicles(int from,int to) {
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicleHistory.class);
@@ -44,6 +59,9 @@ public class UserVehicleHistoryDaoImpl implements UserVehicleHistoryDao {
         return crit.list();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getHistory(java.lang.String, java.lang.String, int, int)
+	 */
 	public List<UserVehicleHistory> getHistory(String regNo,String state,int from,int to){
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicleHistory.class);
@@ -56,6 +74,9 @@ public class UserVehicleHistoryDaoImpl implements UserVehicleHistoryDao {
         return crit.list();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getUvhId(java.lang.String, java.lang.String, java.util.Date)
+	 */
 	@Override
 	public UserVehicleHistory getUvhId(String regNo, String state, Date date) {
 		Session s = HibernateSessionFactory.getSession();

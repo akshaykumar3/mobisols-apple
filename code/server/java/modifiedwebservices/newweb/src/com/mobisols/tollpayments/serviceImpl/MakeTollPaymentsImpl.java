@@ -28,16 +28,37 @@ import com.mobisols.tollpayments.request.post.MakeTollPaymentsRequest;
 import com.mobisols.tollpayments.response.post.MakeTollPaymentsResponse;
 import com.mobisols.tollpayments.service.MakeTollPayments;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MakeTollPaymentsImpl.
+ */
 public class MakeTollPaymentsImpl implements MakeTollPayments {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The vehicle toll usage dao. */
 	private VehicleTollUsageDao vehicleTollUsageDao;
+	
+	/** The toll operator dao. */
 	private TollOperatorDao tollOperatorDao;
+	
+	/** The user balance dao. */
 	private UserBalanceDao userBalanceDao;
+	
+	/** The user balance log dao. */
 	private UserBalanceLogDao userBalanceLogDao;
+	
+	/** The my util date. */
 	private MyUtilDate myUtilDate;
+	
+	/** The payment transaction dao. */
 	private PaymentTransactionDao paymentTransactionDao;
+	
+	/** The user payment detail history dao. */
 	private UserPaymentDetailHistoryDao userPaymentDetailHistoryDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
 	/*private static final int USER_ID=0;
@@ -45,6 +66,9 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 	private static final int PRICE=2;
 	private static final String SUCCESS = "";*/
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.MakeTollPayments#payForTolls(com.mobisols.tollpayments.request.post.MakeTollPaymentsRequest, java.lang.String)
+	 */
 	public String payForTolls(MakeTollPaymentsRequest r,String request){
 		MakeTollPaymentsResponse response=new MakeTollPaymentsResponse();
 		String status = "success";
@@ -225,75 +249,165 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 		return jsonConverter.getJSON(request, status,response);
 	}*/
 
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
 
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param userDao the new user dao
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
+	/**
+	 * Gets the vehicle toll usage dao.
+	 *
+	 * @return the vehicle toll usage dao
+	 */
 	public VehicleTollUsageDao getVehicleTollUsageDao() {
 		return vehicleTollUsageDao;
 	}
 
+	/**
+	 * Sets the vehicle toll usage dao.
+	 *
+	 * @param vehicleTollUsageDao the new vehicle toll usage dao
+	 */
 	public void setVehicleTollUsageDao(VehicleTollUsageDao vehicleTollUsageDao) {
 		this.vehicleTollUsageDao = vehicleTollUsageDao;
 	}
 
+	/**
+	 * Gets the toll operator dao.
+	 *
+	 * @return the toll operator dao
+	 */
 	public TollOperatorDao getTollOperatorDao() {
 		return tollOperatorDao;
 	}
 
+	/**
+	 * Sets the toll operator dao.
+	 *
+	 * @param tollOperatorDao the new toll operator dao
+	 */
 	public void setTollOperatorDao(TollOperatorDao tollOperatorDao) {
 		this.tollOperatorDao = tollOperatorDao;
 	}
 
+	/**
+	 * Gets the user balance dao.
+	 *
+	 * @return the user balance dao
+	 */
 	public UserBalanceDao getUserBalanceDao() {
 		return userBalanceDao;
 	}
 
+	/**
+	 * Sets the user balance dao.
+	 *
+	 * @param userBalanceDao the new user balance dao
+	 */
 	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
 		this.userBalanceDao = userBalanceDao;
 	}
 
+	/**
+	 * Gets the user balance log dao.
+	 *
+	 * @return the user balance log dao
+	 */
 	public UserBalanceLogDao getUserBalanceLogDao() {
 		return userBalanceLogDao;
 	}
 
+	/**
+	 * Sets the user balance log dao.
+	 *
+	 * @param userBalanceLogDao the new user balance log dao
+	 */
 	public void setUserBalanceLogDao(UserBalanceLogDao userBalanceLogDao) {
 		this.userBalanceLogDao = userBalanceLogDao;
 	}
 
+	/**
+	 * Gets the my util date.
+	 *
+	 * @return the my util date
+	 */
 	public MyUtilDate getMyUtilDate() {
 		return myUtilDate;
 	}
 
+	/**
+	 * Sets the my util date.
+	 *
+	 * @param myUtilDate the new my util date
+	 */
 	public void setMyUtilDate(MyUtilDate myUtilDate) {
 		this.myUtilDate = myUtilDate;
 	}
 
+	/**
+	 * Gets the payment transaction dao.
+	 *
+	 * @return the payment transaction dao
+	 */
 	public PaymentTransactionDao getPaymentTransactionDao() {
 		return paymentTransactionDao;
 	}
 
+	/**
+	 * Sets the payment transaction dao.
+	 *
+	 * @param paymentTransactionDao the new payment transaction dao
+	 */
 	public void setPaymentTransactionDao(PaymentTransactionDao paymentTransactionDao) {
 		this.paymentTransactionDao = paymentTransactionDao;
 	}
 
+	/**
+	 * Gets the user payment detail history dao.
+	 *
+	 * @return the user payment detail history dao
+	 */
 	public UserPaymentDetailHistoryDao getUserPaymentDetailHistoryDao() {
 		return userPaymentDetailHistoryDao;
 	}
 
+	/**
+	 * Sets the user payment detail history dao.
+	 *
+	 * @param userPaymentDetailHistoryDao the new user payment detail history dao
+	 */
 	public void setUserPaymentDetailHistoryDao(
 			UserPaymentDetailHistoryDao userPaymentDetailHistoryDao) {
 		this.userPaymentDetailHistoryDao = userPaymentDetailHistoryDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

@@ -9,8 +9,15 @@ import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.TollOperator;
 import com.mobisols.tollpayments.model.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TollOperatorDaoImpl.
+ */
 public class TollOperatorDaoImpl implements TollOperatorDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.TollOperatorDao#getUser(int)
+	 */
 	public User getUser(int tollOperatorId)
 	{
 		Session s = HibernateSessionFactory.getSession();
@@ -20,6 +27,9 @@ public class TollOperatorDaoImpl implements TollOperatorDao {
 		return to.getUser();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.TollOperatorDao#getTollOperator(int)
+	 */
 	public TollOperator getTollOperator(int tollOperatorId)
 	{
 		Session s = HibernateSessionFactory.getSession();

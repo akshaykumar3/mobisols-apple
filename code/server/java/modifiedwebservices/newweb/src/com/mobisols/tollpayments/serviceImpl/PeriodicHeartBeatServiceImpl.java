@@ -20,19 +20,45 @@ import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.response.post.HeartBeatResponse;
 import com.mobisols.tollpayments.service.PeriodicHeartBeatService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PeriodicHeartBeatServiceImpl.
+ */
 public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
+	
+	/** The vml dao. */
 	private VmlDao vmlDao;
+	
+	/** The my util date. */
 	private MyUtilDate myUtilDate;
+	
+	/** The device dao. */
 	private DeviceDao deviceDao;
+	
+	/** The toll location util. */
 	private TollLocationUtil tollLocationUtil;
+	
+	/** The toll location dao. */
 	private TollLocationDao tollLocationDao;
+	
+	/** The device history dao. */
 	private DeviceHistoryDao deviceHistoryDao;
+	
+	/** The vml type dao. */
 	private VmlTypeDao vmlTypeDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 
+	/** The Constant DEFAULT_TIME. */
 	public static final double DEFAULT_TIME=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("default_heart_beat_time"));
+	
+	/** The Constant DEFAULT_DISTANCE. */
 	public static final double DEFAULT_DISTANCE=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("default_heart_beat_distance"));
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#saveHeartBeat(java.lang.String, com.mobisols.tollpayments.request.post.HeartBeatRequest)
+	 */
 	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
 		String status="success";
 		HeartBeatResponse response = new HeartBeatResponse();
@@ -95,65 +121,118 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		return jsonConverter.getJSON(request, status,response);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getMyUtilDate()
+	 */
 	public MyUtilDate getMyUtilDate() {
 		return myUtilDate;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setMyUtilDate(com.mobisols.tollpayments.myutils.MyUtilDate)
+	 */
 	public void setMyUtilDate(MyUtilDate myUtilDate) {
 		this.myUtilDate = myUtilDate;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getDeviceDao()
+	 */
 	public DeviceDao getDeviceDao() {
 		return deviceDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setDeviceDao(com.mobisols.tollpayments.dao.DeviceDao)
+	 */
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getVmlDao()
+	 */
 	public VmlDao getVmlDao() {
 		return vmlDao;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setVmlDao(com.mobisols.tollpayments.dao.VmlDao)
+	 */
 	public void setVmlDao(VmlDao vmlDao) {
 		this.vmlDao = vmlDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getTollLocationUtil()
+	 */
 	public TollLocationUtil getTollLocationUtil() {
 		return tollLocationUtil;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setTollLocationUtil(com.mobisols.tollpayments.myutils.TollLocationUtil)
+	 */
 	public void setTollLocationUtil(TollLocationUtil tollLocationUtil) {
 		this.tollLocationUtil = tollLocationUtil;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getTollLocationDao()
+	 */
 	public TollLocationDao getTollLocationDao() {
 		return tollLocationDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setTollLocationDao(com.mobisols.tollpayments.dao.TollLocationDao)
+	 */
 	public void setTollLocationDao(TollLocationDao tollLocationDao) {
 		this.tollLocationDao = tollLocationDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getDeviceHistoryDao()
+	 */
 	public DeviceHistoryDao getDeviceHistoryDao() {
 		return deviceHistoryDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setDeviceHistoryDao(com.mobisols.tollpayments.dao.DeviceHistoryDao)
+	 */
 	public void setDeviceHistoryDao(DeviceHistoryDao deviceHistoryDao) {
 		this.deviceHistoryDao = deviceHistoryDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#getVmlTypeDao()
+	 */
 	public VmlTypeDao getVmlTypeDao() {
 		return vmlTypeDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#setVmlTypeDao(com.mobisols.tollpayments.dao.VmlTypeDao)
+	 */
 	public void setVmlTypeDao(VmlTypeDao vmlTypeDao) {
 		this.vmlTypeDao = vmlTypeDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

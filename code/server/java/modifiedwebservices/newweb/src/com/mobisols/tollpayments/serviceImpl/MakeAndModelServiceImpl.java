@@ -10,11 +10,21 @@ import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.get.MakeAndModelResponse;
 import com.mobisols.tollpayments.service.MakeAndModelService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MakeAndModelServiceImpl.
+ */
 public class MakeAndModelServiceImpl implements MakeAndModelService {
 
+	/** The make dao. */
 	private MakeDao makeDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.MakeAndModelService#getMakeAndModels(java.lang.String)
+	 */
 	public String getMakeAndModels(String request){
 		String status = "success";
 		MakeAndModelResponse response = new MakeAndModelResponse();
@@ -39,18 +49,38 @@ public class MakeAndModelServiceImpl implements MakeAndModelService {
 		return jsonConverter.getJSON(request, status, response);
 	}
 
+	/**
+	 * Gets the make dao.
+	 *
+	 * @return the make dao
+	 */
 	public MakeDao getMakeDao() {
 		return makeDao;
 	}
 
+	/**
+	 * Sets the make dao.
+	 *
+	 * @param makeDao the new make dao
+	 */
 	public void setMakeDao(MakeDao makeDao) {
 		this.makeDao = makeDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

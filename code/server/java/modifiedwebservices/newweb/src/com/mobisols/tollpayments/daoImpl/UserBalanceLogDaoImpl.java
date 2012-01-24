@@ -11,8 +11,15 @@ import com.mobisols.tollpayments.dao.UserBalanceLogDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserBalanceLog;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserBalanceLogDaoImpl.
+ */
 public class UserBalanceLogDaoImpl implements UserBalanceLogDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserBalanceLogDao#getRecentBalanceLogId(int)
+	 */
 	public UserBalanceLog getRecentBalanceLogId(int balanceId)
 	{
 		Session s=HibernateSessionFactory.getSession();

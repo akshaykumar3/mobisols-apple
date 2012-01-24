@@ -11,8 +11,15 @@ import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.TollLocation;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TollLocationDaoImpl.
+ */
 public class TollLocationDaoImpl implements TollLocationDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.TollLocationDao#getTollLocations()
+	 */
 	public List getTollLocations()
 	{
 		Session s = HibernateSessionFactory.getSession();
@@ -21,6 +28,9 @@ public class TollLocationDaoImpl implements TollLocationDao {
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.TollLocationDao#getTollLocation(double, double)
+	 */
 	public TollLocation getTollLocation(double latitude, double longitude) {
 		Session s=HibernateSessionFactory.getSession();
 		//String qu="from TollLocation as tl where tl.latitude=:lat and tl.longitude=:long";
@@ -36,6 +46,9 @@ public class TollLocationDaoImpl implements TollLocationDao {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.TollLocationDao#getTollLocation(java.lang.String)
+	 */
 	@Override
 	public TollLocation getTollLocation(String name) {
 		Session s = HibernateSessionFactory.getSession();

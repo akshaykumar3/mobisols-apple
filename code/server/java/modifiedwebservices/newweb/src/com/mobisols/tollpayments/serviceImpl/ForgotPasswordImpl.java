@@ -8,11 +8,21 @@ import com.mobisols.tollpayments.myutilsImpl.SMSUtil;
 import com.mobisols.tollpayments.response.GeneralResponse;
 import com.mobisols.tollpayments.service.ForgotPassword;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ForgotPasswordImpl.
+ */
 public class ForgotPasswordImpl implements ForgotPassword {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.ForgotPassword#forgotPassword(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public String forgotPassword(String request,String username) {
 		String password = PasswordGeneratorUtil.generatePassword();
@@ -26,15 +36,38 @@ public class ForgotPasswordImpl implements ForgotPassword {
 		return jsonConverter.getJSON(request, "success", response);
 	}
 	
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param userDao the new user dao
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+	
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
+	
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
+	
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}

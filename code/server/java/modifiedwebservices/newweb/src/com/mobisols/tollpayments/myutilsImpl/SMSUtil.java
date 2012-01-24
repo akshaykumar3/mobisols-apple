@@ -8,11 +8,27 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.PostMethod;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SMSUtil.
+ */
 public class SMSUtil {
 	
+	/** The sms url. */
 	private static String smsURL = ServerConfiguration.getServerConfiguration().getValue("sms_url");
+	
+	/** The sms user name. */
 	private static String smsUserName = ServerConfiguration.getServerConfiguration().getValue("sms_user_name");
+	
+	/** The sms password. */
 	private static String smsPassword = ServerConfiguration.getServerConfiguration().getValue("sms_password");
+	
+	/**
+	 * Send sms.
+	 *
+	 * @param phone the phone
+	 * @param body the body
+	 */
 	public static void sendSMS(String phone,String body) {
 		 HttpClient httpclient = new HttpClient();
 		 //HttpHost proxy = new HttpHost("172.30.0.16", 3128);

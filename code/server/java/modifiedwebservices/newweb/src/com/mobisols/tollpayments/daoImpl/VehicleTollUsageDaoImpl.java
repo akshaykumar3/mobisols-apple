@@ -15,14 +15,25 @@ import com.mobisols.tollpayments.model.TollLocation;
 import com.mobisols.tollpayments.model.TollOperator;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VehicleTollUsageDaoImpl.
+ */
 public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#getNonPaidTollUsage()
+	 */
 	public List<VehicleTollUsage> getNonPaidTollUsage(){
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(VehicleTollUsage.class);
 		crit.add(Restrictions.eq("ptranId",-1));
 		return crit.list();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#getNonPaidTollUsageByVehicle()
+	 */
 	public List getNonPaidTollUsageByVehicle()
 	{
 		Session s=HibernateSessionFactory.getSession();
@@ -34,6 +45,9 @@ public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 		return query.list();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#getNonPaidTollUsageByUser()
+	 */
 	public List getNonPaidTollUsageByUser()
 	{
 		Session s=HibernateSessionFactory.getSession();
@@ -46,6 +60,9 @@ public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 		return query.list();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#getNonPaidTolls(int, int)
+	 */
 	public List getNonPaidTolls(int userId,int tollOperatorId)
 	{
 		Session s=HibernateSessionFactory.getSession();
@@ -59,6 +76,9 @@ public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 		return query.list();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#getVehicleTollUsage(int)
+	 */
 	public VehicleTollUsage getVehicleTollUsage(int vehicleTollUsageId)
 	{
 		Session s=HibernateSessionFactory.getSession();
@@ -67,6 +87,9 @@ public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 		return (VehicleTollUsage)crit.uniqueResult();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#save(com.mobisols.tollpayments.model.VehicleTollUsage)
+	 */
 	@Override
 	public void save(VehicleTollUsage vt) {
 		Session s=HibernateSessionFactory.getSession();

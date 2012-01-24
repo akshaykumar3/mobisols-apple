@@ -12,13 +12,26 @@ import com.mobisols.tollpayments.model.ComponentVersion;
 import com.mobisols.tollpayments.model.Configuration;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConfigurationDaoImpl.
+ */
 public class ConfigurationDaoImpl implements ConfigurationDao {
+	
+	/** The component version dao. */
 	private ComponentVersionDao componentVersionDao;
 	
+	/**
+	 * Instantiates a new configuration dao impl.
+	 */
 	public ConfigurationDaoImpl()
 	{
 		//componentVersionDao = new ComponentVersionDaoImpl();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.ConfigurationDao#getKeyValues(java.lang.String, java.lang.String)
+	 */
 	public List<Configuration> getKeyValues(String component,String version)
 	{
 		Session s=HibernateSessionFactory.getSession();
@@ -27,9 +40,21 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 		crit.add(Restrictions.eq("compVersionId", cv.getCompVersionId()));
 		return crit.list();
 	}
+	
+	/**
+	 * Gets the component version dao.
+	 *
+	 * @return the component version dao
+	 */
 	public ComponentVersionDao getComponentVersionDao() {
 		return componentVersionDao;
 	}
+	
+	/**
+	 * Sets the component version dao.
+	 *
+	 * @param componentVersionDao the new component version dao
+	 */
 	public void setComponentVersionDao(ComponentVersionDao componentVersionDao) {
 		this.componentVersionDao = componentVersionDao;
 	}

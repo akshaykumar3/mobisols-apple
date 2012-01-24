@@ -16,9 +16,16 @@ import com.mobisols.tollpayments.dao.UserVehicleDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserVehicle;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserVehicleDaoImpl.
+ */
 public class UserVehicleDaoImpl implements UserVehicleDao {
 
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getVehicle(java.lang.String, java.lang.String, int)
+	 */
 	@Override
 	public UserVehicle getVehicle(String reg, String state,int userId) {
 		Session s= HibernateSessionFactory.getSession();
@@ -29,6 +36,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		return (UserVehicle)crit.uniqueResult();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#update(com.mobisols.tollpayments.model.UserVehicle)
+	 */
 	@Override
 	public void update(UserVehicle uv) {
 		Session s=HibernateSessionFactory.getSession();
@@ -37,6 +47,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		t.commit();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#delete(com.mobisols.tollpayments.model.UserVehicle)
+	 */
 	@Override
 	public void delete(UserVehicle uv) {
 		Session s= HibernateSessionFactory.getSession();
@@ -45,6 +58,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		t.commit();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#save(com.mobisols.tollpayments.model.UserVehicle)
+	 */
 	@Override
 	public void save(UserVehicle uv) {
 		Session s=HibernateSessionFactory.getSession();
@@ -53,6 +69,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		t.commit();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getVehicle(int)
+	 */
 	@Override
 	public UserVehicle getVehicle(int vehicleId) {
 		Session s= HibernateSessionFactory.getSession();
@@ -61,6 +80,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		return (UserVehicle)crit.uniqueResult();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getActiveVehicles(java.lang.String)
+	 */
 	@Override
 	public List getActiveVehicles(String username) {
 		Session s = HibernateSessionFactory.getSession();
@@ -73,6 +95,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		return crit.list();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getStandByVehicles(java.lang.String)
+	 */
 	public List getStandByVehicles(String username){
 		Session s =HibernateSessionFactory.getSession();
 		String[] configFiles = new String[] { "/spring/dao.xml" };  
@@ -83,6 +108,10 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_STANDBY));
 		return crit.list();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getAllActiveVehicles()
+	 */
 	public List<UserVehicle> getAllActiveVehicles(){
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);
@@ -90,6 +119,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		return crit.list();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getActiveVehicles(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public List<UserVehicle> getActiveVehicles(String reg, String state) {
 		Session s = HibernateSessionFactory.getSession();
@@ -101,6 +133,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		return crit.list();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getActiveVehicles(java.lang.String, java.lang.String, java.sql.Timestamp)
+	 */
 	@Override
 	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp expiry) {
 		Session s = HibernateSessionFactory.getSession();
@@ -113,6 +148,9 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		return crit.list();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getActiveVehicles(java.lang.String, java.lang.String, java.sql.Timestamp, java.sql.Timestamp)
+	 */
 	public List<UserVehicle> getActiveVehicles(String reg,String state,Timestamp start,Timestamp expiry) {
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserVehicle.class);

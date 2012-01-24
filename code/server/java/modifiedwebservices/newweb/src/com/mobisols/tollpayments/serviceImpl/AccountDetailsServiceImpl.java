@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.mobisols.tollpayments.serviceImpl;
 
 import java.util.Iterator;
@@ -13,11 +16,27 @@ import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.response.get.VehicleDetails;
 import com.mobisols.tollpayments.service.AccountDetailsService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AccountDetailsServiceImpl.
+ *
+ * @author Raghu
+ * 
+ * AccountDetailsService class is used to account details of a particular user
+ */
+
 public class AccountDetailsServiceImpl implements AccountDetailsService {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.AccountDetailsService#getAccountDetailsResponse(java.lang.String, java.lang.String)
+	 */
 	public String getAccountDetailsResponse(String request,String username){
 		AccountDetailsResponse adr=new AccountDetailsResponse();
 		String status = "success";
@@ -55,7 +74,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			System.out.println(uv.getRegistrationNo()+uv.getRegisteredState());
 		}
 		
-		//Logic for tollpayments
+		//TODO Logic for tollpayments
 		
 		adr.getBalanceInfo().setCurrentBalance((u.getUserBalance().getBalance()));
 		adr.getBalanceInfo().setBalanceId(u.getUserBalance().getUbalId());
@@ -72,6 +91,12 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		return jsonConverter.getJSON(request, status, adr);
 	}
 
+	/**
+	 * Load payment details.
+	 *
+	 * @param acr the acr
+	 * @param u the u
+	 */
 	private void loadPaymentDetails(AccountDetailsResponse acr, User u) {
 		acr.getPaymentDetails().setCardNumber(u.getUserPaymentDetails().getCcNumber());
 		acr.getPaymentDetails().setCcName(u.getUserPaymentDetails().getCcAcName());
@@ -97,18 +122,38 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		acr.getPaymentDetails().setZip(u.getUserPaymentDetails().getZip());
 	}
 
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
 
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param userDao the new user dao
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

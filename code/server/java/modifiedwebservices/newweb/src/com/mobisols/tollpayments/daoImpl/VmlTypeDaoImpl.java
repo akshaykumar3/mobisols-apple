@@ -10,8 +10,15 @@ import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.VmlType;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VmlTypeDaoImpl.
+ */
 public class VmlTypeDaoImpl implements VmlTypeDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VmlTypeDao#getVmlTypeList()
+	 */
 	@Override
 	public List getVmlTypeList() {
 		Session s =HibernateSessionFactory.getSession();
@@ -19,6 +26,9 @@ public class VmlTypeDaoImpl implements VmlTypeDao {
 		return c.list();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VmlTypeDao#getVmlTypeId(java.lang.String)
+	 */
 	public int getVmlTypeId(String name) {
 		Session s=HibernateSessionFactory.getSession();
 		Criteria c=s.createCriteria(VmlType.class);
