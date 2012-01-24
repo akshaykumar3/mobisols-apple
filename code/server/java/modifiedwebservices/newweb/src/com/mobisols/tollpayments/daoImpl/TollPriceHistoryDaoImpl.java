@@ -12,8 +12,15 @@ import com.mobisols.tollpayments.dao.TollPriceHistoryDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.TollPriceHistory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TollPriceHistoryDaoImpl.
+ */
 public class TollPriceHistoryDaoImpl implements TollPriceHistoryDao{
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.TollPriceHistoryDao#getTollPriceHistory(int, float)
+	 */
 	@Override
 	public List<TollPriceHistory> getTollPriceHistory(int tollLocationId, float price) {
 		Session s = HibernateSessionFactory.getSession();

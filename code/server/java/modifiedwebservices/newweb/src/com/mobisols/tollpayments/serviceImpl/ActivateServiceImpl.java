@@ -18,14 +18,30 @@ import com.mobisols.tollpayments.request.post.ActivateRequest;
 import com.mobisols.tollpayments.response.post.ActivateResponse;
 import com.mobisols.tollpayments.service.ActivateService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActivateServiceImpl.
+ */
 public class ActivateServiceImpl implements ActivateService {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The user balance dao. */
 	private UserBalanceDao userBalanceDao;
+	
+	/** The user vehicle dao. */
 	private UserVehicleDao userVehicleDao;
+	
+	/** The device dao. */
 	private DeviceDao deviceDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.ActivateService#activate(java.lang.String, com.mobisols.tollpayments.request.post.ActivateRequest, java.lang.String)
+	 */
 	public String activate(String request,ActivateRequest ar,String userName){
 		ActivateResponse response = new ActivateResponse();
 		String status="success"; 
@@ -155,42 +171,92 @@ public class ActivateServiceImpl implements ActivateService {
 		return jsonConverter.getJSON(request, status,response);
 	}
 
+	/**
+	 * Gets the user vehicle dao.
+	 *
+	 * @return the user vehicle dao
+	 */
 	public UserVehicleDao getUserVehicleDao() {
 		return userVehicleDao;
 	}
 
+	/**
+	 * Sets the user vehicle dao.
+	 *
+	 * @param userVehicleDao the new user vehicle dao
+	 */
 	public void setUserVehicleDao(UserVehicleDao userVehicleDao) {
 		this.userVehicleDao = userVehicleDao;
 	}
 
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
 
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param userDao the new user dao
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
+	/**
+	 * Gets the device dao.
+	 *
+	 * @return the device dao
+	 */
 	public DeviceDao getDeviceDao() {
 		return deviceDao;
 	}
 
+	/**
+	 * Sets the device dao.
+	 *
+	 * @param deviceDao the new device dao
+	 */
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
 
+	/**
+	 * Gets the user balance dao.
+	 *
+	 * @return the user balance dao
+	 */
 	public UserBalanceDao getUserBalanceDao() {
 		return userBalanceDao;
 	}
 
+	/**
+	 * Sets the user balance dao.
+	 *
+	 * @param userBalanceDao the new user balance dao
+	 */
 	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
 		this.userBalanceDao = userBalanceDao;
 	}

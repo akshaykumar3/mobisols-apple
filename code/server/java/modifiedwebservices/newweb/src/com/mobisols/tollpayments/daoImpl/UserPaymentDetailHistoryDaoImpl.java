@@ -11,8 +11,15 @@ import com.mobisols.tollpayments.dao.UserPaymentDetailHistoryDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.UserPaymentDetailHistory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserPaymentDetailHistoryDaoImpl.
+ */
 public class UserPaymentDetailHistoryDaoImpl implements UserPaymentDetailHistoryDao{
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserPaymentDetailHistoryDao#getLatestUserPaymentDetailHistoryId(int)
+	 */
 	public int getLatestUserPaymentDetailHistoryId(int paymentDetailId)
 	{
 		Session s=HibernateSessionFactory.getSession();

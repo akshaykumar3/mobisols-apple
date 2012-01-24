@@ -11,8 +11,15 @@ import com.mobisols.tollpayments.dao.DeviceHistoryDao;
 import com.mobisols.tollpayments.model.DeviceHistory;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DeviceHistoryDaoImpl.
+ */
 public class DeviceHistoryDaoImpl implements DeviceHistoryDao{
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.DeviceHistoryDao#getLatestDeviceHistoryId(java.lang.Integer)
+	 */
 	@Override
 	public Integer getLatestDeviceHistoryId(Integer deviceId) {
 		Session s=HibernateSessionFactory.getSession();

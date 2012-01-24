@@ -13,19 +13,39 @@ import com.mobisols.tollpayments.response.get.TollDetails;
 import com.mobisols.tollpayments.response.get.TollLocationListResponse;
 import com.mobisols.tollpayments.service.TollDetailsListService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TollDetailsListServiceImpl.
+ */
 public class TollDetailsListServiceImpl implements TollDetailsListService {
 
+	/** The toll location dao. */
 	private TollLocationDao tollLocationDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/**
+	 * Gets the toll location dao.
+	 *
+	 * @return the toll location dao
+	 */
 	public TollLocationDao getTollLocationDao() {
 		return tollLocationDao;
 	}
 
+	/**
+	 * Sets the toll location dao.
+	 *
+	 * @param tollLocationDao the new toll location dao
+	 */
 	public void setTollLocationDao(TollLocationDao tollLocationDao) {
 		this.tollLocationDao = tollLocationDao;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.TollDetailsListService#getTollLocations(java.lang.String)
+	 */
 	@Override
 	public String getTollLocations(String request) {
 		String status="success";
@@ -59,6 +79,9 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 		return jsonConverter.getJSON(request, status,response);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.TollDetailsListService#getTollLocations(java.lang.String, double, double, double, double)
+	 */
 	@Override
 	public String getTollLocations(String request,double lat1, double long1,
 			double lat2, double long2) {
@@ -96,10 +119,20 @@ public class TollDetailsListServiceImpl implements TollDetailsListService {
 		return jsonConverter.getJSON(request, status,response);
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

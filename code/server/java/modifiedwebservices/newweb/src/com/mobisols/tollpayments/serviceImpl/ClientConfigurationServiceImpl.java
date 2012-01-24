@@ -11,12 +11,22 @@ import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.response.get.ClientConfigurationResponse;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientConfigurationServiceImpl.
+ */
 public class ClientConfigurationServiceImpl implements
 		ClientConfigurationService {
 	
+	/** The component dao. */
 	private ComponentDao componentDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.ClientConfigurationService#getClientConfig(java.lang.String, com.mobisols.tollpayments.request.get.ClientConfigurationRequest)
+	 */
 	public String getClientConfig(String request,ClientConfigurationRequest r )
 	{
 		ClientConfigurationResponse response=new ClientConfigurationResponse();
@@ -74,18 +84,38 @@ public class ClientConfigurationServiceImpl implements
 		return jsonConverter.getJSON(request, status,response);
 	}
 	
+	/**
+	 * Gets the component dao.
+	 *
+	 * @return the component dao
+	 */
 	public ComponentDao getComponentDao() {
 		return componentDao;
 	}
 
+	/**
+	 * Sets the component dao.
+	 *
+	 * @param componentDao the new component dao
+	 */
 	public void setComponentDao(ComponentDao componentDao) {
 		this.componentDao = componentDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

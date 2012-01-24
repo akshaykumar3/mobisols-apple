@@ -12,9 +12,20 @@ import com.mobisols.tollpayments.model.TollLocation;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TollLocationList.
+ */
 public class TollLocationList {
+
+/** The instance. */
 private static List<Location> instance=null;
 	
+	/**
+	 * Gets the toll location list.
+	 *
+	 * @return the toll location list
+	 */
 	public static List<Location> getTollLocationList(){
 		if(instance==null)
 		{

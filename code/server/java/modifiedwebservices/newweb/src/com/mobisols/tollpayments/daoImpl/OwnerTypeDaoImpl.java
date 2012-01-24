@@ -10,8 +10,15 @@ import com.mobisols.tollpayments.dao.OwnerTypeDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.OwnerType;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OwnerTypeDaoImpl.
+ */
 public class OwnerTypeDaoImpl implements OwnerTypeDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.OwnerTypeDao#getOwnerTypeList()
+	 */
 	@Override
 	public List getOwnerTypeList() {
 	 Session s = HibernateSessionFactory.getSession();
@@ -19,6 +26,9 @@ public class OwnerTypeDaoImpl implements OwnerTypeDao {
 		return c.list();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.OwnerTypeDao#getOwnerType(java.lang.String)
+	 */
 	@Override
 	public OwnerType getOwnerType(String ownerType) {
 		Session s = HibernateSessionFactory.getSession();

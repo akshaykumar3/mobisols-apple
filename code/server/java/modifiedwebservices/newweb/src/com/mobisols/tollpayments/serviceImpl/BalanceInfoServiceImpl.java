@@ -12,12 +12,22 @@ import com.mobisols.tollpayments.response.get.BalanceInfoResponse;
 import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.service.BalanceInfoService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BalanceInfoServiceImpl.
+ */
 public class BalanceInfoServiceImpl implements BalanceInfoService {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.BalanceInfoService#getBalanceInfo(java.lang.String, java.lang.String)
+	 */
 	public String getBalanceInfo(String request,String user) {
 		BalanceInfoResponse response=new BalanceInfoResponse();
 		String status="success";
@@ -37,18 +47,38 @@ public class BalanceInfoServiceImpl implements BalanceInfoService {
 		return jsonConverter.getJSON(request, status,response);
 	}
 
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param user the new user dao
+	 */
 	public void setUserDao(UserDao user) {
 		this.userDao = user;
 	}
 
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

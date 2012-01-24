@@ -21,15 +21,30 @@ import com.mobisols.tollpayments.daoImpl.ConfigurationDaoImpl;
 import com.mobisols.tollpayments.model.Configuration;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServerConfiguration.
+ */
 public class ServerConfiguration extends MySingleTon {
 
+	/** The Constant SEURITY_CHECK. */
 	public static final String SEURITY_CHECK = "Y";
+	
+	/** The Constant SEURITY_UNCHECK. */
 	public static final String SEURITY_UNCHECK = "N";
 	
+	/** The server configuration. */
 	private static ServerConfiguration serverConfiguration=null;
+	
+	/** The hash. */
 	private HashMap<String, String> hash;
+	
+	/** The configuration dao. */
 	private ConfigurationDao configurationDao;
 	
+	/**
+	 * Instantiates a new server configuration.
+	 */
 	private ServerConfiguration(){
 		hash=new HashMap<String, String>();
 		//this.configurationDao = new ConfigurationDaoImpl();
@@ -39,6 +54,11 @@ public class ServerConfiguration extends MySingleTon {
       
 	}
 	
+	/**
+	 * Gets the server configuration.
+	 *
+	 * @return the server configuration
+	 */
 	public static ServerConfiguration getServerConfiguration() {
 		if(serverConfiguration==null)
 			{
@@ -53,6 +73,12 @@ public class ServerConfiguration extends MySingleTon {
 		return serverConfiguration;
 	}
 	
+	/**
+	 * Gets the value.
+	 *
+	 * @param key the key
+	 * @return the value
+	 */
 	public String getValue(String key)
 	{
 		if(serverConfiguration.isDirty())
@@ -63,6 +89,9 @@ public class ServerConfiguration extends MySingleTon {
 		return hash.get(key);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.myutilsImpl.MySingleTon#refresh()
+	 */
 	@Override
 	public void refresh() {
 			//BufferedReader reader= new BufferedReader(new InputStreamReader(new DataInputStream(new FileInputStream("ServerConfig.txt"))));

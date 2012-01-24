@@ -39,4 +39,6 @@
 	<bean id="dao.tollpayments.vehicleTollUsageDao" class="com.mobisols.tollpayments.daoImpl.VehicleTollUsageDaoImpl" />
 	<bean id="dao.tollpayments.paymentTransactionDao" class="com.mobisols.tollpayments.daoImpl.PaymentTransactionDaoImpl" />
 	<bean id="dao.tollpayments.userPaymentDetailHistoryDao" class="com.mobisols.tollpayments.daoImpl.UserPaymentDetailHistoryDaoImpl" />
+	<bean id="dao.tollpayments.tpImportDao" class="com.mobisols.tollpayments.daoImpl.TpImportDaoImpl" />
+	<bean id="dao.tollpayments.tpImportBatchDao" class="com.mobisols.tollpayments.daoImpl.TpImportBatchDaoImpl" />
 </beans>

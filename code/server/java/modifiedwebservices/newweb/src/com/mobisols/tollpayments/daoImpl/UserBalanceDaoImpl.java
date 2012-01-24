@@ -9,13 +9,24 @@ import com.mobisols.tollpayments.model.HibernateSessionFactory;
 
 import com.mobisols.tollpayments.model.UserBalance;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserBalanceDaoImpl.
+ */
 public class UserBalanceDaoImpl implements UserBalanceDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserBalanceDao#getUserBalance(java.lang.String)
+	 */
 	public UserBalance getUserBalance(String username)
 	{
 		UserDao user=new UserDaoImpl();
 		return user.getUser(username).getUserBalance();
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserBalanceDao#save(com.mobisols.tollpayments.model.UserBalance)
+	 */
 	public void save(UserBalance u)
 	{
 		Session s=HibernateSessionFactory.getSession();

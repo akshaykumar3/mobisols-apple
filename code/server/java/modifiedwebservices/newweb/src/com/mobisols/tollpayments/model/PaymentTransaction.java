@@ -2,6 +2,7 @@ package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
 
+// TODO: Auto-generated Javadoc
 /**
  * PaymentTransactionId entity. @author MyEclipse Persistence Tools
  */
@@ -10,37 +11,94 @@ public class PaymentTransaction implements java.io.Serializable {
 
 	// Fields
 
+	/** The ptran id. */
 	private Integer ptranId;
+	
+	/** The user bl id. */
 	private Integer userBlId;
+	
+	/** The to bl id. */
 	private Integer toBlId;
+	
+	/** The updh id. */
 	private Integer updhId;
+	
+	/** The timestamp. */
 	private Timestamp timestamp;
+	
+	/** The status. */
 	private String status;
+	
+	/** The amount. */
 	private Double amount;
+	
+	/** The udf1. */
 	private String udf1;
+	
+	/** The udf2. */
 	private String udf2;
+	
+	/** The udf3. */
 	private String udf3;
+	
+	/** The udf4. */
 	private String udf4;
+	
+	/** The udf5. */
 	private String udf5;
+	
+	/** The flag1. */
 	private String flag1;
+	
+	/** The flag2. */
 	private String flag2;
+	
+	/** The flag3. */
 	private String flag3;
+	
+	/** The flag4. */
 	private String flag4;
+	
+	/** The flag5. */
 	private String flag5;
+	
+	/** The last modified by. */
 	private Integer lastModifiedBy;
+	
+	/** The last modified on. */
 	private Timestamp lastModifiedOn;
+	
+	/** The created on. */
 	private Timestamp createdOn;
+	
+	/** The client id. */
 	private Integer clientId;
+	
+	/** The from user balance log. */
 	private UserBalanceLog fromUserBalanceLog;
+	
+	/** The to user balance log. */
 	private UserBalanceLog toUserBalanceLog;
+	
+	/** The user payment detail history. */
 	private UserPaymentDetailHistory userPaymentDetailHistory;
 
 	// Constructors
 
+	/**
+	 * Gets the user payment detail history.
+	 *
+	 * @return the user payment detail history
+	 */
 	public UserPaymentDetailHistory getUserPaymentDetailHistory() {
 		return userPaymentDetailHistory;
 	}
 
+	/**
+	 * Sets the user payment detail history.
+	 *
+	 * @param userPaymentDetailHistory the new user payment detail history
+	 */
 	public void setUserPaymentDetailHistory(
 			UserPaymentDetailHistory userPaymentDetailHistory) {
 		this.userPaymentDetailHistory = userPaymentDetailHistory;
@@ -48,27 +106,59 @@ public class PaymentTransaction implements java.io.Serializable {
 
 	
 
+	/**
+	 * Gets the from user balance log.
+	 *
+	 * @return the from user balance log
+	 */
 	public UserBalanceLog getFromUserBalanceLog() {
 		return fromUserBalanceLog;
 	}
 
+	/**
+	 * Sets the from user balance log.
+	 *
+	 * @param fromUserBalanceLog the new from user balance log
+	 */
 	public void setFromUserBalanceLog(UserBalanceLog fromUserBalanceLog) {
 		this.fromUserBalanceLog = fromUserBalanceLog;
 	}
 
+	/**
+	 * Gets the to user balance log.
+	 *
+	 * @return the to user balance log
+	 */
 	public UserBalanceLog getToUserBalanceLog() {
 		return toUserBalanceLog;
 	}
 
+	/**
+	 * Sets the to user balance log.
+	 *
+	 * @param toUserBalanceLog the new to user balance log
+	 */
 	public void setToUserBalanceLog(UserBalanceLog toUserBalanceLog) {
 		this.toUserBalanceLog = toUserBalanceLog;
 	}
 
-	/** default constructor */
+	/**
+	 * default constructor.
+	 */
 	public PaymentTransaction() {
 	}
 
-	/** minimal constructor */
+	/**
+	 * minimal constructor.
+	 *
+	 * @param ptranId the ptran id
+	 * @param timestamp the timestamp
+	 * @param status the status
+	 * @param amount the amount
+	 * @param lastModifiedBy the last modified by
+	 * @param lastModifiedOn the last modified on
+	 * @param createdOn the created on
+	 */
 	public PaymentTransaction(Integer ptranId, Timestamp timestamp,
 			String status, Double amount, Integer lastModifiedBy,
 			Timestamp lastModifiedOn, Timestamp createdOn) {
@@ -81,7 +171,31 @@ public class PaymentTransaction implements java.io.Serializable {
 		this.createdOn = createdOn;
 	}
 
-	/** full constructor */
+	/**
+	 * full constructor.
+	 *
+	 * @param ptranId the ptran id
+	 * @param userBlId the user bl id
+	 * @param toBlId the to bl id
+	 * @param updhId the updh id
+	 * @param timestamp the timestamp
+	 * @param status the status
+	 * @param amount the amount
+	 * @param udf1 the udf1
+	 * @param udf2 the udf2
+	 * @param udf3 the udf3
+	 * @param udf4 the udf4
+	 * @param udf5 the udf5
+	 * @param flag1 the flag1
+	 * @param flag2 the flag2
+	 * @param flag3 the flag3
+	 * @param flag4 the flag4
+	 * @param flag5 the flag5
+	 * @param lastModifiedBy the last modified by
+	 * @param lastModifiedOn the last modified on
+	 * @param createdOn the created on
+	 * @param clientId the client id
+	 */
 	public PaymentTransaction(Integer ptranId, Integer userBlId,
 			Integer toBlId, Integer updhId, Timestamp timestamp, String status,
 			Double amount, String udf1, String udf2, String udf3, String udf4,
@@ -113,174 +227,387 @@ public class PaymentTransaction implements java.io.Serializable {
 
 	// Property accessors
 
+	/**
+	 * Gets the ptran id.
+	 *
+	 * @return the ptran id
+	 */
 	public Integer getPtranId() {
 		return this.ptranId;
 	}
 
+	/**
+	 * Sets the ptran id.
+	 *
+	 * @param ptranId the new ptran id
+	 */
 	public void setPtranId(Integer ptranId) {
 		this.ptranId = ptranId;
 	}
 
+	/**
+	 * Gets the user bl id.
+	 *
+	 * @return the user bl id
+	 */
 	public Integer getUserBlId() {
 		return this.userBlId;
 	}
 
+	/**
+	 * Sets the user bl id.
+	 *
+	 * @param userBlId the new user bl id
+	 */
 	public void setUserBlId(Integer userBlId) {
 		this.userBlId = userBlId;
 	}
 
+	/**
+	 * Gets the to bl id.
+	 *
+	 * @return the to bl id
+	 */
 	public Integer getToBlId() {
 		return this.toBlId;
 	}
 
+	/**
+	 * Sets the to bl id.
+	 *
+	 * @param toBlId the new to bl id
+	 */
 	public void setToBlId(Integer toBlId) {
 		this.toBlId = toBlId;
 	}
 
+	/**
+	 * Gets the updh id.
+	 *
+	 * @return the updh id
+	 */
 	public Integer getUpdhId() {
 		return this.updhId;
 	}
 
+	/**
+	 * Sets the updh id.
+	 *
+	 * @param updhId the new updh id
+	 */
 	public void setUpdhId(Integer updhId) {
 		this.updhId = updhId;
 	}
 
+	/**
+	 * Gets the timestamp.
+	 *
+	 * @return the timestamp
+	 */
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
 
+	/**
+	 * Sets the timestamp.
+	 *
+	 * @param timestamp the new timestamp
+	 */
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
 	}
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public String getStatus() {
 		return this.status;
 	}
 
+	/**
+	 * Sets the status.
+	 *
+	 * @param status the new status
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	/**
+	 * Gets the amount.
+	 *
+	 * @return the amount
+	 */
 	public Double getAmount() {
 		return this.amount;
 	}
 
+	/**
+	 * Sets the amount.
+	 *
+	 * @param amount the new amount
+	 */
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
+	/**
+	 * Gets the udf1.
+	 *
+	 * @return the udf1
+	 */
 	public String getUdf1() {
 		return this.udf1;
 	}
 
+	/**
+	 * Sets the udf1.
+	 *
+	 * @param udf1 the new udf1
+	 */
 	public void setUdf1(String udf1) {
 		this.udf1 = udf1;
 	}
 
+	/**
+	 * Gets the udf2.
+	 *
+	 * @return the udf2
+	 */
 	public String getUdf2() {
 		return this.udf2;
 	}
 
+	/**
+	 * Sets the udf2.
+	 *
+	 * @param udf2 the new udf2
+	 */
 	public void setUdf2(String udf2) {
 		this.udf2 = udf2;
 	}
 
+	/**
+	 * Gets the udf3.
+	 *
+	 * @return the udf3
+	 */
 	public String getUdf3() {
 		return this.udf3;
 	}
 
+	/**
+	 * Sets the udf3.
+	 *
+	 * @param udf3 the new udf3
+	 */
 	public void setUdf3(String udf3) {
 		this.udf3 = udf3;
 	}
 
+	/**
+	 * Gets the udf4.
+	 *
+	 * @return the udf4
+	 */
 	public String getUdf4() {
 		return this.udf4;
 	}
 
+	/**
+	 * Sets the udf4.
+	 *
+	 * @param udf4 the new udf4
+	 */
 	public void setUdf4(String udf4) {
 		this.udf4 = udf4;
 	}
 
+	/**
+	 * Gets the udf5.
+	 *
+	 * @return the udf5
+	 */
 	public String getUdf5() {
 		return this.udf5;
 	}
 
+	/**
+	 * Sets the udf5.
+	 *
+	 * @param udf5 the new udf5
+	 */
 	public void setUdf5(String udf5) {
 		this.udf5 = udf5;
 	}
 
+	/**
+	 * Gets the flag1.
+	 *
+	 * @return the flag1
+	 */
 	public String getFlag1() {
 		return this.flag1;
 	}
 
+	/**
+	 * Sets the flag1.
+	 *
+	 * @param flag1 the new flag1
+	 */
 	public void setFlag1(String flag1) {
 		this.flag1 = flag1;
 	}
 
+	/**
+	 * Gets the flag2.
+	 *
+	 * @return the flag2
+	 */
 	public String getFlag2() {
 		return this.flag2;
 	}
 
+	/**
+	 * Sets the flag2.
+	 *
+	 * @param flag2 the new flag2
+	 */
 	public void setFlag2(String flag2) {
 		this.flag2 = flag2;
 	}
 
+	/**
+	 * Gets the flag3.
+	 *
+	 * @return the flag3
+	 */
 	public String getFlag3() {
 		return this.flag3;
 	}
 
+	/**
+	 * Sets the flag3.
+	 *
+	 * @param flag3 the new flag3
+	 */
 	public void setFlag3(String flag3) {
 		this.flag3 = flag3;
 	}
 
+	/**
+	 * Gets the flag4.
+	 *
+	 * @return the flag4
+	 */
 	public String getFlag4() {
 		return this.flag4;
 	}
 
+	/**
+	 * Sets the flag4.
+	 *
+	 * @param flag4 the new flag4
+	 */
 	public void setFlag4(String flag4) {
 		this.flag4 = flag4;
 	}
 
+	/**
+	 * Gets the flag5.
+	 *
+	 * @return the flag5
+	 */
 	public String getFlag5() {
 		return this.flag5;
 	}
 
+	/**
+	 * Sets the flag5.
+	 *
+	 * @param flag5 the new flag5
+	 */
 	public void setFlag5(String flag5) {
 		this.flag5 = flag5;
 	}
 
+	/**
+	 * Gets the last modified by.
+	 *
+	 * @return the last modified by
+	 */
 	public Integer getLastModifiedBy() {
 		return this.lastModifiedBy;
 	}
 
+	/**
+	 * Sets the last modified by.
+	 *
+	 * @param lastModifiedBy the new last modified by
+	 */
 	public void setLastModifiedBy(Integer lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
+	/**
+	 * Gets the last modified on.
+	 *
+	 * @return the last modified on
+	 */
 	public Timestamp getLastModifiedOn() {
 		return this.lastModifiedOn;
 	}
 
+	/**
+	 * Sets the last modified on.
+	 *
+	 * @param lastModifiedOn the new last modified on
+	 */
 	public void setLastModifiedOn(Timestamp lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
+	/**
+	 * Gets the created on.
+	 *
+	 * @return the created on
+	 */
 	public Timestamp getCreatedOn() {
 		return this.createdOn;
 	}
 
+	/**
+	 * Sets the created on.
+	 *
+	 * @param createdOn the new created on
+	 */
 	public void setCreatedOn(Timestamp createdOn) {
 		this.createdOn = createdOn;
 	}
 
+	/**
+	 * Gets the client id.
+	 *
+	 * @return the client id
+	 */
 	public Integer getClientId() {
 		return this.clientId;
 	}
 
+	/**
+	 * Sets the client id.
+	 *
+	 * @param clientId the new client id
+	 */
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -363,6 +690,9 @@ public class PaymentTransaction implements java.io.Serializable {
 						.getClientId().equals(castOther.getClientId())));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		int result = 17;
 

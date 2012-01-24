@@ -9,18 +9,36 @@ import com.mobisols.tollpayments.request.post.LoginRequest;
 import com.mobisols.tollpayments.response.post.LoginResponse;
 import com.mobisols.tollpayments.service.LoginService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginServiceImpl.
+ */
 public class LoginServiceImpl implements LoginService {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The device dao. */
 	private DeviceDao deviceDao;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/** The Constant PASSWORD_CORRECT_FALSE. */
 	public static final String PASSWORD_CORRECT_FALSE="N";
+	
+	/** The Constant PASSWORD_CORRECT_TRUE. */
 	public static final String PASSWORD_CORRECT_TRUE="Y";
 	
+	/** The Constant ANOTHER_USER_LOGGED_IN_TRUE. */
 	public static final String ANOTHER_USER_LOGGED_IN_TRUE="Y";
+	
+	/** The Constant ANOTHER_USER_LOGGED_IN_FALSE. */
 	public static final String ANOTHER_USER_LOGGED_IN_FALSE="N";
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.LoginService#login(java.lang.String, com.mobisols.tollpayments.request.post.LoginRequest)
+	 */
 	public String login(String request,LoginRequest r)
 	{
 		LoginResponse response =new LoginResponse();
@@ -70,26 +88,56 @@ public class LoginServiceImpl implements LoginService {
 		return responseString;
 	}
 
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
 
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param userDao the new user dao
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
+	/**
+	 * Gets the device dao.
+	 *
+	 * @return the device dao
+	 */
 	public DeviceDao getDeviceDao() {
 		return deviceDao;
 	}
 
+	/**
+	 * Sets the device dao.
+	 *
+	 * @param deviceDao the new device dao
+	 */
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

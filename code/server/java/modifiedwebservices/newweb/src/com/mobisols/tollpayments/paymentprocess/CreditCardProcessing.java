@@ -7,15 +7,48 @@ import com.paypal.sdk.profiles.ProfileFactory;
 import com.paypal.sdk.services.NVPCallerServices;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreditCardProcessing.
+ */
 public class CreditCardProcessing {
 
+	/** The PAYMEN t_ actio n_ addbalance. */
 	public static String PAYMENT_ACTION_ADDBALANCE = "Sale";
+	
+	/**
+	 * Process.
+	 *
+	 * @param ccNumber the cc number
+	 * @param ccType the cc type
+	 * @param date the date
+	 * @param amount the amount
+	 * @return the int
+	 */
 	public  int process(String ccNumber,String ccType,Integer date,Double amount)
 	{
 		int status=1;
 		return status;
 	}
 	
+	/**
+	 * Do payment process.
+	 *
+	 * @param paymentAction the payment action
+	 * @param amount the amount
+	 * @param cardType the card type
+	 * @param acct the acct
+	 * @param expdate the expdate
+	 * @param cvv2 the cvv2
+	 * @param firstName the first name
+	 * @param lastName the last name
+	 * @param street the street
+	 * @param city the city
+	 * @param state the state
+	 * @param zip the zip
+	 * @param countryCode the country code
+	 * @return the string
+	 */
 	public String doPaymentProcess(String paymentAction,String amount,String cardType,
 			String acct,String expdate,String cvv2, String firstName,
 			String lastName, String street, String city, String state, 

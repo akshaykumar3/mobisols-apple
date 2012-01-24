@@ -10,15 +10,29 @@ import com.mobisols.tollpayments.response.get.OwnerType;
 import com.mobisols.tollpayments.response.get.OwnerTypeListResponse;
 import com.mobisols.tollpayments.service.OwnerTypeListService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OwnerTypeListServiceImpl.
+ */
 public class OwnerTypeListServiceImpl implements OwnerTypeListService {
 
-	 private OwnerTypeDao ownerTypeDao;
-	 private JsonConverter jsonConverter;
+	 /** The owner type dao. */
+ 	private OwnerTypeDao ownerTypeDao;
+	 
+ 	/** The json converter. */
+ 	private JsonConverter jsonConverter;
 		
-	 public OwnerTypeListServiceImpl()
+	 /**
+ 	 * Instantiates a new owner type list service impl.
+ 	 */
+ 	public OwnerTypeListServiceImpl()
 	 {
 		 
 	 }
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.OwnerTypeListService#getOwnerTypeList(java.lang.String)
+	 */
 	@Override
 	public String getOwnerTypeList(String request) {
 		String status="success";
@@ -34,15 +48,39 @@ public class OwnerTypeListServiceImpl implements OwnerTypeListService {
 		}
 		return jsonConverter.getJSON(request, status,ownerTypeListResponse);
 	}
+	
+	/**
+	 * Gets the owner type dao.
+	 *
+	 * @return the owner type dao
+	 */
 	public OwnerTypeDao getOwnerTypeDao() {
 		return ownerTypeDao;
 	}
+	
+	/**
+	 * Sets the owner type dao.
+	 *
+	 * @param ownerTypeDao the new owner type dao
+	 */
 	public void setOwnerTypeDao(OwnerTypeDao ownerTypeDao) {
 		this.ownerTypeDao = ownerTypeDao;
 	}
+	
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
+	
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

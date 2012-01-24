@@ -6,9 +6,18 @@ import java.util.HashMap;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.MyUtilVehicle;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MyUtilVehicleImpl.
+ */
 public class MyUtilVehicleImpl implements MyUtilVehicle {
 
+	/** The reg expr. */
 	private HashMap<String,String> regExpr;
+	
+	/**
+	 * Instantiates a new my util vehicle impl.
+	 */
 	public MyUtilVehicleImpl()
 	{
 		regExpr = new HashMap<String,String>();
@@ -124,6 +133,9 @@ public class MyUtilVehicleImpl implements MyUtilVehicle {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.myutils.MyUtilVehicle#isValidRegistrationNumber(java.lang.String, java.lang.String)
+	 */
 	public boolean isValidRegistrationNumber(String regNo,String state)
 	{
 		/*if(regExpr.get(state)!=null)
@@ -133,6 +145,9 @@ public class MyUtilVehicleImpl implements MyUtilVehicle {
 		return true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.myutils.MyUtilVehicle#isValidEndDate(java.util.Date)
+	 */
 	public boolean isValidEndDate(Date endDate)
 	{
 		MyUtilDate myUtilDate = new MyUtilDateImpl();

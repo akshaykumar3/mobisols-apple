@@ -57,38 +57,97 @@ import com.mobisols.tollpayments.service.VehicleTypeListService;
 import com.mobisols.tollpayments.service.VmlTypeListService;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebServiceImpl.
+ */
 @Path("/services")
 public class WebServiceImpl {
 
+	/** The account details service. */
 	AccountDetailsService accountDetailsService;
+	
+	/** The add balance service. */
 	AddBalanceService addBalanceService;
+	
+	/** The vehicle type list service. */
 	VehicleTypeListService vehicleTypeListService;
+	
+	/** The cc type list service. */
 	CcTypeListService ccTypeListService;
+	
+	/** The owner type list service. */
 	OwnerTypeListService ownerTypeListService;
+	
+	/** The vml type list service. */
 	VmlTypeListService vmlTypeListService;
+	
+	/** The balance info service. */
 	BalanceInfoService balanceInfoService;
+	
+	/** The toll details service. */
 	TollDetailsListService tollDetailsService;
+	
+	/** The service plan service. */
 	ServicePlanService servicePlanService;
+	
+	/** The periodic heart beat service. */
 	PeriodicHeartBeatService periodicHeartBeatService;
+	
+	/** The heart beat service. */
 	HeartBeatService heartBeatService;
+	
+	/** The nearest toll service. */
 	NearestTollService nearestTollService;
+	
+	/** The payment details service. */
 	PaymentDetailsService paymentDetailsService;
+	
+	/** The client configuration service. */
 	ClientConfigurationService clientConfigurationService;
+	
+	/** The vehicle details service. */
 	VehicleDetailsService vehicleDetailsService;
+	
+	/** The registration service. */
 	RegistrationService registrationService;
+	
+	/** The device registration service. */
 	DeviceRegistrationService deviceRegistrationService;
+	
+	/** The login service. */
 	LoginService loginService;
+	
+	/** The change password service. */
 	ChangePasswordService changePasswordService;
+	
+	/** The make and model service. */
 	MakeAndModelService makeAndModelService;
+	
+	/** The activate service. */
 	ActivateService activateService;
+	
+	/** The forgot password. */
 	ForgotPassword forgotPassword;
+	
+	/** The json converter. */
 	JsonConverter jsonConverter;
+	
+	/** The make toll payments. */
 	MakeTollPayments makeTollPayments;
 	
+	/** The security check util. */
 	SecurityCheckUtil securityCheckUtil;
+	
+	/** The my util error handler. */
 	MyUtilErrorHandler myUtilErrorHandler;
+	
+	/** The my util clean up. */
 	MyUtilCleanUp myUtilCleanUp;
 	
+	/**
+	 * Instantiates a new web service impl.
+	 */
 	public WebServiceImpl() {
 		 String[] paths = {
 	                "/spring/spring.xml", "/spring/dao.xml",
@@ -124,6 +183,13 @@ public class WebServiceImpl {
 	        makeTollPayments = (MakeTollPayments) ctx.getBean("service.tollpayments.makeTollPayments");
 	}
 
+	/**
+	 * Gets the account details response.
+	 *
+	 * @param securityKey the security key
+	 * @param httpHeader the http header
+	 * @return the account details response
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/AccountDetails")
@@ -147,6 +213,13 @@ public class WebServiceImpl {
 	}
 	
 	
+	/**
+	 * Gets the balance details.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the balance details
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/BalanceDetails")
@@ -166,6 +239,12 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the vehicle types list.
+	 *
+	 * @param securityKey the security key
+	 * @return the vehicle types list
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/VehicleTypeList")
@@ -188,6 +267,14 @@ public class WebServiceImpl {
 		}
 	}
 
+	/**
+	 * Post add balance.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @param httpHeader the http header
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/AddBalance")
@@ -210,6 +297,12 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the cc type list.
+	 *
+	 * @param securityKey the security key
+	 * @return the cc type list
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/CcTypeList")
@@ -229,6 +322,12 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the owner type list.
+	 *
+	 * @param securityKey the security key
+	 * @return the owner type list
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/OwnerTypeList")
@@ -249,6 +348,12 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the vML type list.
+	 *
+	 * @param securityKey the security key
+	 * @return the vML type list
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/VmlTypeList")
@@ -268,6 +373,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the balance info.
+	 *
+	 * @param securityKey the security key
+	 * @param httpHeader the http header
+	 * @return the balance info
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/BalanceInfo")
@@ -288,6 +400,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the toll details list.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the toll details list
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/TollDetailsList")
@@ -316,6 +435,12 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the service plans.
+	 *
+	 * @param securityKey the security key
+	 * @return the service plans
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/ServicePlansList")
@@ -336,6 +461,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Post periodic heart beat.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/PeriodicHeartBeat")
@@ -358,6 +490,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Post heart beat.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/HeartBeat")
@@ -379,6 +518,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the nearest toll.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the nearest toll
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/NearestToll")
@@ -400,6 +546,14 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Post payment details.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @param httpHeader the http header
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/PaymentDetails")
@@ -423,6 +577,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the client configuration.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the client configuration
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/public/ClientConfiguration")
@@ -444,6 +605,15 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Post vehicle details.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @param isNewVehicle the is new vehicle
+	 * @param httpHeader the http header
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/VehicleDetails")
@@ -467,6 +637,14 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Delete vehicle details.
+	 *
+	 * @param securityKey the security key
+	 * @param vehicleId the vehicle id
+	 * @param httpHeader the http header
+	 * @return the string
+	 */
 	@DELETE
 	@Produces("text/plain")
 	@Path("/secure/VehicleDetails")
@@ -487,6 +665,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Register user.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/public/UserRegistration")
@@ -508,6 +693,14 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Register device.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @param servletRequest the servlet request
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/public/DeviceRegistration")
@@ -534,6 +727,13 @@ public class WebServiceImpl {
 		}
 	}
 
+	/**
+	 * Login user.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/public/Login")
@@ -556,6 +756,14 @@ public class WebServiceImpl {
 		}
 	}
 
+	/**
+	 * Change password.
+	 *
+	 * @param securityKey the security key
+	 * @param password the password
+	 * @param httpHeader the http header
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/ChangePassword")
@@ -577,6 +785,14 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Activate.
+	 *
+	 * @param securityKey the security key
+	 * @param json the json
+	 * @param httpHeader the http header
+	 * @return the string
+	 */
 	@POST
 	@Produces("text/plain")
 	@Path("/secure/Activate")
@@ -599,6 +815,13 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Gets the make and model.
+	 *
+	 * @param securityKey the security key
+	 * @param httpHeader the http header
+	 * @return the make and model
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/secure/MakeAndModel")
@@ -619,6 +842,12 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Forgot password.
+	 *
+	 * @param username the username
+	 * @return the string
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/public/ForgotPassword")
@@ -634,6 +863,11 @@ public class WebServiceImpl {
 		}
 	}
 	
+	/**
+	 * Make toll payments.
+	 *
+	 * @return the string
+	 */
 	@GET
 	@Produces("text/plain")
 	@Path("/public/MakeTollPayments")
@@ -648,219 +882,493 @@ public class WebServiceImpl {
 			myUtilCleanUp.cleanUp();
 		}
 	}
+	
+	/**
+	 * Gets the vehicle type list service.
+	 *
+	 * @return the vehicle type list service
+	 */
 	public VehicleTypeListService getVehicleTypeListService() {
 		return vehicleTypeListService;
 	}
 
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
 
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
 
+	/**
+	 * Sets the vehicle type list service.
+	 *
+	 * @param vehicleTypeListService the new vehicle type list service
+	 */
 	public void setVehicleTypeListService(
 			VehicleTypeListService vehicleTypeListService) {
 		this.vehicleTypeListService = vehicleTypeListService;
 	}
+	
+	/**
+	 * Gets the account details service.
+	 *
+	 * @return the account details service
+	 */
 	public AccountDetailsService getAccountDetailsService() {
 		return accountDetailsService;
 	}
 
+	/**
+	 * Sets the account details service.
+	 *
+	 * @param accountDetailsService the new account details service
+	 */
 	public void setAccountDetailsService(AccountDetailsService accountDetailsService) {
 		this.accountDetailsService = accountDetailsService;
 	}
 
+	/**
+	 * Gets the adds the balance service.
+	 *
+	 * @return the adds the balance service
+	 */
 	public AddBalanceService getAddBalanceService() {
 		return addBalanceService;
 	}
 
+	/**
+	 * Sets the adds the balance service.
+	 *
+	 * @param addBalanceService the new adds the balance service
+	 */
 	public void setAddBalanceService(AddBalanceService addBalanceService) {
 		this.addBalanceService = addBalanceService;
 	}
 
+	/**
+	 * Gets the cc type list service.
+	 *
+	 * @return the cc type list service
+	 */
 	public CcTypeListService getCcTypeListService() {
 		return ccTypeListService;
 	}
 
+	/**
+	 * Sets the cc type list service.
+	 *
+	 * @param ccTypeListService the new cc type list service
+	 */
 	public void setCcTypeListService(CcTypeListService ccTypeListService) {
 		this.ccTypeListService = ccTypeListService;
 	}
 	
+	/**
+	 * Gets the owner type list service.
+	 *
+	 * @return the owner type list service
+	 */
 	public OwnerTypeListService getOwnerTypeListService() {
 		return ownerTypeListService;
 	}
 
+	/**
+	 * Sets the owner type list service.
+	 *
+	 * @param ownerTypeListService the new owner type list service
+	 */
 	public void setOwnerTypeListService(OwnerTypeListService ownerTypeListService) {
 		this.ownerTypeListService = ownerTypeListService;
 	}
 	
+	/**
+	 * Gets the vml type list service.
+	 *
+	 * @return the vml type list service
+	 */
 	public VmlTypeListService getVmlTypeListService() {
 		return vmlTypeListService;
 	}
 
+	/**
+	 * Sets the vml type list service.
+	 *
+	 * @param vmlTypeListService the new vml type list service
+	 */
 	public void setVmlTypeListService(VmlTypeListService vmlTypeListService) {
 		this.vmlTypeListService = vmlTypeListService;
 	}
 	
+	/**
+	 * Gets the balance info service.
+	 *
+	 * @return the balance info service
+	 */
 	public BalanceInfoService getBalanceInfoService() {
 		return balanceInfoService;
 	}
 
+	/**
+	 * Sets the balance info service.
+	 *
+	 * @param balanceInfo the new balance info service
+	 */
 	public void setBalanceInfoService(BalanceInfoService balanceInfo) {
 		this.balanceInfoService = balanceInfo;
 	}
+	
+	/**
+	 * Gets the toll details service.
+	 *
+	 * @return the toll details service
+	 */
 	public TollDetailsListService getTollDetailsService() {
 		return tollDetailsService;
 	}
 
+	/**
+	 * Sets the toll details service.
+	 *
+	 * @param tollDetailsService the new toll details service
+	 */
 	public void setTollDetailsService(TollDetailsListService tollDetailsService) {
 		this.tollDetailsService = tollDetailsService;
 	}
+	
+	/**
+	 * Gets the service plan service.
+	 *
+	 * @return the service plan service
+	 */
 	public ServicePlanService getServicePlanService() {
 		return servicePlanService;
 	}
 
+	/**
+	 * Sets the service plan service.
+	 *
+	 * @param servicePlanService the new service plan service
+	 */
 	public void setServicePlanService(ServicePlanService servicePlanService) {
 		this.servicePlanService = servicePlanService;
 	}
 
+	/**
+	 * Gets the periodic heart beat service.
+	 *
+	 * @return the periodic heart beat service
+	 */
 	public PeriodicHeartBeatService getPeriodicHeartBeatService() {
 		return periodicHeartBeatService;
 	}
 
+	/**
+	 * Sets the periodic heart beat service.
+	 *
+	 * @param periodicHeartBeatService the new periodic heart beat service
+	 */
 	public void setPeriodicHeartBeatService(
 			PeriodicHeartBeatService periodicHeartBeatService) {
 		this.periodicHeartBeatService = periodicHeartBeatService;
 	}
 
+	/**
+	 * Gets the heart beat service.
+	 *
+	 * @return the heart beat service
+	 */
 	public HeartBeatService getHeartBeatService() {
 		return heartBeatService;
 	}
 
+	/**
+	 * Sets the heart beat service.
+	 *
+	 * @param heartBeatService the new heart beat service
+	 */
 	public void setHeartBeatService(HeartBeatService heartBeatService) {
 		this.heartBeatService = heartBeatService;
 	}
 
+	/**
+	 * Gets the nearest toll service.
+	 *
+	 * @return the nearest toll service
+	 */
 	public NearestTollService getNearestTollService() {
 		return nearestTollService;
 	}
 
+	/**
+	 * Sets the nearest toll service.
+	 *
+	 * @param nearestTollService the new nearest toll service
+	 */
 	public void setNearestTollService(NearestTollService nearestTollService) {
 		this.nearestTollService = nearestTollService;
 	}
 
+	/**
+	 * Gets the payment details service.
+	 *
+	 * @return the payment details service
+	 */
 	public PaymentDetailsService getPaymentDetailsService() {
 		return paymentDetailsService;
 	}
 
+	/**
+	 * Sets the payment details service.
+	 *
+	 * @param paymentDetailsService the new payment details service
+	 */
 	public void setPaymentDetailsService(PaymentDetailsService paymentDetailsService) {
 		this.paymentDetailsService = paymentDetailsService;
 	}
 
+	/**
+	 * Gets the client configuration service.
+	 *
+	 * @return the client configuration service
+	 */
 	public ClientConfigurationService getClientConfigurationService() {
 		return clientConfigurationService;
 	}
 
+	/**
+	 * Sets the client configuration service.
+	 *
+	 * @param clientConfigurationService the new client configuration service
+	 */
 	public void setClientConfigurationService(
 			ClientConfigurationService clientConfigurationService) {
 		this.clientConfigurationService = clientConfigurationService;
 	}
 
+	/**
+	 * Gets the vehicle details service.
+	 *
+	 * @return the vehicle details service
+	 */
 	public VehicleDetailsService getVehicleDetailsService() {
 		return vehicleDetailsService;
 	}
 
+	/**
+	 * Sets the vehicle details service.
+	 *
+	 * @param vehicleDetailsService the new vehicle details service
+	 */
 	public void setVehicleDetailsService(VehicleDetailsService vehicleDetailsService) {
 		this.vehicleDetailsService = vehicleDetailsService;
 	}
 
+	/**
+	 * Gets the registration service.
+	 *
+	 * @return the registration service
+	 */
 	public RegistrationService getRegistrationService() {
 		return registrationService;
 	}
 
+	/**
+	 * Sets the registration service.
+	 *
+	 * @param registrationService the new registration service
+	 */
 	public void setRegistrationService(RegistrationService registrationService) {
 		this.registrationService = registrationService;
 	}
 
+	/**
+	 * Gets the device registration service.
+	 *
+	 * @return the device registration service
+	 */
 	public DeviceRegistrationService getDeviceRegistrationService() {
 		return deviceRegistrationService;
 	}
 
+	/**
+	 * Sets the device registration service.
+	 *
+	 * @param deviceRegistrationService the new device registration service
+	 */
 	public void setDeviceRegistrationService(
 			DeviceRegistrationService deviceRegistrationService) {
 		this.deviceRegistrationService = deviceRegistrationService;
 	}
 
+	/**
+	 * Gets the login service.
+	 *
+	 * @return the login service
+	 */
 	public LoginService getLoginService() {
 		return loginService;
 	}
 
+	/**
+	 * Sets the login service.
+	 *
+	 * @param loginService the new login service
+	 */
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
 	}
 
+	/**
+	 * Gets the change password service.
+	 *
+	 * @return the change password service
+	 */
 	public ChangePasswordService getChangePasswordService() {
 		return changePasswordService;
 	}
 
+	/**
+	 * Sets the change password service.
+	 *
+	 * @param changePasswordService the new change password service
+	 */
 	public void setChangePasswordService(ChangePasswordService changePasswordService) {
 		this.changePasswordService = changePasswordService;
 	}
 
+	/**
+	 * Gets the activate service.
+	 *
+	 * @return the activate service
+	 */
 	public ActivateService getActivateService() {
 		return activateService;
 	}
 
+	/**
+	 * Sets the activate service.
+	 *
+	 * @param activateService the new activate service
+	 */
 	public void setActivateService(ActivateService activateService) {
 		this.activateService = activateService;
 	}
 
+	/**
+	 * Gets the security check util.
+	 *
+	 * @return the security check util
+	 */
 	public SecurityCheckUtil getSecurityCheckUtil() {
 		return securityCheckUtil;
 	}
 
+	/**
+	 * Sets the security check util.
+	 *
+	 * @param securityCheckUtil the new security check util
+	 */
 	public void setSecurityCheckUtil(SecurityCheckUtil securityCheckUtil) {
 		this.securityCheckUtil = securityCheckUtil;
 	}
 
+	/**
+	 * Gets the make and model service.
+	 *
+	 * @return the make and model service
+	 */
 	public MakeAndModelService getMakeAndModelService() {
 		return makeAndModelService;
 	}
 
+	/**
+	 * Sets the make and model service.
+	 *
+	 * @param makeAndModelService the new make and model service
+	 */
 	public void setMakeAndModelService(MakeAndModelService makeAndModelService) {
 		this.makeAndModelService = makeAndModelService;
 	}
 
+	/**
+	 * Gets the my util error handler.
+	 *
+	 * @return the my util error handler
+	 */
 	public MyUtilErrorHandler getMyUtilErrorHandler() {
 		return myUtilErrorHandler;
 	}
 
+	/**
+	 * Sets the my util error handler.
+	 *
+	 * @param myUtilErrorHandler the new my util error handler
+	 */
 	public void setMyUtilErrorHandler(MyUtilErrorHandler myUtilErrorHandler) {
 		this.myUtilErrorHandler = myUtilErrorHandler;
 	}
 
+	/**
+	 * Gets the my util clean up.
+	 *
+	 * @return the my util clean up
+	 */
 	public MyUtilCleanUp getMyUtilCleanUp() {
 		return myUtilCleanUp;
 	}
 
+	/**
+	 * Sets the my util clean up.
+	 *
+	 * @param myUtilCleanUp the new my util clean up
+	 */
 	public void setMyUtilCleanUp(MyUtilCleanUp myUtilCleanUp) {
 		this.myUtilCleanUp = myUtilCleanUp;
 	}
 
+	/**
+	 * Gets the forgot password.
+	 *
+	 * @return the forgot password
+	 */
 	public ForgotPassword getForgotPassword() {
 		return forgotPassword;
 	}
 
+	/**
+	 * Sets the forgot password.
+	 *
+	 * @param forgotPassword the new forgot password
+	 */
 	public void setForgotPassword(ForgotPassword forgotPassword) {
 		this.forgotPassword = forgotPassword;
 	}
 
+	/**
+	 * Gets the make toll payments.
+	 *
+	 * @return the make toll payments
+	 */
 	public MakeTollPayments getMakeTollPayments() {
 		return makeTollPayments;
 	}
 
+	/**
+	 * Sets the make toll payments.
+	 *
+	 * @param makeTollPayments the new make toll payments
+	 */
 	public void setMakeTollPayments(MakeTollPayments makeTollPayments) {
 		this.makeTollPayments = makeTollPayments;
 	}

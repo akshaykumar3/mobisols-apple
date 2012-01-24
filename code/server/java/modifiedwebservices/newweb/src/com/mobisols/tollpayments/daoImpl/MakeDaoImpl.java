@@ -10,8 +10,15 @@ import com.mobisols.tollpayments.dao.MakeDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.Make;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MakeDaoImpl.
+ */
 public class MakeDaoImpl implements MakeDao {
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.MakeDao#getMake(java.lang.String)
+	 */
 	public Make getMake(String name){
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(Make.class);
@@ -19,6 +26,9 @@ public class MakeDaoImpl implements MakeDao {
 		return (Make) crit.uniqueResult();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.MakeDao#getMake()
+	 */
 	public List<Make> getMake(){
 		Session s =HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(Make.class);

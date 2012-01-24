@@ -18,21 +18,45 @@ import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 import com.mobisols.tollpayments.response.post.RegistrationResponse;
 import com.mobisols.tollpayments.service.RegistrationService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegistrationServiceImpl.
+ */
 public class RegistrationServiceImpl implements RegistrationService {
 
+	/** The user dao. */
 	private UserDao userDao;
+	
+	/** The device dao. */
 	private DeviceDao deviceDao;
+	
+	/** The user balance dao. */
 	private UserBalanceDao userBalanceDao;
+	
+	/** The user payment detail dao. */
 	private UserPaymentDetailDao userPaymentDetailDao;
+	
+	/** The my util date. */
 	private MyUtilDate myUtilDate;
+	
+	/** The json converter. */
 	private JsonConverter jsonConverter;
 	
+	/** The Constant PASSWORD_CORRECT_FALSE. */
 	public static final String PASSWORD_CORRECT_FALSE="N";
+	
+	/** The Constant PASSWORD_CORRECT_TRUE. */
 	public static final String PASSWORD_CORRECT_TRUE="Y";
 	
+	/** The Constant ANOTHER_USER_LOGGED_IN_TRUE. */
 	public static final String ANOTHER_USER_LOGGED_IN_TRUE="Y";
+	
+	/** The Constant ANOTHER_USER_LOGGED_IN_FALSE. */
 	public static final String ANOTHER_USER_LOGGED_IN_FALSE="N";
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.RegistrationService#createUser(java.lang.String, com.mobisols.tollpayments.request.post.RegistrationServiceRequest)
+	 */
 	public String createUser(String request,RegistrationServiceRequest r)
 	{
 		RegistrationResponse response=new RegistrationResponse();
@@ -116,40 +140,111 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return jsonConverter.getJSON(request, status,response);
 		}
 	}
+	
+	/**
+	 * Gets the user dao.
+	 *
+	 * @return the user dao
+	 */
 	public UserDao getUserDao() {
 		return userDao;
 	}
 	
+	/**
+	 * Sets the user dao.
+	 *
+	 * @param userDao the new user dao
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+	
+	/**
+	 * Gets the device dao.
+	 *
+	 * @return the device dao
+	 */
 	public DeviceDao getDeviceDao() {
 		return deviceDao;
 	}
+	
+	/**
+	 * Sets the device dao.
+	 *
+	 * @param deviceDao the new device dao
+	 */
 	public void setDeviceDao(DeviceDao deviceDao) {
 		this.deviceDao = deviceDao;
 	}
+	
+	/**
+	 * Gets the my util date.
+	 *
+	 * @return the my util date
+	 */
 	public MyUtilDate getMyUtilDate() {
 		return myUtilDate;
 	}
+	
+	/**
+	 * Sets the my util date.
+	 *
+	 * @param myUtilDate the new my util date
+	 */
 	public void setMyUtilDate(MyUtilDate myUtilDate) {
 		this.myUtilDate = myUtilDate;
 	}
+	
+	/**
+	 * Gets the user balance dao.
+	 *
+	 * @return the user balance dao
+	 */
 	public UserBalanceDao getUserBalanceDao() {
 		return userBalanceDao;
 	}
+	
+	/**
+	 * Sets the user balance dao.
+	 *
+	 * @param userBalanceDao the new user balance dao
+	 */
 	public void setUserBalanceDao(UserBalanceDao userBalanceDao) {
 		this.userBalanceDao = userBalanceDao;
 	}
+	
+	/**
+	 * Gets the user payment detail dao.
+	 *
+	 * @return the user payment detail dao
+	 */
 	public UserPaymentDetailDao getUserPaymentDetailDao() {
 		return userPaymentDetailDao;
 	}
+	
+	/**
+	 * Sets the user payment detail dao.
+	 *
+	 * @param userPaymentDetailDao the new user payment detail dao
+	 */
 	public void setUserPaymentDetailDao(UserPaymentDetailDao userPaymentDetailDao) {
 		this.userPaymentDetailDao = userPaymentDetailDao;
 	}
+	
+	/**
+	 * Gets the json converter.
+	 *
+	 * @return the json converter
+	 */
 	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
+	
+	/**
+	 * Sets the json converter.
+	 *
+	 * @param jsonConverter the new json converter
+	 */
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}

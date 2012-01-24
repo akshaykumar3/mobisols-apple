@@ -13,8 +13,15 @@ import com.mobisols.tollpayments.dao.ModelDao;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 import com.mobisols.tollpayments.model.Model;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelDaoImpl.
+ */
 public class ModelDaoImpl implements ModelDao {
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.ModelDao#getModel(int, java.lang.String)
+	 */
 	public Model getModel(int makeId,String name){
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(Model.class);
@@ -23,6 +30,9 @@ public class ModelDaoImpl implements ModelDao {
 		return (Model) crit.uniqueResult();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.ModelDao#getModel(java.lang.String, java.lang.String)
+	 */
 	public Model getModel(String make,String model){
 		Session s =HibernateSessionFactory.getSession();
 		String[] configFiles = new String[] { "/spring/dao.xml" };  

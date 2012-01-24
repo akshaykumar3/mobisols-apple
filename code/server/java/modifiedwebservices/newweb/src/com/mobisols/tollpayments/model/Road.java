@@ -2,6 +2,7 @@ package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
 
+// TODO: Auto-generated Javadoc
 /**
  * RoadId entity. @author MyEclipse Persistence Tools
  */
@@ -10,33 +11,79 @@ public class Road implements java.io.Serializable {
 
 	// Fields
 
+	/** The road id. */
 	private Integer roadId;
+	
+	/** The name. */
 	private String name;
+	
+	/** The type. */
 	private String type;
+	
+	/** The start location. */
 	private String startLocation;
+	
+	/** The end location. */
 	private String endLocation;
+	
+	/** The udf1. */
 	private String udf1;
+	
+	/** The udf2. */
 	private String udf2;
+	
+	/** The udf3. */
 	private String udf3;
+	
+	/** The udf4. */
 	private String udf4;
+	
+	/** The udf5. */
 	private String udf5;
+	
+	/** The flag1. */
 	private String flag1;
+	
+	/** The flag2. */
 	private String flag2;
+	
+	/** The flag3. */
 	private String flag3;
+	
+	/** The flag4. */
 	private String flag4;
+	
+	/** The flag5. */
 	private String flag5;
+	
+	/** The created on. */
 	private Timestamp createdOn;
+	
+	/** The last modified on. */
 	private Timestamp lastModifiedOn;
+	
+	/** The last modified by. */
 	private Integer lastModifiedBy;
+	
+	/** The client id. */
 	private Integer clientId;
 
 	// Constructors
 
-	/** default constructor */
+	/**
+	 * default constructor.
+	 */
 	public Road() {
 	}
 
-	/** minimal constructor */
+	/**
+	 * minimal constructor.
+	 *
+	 * @param roadId the road id
+	 * @param createdOn the created on
+	 * @param lastModifiedOn the last modified on
+	 * @param lastModifiedBy the last modified by
+	 */
 	public Road(Integer roadId, Timestamp createdOn,
 			Timestamp lastModifiedOn, Integer lastModifiedBy) {
 		this.roadId = roadId;
@@ -45,7 +92,29 @@ public class Road implements java.io.Serializable {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	/** full constructor */
+	/**
+	 * full constructor.
+	 *
+	 * @param roadId the road id
+	 * @param name the name
+	 * @param type the type
+	 * @param startLocation the start location
+	 * @param endLocation the end location
+	 * @param udf1 the udf1
+	 * @param udf2 the udf2
+	 * @param udf3 the udf3
+	 * @param udf4 the udf4
+	 * @param udf5 the udf5
+	 * @param flag1 the flag1
+	 * @param flag2 the flag2
+	 * @param flag3 the flag3
+	 * @param flag4 the flag4
+	 * @param flag5 the flag5
+	 * @param createdOn the created on
+	 * @param lastModifiedOn the last modified on
+	 * @param lastModifiedBy the last modified by
+	 * @param clientId the client id
+	 */
 	public Road(Integer roadId, String name, String type,
 			String startLocation, String endLocation, String udf1, String udf2,
 			String udf3, String udf4, String udf5, String flag1, String flag2,
@@ -74,158 +143,351 @@ public class Road implements java.io.Serializable {
 
 	// Property accessors
 
+	/**
+	 * Gets the road id.
+	 *
+	 * @return the road id
+	 */
 	public Integer getRoadId() {
 		return this.roadId;
 	}
 
+	/**
+	 * Sets the road id.
+	 *
+	 * @param roadId the new road id
+	 */
 	public void setRoadId(Integer roadId) {
 		this.roadId = roadId;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType() {
 		return this.type;
 	}
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/**
+	 * Gets the start location.
+	 *
+	 * @return the start location
+	 */
 	public String getStartLocation() {
 		return this.startLocation;
 	}
 
+	/**
+	 * Sets the start location.
+	 *
+	 * @param startLocation the new start location
+	 */
 	public void setStartLocation(String startLocation) {
 		this.startLocation = startLocation;
 	}
 
+	/**
+	 * Gets the end location.
+	 *
+	 * @return the end location
+	 */
 	public String getEndLocation() {
 		return this.endLocation;
 	}
 
+	/**
+	 * Sets the end location.
+	 *
+	 * @param endLocation the new end location
+	 */
 	public void setEndLocation(String endLocation) {
 		this.endLocation = endLocation;
 	}
 
+	/**
+	 * Gets the udf1.
+	 *
+	 * @return the udf1
+	 */
 	public String getUdf1() {
 		return this.udf1;
 	}
 
+	/**
+	 * Sets the udf1.
+	 *
+	 * @param udf1 the new udf1
+	 */
 	public void setUdf1(String udf1) {
 		this.udf1 = udf1;
 	}
 
+	/**
+	 * Gets the udf2.
+	 *
+	 * @return the udf2
+	 */
 	public String getUdf2() {
 		return this.udf2;
 	}
 
+	/**
+	 * Sets the udf2.
+	 *
+	 * @param udf2 the new udf2
+	 */
 	public void setUdf2(String udf2) {
 		this.udf2 = udf2;
 	}
 
+	/**
+	 * Gets the udf3.
+	 *
+	 * @return the udf3
+	 */
 	public String getUdf3() {
 		return this.udf3;
 	}
 
+	/**
+	 * Sets the udf3.
+	 *
+	 * @param udf3 the new udf3
+	 */
 	public void setUdf3(String udf3) {
 		this.udf3 = udf3;
 	}
 
+	/**
+	 * Gets the udf4.
+	 *
+	 * @return the udf4
+	 */
 	public String getUdf4() {
 		return this.udf4;
 	}
 
+	/**
+	 * Sets the udf4.
+	 *
+	 * @param udf4 the new udf4
+	 */
 	public void setUdf4(String udf4) {
 		this.udf4 = udf4;
 	}
 
+	/**
+	 * Gets the udf5.
+	 *
+	 * @return the udf5
+	 */
 	public String getUdf5() {
 		return this.udf5;
 	}
 
+	/**
+	 * Sets the udf5.
+	 *
+	 * @param udf5 the new udf5
+	 */
 	public void setUdf5(String udf5) {
 		this.udf5 = udf5;
 	}
 
+	/**
+	 * Gets the flag1.
+	 *
+	 * @return the flag1
+	 */
 	public String getFlag1() {
 		return this.flag1;
 	}
 
+	/**
+	 * Sets the flag1.
+	 *
+	 * @param flag1 the new flag1
+	 */
 	public void setFlag1(String flag1) {
 		this.flag1 = flag1;
 	}
 
+	/**
+	 * Gets the flag2.
+	 *
+	 * @return the flag2
+	 */
 	public String getFlag2() {
 		return this.flag2;
 	}
 
+	/**
+	 * Sets the flag2.
+	 *
+	 * @param flag2 the new flag2
+	 */
 	public void setFlag2(String flag2) {
 		this.flag2 = flag2;
 	}
 
+	/**
+	 * Gets the flag3.
+	 *
+	 * @return the flag3
+	 */
 	public String getFlag3() {
 		return this.flag3;
 	}
 
+	/**
+	 * Sets the flag3.
+	 *
+	 * @param flag3 the new flag3
+	 */
 	public void setFlag3(String flag3) {
 		this.flag3 = flag3;
 	}
 
+	/**
+	 * Gets the flag4.
+	 *
+	 * @return the flag4
+	 */
 	public String getFlag4() {
 		return this.flag4;
 	}
 
+	/**
+	 * Sets the flag4.
+	 *
+	 * @param flag4 the new flag4
+	 */
 	public void setFlag4(String flag4) {
 		this.flag4 = flag4;
 	}
 
+	/**
+	 * Gets the flag5.
+	 *
+	 * @return the flag5
+	 */
 	public String getFlag5() {
 		return this.flag5;
 	}
 
+	/**
+	 * Sets the flag5.
+	 *
+	 * @param flag5 the new flag5
+	 */
 	public void setFlag5(String flag5) {
 		this.flag5 = flag5;
 	}
 
+	/**
+	 * Gets the created on.
+	 *
+	 * @return the created on
+	 */
 	public Timestamp getCreatedOn() {
 		return this.createdOn;
 	}
 
+	/**
+	 * Sets the created on.
+	 *
+	 * @param createdOn the new created on
+	 */
 	public void setCreatedOn(Timestamp createdOn) {
 		this.createdOn = createdOn;
 	}
 
+	/**
+	 * Gets the last modified on.
+	 *
+	 * @return the last modified on
+	 */
 	public Timestamp getLastModifiedOn() {
 		return this.lastModifiedOn;
 	}
 
+	/**
+	 * Sets the last modified on.
+	 *
+	 * @param lastModifiedOn the new last modified on
+	 */
 	public void setLastModifiedOn(Timestamp lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
+	/**
+	 * Gets the last modified by.
+	 *
+	 * @return the last modified by
+	 */
 	public Integer getLastModifiedBy() {
 		return this.lastModifiedBy;
 	}
 
+	/**
+	 * Sets the last modified by.
+	 *
+	 * @param lastModifiedBy the new last modified by
+	 */
 	public void setLastModifiedBy(Integer lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
+	/**
+	 * Gets the client id.
+	 *
+	 * @return the client id
+	 */
 	public Integer getClientId() {
 		return this.clientId;
 	}
 
+	/**
+	 * Sets the client id.
+	 *
+	 * @param clientId the new client id
+	 */
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -303,6 +565,9 @@ public class Road implements java.io.Serializable {
 						.getClientId().equals(castOther.getClientId())));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		int result = 17;
 

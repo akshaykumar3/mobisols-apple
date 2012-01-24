@@ -2,6 +2,7 @@ package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
 
+// TODO: Auto-generated Javadoc
 /**
  * UserServiceId entity. @author MyEclipse Persistence Tools
  */
@@ -10,52 +11,126 @@ public class UserService implements java.io.Serializable {
 
 	// Fields
 
+	/** The user service id. */
 	private Integer userServiceId;
+	
+	/** The user id. */
 	private Integer userId;
+	
+	/** The service id. */
 	private Integer serviceId;
+	
+	/** The start date. */
 	private Timestamp startDate;
+	
+	/** The end date. */
 	private Timestamp endDate;
+	
+	/** The priority. */
 	private Integer priority;
+	
+	/** The udf1. */
 	private String udf1;
+	
+	/** The udf2. */
 	private String udf2;
+	
+	/** The udf3. */
 	private String udf3;
+	
+	/** The udf4. */
 	private String udf4;
+	
+	/** The udf5. */
 	private String udf5;
+	
+	/** The flag1. */
 	private String flag1;
+	
+	/** The flag2. */
 	private String flag2;
+	
+	/** The flag3. */
 	private String flag3;
+	
+	/** The flag4. */
 	private String flag4;
+	
+	/** The flag5. */
 	private String flag5;
+	
+	/** The created on. */
 	private Timestamp createdOn;
+	
+	/** The last modified on. */
 	private Timestamp lastModifiedOn;
+	
+	/** The last modified by. */
 	private Integer lastModifiedBy;
+	
+	/** The client id. */
 	private Integer clientId;
+	
+	/** The service plan. */
 	private ServicePlan servicePlan;
+	
+	/** The user. */
 	private User user;
 
 	// Constructors
 
+	/**
+	 * Gets the service plan.
+	 *
+	 * @return the service plan
+	 */
 	public ServicePlan getServicePlan() {
 		return servicePlan;
 	}
 
+	/**
+	 * Sets the service plan.
+	 *
+	 * @param servicePlan the new service plan
+	 */
 	public void setServicePlan(ServicePlan servicePlan) {
 		this.servicePlan = servicePlan;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	public User getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param user the new user
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-	/** default constructor */
+	/**
+	 * default constructor.
+	 */
 	public UserService() {
 	}
 
-	/** minimal constructor */
+	/**
+	 * minimal constructor.
+	 *
+	 * @param userServiceId the user service id
+	 * @param startDate the start date
+	 * @param endDate the end date
+	 * @param createdOn the created on
+	 * @param lastModifiedOn the last modified on
+	 * @param lastModifiedBy the last modified by
+	 */
 	public UserService(Integer userServiceId, Timestamp startDate,
 			Timestamp endDate, Timestamp createdOn, Timestamp lastModifiedOn,
 			Integer lastModifiedBy) {
@@ -67,7 +142,30 @@ public class UserService implements java.io.Serializable {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	/** full constructor */
+	/**
+	 * full constructor.
+	 *
+	 * @param userServiceId the user service id
+	 * @param userId the user id
+	 * @param serviceId the service id
+	 * @param startDate the start date
+	 * @param endDate the end date
+	 * @param priority the priority
+	 * @param udf1 the udf1
+	 * @param udf2 the udf2
+	 * @param udf3 the udf3
+	 * @param udf4 the udf4
+	 * @param udf5 the udf5
+	 * @param flag1 the flag1
+	 * @param flag2 the flag2
+	 * @param flag3 the flag3
+	 * @param flag4 the flag4
+	 * @param flag5 the flag5
+	 * @param createdOn the created on
+	 * @param lastModifiedOn the last modified on
+	 * @param lastModifiedBy the last modified by
+	 * @param clientId the client id
+	 */
 	public UserService(Integer userServiceId, Integer userId,
 			Integer serviceId, Timestamp startDate, Timestamp endDate,
 			Integer priority, String udf1, String udf2, String udf3,
@@ -98,166 +196,369 @@ public class UserService implements java.io.Serializable {
 
 	// Property accessors
 
+	/**
+	 * Gets the user service id.
+	 *
+	 * @return the user service id
+	 */
 	public Integer getUserServiceId() {
 		return this.userServiceId;
 	}
 
+	/**
+	 * Sets the user service id.
+	 *
+	 * @param userServiceId the new user service id
+	 */
 	public void setUserServiceId(Integer userServiceId) {
 		this.userServiceId = userServiceId;
 	}
 
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
 	public Integer getUserId() {
 		return this.userId;
 	}
 
+	/**
+	 * Sets the user id.
+	 *
+	 * @param userId the new user id
+	 */
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
+	/**
+	 * Gets the service id.
+	 *
+	 * @return the service id
+	 */
 	public Integer getServiceId() {
 		return this.serviceId;
 	}
 
+	/**
+	 * Sets the service id.
+	 *
+	 * @param serviceId the new service id
+	 */
 	public void setServiceId(Integer serviceId) {
 		this.serviceId = serviceId;
 	}
 
+	/**
+	 * Gets the start date.
+	 *
+	 * @return the start date
+	 */
 	public Timestamp getStartDate() {
 		return this.startDate;
 	}
 
+	/**
+	 * Sets the start date.
+	 *
+	 * @param startDate the new start date
+	 */
 	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
+	/**
+	 * Gets the end date.
+	 *
+	 * @return the end date
+	 */
 	public Timestamp getEndDate() {
 		return this.endDate;
 	}
 
+	/**
+	 * Sets the end date.
+	 *
+	 * @param endDate the new end date
+	 */
 	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
 
+	/**
+	 * Gets the priority.
+	 *
+	 * @return the priority
+	 */
 	public Integer getPriority() {
 		return this.priority;
 	}
 
+	/**
+	 * Sets the priority.
+	 *
+	 * @param priority the new priority
+	 */
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
 
+	/**
+	 * Gets the udf1.
+	 *
+	 * @return the udf1
+	 */
 	public String getUdf1() {
 		return this.udf1;
 	}
 
+	/**
+	 * Sets the udf1.
+	 *
+	 * @param udf1 the new udf1
+	 */
 	public void setUdf1(String udf1) {
 		this.udf1 = udf1;
 	}
 
+	/**
+	 * Gets the udf2.
+	 *
+	 * @return the udf2
+	 */
 	public String getUdf2() {
 		return this.udf2;
 	}
 
+	/**
+	 * Sets the udf2.
+	 *
+	 * @param udf2 the new udf2
+	 */
 	public void setUdf2(String udf2) {
 		this.udf2 = udf2;
 	}
 
+	/**
+	 * Gets the udf3.
+	 *
+	 * @return the udf3
+	 */
 	public String getUdf3() {
 		return this.udf3;
 	}
 
+	/**
+	 * Sets the udf3.
+	 *
+	 * @param udf3 the new udf3
+	 */
 	public void setUdf3(String udf3) {
 		this.udf3 = udf3;
 	}
 
+	/**
+	 * Gets the udf4.
+	 *
+	 * @return the udf4
+	 */
 	public String getUdf4() {
 		return this.udf4;
 	}
 
+	/**
+	 * Sets the udf4.
+	 *
+	 * @param udf4 the new udf4
+	 */
 	public void setUdf4(String udf4) {
 		this.udf4 = udf4;
 	}
 
+	/**
+	 * Gets the udf5.
+	 *
+	 * @return the udf5
+	 */
 	public String getUdf5() {
 		return this.udf5;
 	}
 
+	/**
+	 * Sets the udf5.
+	 *
+	 * @param udf5 the new udf5
+	 */
 	public void setUdf5(String udf5) {
 		this.udf5 = udf5;
 	}
 
+	/**
+	 * Gets the flag1.
+	 *
+	 * @return the flag1
+	 */
 	public String getFlag1() {
 		return this.flag1;
 	}
 
+	/**
+	 * Sets the flag1.
+	 *
+	 * @param flag1 the new flag1
+	 */
 	public void setFlag1(String flag1) {
 		this.flag1 = flag1;
 	}
 
+	/**
+	 * Gets the flag2.
+	 *
+	 * @return the flag2
+	 */
 	public String getFlag2() {
 		return this.flag2;
 	}
 
+	/**
+	 * Sets the flag2.
+	 *
+	 * @param flag2 the new flag2
+	 */
 	public void setFlag2(String flag2) {
 		this.flag2 = flag2;
 	}
 
+	/**
+	 * Gets the flag3.
+	 *
+	 * @return the flag3
+	 */
 	public String getFlag3() {
 		return this.flag3;
 	}
 
+	/**
+	 * Sets the flag3.
+	 *
+	 * @param flag3 the new flag3
+	 */
 	public void setFlag3(String flag3) {
 		this.flag3 = flag3;
 	}
 
+	/**
+	 * Gets the flag4.
+	 *
+	 * @return the flag4
+	 */
 	public String getFlag4() {
 		return this.flag4;
 	}
 
+	/**
+	 * Sets the flag4.
+	 *
+	 * @param flag4 the new flag4
+	 */
 	public void setFlag4(String flag4) {
 		this.flag4 = flag4;
 	}
 
+	/**
+	 * Gets the flag5.
+	 *
+	 * @return the flag5
+	 */
 	public String getFlag5() {
 		return this.flag5;
 	}
 
+	/**
+	 * Sets the flag5.
+	 *
+	 * @param flag5 the new flag5
+	 */
 	public void setFlag5(String flag5) {
 		this.flag5 = flag5;
 	}
 
+	/**
+	 * Gets the created on.
+	 *
+	 * @return the created on
+	 */
 	public Timestamp getCreatedOn() {
 		return this.createdOn;
 	}
 
+	/**
+	 * Sets the created on.
+	 *
+	 * @param createdOn the new created on
+	 */
 	public void setCreatedOn(Timestamp createdOn) {
 		this.createdOn = createdOn;
 	}
 
+	/**
+	 * Gets the last modified on.
+	 *
+	 * @return the last modified on
+	 */
 	public Timestamp getLastModifiedOn() {
 		return this.lastModifiedOn;
 	}
 
+	/**
+	 * Sets the last modified on.
+	 *
+	 * @param lastModifiedOn the new last modified on
+	 */
 	public void setLastModifiedOn(Timestamp lastModifiedOn) {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
+	/**
+	 * Gets the last modified by.
+	 *
+	 * @return the last modified by
+	 */
 	public Integer getLastModifiedBy() {
 		return this.lastModifiedBy;
 	}
 
+	/**
+	 * Sets the last modified by.
+	 *
+	 * @param lastModifiedBy the new last modified by
+	 */
 	public void setLastModifiedBy(Integer lastModifiedBy) {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
+	/**
+	 * Gets the client id.
+	 *
+	 * @return the client id
+	 */
 	public Integer getClientId() {
 		return this.clientId;
 	}
 
+	/**
+	 * Sets the client id.
+	 *
+	 * @param clientId the new client id
+	 */
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -339,6 +640,9 @@ public class UserService implements java.io.Serializable {
 						.getClientId().equals(castOther.getClientId())));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	public int hashCode() {
 		int result = 17;
 
