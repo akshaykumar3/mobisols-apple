@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2012 at 05:48 PM
+-- Generation Time: Jan 26, 2012 at 02:37 PM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `configuration_all` (
   PRIMARY KEY (`config_id`),
   KEY `fk_c_cv` (`comp_version_id`),
   KEY `fk_mod_by_config_all` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `configuration_all`
@@ -356,7 +356,20 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 (25, 1, 'min_trans_amount', '10.0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
 (26, 1, 'min_balance', '10.0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
 (27, 1, 'default_heart_beat_time', '600000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
-(28, 1, 'default_heart_beat_distance', '200', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1);
+(28, 1, 'default_heart_beat_distance', '200', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-22 23:06:59', '2012-01-22 23:07:02', -1),
+(29, 1, 'import_pending', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:31:54', '2012-01-23 20:31:57', -1),
+(30, 1, 'import_inprogress', 'I', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:31:54', '2012-01-23 20:31:57', -1),
+(31, 1, 'import_error', 'E', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:31:54', '2012-01-23 20:31:57', -1),
+(32, 1, 'import_hold', 'H', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:31:54', '2012-01-23 20:31:57', -1),
+(33, 1, 'import_partial', 'R', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:31:54', '2012-01-23 20:31:57', -1),
+(34, 1, 'texas_import_type', 'texas import', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
+(35, 1, 'import_batch_pending', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
+(36, 1, 'import_batch_hold', 'H', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
+(37, 1, 'import_batch_inprogress', 'I', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
+(38, 1, 'import_batch_error', 'E', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
+(39, 1, 'import_batch_progress', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
+(40, 1, 'import_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1),
+(41, 1, 'import_batch_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1);
 
 -- --------------------------------------------------------
 
@@ -419,7 +432,7 @@ CREATE TABLE IF NOT EXISTS `device_all` (
   KEY `fk_device_user` (`user_id`),
   KEY `fk_device_client` (`client_id`),
   KEY `fk_lastmod_device` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `device_all`
@@ -455,7 +468,8 @@ INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, 
 (31, 3, '127.0.0.12012-01-04 19:54:55.59', 'desktop', 'N', '2012-01-04 19:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:54:55', '2012-01-04 19:54:55', -1, 1),
 (32, 1, '127.0.0.12012-01-07 20:02:03.894', 'desktop', 'N', '2012-01-07 20:02:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-07 20:02:03', '2012-01-07 20:02:03', -1, 1),
 (33, 1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-07 20:29:34', '2012-01-07 20:29:34', -1, 1),
-(34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 23:28:13', '2012-01-09 23:28:13', -1, 1);
+(34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 23:28:13', '2012-01-09 23:28:13', -1, 1),
+(35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 16:42:57', '2012-01-23 16:42:57', -1, 1);
 
 --
 -- Triggers `device_all`
@@ -575,7 +589,7 @@ CREATE TABLE IF NOT EXISTS `device_history_all` (
   `end_date` datetime DEFAULT NULL,
   `action` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`device_history_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `device_history_all`
@@ -636,7 +650,8 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 (52, 33, -1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:30:29', 'insert'),
 (53, 33, 1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:30:30', '3000-01-01 00:00:00', 'update'),
 (54, 34, -1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:24', 'insert'),
-(55, 34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:25', '3000-01-01 00:00:00', 'update');
+(55, 34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:25', '3000-01-01 00:00:00', 'update'),
+(56, 35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-23 16:42:57', '2012-01-23 16:42:57', '2012-01-23 16:42:57', '3000-01-01 00:00:00', 'insert');
 
 -- --------------------------------------------------------
 
@@ -1747,6 +1762,155 @@ CREATE TABLE IF NOT EXISTS `toll_price_history_all` (
 
 INSERT INTO `toll_price_history_all` (`tph_id`, `toll_price_id`, `toll_location_id`, `vehicle_type_id`, `direction`, `cost_price`, `selling_price`, `action`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `client_id`) VALUES
 (1, 1, 22, 3, NULL, '2.0000', '3.0000', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 22:21:42', '2012-01-09 22:21:40', -1, '2012-01-09 22:21:48', '3000-01-01 00:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tp_import`
+--
+DROP VIEW IF EXISTS `tp_import`;
+CREATE TABLE IF NOT EXISTS `tp_import` (
+`tp_import_id` int(11)
+,`batch_id` int(11)
+,`batch_record_number` int(11)
+,`fd1` varchar(1000)
+,`fd2` varchar(1000)
+,`fd3` varchar(1000)
+,`fd4` varchar(1000)
+,`fd5` varchar(1000)
+,`fd6` varchar(1000)
+,`fd7` varchar(1000)
+,`fd8` varchar(1000)
+,`fd9` varchar(1000)
+,`fd10` varchar(1000)
+,`status` varchar(100)
+,`message` varchar(1000)
+,`processed_on` datetime
+,`created_on` datetime
+,`last_modified_on` datetime
+,`last_modified_by` int(11)
+,`client_id` int(11)
+,`udf1` varchar(1000)
+,`udf2` varchar(1000)
+,`udf3` varchar(1000)
+,`udf4` varchar(1000)
+,`udf5` varchar(1000)
+,`falg1` varchar(1)
+,`flag2` varchar(1)
+,`flag3` varchar(1)
+,`flag4` varchar(1)
+,`flag5` varchar(1)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tp_import_all`
+--
+
+DROP TABLE IF EXISTS `tp_import_all`;
+CREATE TABLE IF NOT EXISTS `tp_import_all` (
+  `tp_import_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_id` int(11) NOT NULL,
+  `batch_record_number` int(11) NOT NULL,
+  `fd1` varchar(1000) DEFAULT NULL,
+  `fd2` varchar(1000) DEFAULT NULL,
+  `fd3` varchar(1000) DEFAULT NULL,
+  `fd4` varchar(1000) DEFAULT NULL,
+  `fd5` varchar(1000) DEFAULT NULL,
+  `fd6` varchar(1000) DEFAULT NULL,
+  `fd7` varchar(1000) DEFAULT NULL,
+  `fd8` varchar(1000) DEFAULT NULL,
+  `fd9` varchar(1000) DEFAULT NULL,
+  `fd10` varchar(1000) DEFAULT NULL,
+  `status` varchar(100) NOT NULL,
+  `message` varchar(1000) NOT NULL,
+  `processed_on` datetime DEFAULT NULL,
+  `created_on` datetime NOT NULL,
+  `last_modified_on` datetime NOT NULL,
+  `last_modified_by` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `udf1` varchar(1000) DEFAULT NULL,
+  `udf2` varchar(1000) DEFAULT NULL,
+  `udf3` varchar(1000) DEFAULT NULL,
+  `udf4` varchar(1000) DEFAULT NULL,
+  `udf5` varchar(1000) DEFAULT NULL,
+  `falg1` varchar(1) DEFAULT NULL,
+  `flag2` varchar(1) DEFAULT NULL,
+  `flag3` varchar(1) DEFAULT NULL,
+  `flag4` varchar(1) DEFAULT NULL,
+  `flag5` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`tp_import_id`),
+  KEY `tp_imp_bat` (`batch_id`),
+  KEY `tp_imp_lmb` (`last_modified_by`),
+  KEY `tp_imp_client` (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tp_import_all`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `tp_import_batch`
+--
+DROP VIEW IF EXISTS `tp_import_batch`;
+CREATE TABLE IF NOT EXISTS `tp_import_batch` (
+`tp_import_batch_id` int(11)
+,`batch_type` varchar(100)
+,`status` varchar(100)
+,`created_on` datetime
+,`processed_on` datetime
+,`last_modified_on` datetime
+,`last_modified_by` int(11)
+,`client_id` int(11)
+,`udf1` varchar(1000)
+,`udf2` varchar(1000)
+,`udf3` varchar(1000)
+,`udf4` varchar(1000)
+,`udf5` varchar(1000)
+,`falg1` varchar(1)
+,`flag2` varchar(1)
+,`flag3` varchar(1)
+,`flag4` varchar(1)
+,`flag5` varchar(1)
+);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tp_import_batch_all`
+--
+
+DROP TABLE IF EXISTS `tp_import_batch_all`;
+CREATE TABLE IF NOT EXISTS `tp_import_batch_all` (
+  `tp_import_batch_id` int(11) NOT NULL AUTO_INCREMENT,
+  `batch_type` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `processed_on` datetime DEFAULT NULL,
+  `last_modified_on` datetime NOT NULL,
+  `last_modified_by` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `udf1` varchar(1000) DEFAULT NULL,
+  `udf2` varchar(1000) DEFAULT NULL,
+  `udf3` varchar(1000) DEFAULT NULL,
+  `udf4` varchar(1000) DEFAULT NULL,
+  `udf5` varchar(1000) DEFAULT NULL,
+  `falg1` varchar(1) DEFAULT NULL,
+  `flag2` varchar(1) DEFAULT NULL,
+  `flag3` varchar(1) DEFAULT NULL,
+  `flag4` varchar(1) DEFAULT NULL,
+  `flag5` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`tp_import_batch_id`),
+  KEY `fk_tp_imp_bat_lmb` (`last_modified_by`),
+  KEY `fk_tp_imp_bat_client` (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `tp_import_batch_all`
+--
+
 
 -- --------------------------------------------------------
 
@@ -2944,7 +3108,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
 --
 
 INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES
-(1, 1, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 11:33:24', '2011-10-14 01:02:24', 1, 1, NULL, '', 0),
+(1, 1, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 11:33:24', '2011-10-14 01:02:24', 1, 1, 'abcdef', '', 0),
 (2, 1, '2011-10-30 22:53:30', '2012-01-01 00:00:00', 'Y', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, 1, NULL, 'blue', 2010),
 (3, 2, '2012-01-04 18:35:36', '2013-01-01 00:00:00', 'N', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 1, 1, NULL, '1234', 2010),
 (4, 3, '2012-01-04 19:55:40', '2013-01-01 00:00:00', 'T', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 1, 1, NULL, 'red', 2010);
@@ -3076,7 +3240,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `color` varchar(45) DEFAULT NULL,
   `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`uvh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=99 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `user_vehicle_history_all`
@@ -3176,8 +3340,9 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (94, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-09 22:39:05', '2012-01-10 20:00:21', 'update', 1, 1, NULL, 'blue', 2010),
 (95, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-09 22:39:06', '2012-01-10 20:00:21', 'update', 1, 1, NULL, '', 0),
 (96, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-10 20:00:22', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'blue', 2010),
-(97, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-10 20:00:22', '3000-01-01 00:00:00', 'update', 1, 1, NULL, '', 0),
-(98, 4, 3, 'T', '2012-01-04 19:55:40', '2013-01-01 00:00:00', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 3, '2012-01-20 09:53:02', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'red', 2010);
+(97, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-10 20:00:22', '2012-01-23 13:28:23', 'update', 1, 1, NULL, '', 0),
+(98, 4, 3, 'T', '2012-01-04 19:55:40', '2013-01-01 00:00:00', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 3, '2012-01-20 09:53:02', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'red', 2010),
+(99, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-23 13:28:24', '3000-01-01 00:00:00', 'update', 1, 1, 'abcdef', '', 0);
 
 -- --------------------------------------------------------
 
@@ -3741,6 +3906,24 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `tp_import`
+--
+DROP TABLE IF EXISTS `tp_import`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tp_import` AS select `tp_import_all`.`tp_import_id` AS `tp_import_id`,`tp_import_all`.`batch_id` AS `batch_id`,`tp_import_all`.`batch_record_number` AS `batch_record_number`,`tp_import_all`.`fd1` AS `fd1`,`tp_import_all`.`fd2` AS `fd2`,`tp_import_all`.`fd3` AS `fd3`,`tp_import_all`.`fd4` AS `fd4`,`tp_import_all`.`fd5` AS `fd5`,`tp_import_all`.`fd6` AS `fd6`,`tp_import_all`.`fd7` AS `fd7`,`tp_import_all`.`fd8` AS `fd8`,`tp_import_all`.`fd9` AS `fd9`,`tp_import_all`.`fd10` AS `fd10`,`tp_import_all`.`status` AS `status`,`tp_import_all`.`message` AS `message`,`tp_import_all`.`processed_on` AS `processed_on`,`tp_import_all`.`created_on` AS `created_on`,`tp_import_all`.`last_modified_on` AS `last_modified_on`,`tp_import_all`.`last_modified_by` AS `last_modified_by`,`tp_import_all`.`client_id` AS `client_id`,`tp_import_all`.`udf1` AS `udf1`,`tp_import_all`.`udf2` AS `udf2`,`tp_import_all`.`udf3` AS `udf3`,`tp_import_all`.`udf4` AS `udf4`,`tp_import_all`.`udf5` AS `udf5`,`tp_import_all`.`falg1` AS `falg1`,`tp_import_all`.`flag2` AS `flag2`,`tp_import_all`.`flag3` AS `flag3`,`tp_import_all`.`flag4` AS `flag4`,`tp_import_all`.`flag5` AS `flag5` from `tp_import_all` where (`tp_import_all`.`tp_import_id` > 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `tp_import_batch`
+--
+DROP TABLE IF EXISTS `tp_import_batch`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `tp_import_batch` AS select `tp_import_batch_all`.`tp_import_batch_id` AS `tp_import_batch_id`,`tp_import_batch_all`.`batch_type` AS `batch_type`,`tp_import_batch_all`.`status` AS `status`,`tp_import_batch_all`.`created_on` AS `created_on`,`tp_import_batch_all`.`processed_on` AS `processed_on`,`tp_import_batch_all`.`last_modified_on` AS `last_modified_on`,`tp_import_batch_all`.`last_modified_by` AS `last_modified_by`,`tp_import_batch_all`.`client_id` AS `client_id`,`tp_import_batch_all`.`udf1` AS `udf1`,`tp_import_batch_all`.`udf2` AS `udf2`,`tp_import_batch_all`.`udf3` AS `udf3`,`tp_import_batch_all`.`udf4` AS `udf4`,`tp_import_batch_all`.`udf5` AS `udf5`,`tp_import_batch_all`.`falg1` AS `falg1`,`tp_import_batch_all`.`flag2` AS `flag2`,`tp_import_batch_all`.`flag3` AS `flag3`,`tp_import_batch_all`.`flag4` AS `flag4`,`tp_import_batch_all`.`flag5` AS `flag5` from `tp_import_batch_all` where (`tp_import_batch_all`.`tp_import_batch_id` >= 0);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `user`
 --
 DROP TABLE IF EXISTS `user`;
@@ -4035,6 +4218,21 @@ ALTER TABLE `toll_price_all`
   ADD CONSTRAINT `fk_last_mod_by_tpa` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tp_tl` FOREIGN KEY (`toll_location_id`) REFERENCES `toll_location_all` (`toll_location_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tp_vt` FOREIGN KEY (`vehicle_type_id`) REFERENCES `vehicle_type_all` (`vehicle_type_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tp_import_all`
+--
+ALTER TABLE `tp_import_all`
+  ADD CONSTRAINT `tp_imp_bat` FOREIGN KEY (`batch_id`) REFERENCES `tp_import_batch_all` (`tp_import_batch_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tp_imp_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tp_imp_lmb` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `tp_import_batch_all`
+--
+ALTER TABLE `tp_import_batch_all`
+  ADD CONSTRAINT `fk_tp_imp_bat_client` FOREIGN KEY (`client_id`) REFERENCES `client_all` (`client_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tp_imp_bat_lmb` FOREIGN KEY (`last_modified_by`) REFERENCES `user_all` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `udf_data_all`
