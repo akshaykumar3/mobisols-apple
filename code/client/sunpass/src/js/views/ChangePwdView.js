@@ -1,6 +1,5 @@
 gtp.views.ChangePwdView = {
-	xtype: 'panel',
-	layout: 'vbox',
+	xtype: 'formpanel',
 	id: 'changepwd_view',
 	scroll: 'vertical',
 	dockedItems: [{
@@ -38,7 +37,7 @@ gtp.views.ChangePwdView = {
 		items: [{
 			xtype: 'button',
 			ui: 'confirm',
-			text: 'change',
+			text: 'Reset',
 			handler: function(dis, eve) {
 				var disform = gtp.tabpanel.getActiveItem().down('#changepwd_view');
 				var curpwd = disform.down('#chpwd_curpwd').getValue();
@@ -49,6 +48,9 @@ gtp.views.ChangePwdView = {
 				else if(newpwd != conpwd)
 					Ext.Msg.alert('Passwords do not match');
 				else {
+					gtp.tabpanel.setLoading({
+						msg: 'sending request..'
+					});
 					Ext.Ajax.request({
 						url: webServices.getAt(webServices.findExact('service','changepassword')).get('url'),
 						method: 'POST',
@@ -56,6 +58,7 @@ gtp.views.ChangePwdView = {
 							password: newpwd
 						},
 						success: function(res) {
+							gtp.tabpanel.setLoading(false);
 							var resobj = Ext.decode(res.responseText);
 							console.log(res.responseText);
 							if(resobj.status == 'success') {
@@ -82,11 +85,42 @@ gtp.views.ChangePwdView = {
 					      	gtp.parse(resobj.response.commands);
 						},
 						failure: function(res) {
+							gtp.tabpanel.setLoading(false);
 							Ext.Msg.alert('Error changing password');
 							gtp.log('Failure in changing password, error status '+res.status);
 						}
 					});
 				}
+			}
+		}]
+	},{
+		xtype: 'fieldset',
+		items: [{
+			xtype: 'button',
+			text: 'Forgot password',
+			handler: function(dis, ev) {
+				gtp.tabpanel.setLoading({
+					msg: 'sending request..'
+				});
+				Ext.Ajax.request({
+					url: webServices.getAt(webServices.findExact('service','changepassword')).get('url'),
+					method: 'POST',
+					params: {
+						username: gtp.utils.dataStore.getValueOfKey('username')
+					},
+					success: function(response) {
+						gtp.tabpanel.setLoading(false);
+						var resobj = Ext.decode(response.responseText);
+						if(resobj.status == 'success') {
+							// do something.
+						}
+				      	gtp.showNotifications(resobj.response.notifications);
+				      	gtp.parse(resobj.response.commands);
+					},
+					failure: function(res) {
+						gtp.tabpanel.setLoading(false);
+					}
+				});
 			}
 		}]
 	}],
