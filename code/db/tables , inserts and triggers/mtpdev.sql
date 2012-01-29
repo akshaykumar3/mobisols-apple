@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2012 at 02:37 PM
+-- Generation Time: Jan 29, 2012 at 06:30 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `configuration_all` (
   PRIMARY KEY (`config_id`),
   KEY `fk_c_cv` (`comp_version_id`),
   KEY `fk_mod_by_config_all` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `configuration_all`
@@ -369,7 +369,8 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 (38, 1, 'import_batch_error', 'E', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
 (39, 1, 'import_batch_progress', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
 (40, 1, 'import_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1),
-(41, 1, 'import_batch_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1);
+(41, 1, 'import_batch_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1),
+(42, 1, 'default_cc_type_id', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:24:16', '2012-01-28 13:24:19', -1);
 
 -- --------------------------------------------------------
 
@@ -432,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `device_all` (
   KEY `fk_device_user` (`user_id`),
   KEY `fk_device_client` (`client_id`),
   KEY `fk_lastmod_device` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `device_all`
@@ -469,7 +470,9 @@ INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, 
 (32, 1, '127.0.0.12012-01-07 20:02:03.894', 'desktop', 'N', '2012-01-07 20:02:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-07 20:02:03', '2012-01-07 20:02:03', -1, 1),
 (33, 1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-07 20:29:34', '2012-01-07 20:29:34', -1, 1),
 (34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 23:28:13', '2012-01-09 23:28:13', -1, 1),
-(35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 16:42:57', '2012-01-23 16:42:57', -1, 1);
+(35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 16:42:57', '2012-01-23 16:42:57', -1, 1),
+(36, 1, '127.0.0.12012-01-28 12:54:46.99', 'desktop', 'N', '2012-01-28 12:54:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 12:54:46', '2012-01-28 12:54:46', -1, 1),
+(37, 5, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:43:25', '2012-01-29 11:43:25', -1, 1);
 
 --
 -- Triggers `device_all`
@@ -589,7 +592,7 @@ CREATE TABLE IF NOT EXISTS `device_history_all` (
   `end_date` datetime DEFAULT NULL,
   `action` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`device_history_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
 -- Dumping data for table `device_history_all`
@@ -651,7 +654,11 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 (53, 33, 1, '127.0.0.12012-01-07 20:29:34.413', 'desktop', 'N', '2012-01-07 20:29:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-07 20:29:34', '2012-01-07 20:29:34', '2012-01-07 20:30:30', '3000-01-01 00:00:00', 'update'),
 (54, 34, -1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:24', 'insert'),
 (55, 34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-09 23:28:13', '2012-01-09 23:28:13', '2012-01-09 23:28:25', '3000-01-01 00:00:00', 'update'),
-(56, 35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-23 16:42:57', '2012-01-23 16:42:57', '2012-01-23 16:42:57', '3000-01-01 00:00:00', 'insert');
+(56, 35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-23 16:42:57', '2012-01-23 16:42:57', '2012-01-23 16:42:57', '3000-01-01 00:00:00', 'insert'),
+(57, 36, -1, '127.0.0.12012-01-28 12:54:46.99', 'desktop', 'N', '2012-01-28 12:54:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-28 12:54:46', '2012-01-28 12:54:46', '2012-01-28 12:54:47', '2012-01-28 12:55:18', 'insert'),
+(58, 36, 1, '127.0.0.12012-01-28 12:54:46.99', 'desktop', 'N', '2012-01-28 12:54:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-28 12:54:46', '2012-01-28 12:54:46', '2012-01-28 12:55:19', '3000-01-01 00:00:00', 'update'),
+(59, 37, -1, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:46:42', 'insert'),
+(60, 37, 5, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:46:43', '3000-01-01 00:00:00', 'update');
 
 -- --------------------------------------------------------
 
@@ -2014,7 +2021,7 @@ CREATE TABLE IF NOT EXISTS `user_all` (
   UNIQUE KEY `uk_user_name` (`user_name`,`client_id`),
   KEY `fk_utype_user` (`utype_id`),
   KEY `fk_client_id_user` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `user_all`
@@ -2022,10 +2029,11 @@ CREATE TABLE IF NOT EXISTS `user_all` (
 
 INSERT INTO `user_all` (`user_id`, `client_id`, `utype_id`, `user_name`, `password`, `locale`, `is_active`, `contact_no`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
 (-1, 1, 1, 'test', 'test', NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 21:20:18', '2011-10-12 21:20:21', -1),
-(1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'Y', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1),
+(1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'N', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1),
 (2, 1, 1, '1234567890', '1840', '', 'I', NULL, '2012-01-04 17:35:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1),
 (3, 1, 1, '9491617227', '2167', '', 'I', NULL, '2012-01-04 19:55:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1),
-(4, 1, 2, 'LA TollOperator', 'tolloperator', NULL, 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1);
+(4, 1, 2, 'LA TollOperator', 'tolloperator', NULL, 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1),
+(5, 1, 1, '4567891230', '5657', '', 'N', NULL, '2012-01-29 11:46:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1);
 
 --
 -- Triggers `user_all`
@@ -2128,7 +2136,7 @@ CREATE TABLE IF NOT EXISTS `user_balance_all` (
   KEY `fk_ubal_users` (`user_id`),
   KEY `fk_last_mod_by_uba` (`last_modified_by`),
   KEY `fk_client_ub` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `user_balance_all`
@@ -2139,7 +2147,8 @@ INSERT INTO `user_balance_all` (`ubal_id`, `user_id`, `balance`, `udf1`, `udf2`,
 (1, 1, '14.6000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
 (2, 2, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
 (3, 3, '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1),
-(4, 4, '50.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1);
+(4, 4, '50.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(5, 5, '10.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-29 11:46:42', '2012-01-29 11:46:42', 1);
 
 --
 -- Triggers `user_balance_all`
@@ -2233,7 +2242,7 @@ CREATE TABLE IF NOT EXISTS `user_balance_log_all` (
   KEY `fk_ublog_ubal` (`ubal_id`),
   KEY `fk_last_mod_by_ubla` (`last_modified_by`),
   KEY `fk_client_ubl` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
 
 --
 -- Dumping data for table `user_balance_log_all`
@@ -2303,7 +2312,9 @@ INSERT INTO `user_balance_log_all` (`ublog_id`, `ubal_id`, `delta`, `timestamp`,
 (60, 1, '10.0000', '2012-01-17 20:28:22', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
 (61, 1, '-3.0000', '2012-01-17 20:28:22', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
 (62, 1, '-3.0000', '2012-01-17 20:29:05', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2011-10-12 22:22:34', '2011-10-12 22:22:34', 1),
-(63, 4, '2.0000', '2012-01-17 20:29:05', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1);
+(63, 4, '2.0000', '2012-01-17 20:29:05', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:06:18', '2012-01-10 20:06:20', 1),
+(64, 5, '0.0000', '2012-01-29 11:46:42', 'new account created', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-29 11:46:42', '2012-01-29 11:46:42', 1),
+(65, 5, '10.0000', '2012-01-29 11:54:07', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-29 11:46:42', '2012-01-29 11:46:42', 1);
 
 -- --------------------------------------------------------
 
@@ -2374,7 +2385,7 @@ CREATE TABLE IF NOT EXISTS `user_history_all` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`user_his_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=66 ;
 
 --
 -- Dumping data for table `user_history_all`
@@ -2427,8 +2438,25 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 (44, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:38:00', '2012-01-07 20:38:17'),
 (45, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-07 20:38:18', '2012-01-09 22:39:05'),
 (46, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-09 22:39:06', '2012-01-10 20:00:21'),
-(47, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-10 20:00:22', '3000-01-01 00:00:00'),
-(48, 4, 'LA TollOperator', 'tolloperator', NULL, 2, NULL, 'Y', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1, '2012-01-10 20:05:26', '3000-01-01 00:00:00');
+(47, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-10 20:00:22', '2012-01-28 12:55:41'),
+(48, 4, 'LA TollOperator', 'tolloperator', NULL, 2, NULL, 'Y', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1, '2012-01-10 20:05:26', '3000-01-01 00:00:00'),
+(49, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 12:55:42', '2012-01-28 13:31:19'),
+(50, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:31:20', '2012-01-28 13:31:22'),
+(51, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:31:23', '2012-01-28 13:31:24'),
+(52, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:31:25', '2012-01-28 13:31:26'),
+(53, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:31:27', '2012-01-28 13:32:42'),
+(54, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:32:43', '2012-01-28 13:32:45'),
+(55, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:32:46', '3000-01-01 00:00:00'),
+(56, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:46:42', '2012-01-29 11:48:24'),
+(57, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:48:25', '2012-01-29 11:54:06'),
+(58, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:54:07', '2012-01-29 11:54:11'),
+(59, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:54:12', '2012-01-29 11:54:14'),
+(60, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:54:15', '2012-01-29 11:54:17'),
+(61, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:54:18', '2012-01-29 11:59:02'),
+(62, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:03', '2012-01-29 11:59:05'),
+(63, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:06', '2012-01-29 11:59:11'),
+(64, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:12', '2012-01-29 11:59:13'),
+(65, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:14', '3000-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -2714,7 +2742,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
   KEY `fk_last_mod_by_upda` (`last_modified_by`),
   KEY `fk_cctype_upd` (`cc_type_id`),
   KEY `fk_client_upd` (`client_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the billing details of the user' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='All the billing details of the user' AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `user_payment_detail_all`
@@ -2722,10 +2750,11 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_all` (
 
 INSERT INTO `user_payment_detail_all` (`upd_id`, `user_id`, `cc_type_id`, `cc_ac_name`, `cc_number`, `cc_exp_month`, `cc_exp_year`, `cc_cvv`, `bank_routing`, `bank_account`, `pay_prefer`, `address1`, `address2`, `city`, `state`, `country`, `zip`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`) VALUES
 (-1, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:07:03', '2012-01-10 20:07:06', 1),
-(1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'c', 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-10 19:52:39', '2011-10-12 22:22:34', 1),
+(1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'c', 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-28 13:26:20', '2011-10-12 22:22:34', 1),
 (2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 17:35:50', '2012-01-04 17:35:50', 1),
 (3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-04 19:55:03', '2012-01-04 19:55:03', 1),
-(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:07:46', '2012-01-10 20:07:48', 1);
+(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-10 20:07:46', '2012-01-10 20:07:48', 1),
+(5, 5, 1, 'raghu', '4154901099939071', 1, 2012, 0, NULL, NULL, 'c', 'asdfasgasg', NULL, 'dfjg;lds', 'CA', 'US', '90000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, '2012-01-29 11:48:25', '2012-01-29 11:46:42', 1);
 
 --
 -- Triggers `user_payment_detail_all`
@@ -2864,7 +2893,7 @@ CREATE TABLE IF NOT EXISTS `user_payment_detail_history_all` (
   `end_date` datetime NOT NULL,
   `client_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`updh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `user_payment_detail_history_all`
@@ -2886,10 +2915,13 @@ INSERT INTO `user_payment_detail_history_all` (`updh_id`, `upd_id`, `user_id`, `
 (12, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:28:49', 1, '2012-01-09 23:28:49', '2012-01-09 23:29:13', 1),
 (13, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-09 23:29:14', 1, '2012-01-09 23:29:14', '2012-01-10 19:52:38', 1),
 (14, 1, 1, 1, 'harish', '447746690240', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-10 19:52:39', 1, '2012-01-10 19:52:39', '2012-01-10 19:59:10', 1),
-(15, 1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-10 19:52:39', 1, '2012-01-10 19:59:11', '3000-01-01 00:00:00', 1),
+(15, 1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-10 19:52:39', 1, '2012-01-10 19:59:11', '2012-01-28 13:26:19', 1),
 (16, -1, -1, -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:06', '2012-01-10 20:07:03', -1, '2012-01-10 20:07:17', '3000-01-01 00:00:00', 1),
 (17, 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:48', '2012-01-10 20:07:46', -1, '2012-01-10 20:07:52', '2012-01-10 20:08:02', -1),
-(18, 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:48', '2012-01-10 20:07:46', -1, '2012-01-10 20:08:03', '3000-01-01 00:00:00', 1);
+(18, 4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'C', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:07:48', '2012-01-10 20:07:46', -1, '2012-01-10 20:08:03', '3000-01-01 00:00:00', 1),
+(19, 1, 1, 1, 'harish', '4154901099939071', 1, 2012, 0, NULL, NULL, 'asdfg', NULL, 'asfj;aj', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2012-01-28 13:26:20', 1, '2012-01-28 13:26:20', '3000-01-01 00:00:00', 1),
+(20, 5, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c', 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:46:42', '2012-01-29 11:48:24', 1),
+(21, 5, 5, 1, 'raghu', '4154901099939071', 1, 2012, 0, NULL, NULL, 'asdfasgasg', NULL, 'dfjg;lds', 'CA', 'US', '90000', 'c', 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:48:25', 5, '2012-01-29 11:48:25', '3000-01-01 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -3101,17 +3133,17 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
   KEY `fk_uv_co` (`owner_type_id`),
   KEY `fk_client_uv` (`client_id`),
   KEY `fk_model_uv` (`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `user_vehicle_all`
 --
 
 INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES
-(1, 1, '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'Y', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-05 11:33:24', '2011-10-14 01:02:24', 1, 1, 'abcdef', '', 0),
-(2, 1, '2011-10-30 22:53:30', '2012-01-01 00:00:00', 'Y', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, 1, NULL, 'blue', 2010),
 (3, 2, '2012-01-04 18:35:36', '2013-01-01 00:00:00', 'N', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 1, 1, NULL, '1234', 2010),
-(4, 3, '2012-01-04 19:55:40', '2013-01-01 00:00:00', 'T', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 1, 1, NULL, 'red', 2010);
+(4, 3, '2012-01-04 19:55:40', '2013-01-01 00:00:00', 'T', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 1, 1, NULL, 'red', 2010),
+(5, 1, '2012-01-28 13:29:48', NULL, 'T', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, 4, NULL, NULL, 2012),
+(7, 5, '2012-01-29 11:58:59', NULL, 'T', '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 1, 3, NULL, 'red', 2012);
 
 --
 -- Triggers `user_vehicle_all`
@@ -3240,7 +3272,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `color` varchar(45) DEFAULT NULL,
   `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`uvh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=123 ;
 
 --
 -- Dumping data for table `user_vehicle_history_all`
@@ -3339,10 +3371,33 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (93, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-07 20:38:18', '2012-01-09 22:39:05', 'update', 1, 1, NULL, '', 0),
 (94, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-09 22:39:05', '2012-01-10 20:00:21', 'update', 1, 1, NULL, 'blue', 2010),
 (95, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-09 22:39:06', '2012-01-10 20:00:21', 'update', 1, 1, NULL, '', 0),
-(96, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-10 20:00:22', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'blue', 2010),
+(96, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-10 20:00:22', '2012-01-28 12:55:37', 'update', 1, 1, NULL, 'blue', 2010),
 (97, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-10 20:00:22', '2012-01-23 13:28:23', 'update', 1, 1, NULL, '', 0),
 (98, 4, 3, 'T', '2012-01-04 19:55:40', '2013-01-01 00:00:00', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 3, '2012-01-20 09:53:02', '3000-01-01 00:00:00', 'update', 1, 1, NULL, 'red', 2010),
-(99, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-23 13:28:24', '3000-01-01 00:00:00', 'update', 1, 1, 'abcdef', '', 0);
+(99, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-23 13:28:24', '2012-01-28 12:55:31', 'update', 1, 1, 'abcdef', '', 0),
+(100, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2012-01-28 12:55:32', '2012-01-28 12:55:32', 'delete', 1, 1, 'abcdef', '', NULL),
+(101, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2012-01-28 12:55:38', '2012-01-28 12:55:38', 'delete', 1, 1, NULL, 'blue', NULL),
+(102, 5, 1, 'N', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:29:48', '2012-01-28 13:30:29', 'insert', 1, 4, NULL, NULL, 2012),
+(103, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:30:30', '2012-01-28 13:31:19', 'update', 1, 4, NULL, NULL, 2012),
+(104, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:31:20', '2012-01-28 13:31:22', 'update', 1, 4, NULL, NULL, 2012),
+(105, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:31:23', '2012-01-28 13:31:24', 'update', 1, 4, NULL, NULL, 2012),
+(106, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:31:25', '2012-01-28 13:31:26', 'update', 1, 4, NULL, NULL, 2012),
+(107, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:31:27', '2012-01-28 13:32:42', 'update', 1, 4, NULL, NULL, 2012),
+(108, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:32:43', '2012-01-28 13:32:45', 'update', 1, 4, NULL, NULL, 2012),
+(109, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:32:46', '3000-01-01 00:00:00', 'update', 1, 4, NULL, NULL, 2012),
+(110, 6, 5, 'N', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:47:24', '2012-01-29 11:49:49', 'insert', 1, 1, NULL, 'red', 2012),
+(111, 6, 5, 'I', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:49:50', '2012-01-29 11:52:48', 'update', 1, 1, NULL, 'red', 2012),
+(112, 6, 5, 'T', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:52:49', '2012-01-29 11:54:06', 'update', 1, 1, NULL, 'red', 2012),
+(113, 6, 5, 'Y', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:54:07', '2012-01-29 11:54:11', 'update', 1, 1, NULL, 'red', 2012),
+(114, 6, 5, 'T', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:54:12', '2012-01-29 11:54:14', 'update', 1, 1, NULL, 'red', 2012),
+(115, 6, 5, 'Y', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:54:15', '2012-01-29 11:54:16', 'update', 1, 1, NULL, 'red', 2012),
+(116, 6, 5, 'T', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:54:17', '2012-01-29 11:58:37', 'update', 1, 1, NULL, 'red', 2012),
+(117, 6, 5, 'T', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:58:38', '2012-01-29 11:58:38', 'delete', 1, 1, NULL, 'red', NULL),
+(118, 7, 5, 'T', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:58:59', '2012-01-29 11:59:02', 'insert', 1, 3, NULL, 'red', 2012),
+(119, 7, 5, 'Y', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:03', '2012-01-29 11:59:05', 'update', 1, 3, NULL, 'red', 2012),
+(120, 7, 5, 'T', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:06', '2012-01-29 11:59:11', 'update', 1, 3, NULL, 'red', 2012),
+(121, 7, 5, 'Y', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:12', '2012-01-29 11:59:13', 'update', 1, 3, NULL, 'red', 2012),
+(122, 7, 5, 'T', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:14', '3000-01-01 00:00:00', 'update', 1, 3, NULL, 'red', 2012);
 
 -- --------------------------------------------------------
 
