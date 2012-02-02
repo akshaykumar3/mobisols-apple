@@ -17,10 +17,10 @@ public interface TollLocationUtil {
 	public Location getNearestToll(Location p);
 	
 	/**
-	 * Gets the distance.
+	 * Gets the distance between two points.
 	 *
-	 * @param p1 the p1
-	 * @param p2 the p2
+	 * @param p1 the location 1.
+	 * @param p2 the location 2.
 	 * @return the distance
 	 */
 	public double getDistance(Location p1,Location p2);

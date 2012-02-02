@@ -11,9 +11,9 @@ import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.response.get.ClientConfigurationResponse;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClientConfigurationServiceImpl.
+ * 
  */
 public class ClientConfigurationServiceImpl implements
 		ClientConfigurationService {

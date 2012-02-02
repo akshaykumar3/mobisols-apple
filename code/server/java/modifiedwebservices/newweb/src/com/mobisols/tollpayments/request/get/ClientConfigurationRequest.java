@@ -1,6 +1,5 @@
 package com.mobisols.tollpayments.request.get;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClientConfigurationRequest.
  */

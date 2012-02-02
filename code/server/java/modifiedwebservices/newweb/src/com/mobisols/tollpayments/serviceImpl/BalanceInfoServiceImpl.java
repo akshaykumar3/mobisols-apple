@@ -12,7 +12,6 @@ import com.mobisols.tollpayments.response.get.BalanceInfoResponse;
 import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.service.BalanceInfoService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BalanceInfoServiceImpl.
  */

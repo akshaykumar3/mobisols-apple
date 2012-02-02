@@ -19,10 +19,10 @@ public class MyValidationUtil {
 	}
 	
 	/**
-	 * Checks if is valid cc.
+	 * Checks if is valid credit card number.
 	 *
-	 * @param number the number
-	 * @return true, if is valid cc
+	 * @param number the credit card number
+	 * @return true, if credit card is valid
 	 */
 	public static boolean isValidCC(String number) {
 		 

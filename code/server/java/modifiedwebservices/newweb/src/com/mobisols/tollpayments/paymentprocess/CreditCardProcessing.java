@@ -17,7 +17,7 @@ public class CreditCardProcessing {
 	public static String PAYMENT_ACTION_ADDBALANCE = "Sale";
 	
 	/**
-	 * Process.
+	 * Process .
 	 *
 	 * @param ccNumber the cc number
 	 * @param ccType the cc type

@@ -10,7 +10,6 @@ import com.mobisols.tollpayments.dao.CcTypeDao;
 import com.mobisols.tollpayments.model.CcType;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CcTypeDaoImpl.
  */
@@ -35,6 +34,17 @@ public class CcTypeDaoImpl implements CcTypeDao {
 		Criteria c =s.createCriteria(CcType.class);
 		c.add(Restrictions.eq("name", cardType));
 		return (Integer) c.uniqueResult();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.CcTypeDao#getCcTypeName(java.lang.Integer)
+	 */
+	@Override
+	public CcType getCcTypeName(Integer ccTypeId) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(CcType.class);
+		crit.add(Restrictions.eq("ccTypeId", ccTypeId));
+		return (CcType) crit.uniqueResult();
 	}
 
 }

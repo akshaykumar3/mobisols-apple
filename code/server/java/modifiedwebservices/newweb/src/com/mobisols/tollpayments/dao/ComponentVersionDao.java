@@ -2,7 +2,6 @@ package com.mobisols.tollpayments.dao;
 
 import com.mobisols.tollpayments.model.ComponentVersion;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ComponentVersionDao.
  * Used for access the data of component_version table.

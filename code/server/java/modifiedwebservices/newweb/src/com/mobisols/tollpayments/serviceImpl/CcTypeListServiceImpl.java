@@ -10,7 +10,6 @@ import com.mobisols.tollpayments.response.get.CcType;
 import com.mobisols.tollpayments.response.get.CcTypeListResponse;
 import com.mobisols.tollpayments.service.CcTypeListService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CcTypeListServiceImpl.
  */

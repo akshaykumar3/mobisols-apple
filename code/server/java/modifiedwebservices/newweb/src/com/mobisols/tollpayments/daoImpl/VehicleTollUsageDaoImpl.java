@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.daoImpl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -96,5 +97,18 @@ public class VehicleTollUsageDaoImpl implements VehicleTollUsageDao {
 		Transaction tx = s.beginTransaction();
 		s.saveOrUpdate(vt);
 		tx.commit();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.VehicleTollUsageDao#getTollUsage(int, java.sql.Timestamp, java.sql.Timestamp)
+	 */
+	@Override
+	public List<VehicleTollUsage> getTollUsage(int tollLocationId,
+			Timestamp fromDate, Timestamp toDate) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(VehicleTollUsage.class);
+		crit.add(Restrictions.eq("tollLocId", tollLocationId));
+		crit.add(Restrictions.between("timestamp", fromDate, toDate));
+		return crit.list();
 	}
 }

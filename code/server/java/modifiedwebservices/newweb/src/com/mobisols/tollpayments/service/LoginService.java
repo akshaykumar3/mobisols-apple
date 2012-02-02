@@ -7,6 +7,7 @@ import com.mobisols.tollpayments.request.post.LoginRequest;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface LoginService.
+ * Used to login .
  */
 public interface LoginService {
 	
@@ -17,11 +18,11 @@ public interface LoginService {
 	DeviceDao deviceDao=null;
 	
 	/**
-	 * Login.
+	 * Checks the username and password of the user and returns the reposne according to it.
 	 *
-	 * @param request the request
-	 * @param r the r
-	 * @return the string
+	 * @param request the name of webservice request from which the function is called.
+ 	 * @param r the Login rquest object that is received as json request parameter.
+	 * @return the json String similar to the object com.mobisols.tollpayments.response.post.LoginResponse.
 	 */
 	public String login(String request,LoginRequest r);
 }

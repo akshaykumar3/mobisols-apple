@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mobisols.tollpayments.model.TollLocation;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface TollLocationDao.
  * Used to access the toll_location table of the database.

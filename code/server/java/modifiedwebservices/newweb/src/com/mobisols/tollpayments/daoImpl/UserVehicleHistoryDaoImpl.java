@@ -95,4 +95,46 @@ public class UserVehicleHistoryDaoImpl implements UserVehicleHistoryDao {
 			return (UserVehicleHistory) l.get(0);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getDateAdded(java.lang.Integer)
+	 */
+	@Override
+	public Timestamp getDateAdded(Integer userVehicleId) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicleHistory.class);
+		crit.add(Restrictions.eq("userVehicleId", userVehicleId));
+		crit.add(Restrictions.eq("action","insert"));
+		UserVehicleHistory uvh = (UserVehicleHistory) crit.uniqueResult();
+		return uvh.getStartDate();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getDateDeleted(java.lang.Integer)
+	 */
+	@Override
+	public Timestamp getDateDeleted(Integer userVehicleId) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicleHistory.class);
+		crit.add(Restrictions.eq("userVehicleId", userVehicleId));
+		crit.add(Restrictions.eq("action", "delete"));
+		UserVehicleHistory uvh =  (UserVehicleHistory) crit.uniqueResult();
+		if(uvh!=null)
+			return uvh.getEndDate();
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserVehicleHistoryDao#getVehicleHistory(int, java.sql.Timestamp, java.sql.Timestamp)
+	 */
+	@Override
+	public List<UserVehicleHistory> getVehicleHistory(int vehicleId,
+			Timestamp fromDate, Timestamp toDate) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserVehicleHistory.class);
+		crit.add(Restrictions.eq("userVehicleId", vehicleId));
+		crit.add(Restrictions.ge("startDate", fromDate));
+		crit.add(Restrictions.le("endDate", toDate));
+		return crit.list();
+	}
+
 }

@@ -6,7 +6,6 @@ import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.response.GeneralResponse;
 import com.mobisols.tollpayments.service.ChangePasswordService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ChangePasswordServiceImpl.
  */

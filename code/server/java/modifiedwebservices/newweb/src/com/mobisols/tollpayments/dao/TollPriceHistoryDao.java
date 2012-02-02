@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mobisols.tollpayments.model.TollPriceHistory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface TollPriceHistoryDao.
  * Used to access the data of the toll_price_history table of the database.

@@ -26,8 +26,8 @@ public class SMSUtil {
 	/**
 	 * Send sms.
 	 *
-	 * @param phone the phone
-	 * @param body the body
+	 * @param phone the phone number
+	 * @param body the message
 	 */
 	public static void sendSMS(String phone,String body) {
 		 HttpClient httpclient = new HttpClient();

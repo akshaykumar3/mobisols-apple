@@ -3,9 +3,9 @@ package com.mobisols.tollpayments.service;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface AddBalanceService.
+ * Used to add balance to the user account
  */
 public interface AddBalanceService {
 	
@@ -13,12 +13,12 @@ public interface AddBalanceService {
 	UserDao userDao=null;
 	
 	/**
-	 * Postadd balance response.
+	 * adds balance response.
 	 *
-	 * @param request the request
-	 * @param ar the ar
+	 * @param request the webservice request from which the function is called.
+	 * @param ar the AddRequest object that is received as a json request parameter.
 	 * @param username the username
-	 * @return the string
+	 * @return the json string which is similar to  com.mobisols.tollpayments.response.GeneralResponse.
 	 */
-	public String postaddBalanceResponse(String request,AddBalanceRequest ar,String username);
+	public String addBalanceResponse(String request,AddBalanceRequest ar,String username);
 }

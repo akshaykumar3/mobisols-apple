@@ -54,4 +54,16 @@ public class ModelDaoImpl implements ModelDao {
 	    crit.add(Restrictions.eq("makeId", makeDao.getMake(make).getMakeId()));
 	    return (Model) crit.uniqueResult();
 	}
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.ModelDao#getModel(java.lang.Integer)
+	 */
+	@Override
+	public Model getModel(Integer modelId) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(Model.class);
+		crit.add(Restrictions.eq("modelId", modelId));
+		return (Model) crit.uniqueResult();
+		
+	}
 }

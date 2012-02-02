@@ -2,7 +2,6 @@ package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
 
-// TODO: Auto-generated Javadoc
 /**
  * ClientId entity. @author MyEclipse Persistence Tools
  */

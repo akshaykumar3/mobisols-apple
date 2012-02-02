@@ -74,7 +74,7 @@ public class ServerConfiguration extends MySingleTon {
 	}
 	
 	/**
-	 * Gets the value.
+	 * Gets the value of a key from server configuration.
 	 *
 	 * @param key the key
 	 * @return the value

@@ -2,7 +2,6 @@ package com.mobisols.tollpayments.dao;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ServicePlanDao.
  * Used to access the service plan table of the database.

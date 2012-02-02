@@ -3,7 +3,6 @@ package com.mobisols.tollpayments.response.get;
 import java.util.LinkedList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BalanceInfoResponse.
  */

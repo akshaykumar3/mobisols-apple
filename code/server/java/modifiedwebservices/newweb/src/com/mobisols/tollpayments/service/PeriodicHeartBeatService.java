@@ -12,6 +12,7 @@ import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface PeriodicHeartBeatService.
+ * Used to save the periodic heart beat.
  */
 public interface PeriodicHeartBeatService {
 	
@@ -37,11 +38,11 @@ public interface PeriodicHeartBeatService {
 	VmlTypeDao vmlTypeDao=null;
 	
 	/**
-	 * Save heart beat.
+	 * Saves the periodic heart beat to the server.
 	 *
 	 * @param request the request
-	 * @param hbr the hbr
-	 * @return the string
+	 * @param hbr theHeart Beat Request.
+	 * @return the json string similar to com.mobisols.tollpayments.reponse.post.HeartBeatResponse.
 	 */
 	public String saveHeartBeat(String request,HeartBeatRequest hbr);
 	

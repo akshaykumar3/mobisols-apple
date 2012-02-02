@@ -7,7 +7,6 @@ import com.mobisols.tollpayments.request.post.AddBalanceRequest;
 import com.mobisols.tollpayments.response.GeneralResponse;
 import com.mobisols.tollpayments.service.AddBalanceService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AddBalanceServiceImpl.
  */
@@ -22,7 +21,7 @@ public class AddBalanceServiceImpl implements AddBalanceService {
 	/* (non-Javadoc)
 	 * @see com.mobisols.tollpayments.service.AddBalanceService#postaddBalanceResponse(java.lang.String, com.mobisols.tollpayments.request.post.AddBalanceRequest, java.lang.String)
 	 */
-	public String postaddBalanceResponse(String request,AddBalanceRequest ar,String username)
+	public String addBalanceResponse(String request,AddBalanceRequest ar,String username)
 	{
 		GeneralResponse gr=new GeneralResponse();
 		String status="success";

@@ -1,7 +1,11 @@
+/**
+ * 
+ */
 package com.mobisols.tollpayments.myutils;
 
 /**
- * The Interface MyUtilContext.
+ * @author Raghu
+ *
  */
 public interface MyUtilContext {
 
