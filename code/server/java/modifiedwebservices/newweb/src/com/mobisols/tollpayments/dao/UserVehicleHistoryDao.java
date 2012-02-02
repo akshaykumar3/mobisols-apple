@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.dao;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -55,4 +56,18 @@ public interface UserVehicleHistoryDao {
 	 * @return the UserVehicleHistory object.
 	 */
 	public UserVehicleHistory getUvh(String plate, String state, Date date);
+
+	/**
+	 * @param userVehicleId
+	 * @return
+	 */
+	public Timestamp getDateAdded(Integer userVehicleId);
+
+	/**
+	 * @param userVehicleId
+	 * @return
+	 */
+	public Timestamp getDateDeleted(Integer userVehicleId);
+	
+	public List<UserVehicleHistory> getVehicleHistory(int vehicleId,Timestamp fromDate, Timestamp toDate);
 }

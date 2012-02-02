@@ -1,6 +1,5 @@
 package com.mobisols.tollpayments.dao;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface DeviceHistoryDao.
  * Used to access the data of the device History table.

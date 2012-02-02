@@ -22,6 +22,9 @@ import com.mobisols.tollpayments.myutils.SecurityCheckUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
+import com.mobisols.tollpayments.request.admin.PaymentDetailsHistoryRequest;
+import com.mobisols.tollpayments.request.admin.PaymentTransactionRequest;
+import com.mobisols.tollpayments.request.admin.VehicleHistoryDetailsRequest;
 import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.request.get.TollRange;
 import com.mobisols.tollpayments.request.post.ActivateRequest;
@@ -47,17 +50,20 @@ import com.mobisols.tollpayments.service.MakeAndModelService;
 import com.mobisols.tollpayments.service.MakeTollPayments;
 import com.mobisols.tollpayments.service.NearestTollService;
 import com.mobisols.tollpayments.service.OwnerTypeListService;
+import com.mobisols.tollpayments.service.PaymentDetailsHistory;
 import com.mobisols.tollpayments.service.PaymentDetailsService;
+import com.mobisols.tollpayments.service.PaymentTransactionService;
 import com.mobisols.tollpayments.service.PeriodicHeartBeatService;
 import com.mobisols.tollpayments.service.RegistrationService;
 import com.mobisols.tollpayments.service.ServicePlanService;
 import com.mobisols.tollpayments.service.TollDetailsListService;
+import com.mobisols.tollpayments.service.UserDetails;
 import com.mobisols.tollpayments.service.VehicleDetailsService;
+import com.mobisols.tollpayments.service.VehicleHistoryDetails;
 import com.mobisols.tollpayments.service.VehicleTypeListService;
 import com.mobisols.tollpayments.service.VmlTypeListService;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WebServiceImpl.
  */
@@ -136,6 +142,11 @@ public class WebServiceImpl {
 	/** The make toll payments. */
 	MakeTollPayments makeTollPayments;
 	
+	UserDetails userDetails;
+	VehicleHistoryDetails vehicleHistoryDetails;
+	PaymentDetailsHistory paymentDetailsHistory;
+	PaymentTransactionService paymentTransactionService;
+	
 	/** The security check util. */
 	SecurityCheckUtil securityCheckUtil;
 	
@@ -181,6 +192,10 @@ public class WebServiceImpl {
 	        myUtilErrorHandler = (MyUtilErrorHandler) ctx.getBean("myutils.tollpayments.myUtilErrorHandler");
 	        myUtilCleanUp = (MyUtilCleanUp) ctx.getBean("myutils.tollpayments.myUtilCleanUp");
 	        makeTollPayments = (MakeTollPayments) ctx.getBean("service.tollpayments.makeTollPayments");
+	        userDetails = (UserDetails) ctx.getBean("service.tollpayments.userDetails");
+	        vehicleHistoryDetails = (VehicleHistoryDetails) ctx.getBean("service.tollpayments.vehicleHistoryDetails");
+	        paymentDetailsHistory = (PaymentDetailsHistory) ctx.getBean("service.tollpayments.paymentDetailsHistory");
+	        paymentTransactionService = (PaymentTransactionService) ctx.getBean("service.tollpayments.paymentTransactionService");
 	}
 
 	/**
@@ -286,7 +301,7 @@ public class WebServiceImpl {
 		AddBalanceRequest ar= (AddBalanceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.AddBalanceRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return addBalanceService.postaddBalanceResponse(request,ar,username);
+			return addBalanceService.addBalanceResponse(request,ar,username);
 		else
 			return null;
 		}catch(Exception e){
@@ -804,7 +819,7 @@ public class WebServiceImpl {
 		ActivateRequest ar = (ActivateRequest) jsonConverter.getObject(json,"com.mobisols.tollpayments.request.post.ActivateRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return activateService.activate(request,ar, userName);
+			return activateService.activateOrDeactivate(request,ar, userName);
 		else
 			return null;
 		}catch(Exception e){
@@ -883,6 +898,64 @@ public class WebServiceImpl {
 		}
 	}
 	
+	@GET
+	@Produces("text/plain")
+	@Path("/admin/UserDetails")
+	public String getUserDetails(@QueryParam("username") String username){
+		String request = "get user details" ;
+		try{
+			return userDetails.getUserDetails(request, username);
+		}catch (Exception e) {
+			return myUtilErrorHandler.handleException(request, e);
+		}finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/admin/VehicleHistoryDetails")
+	public String getVehicleHistoryDetails(@QueryParam("json") String json){
+		String request = "Get Vehicle History Details";
+		try{
+			VehicleHistoryDetailsRequest vhdr = (VehicleHistoryDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.VehicleHistoryDetailsRequest");
+			return vehicleHistoryDetails.getVehicleHistory(request, vhdr);
+		}catch (Exception e) {
+			return myUtilErrorHandler.handleException(request, e);
+		}finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/admin/PaymentDetailsHistory")
+	public String getPaymentDetailsHistory(@QueryParam("josn") String json){
+		String request = "Get Payment Details History";
+		try{
+			PaymentDetailsHistoryRequest pdhr = (PaymentDetailsHistoryRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.PaymentDetailsHistoryRequest");
+			return paymentDetailsHistory.getPaymentDetailsHistory(request, pdhr);
+		}catch (Exception e) {
+			return myUtilErrorHandler.handleException(request, e);
+		}finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
+	
+	@GET
+	@Produces("text/plain")
+	@Path("/admin/PaymentTransactionsService")
+	public String getPaymentTransactions(@QueryParam("josn") String json){
+		String request = "Get Payment Details History";
+		try{
+			PaymentTransactionRequest ptr =  (PaymentTransactionRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.PaymentTransactionRequest");
+			return paymentTransactionService.getPaymentTransactions(request, ptr);
+		}catch (Exception e) {
+			return myUtilErrorHandler.handleException(request, e);
+		}finally{
+			myUtilCleanUp.cleanUp();
+		}
+	}
 	/**
 	 * Gets the vehicle type list service.
 	 *

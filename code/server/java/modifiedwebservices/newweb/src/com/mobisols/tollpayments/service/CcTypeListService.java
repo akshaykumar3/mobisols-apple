@@ -2,9 +2,9 @@ package com.mobisols.tollpayments.service;
 
 import com.mobisols.tollpayments.dao.CcTypeDao;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface CcTypeListService.
+ * Used to respond to the requests related to Credit Card type.
  */
 public interface CcTypeListService {
 	
@@ -12,10 +12,10 @@ public interface CcTypeListService {
 	CcTypeDao ccTypeDao=null;
 	
 	/**
-	 * Gets the cc type list.
+	 * Gets Credit Card type Lists.
 	 *
-	 * @param request the request
-	 * @return the cc type list
+	 * @param request the name of webservice request from which the function is called.
+ 	 * @return the json format of Credit Card Type list similar to the object com.mobisols.tollapyments.response.get.CcTypeListResponse.
 	 */
 	public String getCcTypeList(String request);
 

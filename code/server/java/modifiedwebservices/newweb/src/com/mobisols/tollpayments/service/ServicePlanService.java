@@ -5,6 +5,7 @@ import com.mobisols.tollpayments.dao.ServicePlanDao;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ServicePlanService.
+ * Used to respond to requests related to the services.
  */
 public interface ServicePlanService {
 
@@ -12,7 +13,7 @@ public interface ServicePlanService {
 	ServicePlanDao servicePlanDao=null;
 	
 	/**
-	 * Gets the service list.
+	 * Gets the service list that are available..
 	 *
 	 * @param request the request
 	 * @return the service list

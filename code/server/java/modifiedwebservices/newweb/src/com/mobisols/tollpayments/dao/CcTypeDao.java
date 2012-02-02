@@ -2,9 +2,9 @@ package com.mobisols.tollpayments.dao;
 
 import java.util.List;
 
+import com.mobisols.tollpayments.model.CcType;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface CcTypeDao.
  * Used for accessing the credit card type table.
@@ -28,4 +28,10 @@ public interface CcTypeDao {
 	 * @return the primary key of the card type.
 	 */
 	public Integer getCcTypeId(String cardType);
+
+	/**
+	 * @param ccTypeId
+	 * @return
+	 */
+	public CcType getCcTypeName(Integer ccTypeId);
 }

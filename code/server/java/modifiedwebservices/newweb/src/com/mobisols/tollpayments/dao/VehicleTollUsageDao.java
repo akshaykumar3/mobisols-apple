@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.mobisols.tollpayments.model.VehicleTollUsage;
@@ -55,4 +56,5 @@ public interface VehicleTollUsageDao {
 	 * @return the list of non paid toll usage.
 	 */
 	public List<VehicleTollUsage> getNonPaidTollUsage();
+	public List<VehicleTollUsage> getTollUsage(int tollLocationId,Timestamp fromDate,Timestamp toDate);
 }

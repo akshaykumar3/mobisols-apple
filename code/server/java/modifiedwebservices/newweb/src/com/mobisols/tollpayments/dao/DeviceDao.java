@@ -3,7 +3,6 @@ package com.mobisols.tollpayments.dao;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface DeviceDao.
  * Used to access the data of the Device table.

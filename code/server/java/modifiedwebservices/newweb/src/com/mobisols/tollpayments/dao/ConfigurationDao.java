@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mobisols.tollpayments.model.Configuration;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ConfigurationDao.
  * Used to access the data of the Configuration Table.

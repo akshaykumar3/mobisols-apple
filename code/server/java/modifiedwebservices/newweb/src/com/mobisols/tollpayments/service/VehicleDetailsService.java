@@ -10,6 +10,7 @@ import com.mobisols.tollpayments.request.post.VehicleDetailsRequest;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface VehicleDetailsService.
+ * Used to respond to the request related to the vehicle details.
  */
 public interface VehicleDetailsService {
 	
@@ -29,23 +30,23 @@ public interface VehicleDetailsService {
 	VehicleTypeDao vehicleTypeDao=null;
 	
 	/**
-	 * Post vehicle details.
+	 * Saves or Updates the user details to the user account.
 	 *
-	 * @param request the request
-	 * @param vdr the vdr
-	 * @param user the user
-	 * @param isNewVehicle the is new vehicle
-	 * @return the string
+	 * @param request the name of webservice request from which the function is called.
+	 * @param vdr the vehicle details request.
+	 * @param user the username 
+	 * @param isNewVehicle determines whether the vehicle is new vehicle or old vehicle that is for update. 
+	 * @return the json string similar to com.mobisols.tollpayments.response.GeneralResponse.
 	 */
 	public String postVehicleDetails(String request,VehicleDetailsRequest vdr,String user,String isNewVehicle);
 	
 	/**
-	 * Delete vehicle.
+	 * Deletes vehicle from the user account.
 	 *
-	 * @param request the request
-	 * @param vehicleId the vehicle id
-	 * @param user the user
-	 * @return the string
+	 * @param request the name of webservice request from which the function is called.
+	 * @param vehicleId the vehicle id of the vehicle that is to deleted.
+	 * @param user the username of the user.
+	 * @return the json string similar to com.mobisols.tollpayments.response.GeneralResponse.
 	 */
 	public String deleteVehicle(String request,int vehicleId,String user);
 }

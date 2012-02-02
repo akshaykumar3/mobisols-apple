@@ -1,13 +1,12 @@
 package com.mobisols.tollpayments.paymentprocess;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BankProcessing.
  */
 class BankProcessing {
 	
 	/**
-	 * Process.
+	 * Process a payment.
 	 *
 	 * @param acNumber the ac number
 	 * @param bankName the bank name

@@ -12,7 +12,7 @@ import com.sun.jersey.core.util.Base64;
 public class MyUtilContextImpl implements MyUtilContext {
 
 	/**
-	 * Gets the user name.
+	 * Gets the user name from the headers.
 	 *
 	 * @param header the header
 	 * @return the user name

@@ -2,7 +2,6 @@ package com.mobisols.tollpayments.dao;
 
 import com.mobisols.tollpayments.model.Model;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ModelDao.
  */
@@ -25,4 +24,10 @@ public interface ModelDao {
 	 * @return the model
 	 */
 	public Model getModel(String make,String model);
+
+	/**
+	 * @param modelId
+	 * @return
+	 */
+	public Model getModel(Integer modelId);
 }

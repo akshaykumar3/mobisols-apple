@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.daoImpl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -28,5 +29,19 @@ public class UserPaymentDetailHistoryDaoImpl implements UserPaymentDetailHistory
 		crit.addOrder(Order.desc("startDate"));
 		List<UserPaymentDetailHistory> l= crit.list();
 		return l.get(0).getUpdhId();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.dao.UserPaymentDetailHistoryDao#getPaymentHistory(java.lang.Integer, java.sql.Timestamp, java.sql.Timestamp)
+	 */
+	@Override
+	public List<UserPaymentDetailHistory> getPaymentHistory(Integer updId,
+			Timestamp startDate, Timestamp endDate) {
+		Session s = HibernateSessionFactory.getSession();
+		Criteria crit = s.createCriteria(UserPaymentDetailHistory.class);
+		crit.add(Restrictions.eq("updId", updId));
+		crit.add(Restrictions.ge("startDate", startDate));
+		crit.add(Restrictions.le("endDate", endDate));
+		return crit.list();
 	}
 }

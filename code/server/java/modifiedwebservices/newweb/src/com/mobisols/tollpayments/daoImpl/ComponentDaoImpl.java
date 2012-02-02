@@ -9,7 +9,6 @@ import com.mobisols.tollpayments.dao.ComponentDao;
 import com.mobisols.tollpayments.model.Component;
 import com.mobisols.tollpayments.model.HibernateSessionFactory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ComponentDaoImpl.
  */

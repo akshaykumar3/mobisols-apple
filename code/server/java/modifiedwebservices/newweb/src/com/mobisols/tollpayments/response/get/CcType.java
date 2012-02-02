@@ -1,6 +1,6 @@
 package com.mobisols.tollpayments.response.get;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class CcType.
  */

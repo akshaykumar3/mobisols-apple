@@ -143,13 +143,38 @@
     	<property name="userPaymentDetailHistoryDao" ref="dao.tollpayments.userPaymentDetailHistoryDao"></property>
     	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
     </bean>
-      <bean id="service.tollpayments.processImports" class="com.mobisols.tollpayments.serviceImpl.ProcessImportsImpl">
+    <bean id="service.tollpayments.processImports" class="com.mobisols.tollpayments.serviceImpl.ProcessImportsImpl">
     	<property name="vehicleTollUsageDao" ref="dao.tollpayments.vehicleTollUsageDao"></property>
     	<property name="userVehicleHistoryDao" ref="dao.tollpayments.userVehicleHistoryDao"></property>
     	<property name="tollLocationDao" ref="dao.tollpayments.tollLocationDao"></property>
     	<property name="tollPriceHistoryDao" ref="dao.tollpayments.tollPriceHistoryDao"></property>
     	<property name="tpImportBatchDao" ref="dao.tollpayments.tpImportBatchDao"></property>
     	<property name="tpImportDao" ref="dao.tollpayments.tpImportDao"></property>
+    	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+    </bean>
+    <bean id="service.tollpayments.userDetails" class="com.mobisols.tollpayments.serviceImpl.UserDetailsImpl">
+    	<property name="userVehicleHistoryDao" ref="dao.tollpayments.userVehicleHistoryDao"></property>
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="paymentTransactionDao" ref="dao.tollpayments.paymentTransactionDao"></property>
+    	<property name="myUtilDate" ref="myutils.tollpayments.myUtilDate"></property>
+    	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+    </bean>
+    <bean id="service.tollpayments.vehicleHistoryDetails" class="com.mobisols.tollpayments.serviceImpl.VehicleHistoryDetailsImpl">
+    	<property name="userVehicleHistoryDao" ref="dao.tollpayments.userVehicleHistoryDao"></property>
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="userVehicleDao" ref="dao.tollpayments.userVehicleDao"></property>
+    	<property name="modelDao" ref="dao.tollpayments.modelDao"></property>
+    	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+    </bean>
+     <bean id="service.tollpayments.paymentDetailsHistory" class="com.mobisols.tollpayments.serviceImpl.PaymentDetailsHistoryImpl">
+    	<property name="userPaymentDetailHistoryDao" ref="dao.tollpayments.userPaymentDetailHistoryDao"></property>
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
+    	<property name="ccTypeDao" ref="dao.tollpayments.ccTypeDao"></property>
+    	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+    </bean>
+    <bean id="service.tollpayments.paymentTransactionService" class="com.mobisols.tollpayments.serviceImpl.PaymentTransactionServiceImpl">
+    	<property name="paymentTransactionDao" ref="dao.tollpayments.paymentTransactionDao"></property>
+    	<property name="userDao" ref="dao.tollpayments.userDao"></property>
     	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
     </bean>
 </beans>

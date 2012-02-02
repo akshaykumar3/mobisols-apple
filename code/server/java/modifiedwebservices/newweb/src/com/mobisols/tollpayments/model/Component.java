@@ -3,7 +3,6 @@ package com.mobisols.tollpayments.model;
 import java.sql.Timestamp;
 import java.util.Set;
 
-// TODO: Auto-generated Javadoc
 /**
  * ComponentId entity. @author MyEclipse Persistence Tools
  */

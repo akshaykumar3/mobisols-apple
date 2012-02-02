@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mobisols.tollpayments.model.Make;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface MakeDao.
  * Used to access the data of the Make table.

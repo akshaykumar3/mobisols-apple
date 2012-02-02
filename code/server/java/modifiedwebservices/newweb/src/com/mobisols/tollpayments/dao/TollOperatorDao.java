@@ -3,7 +3,6 @@ package com.mobisols.tollpayments.dao;
 import com.mobisols.tollpayments.model.TollOperator;
 import com.mobisols.tollpayments.model.User;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface TollOperatorDao.
  * Used to access the data of the toll_operator table from the database.

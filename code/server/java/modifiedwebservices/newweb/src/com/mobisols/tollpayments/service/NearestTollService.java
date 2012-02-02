@@ -6,6 +6,7 @@ import com.mobisols.tollpayments.myutils.TollLocationUtil;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface NearestTollService.
+ * Used to find the Nearest Toll Location.
  */
 public interface NearestTollService {
 
@@ -16,12 +17,12 @@ public interface NearestTollService {
 	TollLocationDao tollLocationDao=null;
 	
 	/**
-	 * Gets the nearest toll.
+	 * Gets the nearest toll to the location that is recieved in request.. 
 	 *
-	 * @param request the request
-	 * @param lat the lat
-	 * @param longt the longt
-	 * @return the nearest toll
+	 * @param request the name of webservice request from which the function is called.
+	 * @param lat the latitude 
+	 * @param longt the longitude
+	 * @return the json String similar to the com.mobisols.tollpayments.response.get.NearestTollLocation.
 	 */
 	public String getNearestToll(String request,double lat,double longt);
 }

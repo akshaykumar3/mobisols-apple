@@ -1,6 +1,4 @@
 package com.mobisols.tollpayments.request.post;
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class ActivateRequest.
  */

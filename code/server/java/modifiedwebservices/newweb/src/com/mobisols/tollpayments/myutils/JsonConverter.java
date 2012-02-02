@@ -21,18 +21,18 @@ public interface JsonConverter {
 	/**
 	 * Converts the gicen object into json format by adding request version and status of response.
 	 *
-	 * @param request the request
-	 * @param status the status
-	 * @param o the o
-	 * @return the jSON
+	 * @param request the request that is to be attached along the required response.
+	 * @param status the status of the request that we got
+	 * @param o the object that is to converted to json and included as response.
+	 * @return the jSON String in the required format.
 	 */
 	String getJSON(String request, String status, Object o);
 	
 	/**
 	 * Gets the object.
 	 *
-	 * @param json the json
-	 * @param className the class name
+	 * @param json the json string that is to be converted to the object.
+	 * @param className the class name of the object to which the json is to be converted.
 	 * @return the object
 	 */
 	Object getObject(String json, String className);

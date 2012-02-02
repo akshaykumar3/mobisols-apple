@@ -15,16 +15,16 @@ import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
 import com.mobisols.tollpayments.response.post.CheckUserBalanceResponse;
 import com.mobisols.tollpayments.service.CheckUserBalance;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CheckUserBalanceImpl.
+ * 
  */
 public class CheckUserBalanceImpl implements CheckUserBalance {
 	
 	/** The Constant MIN_BALANCE. */
 	public static final double MIN_BALANCE=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("min_balance"));
 	
-	/** The Constant MIN_TRANS_AMOUNT. */
+	/** The Constant MIN_TRANS_AMOUNT is min amount that is to be transfered for every credit transaction. */
 	public static final Double MIN_TRANS_AMOUNT=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("min_trans_amount"));
 	
 	/** The status. */
@@ -42,11 +42,9 @@ public class CheckUserBalanceImpl implements CheckUserBalance {
 	/** The payment gateway. */
 	private PaymentGateway paymentGateway;
 	
-	/**
-	 * Check.
-	 *
-	 * @param users the users
-	 * @return the check user balance response
+	
+	/* (non-Javadoc)
+	 * @see com.mobisols.tollpayments.service.CheckUserBalance#check(java.util.List)
 	 */
 	public CheckUserBalanceResponse check(List<String> users)
 	{

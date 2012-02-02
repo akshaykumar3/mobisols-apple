@@ -8,6 +8,7 @@ import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface RegistrationService.
+ * Used to register a User.
  */
 public interface RegistrationService {
 	
@@ -21,11 +22,11 @@ public interface RegistrationService {
 	MyUtilDate myUtilDate=null;
 	
 	/**
-	 * Creates the user.
+	 * Creates the new user account with the recieved details..
 	 *
-	 * @param request the request
-	 * @param r the r
-	 * @return the string
+	 * @param request the name of webservice request from which the function is called.
+	 * @param r the Request received as json request parameter. 
+	 * @return the json string similar to com.mobisols.tollpayments.response.RegistrationServiceResponse.
 	 */
 	public String createUser(String request,RegistrationServiceRequest r);
 }

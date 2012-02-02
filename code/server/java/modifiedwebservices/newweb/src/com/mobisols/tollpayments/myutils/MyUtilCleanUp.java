@@ -7,7 +7,7 @@ package com.mobisols.tollpayments.myutils;
 public interface MyUtilCleanUp {
 	
 	/**
-	 * Clean up.
+	 * Used to clean the session.
 	 */
 	public void cleanUp();
 }

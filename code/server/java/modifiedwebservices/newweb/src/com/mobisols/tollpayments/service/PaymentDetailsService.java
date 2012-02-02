@@ -5,9 +5,9 @@ import com.mobisols.tollpayments.dao.UserPaymentDetailDao;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface PaymentDetailsService.
+ * Used to access the paymenst details of the user.
  */
 public interface PaymentDetailsService {
 
@@ -21,12 +21,12 @@ public interface PaymentDetailsService {
 	MyUtilDate myUtilDate=null;
 	
 	/**
-	 * Update.
+	 * Updates the payment details of the user received in the request.
 	 *
-	 * @param request the request
-	 * @param pdr the pdr
+	 * @param request the name of webservice request from which the function is called.
+	 * @param pdr the Payment Details request object
 	 * @param username the username
-	 * @return the string
+	 * @return the json string similar to com.mobisols.tollpaymenst.response.GeneralResponse.
 	 */
 	public String update(String request,PaymentDetailRequest pdr,String username);
 }

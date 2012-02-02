@@ -13,7 +13,7 @@ public interface MyUtilErrorHandler {
 	 * Handle exception.
 	 *
 	 * @param request the request
-	 * @param e the e
+	 * @param e the exception araised.
 	 * @return the string
 	 */
 	public String handleException(String request,Exception e);

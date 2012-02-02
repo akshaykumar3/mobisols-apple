@@ -18,7 +18,6 @@ import com.mobisols.tollpayments.request.post.ActivateRequest;
 import com.mobisols.tollpayments.response.post.ActivateResponse;
 import com.mobisols.tollpayments.service.ActivateService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ActivateServiceImpl.
  */
@@ -42,7 +41,7 @@ public class ActivateServiceImpl implements ActivateService {
 	/* (non-Javadoc)
 	 * @see com.mobisols.tollpayments.service.ActivateService#activate(java.lang.String, com.mobisols.tollpayments.request.post.ActivateRequest, java.lang.String)
 	 */
-	public String activate(String request,ActivateRequest ar,String userName){
+	public String activateOrDeactivate(String request,ActivateRequest ar,String userName){
 		ActivateResponse response = new ActivateResponse();
 		String status="success"; 
 		User u = userDao.getUser(userName);
@@ -144,7 +143,7 @@ public class ActivateServiceImpl implements ActivateService {
 		{
 			if(u.getIsActive().equals(UserDao.USER_ACTIVE))
 			{
-				List activeVehicles = userVehicleDao.getActiveVehicles(userName);
+				List<UserVehicle> activeVehicles = userVehicleDao.getActiveVehicles(userName);
 				for(Iterator<UserVehicle> it = activeVehicles.iterator();it.hasNext();)
 				{
 					UserVehicle uv = it.next();

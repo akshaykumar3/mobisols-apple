@@ -16,7 +16,6 @@ import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.response.get.VehicleDetails;
 import com.mobisols.tollpayments.service.AccountDetailsService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AccountDetailsServiceImpl.
  *

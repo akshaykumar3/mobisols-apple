@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mobisols.tollpayments.model.OwnerType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface OwnerTypeDao.
  * Used to access the data from the owner_type of the database.

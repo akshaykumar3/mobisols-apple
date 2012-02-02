@@ -1,5 +1,10 @@
 package com.mobisols.tollpayments.dao;
 
+import java.sql.Timestamp;
+import java.util.List;
+
+import com.mobisols.tollpayments.model.UserPaymentDetailHistory;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Interface UserPaymentDetailHistoryDao.
@@ -14,4 +19,13 @@ public interface UserPaymentDetailHistoryDao {
 	 * @return the latest user payment detail history id
 	 */
 	public int getLatestUserPaymentDetailHistoryId(int paymentDetailId);
+
+	/**
+	 * @param updId
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public List<UserPaymentDetailHistory> getPaymentHistory(Integer updId,
+			Timestamp startDate, Timestamp endDate);
 }

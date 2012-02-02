@@ -24,4 +24,5 @@ public interface UserBalanceDao {
 	 * @param u the u
 	 */
 	public void save(UserBalance u);
+	
 }

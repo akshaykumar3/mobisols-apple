@@ -18,7 +18,7 @@ public interface UserDao {
 	public static final String USER_INACTIVE = ServerConfiguration.getServerConfiguration().getValue("user_inactive");
 	
 	/** The Constant USER_INCOMPLETE. */
-	public static final String USER_INCOMPLETE = ServerConfiguration.getServerConfiguration().getValue("user_Incomplete");
+	public static final String USER_INCOMPLETE = ServerConfiguration.getServerConfiguration().getValue("user_incomplete");
 	
 	/** The Constant USER_SUSPEND. */
 	public static final String USER_SUSPEND = ServerConfiguration.getServerConfiguration().getValue("user_suspend");
