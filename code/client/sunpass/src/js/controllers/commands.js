@@ -53,10 +53,6 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 		});
 	},
 	
-	hearbeat: function(options) {
-		setTimeout("requestHeartBeat()", options.time * 1000); 
-	},
-	
 	killapp: function(options) {
 		gtp.tabpanel.destroy();
 		gtp.views.Viewport.show();
@@ -137,22 +133,22 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
 	}, 
 	
 	activate: function(options) {
+        var but = Ext.getCmp('home').down('#tfd');
+        but.setText('Deactivate');
+        but.getEl().removeCls('x-button-confirm');
+        but.getEl().addCls('x-button-decline');
 		if(window.plugins.ActivatePlugin) {
 			window.plugins.ActivatePlugin.activate();
-            var but = Ext.getCmp('home').down('#tfd');
-            but.setText('Deactivate');
-            but.getEl().removeCls('x-button-confirm');
-            but.getEl().addCls('x-button-decline');
 		}
 	},
 	
 	deactivate: function(options) {
+        var but = Ext.getCmp('home').down('#tfd');
+        but.setText('Activate');
+        but.getEl().removeCls('x-button-decline');
+        but.getEl().addCls('x-button-confirm');
 		if(window.plugins.ActivatePlugin) {
 			window.plugins.ActivatePlugin.deactivate();
-            var but = Ext.getCmp('home').down('#tfd');
-            but.setText('Activate');
-            but.getEl().removeCls('x-button-decline');
-            but.getEl().addCls('x-button-confirm');
 		}
 	},
 	

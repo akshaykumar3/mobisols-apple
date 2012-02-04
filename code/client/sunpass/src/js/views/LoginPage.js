@@ -1,33 +1,45 @@
 gtp.views.LoginPage = {
-	xtype: 'panel',
+	xtype: 'formpanel',
 	id: 'loginpage',
-	layout: {
-		type: 'vbox',
-		pack: 'center'
-	},
+	scroll: 'vertical',
+	dockedItems: [{
+		xtype: 'toolbar',
+		title: 'Toll Pass',
+		items: [{
+			xtype: 'spacer'
+		},{
+			id: 'regnu',
+			text: 'Register',
+			ui: 'forward',
+			handler: function(){
+				gtp.views.Viewport.setActiveItem('regpage', 'fade');
+			}
+		}]
+	}],
 	items: [{
-		html: 'PhoneNumber:'
+		html: '<img style="height: 114px; width: 114px;" align="middle" src="resources/images/mobisolsapplelogo.png" />'
 	},{
-		xtype: 'zipfield',
-		id: 'lpemailid',
-		placeHolder: 'Phone Number',
-		border: '10 5 3 10',
-		value: gtp.utils.dataStore.getValueOfKey('username')
+		xtype: 'fieldset',
+		title: 'Log into Toll Pass',
+		items: [{
+			xtype: 'zipfield',
+			id: 'lpemailid',
+			placeHolder: 'Phone Number',
+			border: '10 5 3 10',
+			value: gtp.utils.dataStore.getValueOfKey('username')
+		},{
+			xtype: 'zipfield',
+			id: 'lppassword',
+			placeHolder: 'Pin',
+			border: '10 5 3 10',
+			value: gtp.utils.dataStore.getValueOfKey('password')
+		}]
 	},{
-		html: 'password:',
-		align: 'left'
-	},{
-		xtype: 'zipfield',
-		id: 'lppassword',
-		placeHolder: 'Pin',
-		border: '10 5 3 10',
-		value: gtp.utils.dataStore.getValueOfKey('password')
-	},{
-		layout: 'hbox',
+		xtype: 'fieldset',
 		items: [{
 			xtype: 'button',
-			ui: 'round',
-			text: 'Sign in',
+			ui: 'action',
+			text: 'Login',
 			handler: function(button, event){
 				// Suppress keyboard from view.
 				Ext.get('rmKeyboard').dom.focus();
@@ -49,17 +61,9 @@ gtp.views.LoginPage = {
 			    keyup: function(fld, e){
 			        if (e.browserEvent.keyCode == 13) {
 			            e.stopEvent();
-			            fld.fieldEl.dom.blur()
+			            fld.fieldEl.dom.blur();
 			        }
 			    }
-			}
-		},{
-			xtype: 'button',
-			id: 'regnu',
-			text: 'Register',
-			ui: 'round',
-			handler: function(){
-				gtp.views.Viewport.setActiveItem('regpage', 'fade');
 			}
 		}]				
 	}]
