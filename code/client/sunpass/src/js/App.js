@@ -26,7 +26,6 @@ Ext.regApplication({
     	this.launchLoginPage();
     	if(!this.deviceRegistered) {
     		this.registerDevice();
-			gtp.views.Viewport.setLoading(true);
     	}
     	else {
     		gtp.deviceId = gtp.utils.dataStore.getValueOfKey('gtp-deviceID');
@@ -72,8 +71,7 @@ Ext.regApplication({
     		return false;
     },
     registerDevice: function(){
-    	// open the database check if the device id is present.
-    	// create the database 
+		gtp.views.Viewport.setLoading(true);
 		Ext.Ajax.request({
 			url: webServices.getAt(webServices.findExact('service','registerdevice')).get('url'),
 			params: {

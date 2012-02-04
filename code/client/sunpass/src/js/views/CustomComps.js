@@ -35,3 +35,9 @@ Ext.form.Zip = Ext.extend(Ext.form.Text, {
 });
 
 Ext.reg('zipfield', Ext.form.Zip);
+
+// got the function from extJS.
+Ext.util.Format.stripTags = function(v) {
+	var stripTagsRE    = /<\/?[^>]+>/gi;	
+    return !v ? v : String(v).replace(stripTagsRE, "");
+};

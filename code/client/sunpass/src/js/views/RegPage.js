@@ -1,25 +1,33 @@
 gtp.views.RegPage = {
 	xtype: 'formpanel',
+	scroll: 'vertical',
 	id: 'regpage',
-	layout: {
-		type:'vbox',
-		pack: 'center'
-	},
+	dockedItems: [{
+		xtype: 'toolbar',
+		title: 'Register',
+		items: [{
+			text: 'Login',
+			ui: 'back',
+			handler: function(button, event){
+				gtp.views.Viewport.setActiveItem('loginpage');
+			}
+		}]
+	}],
 	items: [{
 		xytpe: 'fieldset',
+		title: 'hello',
 		items: [{
 			xtype: 'zipfield',
 			id: 'rpemailid',
 			name: 'emailid',
-			placeHolder: 'Enter Phone No',
-			border: '10 5 3 10'
+			placeHolder: 'Enter Phone No'
 		}]
 	},{
-		layout: 'hbox',
+		xtype: 'fieldset',
 		items: [{
 			xtype: 'button',
-			ui: 'round',
-			style: 'margin-left: 1px',
+			ui: 'action',
+			//style: 'margin-left: 1px',
 			text: 'Register',
 			handler: function(button, event){
 				
@@ -66,13 +74,6 @@ gtp.views.RegPage = {
 						}
 					});
 				}
-			}
-		},{
-			xtype: 'button',
-			ui: 'round',
-			text: 'Go back',
-			handler: function(button, event){
-				gtp.views.Viewport.setActiveItem('loginpage');
 			}
 		}]
 	}],

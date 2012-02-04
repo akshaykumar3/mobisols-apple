@@ -76,6 +76,21 @@ gtp.views.SettingsFormView = {
 							Ext.Msg.alert('Enter valid email ID');
 						}
 						else {
+							/*var bill_det = setform.down('#settingsform').down('#billingdetails');
+							var checkForScriptContent = false;
+							bill_det.items.each(function(item){
+								if((item.xtype == 'textfield' || item.xtype == 'textareafield') && item.value) {
+									var stripval = Ext.util.Format.stripTags(item.value);
+									console.log(stripval);
+									if(stripval.length < item.value.length) {
+										checkForScriptContent = true;
+									}
+								}
+							},this);
+							if(checkForScriptContent) {
+								Ext.Msg.alert('Script content not allowed');
+							} else {*/
+								
 							gtp.tabpanel.setLoading({
 								msg: 'Please wait..'
 							});
@@ -124,6 +139,7 @@ gtp.views.SettingsFormView = {
 							setform.down('#settingsform').disable();
 							button.setText('edit');
 							button.setDisabled(false);
+						
 						}
 					}
 					else {
