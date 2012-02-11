@@ -58,5 +58,23 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService{
 		}
 		return jsonConverter.getJSON(request, status, response);
 	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+	public UserDao getUserDao() {
+		return userDao;
+	}
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	public PaymentTransactionDao getPaymentTransactionDao() {
+		return paymentTransactionDao;
+	}
+	public void setPaymentTransactionDao(PaymentTransactionDao paymentTransactionDao) {
+		this.paymentTransactionDao = paymentTransactionDao;
+	}
 
 }

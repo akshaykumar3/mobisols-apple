@@ -70,5 +70,35 @@ public class VehicleHistoryDetailsImpl implements VehicleHistoryDetails{
 		}
 		return jsonConverter.getJSON(request, status, response);
 	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+	public UserVehicleDao getUserVehicleDao() {
+		return userVehicleDao;
+	}
+	public void setUserVehicleDao(UserVehicleDao userVehicleDao) {
+		this.userVehicleDao = userVehicleDao;
+	}
+	public UserDao getUserDao() {
+		return userDao;
+	}
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	public UserVehicleHistoryDao getUserVehicleHistoryDao() {
+		return userVehicleHistoryDao;
+	}
+	public void setUserVehicleHistoryDao(UserVehicleHistoryDao userVehicleHistoryDao) {
+		this.userVehicleHistoryDao = userVehicleHistoryDao;
+	}
+	public ModelDao getModelDao() {
+		return modelDao;
+	}
+	public void setModelDao(ModelDao modelDao) {
+		this.modelDao = modelDao;
+	}
 	
 }

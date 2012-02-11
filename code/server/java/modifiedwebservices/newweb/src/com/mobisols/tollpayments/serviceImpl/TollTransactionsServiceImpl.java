@@ -31,5 +31,23 @@ public class TollTransactionsServiceImpl implements TollTransactionsService{
 		
 		return jsonConverter.getJSON(request, status, response);
 	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+	public VehicleTollUsageDao getVehicleTollUsageDao() {
+		return vehicleTollUsageDao;
+	}
+	public void setVehicleTollUsageDao(VehicleTollUsageDao vehicleTollUsageDao) {
+		this.vehicleTollUsageDao = vehicleTollUsageDao;
+	}
+	public TollLocationDao getTollLocationDao() {
+		return tollLocationDao;
+	}
+	public void setTollLocationDao(TollLocationDao tollLocationDao) {
+		this.tollLocationDao = tollLocationDao;
+	}
 
 }

@@ -76,5 +76,30 @@ public class PaymentDetailsHistoryImpl implements PaymentDetailsHistory{
 		}
 		return jsonConverter.getJSON(request, status, response);
 	}
+	public JsonConverter getJsonConverter() {
+		return jsonConverter;
+	}
+	public void setJsonConverter(JsonConverter jsonConverter) {
+		this.jsonConverter = jsonConverter;
+	}
+	public UserPaymentDetailHistoryDao getUserPaymentDetailHistoryDao() {
+		return userPaymentDetailHistoryDao;
+	}
+	public void setUserPaymentDetailHistoryDao(
+			UserPaymentDetailHistoryDao userPaymentDetailHistoryDao) {
+		this.userPaymentDetailHistoryDao = userPaymentDetailHistoryDao;
+	}
+	public UserDao getUserDao() {
+		return userDao;
+	}
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	public CcTypeDao getCcTypeDao() {
+		return ccTypeDao;
+	}
+	public void setCcTypeDao(CcTypeDao ccTypeDao) {
+		this.ccTypeDao = ccTypeDao;
+	}
 
 }
