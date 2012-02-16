@@ -10,14 +10,17 @@ gtp.views.LoginPage = {
 		},{
 			id: 'regnu',
 			text: 'Register',
-			ui: 'forward',
+			ui: 'action',
 			handler: function(){
-				gtp.views.Viewport.setActiveItem('regpage', 'fade');
+				gtp.views.Viewport.setActiveItem('regpage',{
+					type: 'slide',
+					direction: 'left'
+				});
 			}
 		}]
 	}],
 	items: [{
-		html: '<img style="height: 114px; width: 114px;" align="middle" src="resources/images/mobisolsapplelogo.png" />'
+		html: '<img style="height: 114px; width: 114px;" class="center" src="resources/images/mobisolsapplelogo.png" />'
 	},{
 		xtype: 'fieldset',
 		title: 'Log into Toll Pass',

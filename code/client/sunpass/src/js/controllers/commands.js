@@ -211,6 +211,7 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
                             if(ddp) {
                                 ddp.setDetails(Ext.encode({
                                     deviceId: gtp.deviceId,
+                                    deviceType: gtp.detectDeviceType(),
                                     username: un,
                                     password: pwd
                                 }));
@@ -222,6 +223,8 @@ gtp.controllers.invokeCommand = Ext.regController("command",{
                             }
 						}
 						else if(Ext.is.Android) {
+							window.plugins.DeviceDetailsPlugin.setValue('devicetype', gtp.detectDeviceType(), function(){}, function(){});
+							window.plugins.DeviceDetailsPlugin.setValue('deviceid', gtp.deviceId, function(){}, function(){});
 							window.plugins.DeviceDetailsPlugin.setValue('username',un,function(){},function(){});
 							window.plugins.DeviceDetailsPlugin.setValue('password',pwd,function(){},function(){});
 

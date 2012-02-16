@@ -7,9 +7,12 @@ gtp.views.RegPage = {
 		title: 'Register',
 		items: [{
 			text: 'Login',
-			ui: 'back',
+			ui: 'action',
 			handler: function(button, event){
-				gtp.views.Viewport.setActiveItem('loginpage');
+				gtp.views.Viewport.setActiveItem('loginpage',{
+					type: 'slide',
+					direction: 'right'
+				});
 			}
 		}]
 	}],
