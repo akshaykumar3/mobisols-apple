@@ -187,7 +187,7 @@ gtp.views.SettingsFormView = {
 		id: 'paymentdetails',
 		title: 'Payment info',
 		items: [{
-			xtype: 'textfield',
+			xtype: 'zipfield',
 			name: 'ccnumber',
 			id: 'ccnumber',
 			label: 'Cdt card#',
