@@ -1,0 +1,20 @@
+.customField input::-webkit-input-placeholder {
+	color: #2e4bc5;
+}
+
+img.center {
+	display: block;
+	margin-left: auto;   
+	margin-right: auto; 
+}
+
+.invalid-field .x-form-label { 
+	color: red;
+}
+
+.errorfield { 
+	font-size: 0.75em;
+}
+.errorfield ul { 
+	margin: 10px;
+}

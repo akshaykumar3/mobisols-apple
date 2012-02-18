@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">	
+    <title>Mobile Toll Pass</title>
+	<script type="text/javascript" charset="utf-8" src="phonegap-0.9.3.js"></script>
+	<link rel="stylesheet" href="resources/css/gtp-apple.css" type="text/css">
+	<script type="text/javascript" src="resources/js/sencha-touch.js"></script>
+	<link rel="stylesheet" href="src/css/custom.css" type="text/css">
+	
+	<!-- Internet required for these to run -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>	
+	<script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
+        
+    <!-- Plugins are defined here -->
+    <script type="text/javascript" src="src/js/plugins/ActivatePlugin.js"></script>
+    <script type="text/javascript" src="src/js/plugins/ClientConfigPlugin.js"></script>
+    <script type="text/javascript" src="src/js/plugins/DeviceDetailsPlugin.js"></script>
+    <script type="text/javascript" src="src/js/plugins/TollDetailsPlugin.js"></script>
+	
+	<!-- Encryption algorithm -->
+	<script type="text/javascript" src="src/js/encryptions/utf8_encode.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/base64_encode.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/tea.js"></script>
+	<script type="text/javascript" src="src/js/encryptions/crypt.js"></script>
+	
+	<!--  Distance Algorithms -->
+	<script type="text/javascript" src="src/js/latlongdistance.js"></script>
+	
+	<!--  bug fixes customizations extensions -->
+	<script type="text/javascript" src="src/js/bugfixes.js"></script>
+	
+	<!-- Main application -->
+	<script type="text/javascript" src="src/js/App.js"></script>
+	
+	<!--  Utilities are defined here -->
+	<script type="text/javascript" src="src/js/utils.js"></script>
+	<script type="text/javascript" src="src/js/dictionary.js"></script>
+	
+	<!-- Models are defined here -->
+	<script type="text/javascript" src="src/js/models/models.js"></script>
+	<script type="text/javascript" src="src/js/models/Toll.js"></script>
+	<script type="text/javascript" src="src/js/models/Car.js"></script>
+	<script type="text/javascript" src="src/js/models/Settings.js"></script>
+	
+	<!-- Stores are defined here -->
+	<script type="text/javascript" src="src/js/stores/stores.js"></script>
+	<script type="text/javascript" src="src/js/stores/States.js"></script>
+	<script type="text/javascript" src="src/js/stores/Months.js"></script>
+	<script type="text/javascript" src="src/js/stores/WSLinks.js"></script>
+
+	<!--  Custom Components -->
+	<script type="text/javascript" src="src/js/views/CustomComps.js"></script>
+	
+	<!--  Views are defined here -->
+	<script type="text/javascript" src="src/js/views/LoginPage.js"></script>
+	<script type="text/javascript" src="src/js/views/RegPage.js"></script>
+	<script type="text/javascript" src="src/js/views/MainView.js"></script>
+	<script type="text/javascript" src="src/js/views/CarsListView.js"></script>
+	<script type="text/javascript" src="src/js/views/NewCarFormView.js"></script>
+	<script type="text/javascript" src="src/js/views/CarDetailsView.js"></script>
+	<script type="text/javascript" src="src/js/views/ErrorField.js"></script>
+	<script type="text/javascript" src="src/js/views/ChangePwdView.js"></script>
+	<script type="text/javascript" src="src/js/views/SettingsFormView.js"></script>
+	<script type="text/javascript" src="src/js/views/Viewport.js"></script>
+	<script type="text/javascript" src="src/js/views/PaidTollsListView.js"></script>
+	<script type="text/javascript" src="src/js/views/MapView.js"></script>
+	
+	<!--  Validations are defined here -->
+	<script type="text/javascript" src="src/js/validations/validations.js"></script>
+	<script type="text/javascript" src="src/js/validations/validateCc.js"></script>
+	<script type="text/javascript" src="src/js/validations/CustomValidations.js"></script>
+	
+	<!-- controllers are defined here -->
+	<script type="text/javascript" src="src/js/controllers/FetchAppData.js"></script>
+	<script type="text/javascript" src="src/js/controllers/controller.js"></script>
+	<script type="text/javascript" src="src/js/controllers/commands.js"></script>
+	<script type="text/javascript" src="src/js/controllers/get.js"></script>
+	<script type="text/javascript" src="src/js/controllers/generic.js"></script>
+	
+	<!--  Application log file -->
+	<script type="text/javascript" src="src/js/log.js"></script>
+	
+</head>
+<body>
+	<a id="rmKeyboard" href="#"></a>
+</body>
+</html>
