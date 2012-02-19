@@ -80,7 +80,7 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 		vml.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		vml.setLatitude(hbr.getLatitude());
 		vml.setLongitude(hbr.getLongitude());
-		vml.setTimestamp(new Timestamp(new Date().getTime()));
+		vml.setTimestamp(hbr.getTimeStamp());
 		
 		Location p=new Location();
 		p.setLatitude(hbr.getLatitude());

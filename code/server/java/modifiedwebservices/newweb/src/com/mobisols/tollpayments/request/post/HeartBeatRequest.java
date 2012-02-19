@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.request.post;
 
+import java.sql.Timestamp;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class HeartBeatRequest.
@@ -26,6 +28,8 @@ public class HeartBeatRequest {
 	
 	/** The toll session id. */
 	private String tollSessionId;
+	
+	private Timestamp timeStamp;
 	
 	/**
 	 * Gets the device id.
@@ -151,5 +155,13 @@ public class HeartBeatRequest {
 	 */
 	public void setTollSessionId(String tollSessionId) {
 		this.tollSessionId = tollSessionId;
+	}
+
+	public Timestamp getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(Timestamp timestamp) {
+		this.timeStamp = timestamp;
 	}
 }
