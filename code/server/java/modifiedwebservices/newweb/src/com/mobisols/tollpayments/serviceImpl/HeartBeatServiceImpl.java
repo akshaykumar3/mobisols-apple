@@ -2,16 +2,21 @@ package com.mobisols.tollpayments.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.DeviceHistoryDao;
 import com.mobisols.tollpayments.dao.TollLocationDao;
+import com.mobisols.tollpayments.dao.UserDao;
+import com.mobisols.tollpayments.dao.UserNotificationDao;
 import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
 import com.mobisols.tollpayments.dao.VmlDao;
 import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.TollLocation;
+import com.mobisols.tollpayments.model.UserNotification;
 import com.mobisols.tollpayments.model.VehicleMovementLog;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
@@ -22,7 +27,6 @@ import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.response.post.HeartBeatResponse;
 import com.mobisols.tollpayments.service.HeartBeatService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HeartBeatServiceImpl.
  */
@@ -54,6 +58,8 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	
 	/** The json converter. */
 	private JsonConverter jsonConverter;
+	
+	private UserNotificationDao userNotificationDao;
 	
 	/** The Constant DEFAULT_TIME. */
 	public static final double DEFAULT_TIME=Double.parseDouble(ServerConfiguration.getServerConfiguration().getValue("default_heart_beat_time"));
@@ -133,6 +139,27 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
 		response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
 		response.getHash().put("tollSessionId", tollSessionId);
+		
+		List<UserNotification> un = userNotificationDao.getPendingCommands(hbr.getDeviceId());
+		for(Iterator<UserNotification> it = un.iterator();it.hasNext();)
+		{
+			UserNotification command = it.next();
+			response.getCommands().add(command.getNotification());
+			command.setLastModifiedOn(new Timestamp(new Date().getTime()));
+			command.setLastModifiedBy(UserDao.DEFAULT_USER);
+			command.setSentTimestamp(new Timestamp(new Date().getTime()));
+			userNotificationDao.update(command);
+		}
+		
+		List<UserNotification> unl = userNotificationDao.getPendingNotifications(hbr.getDeviceId());
+		for(Iterator<UserNotification> it = unl.iterator();it.hasNext();)
+		{
+			UserNotification notification = it.next();
+			response.getNotifications().add(notification.getNotification());
+			notification.setLastModifiedBy(UserDao.DEFAULT_USER);
+			notification.setLastModifiedOn(new Timestamp(new Date().getTime()));
+			userNotificationDao.update(notification);
+		}
 		return jsonConverter.getJSON(request, status,response);
 	}
 	
@@ -274,4 +301,15 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
+
+
+	public UserNotificationDao getUserNotificationDao() {
+		return userNotificationDao;
+	}
+
+
+	public void setUserNotificationDao(UserNotificationDao userNotificationDao) {
+		this.userNotificationDao = userNotificationDao;
+	}
+	
 }
