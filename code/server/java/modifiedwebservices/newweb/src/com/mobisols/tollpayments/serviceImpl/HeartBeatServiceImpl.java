@@ -86,7 +86,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		vml.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 		vml.setLatitude(hbr.getLatitude());
 		vml.setLongitude(hbr.getLongitude());
-		vml.setTimestamp(new Timestamp(new Date().getTime()));
+		vml.setTimestamp(hbr.getTimeStamp());
 		
 		Location p=new Location();
 		p.setLatitude(hbr.getLatitude());
@@ -99,7 +99,8 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 			vml.setTollLocationId(t.getTollLocationId());
 		
 		vml.setDeviceHistoryId(deviceHistoryDao.getLatestDeviceHistoryId(d.getDeviceId()));
-		
+		if(hbr.getTollSessionId()==null)
+			hbr.setTollSessionId("");
 		String tollSessionId;
 		int index=hbr.getTollSessionId().indexOf('#');
 		if(index==-1)
@@ -111,14 +112,18 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 		}
 		else
 		{
-			int tollId=Integer.getInteger(hbr.getTollSessionId().substring(0,index).trim());
-			if(tollId==t.getTollLocationId())
+			int tollId=Integer.parseInt(hbr.getTollSessionId().substring(0,index).trim());
+			if(t!=null && tollId==t.getTollLocationId())
 			{
 				tollSessionId=hbr.getTollSessionId();
 			}
-			else
+			else if(t!=null)
 			{
 				tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+			}
+			else
+			{
+				tollSessionId=Integer.toString(tollLocationDao.getTollLocation(np.getLatitude(), np.getLongitude()).getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
 			}
 		}
 		vml.setTollSessionId(tollSessionId);

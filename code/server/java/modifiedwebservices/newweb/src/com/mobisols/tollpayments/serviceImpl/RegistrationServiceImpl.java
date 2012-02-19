@@ -71,6 +71,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		if(u!=null)
 		{
 			response.getResponse().put("userNameExists", UserDao.USER_EXISTS);
+			response.getNotifications().add("User Name already exist");
 			Device d= deviceDao.getDevice(r.getDeviceDetails().getDeviceId(), r.getDeviceDetails().getDeviceName());
 			if(d==null)
 				response.getResponse().put("deviceExists",DeviceDao.DEVICE_NOT_EXISTS);
