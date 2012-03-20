@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.response.post;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class CheckUserBalanceResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String,String> commands;
 	
 	/**
 	 * Instantiates a new check user balance response.
@@ -23,7 +24,7 @@ public class CheckUserBalanceResponse {
 	public CheckUserBalanceResponse(){
 		response=new LinkedList<String>();
 		this.notifications = new LinkedList<String>();
-		this.commands  = new LinkedList<String>();
+		this.commands  = new HashMap<String, String>();
 	}
 	
 	/**
@@ -49,7 +50,7 @@ public class CheckUserBalanceResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String,String> getCommands() {
 		return commands;
 	}
 	
@@ -58,7 +59,7 @@ public class CheckUserBalanceResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 	

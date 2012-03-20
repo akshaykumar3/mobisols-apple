@@ -12,6 +12,7 @@ public class MakeAndModelResponse {
 	/** The make. */
 	private List<Make> make;
 
+	
 	/**
 	 * Instantiates a new make and model response.
 	 */

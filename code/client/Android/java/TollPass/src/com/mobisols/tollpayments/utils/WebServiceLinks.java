@@ -1,10 +1,11 @@
 package com.mobisols.tollpayments.utils;
 
 public class WebServiceLinks {
-	private static String HOST = "172.30.102.71";
+	private static String HOST = "mbtest.dyndns.dk";
 	private static int PORT = 6004;
-	private static String GET_TOLL_LOCATIONS = "http://172.30.102.71:6004/newweb/services/secure/TollDetailsList";
-	private static String HEART_BEAT = "http://172.30.102.71:6004/newweb/services/secure/HeartBeat";
+	private static String GET_TOLL_LOCATIONS = "http://mbtest.dyndns.dk:6004/devserver/services/secure/TollDetailsList";
+	private static String HEART_BEAT = "http://mbtest.dyndns.dk:6004/devserver/services/secure/HeartBeat";
+	private static String COMMAND_ACKNOWLEDGE = "http://mbtest.dyndns.dk:6004/devserver/services/secure/CommandAck";
 	
 	public static String getHost(){
 		return HOST;
@@ -20,5 +21,9 @@ public class WebServiceLinks {
 	
 	public static String getHeartBeat(){
 		return HEART_BEAT;
+	}
+	
+	public static String getCommandAck(){
+		return COMMAND_ACKNOWLEDGE;
 	}
 }

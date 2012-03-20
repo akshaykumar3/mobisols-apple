@@ -46,6 +46,7 @@ public class CarProximityReceiver extends BroadcastReceiver{
 			Log.d("HeartBeat Request", JsonConverter.getJSON(hbRequest));
 
 			
+			
 			new HeartBeatService().execute(JsonConverter.getJSON(hbRequest));
 			
 			LocationData locationData = LocationData.getInstance();

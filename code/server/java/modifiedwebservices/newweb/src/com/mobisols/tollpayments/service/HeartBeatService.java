@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.service;
 
+import java.util.List;
+
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.dao.UserVehicleHistoryDao;
@@ -7,6 +9,7 @@ import com.mobisols.tollpayments.dao.VmlDao;
 import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
+import com.mobisols.tollpayments.request.post.HeartBeatList;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 
 // TODO: Auto-generated Javadoc
@@ -44,7 +47,7 @@ public interface HeartBeatService {
 	 * @param hbr the heart beat request.
 	 * @return the response similar to the com.mobisols.tollpaymenst.response.post.HeartBeatResponse.
 	 */
-	public String saveHeartBeat(String request,HeartBeatRequest hbr);
+	public String saveHeartBeat(String request,HeartBeatList hbr);
 	
 	/**
 	 * Gets the my util date.

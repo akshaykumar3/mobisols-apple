@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.response.get;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class AccountDetailsResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String,String> commands;
 	
 	
 	/**
@@ -47,7 +48,7 @@ public class AccountDetailsResponse {
 		this.tollPayments=new LinkedList<TollPayments>();
 		this.notifications=new LinkedList<String>();
 		this.balanceInfo = new BalanceInfoResponse();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String, String>();
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class AccountDetailsResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands()	{
+	public HashMap<String,String> getCommands()	{
 		return commands;
 	}
 	
@@ -64,7 +65,7 @@ public class AccountDetailsResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands)	{
+	public void setCommands(HashMap<String,String> commands)	{
 		this.commands = commands;
 	}
 	

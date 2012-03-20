@@ -17,7 +17,7 @@ public class HeartBeatResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String, String> commands;
 	
 	/**
 	 * Instantiates a new heart beat response.
@@ -26,7 +26,7 @@ public class HeartBeatResponse {
 	{
 		this.hash= new HashMap<String, String>();
 		this.notifications = new LinkedList<String>();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String,String>();
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class HeartBeatResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 
@@ -79,7 +79,7 @@ public class HeartBeatResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String,String> getCommands() {
 		return commands;
 	}
 }

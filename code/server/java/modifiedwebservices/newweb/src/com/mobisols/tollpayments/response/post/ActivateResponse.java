@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.response.post;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class ActivateResponse {
 	private String active;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String, String> commands;
 	
 	
 	/**
@@ -23,7 +24,7 @@ public class ActivateResponse {
 	 */
 	public ActivateResponse(){
 		this.notifications = new LinkedList<String>();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String, String>();
 	}
 	
 	/**
@@ -67,7 +68,7 @@ public class ActivateResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 
@@ -76,7 +77,7 @@ public class ActivateResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String,String> getCommands() {
 		return commands;
 	}
 }

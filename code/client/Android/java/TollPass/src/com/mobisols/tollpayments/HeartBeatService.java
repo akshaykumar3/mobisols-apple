@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -39,10 +41,32 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 	
 	@Override
 	protected ActualHeartBeatResponse doInBackground(String... heartBeatRequest) {
-		HttpResponse response = sendRequest(heartBeatRequest[0]);
+		
+		DataBaseHelper.getInstance().insertHeartBeat(heartBeatRequest[0]);
+		String request = "{heartBeatList:[";
+		List<Long> heartbeatSent = new LinkedList<Long>();
+		HttpResponse response = null;
+		if(MyApplicationUtil.getInstance().getLock().tryLock()){
+			Log.d("HeartBeatService", "Lock is available");
+			Cursor c = DataBaseHelper.getInstance().getHeartBeatCursor();
+			c.moveToFirst();
+			while(!c.isAfterLast()){
+				Long id = c.getLong(0);
+				heartbeatSent.add(id);
+				String josn = c.getString(1);
+				Log.d("HeartBeatService", josn);
+				request = request+josn+",";
+			}
+			request = request.substring(0,request.length()-1);
+			request = request + "]";
+			c.close();
+			response = sendRequest(request);
+		}
+		else{
+			Log.d("HeartBeatService","Lock is not available");
+		}
 		if(response == null || response.getStatusLine() == null|| response.getStatusLine().getStatusCode() != 200)
 		{
-			DataBaseHelper.getInstance().insertHeartBeat(heartBeatRequest[0]);
 			return null;
 		}
 		BufferedReader rd;
@@ -60,32 +84,12 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 			Log.d("HTTP REQUEST", "Nullpointer Exception2");
 		}
 		ActualHeartBeatResponse result = (ActualHeartBeatResponse) JsonConverter.getObject(line,"com.mobisols.tollpayments.response.ActualHeartBeatResponse");
+		
 		LocationData.getInstance().setTollSessionId(result.getResponse().getHash().get("tollSessionId"));
-		if(MyApplicationUtil.getInstance().getLock().tryLock()){
-			Log.d("HeartBeatService", "Lock is available");
-			Cursor c = DataBaseHelper.getInstance().getHeartBeatCursor();
-			c.moveToFirst();
-			while(!c.isAfterLast()){
-				Long id = c.getLong(0);
-				String josn = c.getString(1);
-				Log.d("HeartBeatService", josn);
-				HttpResponse s = sendRequest(josn);
-				if(response ==null || response.getStatusLine().getStatusCode() == 200)
-				{
-					DataBaseHelper.getInstance().deleteHeartBeat(id);
-					c.moveToNext();
-				}
-				else
-				{
-					break;
-				}
-			}
-			c.close();
-			MyApplicationUtil.getInstance().getLock().unlock();
+		for(Iterator<Long> it = heartbeatSent.iterator();it.hasNext();){
+			DataBaseHelper.getInstance().deleteHeartBeat(it.next());
 		}
-		else{
-			Log.d("HeartBeatService","Lock is not available");
-		}
+		MyApplicationUtil.getInstance().getLock().unlock();
 		return result;
 	}
 
