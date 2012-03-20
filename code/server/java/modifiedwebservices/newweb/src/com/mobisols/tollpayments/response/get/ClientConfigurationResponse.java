@@ -19,7 +19,7 @@ public class ClientConfigurationResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String, String> commands;
 	
 	/**
 	 * Instantiates a new client configuration response.
@@ -27,7 +27,7 @@ public class ClientConfigurationResponse {
 	public ClientConfigurationResponse(){
 		this.keyValues = new HashMap<String, String>();
 		this.notifications = new LinkedList<String>();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String, String>();
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class ClientConfigurationResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 	
@@ -98,7 +98,7 @@ public class ClientConfigurationResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String,String> getCommands() {
 		return commands;
 	}
 	

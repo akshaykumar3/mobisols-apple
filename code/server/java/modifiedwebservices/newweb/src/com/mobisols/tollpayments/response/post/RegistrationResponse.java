@@ -17,7 +17,7 @@ public class RegistrationResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String, String> commands;
 	
 	/**
 	 * Instantiates a new registration response.
@@ -26,7 +26,7 @@ public class RegistrationResponse {
 	{
 		this.notifications = new LinkedList<String>();
 		response=new HashMap<String, String>();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String, String>();
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class RegistrationResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 
@@ -79,7 +79,7 @@ public class RegistrationResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String,String> getCommands() {
 		return commands;
 	}
 }

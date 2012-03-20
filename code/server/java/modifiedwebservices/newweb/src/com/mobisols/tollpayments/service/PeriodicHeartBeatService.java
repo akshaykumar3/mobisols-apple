@@ -7,7 +7,7 @@ import com.mobisols.tollpayments.dao.VmlDao;
 import com.mobisols.tollpayments.dao.VmlTypeDao;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
-import com.mobisols.tollpayments.request.post.HeartBeatRequest;
+import com.mobisols.tollpayments.request.post.HeartBeatList;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -44,7 +44,7 @@ public interface PeriodicHeartBeatService {
 	 * @param hbr theHeart Beat Request.
 	 * @return the json string similar to com.mobisols.tollpayments.reponse.post.HeartBeatResponse.
 	 */
-	public String saveHeartBeat(String request,HeartBeatRequest hbr);
+	public String saveHeartBeat(String request,HeartBeatList hbr);
 	
 	/**
 	 * Gets the my util date.

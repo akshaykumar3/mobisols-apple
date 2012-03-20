@@ -29,7 +29,9 @@ import com.mobisols.tollpayments.request.get.ClientConfigurationRequest;
 import com.mobisols.tollpayments.request.get.TollRange;
 import com.mobisols.tollpayments.request.post.ActivateRequest;
 import com.mobisols.tollpayments.request.post.AddBalanceRequest;
+import com.mobisols.tollpayments.request.post.CommandAckRequest;
 import com.mobisols.tollpayments.request.post.DeviceRegistrationRequest;
+import com.mobisols.tollpayments.request.post.HeartBeatList;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.request.post.LoginRequest;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
@@ -42,6 +44,7 @@ import com.mobisols.tollpayments.service.BalanceInfoService;
 import com.mobisols.tollpayments.service.CcTypeListService;
 import com.mobisols.tollpayments.service.ChangePasswordService;
 import com.mobisols.tollpayments.service.ClientConfigurationService;
+import com.mobisols.tollpayments.service.CommandAck;
 import com.mobisols.tollpayments.service.DeviceRegistrationService;
 import com.mobisols.tollpayments.service.ForgotPassword;
 import com.mobisols.tollpayments.service.HeartBeatService;
@@ -146,6 +149,7 @@ public class WebServiceImpl {
 	VehicleHistoryDetails vehicleHistoryDetails;
 	PaymentDetailsHistory paymentDetailsHistory;
 	PaymentTransactionService paymentTransactionService;
+	CommandAck commandAck;
 	
 	/** The security check util. */
 	SecurityCheckUtil securityCheckUtil;
@@ -196,6 +200,7 @@ public class WebServiceImpl {
 	        vehicleHistoryDetails = (VehicleHistoryDetails) ctx.getBean("service.tollpayments.vehicleHistoryDetails");
 	        paymentDetailsHistory = (PaymentDetailsHistory) ctx.getBean("service.tollpayments.paymentDetailsHistory");
 	        paymentTransactionService = (PaymentTransactionService) ctx.getBean("service.tollpayments.paymentTransactionService");
+	        commandAck = (CommandAck) ctx.getBean("service.tollpayments.commandAck");
 	}
 
 	/**
@@ -490,7 +495,7 @@ public class WebServiceImpl {
 	{
 		String request="post periodic heartbeat";
 		try{
-		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
+		HeartBeatList hbr=(HeartBeatList) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatList");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
 			return periodicHeartBeatService.saveHeartBeat(request,hbr) ;
@@ -520,7 +525,7 @@ public class WebServiceImpl {
 		String request="post heartbeat";
 		System.out.println(json);
 		try{
-		HeartBeatRequest hbr=(HeartBeatRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatRequest");
+		HeartBeatList hbr=(HeartBeatList) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatList");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
 			return heartBeatService.saveHeartBeat(request,hbr);
@@ -930,7 +935,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/admin/PaymentDetailsHistory")
-	public String getPaymentDetailsHistory(@QueryParam("josn") String json){
+	public String getPaymentDetailsHistory(@QueryParam("json") String json){
 		String request = "Get Payment Details History";
 		try{
 			PaymentDetailsHistoryRequest pdhr = (PaymentDetailsHistoryRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.PaymentDetailsHistoryRequest");
@@ -945,7 +950,7 @@ public class WebServiceImpl {
 	@GET
 	@Produces("text/plain")
 	@Path("/admin/PaymentTransactionsService")
-	public String getPaymentTransactions(@QueryParam("josn") String json){
+	public String getPaymentTransactions(@QueryParam("json") String json){
 		String request = "Get Payment Details History";
 		try{
 			PaymentTransactionRequest ptr =  (PaymentTransactionRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.PaymentTransactionRequest");
@@ -955,6 +960,22 @@ public class WebServiceImpl {
 		}finally{
 			myUtilCleanUp.cleanUp();
 		}
+	}
+	
+	@POST
+	@Produces("text/plain")
+	@Path("/secure/CommandAck")
+	public String commandAcknowledge(@QueryParam("json") String json){
+		String request = "Command Acknowledge";
+		String response;
+		try{
+			CommandAckRequest req = (CommandAckRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.CommandAckRequest");
+			response =  commandAck.acknowledgeCommand(req, request);
+		}catch (Exception e){
+			return myUtilErrorHandler.handleException(request, e);
+		}
+		myUtilCleanUp.cleanUp();
+		return response;
 	}
 	/**
 	 * Gets the vehicle type list service.
@@ -1444,6 +1465,47 @@ public class WebServiceImpl {
 	 */
 	public void setMakeTollPayments(MakeTollPayments makeTollPayments) {
 		this.makeTollPayments = makeTollPayments;
+	}
+
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
+	}
+
+	public VehicleHistoryDetails getVehicleHistoryDetails() {
+		return vehicleHistoryDetails;
+	}
+
+	public void setVehicleHistoryDetails(VehicleHistoryDetails vehicleHistoryDetails) {
+		this.vehicleHistoryDetails = vehicleHistoryDetails;
+	}
+
+	public PaymentDetailsHistory getPaymentDetailsHistory() {
+		return paymentDetailsHistory;
+	}
+
+	public void setPaymentDetailsHistory(PaymentDetailsHistory paymentDetailsHistory) {
+		this.paymentDetailsHistory = paymentDetailsHistory;
+	}
+
+	public PaymentTransactionService getPaymentTransactionService() {
+		return paymentTransactionService;
+	}
+
+	public void setPaymentTransactionService(
+			PaymentTransactionService paymentTransactionService) {
+		this.paymentTransactionService = paymentTransactionService;
+	}
+
+	public CommandAck getCommandAck() {
+		return commandAck;
+	}
+
+	public void setCommandAck(CommandAck commandAck) {
+		this.commandAck = commandAck;
 	}
 
 }

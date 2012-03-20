@@ -2,12 +2,14 @@ package com.mobisols.tollpayments.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
 
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.DeviceHistoryDao;
 import com.mobisols.tollpayments.dao.TollLocationDao;
 import com.mobisols.tollpayments.dao.VmlDao;
 import com.mobisols.tollpayments.dao.VmlTypeDao;
+import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.TollLocation;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.VehicleMovementLog;
@@ -16,6 +18,7 @@ import com.mobisols.tollpayments.myutils.MyUtilDate;
 import com.mobisols.tollpayments.myutils.TollLocationUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
+import com.mobisols.tollpayments.request.post.HeartBeatList;
 import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.response.post.HeartBeatResponse;
 import com.mobisols.tollpayments.service.PeriodicHeartBeatService;
@@ -59,65 +62,78 @@ public class PeriodicHeartBeatServiceImpl implements PeriodicHeartBeatService {
 	/* (non-Javadoc)
 	 * @see com.mobisols.tollpayments.service.PeriodicHeartBeatService#saveHeartBeat(java.lang.String, com.mobisols.tollpayments.request.post.HeartBeatRequest)
 	 */
-	public String saveHeartBeat(String request,HeartBeatRequest hbr) {
-		String status="success";
+	public String saveHeartBeat(String request,HeartBeatList hblist) {
 		HeartBeatResponse response = new HeartBeatResponse();
-		VehicleMovementLog vml=new VehicleMovementLog();
-		Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());
-		vml.setClientId(1);
-		vml.setCreatedOn(myUtilDate.getCurrentTimeStamp());
-		vml.setFlag1(null);
-		vml.setFlag2(null);
-		vml.setFlag3(null);
-		vml.setFlag4(null);
-		vml.setFlag5(null);
-		vml.setUdf1(null);
-		vml.setUdf2(null);
-		vml.setUdf3(null);
-		vml.setUdf4(null);
-		vml.setUdf5(null);
-		vml.setLastModifiedBy(d.getUserId());
-		vml.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
-		vml.setLatitude(hbr.getLatitude());
-		vml.setLongitude(hbr.getLongitude());
-		vml.setTimestamp(hbr.getTimeStamp());
-		
-		Location p=new Location();
-		p.setLatitude(hbr.getLatitude());
-		Location np=tollLocationUtil.getNearestToll(p);
-		double dist = tollLocationUtil.getDistance(p, np);
-		vml.setDistance(dist);
-		
-		TollLocation t=tollLocationDao.getTollLocation(hbr.getLatitude(), hbr.getLongitude());
-		if(t!=null)
-		vml.setTollLocationId(t.getTollLocationId());
-		vml.setDeviceHistoryId(deviceHistoryDao.getLatestDeviceHistoryId(d.getDeviceId()));
-		
-		String tollSessionId;
-		int index=hbr.getTollSessionId().indexOf('#');
-		if(index==-1)
-		{
-			tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
-		}
-		else
-		{
-			int tollId=Integer.getInteger(hbr.getTollSessionId().substring(0,index).trim());
-			if(tollId==t.getTollLocationId())
+		String status="success";
+		for(Iterator<HeartBeatRequest> it = hblist.getHeartBeatList().iterator();it.hasNext();){
+			HeartBeatRequest hbr = it.next();
+			VehicleMovementLog vml=new VehicleMovementLog();
+			System.out.println(hbr.getDeviceId());
+			Device d=deviceDao.getDevice(hbr.getDeviceId(), hbr.getDeviceType());
+			vml.setClientId(Client.PRESENT_CLIENT);
+			vml.setCreatedOn(myUtilDate.getCurrentTimeStamp());
+			vml.setFlag1(null);
+			vml.setFlag2(null);
+			vml.setFlag3(null);
+			vml.setFlag4(null);
+			vml.setFlag5(null);
+			vml.setUdf1(null);
+			vml.setUdf2(null);
+			vml.setUdf3(null);
+			vml.setUdf4(null);
+			vml.setUdf5(null);
+			vml.setLastModifiedBy(d.getUserId());
+			vml.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
+			vml.setLatitude(hbr.getLatitude());
+			vml.setLongitude(hbr.getLongitude());
+			vml.setTimestamp(hbr.getTimeStamp());
+
+			Location p=new Location();
+			p.setLatitude(hbr.getLatitude());
+			Location np=tollLocationUtil.getNearestToll(p);
+			double dist = tollLocationUtil.getDistance(p, np);
+			vml.setDistance(dist);
+
+			TollLocation t=tollLocationDao.getTollLocation(hbr.getLatitude(), hbr.getLongitude());
+			if(t!=null)
+				vml.setTollLocationId(t.getTollLocationId());
+
+			vml.setDeviceHistoryId(deviceHistoryDao.getLatestDeviceHistoryId(d.getDeviceId()));
+			if(hbr.getTollSessionId()==null)
+				hbr.setTollSessionId("");
+			String tollSessionId;
+			int index=hbr.getTollSessionId().indexOf('#');
+			if(index==-1)
 			{
-				tollSessionId=hbr.getTollSessionId();
+				if(t!=null)
+					tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+				else
+					tollSessionId=Integer.toString(tollLocationDao.getTollLocation(np.getLatitude(), np.getLongitude()).getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
 			}
 			else
 			{
-				tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+				int tollId=Integer.parseInt(hbr.getTollSessionId().substring(0,index).trim());
+				if(t!=null && tollId==t.getTollLocationId())
+				{
+					tollSessionId=hbr.getTollSessionId();
+				}
+				else if(t!=null)
+				{
+					tollSessionId=Integer.toString(t.getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+				}
+				else
+				{
+					tollSessionId=Integer.toString(tollLocationDao.getTollLocation(np.getLatitude(), np.getLongitude()).getTollLocationId()) + "#" + myUtilDate.getCurrentTimeStamp();
+				}
 			}
+			vml.setTollSessionId(tollSessionId);
+			vml.setVmlTypeId(vmlTypeDao.getVmlTypeId(hbr.getVmlType()));
+			vmlDao.save(vml);
+			response.getHash().put("status", "success");
+			response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
+			response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
+			response.getHash().put("tollSessionId", tollSessionId);
 		}
-		vml.setTollSessionId(tollSessionId);
-		vml.setVmlTypeId(vmlTypeDao.getVmlTypeId(hbr.getVmlType()));
-		vmlDao.save(vml);
-		response.getHash().put("status", "success");
-		response.getHash().put("timeInterval",Double.toString(DEFAULT_TIME));
-		response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
-		response.getHash().put("tollSessionId", tollSessionId);
 		return jsonConverter.getJSON(request, status,response);
 	}
 	

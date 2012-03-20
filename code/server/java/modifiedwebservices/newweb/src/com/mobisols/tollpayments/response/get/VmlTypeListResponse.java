@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.response.get;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class VmlTypeListResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String,String> commands;
 	
 	/**
 	 * Instantiates a new vml type list response.
@@ -25,7 +26,7 @@ public class VmlTypeListResponse {
 	{
 		vmlTypeList = new LinkedList();
 		this.notifications = new LinkedList<String>();
-		this.commands = new LinkedList<String>();
+		this.commands =new HashMap<String, String>();
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class VmlTypeListResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 
@@ -78,7 +79,7 @@ public class VmlTypeListResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String,String> getCommands() {
 		return commands;
 	}
 

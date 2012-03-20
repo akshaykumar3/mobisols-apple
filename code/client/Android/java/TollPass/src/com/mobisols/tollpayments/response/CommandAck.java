@@ -1,51 +1,51 @@
-package com.mobisols.tollpayments.response.get;
+/**
+ * 
+ */
+package com.mobisols.tollpayments.response;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The Class CcTypeListResponse.
+ * @author Raghu
+ *
  */
-public class CcTypeListResponse {
-	
-	/** The cc type list. */
-	private List<CcType> ccTypeList;
+public class CommandAck {
+
+	private String description;
 	
 	/** The notifications. */
 	private List<String> notifications;
 	
 	/** The commands. */
-	private HashMap<String,String> commands;
+	private List<String> commands;
 	
 	/**
-	 * Instantiates a new cc type list response.
+	 * Instantiates a new CommandAck
 	 */
-	public CcTypeListResponse()
-	{
-		this.ccTypeList=new LinkedList<CcType>();
+	public CommandAck(){
 		this.notifications = new LinkedList<String>();
-		this.commands = new HashMap<String,String>();
+		this.commands = new LinkedList<String>();
 	}
-
+	
 	/**
 	 * Gets the commands.
 	 *
 	 * @return the commands
 	 */
-	public HashMap<String,String> getCommands() {
+	public List<String> getCommands() {
 		return commands;
 	}
-
+	
 	/**
 	 * Sets the commands.
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(HashMap<String,String> commands) {
+	public void setCommands(List<String> commands) {
 		this.commands = commands;
 	}
-
+	
 	/**
 	 * Gets the notifications.
 	 *
@@ -65,22 +65,20 @@ public class CcTypeListResponse {
 	}
 
 	/**
-	 * Gets the cc type list.
+	 * Gets the description.
 	 *
-	 * @return the cc type list
+	 * @return the description
 	 */
-	public List<CcType> getCcTypeList() {
-		return ccTypeList;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * Sets the cc type list.
+	 * Sets the description.
 	 *
-	 * @param ccTypeList the new cc type list
+	 * @param description the new description
 	 */
-	public void setCcTypeList(List<CcType> ccTypeList) {
-		this.ccTypeList = ccTypeList;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
-
 }

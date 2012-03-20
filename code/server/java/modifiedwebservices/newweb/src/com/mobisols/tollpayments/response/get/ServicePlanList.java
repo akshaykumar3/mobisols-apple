@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.response.get;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,16 +17,16 @@ public class ServicePlanList {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String, String> commands;
 	
 	/**
 	 * Instantiates a new service plan list.
 	 */
 	public ServicePlanList()
 	{
-		servicePlanList = new LinkedList();
+		servicePlanList = new LinkedList<ServicePlan>();
 		this.notifications = new LinkedList<String>();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String, String>();
 	}
 	
 	/**
@@ -63,4 +64,13 @@ public class ServicePlanList {
 	public void setServicePlanList(List<ServicePlan> servicePlanList) {
 		this.servicePlanList = servicePlanList;
 	}
+
+	public HashMap<String, String> getCommands() {
+		return commands;
+	}
+
+	public void setCommands(HashMap<String, String> commands) {
+		this.commands = commands;
+	}
+	
 }

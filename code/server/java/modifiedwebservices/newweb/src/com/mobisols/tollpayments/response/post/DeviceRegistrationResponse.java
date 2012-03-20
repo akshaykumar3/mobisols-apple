@@ -1,5 +1,6 @@
 package com.mobisols.tollpayments.response.post;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class DeviceRegistrationResponse {
 	private List<String> notifications;
 	
 	/** The commands. */
-	private List<String> commands;
+	private HashMap<String, String> commands;
 	
 	/**
 	 * Instantiates a new device registration response.
@@ -27,7 +28,7 @@ public class DeviceRegistrationResponse {
 	public DeviceRegistrationResponse()
 	{
 		this.notifications = new LinkedList<String>();
-		this.commands = new LinkedList<String>();
+		this.commands = new HashMap<String, String>();
 	}
 	
 	/**
@@ -89,7 +90,7 @@ public class DeviceRegistrationResponse {
 	 *
 	 * @param commands the new commands
 	 */
-	public void setCommands(List<String> commands) {
+	public void setCommands(HashMap<String,String> commands) {
 		this.commands = commands;
 	}
 	
@@ -98,7 +99,7 @@ public class DeviceRegistrationResponse {
 	 *
 	 * @return the commands
 	 */
-	public List<String> getCommands() {
+	public HashMap<String, String> getCommands() {
 		return commands;
 	}
 }

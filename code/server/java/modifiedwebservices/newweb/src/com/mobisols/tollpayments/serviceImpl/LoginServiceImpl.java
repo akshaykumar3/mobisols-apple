@@ -1,9 +1,15 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.UserDao;
+import com.mobisols.tollpayments.dao.UserNotificationDao;
+import com.mobisols.tollpayments.model.Client;
 import com.mobisols.tollpayments.model.Device;
 import com.mobisols.tollpayments.model.User;
+import com.mobisols.tollpayments.model.UserNotification;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.request.post.LoginRequest;
 import com.mobisols.tollpayments.response.post.LoginResponse;
@@ -23,6 +29,8 @@ public class LoginServiceImpl implements LoginService {
 	
 	/** The json converter. */
 	private JsonConverter jsonConverter;
+	
+	private UserNotificationDao userNotificationDao;
 	
 	/** The Constant PASSWORD_CORRECT_FALSE. */
 	public static final String PASSWORD_CORRECT_FALSE="N";
@@ -63,7 +71,20 @@ public class LoginServiceImpl implements LoginService {
 				if(d==null)
 				{
 					response.getResponse().put("deviceExists", DeviceDao.DEVICE_NOT_EXISTS);
-					response.getCommands().add("DoDeviceRegistration");
+					UserNotification un = new UserNotification();
+					un.setAddTimestamp(new Timestamp(new Date().getTime()));
+					un.setClientId(Client.PRESENT_CLIENT);
+					un.setCreatedOn(new Timestamp(new Date().getTime()));
+					//un.setDeviceId(d.getDeviceId());
+					un.setLastModifiedBy(UserDao.DEFAULT_USER);
+					un.setLastModifiedOn(new Timestamp(new Date().getTime()));
+					un.setNotification("DoDeviceRegistration");
+					un.setSendAt(new Timestamp(new Date().getTime()));
+					un.setSentTimestamp(new Timestamp(new Date().getTime()));
+					un.setStatus(UserNotificationDao.COMMAND_PROGRESS);
+					un.setUserNotificationType(UserNotificationDao.USER_COMMAND);
+					userNotificationDao.save(un);
+					response.getCommands().put(un.getUserNotificationId().toString(),un.getNotification());
 					return jsonConverter.getJSON(request, status,response);
 				}
 				response.getResponse().put("deviceExists", DeviceDao.DEVICE_EXISTS);
@@ -141,4 +162,13 @@ public class LoginServiceImpl implements LoginService {
 	public void setJsonConverter(JsonConverter jsonConverter) {
 		this.jsonConverter = jsonConverter;
 	}
+
+	public UserNotificationDao getUserNotificationDao() {
+		return userNotificationDao;
+	}
+
+	public void setUserNotificationDao(UserNotificationDao userNotificationDao) {
+		this.userNotificationDao = userNotificationDao;
+	}
+	
 }
