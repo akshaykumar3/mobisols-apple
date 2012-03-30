@@ -74,7 +74,7 @@
                 <column name="ack_result" length="100"/>
             </property>
             <property name="addTimestamp" type="java.sql.Timestamp">
-                <column name="addTimestamp" length="19"/>
+                <column name="add_timestamp" length="19"/>
             </property>
             <property name="sentTimestamp" type="java.sql.Timestamp">
                 <column name="sent_timestamp" length="19"/>

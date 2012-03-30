@@ -34,7 +34,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		Log.d("TollPass DataBaseHelper", "creating database");
 		db.execSQL("Create table "+TBL_HEART_BEAT+" (id INTEGER PRIMARY KEY AUTOINCREMENT,request VARCHAR(1000) NOT NULL);");
-		db.execSQL("Create table "+TBL_COMMANDS+" (id INTEGER PRIMARY KEY,command VARCHAR(1000) NOT NULL),status VARCHAR(100);");
+		db.execSQL("Create table "+TBL_COMMANDS+" (id INTEGER PRIMARY KEY,command VARCHAR(1000) NOT NULL,status VARCHAR(100));");
 	}
 
 	@Override
