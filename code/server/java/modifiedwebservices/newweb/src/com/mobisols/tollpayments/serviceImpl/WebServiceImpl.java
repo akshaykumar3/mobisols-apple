@@ -32,7 +32,6 @@ import com.mobisols.tollpayments.request.post.AddBalanceRequest;
 import com.mobisols.tollpayments.request.post.CommandAckRequest;
 import com.mobisols.tollpayments.request.post.DeviceRegistrationRequest;
 import com.mobisols.tollpayments.request.post.HeartBeatList;
-import com.mobisols.tollpayments.request.post.HeartBeatRequest;
 import com.mobisols.tollpayments.request.post.LoginRequest;
 import com.mobisols.tollpayments.request.post.PaymentDetailRequest;
 import com.mobisols.tollpayments.request.post.RegistrationServiceRequest;

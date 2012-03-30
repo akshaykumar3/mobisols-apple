@@ -24,7 +24,7 @@ public class UserNotificationDaoImpl implements UserNotificationDao {
 	 * @see com.mobisols.tollpayments.dao.UserNotificationDao#getPendingCommands(java.lang.String)
 	 */
 	@Override
-	public List<UserNotification> getPendingCommands(String deviceId) {
+	public List<UserNotification> getPendingCommands(Integer deviceId) {
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserNotification.class);
 		crit.add(Restrictions.eq("status", UserNotificationDao.COMMAND_PENDING));
@@ -37,7 +37,7 @@ public class UserNotificationDaoImpl implements UserNotificationDao {
 	 * @see com.mobisols.tollpayments.dao.UserNotificationDao#getPendingNotifications(java.lang.String)
 	 */
 	@Override
-	public List<UserNotification> getPendingNotifications(String deviceId) {
+	public List<UserNotification> getPendingNotifications(Integer deviceId) {
 		Session s = HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(UserNotification.class);
 		crit.add(Restrictions.eq("status", UserNotificationDao.NOTIFICATION_PENDING));

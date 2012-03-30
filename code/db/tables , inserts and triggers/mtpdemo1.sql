@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 29, 2012 at 06:30 AM
+-- Generation Time: Mar 30, 2012 at 08:06 AM
 -- Server version: 5.5.13
 -- PHP Version: 5.3.5
 
@@ -203,7 +203,8 @@ CREATE TABLE IF NOT EXISTS `component_all` (
 --
 
 INSERT INTO `component_all` (`component_id`, `name`, `description`, `client_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
-(1, 'server', 'server configuration', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-09 20:24:16', '2011-10-09 20:24:19', -1);
+(1, 'server', 'server configuration', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-09 20:24:16', '2011-10-09 20:24:19', -1),
+(2, 'Client', 'client configuration', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 01:41:17', '2012-03-28 01:41:20', -1);
 
 -- --------------------------------------------------------
 
@@ -260,14 +261,15 @@ CREATE TABLE IF NOT EXISTS `component_version_all` (
   PRIMARY KEY (`comp_version_id`),
   KEY `fk_cv_c` (`component_id`),
   KEY `fk_last_mod_cv` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `component_version_all`
 --
 
 INSERT INTO `component_version_all` (`comp_version_id`, `component_id`, `description`, `list_of_changes`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `version`) VALUES
-(1, 1, 'version 1', 'none', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-09 20:26:07', '2011-10-09 20:26:10', -1, '1.0');
+(1, 1, 'version 1', 'none', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-09 20:26:07', '2011-10-09 20:26:10', -1, '1.0'),
+(2, 2, 'client configuration version 1', 'no changes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 01:42:00', '2012-03-28 01:42:05', -1, '1.0');
 
 -- --------------------------------------------------------
 
@@ -322,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `configuration_all` (
   PRIMARY KEY (`config_id`),
   KEY `fk_c_cv` (`comp_version_id`),
   KEY `fk_mod_by_config_all` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `configuration_all`
@@ -370,7 +372,23 @@ INSERT INTO `configuration_all` (`config_id`, `comp_version_id`, `key`, `value`,
 (39, 1, 'import_batch_progress', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 20:46:06', '2012-01-23 20:46:12', -1),
 (40, 1, 'import_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1),
 (41, 1, 'import_batch_complete', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-26 20:05:15', '2012-01-26 20:05:19', -1),
-(42, 1, 'default_cc_type_id', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:24:16', '2012-01-28 13:24:19', -1);
+(42, 1, 'default_cc_type_id', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:24:16', '2012-01-28 13:24:19', -1),
+(43, 2, 'min_car_proximity', '200', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 01:45:14', '2012-03-28 01:45:17', -1),
+(44, 2, 'command_ack', 'COMMAND_ACK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(45, 2, 'command_status_failure', 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(46, 2, 'command_status_success', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(47, 2, 'command_status_pending', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(48, 1, 'command_pending', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(49, 1, 'command_progress', 'R', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(50, 1, 'command_success', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(51, 1, 'command_failure', 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(52, 1, 'notification_pending', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(53, 1, 'notification_success', 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(54, 1, 'user_notification_type_command', 'C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(55, 1, 'user_notification_type_notification', 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(56, 2, 'command_deactivate_user', 'DEACTIVATE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(57, 2, 'command_device_registration', 'DO_DEVICE_REGISTRATION', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:03:32', '2012-03-28 02:03:35', -1),
+(58, 2, 'command_update_client_config', 'UPDATE_CLIENT_CONFIG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-28 02:21:33', '2012-03-28 02:21:37', -1);
 
 -- --------------------------------------------------------
 
@@ -433,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `device_all` (
   KEY `fk_device_user` (`user_id`),
   KEY `fk_device_client` (`client_id`),
   KEY `fk_lastmod_device` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `device_all`
@@ -472,7 +490,12 @@ INSERT INTO `device_all` (`device_id`, `user_id`, `device_uuid`, `device_type`, 
 (34, 1, '127.0.0.12012-01-09 23:28:13.708', 'desktop', 'N', '2012-01-09 23:28:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-09 23:28:13', '2012-01-09 23:28:13', -1, 1),
 (35, -1, '127.0.0.12012-01-23 16:42:57.051', 'desktop', 'N', '2012-01-23 16:42:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-23 16:42:57', '2012-01-23 16:42:57', -1, 1),
 (36, 1, '127.0.0.12012-01-28 12:54:46.99', 'desktop', 'N', '2012-01-28 12:54:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 12:54:46', '2012-01-28 12:54:46', -1, 1),
-(37, 5, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:43:25', '2012-01-29 11:43:25', -1, 1);
+(37, 5, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:43:25', '2012-01-29 11:43:25', -1, 1),
+(38, 1, '172.30.102.712012-02-06 15:15:20.222', 'android', 'N', '2012-02-06 15:15:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-06 15:15:20', '2012-02-06 15:15:20', -1, 1),
+(39, 1, '172.30.102.712012-02-06 15:43:17.237', 'android', 'N', '2012-02-06 15:43:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-06 15:43:17', '2012-02-06 15:43:17', -1, 1),
+(40, -1, '127.0.0.12012-02-14 19:56:54.399', 'desktop', 'N', '2012-02-14 19:56:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-14 19:56:54', '2012-02-14 19:56:54', -1, 1),
+(41, 1, '127.0.0.12012-02-14 19:58:35.877', 'desktop', 'N', '2012-02-14 19:58:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-14 19:58:35', '2012-02-14 19:58:35', -1, 1),
+(42, 1, '172.30.102.712012-03-30 10:51:41.198', 'android', 'N', '2012-03-30 10:51:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 10:51:41', '2012-03-30 10:51:41', -1, 1);
 
 --
 -- Triggers `device_all`
@@ -592,7 +615,7 @@ CREATE TABLE IF NOT EXISTS `device_history_all` (
   `end_date` datetime DEFAULT NULL,
   `action` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`device_history_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
 
 --
 -- Dumping data for table `device_history_all`
@@ -658,7 +681,16 @@ INSERT INTO `device_history_all` (`device_history_id`, `device_id`, `user_id`, `
 (57, 36, -1, '127.0.0.12012-01-28 12:54:46.99', 'desktop', 'N', '2012-01-28 12:54:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-28 12:54:46', '2012-01-28 12:54:46', '2012-01-28 12:54:47', '2012-01-28 12:55:18', 'insert'),
 (58, 36, 1, '127.0.0.12012-01-28 12:54:46.99', 'desktop', 'N', '2012-01-28 12:54:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-28 12:54:46', '2012-01-28 12:54:46', '2012-01-28 12:55:19', '3000-01-01 00:00:00', 'update'),
 (59, 37, -1, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:46:42', 'insert'),
-(60, 37, 5, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:46:43', '3000-01-01 00:00:00', 'update');
+(60, 37, 5, '127.0.0.12012-01-29 11:43:25.279', 'desktop', 'N', '2012-01-29 11:43:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-01-29 11:43:25', '2012-01-29 11:43:25', '2012-01-29 11:46:43', '3000-01-01 00:00:00', 'update'),
+(61, 38, -1, '172.30.102.712012-02-06 15:15:20.222', 'android', 'N', '2012-02-06 15:15:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-06 15:15:20', '2012-02-06 15:15:20', '2012-02-06 15:15:20', '2012-02-06 15:15:56', 'insert'),
+(62, 38, 1, '172.30.102.712012-02-06 15:15:20.222', 'android', 'N', '2012-02-06 15:15:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-06 15:15:20', '2012-02-06 15:15:20', '2012-02-06 15:15:57', '3000-01-01 00:00:00', 'update'),
+(63, 39, -1, '172.30.102.712012-02-06 15:43:17.237', 'android', 'N', '2012-02-06 15:43:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-06 15:43:17', '2012-02-06 15:43:17', '2012-02-06 15:43:17', '2012-02-06 15:44:09', 'insert'),
+(64, 39, 1, '172.30.102.712012-02-06 15:43:17.237', 'android', 'N', '2012-02-06 15:43:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-06 15:43:17', '2012-02-06 15:43:17', '2012-02-06 15:44:10', '3000-01-01 00:00:00', 'update'),
+(65, 40, -1, '127.0.0.12012-02-14 19:56:54.399', 'desktop', 'N', '2012-02-14 19:56:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-14 19:56:54', '2012-02-14 19:56:54', '2012-02-14 19:56:54', '3000-01-01 00:00:00', 'insert'),
+(66, 41, -1, '127.0.0.12012-02-14 19:58:35.877', 'desktop', 'N', '2012-02-14 19:58:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-14 19:58:35', '2012-02-14 19:58:35', '2012-02-14 19:58:35', '2012-02-14 19:59:52', 'insert'),
+(67, 41, 1, '127.0.0.12012-02-14 19:58:35.877', 'desktop', 'N', '2012-02-14 19:58:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-02-14 19:58:35', '2012-02-14 19:58:35', '2012-02-14 19:59:53', '3000-01-01 00:00:00', 'update'),
+(68, 42, -1, '172.30.102.712012-03-30 10:51:41.198', 'android', 'N', '2012-03-30 10:51:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-03-30 10:51:41', '2012-03-30 10:51:41', '2012-03-30 10:51:41', '2012-03-30 10:52:28', 'insert'),
+(69, 42, 1, '172.30.102.712012-03-30 10:51:41.198', 'android', 'N', '2012-03-30 10:51:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, -1, '2012-03-30 10:51:41', '2012-03-30 10:51:41', '2012-03-30 10:52:29', '3000-01-01 00:00:00', 'update');
 
 -- --------------------------------------------------------
 
@@ -714,15 +746,18 @@ CREATE TABLE IF NOT EXISTS `make_all` (
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `fk_make_client` (`client_id`),
   KEY `fk_lmb_make` (`last_modified_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `make_all`
 --
 
 INSERT INTO `make_all` (`make_id`, `name`, `description`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `client_id`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
-(1, 'mymake', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:06', '2011-10-29 23:31:09', -1),
-(2, 'honda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:40:46', '2012-01-04 18:40:48', -1);
+(1, 'BMW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:06', '2011-10-29 23:31:09', -1),
+(2, 'Honda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:40:46', '2012-01-04 18:40:48', -1),
+(3, 'Nissan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-23 14:03:13', '2012-01-23 14:03:17', -1),
+(4, 'Toyota', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-23 14:03:13', '2012-01-23 14:03:17', -1),
+(5, 'Lexus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-23 14:03:13', '2012-01-23 14:03:17', -1);
 
 -- --------------------------------------------------------
 
@@ -783,17 +818,21 @@ CREATE TABLE IF NOT EXISTS `model_all` (
   KEY `fk_model_client` (`client_id`),
   KEY `fk_lmb_model` (`last_modified_by`),
   KEY `fk_model_vt` (`vehicle_type_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `model_all`
 --
 
 INSERT INTO `model_all` (`model_id`, `name`, `description`, `make_id`, `vehicle_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `client_id`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
-(1, 'mymodel', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:54', '2011-10-29 23:31:56', -1),
-(2, 'mymodel2', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:32:30', '2011-11-08 16:32:33', -1),
-(3, '123', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:41:28', '2012-01-04 18:41:30', -1),
-(4, '1234', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:41:55', '2012-01-04 18:41:58', -1);
+(1, '325CI Convertible', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-10-29 23:31:54', '2011-10-29 23:31:56', -1),
+(2, 'M3', NULL, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2011-11-08 16:32:30', '2011-11-08 16:32:33', -1),
+(3, 'Accord Sedan', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:41:28', '2012-01-04 18:41:30', -1),
+(4, 'Pilot', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-04 18:41:55', '2012-01-04 18:41:58', -1),
+(5, 'Odyssey', NULL, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-23 14:04:54', '2012-01-23 14:04:57', -1),
+(6, 'PathFun', NULL, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-23 14:04:54', '2012-01-23 14:04:57', -1),
+(7, 'Corolla', NULL, 4, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, -1, '2012-01-23 14:06:23', '2012-01-23 14:06:26', -1),
+(8, 'PathFinde', NULL, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-23 14:10:39', '2012-01-23 14:10:41', -1);
 
 -- --------------------------------------------------------
 
@@ -2029,7 +2068,7 @@ CREATE TABLE IF NOT EXISTS `user_all` (
 
 INSERT INTO `user_all` (`user_id`, `client_id`, `utype_id`, `user_name`, `password`, `locale`, `is_active`, `contact_no`, `last_login_time`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`) VALUES
 (-1, 1, 1, 'test', 'test', NULL, 'N', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 21:20:18', '2011-10-12 21:20:21', -1),
-(1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'N', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1),
+(1, 1, 1, 'harish@mobisols.com', 'raghu', '', 'Y', NULL, '2011-10-12 22:22:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1),
 (2, 1, 1, '1234567890', '1840', '', 'I', NULL, '2012-01-04 17:35:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 17:35:50', '2012-01-04 17:35:50', -1),
 (3, 1, 1, '9491617227', '2167', '', 'I', NULL, '2012-01-04 19:55:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-04 19:55:02', '2012-01-04 19:55:02', -1),
 (4, 1, 2, 'LA TollOperator', 'tolloperator', NULL, 'Y', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-10 20:05:21', '2012-01-10 20:05:24', -1),
@@ -2385,7 +2424,7 @@ CREATE TABLE IF NOT EXISTS `user_history_all` (
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`user_his_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='This table has all details about the users' AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `user_history_all`
@@ -2446,7 +2485,7 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 (52, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:31:25', '2012-01-28 13:31:26'),
 (53, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:31:27', '2012-01-28 13:32:42'),
 (54, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:32:43', '2012-01-28 13:32:45'),
-(55, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:32:46', '3000-01-01 00:00:00'),
+(55, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-01-28 13:32:46', '2012-02-14 20:00:22'),
 (56, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'I', NULL, 1, 'insert', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:46:42', '2012-01-29 11:48:24'),
 (57, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:48:25', '2012-01-29 11:54:06'),
 (58, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:54:07', '2012-01-29 11:54:11'),
@@ -2456,7 +2495,12 @@ INSERT INTO `user_history_all` (`user_his_id`, `user_id`, `user_name`, `password
 (62, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:03', '2012-01-29 11:59:05'),
 (63, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:06', '2012-01-29 11:59:11'),
 (64, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:12', '2012-01-29 11:59:13'),
-(65, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:14', '3000-01-01 00:00:00');
+(65, 5, '4567891230', '5657', '', 1, '2012-01-29 11:46:42', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:46:42', '2012-01-29 11:46:42', -1, '2012-01-29 11:59:14', '3000-01-01 00:00:00'),
+(66, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-02-14 20:00:23', '2012-02-14 20:00:25'),
+(67, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-02-14 20:00:26', '2012-03-30 10:54:40'),
+(68, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-03-30 10:54:41', '2012-03-30 10:54:52'),
+(69, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'N', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-03-30 10:54:53', '2012-03-30 10:54:56'),
+(70, 1, 'harish@mobisols.com', 'raghu', '', 1, '2011-10-12 22:22:34', 'Y', NULL, 1, 'update', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-12 22:22:34', '2011-10-12 22:22:34', -1, '2012-03-30 10:54:57', '3000-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -2467,7 +2511,7 @@ DROP VIEW IF EXISTS `user_notification`;
 CREATE TABLE IF NOT EXISTS `user_notification` (
 `user_notification_id` int(11)
 ,`device_id` int(11)
-,`notification_type` varchar(100)
+,`user_notification_type` varchar(100)
 ,`udf1` varchar(500)
 ,`udf2` varchar(500)
 ,`udf3` varchar(500)
@@ -2485,7 +2529,7 @@ CREATE TABLE IF NOT EXISTS `user_notification` (
 ,`status` varchar(45)
 ,`send_at` timestamp
 ,`notification` varchar(1000)
-,`ack_mesage` varchar(4000)
+,`ack_message` varchar(4000)
 ,`ack_result` varchar(100)
 ,`add_timestamp` timestamp
 ,`sent_timestamp` timestamp
@@ -2501,7 +2545,7 @@ DROP TABLE IF EXISTS `user_notification_all`;
 CREATE TABLE IF NOT EXISTS `user_notification_all` (
   `user_notification_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` int(11) DEFAULT NULL,
-  `notification_type` varchar(100) DEFAULT NULL,
+  `user_notification_type` varchar(100) DEFAULT NULL,
   `udf1` varchar(500) DEFAULT NULL,
   `udf2` varchar(500) DEFAULT NULL,
   `udf3` varchar(500) DEFAULT NULL,
@@ -2519,7 +2563,7 @@ CREATE TABLE IF NOT EXISTS `user_notification_all` (
   `status` varchar(45) DEFAULT NULL,
   `send_at` timestamp NULL DEFAULT NULL,
   `notification` varchar(1000) DEFAULT NULL,
-  `ack_mesage` varchar(4000) DEFAULT NULL,
+  `ack_message` varchar(4000) DEFAULT NULL,
   `ack_result` varchar(100) DEFAULT NULL,
   `add_timestamp` timestamp NULL DEFAULT NULL,
   `sent_timestamp` timestamp NULL DEFAULT NULL,
@@ -3142,7 +3186,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_all` (
 INSERT INTO `user_vehicle_all` (`user_vehicle_id`, `user_id`, `vehicle_start_date`, `vehicle_end_date`, `is_active`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_by`, `last_modified_on`, `created_on`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES
 (3, 2, '2012-01-04 18:35:36', '2013-01-01 00:00:00', 'N', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2012-01-04 18:35:36', '2012-01-04 18:35:36', 1, 1, NULL, '1234', 2010),
 (4, 3, '2012-01-04 19:55:40', '2013-01-01 00:00:00', 'T', '1453', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2012-01-04 19:55:40', '2012-01-04 19:55:40', 1, 1, NULL, 'red', 2010),
-(5, 1, '2012-01-28 13:29:48', NULL, 'T', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, 4, NULL, NULL, 2012),
+(5, 1, '2012-01-28 13:29:48', NULL, 'Y', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, 4, NULL, NULL, 2012),
 (7, 5, '2012-01-29 11:58:59', NULL, 'T', '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 1, 3, NULL, 'red', 2012);
 
 --
@@ -3272,7 +3316,7 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
   `color` varchar(45) DEFAULT NULL,
   `manufactured_year` int(11) DEFAULT NULL,
   PRIMARY KEY (`uvh_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=123 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='List of vehicles registered by the user' AUTO_INCREMENT=128 ;
 
 --
 -- Dumping data for table `user_vehicle_history_all`
@@ -3280,32 +3324,12 @@ CREATE TABLE IF NOT EXISTS `user_vehicle_history_all` (
 
 INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, `is_active`, `vehicle_start_date`, `vehicle_end_date`, `registration_no`, `registered_state`, `owner_type_id`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `created_on`, `last_modified_on`, `last_modified_by`, `start_date`, `end_date`, `action`, `client_id`, `model_id`, `vin`, `color`, `manufactured_year`) VALUES
 (1, 1, 1, 'N', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-14 01:02:24', '2011-10-19 21:32:15', 'insert', 1, 0, NULL, NULL, NULL),
-(2, 2, 1, 'N', '2011-10-14 08:23:24', '2013-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 08:23:56', '2011-10-14 08:23:56', 1, '2011-10-14 08:23:56', '2011-10-14 22:14:01', 'insert', 1, 0, NULL, NULL, NULL),
-(3, 2, 1, 'N', '2011-10-14 08:23:24', '2013-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 08:23:56', '2011-10-14 08:23:56', 1, '2011-10-14 22:14:02', '2011-10-14 22:14:02', 'delete', 1, 0, NULL, NULL, NULL),
-(4, 3, 1, 'N', '2011-10-14 22:15:18', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 22:15:42', '2011-10-14 22:15:42', 1, '2011-10-14 22:15:42', '2011-10-14 22:17:05', 'insert', 1, 0, NULL, NULL, NULL),
-(5, 3, 1, 'N', '2011-10-14 22:15:18', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 22:15:42', '2011-10-14 22:15:42', 1, '2011-10-14 22:17:06', '2011-10-14 22:17:06', 'delete', 1, 0, NULL, NULL, NULL),
-(6, 4, 1, 'N', '2011-10-15 09:10:25', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 09:11:39', '2011-10-15 09:11:39', 1, '2011-10-15 09:11:39', '2011-10-15 09:16:21', 'insert', 1, 0, NULL, NULL, NULL),
-(7, 4, 1, 'N', '2011-10-15 09:10:25', '2012-01-01 00:00:00', 'qwerty', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 09:11:39', '2011-10-15 09:11:39', 1, '2011-10-15 09:16:22', '2011-10-15 09:16:22', 'delete', 1, 0, NULL, NULL, NULL),
-(8, 2, 1, 'N', '2011-10-15 23:35:56', '2014-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 23:48:04', '2011-10-15 23:48:04', 1, '2011-10-15 23:48:04', '2011-10-15 23:48:09', 'insert', 1, 0, NULL, NULL, NULL),
-(9, 2, 1, 'N', '2011-10-15 23:35:56', '2014-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-15 23:48:04', '2011-10-15 23:48:04', 1, '2011-10-15 23:48:10', '2011-10-15 23:48:10', 'delete', 1, 0, NULL, NULL, NULL),
-(10, 3, 1, 'N', '2011-10-16 00:23:39', '2012-01-01 00:00:00', 'asdfg', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 00:24:18', '2011-10-16 00:24:18', 1, '2011-10-16 00:24:18', '2011-10-16 00:24:23', 'insert', 1, 0, NULL, NULL, NULL),
 (11, 3, 1, 'N', '2011-10-16 00:23:39', '2012-01-01 00:00:00', 'asdfg', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 00:24:18', '2011-10-16 00:24:18', 1, '2011-10-16 00:24:24', '2011-10-16 00:24:24', 'delete', 1, 0, NULL, NULL, NULL),
-(12, 4, 1, 'N', '2011-10-16 08:42:42', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:44:23', '2011-10-16 08:44:23', 1, '2011-10-16 08:44:23', '2011-10-16 08:55:20', 'insert', 1, 0, NULL, NULL, NULL),
 (13, 4, 1, 'N', '2011-10-16 08:42:42', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:44:23', '2011-10-16 08:44:23', 1, '2011-10-16 08:55:21', '2011-10-16 08:55:21', 'delete', 1, 0, NULL, NULL, NULL),
-(14, 5, 1, 'N', '2011-10-16 08:56:57', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:57:52', '2011-10-16 08:57:52', 1, '2011-10-16 08:57:52', '2011-10-16 09:18:25', 'insert', 1, 0, NULL, NULL, NULL),
 (15, 5, 1, 'N', '2011-10-16 08:56:57', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 08:57:52', '2011-10-16 08:57:52', 1, '2011-10-16 09:18:27', '2011-10-16 09:18:27', 'delete', 1, 0, NULL, NULL, NULL),
-(16, 2, 1, 'N', '2011-10-16 22:07:28', NULL, '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 22:07:47', '2011-10-16 22:07:47', 1, '2011-10-16 22:07:47', '2011-10-16 23:20:09', 'insert', 1, 0, NULL, NULL, NULL),
-(17, 2, 1, 'N', '2011-10-16 22:07:28', NULL, '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-16 22:07:47', '2011-10-16 22:07:47', 1, '2011-10-16 23:20:10', '2011-10-16 23:20:10', 'delete', 1, 0, NULL, NULL, NULL),
-(18, 2, 1, 'N', '2011-10-17 13:07:09', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:08:17', '2011-10-17 13:08:17', 1, '2011-10-17 13:08:17', '2011-10-17 13:08:49', 'insert', 1, 0, NULL, NULL, NULL),
-(19, 2, 1, 'N', '2011-10-17 13:07:09', '2012-01-01 00:00:00', '123456', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:08:17', '2011-10-17 13:08:17', 1, '2011-10-17 13:08:50', '2011-10-17 13:08:50', 'delete', 1, 0, NULL, NULL, NULL),
-(20, 3, 1, 'N', '2011-10-17 13:14:59', '2011-10-18 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:28', 1, '2011-10-17 13:16:28', '2011-10-17 13:16:43', 'insert', 1, 0, NULL, NULL, NULL),
 (21, 3, 1, 'N', '2011-10-17 13:14:59', '2011-10-24 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:44', 1, '2011-10-17 13:16:44', '2011-10-17 13:16:54', 'update', 1, 0, NULL, NULL, NULL),
-(22, 3, 1, 'N', '2011-10-17 13:14:59', '2011-10-24 00:00:00', '123456', 'DE', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-17 13:16:28', '2011-10-17 13:16:44', 1, '2011-10-17 13:16:55', '2011-10-17 13:16:55', 'delete', 1, 0, NULL, NULL, NULL),
 (23, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:32:16', '2011-10-19 21:39:31', 'update', 1, 0, NULL, NULL, NULL),
 (24, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-19 21:39:32', '2011-10-19 21:40:41', 'update', 1, 0, NULL, NULL, NULL),
-(26, 2, 1, 'Y', '2011-10-28 09:42:09', '2011-10-28 09:42:12', 'asfsafag', 'sfsafa', -1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 09:42:42', '2011-10-28 09:42:38', -1, '2011-10-28 09:43:09', '2011-10-28 09:43:35', 'insert', -1, 0, NULL, 'safas', 2011),
-(29, 3, 1, 'N', '2011-10-28 09:48:02', '2012-01-01 00:00:00', 'afk;asf', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 09:48:29', '2011-10-28 09:48:29', 1, '2011-10-28 09:48:29', '2011-10-28 09:48:36', 'insert', 1, 0, NULL, NULL, NULL),
-(30, 3, 1, 'N', '2011-10-28 09:48:02', '2012-01-01 00:00:00', 'afk;asf', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 09:48:29', '2011-10-28 09:48:29', 1, '2011-10-28 09:48:37', '2011-10-28 09:48:37', 'delete', 1, 0, NULL, NULL, NULL),
 (31, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-30 18:25:44', '2011-10-30 18:26:19', 'update', 1, 0, NULL, NULL, NULL),
 (32, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-30 18:26:20', '2011-10-30 18:26:29', 'update', 1, 0, NULL, NULL, NULL),
 (33, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-30 18:26:30', '2011-10-30 18:26:31', 'update', 1, 0, NULL, NULL, NULL),
@@ -3323,17 +3347,12 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (45, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-30 20:36:32', '2011-10-30 20:36:37', 'update', 1, 0, NULL, NULL, NULL),
 (46, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-30 20:36:38', '2011-10-30 20:36:56', 'update', 1, 0, NULL, NULL, NULL),
 (47, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-10-30 20:36:57', '2011-11-03 22:08:03', 'update', 1, 0, NULL, NULL, NULL),
-(48, 2, 1, 'N', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-10-30 22:53:33', '2011-11-03 22:07:50', 'insert', 1, 0, NULL, 'blue', 2010),
 (49, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-11-03 22:07:51', '2011-11-03 22:08:57', 'update', 1, 0, NULL, 'blue', 2010),
 (50, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-11-03 22:08:04', '2011-11-03 22:08:48', 'update', 1, 0, NULL, NULL, NULL),
 (51, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-10-14 01:02:24', 1, '2011-11-03 22:08:49', '2011-11-05 11:31:46', 'update', 1, 1, NULL, NULL, NULL),
 (52, 2, 1, 'Y', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-11-03 22:08:58', '2011-11-10 20:03:08', 'update', 1, 1, NULL, 'blue', 2010),
 (53, 1, 1, 'T', '2011-10-14 01:01:46', '2014-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:31:47', 1, '2011-11-05 11:31:47', '2011-11-05 11:33:23', 'update', 1, 1, NULL, '', 0),
 (54, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-05 11:33:24', '2011-11-10 20:03:01', 'update', 1, 1, NULL, '', 0),
-(55, 3, 1, 'N', '2011-11-05 11:38:21', '2012-01-01 00:00:00', 'fasjdlf;a', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 11:38:21', '2011-11-05 11:38:21', 1, '2011-11-05 11:38:21', '2011-11-05 13:34:37', 'insert', 1, 0, NULL, '', 2010),
-(56, 3, 1, 'N', '2011-11-05 11:38:21', '2012-01-01 00:00:00', 'fasjdlf;a', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 11:38:21', '2011-11-05 11:38:21', 1, '2011-11-05 13:34:38', '2011-11-05 13:34:38', 'delete', 1, 0, NULL, '', NULL),
-(57, 4, 1, 'N', '2011-11-05 13:35:52', '2012-01-01 00:00:00', 'asdfasf', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 13:35:53', '2011-11-05 13:35:53', 1, '2011-11-05 13:35:53', '2011-11-05 13:36:36', 'insert', 1, 0, NULL, '', 0),
-(58, 4, 1, 'N', '2011-11-05 13:35:52', '2012-01-01 00:00:00', 'asdfasf', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-11-05 13:35:53', '2011-11-05 13:35:53', 1, '2011-11-05 13:36:37', '2011-11-05 13:36:37', 'delete', 1, 0, NULL, '', NULL),
 (59, 1, 1, 'Y', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:02', '2011-11-10 20:03:08', 'update', 1, 1, NULL, '', 0),
 (60, 2, 1, 'T', '2011-10-30 22:53:30', '2012-01-01 00:00:00', '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-30 22:53:33', '2011-10-30 22:53:33', 1, '2011-11-10 20:03:09', '2012-01-07 20:02:32', 'update', 1, 1, NULL, 'blue', 2010),
 (61, 1, 1, 'T', '2011-10-14 01:01:46', '2012-01-01 00:00:00', 'abcdef', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-14 01:02:24', '2011-11-05 11:33:24', 1, '2011-11-10 20:03:09', '2011-11-10 20:03:11', 'update', 1, 1, NULL, '', 0),
@@ -3384,7 +3403,7 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (106, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:31:25', '2012-01-28 13:31:26', 'update', 1, 4, NULL, NULL, 2012),
 (107, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:31:27', '2012-01-28 13:32:42', 'update', 1, 4, NULL, NULL, 2012),
 (108, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:32:43', '2012-01-28 13:32:45', 'update', 1, 4, NULL, NULL, 2012),
-(109, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:32:46', '3000-01-01 00:00:00', 'update', 1, 4, NULL, NULL, 2012),
+(109, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-01-28 13:32:46', '2012-02-14 20:00:22', 'update', 1, 4, NULL, NULL, 2012),
 (110, 6, 5, 'N', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:47:24', '2012-01-29 11:49:49', 'insert', 1, 1, NULL, 'red', 2012),
 (111, 6, 5, 'I', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:49:50', '2012-01-29 11:52:48', 'update', 1, 1, NULL, 'red', 2012),
 (112, 6, 5, 'T', '2012-01-29 11:47:23', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:47:23', '2012-01-29 11:47:23', 5, '2012-01-29 11:52:49', '2012-01-29 11:54:06', 'update', 1, 1, NULL, 'red', 2012),
@@ -3397,7 +3416,12 @@ INSERT INTO `user_vehicle_history_all` (`uvh_id`, `user_vehicle_id`, `user_id`, 
 (119, 7, 5, 'Y', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:03', '2012-01-29 11:59:05', 'update', 1, 3, NULL, 'red', 2012),
 (120, 7, 5, 'T', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:06', '2012-01-29 11:59:11', 'update', 1, 3, NULL, 'red', 2012),
 (121, 7, 5, 'Y', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:12', '2012-01-29 11:59:13', 'update', 1, 3, NULL, 'red', 2012),
-(122, 7, 5, 'T', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:14', '3000-01-01 00:00:00', 'update', 1, 3, NULL, 'red', 2012);
+(122, 7, 5, 'T', '2012-01-29 11:58:59', NULL, '789', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-29 11:58:59', '2012-01-29 11:58:59', 5, '2012-01-29 11:59:14', '3000-01-01 00:00:00', 'update', 1, 3, NULL, 'red', 2012),
+(123, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-02-14 20:00:23', '2012-02-14 20:00:25', 'update', 1, 4, NULL, NULL, 2012),
+(124, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-02-14 20:00:26', '2012-03-30 10:54:40', 'update', 1, 4, NULL, NULL, 2012),
+(125, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-03-30 10:54:41', '2012-03-30 10:54:52', 'update', 1, 4, NULL, NULL, 2012),
+(126, 5, 1, 'T', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-03-30 10:54:53', '2012-03-30 10:54:56', 'update', 1, 4, NULL, NULL, 2012),
+(127, 5, 1, 'Y', '2012-01-28 13:29:48', NULL, '1234', 'AL', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-01-28 13:29:48', '2012-01-28 13:29:48', 1, '2012-03-30 10:54:57', '3000-01-01 00:00:00', 'update', 1, 4, NULL, NULL, 2012);
 
 -- --------------------------------------------------------
 
@@ -3539,7 +3563,7 @@ CREATE TABLE IF NOT EXISTS `vehicle_movement_log_all` (
   KEY `fk_last_mod_by_vmla` (`last_modified_by`),
   KEY `fk_client_vml` (`client_id`),
   KEY `fk_vml_toll_location` (`toll_location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Trackiing the vehicle movement ' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Trackiing the vehicle movement ' AUTO_INCREMENT=353 ;
 
 --
 -- Dumping data for table `vehicle_movement_log_all`
@@ -3555,7 +3579,350 @@ INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history
 (7, 1, 36, NULL, NULL, '2011-10-27 22:43:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 22:43:10', 1, '2011-10-27 22:43:10', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 22:43:10.333', 104.127),
 (8, 1, 36, NULL, NULL, '2011-10-27 22:49:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-27 22:49:45', 1, '2011-10-27 22:49:45', 1, '31.064520', '-104.263282', NULL, '24#2011-10-27 22:49:45.897', 104.127),
 (9, 1, 36, NULL, NULL, '2011-10-28 02:29:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 02:29:36', 1, '2011-10-28 02:29:36', 1, '31.064520', '-104.263282', NULL, '24#2011-10-28 02:29:36.761', 104.127),
-(10, 1, 36, NULL, NULL, '2011-10-28 02:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 02:29:58', 1, '2011-10-28 02:29:58', 1, '31.061340', '-104.153717', NULL, '24#2011-10-28 02:29:58.614', 104.127);
+(10, 1, 36, NULL, NULL, '2011-10-28 02:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2011-10-28 02:29:58', 1, '2011-10-28 02:29:58', 1, '31.061340', '-104.153717', NULL, '24#2011-10-28 02:29:58.614', 104.127),
+(11, 1, 64, NULL, NULL, '2012-02-16 09:43:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 09:43:01', 1, '2012-02-16 09:43:01', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 09:43:01.471', 104.127),
+(12, 1, 64, NULL, NULL, '2012-02-16 09:43:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 09:43:20', 1, '2012-02-16 09:43:20', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 09:43:20.92', 104.127),
+(13, 1, 64, NULL, NULL, '2012-02-16 09:43:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 09:43:32', 1, '2012-02-16 09:43:32', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 09:43:32.181', 104.127),
+(14, 1, 64, NULL, NULL, '2012-02-16 09:43:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 09:43:32', 1, '2012-02-16 09:43:32', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 09:43:32.504', 104.127),
+(15, 1, 64, NULL, NULL, '2012-02-16 09:43:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 09:43:35', 1, '2012-02-16 09:43:35', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 09:43:35.352', 104.127),
+(16, 1, 64, NULL, NULL, '2012-02-16 10:10:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:10:50', 1, '2012-02-16 10:10:50', 1, '32.964812', '-117.164258', NULL, '24#2012-02-16 10:10:50.523', 104.145),
+(17, 1, 64, NULL, NULL, '2012-02-16 10:11:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:11:30', 1, '2012-02-16 10:11:30', 1, '32.941085', '-117.219772', NULL, '24#2012-02-16 10:11:31.008', 104.144),
+(18, 1, 64, NULL, NULL, '2012-02-16 10:11:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:11:44', 1, '2012-02-16 10:11:44', 1, '32.932645', '-117.240048', NULL, '24#2012-02-16 10:11:44.588', 104.144),
+(19, 1, 64, NULL, NULL, '2012-02-16 10:12:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:12:02', 1, '2012-02-16 10:12:02', 1, '32.914260', '-117.230785', NULL, '24#2012-02-16 10:12:02.378', 104.144),
+(20, 1, 64, NULL, NULL, '2012-02-16 10:13:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:13:04', 1, '2012-02-16 10:13:04', 1, '32.901498', '-117.187157', NULL, '24#2012-02-16 10:13:04.763', 104.144),
+(21, 1, 64, NULL, NULL, '2012-02-16 10:15:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:15:19', 1, '2012-02-16 10:15:19', 1, '32.940515', '-117.109853', NULL, '24#2012-02-16 10:15:19.433', 104.144),
+(22, 1, 64, NULL, NULL, '2012-02-16 10:17:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:17:50', 1, '2012-02-16 10:17:50', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 10:17:50.217', 104.127),
+(23, 1, 64, NULL, NULL, '2012-02-16 10:18:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:18:12', 1, '2012-02-16 10:18:12', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 10:18:12.516', 104.127),
+(24, 1, 64, NULL, NULL, '2012-02-16 10:18:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:18:18', 1, '2012-02-16 10:18:18', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 10:18:18.758', 104.127),
+(25, 1, 64, NULL, NULL, '2012-02-16 10:18:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:18:26', 1, '2012-02-16 10:18:26', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 10:18:26.878', 104.127),
+(26, 1, 64, NULL, NULL, '2012-02-16 10:18:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:18:27', 1, '2012-02-16 10:18:27', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 10:18:27.593', 104.127),
+(27, 1, 64, NULL, NULL, '2012-02-16 10:22:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:22:48', 1, '2012-02-16 10:22:48', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 10:22:48.097', 104.127),
+(28, 1, 64, NULL, NULL, '2012-02-16 10:24:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:24:58', 1, '2012-02-16 10:24:58', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 10:24:58.82', 104.127),
+(29, 1, 64, NULL, NULL, '2012-02-16 10:25:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:25:21', 1, '2012-02-16 10:25:21', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 10:25:21.44', 104.127),
+(30, 1, 64, NULL, NULL, '2012-02-16 10:25:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:25:28', 1, '2012-02-16 10:25:28', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 10:25:28.495', 104.127),
+(31, 1, 64, NULL, NULL, '2012-02-16 10:25:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:25:33', 1, '2012-02-16 10:25:33', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 10:25:33.537', 104.127),
+(32, 1, 64, NULL, NULL, '2012-02-16 10:25:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:25:35', 1, '2012-02-16 10:25:35', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 10:25:36.034', 104.127),
+(33, 1, 64, NULL, NULL, '2012-02-16 10:28:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:28:54', 1, '2012-02-16 10:28:54', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 10:28:55.126', 104.127),
+(34, 1, 64, NULL, NULL, '2012-02-16 10:29:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:29:22', 1, '2012-02-16 10:29:22', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 10:29:22.076', 104.127),
+(35, 1, 64, NULL, NULL, '2012-02-16 10:39:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:39:18', 1, '2012-02-16 10:39:18', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 10:39:18.579', 104.127),
+(36, 1, 64, NULL, NULL, '2012-02-16 10:39:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:39:27', 1, '2012-02-16 10:39:27', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 10:39:27.546', 104.127),
+(37, 1, 64, NULL, NULL, '2012-02-16 10:39:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:39:39', 1, '2012-02-16 10:39:39', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 10:39:39.468', 104.127),
+(38, 1, 64, NULL, NULL, '2012-02-16 10:39:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:39:50', 1, '2012-02-16 10:39:50', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 10:39:50.228', 104.127),
+(39, 1, 64, NULL, NULL, '2012-02-16 10:39:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:39:54', 1, '2012-02-16 10:39:54', 1, '31.071928', '-104.130782', NULL, '24#2012-02-16 10:39:54.316', 104.127),
+(40, 1, 64, NULL, NULL, '2012-02-16 10:39:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 10:39:56', 1, '2012-02-16 10:39:56', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 10:39:56.465', 104.127),
+(41, 1, 64, NULL, NULL, '2012-02-16 13:38:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:38:24', 1, '2012-02-16 13:38:24', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 13:38:24.546', 104.127),
+(42, 1, 64, NULL, NULL, '2012-02-16 13:38:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:38:32', 1, '2012-02-16 13:38:32', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 13:38:32.938', 104.127),
+(43, 1, 64, NULL, NULL, '2012-02-16 13:38:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:38:45', 1, '2012-02-16 13:38:45', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 13:38:45.27', 104.127),
+(44, 1, 64, NULL, NULL, '2012-02-16 13:39:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:39:01', 1, '2012-02-16 13:39:01', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 13:39:01.151', 104.127),
+(45, 1, 64, NULL, NULL, '2012-02-16 13:39:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:39:01', 1, '2012-02-16 13:39:01', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 13:39:01.353', 104.127),
+(46, 1, 64, NULL, NULL, '2012-02-16 13:39:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:39:01', 1, '2012-02-16 13:39:01', 1, '31.072658', '-104.127440', NULL, '24#2012-02-16 13:39:02.04', 104.127),
+(47, 1, 64, NULL, NULL, '2012-02-16 13:58:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 13:58:31', 1, '2012-02-16 13:58:31', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 13:58:31.532', 104.127),
+(48, 1, 64, NULL, NULL, '2012-02-16 14:04:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:04:06', 1, '2012-02-16 14:04:06', 1, '31.072658', '-104.127440', NULL, '24#2012-02-16 14:04:06.597', 104.127),
+(49, 1, 64, NULL, NULL, '2012-02-16 14:22:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:22:35', 1, '2012-02-16 14:22:35', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 14:22:35.224', 104.127),
+(50, 1, 64, NULL, NULL, '2012-02-16 14:22:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:22:39', 1, '2012-02-16 14:22:39', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 14:22:39.516', 104.127),
+(51, 1, 64, NULL, NULL, '2012-02-16 14:22:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:22:40', 1, '2012-02-16 14:22:40', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 14:22:41.006', 104.127),
+(52, 1, 64, NULL, NULL, '2012-02-16 14:30:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:30:22', 1, '2012-02-16 14:30:22', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 14:30:22.65', 104.127),
+(53, 1, 64, NULL, NULL, '2012-02-16 14:30:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:30:33', 1, '2012-02-16 14:30:33', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 14:30:33.267', 104.127),
+(54, 1, 64, NULL, NULL, '2012-02-16 14:30:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:30:51', 1, '2012-02-16 14:30:51', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 14:30:51.41', 104.127),
+(55, 1, 64, NULL, NULL, '2012-02-16 14:30:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:30:55', 1, '2012-02-16 14:30:55', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 14:30:55.067', 104.127),
+(56, 1, 64, NULL, NULL, '2012-02-16 14:30:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:30:59', 1, '2012-02-16 14:30:59', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 14:31:00.039', 104.127),
+(57, 1, 64, NULL, NULL, '2012-02-16 14:31:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:31:01', 1, '2012-02-16 14:31:01', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 14:31:01.368', 104.127),
+(58, 1, 64, NULL, NULL, '2012-02-16 14:42:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:42:53', 1, '2012-02-16 14:42:53', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 14:42:54.078', 104.127),
+(59, 1, 64, NULL, NULL, '2012-02-16 14:42:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:43:03', 1, '2012-02-16 14:43:03', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 14:43:03.692', 104.127),
+(60, 1, 64, NULL, NULL, '2012-02-16 14:43:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:43:18', 1, '2012-02-16 14:43:18', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 14:43:18.339', 104.127),
+(61, 1, 64, NULL, NULL, '2012-02-16 14:43:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:43:28', 1, '2012-02-16 14:43:28', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 14:43:28.32', 104.127),
+(62, 1, 64, NULL, NULL, '2012-02-16 14:43:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:43:28', 1, '2012-02-16 14:43:28', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 14:43:28.356', 104.127),
+(63, 1, 64, NULL, NULL, '2012-02-16 14:53:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:53:36', 1, '2012-02-16 14:53:36', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 14:53:36.266', 104.127),
+(64, 1, 64, NULL, NULL, '2012-02-16 14:53:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:53:45', 1, '2012-02-16 14:53:45', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 14:53:45.676', 104.127),
+(65, 1, 64, NULL, NULL, '2012-02-16 14:53:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:53:59', 1, '2012-02-16 14:53:59', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 14:53:59.115', 104.127),
+(66, 1, 64, NULL, NULL, '2012-02-16 14:53:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:54:08', 1, '2012-02-16 14:54:08', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 14:54:08.35', 104.127),
+(67, 1, 64, NULL, NULL, '2012-02-16 14:53:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:54:10', 1, '2012-02-16 14:54:10', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 14:54:10.052', 104.127),
+(68, 1, 64, NULL, NULL, '2012-02-16 14:54:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:54:15', 1, '2012-02-16 14:54:15', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 14:54:15.793', 104.127),
+(69, 1, 64, NULL, NULL, '2012-02-16 14:58:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 14:58:59', 1, '2012-02-16 14:58:59', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 14:59:00.021', 104.127),
+(70, 1, 64, NULL, NULL, '2012-02-16 15:06:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:06:36', 1, '2012-02-16 15:06:36', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 15:06:36.232', 104.127),
+(71, 1, 64, NULL, NULL, '2012-02-16 15:10:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:10:40', 1, '2012-02-16 15:10:40', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 15:10:40.751', 104.127),
+(72, 1, 64, NULL, NULL, '2012-02-16 15:10:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:10:48', 1, '2012-02-16 15:10:48', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 15:10:48.599', 104.127),
+(73, 1, 64, NULL, NULL, '2012-02-16 15:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:11:06', 1, '2012-02-16 15:11:06', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 15:11:06.66', 104.127),
+(74, 1, 64, NULL, NULL, '2012-02-16 15:11:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:11:18', 1, '2012-02-16 15:11:18', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 15:11:18.96', 104.127),
+(75, 1, 64, NULL, NULL, '2012-02-16 15:11:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:11:19', 1, '2012-02-16 15:11:19', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 15:11:19.128', 104.127),
+(76, 1, 64, NULL, NULL, '2012-02-16 15:10:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 15:11:20', 1, '2012-02-16 15:11:20', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 15:11:20.341', 104.127),
+(77, 1, 64, NULL, NULL, '2012-02-16 20:13:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:13:24', 1, '2012-02-16 20:13:24', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:13:24.854', 104.127),
+(78, 1, 64, NULL, NULL, '2012-02-16 20:13:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:13:32', 1, '2012-02-16 20:13:32', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:13:32.425', 104.127),
+(79, 1, 64, NULL, NULL, '2012-02-16 20:13:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:13:45', 1, '2012-02-16 20:13:45', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:13:45.592', 104.127),
+(80, 1, 64, NULL, NULL, '2012-02-16 20:13:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:13:55', 1, '2012-02-16 20:13:55', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 20:13:55.953', 104.127),
+(81, 1, 64, NULL, NULL, '2012-02-16 20:13:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:14:01', 1, '2012-02-16 20:14:01', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 20:14:01.132', 104.127),
+(82, 1, 64, NULL, NULL, '2012-02-16 20:13:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:14:02', 1, '2012-02-16 20:14:02', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 20:14:02.685', 104.127),
+(83, 1, 64, NULL, NULL, '2012-02-16 20:15:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:15:33', 1, '2012-02-16 20:15:33', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:15:33.924', 104.127),
+(84, 1, 64, NULL, NULL, '2012-02-16 20:15:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:15:40', 1, '2012-02-16 20:15:40', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:15:41.029', 104.127),
+(85, 1, 64, NULL, NULL, '2012-02-16 20:15:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:15:55', 1, '2012-02-16 20:15:55', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:15:55.264', 104.127),
+(86, 1, 64, NULL, NULL, '2012-02-16 20:15:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:16:05', 1, '2012-02-16 20:16:05', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 20:16:05.928', 104.127),
+(87, 1, 64, NULL, NULL, '2012-02-16 20:15:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:16:06', 1, '2012-02-16 20:16:06', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 20:16:06.412', 104.127),
+(88, 1, 64, NULL, NULL, '2012-02-16 20:15:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:16:08', 1, '2012-02-16 20:16:08', 1, '31.071928', '-104.130782', NULL, '24#2012-02-16 20:16:08.594', 104.127),
+(89, 1, 64, NULL, NULL, '2012-02-16 20:31:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:48', 1, '2012-02-16 20:31:48', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:31:48.925', 104.127),
+(90, 1, 64, NULL, NULL, '2012-02-16 20:31:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:50', 1, '2012-02-16 20:31:50', 1, '31.071380', '-104.132400', NULL, '24#2012-02-16 20:31:50.739', 104.127),
+(91, 1, 64, NULL, NULL, '2012-02-16 20:31:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:51', 1, '2012-02-16 20:31:51', 1, '31.072308', '-104.129210', NULL, '24#2012-02-16 20:31:51.718', 104.127),
+(92, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:53', 1, '2012-02-16 20:31:53', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:53.588', 104.127),
+(93, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:54', 1, '2012-02-16 20:31:54', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:54.049', 104.127),
+(94, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:54', 1, '2012-02-16 20:31:54', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:54.378', 104.127),
+(95, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:54', 1, '2012-02-16 20:31:54', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:54.805', 104.127),
+(96, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:55', 1, '2012-02-16 20:31:55', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:55.102', 104.127),
+(97, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:55', 1, '2012-02-16 20:31:55', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:55.489', 104.127),
+(98, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:55', 1, '2012-02-16 20:31:55', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:55.905', 104.127),
+(99, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:56', 1, '2012-02-16 20:31:56', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:56.237', 104.127),
+(100, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:56', 1, '2012-02-16 20:31:56', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:56.478', 104.127),
+(101, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:56', 1, '2012-02-16 20:31:56', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:56.978', 104.127),
+(102, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:57', 1, '2012-02-16 20:31:57', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:57.294', 104.127),
+(103, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:57', 1, '2012-02-16 20:31:57', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:57.807', 104.127),
+(104, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:58', 1, '2012-02-16 20:31:58', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:58.242', 104.127),
+(105, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:58', 1, '2012-02-16 20:31:58', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:58.822', 104.127),
+(106, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:59', 1, '2012-02-16 20:31:59', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:59.386', 104.127),
+(107, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:31:59', 1, '2012-02-16 20:31:59', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:31:59.985', 104.127),
+(108, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:00', 1, '2012-02-16 20:32:00', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:00.547', 104.127),
+(109, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:01', 1, '2012-02-16 20:32:01', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:01.155', 104.127),
+(110, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:01', 1, '2012-02-16 20:32:01', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:01.577', 104.127),
+(111, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:02', 1, '2012-02-16 20:32:02', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:02.185', 104.127),
+(112, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:02', 1, '2012-02-16 20:32:02', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:02.501', 104.127),
+(113, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:02', 1, '2012-02-16 20:32:02', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:02.959', 104.127),
+(114, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:03', 1, '2012-02-16 20:32:03', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:03.349', 104.127),
+(115, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:03', 1, '2012-02-16 20:32:03', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:03.685', 104.127),
+(116, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:04', 1, '2012-02-16 20:32:04', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:04.028', 104.127),
+(117, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:04', 1, '2012-02-16 20:32:04', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:04.507', 104.127),
+(118, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:05', 1, '2012-02-16 20:32:05', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:05.067', 104.127),
+(119, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:05', 1, '2012-02-16 20:32:05', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:05.449', 104.127),
+(120, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:05', 1, '2012-02-16 20:32:05', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:05.746', 104.127),
+(121, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:06', 1, '2012-02-16 20:32:06', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:06.184', 104.127),
+(122, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:06', 1, '2012-02-16 20:32:06', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:06.579', 104.127),
+(123, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:12', 1, '2012-02-16 20:32:12', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:12.461', 104.127),
+(124, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:12', 1, '2012-02-16 20:32:12', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:12.731', 104.127),
+(125, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:13', 1, '2012-02-16 20:32:13', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:13.251', 104.127),
+(126, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:13', 1, '2012-02-16 20:32:13', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:13.649', 104.127),
+(127, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:14', 1, '2012-02-16 20:32:14', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:14.051', 104.127),
+(128, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:14', 1, '2012-02-16 20:32:14', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:14.326', 104.127),
+(129, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:14', 1, '2012-02-16 20:32:14', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:14.804', 104.127),
+(130, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:15', 1, '2012-02-16 20:32:15', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:15.493', 104.127),
+(131, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:15', 1, '2012-02-16 20:32:15', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:15.885', 104.127),
+(132, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:16', 1, '2012-02-16 20:32:16', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:16.18', 104.127),
+(133, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:16', 1, '2012-02-16 20:32:16', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:16.662', 104.127),
+(134, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:16', 1, '2012-02-16 20:32:16', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:16.964', 104.127),
+(135, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:17', 1, '2012-02-16 20:32:17', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:17.291', 104.127),
+(136, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:17', 1, '2012-02-16 20:32:17', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:17.604', 104.127),
+(137, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:18', 1, '2012-02-16 20:32:18', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:18.09', 104.127),
+(138, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:18', 1, '2012-02-16 20:32:18', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:18.535', 104.127),
+(139, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:19', 1, '2012-02-16 20:32:19', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:19.232', 104.127),
+(140, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:19', 1, '2012-02-16 20:32:19', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:19.639', 104.127),
+(141, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:20', 1, '2012-02-16 20:32:20', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:20.154', 104.127),
+(142, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:20', 1, '2012-02-16 20:32:20', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:20.577', 104.127),
+(143, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:21', 1, '2012-02-16 20:32:21', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:21.215', 104.127),
+(144, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:21', 1, '2012-02-16 20:32:21', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:21.678', 104.127),
+(145, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:22', 1, '2012-02-16 20:32:22', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:22.374', 104.127),
+(146, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:22', 1, '2012-02-16 20:32:22', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:22.68', 104.127),
+(147, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:23', 1, '2012-02-16 20:32:23', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:23.186', 104.127),
+(148, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:23', 1, '2012-02-16 20:32:23', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:23.519', 104.127),
+(149, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:23', 1, '2012-02-16 20:32:23', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:23.918', 104.127),
+(150, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:24', 1, '2012-02-16 20:32:24', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:24.336', 104.127),
+(151, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:24', 1, '2012-02-16 20:32:24', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:24.675', 104.127),
+(152, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:24', 1, '2012-02-16 20:32:24', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:24.994', 104.127),
+(153, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:25', 1, '2012-02-16 20:32:25', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:25.484', 104.127),
+(154, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:25', 1, '2012-02-16 20:32:25', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:26.017', 104.127),
+(155, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:26', 1, '2012-02-16 20:32:26', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:26.494', 104.127),
+(156, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:26', 1, '2012-02-16 20:32:26', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:26.894', 104.127),
+(157, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:27', 1, '2012-02-16 20:32:27', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:27.277', 104.127),
+(158, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:27', 1, '2012-02-16 20:32:27', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:27.672', 104.127),
+(159, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:28', 1, '2012-02-16 20:32:28', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:28.123', 104.127),
+(160, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:28', 1, '2012-02-16 20:32:28', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:28.686', 104.127),
+(161, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:29', 1, '2012-02-16 20:32:29', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:29.18', 104.127),
+(162, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:29', 1, '2012-02-16 20:32:29', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:29.628', 104.127),
+(163, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:30', 1, '2012-02-16 20:32:30', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:30.351', 104.127),
+(164, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:30', 1, '2012-02-16 20:32:30', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:30.718', 104.127),
+(165, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:32:31', 1, '2012-02-16 20:32:31', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:32:31.282', 104.127),
+(166, 1, 64, NULL, NULL, '2012-02-16 20:45:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:19', 1, '2012-02-16 20:45:19', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:45:19.481', 104.127),
+(167, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:20', 1, '2012-02-16 20:45:20', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:45:20.962', 104.127),
+(168, 1, 64, NULL, NULL, '2012-02-16 20:31:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:21', 1, '2012-02-16 20:45:21', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:45:21.581', 104.127),
+(169, 1, 64, NULL, NULL, '2012-02-16 20:31:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:21', 1, '2012-02-16 20:45:21', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:45:21.953', 104.127),
+(170, 1, 64, NULL, NULL, '2012-02-16 20:45:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:29', 1, '2012-02-16 20:45:29', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:45:29.641', 104.127),
+(171, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:30', 1, '2012-02-16 20:45:30', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:45:30.912', 104.127),
+(172, 1, 64, NULL, NULL, '2012-02-16 20:31:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:31', 1, '2012-02-16 20:45:31', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:45:31.23', 104.127),
+(173, 1, 64, NULL, NULL, '2012-02-16 20:31:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:45:31', 1, '2012-02-16 20:45:31', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:45:31.707', 104.127),
+(174, 1, 64, NULL, NULL, '2012-02-16 20:48:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:48:53', 1, '2012-02-16 20:48:53', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:48:53.717', 104.127),
+(175, 1, 64, NULL, NULL, '2012-02-16 20:31:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:48:54', 1, '2012-02-16 20:48:54', 1, '31.064520', '-104.263282', NULL, '24#2012-02-16 20:48:54.681', 104.127),
+(176, 1, 64, NULL, NULL, '2012-02-16 20:31:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:48:55', 1, '2012-02-16 20:48:55', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:48:55.396', 104.127),
+(177, 1, 64, NULL, NULL, '2012-02-16 20:31:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:48:55', 1, '2012-02-16 20:48:55', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:48:55.791', 104.127),
+(178, 1, 64, NULL, NULL, '2012-02-16 20:48:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:49:03', 1, '2012-02-16 20:49:03', 1, '31.063230', '-104.183937', NULL, '24#2012-02-16 20:49:03.612', 104.127),
+(179, 1, 64, NULL, NULL, '2012-02-16 20:49:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:49:18', 1, '2012-02-16 20:49:18', 1, '31.061340', '-104.153717', NULL, '24#2012-02-16 20:49:18.065', 104.127),
+(180, 1, 64, NULL, NULL, '2012-02-16 20:49:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:49:29', 1, '2012-02-16 20:49:29', 1, '31.068740', '-104.137862', NULL, '24#2012-02-16 20:49:29.263', 104.127),
+(181, 1, 64, NULL, NULL, '2012-02-16 20:49:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:49:33', 1, '2012-02-16 20:49:33', 1, '31.072658', '-104.127440', NULL, '24#2012-02-16 20:49:33.307', 104.127),
+(182, 1, 64, NULL, NULL, '2012-02-16 20:49:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-02-16 20:49:33', 1, '2012-02-16 20:49:33', 1, '31.071928', '-104.130782', NULL, '24#2012-02-16 20:49:33.318', 104.127),
+(183, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:20:09', 1, '2012-03-30 11:20:09', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:20:10.023', 104.127),
+(184, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:20:10', 1, '2012-03-30 11:20:10', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:20:10.332', 104.127),
+(185, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:20:10', 1, '2012-03-30 11:20:10', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:20:10.386', 104.127),
+(186, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:24:10', 1, '2012-03-30 11:24:10', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:24:10.269', 104.127),
+(187, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:24:10', 1, '2012-03-30 11:24:10', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:24:10.342', 104.127),
+(188, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:24:10', 1, '2012-03-30 11:24:10', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:24:10.411', 104.127),
+(189, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:24:10', 1, '2012-03-30 11:24:10', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:24:10.48', 104.127),
+(190, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:27:28', 1, '2012-03-30 11:27:28', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:27:28.727', 104.127),
+(191, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:27:28', 1, '2012-03-30 11:27:28', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:27:28.785', 104.127),
+(192, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:27:28', 1, '2012-03-30 11:27:28', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:27:28.832', 104.127),
+(193, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:27:28', 1, '2012-03-30 11:27:28', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:27:28.905', 104.127),
+(194, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:27:28', 1, '2012-03-30 11:27:28', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:27:28.983', 104.127),
+(195, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:39:02', 1, '2012-03-30 11:39:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:39:02.136', 104.127),
+(196, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:39:02', 1, '2012-03-30 11:39:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:39:02.227', 104.127),
+(197, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:39:02', 1, '2012-03-30 11:39:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:39:02.295', 104.127),
+(198, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:39:02', 1, '2012-03-30 11:39:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:39:02.363', 104.127),
+(199, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:39:02', 1, '2012-03-30 11:39:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:39:02.466', 104.127),
+(200, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:39:02', 1, '2012-03-30 11:39:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:39:02.545', 104.127),
+(201, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.138', 104.127),
+(202, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.213', 104.127),
+(203, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.27', 104.127),
+(204, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.347', 104.127),
+(205, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.404', 104.127),
+(206, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.473', 104.127),
+(207, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:42:20', 1, '2012-03-30 11:42:20', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:42:20.561', 104.127),
+(208, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:03', 1, '2012-03-30 11:45:03', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:03.995', 104.127),
+(209, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.07', 104.127),
+(210, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.135', 104.127),
+(211, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.209', 104.127),
+(212, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.271', 104.127),
+(213, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.34', 104.127),
+(214, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.41', 104.127);
+INSERT INTO `vehicle_movement_log_all` (`vml_id`, `vml_type_id`, `device_history_id`, `toll_location_id`, `geometry`, `timestamp`, `udf1`, `udf2`, `udf3`, `udf4`, `udf5`, `flag1`, `flag2`, `flag3`, `flag4`, `flag5`, `last_modified_on`, `last_modified_by`, `created_on`, `client_id`, `latitude`, `longitude`, `status`, `toll_session_id`, `distance`) VALUES
+(215, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:45:04', 1, '2012-03-30 11:45:04', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:45:04.466', 104.127),
+(216, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.482', 104.127),
+(217, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.567', 104.127),
+(218, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.65', 104.127),
+(219, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.707', 104.127),
+(220, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.786', 104.127),
+(221, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.853', 104.127),
+(222, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.907', 104.127),
+(223, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:07', 1, '2012-03-30 11:55:07', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:07.97', 104.127),
+(224, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:55:08', 1, '2012-03-30 11:55:08', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:55:08.027', 104.127),
+(225, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:41', 1, '2012-03-30 11:57:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:41.742', 104.127),
+(226, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:41', 1, '2012-03-30 11:57:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:41.815', 104.127),
+(227, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:41', 1, '2012-03-30 11:57:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:41.862', 104.127),
+(228, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:41', 1, '2012-03-30 11:57:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:41.96', 104.127),
+(229, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:42', 1, '2012-03-30 11:57:42', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:42.025', 104.127),
+(230, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:42', 1, '2012-03-30 11:57:42', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:42.089', 104.127),
+(231, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:42', 1, '2012-03-30 11:57:42', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:42.154', 104.127),
+(232, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:42', 1, '2012-03-30 11:57:42', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:42.223', 104.127),
+(233, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:42', 1, '2012-03-30 11:57:42', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:42.302', 104.127),
+(234, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 11:57:42', 1, '2012-03-30 11:57:42', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 11:57:42.391', 104.127),
+(235, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.6', 104.127),
+(236, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.689', 104.127),
+(237, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.756', 104.127),
+(238, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.827', 104.127),
+(239, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.872', 104.127),
+(240, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.917', 104.127),
+(241, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:12', 1, '2012-03-30 12:01:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:12.975', 104.127),
+(242, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:13', 1, '2012-03-30 12:01:13', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:13.029', 104.127),
+(243, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:13', 1, '2012-03-30 12:01:13', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:13.085', 104.127),
+(244, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:13', 1, '2012-03-30 12:01:13', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:13.15', 104.127),
+(245, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:01:13', 1, '2012-03-30 12:01:13', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:01:13.217', 104.127),
+(246, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.359', 104.127),
+(247, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.417', 104.127),
+(248, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.474', 104.127),
+(249, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.529', 104.127),
+(250, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.576', 104.127),
+(251, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.646', 104.127),
+(252, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.708', 104.127),
+(253, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.768', 104.127),
+(254, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.806', 104.127),
+(255, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.848', 104.127),
+(256, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.923', 104.127),
+(257, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:04:40', 1, '2012-03-30 12:04:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:04:40.959', 104.127),
+(258, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:01', 1, '2012-03-30 12:11:01', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:01.643', 104.127),
+(259, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:01', 1, '2012-03-30 12:11:01', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:01.694', 104.127),
+(260, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:01', 1, '2012-03-30 12:11:01', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:01.76', 104.127),
+(261, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:01', 1, '2012-03-30 12:11:01', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:01.833', 104.127),
+(262, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:01', 1, '2012-03-30 12:11:01', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:01.903', 104.127),
+(263, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:01', 1, '2012-03-30 12:11:01', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:01.954', 104.127),
+(264, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.012', 104.127),
+(265, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.069', 104.127),
+(266, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.12', 104.127),
+(267, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.162', 104.127),
+(268, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.229', 104.127),
+(269, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.283', 104.127),
+(270, 1, 69, NULL, NULL, '2012-03-30 12:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 12:11:02', 1, '2012-03-30 12:11:02', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 12:11:02.337', 104.127),
+(271, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:57', 1, '2012-03-30 13:02:57', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.002', 104.127),
+(272, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.12', 104.127),
+(273, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.163', 104.127),
+(274, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.226', 104.127),
+(275, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.289', 104.127),
+(276, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.351', 104.127),
+(277, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.391', 104.127),
+(278, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.433', 104.127),
+(279, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.48', 104.127),
+(280, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.558', 104.127),
+(281, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.618', 104.127),
+(282, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.673', 104.127),
+(283, 1, 69, NULL, NULL, '2012-03-30 12:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.726', 104.127),
+(284, 1, 69, NULL, NULL, '2012-03-30 13:02:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:02:58', 1, '2012-03-30 13:02:58', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:02:58.791', 104.127),
+(285, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.03', 104.127),
+(286, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.102', 104.127),
+(287, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.138', 104.127),
+(288, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.207', 104.127),
+(289, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.259', 104.127),
+(290, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.315', 104.127),
+(291, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.376', 104.127),
+(292, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.431', 104.127),
+(293, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.495', 104.127),
+(294, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.551', 104.127),
+(295, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.612', 104.127),
+(296, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.667', 104.127),
+(297, 1, 69, NULL, NULL, '2012-03-30 12:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.736', 104.127),
+(298, 1, 69, NULL, NULL, '2012-03-30 13:02:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.792', 104.127),
+(299, 1, 69, NULL, NULL, '2012-03-30 13:17:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:18:06', 1, '2012-03-30 13:18:06', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:18:06.848', 104.127),
+(300, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.223', 104.127),
+(301, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.287', 104.127),
+(302, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.361', 104.127),
+(303, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.452', 104.127),
+(304, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.499', 104.127),
+(305, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.54', 104.127),
+(306, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.61', 104.127),
+(307, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.658', 104.127),
+(308, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.712', 104.127),
+(309, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.782', 104.127),
+(310, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.818', 104.127),
+(311, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.861', 104.127),
+(312, 1, 69, NULL, NULL, '2012-03-30 12:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.91', 104.127),
+(313, 1, 69, NULL, NULL, '2012-03-30 13:02:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:12', 1, '2012-03-30 13:21:12', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:12.949', 104.127),
+(314, 1, 69, NULL, NULL, '2012-03-30 13:17:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:13', 1, '2012-03-30 13:21:13', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:13.017', 104.127),
+(315, 1, 69, NULL, NULL, '2012-03-30 13:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:21:13', 1, '2012-03-30 13:21:13', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:21:13.052', 104.127),
+(316, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:40', 1, '2012-03-30 13:25:40', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:40.956', 104.127),
+(317, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.011', 104.127),
+(318, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.058', 104.127),
+(319, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.116', 104.127),
+(320, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.177', 104.127),
+(321, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.224', 104.127),
+(322, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.292', 104.127),
+(323, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.361', 104.127),
+(324, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.46', 104.127),
+(325, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.521', 104.127),
+(326, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.582', 104.127),
+(327, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.653', 104.127),
+(328, 1, 69, NULL, NULL, '2012-03-30 12:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.709', 104.127),
+(329, 1, 69, NULL, NULL, '2012-03-30 13:02:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.792', 104.127),
+(330, 1, 69, NULL, NULL, '2012-03-30 13:17:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.863', 104.127),
+(331, 1, 69, NULL, NULL, '2012-03-30 13:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.916', 104.127),
+(332, 1, 69, NULL, NULL, '2012-03-30 13:25:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:25:41', 1, '2012-03-30 13:25:41', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:25:41.973', 104.127),
+(333, 1, 69, NULL, NULL, '2012-03-30 11:06:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.452', 104.127),
+(334, 1, 69, NULL, NULL, '2012-03-30 11:11:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.539', 104.127),
+(335, 1, 69, NULL, NULL, '2012-03-30 11:20:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.597', 104.127),
+(336, 1, 69, NULL, NULL, '2012-03-30 11:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.648', 104.127),
+(337, 1, 69, NULL, NULL, '2012-03-30 11:27:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.693', 104.127),
+(338, 1, 69, NULL, NULL, '2012-03-30 11:38:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.743', 104.127),
+(339, 1, 69, NULL, NULL, '2012-03-30 11:42:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.804', 104.127),
+(340, 1, 69, NULL, NULL, '2012-03-30 11:44:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.853', 104.127),
+(341, 1, 69, NULL, NULL, '2012-03-30 11:55:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.905', 104.127),
+(342, 1, 69, NULL, NULL, '2012-03-30 11:57:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.944', 104.127),
+(343, 1, 69, NULL, NULL, '2012-03-30 12:01:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:25', 1, '2012-03-30 13:33:25', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:25.986', 104.127),
+(344, 1, 69, NULL, NULL, '2012-03-30 12:04:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.063', 104.127),
+(345, 1, 69, NULL, NULL, '2012-03-30 12:10:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.109', 104.127),
+(346, 1, 69, NULL, NULL, '2012-03-30 13:02:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.154', 104.127),
+(347, 1, 69, NULL, NULL, '2012-03-30 13:17:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.193', 104.127),
+(348, 1, 69, NULL, NULL, '2012-03-30 13:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.237', 104.127),
+(349, 1, 69, NULL, NULL, '2012-03-30 13:25:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.279', 104.127),
+(350, 1, 69, NULL, NULL, '2012-03-30 13:33:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:26', 1, '2012-03-30 13:33:26', 1, '31.064520', '-104.263282', NULL, '24#2012-03-30 13:33:26.327', 104.127),
+(351, 1, 69, NULL, NULL, '2012-03-30 13:33:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:34', 1, '2012-03-30 13:33:34', 1, '31.063230', '-104.183937', NULL, '24#2012-03-30 13:33:34.248', 104.127),
+(352, 1, 69, NULL, NULL, '2012-03-30 13:33:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2012-03-30 13:33:49', 1, '2012-03-30 13:33:49', 1, '31.061340', '-104.153717', NULL, '24#2012-03-30 13:33:49.934', 104.127);
 
 -- --------------------------------------------------------
 
@@ -4019,7 +4386,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `user_notification`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_notification` AS select `user_notification_all`.`user_notification_id` AS `user_notification_id`,`user_notification_all`.`device_id` AS `device_id`,`user_notification_all`.`notification_type` AS `notification_type`,`user_notification_all`.`udf1` AS `udf1`,`user_notification_all`.`udf2` AS `udf2`,`user_notification_all`.`udf3` AS `udf3`,`user_notification_all`.`udf4` AS `udf4`,`user_notification_all`.`udf5` AS `udf5`,`user_notification_all`.`flag1` AS `flag1`,`user_notification_all`.`flag2` AS `flag2`,`user_notification_all`.`flag3` AS `flag3`,`user_notification_all`.`flag4` AS `flag4`,`user_notification_all`.`flag5` AS `flag5`,`user_notification_all`.`created_on` AS `created_on`,`user_notification_all`.`last_modified_on` AS `last_modified_on`,`user_notification_all`.`last_modified_by` AS `last_modified_by`,`user_notification_all`.`client_id` AS `client_id`,`user_notification_all`.`status` AS `status`,`user_notification_all`.`send_at` AS `send_at`,`user_notification_all`.`notification` AS `notification`,`user_notification_all`.`ack_mesage` AS `ack_mesage`,`user_notification_all`.`ack_result` AS `ack_result`,`user_notification_all`.`add_timestamp` AS `add_timestamp`,`user_notification_all`.`sent_timestamp` AS `sent_timestamp`,`user_notification_all`.`ack_timestamp` AS `ack_timestamp` from `user_notification_all` where (`user_notification_all`.`user_notification_id` > 0);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_notification` AS select `user_notification_all`.`user_notification_id` AS `user_notification_id`,`user_notification_all`.`device_id` AS `device_id`,`user_notification_all`.`user_notification_type` AS `user_notification_type`,`user_notification_all`.`udf1` AS `udf1`,`user_notification_all`.`udf2` AS `udf2`,`user_notification_all`.`udf3` AS `udf3`,`user_notification_all`.`udf4` AS `udf4`,`user_notification_all`.`udf5` AS `udf5`,`user_notification_all`.`flag1` AS `flag1`,`user_notification_all`.`flag2` AS `flag2`,`user_notification_all`.`flag3` AS `flag3`,`user_notification_all`.`flag4` AS `flag4`,`user_notification_all`.`flag5` AS `flag5`,`user_notification_all`.`created_on` AS `created_on`,`user_notification_all`.`last_modified_on` AS `last_modified_on`,`user_notification_all`.`last_modified_by` AS `last_modified_by`,`user_notification_all`.`client_id` AS `client_id`,`user_notification_all`.`status` AS `status`,`user_notification_all`.`send_at` AS `send_at`,`user_notification_all`.`notification` AS `notification`,`user_notification_all`.`ack_message` AS `ack_message`,`user_notification_all`.`ack_result` AS `ack_result`,`user_notification_all`.`add_timestamp` AS `add_timestamp`,`user_notification_all`.`sent_timestamp` AS `sent_timestamp`,`user_notification_all`.`ack_timestamp` AS `ack_timestamp` from `user_notification_all` where (`user_notification_all`.`user_notification_id` > 0);
 
 -- --------------------------------------------------------
 

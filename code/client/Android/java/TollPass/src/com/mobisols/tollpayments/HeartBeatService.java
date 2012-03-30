@@ -56,9 +56,10 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 				String josn = c.getString(1);
 				Log.d("HeartBeatService", josn);
 				request = request+josn+",";
+				c.moveToNext();
 			}
 			request = request.substring(0,request.length()-1);
-			request = request + "]";
+			request = request + "]}";
 			c.close();
 			response = sendRequest(request);
 		}

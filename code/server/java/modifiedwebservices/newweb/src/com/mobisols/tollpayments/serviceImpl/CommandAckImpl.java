@@ -50,10 +50,10 @@ public class CommandAckImpl implements CommandAck {
 	public void setUserNotificationDao(UserNotificationDao userNotificationDao) {
 		this.userNotificationDao = userNotificationDao;
 	}
-	public JsonConverter getJosnConverter() {
+	public JsonConverter getJsonConverter() {
 		return jsonConverter;
 	}
-	public void setJosnConverter(JsonConverter josnConverter) {
+	public void setJsonConverter(JsonConverter josnConverter) {
 		this.jsonConverter = josnConverter;
 	}
 

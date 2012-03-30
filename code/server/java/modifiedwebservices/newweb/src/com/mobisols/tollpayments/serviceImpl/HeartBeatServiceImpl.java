@@ -143,7 +143,8 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 			response.getHash().put("distance", Double.toString(DEFAULT_DISTANCE));
 			response.getHash().put("tollSessionId", tollSessionId);
 		}
-		List<UserNotification> un = userNotificationDao.getPendingCommands(hblist.getHeartBeatList().get(0).getDeviceId());
+		if(hblist.getHeartBeatList().get(0)!=null){
+		List<UserNotification> un = userNotificationDao.getPendingCommands(deviceDao.getDevice(hblist.getHeartBeatList().get(0).getDeviceId(),hblist.getHeartBeatList().get(0).getDeviceType()).getDeviceId());
 		for(Iterator<UserNotification> it = un.iterator();it.hasNext();)
 		{
 			UserNotification command = it.next();
@@ -154,7 +155,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 			userNotificationDao.update(command);
 		}
 
-		List<UserNotification> unl = userNotificationDao.getPendingNotifications(hblist.getHeartBeatList().get(0).getDeviceId());
+		List<UserNotification> unl = userNotificationDao.getPendingNotifications(deviceDao.getDevice(hblist.getHeartBeatList().get(0).getDeviceId(),hblist.getHeartBeatList().get(0).getDeviceType()).getDeviceId());
 		for(Iterator<UserNotification> it = unl.iterator();it.hasNext();)
 		{
 			UserNotification notification = it.next();
@@ -163,7 +164,7 @@ public class HeartBeatServiceImpl implements HeartBeatService {
 			notification.setLastModifiedOn(new Timestamp(new Date().getTime()));
 			userNotificationDao.update(notification);
 		}
-
+		}
 		return jsonConverter.getJSON(request, status,response);
 	}
 

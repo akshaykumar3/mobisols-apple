@@ -66,6 +66,8 @@
     	<property name="tollLocationDao" ref="dao.tollpayments.tollLocationDao"></property>
     	<property name="deviceHistoryDao" ref="dao.tollpayments.deviceHistoryDao"></property>
     	<property name="vmlTypeDao" ref="dao.tollpayments.vmlTypeDao"></property>
+    	<property name="userNotificationDao" ref="dao.tollpayments.userNotificationDao"></property>
+    	
     	<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
     </bean>
     <bean id="service.tollpayments.nearestTollService" class="com.mobisols.tollpayments.serviceImpl.NearestTollServiceImpl">

@@ -14,6 +14,8 @@ public class MyApplicationUtil {
 	
 	private static MyApplicationUtil myApplicationUtil=null;
 	
+	public static final String version = "1.0";
+	
 	private MyApplicationUtil(){
 		lock = new ReentrantLock();
 	}
