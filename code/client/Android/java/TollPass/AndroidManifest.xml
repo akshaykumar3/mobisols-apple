@@ -31,7 +31,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />-->
 
-    <application android:debuggable="true" android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:debuggable="true" android:icon="@drawable/icon" android:label="Mobile TollPass">
         <activity android:configChanges="orientation|keyboardHidden" android:name=".TollPassActivity"
                   android:label="@string/app_name">
             <intent-filter>
