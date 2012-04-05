@@ -84,8 +84,29 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 		}catch(NullPointerException e){
 			Log.d("HTTP REQUEST", "Nullpointer Exception2");
 		}
+		Log.d("HeartBeat", line);
 		ActualHeartBeatResponse result = (ActualHeartBeatResponse) JsonConverter.getObject(line,"com.mobisols.tollpayments.response.ActualHeartBeatResponse");
 		
+		if(!result.getResponse().getCommands().isEmpty()){
+			for(Iterator<String> it = result.getResponse().getCommands().keySet().iterator();it.hasNext();){
+				String key = it.next();
+				if(result.getResponse().getCommands().get(key).equals("DEACTIVATE")){
+					ProcessCommands.dsiableApp(Long.getLong(key));
+				}if(result.getResponse().getCommands().get(key).equals("DO_DEVICE_REGISTRATION")){
+					ProcessCommands.doDeviceRegistration(Long.getLong(key));
+				}if(result.getResponse().getCommands().get(key).equals("UPDATE_CLIENT_CONFIG")){
+					ProcessCommands.updateClientConfiguration(Long.getLong(key));
+				}if(result.getResponse().getCommands().get(key).equals("COMMAND_ACK")){
+					ProcessCommands.commandAcknowledge(Long.getLong(key));
+				}
+			}
+		}
+		
+		if(!result.getResponse().getCommands().isEmpty()){
+			for(Iterator<String> it = result.getResponse().getNotifications().iterator();it.hasNext();){
+				//TODO Display Notifications
+			}
+		}
 		LocationData.getInstance().setTollSessionId(result.getResponse().getHash().get("tollSessionId"));
 		for(Iterator<Long> it = heartbeatSent.iterator();it.hasNext();){
 			DataBaseHelper.getInstance().deleteHeartBeat(it.next());
