@@ -96,6 +96,15 @@ gtp.views.MainView = {
 	},{
 		xtype: 'fieldset',
 		items: [{
+			xtype: 'textfield',
+			label: 'A/c Bal $',
+			id: 'acbalance',
+			value: '-',
+			disabled: true
+		}]
+	},{
+		xtype: 'fieldset',
+		items: [{
 			xtype: 'button',
 			id: 'tfd',
 			text: 'Activate',

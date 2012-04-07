@@ -132,7 +132,28 @@ Ext.regApplication({
     },
     showNotifications: function(notfs) {
     	if(notfs && notfs[0]) {
-    		Ext.Msg.alert('Notification',notfs[0]);
+    		//Ext.Msg.alert('Notification',notfs[0]);
+    		if(gtp.notify)
+    			gtp.notify.destroy();
+    		gtp.notify = new Ext.Sheet({
+    			stretchX: true,
+    			renderTo: Ext.getBody(),
+    			style: {
+    				width: '90%',
+    				height: '10%',
+    				color: '#fff',
+    				backgroundColor: '#abc',
+    				borderRadius: '0.4em'
+    			},
+    			modal: false,
+    			centered: true,
+    			enter:'top',
+    			exit: 'top',
+    			exitAnimation: 'fade',
+    			html: notfs[0]
+    		});
+    		gtp.notify.show();
+    		setTimeout('hideNotify()', 2000);
     	}
     },
     responseFailureHandler: function(res, message) {

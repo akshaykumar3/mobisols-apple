@@ -18,21 +18,26 @@ gtp.views.RegPage = {
 	}],
 	items: [{
 		xytpe: 'fieldset',
-		title: 'hello',
 		items: [{
 			xtype: 'zipfield',
 			id: 'rpemailid',
-			name: 'emailid',
+			name: 'rpemailid',
+			style: {
+				borderRadius: '0.4em'
+			},
 			placeHolder: 'Enter Phone No'
 		}]
 	},{
 		xtype: 'fieldset',
+		instructions: 'You will receive a text message with pin that you can use to login',
 		items: [{
 			xtype: 'button',
 			ui: 'action',
-			//style: 'margin-left: 1px',
 			text: 'Register',
 			handler: function(button, event){
+				
+				// Suppress keyboard from view.
+				Ext.get('rmKeyboard').dom.focus();
 				
 				var eid = Ext.getCmp('rpemailid').getValue();
 				// Validate Phone Number.
