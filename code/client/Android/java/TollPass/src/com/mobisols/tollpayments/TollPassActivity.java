@@ -1,6 +1,8 @@
 package com.mobisols.tollpayments;
 
 
+import java.io.IOException;
+
 import com.mobisols.tollpayments.data.ClientConfiguration;
 import com.mobisols.tollpayments.data.DataBaseHelper;
 import com.mobisols.tollpayments.data.DeviceDetails;
@@ -11,6 +13,8 @@ import com.mobisols.tollpayments.utils.MyLocationUtil;
 import com.phonegap.DroidGap;
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -34,8 +38,10 @@ public class TollPassActivity extends DroidGap {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myApplicationUtil.log("TollPassActivity", "Application started loading");
         super.setIntegerProperty("loadUrlTimeoutValue", 60000); 
         super.loadUrl("file:///android_asset/www/index.html");
+        myApplicationUtil.log("TollPassActivity", "Called the url loader");
         myApplicationUtil.setApplicationContext(getApplicationContext());
         myApplicationUtil.setApplicationActivity(this);
         
@@ -62,9 +68,17 @@ public class TollPassActivity extends DroidGap {
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new MyLocationListener());
         
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        
+        Notification notification = new Notification(R.drawable.icon,"REQUESTED FOR LOCATION UPDATES",System.currentTimeMillis());
+        
+        Intent notificationIntent = new Intent("myNotificationIntent");
+        PendingIntent pi =  PendingIntent.getActivity(this, 1, notificationIntent, 0);
+        notification.setLatestEventInfo(getApplicationContext(), "TollPass", "Requested for Updates", pi);
+        notificationManager.notify(myApplicationUtil.getNotificationId(), notification);
         
         Log.d("LocationManager", "requested for location updates");
-        
+        myApplicationUtil.log("onCreate", "requested for location updates");
 	}
 	
 	protected void onStart(){
@@ -81,6 +95,12 @@ public class TollPassActivity extends DroidGap {
 	        super.onDestroy();
 	        unregisterReceiver(carProximityReceiver);
 	        unregisterReceiver(tollProximityReceiver);
+	        try {
+				myApplicationUtil.getLogWriter().close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 	 
 	/* @Override

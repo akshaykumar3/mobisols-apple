@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ClientConfigResponse {
 	private HashMap<String, String> keyValues;
-	private int compVersionId;
+	private Integer compVersionId;
 	private List<String> notifications;
 	private List<String> commands;
 	

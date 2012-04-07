@@ -48,6 +48,7 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 		HttpResponse response = null;
 		if(MyApplicationUtil.getInstance().getLock().tryLock()){
 			Log.d("HeartBeatService", "Lock is available");
+			MyApplicationUtil.getInstance().log("HeartBeat Service", "Lock is Available");
 			Cursor c = DataBaseHelper.getInstance().getHeartBeatCursor();
 			c.moveToFirst();
 			while(!c.isAfterLast()){
@@ -55,6 +56,7 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 				heartbeatSent.add(id);
 				String josn = c.getString(1);
 				Log.d("HeartBeatService", josn);
+				MyApplicationUtil.getInstance().log("Heart Beat Service Stored", josn);
 				request = request+josn+",";
 				c.moveToNext();
 			}
@@ -65,6 +67,7 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 		}
 		else{
 			Log.d("HeartBeatService","Lock is not available");
+			MyApplicationUtil.getInstance().log("Heart Beat Service", "Lock is not Avaible");
 		}
 		if(response == null || response.getStatusLine() == null|| response.getStatusLine().getStatusCode() != 200)
 		{
@@ -83,8 +86,11 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 			e1.printStackTrace();
 		}catch(NullPointerException e){
 			Log.d("HTTP REQUEST", "Nullpointer Exception2");
+			MyApplicationUtil.getInstance().log("Heart Beat Service", "Null Pointer Exception in reading the response");
 		}
-		Log.d("HeartBeat", line);
+		Log.d("HeartBeat", line+"");
+		MyApplicationUtil.getInstance().log("Heart Beat Response", line);
+		
 		ActualHeartBeatResponse result = (ActualHeartBeatResponse) JsonConverter.getObject(line,"com.mobisols.tollpayments.response.ActualHeartBeatResponse");
 		
 		if(!result.getResponse().getCommands().isEmpty()){

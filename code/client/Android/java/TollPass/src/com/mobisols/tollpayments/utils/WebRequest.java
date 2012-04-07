@@ -34,11 +34,14 @@ public class WebRequest {
         client.getCredentialsProvider().setCredentials(new AuthScope(WebServiceLinks.getHost(), WebServiceLinks.getPort()), 
         		new UsernamePasswordCredentials(dd.getValue(DeviceDetails.KEY_USERNAME), dd.getValue(DeviceDetails.KEY_PASSWORD)));
         Log.d("HTTP REQUEST", "REQUEST before SENT FROM CLIENT");
-		HttpResponse response = null;
+        MyApplicationUtil.getInstance().log("HTTP Get Request", "Request Sent from Client");
+		
+        HttpResponse response = null;
 		try {
 			response = client.execute(request);
 			Log.d("HTTP REQUEST", "REQUEST after SENT FROM CLIENT");
 			Log.d("HTTP status",""+ response.getStatusLine());
+			MyApplicationUtil.getInstance().log("HTTP Get Request", "Status of Response is "+response.getStatusLine());
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,8 +50,10 @@ public class WebRequest {
 			e.printStackTrace();
 		}catch(NullPointerException e){
 			Log.d("HTTP REQUEST", "Nullpointer Exception1");
+			MyApplicationUtil.getInstance().log("HTTP Get Request", "Null Pointer Exception in Reading response");
 		}catch(Exception e){
 			Log.d("HTTP GET", e.getMessage());
+			MyApplicationUtil.getInstance().log("HTTP Get Request Exception", e.getMessage());
 		}finally{
 			client.getConnectionManager().shutdown();
 		}
@@ -67,11 +72,14 @@ public class WebRequest {
         		new UsernamePasswordCredentials(dd.getValue(DeviceDetails.KEY_USERNAME), dd.getValue(DeviceDetails.KEY_PASSWORD)));
         
 		Log.d("HTTP REQUEST", "REQUEST before SENT FROM CLIENT");
+		MyApplicationUtil.getInstance().log("HTTP Post Request", "Request Sent from Client");
+		
 		BasicHttpResponse response = null;
 		try {
 			response = (BasicHttpResponse) client.execute(request);
 			Log.d("HTTP REQUEST", "REQUEST after SENT FROM CLIENT");
 			Log.d("HTTP status",""+ response.getStatusLine());
+			MyApplicationUtil.getInstance().log("HTTP Post Request", "Status of Response is "+response.getStatusLine());
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,7 +87,8 @@ public class WebRequest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}catch(Exception e){
-			Log.d("HTTP GET", e.getMessage());
+			Log.d("HTTP Post", e.getMessage());
+			MyApplicationUtil.getInstance().log("HTTP Post", e.getMessage());
 		}finally{
 			client.getConnectionManager().shutdown();
 		}
