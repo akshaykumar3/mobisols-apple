@@ -10,7 +10,10 @@ gtp.validateEmail = function(emailID) {
 gtp.validatePhoneNumber = function(phonenum) {
 	// todo
 	// logic to check whether phonenum format is correct.
-	return true;
+	if(phonenum)
+		return true;
+	else
+		return false;
 };
 
 gtp.validateCar = function(car_reg, car_state) {

@@ -36,7 +36,17 @@ gtp.controllers = Ext.regController("load",{
 		        gtp.views.HomeViewport,
 		        gtp.views.PaidTollsListView,
 		        gtp.views.MapView,
-			]
+			],
+			listeners: {
+				beforecardswitch: function(dis, newCard, oldCard, index, animated) {
+					if(newCard.getId() == 'mviewport') {
+							newCard.setActiveItem('home', {
+								type: 'slide',
+								direction: 'right'
+							});
+					}
+				}
+			}
 		});
 		
 		// Fetches User Data and adds them to stores.

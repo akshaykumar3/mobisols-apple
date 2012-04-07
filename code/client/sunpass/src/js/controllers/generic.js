@@ -109,3 +109,10 @@ gtp.getGeoLongitude = function() {
 		return 0;
 	}
 };
+
+var hideNotify = function()
+{ 
+	if(gtp.notify)
+		gtp.notify.hide();
+};
+

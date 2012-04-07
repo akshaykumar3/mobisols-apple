@@ -1,6 +1,4 @@
 gtp.FetchUserData = function(options) {
-	if(gtp.tabpanel)
-		console.log('tabpanel is ready');
 	
 	gtp.geo = new Ext.util.GeoLocation({
 	    autoUpdate: true,
@@ -54,9 +52,15 @@ gtp.FetchUserData = function(options) {
 		  	var pay_details=res.response.paymentDetails;
 		  	var vehicle_details=res.response.vehicleDetails;
 		  	var paidtoll_details=res.response.tollPayments;
+		  	var balance_info = res.response.balanceInfo;
 		  	var add_vehicle_text = '';
 		  	var pay_details_text = '';
 	      	
+		  	if(balance_info) {
+		  		var hme = gtp.tabpanel.getComponent('mviewport').down('#home');
+		  		hme.down('#acbalance').setValue(balance_info.currentBalance);
+		  	}
+		  	
 		  	if(vehicle_details && vehicle_details.length) {
 		  		gtp.isCarValid = true;
 		      	for(var i=0;i<vehicle_details.length;i++)

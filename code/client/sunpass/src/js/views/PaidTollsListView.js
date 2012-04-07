@@ -20,7 +20,7 @@ gtp.views.PaidTollsListView = {
 		xtype: 'list',
 		grouped: true,
 		fullscreen: true,
-		emptyText: 'No payments are made yet, Start using the app!!',
+		emptyText: 'No toll transactions',
 		scroll: 'vertical',
 		store: gtp.stores.paidTolls,
 		itemTpl: '<div class="contact">{amount}$ on <strong>{date}</strong> @ {location} - {reg}</div>',
