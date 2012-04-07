@@ -5,6 +5,10 @@ public class ActualTollDetailsResponse {
 	private String status;
 	private String version;
 	private TollLocationListResponse response;
+	
+	public ActualTollDetailsResponse() {
+		super();
+	}
 	public String getRequest() {
 		return request;
 	}

@@ -12,6 +12,10 @@ public class CommandAckResponse {
 	private String status;
 	private String version;
 	private CommandAck response;
+	
+	public CommandAckResponse() {
+		super();
+	}
 	public String getRequest() {
 		return request;
 	}

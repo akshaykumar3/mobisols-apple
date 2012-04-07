@@ -5,6 +5,10 @@ public class ActualHeartBeatResponse {
 	private String status;
 	private String version;
 	private HeartBeatResponse response;
+	
+	public ActualHeartBeatResponse() {
+		
+	}
 	public String getRequest() {
 		return request;
 	}

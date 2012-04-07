@@ -12,6 +12,9 @@ public class ActualClientConfigResponse {
 	private String status;
 	private String version;
 	private ClientConfigResponse response;
+	
+	public ActualClientConfigResponse() {
+	}
 	public String getRequest() {
 		return request;
 	}

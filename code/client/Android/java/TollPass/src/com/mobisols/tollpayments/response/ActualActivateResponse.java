@@ -13,6 +13,10 @@ public class ActualActivateResponse {
 	private String status;
 	private String version;
 	private ActivateResponse response;
+	
+	public ActualActivateResponse() {
+		
+	}
 	public String getRequest() {
 		return request;
 	}
