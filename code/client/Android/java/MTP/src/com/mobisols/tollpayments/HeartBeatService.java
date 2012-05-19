@@ -48,9 +48,10 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 		HttpResponse response = null;
 		ActualHeartBeatResponse result =null;
 		
-		synchronized (this) {
-			Log.d("HeartBeatService", "Lock is available");
-			MyApplicationUtil.getInstance().log("HeartBeat Service", "Lock is Available");
+		synchronized (ActualHeartBeatResponse.class) {
+			Log.d("HeartBest Service", "Entering the synchronized block");
+			MyApplicationUtil.getInstance().log("HeartBeat Service", "Entering Synchronized block");
+			Log.d("HeartBeat Service", "Started reading from the database");
 			Cursor c = DataBaseHelper.getInstance().getHeartBeatCursor();
 			c.moveToFirst();
 			while(!c.isAfterLast()){
@@ -62,6 +63,7 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 				request = request+josn+",";
 				c.moveToNext();
 			}
+			Log.d("HeartBeat Service", "Completed reading from database");
 			request = request.substring(0,request.length()-1);
 			request = request + "]}";
 			c.close();
@@ -115,6 +117,7 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 		for(Iterator<Long> it = heartbeatSent.iterator();it.hasNext();){
 			DataBaseHelper.getInstance().deleteHeartBeat(it.next());
 		}
+		Log.d("HeartBeat Service", "Exiting the synchronized bloack");
 		}
 		return result;
 	}
