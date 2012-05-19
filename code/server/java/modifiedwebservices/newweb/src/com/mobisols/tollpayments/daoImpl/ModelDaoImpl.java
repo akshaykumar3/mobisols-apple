@@ -42,17 +42,25 @@ public class ModelDaoImpl implements ModelDao {
 	    crit.add(Restrictions.eq("name", model));
 	    if(makeDao.getMake(make) == null)
 	    {
+	    	System.out.println("Make is Null");
 	    	return null;
 	    }
-	    for(Iterator<Model> it  = makeDao.getMake(make).getModel().iterator();it.hasNext();)
+	   /* for(Iterator<Model> it  = makeDao.getMake(make).getModel().iterator();it.hasNext();)
 	    {
 	    	Model m = it.next();
 	    	System.out.println(m.getName());
 	    	System.out.println(m.getMakeId());
-	    }
+	    }*/
 	    System.out.println(makeDao.getMake(make).getMakeId());
 	    crit.add(Restrictions.eq("makeId", makeDao.getMake(make).getMakeId()));
-	    return (Model) crit.uniqueResult();
+	    System.out.println(crit.list().size());
+	    Model m = (Model) crit.uniqueResult();
+	    try{
+	    	System.out.println(m.getName());
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    }
+	    return m;
 	}
 
 	/* (non-Javadoc)

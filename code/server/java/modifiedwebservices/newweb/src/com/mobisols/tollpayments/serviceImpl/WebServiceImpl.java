@@ -610,6 +610,7 @@ public class WebServiceImpl {
 	{
 		String request="get ClientConfiguration";
 		try{
+			System.out.println(json);
 		ClientConfigurationRequest r= (ClientConfigurationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.ClientConfigurationRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))

@@ -9,6 +9,7 @@
     
             <id name="userNotificationId" type="java.lang.Integer">
                 <column name="user_notification_id" />
+                <generator class="native"/>
             </id>
             <property name="deviceId" type="java.lang.Integer">
                 <column name="device_id" />
