@@ -26,6 +26,7 @@ public class LocationData {
 		{
 			locationData  = new LocationData();
 			locationData.setBeforeToll(false);
+			locationData.setTollId(-1);
 		}
 		
 		return locationData;

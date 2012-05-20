@@ -22,6 +22,7 @@ import com.mobisols.tollpayments.data.LocationData;
 import com.mobisols.tollpayments.response.ActualHeartBeatResponse;
 import com.mobisols.tollpayments.utils.JsonConverter;
 import com.mobisols.tollpayments.utils.MyApplicationUtil;
+import com.mobisols.tollpayments.utils.MyLocationUtil;
 import com.mobisols.tollpayments.utils.WebRequest;
 import com.mobisols.tollpayments.utils.WebServiceLinks;
 
@@ -54,7 +55,8 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 			Log.d("HeartBeat Service", "Started reading from the database");
 			Cursor c = DataBaseHelper.getInstance().getHeartBeatCursor();
 			c.moveToFirst();
-			while(!c.isAfterLast()){
+			int count=0;
+			while(!c.isAfterLast() && count < MyLocationUtil.MAX_HERART_BEAT_COUNT){
 				Long id = c.getLong(0);
 				heartbeatSent.add(id);
 				String josn = c.getString(1);
@@ -62,6 +64,7 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 				MyApplicationUtil.getInstance().log("Heart Beat Service Stored", josn);
 				request = request+josn+",";
 				c.moveToNext();
+				count++;
 			}
 			Log.d("HeartBeat Service", "Completed reading from database");
 			request = request.substring(0,request.length()-1);

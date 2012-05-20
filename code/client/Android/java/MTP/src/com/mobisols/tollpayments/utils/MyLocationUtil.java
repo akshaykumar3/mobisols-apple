@@ -22,6 +22,7 @@ public class MyLocationUtil {
 	public static final int TOLL_REQUEST_CODE =2;
 	public static final int TOLL_RADIUS = 250;
 	public static final float MIN_CAR_PROXIMITY = 250;
+	public static final int MAX_HERART_BEAT_COUNT = 50;
 	
 	public static Location getNearestTollLocation(Location currentLocation){
 		TollLocationList tollLocationList = TollLocationList.getInstace();
