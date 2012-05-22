@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -71,7 +72,8 @@ import com.mobisols.tollpayments.service.VmlTypeListService;
  */
 @Path("/services")
 public class WebServiceImpl {
-
+	 private static Logger logger = Logger.getLogger(WebServiceImpl.class);
+	 
 	/** The account details service. */
 	AccountDetailsService accountDetailsService;
 	
@@ -163,6 +165,9 @@ public class WebServiceImpl {
 	 * Instantiates a new web service impl.
 	 */
 	public WebServiceImpl() {
+		
+		 logger.info("Webservice constructor is called");
+		 
 		 String[] paths = {
 	                "/spring/spring.xml", "/spring/dao.xml",
 	                "/spring/myutils.xml"
@@ -213,21 +218,23 @@ public class WebServiceImpl {
 	@Produces("text/plain")
 	@Path("/secure/AccountDetails")
 	public String getAccountDetailsResponse(@QueryParam("key") String securityKey,@Context HttpHeaders httpHeader){
+		logger.debug("Account details method is called");
 		String request = "RETRIEVE ACC_DETAILS";
 		try{
 		
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return accountDetailsService.getAccountDetailsResponse(request,username);
+		{
+			String response =  accountDetailsService.getAccountDetailsResponse(request,username);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}
 		catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -272,6 +279,7 @@ public class WebServiceImpl {
 		String request="";
 		try{
 		String vr=vehicleTypeListService.getVehicleTypeList(request);
+		myUtilCleanUp.cleanUp();
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
 			return vr;
@@ -280,9 +288,6 @@ public class WebServiceImpl {
 		}
 		catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 
@@ -305,14 +310,15 @@ public class WebServiceImpl {
 		AddBalanceRequest ar= (AddBalanceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.AddBalanceRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return addBalanceService.addBalanceResponse(request,ar,username);
+		{
+			String response =  addBalanceService.addBalanceResponse(request,ar,username);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -331,13 +337,14 @@ public class WebServiceImpl {
 		try{
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return ccTypeListService.getCcTypeList(request);
+		{
+			String response = ccTypeListService.getCcTypeList(request);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -356,14 +363,15 @@ public class WebServiceImpl {
 		try{
 			if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return ownerTypeListService.getOwnerTypeList(request);
+			{
+				String response =  ownerTypeListService.getOwnerTypeList(request);
+				myUtilCleanUp.cleanUp();
+				return response;
+			}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -382,13 +390,14 @@ public class WebServiceImpl {
 		try{
 			if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return vmlTypeListService.getVmlTypeList(request);
+			{
+				String response =  vmlTypeListService.getVmlTypeList(request);
+				myUtilCleanUp.cleanUp();
+				return response;
+			}
 		return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -409,13 +418,14 @@ public class WebServiceImpl {
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return balanceInfoService.getBalanceInfo(request,username);
+			{
+				String response =  balanceInfoService.getBalanceInfo(request,username);
+				myUtilCleanUp.cleanUp();
+				return response;
+			}
 		return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -437,20 +447,20 @@ public class WebServiceImpl {
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
 		{
-		if(tr==null)
-			return tollDetailsService.getTollLocations(request);
-		else
-			return  tollDetailsService.getTollLocations(request,tr.getLatitude1(),
-				tr.getLongitude1(), tr.getLatitude2(), tr.getLongitude2());
+			String response = null;
+			if(tr==null)
+				response =  tollDetailsService.getTollLocations(request);
+			else
+				response =  tollDetailsService.getTollLocations(request,tr.getLatitude1(),
+					tr.getLongitude1(), tr.getLatitude2(), tr.getLongitude2());
+			myUtilCleanUp.cleanUp();
+			return response;
 		}
 		else
 			return null;
 		
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			//myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -469,14 +479,15 @@ public class WebServiceImpl {
 		try{
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return servicePlanService.getServiceList(request);
+			{
+			String response =  servicePlanService.getServiceList(request);
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		return null;
 		}
 		catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -497,15 +508,16 @@ public class WebServiceImpl {
 		HeartBeatList hbr=(HeartBeatList) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatList");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return periodicHeartBeatService.saveHeartBeat(request,hbr) ;
+			{
+			String response =  periodicHeartBeatService.saveHeartBeat(request,hbr) ;
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		else
 			return null;
 		}
 		catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -527,13 +539,14 @@ public class WebServiceImpl {
 		HeartBeatList hbr=(HeartBeatList) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.HeartBeatList");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return heartBeatService.saveHeartBeat(request,hbr);
+			{
+			String response =  heartBeatService.saveHeartBeat(request,hbr);
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -554,14 +567,15 @@ public class WebServiceImpl {
 			Location l=(Location) jsonConverter.getObject(json, "com.mobisols.tollpayments.myutilsImpl.Location");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return nearestTollService.getNearestToll(request,l.getLatitude(), l.getLongitude() );
+			{
+			String response =  nearestTollService.getNearestToll(request,l.getLatitude(), l.getLongitude() );
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -584,15 +598,16 @@ public class WebServiceImpl {
 		PaymentDetailRequest pd=(PaymentDetailRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.PaymentDetailRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return paymentDetailsService.update(request,pd, username);
+			{
+			String response =  paymentDetailsService.update(request,pd, username);
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		else
 			return null;
 		}
 		catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -614,14 +629,15 @@ public class WebServiceImpl {
 		ClientConfigurationRequest r= (ClientConfigurationRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.get.ClientConfigurationRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return clientConfigurationService.getClientConfig(request,r);
+			{
+			String response =  clientConfigurationService.getClientConfig(request,r);
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -646,14 +662,15 @@ public class WebServiceImpl {
 		System.out.println(r.getState());
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return vehicleDetailsService.postVehicleDetails(request,r, username, isNewVehicle);
+			{
+			String response =  vehicleDetailsService.postVehicleDetails(request,r, username, isNewVehicle);
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -675,13 +692,14 @@ public class WebServiceImpl {
 		String username=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return vehicleDetailsService.deleteVehicle(request,vehicleId, username);
+			{
+			String response =  vehicleDetailsService.deleteVehicle(request,vehicleId, username);
+			myUtilCleanUp.cleanUp();
+			return response;
+			}
 		return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -702,14 +720,15 @@ public class WebServiceImpl {
 		RegistrationServiceRequest request1= (RegistrationServiceRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.RegistrationServiceRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return registrationService.createUser(request,request1);
+		{
+			String response = registrationService.createUser(request,request1);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -734,16 +753,17 @@ public class WebServiceImpl {
 		System.out.println(ServerConfiguration.getServerConfiguration().getValue("checkSecurity"));
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return deviceRegistrationService.registerDevice(request,request1,servletRequest.getRemoteAddr());
+		{
+			String response = deviceRegistrationService.registerDevice(request,request1,servletRequest.getRemoteAddr());
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 		{
 			return null;
 		}
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 
@@ -765,14 +785,15 @@ public class WebServiceImpl {
 		LoginRequest request1=  (LoginRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.LoginRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return loginService.login(request,request1);
+		{
+			String response = loginService.login(request,request1);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 
@@ -794,14 +815,15 @@ public class WebServiceImpl {
 		String userName=MyUtilContextImpl.getUserName(httpHeader);
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return changePasswordService.changePassword(request,userName, password);
+		{
+			String response =  changePasswordService.changePassword(request,userName, password);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -824,14 +846,15 @@ public class WebServiceImpl {
 		ActivateRequest ar = (ActivateRequest) jsonConverter.getObject(json,"com.mobisols.tollpayments.request.post.ActivateRequest");
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return activateService.activateOrDeactivate(request,ar, userName);
+		{
+			String response =  activateService.activateOrDeactivate(request,ar, userName);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -851,14 +874,15 @@ public class WebServiceImpl {
 		try{
 		if(ServerConfiguration.getServerConfiguration().getValue("checkSecurity").equals(ServerConfiguration.SEURITY_CHECK)
 				&& securityCheckUtil.isKeyCorrect(securityKey))
-			return makeAndModelService.getMakeAndModels(request);
+		{
+			String response = makeAndModelService.getMakeAndModels(request);
+			myUtilCleanUp.cleanUp();
+			return response;
+		}
 		else
 			return null;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -874,12 +898,11 @@ public class WebServiceImpl {
 	public String forgotPassword(@QueryParam("username") String username){
 		String request = "forgot password";
 		try{
-			return forgotPassword.forgotPassword(request, username);
+			String response = forgotPassword.forgotPassword(request, username);
+			myUtilCleanUp.cleanUp();
+			return response;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -894,12 +917,11 @@ public class WebServiceImpl {
 	public String makeTollPayments(){
 		String request = "Make Tollpayments";
 		try{
-			return makeTollPayments.payForTolls(null, request);
+			String response =  makeTollPayments.payForTolls(null, request);
+			myUtilCleanUp.cleanUp();
+			return response;
 		}catch(Exception e){
 			return myUtilErrorHandler.handleException(request, e);
-		}
-		finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -909,11 +931,11 @@ public class WebServiceImpl {
 	public String getUserDetails(@QueryParam("username") String username){
 		String request = "get user details" ;
 		try{
-			return userDetails.getUserDetails(request, username);
+			String response =  userDetails.getUserDetails(request, username);
+			myUtilCleanUp.cleanUp();
+			return response;
 		}catch (Exception e) {
 			return myUtilErrorHandler.handleException(request, e);
-		}finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -924,11 +946,11 @@ public class WebServiceImpl {
 		String request = "Get Vehicle History Details";
 		try{
 			VehicleHistoryDetailsRequest vhdr = (VehicleHistoryDetailsRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.VehicleHistoryDetailsRequest");
-			return vehicleHistoryDetails.getVehicleHistory(request, vhdr);
+			String response =  vehicleHistoryDetails.getVehicleHistory(request, vhdr);
+			myUtilCleanUp.cleanUp();
+			return response;
 		}catch (Exception e) {
 			return myUtilErrorHandler.handleException(request, e);
-		}finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -939,11 +961,11 @@ public class WebServiceImpl {
 		String request = "Get Payment Details History";
 		try{
 			PaymentDetailsHistoryRequest pdhr = (PaymentDetailsHistoryRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.PaymentDetailsHistoryRequest");
-			return paymentDetailsHistory.getPaymentDetailsHistory(request, pdhr);
+			String response =  paymentDetailsHistory.getPaymentDetailsHistory(request, pdhr);
+			myUtilCleanUp.cleanUp();
+			return response;
 		}catch (Exception e) {
 			return myUtilErrorHandler.handleException(request, e);
-		}finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -954,11 +976,11 @@ public class WebServiceImpl {
 		String request = "Get Payment Details History";
 		try{
 			PaymentTransactionRequest ptr =  (PaymentTransactionRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.admin.PaymentTransactionRequest");
-			return paymentTransactionService.getPaymentTransactions(request, ptr);
+			String response = paymentTransactionService.getPaymentTransactions(request, ptr);
+			myUtilCleanUp.cleanUp();
+			return response;
 		}catch (Exception e) {
 			return myUtilErrorHandler.handleException(request, e);
-		}finally{
-			myUtilCleanUp.cleanUp();
 		}
 	}
 	
@@ -971,10 +993,11 @@ public class WebServiceImpl {
 		try{
 			CommandAckRequest req = (CommandAckRequest) jsonConverter.getObject(json, "com.mobisols.tollpayments.request.post.CommandAckRequest");
 			response =  commandAck.acknowledgeCommand(req, request);
+			myUtilCleanUp.cleanUp();
 		}catch (Exception e){
 			return myUtilErrorHandler.handleException(request, e);
 		}
-		myUtilCleanUp.cleanUp();
+		
 		return response;
 	}
 	/**

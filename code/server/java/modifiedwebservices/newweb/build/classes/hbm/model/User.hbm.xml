@@ -49,7 +49,7 @@
                 <column name="udf4" length="1000" />
             </property>
             <property name="udf5" type="java.lang.String" >
-                            <column name="udf5" length="1000" />
+                 <column name="udf5" length="1000" />
             </property>
             <property name="flag1" type="java.lang.String" >
                 <column name="flag1" length="1" />

@@ -14,7 +14,7 @@
   	<init-param>
   		<param-name>com.sun.jersey.config.property.packages</param-name>
   		<param-value>com.mobisols.tollpayments.serviceImpl</param-value>
-  	</init-param>
+  	</init-param>    
   	<init-param>
   		<param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
   		<param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
