@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans
+  PUBLIC "-//SPRING//DTD BEAN//EN"
+  "http://www.springframework.org/dtd/spring-beans.dtd"
+>
+<beans>
+	<bean id="myutils.tollpayments.jsonConverter" class="com.mobisols.tollpayments.myutilsImpl.JsonConverterImpl">
+	</bean>
+	<bean id="myutils.tollpayments.myUtilDate" class="com.mobisols.tollpayments.myutilsImpl.MyUtilDateImpl">
+	</bean>
+	<bean id="myutils.tollpayments.tollLocationUtil" class="com.mobisols.tollpayments.myutilsImpl.TollLocationUtilImpl">
+	</bean>
+	<bean id="myutils.tollpayments.myUtilVehicle" class="com.mobisols.tollpayments.myutilsImpl.MyUtilVehicleImpl">
+	</bean>
+	<bean id="myutils.tollpayments.myUtilContext" class="com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl">
+	</bean>
+	<bean id="myutils.tollpayments.securityCheckUtil" class="com.mobisols.tollpayments.myutilsImpl.SecurityCheckUtilImpl">
+	</bean>
+	<bean id="myutils.tollpayments.myUtilErrorHandler" class="com.mobisols.tollpayments.myutilsImpl.MyUtilErrorHandlerImpl">
+		<property name="jsonConverter" ref="myutils.tollpayments.jsonConverter"></property>
+	</bean>
+	<bean id="myutils.tollpayments.myUtilCleanUp" class="com.mobisols.tollpayments.myutilsImpl.MyUtilCleanUpImpl">
+	</bean>
+</beans>
