@@ -3,6 +3,9 @@ package com.mobisols.tollpayments.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.mobisols.tollpayments.myutilsImpl.EncryptUtil;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
+
 // TODO: Auto-generated Javadoc
 /**
  * UserPaymentDetailId entity. @author MyEclipse Persistence Tools
@@ -324,7 +327,7 @@ public class UserPaymentDetail implements java.io.Serializable {
 	 * @return the cc number
 	 */
 	public String getCcNumber() {
-		return this.ccNumber;
+		return EncryptUtil.decrypt(ccNumber, ServerConfiguration.getServerConfiguration().getValue("cc_encryption_key"));
 	}
 
 	/**
@@ -333,7 +336,7 @@ public class UserPaymentDetail implements java.io.Serializable {
 	 * @param ccNumber the new cc number
 	 */
 	public void setCcNumber(String ccNumber) {
-		this.ccNumber = ccNumber;
+		this.ccNumber = EncryptUtil.encrypt(ccNumber, ServerConfiguration.getServerConfiguration().getValue("cc_encrytion_key"));
 	}
 
 	/**
