@@ -49,7 +49,8 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 		HttpResponse response = null;
 		ActualHeartBeatResponse result =null;
 		
-		synchronized (ActualHeartBeatResponse.class) {
+		if(MyApplicationUtil.getInstance().getLock().tryLock()){
+			try{
 			Log.d("HeartBest Service", "Entering the synchronized block");
 			MyApplicationUtil.getInstance().log("HeartBeat Service", "Entering Synchronized block");
 			Log.d("HeartBeat Service", "Started reading from the database");
@@ -121,6 +122,11 @@ public class HeartBeatService extends AsyncTask<String, Void, ActualHeartBeatRes
 			DataBaseHelper.getInstance().deleteHeartBeat(it.next());
 		}
 		Log.d("HeartBeat Service", "Exiting the synchronized bloack");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+		MyApplicationUtil.getInstance().getLock().unlock();
+		}
 		}
 		return result;
 	}
