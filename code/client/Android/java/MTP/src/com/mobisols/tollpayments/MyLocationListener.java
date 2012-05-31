@@ -65,7 +65,7 @@ public class MyLocationListener implements LocationListener {
 	        }
 	        else if(location.distanceTo(nearestToll)<=200){
 	        	Log.d("HeartBeatService", "Distance is less than 200");
-	        	locationData.setDistanceToPreviousToll(location.distanceTo(nearestToll));
+	        	Log.d("HeartBeatService", "Nearest toll index is "+locationData.getTollId());
 	        	HeartBeatRequest hbRequest = new HeartBeatRequest();
 
 				hbRequest.setAngle(0.0);
@@ -80,20 +80,22 @@ public class MyLocationListener implements LocationListener {
 					hbRequest.setTollSessionId(LocationData.getInstance().getTollSessionId());
 				hbRequest.setVmlType("CHB");
 
-	        	if(location.distanceTo(nearestToll)<=200 && locationData.getTollId()==-1 && location.distanceTo(nearestToll)<locationData.getDistanceToPreviousToll()){
+	        	if(location.distanceTo(nearestToll)<=50 && locationData.getTollId()==-1 && location.distanceTo(nearestToll)<locationData.getDistanceToPreviousToll()){
 	        		locationData.setTollId(tollId);
 	        		//locationData.setBeforeToll(true);
 	        		Log.d("Entering Toll Location", ""+nearestToll.getLatitude()+"  "+nearestToll.getLongitude());
 	        		Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), "Entering TollLocation", Toast.LENGTH_SHORT).show();
 		        
 	        	}
-	        	if(location.distanceTo(nearestToll)<=200 && locationData.getTollId()!=-1 && location.distanceTo(nearestToll)>locationData.getDistanceToPreviousToll()){
+	        	if(location.distanceTo(nearestToll)<=50 && locationData.getTollId()!=-1 && location.distanceTo(nearestToll)>locationData.getDistanceToPreviousToll()){
 	        		locationData.setTollId(-1);
 	        		hbRequest.setVmlType("TC");
 	        		//locationData.setBeforeToll(false);
 	        		Log.d("Exiting Toll Location", ""+nearestToll.getLatitude()+"  "+nearestToll.getLongitude());
 	        		Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), "Exiting TollLocation", Toast.LENGTH_SHORT).show();		        
 	        	}
+	        	locationData.setDistanceToPreviousToll(location.distanceTo(nearestToll));
+	        	
 	        	locationManager.removeUpdates(this);
 	        					Log.d("HeartBeat Request", JsonConverter.getJSON(hbRequest));
 				new HeartBeatService().execute(JsonConverter.getJSON(hbRequest));
