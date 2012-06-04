@@ -13,7 +13,6 @@ public class LocationData {
 	private static LocationData locationData=null;
 	private boolean enabled;
 	private String tollSessionId=null;
-	private boolean beforeToll=true;
 	private double distanceToPreviousToll;
 	private int tollId;
 	
@@ -25,8 +24,8 @@ public class LocationData {
 		if(locationData == null)
 		{
 			locationData  = new LocationData();
-			locationData.setBeforeToll(false);
 			locationData.setTollId(-1);
+			locationData.setDistanceToPreviousToll(Long.MAX_VALUE);
 		}
 		
 		return locationData;
@@ -83,14 +82,6 @@ public class LocationData {
 
 	public void setTollSessionId(String tollSessionId) {
 		this.tollSessionId = tollSessionId;
-	}
-
-	public void setBeforeToll(boolean beforeToll) {
-		this.beforeToll = beforeToll;
-	}
-
-	public boolean isBeforeToll() {
-		return beforeToll;
 	}
 
 	public void setDistanceToPreviousToll(double distanceToPreviousToll) {
