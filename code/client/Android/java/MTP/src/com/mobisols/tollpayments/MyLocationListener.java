@@ -1,10 +1,13 @@
 package com.mobisols.tollpayments;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.mobisols.tollpayments.data.DeviceDetails;
 import com.mobisols.tollpayments.data.LocationData;
+import com.mobisols.tollpayments.data.TollLocation;
+import com.mobisols.tollpayments.data.TollLocationList;
 import com.mobisols.tollpayments.request.HeartBeatRequest;
 import com.mobisols.tollpayments.utils.JsonConverter;
 import com.mobisols.tollpayments.utils.MyApplicationUtil;
@@ -24,6 +27,14 @@ public class MyLocationListener implements LocationListener {
 		
 	}
 	public void onLocationChanged(Location location) {
+		
+		Log.d("LocationListener time",""+ location.getTime());
+		Log.d("LocationListener time",""+ Calendar.getInstance().getTime().getTime());
+		Log.d("LocationListener Time",""+(location.getTime()< (Calendar.getInstance().getTime().getTime() - 5000*60)));
+		if(location.getTime()< (Calendar.getInstance().getTime().getTime() - 5000*60)) 
+		{
+			return;
+		}
 		Log.d("Location Listener", "location Listener is called");
 		if(LocationData.getInstance().isEnabled())
 		{
@@ -39,69 +50,64 @@ public class MyLocationListener implements LocationListener {
 	        Log.d("Location Listener", ""+location.getLatitude());
 	        Log.d("LocationListener", ""+location.getLongitude());
 	        Log.d("LocationListener", ""+location.distanceTo(nearestToll)/2);
-	        Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), "location listener got an update", Toast.LENGTH_SHORT).show();
-	        if((location.distanceTo(nearestToll)>200 && location.distanceTo(nearestToll) <= locationData.getDistanceToPreviousToll()/2)){
+	        //TODO change the values to get from client configuration
+	        if(location.distanceTo(nearestToll)>2000 ){
+	        	Log.d("MyLocationListener", "Got an Update");
 	        	if(nearestToll == null)
 	        		Log.d("NearestToll", "NearestToll is null");
 	        	locationManager.removeUpdates(this);
 	        	locationData.setDistanceToPreviousToll(location.distanceTo(nearestToll));
-	        	HeartBeatRequest hbRequest = new HeartBeatRequest();
-
-				hbRequest.setAngle(0.0);
-				hbRequest.setDeviceId(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICEID));
-				hbRequest.setDeviceType(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICE_TYPE));
-				hbRequest.setLatitude(location.getLatitude());
-				hbRequest.setLongitude(location.getLongitude());
-				hbRequest.setTimeStamp(new Timestamp(new Date().getTime()));
-				if(LocationData.getInstance().getTollSessionId()==null)
-					hbRequest.setTollSessionId("");
-				else
-					hbRequest.setTollSessionId(LocationData.getInstance().getTollSessionId());
-				hbRequest.setVmlType("SHB");
-				Log.d("HeartBeat Request", JsonConverter.getJSON(hbRequest));
-				new HeartBeatService().execute(JsonConverter.getJSON(hbRequest));
-			
-	        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, location.distanceTo(nearestToll)/2, this);
+	        	//Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), "location listener got an update", Toast.LENGTH_SHORT).show();
+	  	       doHeartBeat(location,"SHB");
+	  	       locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, location.distanceTo(nearestToll)/2, this);
 	        }
-	        else if(location.distanceTo(nearestToll)<=200){
+	        else if(location.distanceTo(nearestToll)<=2000){
 	        	Log.d("HeartBeatService", "Distance is less than 200");
-	        	Log.d("HeartBeatService", "Nearest toll index is "+locationData.getTollId());
-	        	HeartBeatRequest hbRequest = new HeartBeatRequest();
-
-				hbRequest.setAngle(0.0);
-				hbRequest.setDeviceId(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICEID));
-				hbRequest.setDeviceType(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICE_TYPE));
-				hbRequest.setLatitude(location.getLatitude());
-				hbRequest.setLongitude(location.getLongitude());
-				hbRequest.setTimeStamp(new Timestamp(new Date().getTime()));
-				if(LocationData.getInstance().getTollSessionId()==null)
-					hbRequest.setTollSessionId("");
-				else
-					hbRequest.setTollSessionId(LocationData.getInstance().getTollSessionId());
-				hbRequest.setVmlType("CHB");
-
-	        	if(location.distanceTo(nearestToll)<=50 && locationData.getTollId()==-1 && location.distanceTo(nearestToll)<locationData.getDistanceToPreviousToll()){
+	        	locationData.setDistanceToPreviousToll(location.distanceTo(nearestToll));
+	        	locationManager.removeUpdates(this);
+	        	
+	        	if(location.distanceTo(nearestToll)<=200 && locationData.getTollId()==-1){
 	        		locationData.setTollId(tollId);
-	        		//locationData.setBeforeToll(true);
+	        		doHeartBeat(location, "TC");
 	        		Log.d("Entering Toll Location", ""+nearestToll.getLatitude()+"  "+nearestToll.getLongitude());
-	        		Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), "Entering TollLocation", Toast.LENGTH_SHORT).show();
-		        
-	        	}
-	        	if(location.distanceTo(nearestToll)<=50 && locationData.getTollId()!=-1 && location.distanceTo(nearestToll)>locationData.getDistanceToPreviousToll()){
+	        		TollLocation t = TollLocationList.getInstace().getTollLocation(nearestToll.getLatitude(), nearestToll.getLongitude());
+	        		Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), t.getTollOperator()+ " Toll Cost = "+t.getSellingPrice(), Toast.LENGTH_SHORT).show();
+	        	}else if(location.distanceTo(nearestToll)> 200){
 	        		locationData.setTollId(-1);
-	        		hbRequest.setVmlType("TC");
-	        		//locationData.setBeforeToll(false);
+	        	}
+	        	/*if(location.distanceTo(nearestToll)<=200 && locationData.getTollId()!=-1 && location.distanceTo(nearestToll)>locationData.getDistanceToPreviousToll()){
+	        		locationData.setTollId(-1);
+	        		doHeartBeat(location, "TC");
 	        		Log.d("Exiting Toll Location", ""+nearestToll.getLatitude()+"  "+nearestToll.getLongitude());
 	        		Toast.makeText(MyApplicationUtil.getInstance().getApplicationContext(), "Exiting TollLocation", Toast.LENGTH_SHORT).show();		        
+	        	}*/else{
+	        		doHeartBeat(location, "CHB");
 	        	}
-	        	locationData.setDistanceToPreviousToll(location.distanceTo(nearestToll));
-	        	
-	        	locationManager.removeUpdates(this);
-	        					Log.d("HeartBeat Request", JsonConverter.getJSON(hbRequest));
-				new HeartBeatService().execute(JsonConverter.getJSON(hbRequest));
 	        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, location.distanceTo(nearestToll)/2, this);
 	        }
 		}
+		else{
+			MyApplicationUtil applicationUtil = MyApplicationUtil.getInstance();
+			LocationManager locationManager = (LocationManager) applicationUtil.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+			locationManager.removeUpdates(this);
+		}
+	}
+	private void doHeartBeat(Location location,String vmlType) {
+		HeartBeatRequest hbRequest = new HeartBeatRequest();
+
+		hbRequest.setAngle(0.0);
+		hbRequest.setDeviceId(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICEID));
+		hbRequest.setDeviceType(DeviceDetails.getInstance().getValue(DeviceDetails.KEY_DEVICE_TYPE));
+		hbRequest.setLatitude(location.getLatitude());
+		hbRequest.setLongitude(location.getLongitude());
+		hbRequest.setTimeStamp(new Timestamp(new Date().getTime()));
+		if(LocationData.getInstance().getTollSessionId()==null)
+			hbRequest.setTollSessionId("");
+		else
+			hbRequest.setTollSessionId(LocationData.getInstance().getTollSessionId());
+		hbRequest.setVmlType(vmlType);
+		Log.d("HeartBeat Request", JsonConverter.getJSON(hbRequest));
+		new HeartBeatService().execute(JsonConverter.getJSON(hbRequest));
 	}
 
 	public void onProviderDisabled(String provider) {
