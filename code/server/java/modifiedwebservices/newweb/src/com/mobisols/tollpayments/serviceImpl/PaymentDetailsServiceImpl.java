@@ -48,21 +48,28 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 			response.getNotifications().add("Invalid Expiry Date");
 			status="fail";
 		}
+		
+		UserPaymentDetail upd=userDao.getUser(username).getUserPaymentDetails();
+		
 		pd.setCardNumber(pd.getCardNumber().trim());
-		pd.setCardNumber(pd.getCardNumber().replaceAll(" ", ""));
+		pd.setCardNumber(pd.getCardNumber().replaceAll(" ",""));
 		System.out.println(pd.getCardNumber());
-		if(!MyValidationUtil.isValidCC(pd.getCardNumber())){
-			response.getNotifications().add("Invalid Credit Card");
-			status = "fail";
+		if(!pd.getCardNumber().contains("x") || !pd.getCardNumber().contains("X")){
+			if(!MyValidationUtil.isValidCC(pd.getCardNumber())){
+				response.getNotifications().add("Invalid Credit Card");
+				status = "fail";
+			}
+			else
+				upd.setCcNumber(pd.getCardNumber());
+			
 		}
 		if(status.equals("fail"))
 			return jsonConverter.getJSON(request, status, response);
-		UserPaymentDetail upd=userDao.getUser(username).getUserPaymentDetails();
+		
 		upd.setBankAccount(pd.getBankAccount());
 		upd.setBankRouting(pd.getBankRouting());
 		upd.setCcExpMonth(pd.getExpMonth());
 		upd.setCcExpYear(pd.getExpYear());
-		upd.setCcNumber(pd.getCardNumber());
 		upd.setClientId(Client.PRESENT_CLIENT);
 		upd.setAddress1(pd.getAddress1());
 		upd.setAddress2(pd.getAddress2());
@@ -83,7 +90,10 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		userPaymentDetailDao.update(upd);
 		User u =userDao.getUser(username);
 		if(u.getIsActive().equals(UserDao.USER_INCOMPLETE))
+		{
 			u.setIsActive(UserDao.USER_INACTIVE);
+			
+		}
 		userDao.update(u);
 		response.getNotifications().add("Your details have been updated");
 		return jsonConverter.getJSON(request, status,response);

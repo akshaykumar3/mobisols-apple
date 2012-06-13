@@ -13,23 +13,9 @@ import com.paypal.sdk.services.NVPCallerServices;
  */
 public class CreditCardProcessing {
 
-	/** The PAYMEN t_ actio n_ addbalance. */
+	/** The PAYMENT_ action_ addbalance. */
 	public static String PAYMENT_ACTION_ADDBALANCE = "Sale";
 	
-	/**
-	 * Process .
-	 *
-	 * @param ccNumber the cc number
-	 * @param ccType the cc type
-	 * @param date the date
-	 * @param amount the amount
-	 * @return the int
-	 */
-	public  int process(String ccNumber,String ccType,Integer date,Double amount)
-	{
-		int status=1;
-		return status;
-	}
 	
 	/**
 	 * Do payment process.

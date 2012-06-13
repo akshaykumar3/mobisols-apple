@@ -21,6 +21,7 @@ import com.mobisols.tollpayments.model.UserVehicleHistory;
 import com.mobisols.tollpayments.model.VehicleTollUsage;
 import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilDate;
+import com.mobisols.tollpayments.myutilsImpl.EncryptUtil;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.paymentprocess.CreditCardProcessing;
 import com.mobisols.tollpayments.paymentprocess.PaymentGateway;
@@ -72,7 +73,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 	public String payForTolls(MakeTollPaymentsRequest r,String request){
 		MakeTollPaymentsResponse response=new MakeTollPaymentsResponse();
 		String status = "success";
-		List<String> users;
+		List<String> users = null;
 		if(r!=null)
 		{
 			users=r.getUsers();
@@ -102,7 +103,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 				expDate = expDate + upd.getCcExpYear();
 				String x=pg.getCreditCardProcessing().doPaymentProcess(
 						CreditCardProcessing.PAYMENT_ACTION_ADDBALANCE, amount.toString(), 
-						upd.getCcType().getName(), upd.getCcNumber(),expDate , upd.getCcCvv().toString(), 
+						upd.getCcType().getName(), EncryptUtil.decrypt(upd.getCcNumber(), ServerConfiguration.getServerConfiguration().getValue("cc_encryption_key")),expDate , upd.getCcCvv().toString(), 
 						upd.getCcAcName(), "", upd.getAddress1()+upd.getAddress2(), 
 						upd.getCity(), upd.getState(), upd.getZip(), upd.getCountry());
 				if(x.equals("Success")||(x.equals("SuccessWithWarning")))

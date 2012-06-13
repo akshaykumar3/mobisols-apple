@@ -85,8 +85,9 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 				uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
 			else if(vdr.getIsActive().equals(UserVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(UserDao.USER_INACTIVE))
 				uv.setIsActive(UserVehicleDao.VEHICLE_STANDBY);
-			else
-				uv.setIsActive(UserVehicleDao.VEHICLE_INACTIVE);
+			else if(u.getIsActive().equals(UserDao.USER_INCOMPLETE))
+				uv.setIsActive(UserVehicleDao.VEHICLE_STANDBY);
+			
 			uv.setVehicleStartDate(new Timestamp(vdr.getStartDate().getTime()));
 			if(vdr.getEndDate() !=null)
 				uv.setVehicleEndDate(new Timestamp(vdr.getEndDate().getTime()));
@@ -118,8 +119,8 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 				uv.setIsActive(UserVehicleDao.VEHICLE_ACTIVE);
 			else if(vdr.getIsActive().equals(UserVehicleDao.VEHICLE_ACTIVE) && u.getIsActive().equals(UserDao.USER_INACTIVE))
 				uv.setIsActive(UserVehicleDao.VEHICLE_STANDBY);
-			else
-				uv.setIsActive(UserVehicleDao.VEHICLE_INACTIVE);
+			else if(u.getIsActive().equals(UserDao.USER_INCOMPLETE))
+				uv.setIsActive(UserVehicleDao.VEHICLE_STANDBY);
 			uv.setLastModifiedBy(u.getUserId());
 			uv.setLastModifiedOn(myUtilDate.getCurrentTimeStamp());
 			OwnerType ot=ownerTypeDao.getOwnerType(vdr.getOwnerType());			

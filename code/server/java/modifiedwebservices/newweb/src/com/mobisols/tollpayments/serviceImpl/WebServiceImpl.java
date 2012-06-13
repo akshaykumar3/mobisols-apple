@@ -20,6 +20,7 @@ import com.mobisols.tollpayments.myutils.JsonConverter;
 import com.mobisols.tollpayments.myutils.MyUtilCleanUp;
 import com.mobisols.tollpayments.myutils.MyUtilErrorHandler;
 import com.mobisols.tollpayments.myutils.SecurityCheckUtil;
+import com.mobisols.tollpayments.myutilsImpl.EncryptUtil;
 import com.mobisols.tollpayments.myutilsImpl.Location;
 import com.mobisols.tollpayments.myutilsImpl.MyUtilContextImpl;
 import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
@@ -207,6 +208,19 @@ public class WebServiceImpl {
 	        commandAck = (CommandAck) ctx.getBean("service.tollpayments.commandAck");
 	}
 
+	@GET
+	@Produces("text/plain")
+	@Path("/test")
+	public String test(){
+		String inp = "4154901099939071";
+		String pass = "mobisolstollpass"; 
+		String enp = EncryptUtil.encrypt(inp, pass);
+		System.out.println(enp);
+		enp="4154901099939071";
+		String s = EncryptUtil.decrypt(enp, pass);
+		System.out.println(s);
+		return s;
+	}
 	/**
 	 * Gets the account details response.
 	 *

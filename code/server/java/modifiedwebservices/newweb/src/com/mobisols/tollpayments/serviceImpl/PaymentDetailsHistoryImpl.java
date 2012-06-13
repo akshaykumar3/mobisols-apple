@@ -14,6 +14,8 @@ import com.mobisols.tollpayments.dao.UserPaymentDetailHistoryDao;
 import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserPaymentDetailHistory;
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.myutilsImpl.EncryptUtil;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.request.admin.PaymentDetailsHistoryRequest;
 import com.mobisols.tollpayments.response.admin.PaymentDetailHistory;
 import com.mobisols.tollpayments.response.admin.PaymentDetailHistoryResponse;
@@ -57,7 +59,7 @@ public class PaymentDetailsHistoryImpl implements PaymentDetailsHistory{
 			p.setAddress2(updh.getAddress2());
 			p.setBankAccount(updh.getBankAccount());
 			p.setBankRouting(updh.getBankRouting());
-			p.setCardNumber(updh.getCcNumber());
+			p.setCardNumber(EncryptUtil.decrypt(updh.getCcNumber(),ServerConfiguration.getServerConfiguration().getValue("cc_encryption_key")));
 			p.setCardType(ccTypeDao.getCcTypeName(updh.getCcTypeId()).getName());
 			p.setCcCVV(updh.getCcCvv());
 			p.setCcName(updh.getCcAcName());
