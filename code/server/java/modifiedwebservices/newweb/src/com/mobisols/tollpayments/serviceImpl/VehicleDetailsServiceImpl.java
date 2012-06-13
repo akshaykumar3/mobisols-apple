@@ -71,6 +71,7 @@ public class VehicleDetailsServiceImpl implements VehicleDetailsService {
 		
 		if(myUtilVehicle.isValidRegistrationNumber(vdr.getRegistration(), vdr.getState()) && myUtilVehicle.isValidEndDate(vdr.getEndDate()))
 		{
+			//TODO ignore the variable and insert the vehicle if the details are not null
 		if(isNewVehicle.equals(IS_NEW_VEHICLE_FALSE))
 		{
 			User u=userDao.getUser(user);

@@ -71,6 +71,10 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 	 * @see com.mobisols.tollpayments.service.MakeTollPayments#payForTolls(com.mobisols.tollpayments.request.post.MakeTollPaymentsRequest, java.lang.String)
 	 */
 	public String payForTolls(MakeTollPaymentsRequest r,String request){
+		//TODO add exception handling,
+		//log to the database before charging the credit card and after
+		//Create a payment transaction before charging credit card as IN_PROGRESS and update its status after processing
+		//do similar to user balances
 		MakeTollPaymentsResponse response=new MakeTollPaymentsResponse();
 		String status = "success";
 		List<String> users = null;
@@ -113,6 +117,7 @@ public class MakeTollPaymentsImpl implements MakeTollPayments {
 				}
 			}
 			if(ub.getBalance()-price > u.getUserType().getMinBalance()){
+				//TODO process it as a single transaction using hibernate.
 				ub.setBalance(ub.getBalance() - price);
 				userBalanceDao.save(ub);
 				UserBalanceLog ubl = userBalanceLogDao.getRecentBalanceLogId(ub.getUbalId());

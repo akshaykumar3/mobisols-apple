@@ -69,6 +69,7 @@ public class HibernateSessionFactory {
 			session = (sessionFactory != null) ? sessionFactory.openSession()
 					: null;
 			threadLocal.set(session);
+			//EXTEND for enabling multi client architechture cliend id field needs to be set to client id
 			if(session!=null)
 				session.enableFilter("clientIdFilter").setParameter("clientId", 1);
 		}
