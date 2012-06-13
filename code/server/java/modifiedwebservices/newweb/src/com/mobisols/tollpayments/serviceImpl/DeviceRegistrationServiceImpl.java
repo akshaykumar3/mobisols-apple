@@ -1,5 +1,7 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import java.util.UUID;
+
 import com.mobisols.tollpayments.dao.DeviceDao;
 import com.mobisols.tollpayments.dao.UserDao;
 import com.mobisols.tollpayments.model.Device;
@@ -33,7 +35,8 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 	{
 		DeviceRegistrationResponse response=new DeviceRegistrationResponse();
 		String status="success";
-		String deviceId=ipAddress+myUtilDate.getCurrentTimeStamp();
+		//String deviceId=ipAddress+myUtilDate.getCurrentTimeStamp();
+		String deviceId = UUID.randomUUID().toString();
 		Device d=new Device();
 		d.setClientId(1);
 		d.setCreatedOn(myUtilDate.getCurrentTimeStamp());

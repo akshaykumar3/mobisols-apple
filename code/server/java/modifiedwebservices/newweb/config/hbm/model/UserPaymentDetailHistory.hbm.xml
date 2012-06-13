@@ -22,7 +22,7 @@
                 <column name="cc_ac_name" length="45" />
             </property>
             <property name="ccNumber" type="java.lang.String">
-                <column name="cc_number" length="16" />
+                <column name="cc_number" length="50" />
             </property>
             <property name="ccExpMonth" type="java.lang.Integer">
                 <column name="cc_exp_month" />

@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 /**
  * The Class Model.
  */
-public class Model {
+public class Model implements Comparable<Model>{
 	
 	/** The model id. */
 	private Integer modelId;
@@ -454,6 +454,14 @@ public class Model {
 	 */
 	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(Model o) {
+		return this.name.compareTo(o.getName());
 	}
 
 }

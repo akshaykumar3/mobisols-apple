@@ -20,8 +20,12 @@ public class EncryptUtil {
 
 	 
 	public static String encrypt(String data,String passPhrase){
-		
+		if(data==null)
+			return null;
+		if(data.equals(""))
+			return "";
 		try {
+				System.out.println(passPhrase);
 				DESKeySpec keySpec = new DESKeySpec(passPhrase.getBytes());
 				SecretKey key = SecretKeyFactory.getInstance("DES").generateSecret(keySpec);
 				Cipher ecipher = Cipher.getInstance("DES");
@@ -35,13 +39,20 @@ public class EncryptUtil {
 	            // Encode bytes to base64 to get a string
 	            String encode = new String(Base64Coder.encode(enc));
 				return encode;
-	        } catch (javax.crypto.NoSuchPaddingException e) {
+	        }  catch (javax.crypto.NoSuchPaddingException e) {
+	        	e.printStackTrace();
 	        } catch (java.security.NoSuchAlgorithmException e) {
+	        	e.printStackTrace();
 	        } catch (java.security.InvalidKeyException e) {
+	        	e.printStackTrace();
 	        } catch (javax.crypto.BadPaddingException e) {
+	        	e.printStackTrace();
 	        } catch (IllegalBlockSizeException e) {
+	        	e.printStackTrace();
 	        } catch (UnsupportedEncodingException e) {
+	        	e.printStackTrace();
 	        } catch (java.io.IOException e) {
+	        	e.printStackTrace();
 	        } catch (InvalidKeySpecException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -54,6 +65,10 @@ public class EncryptUtil {
 	}
 	
 	public static String decrypt(String data,String passPhrase){
+		if(data==null)
+			return null;
+		if(data.equals(""))
+			return "";
 		try {
 			DESKeySpec keySpec = new DESKeySpec(passPhrase.getBytes());
 			SecretKey key = SecretKeyFactory.getInstance("DES").generateSecret(keySpec);
@@ -66,13 +81,20 @@ public class EncryptUtil {
 
 	            // Decode using utf-8
 	            return new String(utf8, "UTF8");
-        } catch (javax.crypto.NoSuchPaddingException e) {
+        }  catch (javax.crypto.NoSuchPaddingException e) {
+        	e.printStackTrace();
         } catch (java.security.NoSuchAlgorithmException e) {
+        	e.printStackTrace();
         } catch (java.security.InvalidKeyException e) {
+        	e.printStackTrace();
         } catch (javax.crypto.BadPaddingException e) {
+        	e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
+        	e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
+        	e.printStackTrace();
         } catch (java.io.IOException e) {
+        	e.printStackTrace();
         } catch (InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.mobisols.tollpayments.dao.MakeDao;
@@ -32,6 +33,7 @@ public class MakeDaoImpl implements MakeDao {
 	public List<Make> getMake(){
 		Session s =HibernateSessionFactory.getSession();
 		Criteria crit = s.createCriteria(Make.class);
+		crit.addOrder(Order.asc("name"));
 		return crit.list();
 	}
 }

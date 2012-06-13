@@ -11,6 +11,8 @@ import com.mobisols.tollpayments.model.User;
 import com.mobisols.tollpayments.model.UserBalanceLog;
 import com.mobisols.tollpayments.model.UserVehicle;
 import com.mobisols.tollpayments.myutils.JsonConverter;
+import com.mobisols.tollpayments.myutilsImpl.EncryptUtil;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
 import com.mobisols.tollpayments.response.get.AccountDetailsResponse;
 import com.mobisols.tollpayments.response.get.BalanceLog;
 import com.mobisols.tollpayments.response.get.VehicleDetails;
@@ -70,7 +72,7 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 			vd.setColor(uv.getColor());
 			
 			adr.getVehicleDetails().add(vd);
-			System.out.println(uv.getRegistrationNo()+uv.getRegisteredState());
+			//System.out.println(uv.getRegistrationNo()+uv.getRegisteredState());
 		}
 		
 		//TODO Logic for tollpayments
@@ -97,7 +99,14 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	 * @param u the u
 	 */
 	private void loadPaymentDetails(AccountDetailsResponse acr, User u) {
-		acr.getPaymentDetails().setCardNumber(u.getUserPaymentDetails().getCcNumber());
+		
+		String cardNumber = u.getUserPaymentDetails().getCcNumber();
+		//cardNumber = EncryptUtil.decrypt(cardNumber, ServerConfiguration.getServerConfiguration().getValue("cc_encryption_key"));
+		if(cardNumber!=null && cardNumber.length()>=4){
+			String lastDigits = cardNumber.substring(cardNumber.length()-4, cardNumber.length());
+			lastDigits = cardNumber.substring(0,cardNumber.length()-5).replaceAll("[0-9]", "x")+lastDigits;
+			acr.getPaymentDetails().setCardNumber(lastDigits);
+		}
 		acr.getPaymentDetails().setCcName(u.getUserPaymentDetails().getCcAcName());
 		if(u.getUserPaymentDetails().getCcType()==null)
 			acr.getPaymentDetails().setCardType(null);

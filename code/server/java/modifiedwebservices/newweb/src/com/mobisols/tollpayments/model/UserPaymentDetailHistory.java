@@ -2,6 +2,9 @@ package com.mobisols.tollpayments.model;
 
 import java.sql.Timestamp;
 
+import com.mobisols.tollpayments.myutilsImpl.EncryptUtil;
+import com.mobisols.tollpayments.myutilsImpl.ServerConfiguration;
+
 // TODO: Auto-generated Javadoc
 /**
  * UserPaymentDetailHistoryId entity. @author MyEclipse Persistence Tools
@@ -328,7 +331,7 @@ public class UserPaymentDetailHistory implements java.io.Serializable {
 	 * @return the cc ac name
 	 */
 	public String getCcAcName() {
-		return this.ccAcName;
+		return ccAcName;
 	}
 
 	/**

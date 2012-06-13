@@ -338,7 +338,9 @@ public class UserPaymentDetail implements java.io.Serializable {
 	 */
 	public void setCcNumber(String ccNumber) {
 		this.ccNumber = ccNumber;
-		//this.ccNumber = EncryptUtil.encrypt(ccNumber, ServerConfiguration.getServerConfiguration().getValue("cc_encrytion_key"));
+		//String s = EncryptUtil.encrypt(ccNumber, ServerConfiguration.getServerConfiguration().getValue("cc_encryption_key"));
+		//System.out.println(s);
+		//this.ccNumber = s;
 	}
 
 	/**

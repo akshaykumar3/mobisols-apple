@@ -94,7 +94,7 @@ public class UserVehicleDaoImpl implements UserVehicleDao {
 		crit.add(Restrictions.eq("isActive",UserVehicleDao.VEHICLE_ACTIVE));
 		return crit.list();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.mobisols.tollpayments.dao.UserVehicleDao#getStandByVehicles(java.lang.String)
 	 */

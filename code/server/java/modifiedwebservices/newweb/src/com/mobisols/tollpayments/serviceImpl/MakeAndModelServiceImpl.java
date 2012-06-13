@@ -1,6 +1,8 @@
 package com.mobisols.tollpayments.serviceImpl;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.mobisols.tollpayments.dao.MakeDao;
@@ -33,8 +35,9 @@ public class MakeAndModelServiceImpl implements MakeAndModelService {
 		{
 			Make make = it.next();
 			com.mobisols.tollpayments.response.get.Make makeResponse = new com.mobisols.tollpayments.response.get.Make();
-			System.out.println(make.getModel().size());
-			for(Iterator<Model> it1 = make.getModel().iterator();it1.hasNext();)
+			List<Model> li = new LinkedList<Model>(make.getModel());
+			Collections.sort(li);
+			for(Iterator<Model> it1 = li.iterator();it1.hasNext();)
 			{
 				Model model = it1.next();
 				com.mobisols.tollpayments.response.get.Model modelResponse = new com.mobisols.tollpayments.response.get.Model();
