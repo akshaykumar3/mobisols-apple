@@ -1,6 +1,8 @@
 package com.mobisols.tollpayments.serviceImpl;
 
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -167,12 +169,14 @@ public class WebServiceImpl {
 	 */
 	public WebServiceImpl() {
 		
-		logger.info("Webservice constructor is called");
+		System.out.println(""+new Date()+"Webservice constructor is called");
 		 
 		 String[] paths = {
 	                "/spring/spring.xml", "/spring/dao.xml",
 	                "/spring/myutils.xml"
 	            };
+		 //CHECK why are we initializing in constructor?
+		 //Move the initialization to the methods
 	        ApplicationContext ctx = new ClassPathXmlApplicationContext(paths);
 	        accountDetailsService = (AccountDetailsService) ctx.getBean("service.tollpayments.accountDetailsService");
 	        addBalanceService=(AddBalanceService)ctx.getBean("service.tollpayments.addBalanceService");

@@ -58,6 +58,9 @@ public class ActivateServiceImpl implements ActivateService {
 			}
 			else if(u.getIsActive().equals(UserDao.USER_INACTIVE))
 			{
+				//TODO add exception handling,
+				//log to the database before charging the credit card and after
+				//Create a payment transaction before charging credit card as IN_PROGRESS and update its status after processing
 				UserBalance ub = u.getUserBalance();
 				if(ub.getBalance()< u.getUserType().getMinBalance())
 				{
